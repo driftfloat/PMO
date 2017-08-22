@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmo.dashboard.dao.HSBCProjectMapper">
+	<resultMap id="hsbcProjectMap" type="com.pmo.dashboard.entity.HSBCProject">
+		<id property="hsbcProjectId" column="HSBC_PROJECT_ID" javaType="String" />
+		<result property="hsbcSubDeptId" column="HSBC_SUBDEPT_ID" javaType="String" />
+		<result property="hsbcProjectName" column="HSBC_PROJECT_NAME" javaType="String" />
+		<result property="hsbcProjectDescription" column="HSBC_PROJECT_DESCRIPTION" javaType="String" />
+		<result property="hsbcManager" column="HSBC_MANAGER" javaType="String" />
+	</resultMap>
+	
+	
+	<select id="queryProjectNameById" parameterType="String" resultMap="hsbcProjectMap">
+	    SELECT * FROM t_hsbc_project WHERE HSBC_SUBDEPT_ID = #{hsbcSubDeptId}
+	</select>
+	
+	<select id="queryProjectName" parameterType="String" resultMap="hsbcProjectMap">
+	    SELECT * FROM t_hsbc_project WHERE HSBC_PROJECT_ID = #{hsbcProjectId}
+	</select>
+</mapper>

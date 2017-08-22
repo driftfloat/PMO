@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmo.dashboard.dao.EmployeeInfoMapper">
+	<resultMap id="employeeInfoMap" type="com.pmo.dashboard.entity.EmployeeInfo">
+		<id property="employeeId" column="EMPLOYEE_ID" javaType="String" />
+		<result property="eHr" column="E_HR" javaType="String" />
+		<result property="staffName" column="STAFF_NAME" javaType="String" />
+		<result property="ln" column="LN" javaType="String" />
+		<result property="csDeptName" column="CS_DEPT_NAME" javaType="String" />
+		<result property="csSubDeptName" column="CS_SUBDEPT_NAME" javaType="String" />
+		<result property="hsbcStaffId" column="HSBC_STAFF_ID" javaType="String" />
+	</resultMap>
+	
+	<select id="queryEmployeeList" parameterType="com.pmo.dashboard.entity.EmployeePageCondition" resultMap="employeeInfoMap" >
+	    SELECT e.EMPLOYEE_ID,e.HSBC_STAFF_ID,e.E_HR,e.STAFF_NAME,e.LN,d.CS_DEPT_NAME,d.CS_SUBDEPT_NAME
+        FROM t_employee AS e
+        LEFT JOIN t_cs_dept AS d
+        ON e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID
+        WHERE 1 = 1
+        
+			<if test="hsbcStaffId != null and hsbcStaffId != ''">
+				AND e.HSBC_STAFF_ID = #{hsbcStaffId}
+			</if>
+			<if test="eHr != null and eHr != ''">
+				AND e.E_HR = #{eHr}
+			</if>
+			<if test="csDeptName != null and csDeptName != ''">
+				AND d.CS_DEPT_NAME = #{csDeptName}
+			</if>
+			<if test="csSubDeptName != null and csSubDeptName != ''">
+				AND d.CS_SUBDEPT_NAME = #{csSubDeptName}
+			</if>
+			<if test="csbuName != null and csbuName != ''">
+				AND d.CS_BU_NAME = #{csbuName}
+			</if>
+		
+        LIMIT #{currentPage},10;
+	</select>
+	
+	<select id="countEmployeeList" parameterType="com.pmo.dashboard.entity.EmployeePageCondition" resultType="int" >
+	    SELECT count(0)
+        FROM t_employee AS e
+        LEFT JOIN t_cs_dept AS d
+        ON e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID
+        WHERE 1 = 1
+        
+			<if test="hsbcStaffId != null and hsbcStaffId != ''">
+				AND e.HSBC_STAFF_ID = #{hsbcStaffId}
+			</if>
+			<if test="eHr != null and eHr != ''">
+				AND e.E_HR = #{eHr}
+			</if>
+			<if test="csDeptName != null and csDeptName != ''">
+				AND d.CS_DEPT_NAME = #{csDeptName}
+			</if>
+			<if test="csSubDeptName != null and csSubDeptName != ''">
+				AND d.CS_SUBDEPT_NAME = #{csSubDeptName}
+			</if>
+			<if test="csbuName != null and csbuName != ''">
+				AND d.CS_BU_NAME = #{csbuName}
+			</if>
+		
+	</select>
+	
+</mapper>

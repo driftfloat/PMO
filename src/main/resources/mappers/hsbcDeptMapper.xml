@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmo.dashboard.dao.HSBCDeptMapper">
+	<resultMap id="hsbcDeptMap" type="com.pmo.dashboard.entity.HSBCDept">
+		<id property="hsbcSubDeptId" column="HSBC_SUBDEPT_ID" javaType="String" />
+		<result property="hsbcSubDeptName" column="HSBC_SUBDEPT_NAME" javaType="String" />
+		<result property="hsbcDeptName" column="HSBC_DEPT_NAME" javaType="String" />
+	</resultMap>
+	
+	<select id="queryHSBCDeptName" resultMap="hsbcDeptMap">
+	    SELECT * FROM t_hsbc_dept GROUP BY HSBC_DEPT_NAME ORDER BY HSBC_DEPT_NAME ASC  
+	</select>
+	
+	<select id="queryHSBCDubDeptNameById" parameterType="String" resultMap="hsbcDeptMap">
+        SELECT * FROM t_hsbc_dept WHERE HSBC_DEPT_NAME = (SELECT HSBC_DEPT_NAME FROM t_hsbc_dept WHERE HSBC_SUBDEPT_ID = #{hsbcSubDeptName})
+	</select>
+	
+	<select id="queryHSBCSubDeptById" parameterType="String" resultMap="hsbcDeptMap">
+	    SELECT * FROM t_hsbc_dept WHERE HSBC_SUBDEPT_ID = (SELECT HSBC_SUBDEPT_ID FROM t_hsbc_project WHERE HSBC_PROJECT_ID = #{hsbcProjectId})
+	</select>
+	
+</mapper>

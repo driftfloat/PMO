@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmo.dashboard.dao.EmployeeMapper">
+	<resultMap id="employeeMap" type="com.pmo.dashboard.entity.Employee">
+		<id property="employeeId" column="EMPLOYEE_ID" javaType="String" />
+		<result property="hsbcStaffId" column="HSBC_STAFF_ID" javaType="String" />
+		<result property="staffName" column="STAFF_NAME" javaType="String" />
+		<result property="ln" column="LN" javaType="String" />
+		<result property="staffRegion" column="STAFF_REGION" javaType="String" />
+		<result property="staffLocation" column="STAFF_LOCATION" javaType="String" />
+		<result property="locationType" column="LOCATION_TYPE" javaType="String" />
+		<result property="onShoreOrOffShore" column="ONSHORE_OR_OFFSHORE" javaType="String" />
+		<result property="sow" column="SOW" javaType="String" />
+		<result property="sowExpiredDate" column="SOW_EXPIRED_DATE" javaType="String" />
+		<result property="staffCategory" column="STAFF_CATEGORY" javaType="String" />
+		<result property="engagementType" column="ENGAGEMENT_TYPE" javaType="String" />
+		<result property="hsbcDoj" column="HSBC_DOJ" javaType="String" />
+		<result property="graduationDate" column="GRADUATION_DATE" javaType="String" />
+		<result property="billingEntity" column="BILLING_ENTITY" javaType="String" />
+		<result property="billCurrency" column="BILL_CURRENCY" javaType="String" />
+		<result property="billRate" column="BILL_RATE" javaType="String" />
+		<result property="resourceStatus" column="RESOURCE_STATUS" javaType="String" />
+		<result property="mentionLWD" column="MENTION_LWD" javaType="String" />
+		<result property="reasonForTermination" column="REASON_FOR_TERMINATION" javaType="String" />
+		<result property="eHr" column="E_HR" javaType="String" />
+		<result property="nicheSkill" column="NICHE_SKILL" javaType="String" />
+		<result property="hsbcProjectId" column="HSBC_PROJECT_ID" javaType="String" />
+		<result property="role" column="ROLE" javaType="String" />
+		<result property="skill" column="SKILL" javaType="String" />
+		<result property="csSubDeptId" column="CS_SUBDEPT_ID" javaType="String" />
+	</resultMap>
+	
+	
+	<insert id="addEmployee" parameterType="com.pmo.dashboard.entity.Employee">
+	    insert into t_employee (EMPLOYEE_ID,HSBC_STAFF_ID,STAFF_NAME,LN,STAFF_REGION,STAFF_LOCATION,LOCATION_TYPE,ONSHORE_OR_OFFSHORE,SOW,SOW_EXPIRED_DATE,STAFF_CATEGORY,ENGAGEMENT_TYPE,HSBC_DOJ,GRADUATION_DATE,BILLING_ENTITY,BILL_CURRENCY,BILL_RATE,RESOURCE_STATUS,MENTION_LWD,REASON_FOR_TERMINATION,E_HR,NICHE_SKILL,HSBC_PROJECT_ID,ROLE,SKILL,CS_SUBDEPT_ID)
+	    values
+	    (#{employeeId},#{hsbcStaffId},#{staffName},#{ln},#{staffRegion},#{staffLocation},#{locationType},#{onShoreOrOffShore},#{sow},#{sowExpiredDate},#{staffCategory},#{engagementType},#{hsbcDoj},#{graduationDate},#{billingEntity},#{billCurrency},#{billRate},#{resourceStatus},#{mentionLWD},#{reasonForTermination},#{eHr},#{nicheSkill},#{hsbcProjectId},#{role},#{skill},#{csSubDeptId})
+	</insert>
+	
+	<select id="queryEmployeeById" parameterType="String" resultMap="employeeMap">
+	    SELECT * FROM t_employee WHERE EMPLOYEE_ID = #{employeeId};
+	</select>
+	
+	<select id="queryEmployeeList" parameterType="com.pmo.dashboard.entity.EmployeePageCondition" resultMap="employeeMap">
+	    SELECT * FROM t_employee WHERE 1 = 1 AND CS_SUBDEPT_ID IN (SELECT CS_SUBDEPT_ID FROM t_cs_dept WHERE 1 = 1
+	    <if test="csDeptName != null and csDeptName != ''">
+				AND cs_dept_name = #{csDeptName}
+		</if>
+		<if test="csSubDeptName != null and csSubDeptName != ''">
+				AND CS_SUBDEPT_NAME = #{csSubDeptName}
+		</if>
+		<if test="csbuName != null and csbuName != ''">
+				AND CS_BU_NAME = #{csbuName}
+		</if>
+		)
+	</select>
+	
+	<update id="updateEmployee" parameterType="com.pmo.dashboard.entity.Employee">
+	    update t_employee set HSBC_STAFF_ID = #{hsbcStaffId},STAFF_NAME = #{staffName},LN = #{ln},STAFF_REGION = #{staffRegion},STAFF_LOCATION = #{staffLocation},LOCATION_TYPE = #{locationType},ONSHORE_OR_OFFSHORE = #{onShoreOrOffShore},SOW = #{sow},SOW_EXPIRED_DATE = #{sowExpiredDate},STAFF_CATEGORY = #{staffCategory},ENGAGEMENT_TYPE = #{engagementType},HSBC_DOJ= #{hsbcDoj},GRADUATION_DATE = #{graduationDate},BILLING_ENTITY = #{billingEntity},BILL_CURRENCY = #{billCurrency},BILL_RATE = #{billRate},RESOURCE_STATUS = #{resourceStatus},MENTION_LWD = #{mentionLWD},REASON_FOR_TERMINATION = #{reasonForTermination},E_HR = #{eHr},NICHE_SKILL = #{nicheSkill},HSBC_PROJECT_ID = #{hsbcProjectId},ROLE = #{role},SKILL = #{skill},CS_SUBDEPT_ID = #{csSubDeptId} where EMPLOYEE_ID = #{employeeId}    
+	</update>
+	
+</mapper>

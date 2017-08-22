@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmo.dashboard.dao.CSDeptMapper">
+	<resultMap id="csDeptMap" type="com.pmo.dashboard.entity.CSDept">
+		<id property="csSubDeptId" column="CS_SUBDEPT_ID" javaType="String" />
+		<result property="csSubDeptName" column="CS_SUBDEPT_NAME" javaType="String" />
+		<result property="csDeptName" column="CS_DEPT_NAME" javaType="String" />
+		<result property="csBuName" column="CS_BU_NAME" javaType="String" />
+		<result property="am" column="AM" javaType="String" />
+	</resultMap>
+	
+	<select id="queryCSDeptName" resultMap="csDeptMap">
+	    SELECT * FROM t_cs_dept GROUP BY CS_DEPT_NAME ORDER BY CS_DEPT_NAME ASC; 
+	</select>
+	
+	<select id="queryCSSubDeptName" parameterType="String" resultMap="csDeptMap">
+	    SELECT * FROM t_cs_dept WHERE CS_DEPT_NAME = (SELECT CS_DEPT_NAME FROM t_cs_dept WHERE CS_SUBDEPT_ID = #{csSubDeptId}) ORDER BY CS_SUBDEPT_NAME ASC; 
+	</select>
+	
+	<select id="queryCSDeptById" parameterType="String" resultMap="csDeptMap">
+	    SELECT * FROM t_cs_dept WHERE CS_SUBDEPT_ID = #{csSubDeptId}
+	</select>
+	
+	<select id="queryAllCSSubDeptName" resultMap="csDeptMap">
+	    SELECT DISTINCT CS_SUBDEPT_NAME FROM t_cs_dept
+	</select>
+</mapper>
