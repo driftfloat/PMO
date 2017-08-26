@@ -9,4 +9,6 @@ public interface HSBCDeptMapper
     List<HSBCDept> queryHSBCDeptName();
     List<HSBCDept> queryHSBCDubDeptNameById(String hsbcSubDeptId);
     HSBCDept queryHSBCSubDeptById(String hsbcProjectId);
+    public List<HSBCDept> queryHSBCSubDeptNameByDeptName(String hsbcDeptName);
+    public HSBCDept queryDemandHSBCSubDeptById(String hsbcSubDeptId);
 }

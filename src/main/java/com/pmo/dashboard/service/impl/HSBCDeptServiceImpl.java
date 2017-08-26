@@ -38,4 +38,10 @@ public class HSBCDeptServiceImpl implements HSBCDeptService
         return hsbcDept;
     }
 
+	@Override
+	public List<HSBCDept> queryHSBCSubDeptNameByDeptName(String hsbcDeptName) {
+		List<HSBCDept> list = hsbcDeptMapper.queryHSBCSubDeptNameByDeptName(hsbcDeptName);
+		return list;
+	}
+
 }

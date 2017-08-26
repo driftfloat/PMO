@@ -17,6 +17,9 @@ public class Demand
     
     private String hsbcSubDeptId;
     
+    /** 关联的部门信息*/
+    private HSBCDept hsbcDept;
+    
     private String location;
     
     private String reqPublishedDate;
@@ -125,17 +128,16 @@ public class Demand
         this.position = position;
     }
 
-    public String getHsbcSubDeptId()
-    {
-        return hsbcSubDeptId;
-    }
 
-    public void setHsbcSubDeptId(String hsbcSubDeptId)
-    {
-        this.hsbcSubDeptId = hsbcSubDeptId;
-    }
+    public HSBCDept getHsbcDept() {
+		return hsbcDept;
+	}
 
-    public String getLocation()
+	public void setHsbcDept(HSBCDept hsbcDept) {
+		this.hsbcDept = hsbcDept;
+	}
+
+	public String getLocation()
     {
         return location;
     }
@@ -374,6 +376,14 @@ public class Demand
     {
         this.ageingReceived = ageingReceived;
     }
+    
+    public String getHsbcSubDeptId() {
+		return hsbcSubDeptId;
+	}
+
+	public void setHsbcSubDeptId(String hsbcSubDeptId) {
+		this.hsbcSubDeptId = hsbcSubDeptId;
+	}
 
     public Demand()
     {
@@ -381,51 +391,44 @@ public class Demand
         // TODO Auto-generated constructor stub
     }
 
-    public Demand(String demandId, String rr, String jobCode, String skill,
-            String requestor, String position, String hsbcSubDeptId,
-            String location, String reqPublishedDate, String ageing,
-            String profilesNo, String interviewedNo, String status,
-            String staffName, String proposedJoiningDate, String dcCleared,
-            String sowSigned, String onboarded, String abort, String delayed,
-            String reason, String nextAction, String status2, String remark,
-            String csSubDept, String plannedOnboardDate, String doNumber,
-            String level, String hrPriority, String reqReceivedDate,
-            String ageingReceived)
-    {
-        super();
-        this.demandId = demandId;
-        this.rr = rr;
-        this.jobCode = jobCode;
-        this.skill = skill;
-        this.requestor = requestor;
-        this.position = position;
-        this.hsbcSubDeptId = hsbcSubDeptId;
-        this.location = location;
-        this.reqPublishedDate = reqPublishedDate;
-        this.ageing = ageing;
-        this.profilesNo = profilesNo;
-        this.interviewedNo = interviewedNo;
-        this.status = status;
-        this.staffName = staffName;
-        this.proposedJoiningDate = proposedJoiningDate;
-        this.dcCleared = dcCleared;
-        this.sowSigned = sowSigned;
-        this.onboarded = onboarded;
-        this.abort = abort;
-        this.delayed = delayed;
-        this.reason = reason;
-        this.nextAction = nextAction;
-        this.status2 = status2;
-        this.remark = remark;
-        this.csSubDept = csSubDept;
-        this.plannedOnboardDate = plannedOnboardDate;
-        this.doNumber = doNumber;
-        this.level = level;
-        this.hrPriority = hrPriority;
-        this.reqReceivedDate = reqReceivedDate;
-        this.ageingReceived = ageingReceived;
-    }
-    
-    
-    
+	public Demand(String demandId, String rr, String jobCode, String skill, String requestor, String position,
+			String hsbcSubDeptId, String location, String reqPublishedDate, String ageing, String profilesNo,
+			String interviewedNo, String status, String staffName, String proposedJoiningDate, String dcCleared,
+			String sowSigned, String onboarded, String abort, String delayed, String reason, String nextAction,
+			String status2, String remark, String csSubDept, String plannedOnboardDate, String doNumber, String level,
+			String hrPriority, String reqReceivedDate, String ageingReceived) {
+		super();
+		this.demandId = demandId;
+		this.rr = rr;
+		this.jobCode = jobCode;
+		this.skill = skill;
+		this.requestor = requestor;
+		this.position = position;
+		this.hsbcSubDeptId = hsbcSubDeptId;
+		this.location = location;
+		this.reqPublishedDate = reqPublishedDate;
+		this.ageing = ageing;
+		this.profilesNo = profilesNo;
+		this.interviewedNo = interviewedNo;
+		this.status = status;
+		this.staffName = staffName;
+		this.proposedJoiningDate = proposedJoiningDate;
+		this.dcCleared = dcCleared;
+		this.sowSigned = sowSigned;
+		this.onboarded = onboarded;
+		this.abort = abort;
+		this.delayed = delayed;
+		this.reason = reason;
+		this.nextAction = nextAction;
+		this.status2 = status2;
+		this.remark = remark;
+		this.csSubDept = csSubDept;
+		this.plannedOnboardDate = plannedOnboardDate;
+		this.doNumber = doNumber;
+		this.level = level;
+		this.hrPriority = hrPriority;
+		this.reqReceivedDate = reqReceivedDate;
+		this.ageingReceived = ageingReceived;
+	}
+
 }

@@ -20,4 +20,14 @@
 	    SELECT * FROM t_hsbc_dept WHERE HSBC_SUBDEPT_ID = (SELECT HSBC_SUBDEPT_ID FROM t_hsbc_project WHERE HSBC_PROJECT_ID = #{hsbcProjectId})
 	</select>
 	
+	<select id="queryDemandHSBCSubDeptById" parameterType="String" resultMap="hsbcDeptMap">
+	    SELECT * FROM t_hsbc_dept WHERE HSBC_SUBDEPT_ID = #{hsbcSubDeptId}
+	</select>
+	
+	<select id="queryHSBCSubDeptNameByDeptName" parameterType="String" resultMap="hsbcDeptMap">
+		select * 
+		from t_hsbc_dept 
+		where HSBC_DEPT_NAME=#{id}
+		GROUP BY HSBC_SUBDEPT_NAME
+	</select>
 </mapper>
