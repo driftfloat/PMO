@@ -24,6 +24,19 @@
 	    SELECT * FROM t_hsbc_dept WHERE HSBC_SUBDEPT_ID = #{hsbcSubDeptId}
 	</select>
 	
+	<select id="queryHSBCSubDeptId" parameterType="com.pmo.dashboard.entity.Demand" resultType="String">
+	    SELECT HSBC_SUBDEPT_ID 
+	    FROM t_hsbc_dept 
+	    <where>
+	    	<if test="hsbcDept.hsbcDeptName!=null and hsbcDept.hsbcDeptName!=''">
+	    		and HSBC_DEPT_NAME = #{hsbcDept.hsbcDeptName}
+	    	</if>
+	    	<if test="hsbcDept.hsbcSubDeptName!=null and hsbcDept.hsbcSubDeptName!=''">
+	    		and HSBC_SUBDEPT_NAME = #{hsbcDept.hsbcSubDeptName}
+	    	</if>
+	    </where>
+	</select>
+	
 	<select id="queryHSBCSubDeptNameByDeptName" parameterType="String" resultMap="hsbcDeptMap">
 		select * 
 		from t_hsbc_dept 

@@ -58,7 +58,7 @@ public class DemandController {
 	@ResponseBody
 	public List<Demand> demandQuery(Demand demand,Model model){
 		//model.addAttribute(demand);
-		List<Demand> list = demandService.queryDemandList();
+		List<Demand> list = demandService.queryDemandList(demand);
 		return list;
 	}
 }

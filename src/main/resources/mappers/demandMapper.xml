@@ -40,7 +40,27 @@
 			<id column="hsbcDeptName" property="HSBC_DEPT_NAME"/>
 		</association>
 	</resultMap>
-	<select id="queryDemandList" resultMap="demandMap">
-		select * from  demand
+	<select id="queryDemandList" parameterType="java.util.HashMap" resultMap="demandMap">
+		select * 
+		from  demand
+		<where>
+			<if test="demand.skill!=null and demand.skill!=''">
+				and SKILL = #{demand.skill}
+			</if>
+			<if test="demand.position!=null and demand.position!=''">
+				and position = #{demand.position}
+			</if>
+			<if test="demand.status!=null and demand.status!=''">
+				and status = #{demand.status}
+			</if>
+			<if test="demand.rr!=null and demand.rr!=''">
+				and rr = #{demand.rr}
+			</if>
+			<!-- <if test="demand.hsbcSubDeptId!=null and demand.hsbcSubDeptId!=''"> -->
+				and HSBC_SUBDEPT_ID in 
+				<foreach item="item" collection="hsbcSubDeptIdList" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+		</where>
 	</select>
 </mapper>

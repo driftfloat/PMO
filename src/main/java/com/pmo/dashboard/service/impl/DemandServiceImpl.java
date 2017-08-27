@@ -1,6 +1,9 @@
 package com.pmo.dashboard.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -28,11 +31,17 @@ public class DemandServiceImpl implements DemandService{
 	HSBCDeptMapper hsbcDeptMapper;
 	
 	@Override
-	public List<Demand> queryDemandList() {
-		List<Demand> list = demandMapper.queryDemandList();
-		for (Demand demand : list) {
-			HSBCDept hsbcDept = hsbcDeptMapper.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
-			demand.setHsbcDept(hsbcDept);
+	public List<Demand> queryDemandList(Demand demand) {
+		List<String> hsbcSubDeptIdList = hsbcDeptMapper.queryHSBCSubDeptId(demand);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("hsbcSubDeptIdList", hsbcSubDeptIdList);
+		params.put("demand", demand);
+		List<Demand> list = demandMapper.queryDemandList(params);
+		//List<Demand> newList = new ArrayList<Demand>();
+		for (Demand demands : list) {
+			//demands.setHsbcSubDeptId(hsbcSubDeptId);
+			HSBCDept hsbcDept = hsbcDeptMapper.queryDemandHSBCSubDeptById(demands.getHsbcSubDeptId());
+			demands.setHsbcDept(hsbcDept);
 		}
 		return list;
 	}

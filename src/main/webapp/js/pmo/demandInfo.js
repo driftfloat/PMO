@@ -9,7 +9,7 @@ $(function(){
 	$("#department").change(function(){
 		//var department = $("#department option:selected").text();
 		var department = $("#department").val();
-		alert(department);
+		//alert(department);
 		//$("#sub_department").find("option").remove();
 		$("#sub_department").empty();
 		$("#sub_department").append("<option value=''>-- select --</option>");

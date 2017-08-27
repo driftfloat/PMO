@@ -10,5 +10,5 @@ import com.pmo.dashboard.entity.Demand;
  */
 public interface DemandService {
 
-	public List<Demand> queryDemandList();
+	public List<Demand> queryDemandList(Demand demand);
 }
