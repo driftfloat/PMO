@@ -3,6 +3,7 @@ package com.pom.dashboard.service;
 import java.util.List;
 
 import com.pmo.dashboard.entity.Demand;
+import com.pmo.dashboard.entity.PageCondition;
 
 /**
  * 需求service类
@@ -10,5 +11,5 @@ import com.pmo.dashboard.entity.Demand;
  */
 public interface DemandService {
 
-	public List<Demand> queryDemandList(Demand demand);
+	public List<Demand> queryDemandList(Demand demand, PageCondition pageCondition);
 }

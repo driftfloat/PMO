@@ -1,6 +1,8 @@
 package com.pmo.dashboard.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmo.dashboard.entity.Demand;
 import com.pmo.dashboard.entity.HSBCDept;
+import com.pmo.dashboard.entity.PageCondition;
 import com.pom.dashboard.service.DemandService;
 import com.pom.dashboard.service.HSBCDeptService;
 
@@ -56,9 +59,14 @@ public class DemandController {
 	
 	@RequestMapping("/queryDemandList")
 	@ResponseBody
-	public List<Demand> demandQuery(Demand demand,Model model){
-		//model.addAttribute(demand);
-		List<Demand> list = demandService.queryDemandList(demand);
-		return list;
+	public Object demandQuery(Demand demand,PageCondition pageCondition){
+		if("".equals(pageCondition.getCurrPage()) || pageCondition.getCurrPage() == null){
+			pageCondition.setCurrPage(1);
+		}
+		List<Demand> list = demandService.queryDemandList(demand,pageCondition);
+		Map<String,Object> result = new HashMap<String,Object>();
+		result.put("list", list);
+		result.put("pageCondition", pageCondition);
+		return result;
 	}
 }

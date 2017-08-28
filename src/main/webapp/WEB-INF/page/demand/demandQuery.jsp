@@ -178,18 +178,21 @@ var path='<%=path%>';
 												<th>Department</th>
 												<th>Sub - Department</th>
 												<th>Status</th>
-												<th>操作</th>
+												<!-- <th>操作</th> -->
 											</tr>
 										</thead>
 										
 									</table>
 									</div>
-									<div>
+									<div class="pagination">
 										<ul class="pagination pagination-centered">
-											<li><a href="#" id="fristPage" onclick="loadEmployeeList('frist')">首页</a></li>
-											<li><a href="#" id="previousPage" onclick="loadEmployeeList('previous')">上一页</a></li>
-											<li><a href="#" id="nextPage" onclick="loadEmployeeList('next')">下一页</a></li>
-											<li><a href="#" id="lastPage" onclick="loadEmployeeList('last')">末页</a></li>
+											<%-- <li><a href="#" id="fristPage" onclick="loadDemandList(1)">首页</a></li>
+											<li><a href="#" id="previousPage" >&laquo;</a></li>
+										<c:forEach begin="1" end="<% %>" step="1" varStatus="status" >
+											<li><a href="#">${status.count }</a></li>
+										</c:forEach>
+											<li><a href="#" id="nextPage" >&raquo;</a></li>
+											<li><a href="#" id="lastPage" >末页</a></li> --%>
 										</ul>
 										<br>
 										共<span id="pageCount"></span>页   第<span id="currentPage"></span>页
