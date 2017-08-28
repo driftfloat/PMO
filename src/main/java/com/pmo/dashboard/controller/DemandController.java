@@ -13,9 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.Demand;
 import com.pmo.dashboard.entity.HSBCDept;
 import com.pmo.dashboard.entity.PageCondition;
+import com.pom.dashboard.service.CSDeptService;
 import com.pom.dashboard.service.DemandService;
 import com.pom.dashboard.service.HSBCDeptService;
 
@@ -34,6 +36,9 @@ public class DemandController {
 	
 	@Resource
 	HSBCDeptService hsbcDeptService;
+	
+	@Resource
+	CSDeptService csDeptService;
 
 	private static Logger logger = LoggerFactory.getLogger(DemandController.class);
 	
@@ -56,6 +61,17 @@ public class DemandController {
 		return list;
 	}
 	
+	/**
+	 * 加载交付部信息
+	 * @param csBuName
+	 * @return
+	 */
+	@RequestMapping("/loadScSubDeptName")
+	@ResponseBody
+	public List<CSDept> loadScSubDeptName(String csBuName){
+		List<CSDept> list = csDeptService.queryCSSubDeptNameByCsBuName(csBuName);
+		return list;
+	}
 	
 	@RequestMapping("/queryDemandList")
 	@ResponseBody

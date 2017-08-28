@@ -5,6 +5,87 @@ $(function(){
 	loadDemandStatus();
 	
 	loadDepartment();
+	loadSubDepartment();
+	
+	loadDemandList();
+	$("#searchBtn").click(function(){
+		loadDemandList();
+	})
+	loadCsBuName();
+	loadScSubDeptName();
+})
+
+function loadSkill(){
+	var url = path+'/json/skill.json';
+	$.getJSON(url, function(data){
+		$.each(data, function(i, item){
+			 $("#skill").append("<option value='"+item.name+"'>"+item.name+"</option>");
+		})
+	})
+}
+function loadPosition(){
+	var url = path+'/json/position.json';
+	$.getJSON(url, function(data){
+		$.each(data, function(i, item){
+			$("#position").append("<option value='"+item.name+"'>"+item.name+"</option>");
+		})
+	})
+}
+function loadDemandStatus(){
+	var url = path+'/json/demandStatus.json';
+	$.getJSON(url, function(data){
+		$.each(data, function(i, item){
+			$("#status").append("<option value='"+item.name+"'>"+item.name+"</option>");
+		})
+	})
+}
+/*加载业务部*/
+function loadCsBuName(){
+	var url = path+'/json/csBuName.json';
+	$.getJSON(url, function(data){
+		$.each(data,function(i,item){
+			$("#csBuName").append("<option value='"+item.name+"'>"+item.name+"</option>");
+		})
+	})
+}
+/*加载交付部*/
+function loadScSubDeptName(){
+	$("#csBuName").change(function(){
+		var csBuName = $("#csBuName").val();
+		$("#scSubDeptName").empty();
+		$("#scSubDeptName").append("<option value=''>-- select --</option>");
+		$.ajax({
+			url:path+'/service/demand/loadScSubDeptName',
+			dataType:"json",
+			async:true,
+			cache:false,
+			type:"post",
+			data:{"csBuName":csBuName},
+			success:function(data){
+				$.each(data, function(i,item){
+					$("#scSubDeptName").append("<option value='"+item.csSubDeptName+"'>"+item.csSubDeptName+"</option>");
+				})
+			}
+		})
+	})
+}
+
+function loadDepartment(){
+	$.ajax({
+		url:path+'/service/demand/loadDepartment',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(data){
+			$.each(data, function(i,item){
+				$("#department").append("<option value='"+item.hsbcDeptName+"'>"+item.hsbcDeptName+"</option>")
+			})
+		}
+	})
+}
+
+function loadSubDepartment(){
 	/*根据department加载subdepartment的ajax*/
 	$("#department").change(function(){
 		//var department = $("#department option:selected").text();
@@ -27,50 +108,6 @@ $(function(){
 			}
 		});
 	});
-	loadDemandList();
-	$("#searchBtn").click(function(){
-		loadDemandList();
-	})
-})
-
-function loadSkill(){
-	var url = path+'/json/skill.json'
-	$.getJSON(url, function(data){
-		$.each(data, function(i, item){
-			 $("#skill").append("<option value='"+item.name+"'>"+item.name+"</option>");
-		})
-	})
-}
-function loadPosition(){
-	var url = path+'/json/position.json'
-	$.getJSON(url, function(data){
-		$.each(data, function(i, item){
-			$("#position").append("<option value='"+item.name+"'>"+item.name+"</option>");
-		})
-	})
-}
-function loadDemandStatus(){
-	var url = path+'/json/demandStatus.json'
-	$.getJSON(url, function(data){
-		$.each(data, function(i, item){
-			$("#status").append("<option value='"+item.name+"'>"+item.name+"</option>");
-		})
-	})
-}
-
-function loadDepartment(){
-	$.ajax({
-		url:path+'/service/demand/loadDepartment',
-		dataType:"json",
-		async:true,
-		cache:false,
-		type:"post",
-		success:function(data){
-			$.each(data, function(i,item){
-				$("#department").append("<option value='"+item.hsbcDeptName+"'>"+item.hsbcDeptName+"</option>")
-			})
-		}
-	})
 }
 
 function loadDemandList(currPage){
@@ -80,6 +117,7 @@ function loadDemandList(currPage){
 	var sub_department= $("#sub_department").val();
 	var status= $("#status").val();
 	var rr= $("#rr").val();
+	var csSubDept = $("#scSubDeptName").val();
 	//$("#demandList").empty();
 	$("#demandList  tr:not(:first)").html("");
 	$.ajax({
@@ -89,7 +127,7 @@ function loadDemandList(currPage){
 		cache:false,
 		type:"post",
 		data:{"skill":skill,"position":position,"hsbcDept.hsbcDeptName":department,
-			"hsbcDept.hsbcSubDeptName":sub_department,"status":status,"rr":rr,"currPage":currPage},
+			"hsbcDept.hsbcSubDeptName":sub_department,"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept},
 		success:function(result){
 			console.log(1111111);
 			console.log(result);
@@ -103,12 +141,14 @@ function loadDemandList(currPage){
 				var td4 = $("<td>"+result.list[i].hsbcDept.hsbcDeptName+"</td>");
 				var td5 = $("<td>"+result.list[i].hsbcDept.hsbcSubDeptName+"</td>");
 				var td6 = $("<td>"+result.list[i].status+"</td>");
+				var td7 = $("<td>"+result.list[i].csSubDept+"</td>");
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
 				td4.appendTo(tr);
 				td5.appendTo(tr);
 				td6.appendTo(tr);
+				td7.appendTo(tr);
 				$("#demandList").append(tr);
 			}
 			//alert(result.pageCondition.totalPage);

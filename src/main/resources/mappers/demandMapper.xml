@@ -55,6 +55,9 @@
 			<if test="demand.rr!=null and demand.rr!=''">
 				and rr = #{demand.rr}
 			</if>
+			<if test="demand.csSubDept!=null and demand.csSubDept!=''">
+				and CS_SUBDEPT = #{demand.csSubDept}
+			</if>
 			<!-- <if test="demand.hsbcSubDeptId!=null and demand.hsbcSubDeptId!=''"> -->
 				and HSBC_SUBDEPT_ID in 
 				<foreach item="item" collection="hsbcSubDeptIdList" open="(" separator="," close=")">

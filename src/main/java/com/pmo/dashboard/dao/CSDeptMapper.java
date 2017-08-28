@@ -10,4 +10,5 @@ public interface CSDeptMapper
     List<CSDept> queryCSSubDeptName(String csSubDeptId);
     CSDept  queryCSDeptById(String csSubDeptId);
     List<CSDept> queryAllCSSubDeptName();
+    public List<CSDept> queryCSSubDeptNameByCsBuName(String csBuName);
 }

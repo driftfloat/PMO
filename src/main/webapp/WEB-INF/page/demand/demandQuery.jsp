@@ -147,6 +147,25 @@ var path='<%=path%>';
 										</div>
 										</br></br></br>
 										
+										<div class="group">
+										<label class="col-lg-2 control-label">业务部</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="csDept.csBuName" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="csBuName" data-bv-group=".group">
+												<option value="">-- select--</option>
+											</select>
+										</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">交付部</label>
+											<div class="col-sm-4">
+												<select class="form-control" name="csDept.scSubDeptName" data-bv-notempty
+													data-bv-notempty-message="请选择角色" id="scSubDeptName" data-bv-group=".group">
+													<option value="">-- select--</option>
+												</select>
+											</div>
+										</div>
+										</br></br></br>
 										
 										<div class="form-group">
 									    <div style="text-align:center;width:50%;float:left">
@@ -178,7 +197,7 @@ var path='<%=path%>';
 												<th>Department</th>
 												<th>Sub - Department</th>
 												<th>Status</th>
-												<!-- <th>操作</th> -->
+												<th>交付部</th>
 											</tr>
 										</thead>
 										

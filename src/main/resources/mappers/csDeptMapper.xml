@@ -25,4 +25,8 @@
 	<select id="queryAllCSSubDeptName" resultMap="csDeptMap">
 	    SELECT DISTINCT CS_SUBDEPT_NAME FROM t_cs_dept
 	</select>
+	
+	<select id="queryCSSubDeptNameByCsBuName" parameterType="String" resultMap="csDeptMap">
+	    SELECT *  FROM t_cs_dept WHERE CS_BU_NAME = #{csBuName} GROUP BY CS_SUBDEPT_NAME
+	</select>
 </mapper>
