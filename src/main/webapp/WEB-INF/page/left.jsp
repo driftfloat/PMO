@@ -23,7 +23,8 @@
                         </li>
                         <li><a class="ajax-link" href="<%=path %>/service/employee/employeeInfo.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;员工信息维护</span></a>
                         </li>
-                        
+                          <li><a class="ajax-link" href="<%=path %>/service/candidate/getCandidate.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;候选人列表</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
