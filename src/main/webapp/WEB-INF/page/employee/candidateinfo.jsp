@@ -63,7 +63,7 @@ var path='<%=path%>';
 								</h2>
 							</div>
 							<div id="employeeInfo" class="box-content">
-							    <form id="employeeForm" method="post" class="form-horizontal">
+							    <form id="candidateForm" method="post" class="form-horizontal">
 									<div class="group">
 										<label class="col-sm-2 control-label">NAME</label>
 										<div class="col-sm-4">
@@ -129,8 +129,15 @@ var path='<%=path%>';
 									<br/><br/><br/>
 									<div class="group">
 										<label class="col-sm-2 control-label">WORK YEARS</label>
-										<div class="col-sm-4">
-											<input type="text" class="form-control" name="experienceYears" id="experienceYears" />
+										<div class="col-lg-4">
+											<select class="form-control" name="experienceYears" data-bv-notempty
+												data-bv-notempty-message="请选择工作年限" id="experienceYears" data-bv-group=".group">
+												<option value="">-- ALL--</option>
+												<option value="0">2年以下</option>
+												<option value="1">3~5年</option>
+												<option value="2">6~10年</option>
+												<option value="3">11年以上</option>
+											</select>
 										</div>
 									</div>
 									<div class="group">
@@ -147,8 +154,11 @@ var path='<%=path%>';
 									<br/><br/><br/>
 									<div class="group">
 										<label class="col-sm-2 control-label">SKILL</label>
-										<div class="col-sm-4">
-											<input type="text" class="form-control" name="skill" id="skill" />
+										<div class="col-lg-4">
+											<select class="form-control" name="skill" data-bv-notempty
+												data-bv-notempty-message="请选择技能" id="skill" data-bv-group=".group">
+												<option value="">-- ALL--</option>
+											</select>
 										</div>
 									</div>
 									<div class="group">
@@ -170,17 +180,17 @@ var path='<%=path%>';
 										</div>
 									</div>
 									<div class="form-group">
-									    <div style="text-align:center;width:25%;float:right;cursor:pointer">
+									    <div style="text-align:center;width:25%;float:right;">
 									    	<input type="button" value="查&nbsp;&nbsp;询"
 												name="searchBtn" id="searchBtn" 
 												class="button btn btn-primary" data-dismiss="modal"
-												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
+												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto;cursor:pointer;">
 									    </div>
-									    <div style="text-align:center;width:25%;float:right;cursor:pointer;display:none;">
+									    <div style="text-align:center;width:25%;float:right;">
 									    	<input type="reset" value="导出Excel" disabled="disabled"
 												name="exportExcel" id="exportExcel"
 												class="button btn btn-primary" data-dismiss="modal"
-												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
+												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto;cursor:pointer;">
 									    </div>
 									</div>
 								        

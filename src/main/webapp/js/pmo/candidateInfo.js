@@ -1,16 +1,9 @@
 var currentPage = "";//当前页码
 var pageCount = "";//共几页 
 
-var csSubDeptName0 = "";
-	
-var csBuName0 = "";
 $(function(){
-//	loadCSDept();
-	
-//	loadEmployeeList();
-	loadCandidateList();
-//	loadCSSubDept();
-	
+	loadCandidateSkillInfo();
+	loadCandidateList();	
 })
 
 
@@ -28,21 +21,6 @@ $("#csBu").change(function(){
 	$("#exportExcel").attr("disabled", true);
 })
 
-
-function loadCSDept(){
-	$.ajax({
-		url:path+'/service/csDept/queryCSDeptName',
-		dataType:"json",
-		async:true,
-		cache:false,
-		type:"post",
-		success:function(list){
-			for(var i = 0;i<list.length;i++){
-				$("#csDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csDeptName+"</option>");
-			}
-		}
-	})
-}
 
 
 $('#searchBtn').bind("click", function(){
@@ -93,54 +71,47 @@ function exportCondition(){
 }
 
 
-function loadCSSubDept(){
-	$.ajax({
-		url:path+'/service/csDept/queryAllCSSubDeptName',
-		dataType:"json",
-		async:true,
-		cache:false,
-		type:"post",
-		success:function(list){
-			for(var i = 0;i<list.length;i++){
-				$("#csSubDept").append("<option>"+list[i].csSubDeptName+"</option>");
-			}
-		}
-	})
-}
-
-
 function editEmployeeInfo(employeeId){
 	$("#editForm").attr("action",path+"/service/employee/updateEmployeeInfo.html");
 	$("#employeeId").val(employeeId);
 	$("#editForm").submit();
 }
-
+function loadCandidateSkillInfo(){
+	var url = path+'/json/skill.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#skill").append("<option>"+item.name+"</option>");
+	       })
+	});
+}
 function loadCandidateList(pageState)
 {
-	var candidateStatus = $("#candidateStatus").find("option:selected").val();
-	var education = $("#education").find("option:selected").val();
-	var majorStatus = $("#majorStatus").find("option:selected").val();
-	var englishLevel = $("#englishLevel").find("option:selected").val();
-	var candidateName = $("#candidateName").val();
-	var source = $("#source").val();
-	var candidateTel = $("#candidateTel").val();
-	var email = $("#email").val();
-	var experienceYears = $("#experienceYears").val();
-	var skill = $("#skill").val();
-	var userName = $("#userName").val();
-
+	var candidate = new FormData(document.getElementById("candidateForm"));
+	if(null != pageState)
+	{
+		candidate.append("pageState",pageState);
+	}
+	candidate.append("currentPage",currentPage);
+	candidate.append("pageCount",pageCount);
 	$.ajax({
 		url:path+"/service/candidate/queryCandidateList",
 		dataType:"json",
 		async:true,
-		data:{"candidateStatus":candidateStatus,"education":education,"majorStatus":majorStatus,"englishLevel":englishLevel,"candidateName":candidateName,"source":source,"candidateTel":candidateTel,"email":email,"experienceYears":experienceYears,"skill":skill,"userName":userName,"currentPage":currentPage,"pageCount":pageCount,"pageState":pageState},
+		data:candidate,
 		cache:false,
+		processData:false,
+        contentType:false,
 		type:"post",
 		success:function(result){
 			$("#candidateList tbody").remove();
 			var tbody = $("<tbody>");
 			tbody.appendTo($("#candidateList"));
-			if(result.data.length > 0 ){
+			if(result.data.length <= 0 ){
+				$("#exportExcel").attr("disabled",true);
+				var tr = $("<tr></tr>");
+				tr.appendTo(tbody);
+				$("<td colspan='14' style='color: red;text-align: center;'>未查询到数据！</td>").appendTo(tr);
+			}else{
 				$("#exportExcel").removeAttr("disabled");
 			}
 			for (var i = 0; i < result.data.length; i++) {
@@ -163,10 +134,8 @@ function loadCandidateList(pageState)
 				$("<td>"+ result.data[i].userName+ "</td>").appendTo(tr);
 				$("<td><a href='javascript:void(0);'" +
 						"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
-						"&nbsp;&nbsp;<a href='javascript:void(0);'" +
-							"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>DETAIL</a>" +
-						"&nbsp;&nbsp;<a href='javascript:void(0);'" +
-							"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>RESUME</a>" +
+					"&nbsp;&nbsp;<a href='javascript:void(0);'" +
+						"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>RESUME</a>" +
 				"</td>").appendTo(tr);
 			}
 			$("#candidateList").append("</tbdoy>");
