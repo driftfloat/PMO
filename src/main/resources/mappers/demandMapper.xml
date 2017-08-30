@@ -55,27 +55,38 @@
 			<if test="demand.rr!=null and demand.rr!=''">
 				and rr = #{demand.rr}
 			</if>
-			<if test="demand.csSubDept!=null and demand.csSubDept!=''">
-				and CS_SUBDEPT = #{demand.csSubDept}
-			</if>
-			<!-- <if test="demand.hsbcSubDeptId!=null and demand.hsbcSubDeptId!=''"> -->
+			<choose>
+				<when test="demand.csSubDept!=null and demand.csSubDept!=''">
+					and CS_SUBDEPT = #{demand.csSubDept}
+				</when>
+				<otherwise>
+					<if test="csBuName!=null and csBuName!=''">
+						and CS_SUBDEPT in
+						<foreach item="item" collection="csSubDeptList" open="(" separator="," close=")">
+							#{item.csSubDeptName}
+						</foreach>
+					</if>
+				</otherwise>
+			</choose>
+			<if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
 				and HSBC_SUBDEPT_ID in 
 				<foreach item="item" collection="hsbcSubDeptIdList" open="(" separator="," close=")">
 					#{item}
 				</foreach>
+			</if>
 		</where>
 	</sql>
 	
 	<select id="queryDemandList" parameterType="java.util.HashMap" resultMap="demandMap">
 		select * 
-		from  demand
+		from  t_demand
 		<include refid="queryWhere"/>
 		limit #{num}, #{pageCondition.pageSize}
 	</select>
 	
 	<select id="queryDemandCount" parameterType="java.util.HashMap" resultType="int">
 		select count(1) 
-		from  demand
+		from  t_demand
 		<include refid="queryWhere"/>
 	</select>
 </mapper>

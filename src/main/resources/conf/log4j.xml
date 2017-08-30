@@ -5,7 +5,7 @@
 	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern"
-				value="%d{yyyy-MM-dd HH:mm:ss:SSS} %l %m%n" />
+				value="%d{yyyy-MM-dd HH:mm:ss:SSS}  %m%n" />
 		</layout>
 		<filter class="org.apache.log4j.varia.LevelRangeFilter">
 			<param name="LevelMax" value="ERROR" />
@@ -26,6 +26,7 @@
 		<priority value="debug" />
 		<!-- <appender-ref ref="CONSOLE" /> -->
 		<appender-ref ref="FILE" />
+		<appender-ref ref="CONSOLE" />
 	</root>
 	<category name="org.springframework">
 		<priority value="error" />

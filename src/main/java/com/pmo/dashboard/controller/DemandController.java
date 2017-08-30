@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,10 @@ public class DemandController {
 		return "/demand/demandQuery";
 	}
 	
+	/**
+	 * 加载Department信息
+	 * @return
+	 */
 	@RequestMapping("/loadDepartment")
 	@ResponseBody
 	public List<HSBCDept> loadDepartment(){
@@ -54,6 +59,11 @@ public class DemandController {
 		return list;
 	}
 	
+	/**
+	 * 加载SubDepartment信息
+	 * @param hsbcDeptName
+	 * @return
+	 */
 	@RequestMapping("/loadSubDepartment")
 	@ResponseBody
 	public List<HSBCDept> loadSubDepartment(String hsbcDeptName){
@@ -73,13 +83,20 @@ public class DemandController {
 		return list;
 	}
 	
+	/**
+	 * 按条件查询招聘需求和分页功能
+	 * @param demand
+	 * @param pageCondition
+	 * @return
+	 */
 	@RequestMapping("/queryDemandList")
 	@ResponseBody
-	public Object demandQuery(Demand demand,PageCondition pageCondition){
+	public Object demandQuery(String csBuName,Demand demand,PageCondition pageCondition){
 		if("".equals(pageCondition.getCurrPage()) || pageCondition.getCurrPage() == null){
 			pageCondition.setCurrPage(1);
 		}
-		List<Demand> list = demandService.queryDemandList(demand,pageCondition);
+		//String csBuName = request.getParameter("csBuName");
+		List<Demand> list = demandService.queryDemandList(demand,pageCondition,csBuName);
 		Map<String,Object> result = new HashMap<String,Object>();
 		result.put("list", list);
 		result.put("pageCondition", pageCondition);

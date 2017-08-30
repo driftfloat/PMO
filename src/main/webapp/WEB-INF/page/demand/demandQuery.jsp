@@ -148,7 +148,7 @@ var path='<%=path%>';
 										</br></br></br>
 										
 										<div class="group">
-										<label class="col-lg-2 control-label">业务部</label>
+										<label class="col-lg-2 control-label">事业部</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="csDept.csBuName" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="csBuName" data-bv-group=".group">

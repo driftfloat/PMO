@@ -14,7 +14,7 @@ $(function(){
 	loadCsBuName();
 	loadScSubDeptName();
 })
-
+/*加载skill本地json信息*/
 function loadSkill(){
 	var url = path+'/json/skill.json';
 	$.getJSON(url, function(data){
@@ -23,6 +23,7 @@ function loadSkill(){
 		})
 	})
 }
+/*加载position本地json信息*/
 function loadPosition(){
 	var url = path+'/json/position.json';
 	$.getJSON(url, function(data){
@@ -31,6 +32,7 @@ function loadPosition(){
 		})
 	})
 }
+/*加载status本地json信息*/
 function loadDemandStatus(){
 	var url = path+'/json/demandStatus.json';
 	$.getJSON(url, function(data){
@@ -69,7 +71,7 @@ function loadScSubDeptName(){
 		})
 	})
 }
-
+/*异步加载Department信息*/
 function loadDepartment(){
 	$.ajax({
 		url:path+'/service/demand/loadDepartment',
@@ -84,9 +86,8 @@ function loadDepartment(){
 		}
 	})
 }
-
+/*根据department加载subdepartment的ajax*/
 function loadSubDepartment(){
-	/*根据department加载subdepartment的ajax*/
 	$("#department").change(function(){
 		//var department = $("#department option:selected").text();
 		var department = $("#department").val();
@@ -109,7 +110,7 @@ function loadSubDepartment(){
 		});
 	});
 }
-
+/*根据条件和当前页加载查询到的信息*/
 function loadDemandList(currPage){
 	var skill= $("#skill").val();
 	var position= $("#position").val();
@@ -117,6 +118,7 @@ function loadDemandList(currPage){
 	var sub_department= $("#sub_department").val();
 	var status= $("#status").val();
 	var rr= $("#rr").val();
+	var csBuName = $("#csBuName").val();
 	var csSubDept = $("#scSubDeptName").val();
 	//$("#demandList").empty();
 	$("#demandList  tr:not(:first)").html("");
@@ -126,8 +128,8 @@ function loadDemandList(currPage){
 		async:true,
 		cache:false,
 		type:"post",
-		data:{"skill":skill,"position":position,"hsbcDept.hsbcDeptName":department,
-			"hsbcDept.hsbcSubDeptName":sub_department,"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept},
+		data:{"csBuName":csBuName,"skill":skill,"position":position,"hsbcDept.hsbcDeptName":department,"hsbcDept.hsbcSubDeptName":sub_department,
+			"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept},
 		success:function(result){
 			console.log(1111111);
 			console.log(result);

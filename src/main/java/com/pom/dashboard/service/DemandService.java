@@ -11,5 +11,5 @@ import com.pmo.dashboard.entity.PageCondition;
  */
 public interface DemandService {
 
-	public List<Demand> queryDemandList(Demand demand, PageCondition pageCondition);
+	public List<Demand> queryDemandList(Demand demand, PageCondition pageCondition,String csBuName);
 }
