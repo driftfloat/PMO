@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmo.dashboard.dao.DemandMapper">
+	<resultMap id="demandMap" type="com.pmo.dashboard.entity.Demand">
+		<id property="demandId" column="DEMAND_ID" javaType="String" />
+		<result property="rr" column="RR" javaType="String" />
+		<result property="jobCode" column="JOB_CODE" javaType="String" />
+		<result property="skill" column="SKILL" javaType="String" />
+		<result property="requestor" column="REQUESTOR" javaType="String" />
+		<result property="position" column="POSITION" javaType="String" />
+		<result property="hsbcSubDeptId" column="HSBC_SUBDEPT_ID" javaType="String" />
+		<result property="location" column="LOCATION" javaType="String" />
+		<result property="reqPublishedDate" column="REQ_PUBLISHED_DATE" javaType="String" />
+		<result property="ageing" column="AGEING" javaType="String" />
+		<result property="profilesNo" column="PROFILES_NO" javaType="String" />
+		<result property="interviewedNo" column="INTERVIEWED_NO" javaType="String" />
+		<result property="status" column="STATUS" javaType="String" />
+		<result property="staffName" column="STAFF_NAME" javaType="String" />
+		<result property="proposedJoiningDate" column="PROPOSED_JOINING_DATE" javaType="String" />
+		<result property="dcCleared" column="DC_CLEARED" javaType="String" />
+		<result property="sowSigned" column="SOW_SIGNED" javaType="String" />
+		<result property="onboarded" column="ONBOARDED" javaType="String" />
+		<result property="abort" column="ABORT" javaType="String" />
+		<result property="delayed" column="DELAYED" javaType="String" />
+		<result property="reason" column="REASON" javaType="String" />
+		<result property="nextAction" column="NEXT_ACTION" javaType="String" />
+		<result property="status2" column="STATUS2" javaType="String" />
+		<result property="remark" column="REMARK" javaType="String" />
+		<result property="csSubDept" column="CS_SUBDEPT" javaType="String" />
+		<result property="plannedOnboardDate" column="PLANNED_ONBOARD_DATE" javaType="String" />
+		<result property="doNumber" column="DO_NUMBER" javaType="String" />
+		<result property="level" column="LEVEL" javaType="String" />
+		<result property="hrPriority" column="HR_PRIORITY" javaType="String" />
+		<result property="reqReceivedDate" column="REQ_RECEIVED_DATE" javaType="String" />
+		<result property="ageingReceived" column="AGEING_RECEIVED" javaType="String" />
+		<association property="hsbcDept" javaType="com.pmo.dashboard.entity.HSBCDept">
+			<id column="hsbcSubDeptId" property="HSBC_SUBDEPT_ID"/>
+			<id column="hsbcSubDeptName" property="HSBC_SUBDEPT_NAME"/>
+			<id column="hsbcDeptName" property="HSBC_DEPT_NAME"/>
+		</association>
+	</resultMap>
+	
+	<sql id="queryWhere">
+		<where>
+			<if test="demand.skill!=null and demand.skill!=''">
+				and SKILL = #{demand.skill}
+			</if>
+			<if test="demand.position!=null and demand.position!=''">
+				and position = #{demand.position}
+			</if>
+			<if test="demand.status!=null and demand.status!=''">
+				and status = #{demand.status}
+			</if>
+			<if test="demand.rr!=null and demand.rr!=''">
+				and rr = #{demand.rr}
+			</if>
+			<choose>
+				<when test="demand.csSubDept!=null and demand.csSubDept!=''">
+					and CS_SUBDEPT = #{demand.csSubDept}
+				</when>
+				<otherwise>
+					<if test="csBuName!=null and csBuName!=''">
+						and CS_SUBDEPT in
+						<foreach item="item" collection="csSubDeptList" open="(" separator="," close=")">
+							#{item.csSubDeptName}
+						</foreach>
+					</if>
+				</otherwise>
+			</choose>
+			<if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
+				and HSBC_SUBDEPT_ID in 
+				<foreach item="item" collection="hsbcSubDeptIdList" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="queryDemandList" parameterType="java.util.HashMap" resultMap="demandMap">
+		select * 
+		from  t_demand
+		<include refid="queryWhere"/>
+		limit #{num}, #{pageCondition.pageSize}
+	</select>
+	
+	<select id="queryDemandCount" parameterType="java.util.HashMap" resultType="int">
+		select count(1) 
+		from  t_demand
+		<include refid="queryWhere"/>
+	</select>
+</mapper>

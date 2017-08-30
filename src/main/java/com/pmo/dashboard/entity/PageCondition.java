@@ -4,9 +4,13 @@ public class PageCondition
 {
     private String currentPage;
     private String pageCount;
+
+    private Integer currPage;
+    private Integer totalPage;
+    private Integer pageSize = 10;
+
     private String pageDataCount;
     private String dataCount;
-    
     
     public String getCurrentPage()
     {
@@ -24,7 +28,25 @@ public class PageCondition
     {
         this.pageCount = pageCount;
     }
-    public PageCondition()
+    public Integer getCurrPage() {
+		return currPage;
+	}
+	public void setCurrPage(Integer currPage) {
+		this.currPage = currPage;
+	}
+	public Integer getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(Integer totalPage) {
+		this.totalPage = totalPage;
+	}
+	public Integer getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+	public PageCondition()
     {
         super();
         // TODO Auto-generated constructor stub
