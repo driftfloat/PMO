@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmo.dashboard.dao.CandidateMapper">
+	<resultMap id="candidateMap" type="com.pmo.dashboard.entity.CandidateInfo">
+		<id 	property="candidateId" 		column="CANDIDATE_ID" 		javaType="String" />
+		<result property="candidateName" 	column="CANDIDATE_NAME" 	javaType="String" />
+		<result property="candidateAge" 	column="CANDIDATE_AGE" 		javaType="String" />
+		<result property="candidateSex" 	column="CANDIDATE_SEX" 		javaType="String" />
+		<result property="candidateTel" 	column="TEL" 				javaType="String" />
+		<result property="education" 		column="EDUCATION" 			javaType="String" />
+		<result property="skill" 			column="SKILL" 				javaType="String" />
+		<result property="experienceYears" 	column="EXPERIENCE_YEARS" 	javaType="String" />
+		<result property="candidateStatus" 	column="CANDIDATE_STATUS" 	javaType="String" />
+		<result property="collage" 			column="COLLEGE" 			javaType="String" />
+		<result property="majorStatus" 		column="MAJOR_STATUS" 		javaType="String" />
+		<result property="graduateDate" 	column="GRADUATE_DATE" 		javaType="String" />
+		<result property="englishLevel" 	column="ENGLISH_LEVEL" 		javaType="String" />
+		<result property="resumePath" 		column="RESUME_PATH" 		javaType="String" />
+		<result property="lockPerson" 		column="LOCK_PERSION" 		javaType="String" />
+		<result property="userName" 		column="USER_NAME" 			javaType="String" />
+		<result property="createDate" 		column="CREATE_DATE" 		javaType="String" />
+		<result property="updateDate" 		column="UPDATE_DATE" 		javaType="String" />
+		<result property="source" 			column="SOURCE" 			javaType="String" />
+		<result property="role" 			column="ROLE" 				javaType="String" />
+		<result property="entyDate" 		column="ENTY_DATE" 			javaType="String" />
+		<result property="email" 			column="EMAIL" 				javaType="String" />
+	</resultMap>
+	
+	<select id="queryCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
+	    SELECT 
+	    	a.*,b.USER_NAME 
+        FROM 
+        	t_candidate a
+        left join 
+        	t_user b 
+        on a.LOCK_PERSION = b.USER_ID
+        WHERE 
+        	CANDIDATE_STATUS != 5 
+			<if test="candidateName != null and candidateName != ''">
+				AND CANDIDATE_NAME = #{candidateName}
+			</if>
+			<if test="candidateTel != null and candidateTel != ''">
+				AND TEL like CONCAT('%',#{candidateTel},'%')
+			</if>
+			<if test="candidateStatus != null and candidateStatus != ''">
+				AND CANDIDATE_STATUS = #{candidateStatus}
+			</if>
+			<if test="majorStatus != null and majorStatus != ''">
+				AND MAJOR_STATUS = #{majorStatus}
+			</if>
+			<if test="experienceYears != null and experienceYears != ''">
+				AND EXPERIENCE_YEARS = #{experienceYears}
+			</if>
+			<if test="education != null and education != ''">
+				AND EDUCATION = #{education}
+			</if>
+			<if test="skill != null and skill != ''">
+				AND SKILL like CONCAT('%',#{skill},'%')
+			</if>
+			<if test="email != null and email != ''">
+				AND EMAIL like CONCAT('%',#{email},'%')
+			</if>
+			<if test="englishLevel != null and englishLevel != ''">
+				AND ENGLISH_LEVEL = #{englishLevel}
+			</if>
+			<if test="userName != null and userName != ''">
+				AND USER_NAME = #{userName}
+			</if>
+			<if test="source != null and source != ''">
+				AND SOURCE = #{source}
+			</if>
+			ORDER BY CANDIDATE_STATUS,EXPERIENCE_YEARS desc,EDUCATION,MAJOR_STATUS,CANDIDATE_ID 
+        LIMIT #{currentPage},#{pageDataCount};
+	</select>
+	<select id="queryCandidateCount" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="int" >
+	    SELECT 
+	    	count(0) 
+        FROM 
+        	t_candidate a
+        left join 
+        	t_user b 
+        on a.LOCK_PERSION = b.USER_ID
+        WHERE 
+        	CANDIDATE_STATUS != 5 
+			<if test="candidateName != null and candidateName != ''">
+				AND CANDIDATE_NAME = #{candidateName}
+			</if>
+			<if test="candidateTel != null and candidateTel != ''">
+				AND TEL like "%"#{candidateTel}"%"
+			</if>
+			<if test="candidateStatus != null and candidateStatus != ''">
+				AND CANDIDATE_STATUS = #{candidateStatus}
+			</if>
+			<if test="majorStatus != null and majorStatus != ''">
+				AND MAJOR_STATUS = #{majorStatus}
+			</if>
+			<if test="experienceYears != null and experienceYears != ''">
+				AND EXPERIENCE_YEARS = #{experienceYears}
+			</if>
+			<if test="education != null and education != ''">
+				AND EDUCATION = #{education}
+			</if>
+			<if test="skill != null and skill != ''">
+				AND SKILL like "%"#{skill}"%"
+			</if>
+			<if test="email != null and email != ''">
+				AND EMAIL like "%"#{email}"%"
+			</if>
+			<if test="englishLevel != null and englishLevel != ''">
+				AND ENGLISH_LEVEL like "%"#{englishLevel}"%"
+			</if>
+			<if test="userName != null and userName != ''">
+				AND USER_NAME = #{userName}
+			</if>
+			<if test="source != null and source != ''">
+				AND SOURCE like "%"#{source}"%"
+			</if>
+			;
+	</select>
+</mapper>

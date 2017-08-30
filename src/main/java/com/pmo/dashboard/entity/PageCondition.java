@@ -4,9 +4,13 @@ public class PageCondition
 {
     private String currentPage;
     private String pageCount;
+
     private Integer currPage;
     private Integer totalPage;
     private Integer pageSize = 10;
+
+    private String pageDataCount;
+    private String dataCount;
     
     public String getCurrentPage()
     {
@@ -53,5 +57,17 @@ public class PageCondition
         this.currentPage = currentPage;
         this.pageCount = pageCount;
     }
+	public String getPageDataCount() {
+		return pageDataCount;
+	}
+	public void setPageDataCount(String pageDataCount) {
+		this.pageDataCount = pageDataCount;
+	}
+	public String getDataCount() {
+		return dataCount;
+	}
+	public void setDataCount(String dataCount) {
+		this.dataCount = dataCount;
+	}
     
 }
