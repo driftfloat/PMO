@@ -26,6 +26,8 @@ public class CandidateInfo extends PageCondition
 	private String email;
 	private String workYearsStart;
 	private String workYearsEnd;
+	private String exportDataColumn;
+	private String exportPageColumn;
 	
 	private String pageState;
 	
@@ -178,6 +180,18 @@ public class CandidateInfo extends PageCondition
 	}
 	public void setWorkYearsEnd(String workYearsEnd) {
 		this.workYearsEnd = workYearsEnd;
+	}
+	public String getExportDataColumn() {
+		return exportDataColumn;
+	}
+	public void setExportDataColumn(String exportDataColumn) {
+		this.exportDataColumn = exportDataColumn;
+	}
+	public String getExportPageColumn() {
+		return exportPageColumn;
+	}
+	public void setExportPageColumn(String exportPageColumn) {
+		this.exportPageColumn = exportPageColumn;
 	}
 	
 }

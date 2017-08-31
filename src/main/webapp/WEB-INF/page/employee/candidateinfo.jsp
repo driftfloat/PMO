@@ -182,20 +182,20 @@ var path='<%=path%>';
 									<div class="form-group">
 									    <div style="text-align:center;width:25%;float:right;">
 									    	<input type="button" value="查&nbsp;&nbsp;询"
-												name="searchBtn" id="searchBtn" 
+												name="searchCandidateBtn" id="searchCandidateBtn" 
 												class="button btn btn-primary" data-dismiss="modal"
 												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto;cursor:pointer;">
 									    </div>
 									    <div style="text-align:center;width:25%;float:right;">
 									    	<input type="reset" value="导出Excel" disabled="disabled"
-												name="exportExcel" id="exportExcel"
+												name="exportCandidateExcel" id="exportCandidateExcel"
 												class="button btn btn-primary" data-dismiss="modal"
 												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto;cursor:pointer;">
 									    </div>
 									</div>
 								        
 							        <div >
-								    	<a href="" id="exceltHref" style="display:none;">导出</a>
+								    	<a href="" id="exceltHrefCandidate" style="display:none;">导出</a>
 								    </div>
 								    
 									<div style="overflow: auto;">
@@ -248,7 +248,7 @@ var path='<%=path%>';
 			<!--/#content.col-md-0-->
 		</div>
 		<hr>
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		<div class="modal fade" id="myCandidateListModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -256,7 +256,6 @@ var path='<%=path%>';
 						<h2>
 							<i class="glyphicon glyphicon-user"></i> 勾选导出项
 						</h2>
-
 						<div class="box-icon">
 							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
 								class="glyphicon glyphicon-chevron-up"></i></a> <a
@@ -270,35 +269,36 @@ var path='<%=path%>';
 							class="table table-striped table-bordered">
 							<thead>
 								<tr>
-									<label><input type="checkbox" checked="checked" name="candidateName"/>Name&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="candidateSex"/>Sex&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="candidateAge"/>Age&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="candidateTel"/>Tel&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="email"/>Email&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="source"/>Source&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="candidateStatus"/>Status&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="education">Education&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="experienceYears"/>Work Years&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="majorStatus"/>Major Type&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="englishLevel"/>English Level&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="skill"/>Skill&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="college"/>College&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="graduate"/>Graduate&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="lockPerson"/>Lock HR&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="createDate"/>Create Date&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="updateDate"/>Update Date&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="Role"/>Role&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="entyDate"/>ENTY Date&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="CANDIDATE_NAME" value="Name"/>Name&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="CANDIDATE_SEX" value="Sex"/>Sex&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="CANDIDATE_AGE" value="Age"/>Age&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="TEL" value="Tel"/>Tel&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="EMAIL" value="Email"/>Email&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="SOURCE" value="Source"/>Source&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="CANDIDATE_STATUS" value="Status"/>Status&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="EDUCATION" value="Education"/>Education&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="EXPERIENCE_YEARS" value="Work Years"/>Work Years&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="MAJOR_STATUS" value="Major Type"/>Major Type&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="ENGLISH_LEVEL" value="English Level"/>English Level&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="SKILL" value="Skill"/>Skill&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="COLLEGE" value="College"/>College&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="GRADUATE_DATE" value="Graduate Date"/>Graduate Date&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="USER_NAME" value="Lock HR"/>Lock HR&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="CREATE_DATE" value="Create Date"/>Create Date&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="UPDATE_DATE" value="Update Date"/>Update Date&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="ROLE" value="Role"/>Role&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="ENTY_DATE" value="ENTY Date"/>ENTY Date&nbsp;&nbsp;</label>
 								</tr>
 							</thead>
 							<tbody>
 							</tbody>
 						</table>
 						<div class="center">
-							<a class="btn btn-success" href="#" onClick="exportCondition()"> <i
-								class="glyphicon glyphicon-ok icon-white" ></i> 确定
-							</a> <a class="btn btn-info" href="#" data-dismiss="modal"> <i
-								class="glyphicon glyphicon-remove icon-white"></i> 取消
+							<a class="btn btn-success" href="#" onClick="exportCondition()"> 
+								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
+							</a> 
+							<a class="btn btn-info" href="#" data-dismiss="modal"> 
+								<i class="glyphicon glyphicon-remove icon-white"></i> 取消
 							</a>
 						</div>
 					</div>
