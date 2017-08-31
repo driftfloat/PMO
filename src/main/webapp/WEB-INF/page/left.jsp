@@ -26,7 +26,11 @@
 
                         <li><a class="ajax-link" href="<%=path %>/service/demand/demandInfo.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;招聘需求查询</span></a>
                         </li>
+
                          <li><a class="ajax-link" href="<%=path %>/service/resume/input.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;候选人录入</span></a>
+
+                        <li><a class="ajax-link" href="<%=path %>/service/demand/recruitdemand.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;招聘需求</span></a>
+
                         </li>
 
                           <li><a class="ajax-link" href="<%=path %>/service/candidate/getCandidate.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;候选人列表</span></a>
