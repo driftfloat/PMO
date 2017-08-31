@@ -50,7 +50,7 @@ public class CandidateController
     public String getCandidate(final HttpServletRequest request,
             final HttpServletResponse response)
     {
-    	return "employee/candidateinfo";
+    	return "candidate/candidateinfo";
     }
     
     @RequestMapping("/queryCandidateList")
