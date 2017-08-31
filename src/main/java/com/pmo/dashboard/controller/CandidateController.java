@@ -41,6 +41,23 @@ public class CandidateController
     {
     	 String pageState = candidate.getPageState();
     	 PageCondition page = new PageCondition();
+
+     	String  expriencesWork = candidate.getExperienceYears();
+    	 if("0".equals(expriencesWork)){
+    		 candidate.setWorkYearsEnd("2");
+    	 }else if("1".equals(expriencesWork)){
+    		 candidate.setWorkYearsStart("3");
+    		 candidate.setWorkYearsEnd("5");
+    	 }else if("2".equals(expriencesWork)){
+    		 candidate.setWorkYearsStart("6");
+    		 candidate.setWorkYearsEnd("10");
+    	 }else if("3".equals(expriencesWork)){
+    		 candidate.setWorkYearsStart("11");
+    	 }
+    	 if("-- ALL--".equalsIgnoreCase(candidate.getSkill()))
+    	 {
+    		 candidate.setSkill("");
+    	 }
 		 int dataCount = candidateService.queryCandidateCount(candidate);
 	     page.setDataCount(dataCount+"");
 		 page.setPageCount((dataCount-1)/10 + 1 +"");

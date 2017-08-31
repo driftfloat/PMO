@@ -24,6 +24,8 @@ public class CandidateInfo extends PageCondition
 	private String role;
 	private String entyDate;
 	private String email;
+	private String workYearsStart;
+	private String workYearsEnd;
 	
 	private String pageState;
 	
@@ -164,6 +166,18 @@ public class CandidateInfo extends PageCondition
 	}
 	public void setPageState(String pageState) {
 		this.pageState = pageState;
+	}
+	public String getWorkYearsStart() {
+		return workYearsStart;
+	}
+	public void setWorkYearsStart(String workYearsStart) {
+		this.workYearsStart = workYearsStart;
+	}
+	public String getWorkYearsEnd() {
+		return workYearsEnd;
+	}
+	public void setWorkYearsEnd(String workYearsEnd) {
+		this.workYearsEnd = workYearsEnd;
 	}
 	
 }
