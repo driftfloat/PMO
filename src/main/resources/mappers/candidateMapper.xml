@@ -25,6 +25,12 @@
 		<result property="role" 			column="ROLE" 				javaType="String" />
 		<result property="entyDate" 		column="ENTY_DATE" 			javaType="String" />
 		<result property="email" 			column="EMAIL" 				javaType="String" />
+		<result property="expectedSalary" 	column="EXPECTED_SALARY" 	javaType="String" />
+		<result property="realSalary" 		column="REAL_SALARY" 		javaType="String" />
+		<result property="arrivalDate" 		column="ARRIVAL_DATE" 		javaType="String" />
+		<result property="oldCompany" 		column="OLD_COMPANY" 		javaType="String" />
+		<result property="remark" 			column="REMARK" 			javaType="String" />
+		<result property="createUser" 		column="CREATE_USER" 		javaType="String" />
 	</resultMap>
 	
 	<select id="queryCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
@@ -36,46 +42,11 @@
         	t_user b 
         on a.LOCK_PERSION = b.USER_ID
         WHERE 
-        	CANDIDATE_STATUS != 5 
-			<if test="candidateName != null and candidateName != ''">
-				AND CANDIDATE_NAME = #{candidateName}
-			</if>
-			<if test="candidateTel != null and candidateTel != ''">
-				AND TEL like CONCAT('%',#{candidateTel},'%')
-			</if>
-			<if test="candidateStatus != null and candidateStatus != ''">
-				AND CANDIDATE_STATUS = #{candidateStatus}
-			</if>
-			<if test="majorStatus != null and majorStatus != ''">
-				AND MAJOR_STATUS = #{majorStatus}
-			</if>
-			<if test="workYearsStart != null and workYearsStart != ''">
-				AND EXPERIENCE_YEARS >= ${workYearsStart}
-			</if>
-			<if test="workYearsEnd != null and workYearsEnd != ''">
-				AND EXPERIENCE_YEARS <![CDATA[<=]]> ${workYearsEnd}
-			</if>
-			<if test="education != null and education != ''">
-				AND EDUCATION = #{education}
-			</if>
-			<if test="skill != null and skill != ''">
-				AND SKILL = #{skill}
-			</if>
-			<if test="email != null and email != ''">
-				AND EMAIL like CONCAT('%',#{email},'%')
-			</if>
-			<if test="englishLevel != null and englishLevel != ''">
-				AND ENGLISH_LEVEL = #{englishLevel}
-			</if>
-			<if test="userName != null and userName != ''">
-				AND USER_NAME = #{userName}
-			</if>
-			<if test="source != null and source != ''">
-				AND SOURCE = #{source}
-			</if>
-			ORDER BY CANDIDATE_STATUS,EXPERIENCE_YEARS desc,EDUCATION,MAJOR_STATUS,CANDIDATE_ID 
+        	<include refid="candidateWherePart"/>
+		ORDER BY CANDIDATE_STATUS,EXPERIENCE_YEARS desc,EDUCATION,MAJOR_STATUS,CANDIDATE_ID 
         LIMIT #{currentPage},#{pageDataCount};
 	</select>
+	
 	<select id="queryCandidateCount" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="int" >
 	    SELECT 
 	    	count(0) 
@@ -85,43 +56,73 @@
         	t_user b 
         on a.LOCK_PERSION = b.USER_ID
         WHERE 
-        	CANDIDATE_STATUS != 5 
-			<if test="candidateName != null and candidateName != ''">
-				AND CANDIDATE_NAME = #{candidateName}
-			</if>
-			<if test="candidateTel != null and candidateTel != ''">
-				AND TEL like CONCAT('%',#{candidateTel},'%')
-			</if>
-			<if test="candidateStatus != null and candidateStatus != ''">
-				AND CANDIDATE_STATUS = #{candidateStatus}
-			</if>
-			<if test="majorStatus != null and majorStatus != ''">
-				AND MAJOR_STATUS = #{majorStatus}
-			</if>
-			<if test="workYearsStart != null and workYearsStart != ''">
-				AND EXPERIENCE_YEARS >= ${workYearsStart}
-			</if>
-			<if test="workYearsEnd != null and workYearsEnd != ''">
-				AND EXPERIENCE_YEARS <![CDATA[<=]]> ${workYearsEnd}
-			</if>
-			<if test="education != null and education != ''">
-				AND EDUCATION = #{education}
-			</if>
-			<if test="skill != null and skill != ''">
-				AND SKILL = #{skill}
-			</if>
-			<if test="email != null and email != ''">
-				AND EMAIL like CONCAT('%',#{email},'%')
-			</if>
-			<if test="englishLevel != null and englishLevel != ''">
-				AND ENGLISH_LEVEL = #{englishLevel}
-			</if>
-			<if test="userName != null and userName != ''">
-				AND USER_NAME = #{userName}
-			</if>
-			<if test="source != null and source != ''">
-				AND SOURCE = #{source}
-			</if>
+        	<include refid="candidateWherePart"/>
 			;
 	</select>
+	
+	<select id="queryCandidateResumePath" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="java.lang.String" >
+	    SELECT 
+	    	RESUME_PATH 
+        FROM 
+        	t_candidate 
+        WHERE 
+        	CANDIDATE_ID = #{candidateId};
+	</select>
+	
+	<select id="queryExportData" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="java.util.LinkedHashMap" >
+	    SELECT 
+	    	${exportDataColumn}
+        FROM 
+        	t_candidate a
+        left join 
+        	t_user b 
+        on a.LOCK_PERSION = b.USER_ID
+        left join 
+        	t_user c 
+        on a.CREATE_USER = c.USER_ID
+        WHERE 
+        	<include refid="candidateWherePart"/>
+        ORDER BY CANDIDATE_STATUS,EXPERIENCE_YEARS desc,EDUCATION,MAJOR_STATUS,CANDIDATE_ID;
+	</select>
+	
+	<sql id="candidateWherePart">
+		CANDIDATE_STATUS != 5 
+		<if test="candidateName != null and candidateName != ''">
+			AND CANDIDATE_NAME = #{candidateName}
+		</if>
+		<if test="candidateTel != null and candidateTel != ''">
+			AND TEL like CONCAT('%',#{candidateTel},'%')
+		</if>
+		<if test="candidateStatus != null and candidateStatus != ''">
+			AND CANDIDATE_STATUS = #{candidateStatus}
+		</if>
+		<if test="majorStatus != null and majorStatus != ''">
+			AND MAJOR_STATUS = #{majorStatus}
+		</if>
+		<if test="workYearsStart != null and workYearsStart != ''">
+			AND EXPERIENCE_YEARS >= ${workYearsStart}
+		</if>
+		<if test="workYearsEnd != null and workYearsEnd != ''">
+			AND EXPERIENCE_YEARS <![CDATA[<=]]> ${workYearsEnd}
+		</if>
+		<if test="education != null and education != ''">
+			AND EDUCATION = #{education}
+		</if>
+		<if test="skill != null and skill != ''">
+			AND SKILL = #{skill}
+		</if>
+		<if test="email != null and email != ''">
+			AND EMAIL like CONCAT('%',#{email},'%')
+		</if>
+		<if test="englishLevel != null and englishLevel != ''">
+			AND ENGLISH_LEVEL = #{englishLevel}
+		</if>
+		<if test="userName != null and userName != ''">
+			AND USER_NAME = #{userName}
+		</if>
+		<if test="source != null and source != ''">
+			AND SOURCE = #{source}
+		</if>
+    </sql>
+	
 </mapper>

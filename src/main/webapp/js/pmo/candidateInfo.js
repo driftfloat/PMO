@@ -1,81 +1,83 @@
 var currentPage = "";//当前页码
 var pageCount = "";//共几页 
-
+var exportdata;
 $(function(){
 	loadCandidateSkillInfo();
 	loadCandidateList();	
 })
 
-
-$("#csDept").change(function(){
-	$("#exportExcel").attr("disabled", true);
-})
-
-
-$("#csSubDept").change(function(){
-	$("#exportExcel").attr("disabled", true);
-})
-
-
-$("#csBu").change(function(){
-	$("#exportExcel").attr("disabled", true);
-})
-
-
-
-$('#searchBtn').bind("click", function(){
+$('#searchCandidateBtn').bind("click", function(){
 	loadCandidateList();
 });
 
-$('#exportExcel').bind("click", function(){
-	
-	$('#myModal').modal('show');
-	
+$('#exportCandidateExcel').bind("click", function(){	
+	exportdata = new FormData(document.getElementById("candidateForm"));
+	$('#myCandidateListModal').modal('show');	
 });
-
-
 
 function exportCondition(){
 	var lb = $("label input");
-	var condition = "";
+	var exportDataColumn = "";
+	var exportPageColumn = "";
+	if(lb.length <= 0){
+		alert("未勾选导出列！");
+		return;
+	}
 	for (var i=0;i<lb.length;i++)
 	{
 		if (lb.eq(i).is(':checked'))
 		{
-			condition += lb.eq(i).attr("name")+",";
+			exportDataColumn += lb.eq(i).attr("name")+",";
+			exportPageColumn += lb.eq(i).val()+",";
 		}
 	}
 	
-	var csDeptName = csDeptName0;
-
-	var csSubDeptName = csSubDeptName0;
-	
-	var csBuName = csBuName0;
-
+	exportdata.append("exportDataColumn",exportDataColumn);
+	exportdata.append("exportPageColumn",exportPageColumn);
 	$.ajax({
-		url:path+'/service/employeeInfo/setEmpConditon',
+		url:path+'/service/candidate/transformCandidateData',
 		dataType:"json",
-		data:{"condition":condition,"csDeptName":csDeptName,"csSubDeptName":csSubDeptName,"csBuName":csBuName},
+		data:exportdata,
 		async:true,
 		cache:false,
+		processData:false,
+        contentType:false,
 		type:"post",
+		success:function(result){
+			if(result == '1')
+			{
+				exportData();
+			}
+		}
 	})
 	
-	var url = path+'/service/employee/exportExcel';
-	$("#exceltHref").attr("href",url);
-	document.getElementById("exceltHref").click();
-	
-	
-	$('#myModal').modal('hide');
-	$("[type='checkbox']").removeAttr("checked");
 }
 
+function exportData(){
+	var url = path+'/service/candidate/exportExcel';
+	$("#exceltHrefCandidate").attr("href",url);
+	document.getElementById("exceltHrefCandidate").click();
+	
+	$('#myCandidateListModal').modal('hide');
+	$("[type='checkbox']").attr("checked","checked");
+}
 
 function editEmployeeInfo(employeeId){
 	$("#editForm").attr("action",path+"/service/employee/updateEmployeeInfo.html");
 	$("#employeeId").val(employeeId);
 	$("#editForm").submit();
 }
+
+function downLoadCandidateResume(candidateId,resumePath){
+	if(resumePath == null || resumePath == ''){
+		alert("未上传此候选人简历");
+		return;
+	}
+	var url = path+'/service/candidate/downLoadCandidateResume?candidateId='+candidateId;
+	$("#exceltHrefCandidate").attr("href",url);
+	document.getElementById("exceltHrefCandidate").click();
+}
+
 function loadCandidateSkillInfo(){
 	var url = path+'/json/skill.json'
 	$.getJSON(url,  function(data) {
@@ -84,6 +86,7 @@ function loadCandidateSkillInfo(){
 	       })
 	});
 }
+
 function loadCandidateList(pageState)
 {
 	var candidate = new FormData(document.getElementById("candidateForm"));
@@ -107,12 +110,12 @@ function loadCandidateList(pageState)
 			var tbody = $("<tbody>");
 			tbody.appendTo($("#candidateList"));
 			if(result.data.length <= 0 ){
-				$("#exportExcel").attr("disabled",true);
+				$("#exportCandidateExcel").attr("disabled",true);
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
 				$("<td colspan='14' style='color: red;text-align: center;'>未查询到数据！</td>").appendTo(tr);
 			}else{
-				$("#exportExcel").removeAttr("disabled");
+				$("#exportCandidateExcel").removeAttr("disabled");
 			}
 			for (var i = 0; i < result.data.length; i++) {
 				var tr = $("<tr></tr>");
@@ -135,7 +138,8 @@ function loadCandidateList(pageState)
 				$("<td><a href='javascript:void(0);'" +
 						"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
 					"&nbsp;&nbsp;<a href='javascript:void(0);'" +
-						"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>RESUME</a>" +
+						"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
+	//				"&nbsp;&nbsp;<a href='https://"+resumePath+"' download='"+fileName+"'>RESUME</a>" +
 				"</td>").appendTo(tr);
 			}
 			$("#candidateList").append("</tbdoy>");
@@ -149,11 +153,15 @@ function loadCandidateList(pageState)
 			$("#dataCount").html(dataCount);
 			$("#nextPage").attr("onclick","loadCandidateList('next')");
 			$("#previousPage").attr("onclick","loadCandidateList('previous')");
+			$("#lastPage").attr("onclick","loadCandidateList('last')");
+			$("#fristPage").attr("onclick","loadCandidateList('frist')");
 			if(currentPage == pageCount){
 				$("#nextPage").removeAttr("onclick");
+				$("#lastPage").removeAttr("onclick");
 			}
 			if(currentPage == 1){
 				$("#previousPage").removeAttr("onclick");
+				$("#fristPage").removeAttr("onclick");
 			}
 		}
 	})
