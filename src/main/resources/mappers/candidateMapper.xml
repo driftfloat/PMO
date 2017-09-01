@@ -25,6 +25,12 @@
 		<result property="role" 			column="ROLE" 				javaType="String" />
 		<result property="entyDate" 		column="ENTY_DATE" 			javaType="String" />
 		<result property="email" 			column="EMAIL" 				javaType="String" />
+		<result property="expectedSalary" 	column="EXPECTED_SALARY" 	javaType="String" />
+		<result property="realSalary" 		column="REAL_SALARY" 		javaType="String" />
+		<result property="arrivalDate" 		column="ARRIVAL_DATE" 		javaType="String" />
+		<result property="oldCompany" 		column="OLD_COMPANY" 		javaType="String" />
+		<result property="remark" 			column="REMARK" 			javaType="String" />
+		<result property="createUser" 		column="CREATE_USER" 		javaType="String" />
 	</resultMap>
 	
 	<select id="queryCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
@@ -54,6 +60,15 @@
 			;
 	</select>
 	
+	<select id="queryCandidateResumePath" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="java.lang.String" >
+	    SELECT 
+	    	RESUME_PATH 
+        FROM 
+        	t_candidate 
+        WHERE 
+        	CANDIDATE_ID = #{candidateId};
+	</select>
+	
 	<select id="queryExportData" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="java.util.LinkedHashMap" >
 	    SELECT 
 	    	${exportDataColumn}
@@ -62,6 +77,9 @@
         left join 
         	t_user b 
         on a.LOCK_PERSION = b.USER_ID
+        left join 
+        	t_user c 
+        on a.CREATE_USER = c.USER_ID
         WHERE 
         	<include refid="candidateWherePart"/>
         ORDER BY CANDIDATE_STATUS,EXPERIENCE_YEARS desc,EDUCATION,MAJOR_STATUS,CANDIDATE_ID;

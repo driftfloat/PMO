@@ -1,12 +1,27 @@
 package com.pmo.dashboard.service.impl;
 
+import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.pmo.dashboard.dao.CandidateMapper;
 import com.pmo.dashboard.entity.CandidateInfo;
 import com.pom.dashboard.service.CandidateService;
+
+import jxl.Workbook;
+import jxl.format.Alignment;
+import jxl.format.Border;
+import jxl.format.BorderLineStyle;
+import jxl.format.Colour;
+import jxl.format.VerticalAlignment;
+import jxl.write.Label;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
 
 @Service
 public class CandidateServiceImpl implements CandidateService
@@ -40,7 +55,7 @@ public class CandidateServiceImpl implements CandidateService
 				for (LinkedHashMap<String,String> map : candidateList) 
 				{
 					map.put("CANDIDATE_SEX", "0".equals(map.get("CANDIDATE_SEX"))?"男":"女");
-					map.put("ENGLISH_LEVEL", "0".equals(map.get("ENGLISH_LEVEL"))?"简单使用":"流利沟通");
+					map.put("ENGLISH_LEVEL", "0".equals(map.get("ENGLISH_LEVEL"))?"非工作语言":"工作语言");
 					map.put("MAJOR_STATUS", "0".equals(map.get("MAJOR_STATUS"))?"是":"否");
 					String candidateStatus = map.get("CANDIDATE_STATUS");
 					if ("0".equals(candidateStatus)){
@@ -53,6 +68,10 @@ public class CandidateServiceImpl implements CandidateService
 						candidateStatus = "闲置中";
 					}else if ("4".equals(candidateStatus)){
 						candidateStatus = "暂不关注";
+					}else if ("5".equals(candidateStatus)){
+						candidateStatus = "黑名单";
+					}else if ("6".equals(candidateStatus)){
+						candidateStatus = "入职他司";
 					}
 					map.put("CANDIDATE_STATUS", candidateStatus);
 					
@@ -99,7 +118,7 @@ public class CandidateServiceImpl implements CandidateService
 				for (CandidateInfo candidateInfo : candidateList) 
 				{
 					candidateInfo.setCandidateSex("0".equals(candidateInfo.getCandidateSex())?"男":"女");
-					candidateInfo.setEnglishLevel("0".equals(candidateInfo.getEnglishLevel())?"简单使用":"流利沟通");
+					candidateInfo.setEnglishLevel("0".equals(candidateInfo.getEnglishLevel())?"非工作语言":"工作语言");
 					candidateInfo.setMajorStatus("0".equals(candidateInfo.getMajorStatus())?"是":"否");
 					String candidateStatus = candidateInfo.getCandidateStatus();
 					if ("0".equals(candidateStatus)){
@@ -112,6 +131,10 @@ public class CandidateServiceImpl implements CandidateService
 						candidateStatus = "闲置中";
 					}else if ("4".equals(candidateStatus)){
 						candidateStatus = "暂不关注";
+					}else if ("5".equals(candidateStatus)){
+						candidateStatus = "黑名单";
+					}else if ("6".equals(candidateStatus)){
+						candidateStatus = "入职他司";
 					}
 					candidateInfo.setCandidateStatus(candidateStatus);
 					
@@ -149,6 +172,92 @@ public class CandidateServiceImpl implements CandidateService
 			e.printStackTrace();
 		}
 		return candidateList;
+	}
+
+	@Override
+	public void transferExportData(List<LinkedHashMap<String, String>> candidateDatalist, List<String> conditionList,File file) {
+		try {
+	         
+            //以fileName为文件名来创建一个Workbook
+			 WritableWorkbook wwb = Workbook.createWorkbook(file);
+
+            // 创建sheet页工作表
+            WritableSheet ws = wwb.createSheet("Candidate List", 0);
+            //设置列宽
+            ws.setColumnView(0, 10);
+            for (int i = 0; i < conditionList.size(); i++) 
+            {
+            	 ws.setColumnView(i+1, 20); //第1列宽
+			}
+            //设置行高
+            ws.setRowView(0, 500);
+            for (int i = 0; i < candidateDatalist.size(); i++) 
+            {
+                ws.setRowView(i+1, 300);
+			}
+            ws.getSettings().setVerticalFreeze(1);
+            ws.getSettings().setHorizontalFreeze(2);
+            //标题样式
+            WritableFont headFont = new WritableFont(WritableFont.TIMES, 14,WritableFont.BOLD);
+            WritableCellFormat headcell = new WritableCellFormat(headFont);
+            headcell.setAlignment(Alignment.CENTRE);// 单元格内容水平居中  
+            headcell.setBackground(Colour.GREEN);//背景色 
+            headcell.setVerticalAlignment(VerticalAlignment.CENTRE);// 单元格内容垂直居中
+            headcell.setBorder(Border.ALL, BorderLineStyle.THIN,Colour.BLACK); // 边框
+            headcell.setWrap(true);//是否换行
+            //内容样式
+            WritableFont contentFont = new WritableFont(WritableFont.TIMES, 12);
+            WritableCellFormat contentcell = new WritableCellFormat(contentFont);
+            contentcell.setAlignment(Alignment.LEFT);// 单元格内容水平居左  
+            contentcell.setVerticalAlignment(VerticalAlignment.CENTRE);// 单元格内容垂直居中
+            contentcell.setBorder(Border.ALL, BorderLineStyle.THIN,Colour.BLACK); // 边框
+            contentcell.setWrap(false);//是否换行
+            //要插入到的Excel表格的行号，默认从0开始           
+            Label labelSL= new Label(0, 0, "SL#",headcell);
+            ws.addCell(labelSL);
+            
+            for(int k=0;k<conditionList.size();k++)
+            {
+                Label label = new Label(k+1, 0, conditionList.get(k),headcell);
+                ws.addCell(label);
+            }
+            
+            for (int i = 1; i-1 < candidateDatalist.size(); i++) 
+            {
+            	LinkedHashMap<String,String> map = candidateDatalist.get(i-1);
+            	int j = 0;
+            	Label labelSL_i= new Label(j, i, i+"",contentcell);
+                ws.addCell(labelSL_i);
+            	for (Map.Entry<String, String> entry : map.entrySet()) 
+            	{
+            		if(entry.getValue() == null)
+            		{
+            			Label label= new Label(++j, i, "",contentcell);
+            			ws.addCell(label);
+            		}
+            		else
+            		{
+            			Label label= new Label(++j, i, entry.getValue(),contentcell);
+               		 	ws.addCell(label);
+            		}
+            	}
+            }
+          
+           //写进文档
+            wwb.write();
+           // 关闭Excel工作簿对象
+            wwb.close();
+     } catch (Exception e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+     } 
+		
+	}
+
+	@Override
+	public String queryCandidateResumePath(CandidateInfo candidate) 
+	{
+		return candidateMapper.queryCandidateResumePath(candidate);
 	}
 
 }

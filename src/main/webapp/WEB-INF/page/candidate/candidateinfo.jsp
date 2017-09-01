@@ -283,11 +283,17 @@ var path='<%=path%>';
 									<label><input type="checkbox" checked="checked" name="SKILL" value="Skill"/>Skill&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="COLLEGE" value="College"/>College&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="GRADUATE_DATE" value="Graduate Date"/>Graduate Date&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="USER_NAME" value="Lock HR"/>Lock HR&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="b.USER_NAME as lockHR" value="Lock HR"/>Lock HR&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="CREATE_DATE" value="Create Date"/>Create Date&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="UPDATE_DATE" value="Update Date"/>Update Date&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="EXPECTED_SALARY" value="Old Company"/>Expected Salary&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="REAL_SALARY" value="Old Company"/>Real Salary&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="ROLE" value="Role"/>Role&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="ENTY_DATE" value="ENTY Date"/>ENTY Date&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="OLD_COMPANY" value="Old Company"/>Old Company&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="ENTY_DATE" value="Enty Date"/>Enty Date&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="ARRIVAL_DATE" value="Arrival Date"/>Arrival Date&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="c.USER_NAME as createUser" value="Create User"/>Create User&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="REMARK" value="Remark"/>Remark&nbsp;&nbsp;</label>
 								</tr>
 							</thead>
 							<tbody>

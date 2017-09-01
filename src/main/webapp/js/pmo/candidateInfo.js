@@ -67,6 +67,17 @@ function editEmployeeInfo(employeeId){
 	$("#employeeId").val(employeeId);
 	$("#editForm").submit();
 }
+
+function downLoadCandidateResume(candidateId,resumePath){
+	if(resumePath == null || resumePath == ''){
+		alert("未上传此候选人简历");
+		return;
+	}
+	var url = path+'/service/candidate/downLoadCandidateResume?candidateId='+candidateId;
+	$("#exceltHrefCandidate").attr("href",url);
+	document.getElementById("exceltHrefCandidate").click();
+}
+
 function loadCandidateSkillInfo(){
 	var url = path+'/json/skill.json'
 	$.getJSON(url,  function(data) {
@@ -75,6 +86,7 @@ function loadCandidateSkillInfo(){
 	       })
 	});
 }
+
 function loadCandidateList(pageState)
 {
 	var candidate = new FormData(document.getElementById("candidateForm"));
@@ -126,7 +138,8 @@ function loadCandidateList(pageState)
 				$("<td><a href='javascript:void(0);'" +
 						"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
 					"&nbsp;&nbsp;<a href='javascript:void(0);'" +
-						"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>RESUME</a>" +
+						"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
+	//				"&nbsp;&nbsp;<a href='https://"+resumePath+"' download='"+fileName+"'>RESUME</a>" +
 				"</td>").appendTo(tr);
 			}
 			$("#candidateList").append("</tbdoy>");

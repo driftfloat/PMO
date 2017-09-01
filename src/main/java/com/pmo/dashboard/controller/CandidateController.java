@@ -4,8 +4,11 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -30,11 +33,6 @@ import com.pmo.dashboard.entity.PageCondition;
 import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.CandidateService;
-
-import jxl.Workbook;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
 
 @Controller
 @RequestMapping(value="/candidate")
@@ -132,63 +130,29 @@ public class CandidateController
         List<String> conditionList = Arrays.asList(candidate.getExportPageColumn().split(","));
         
         try {
-         
-            String fileName =  Constants.PATH+""+Utils.getUUID()+".xls";
-            
-            WritableWorkbook wwb = null;
-         
-            // 创建可写入的Excel工作簿           
-            File file=new File(fileName);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            //以fileName为文件名来创建一个Workbook
-            wwb = Workbook.createWorkbook(file);
-
-            // 创建工作表
-            WritableSheet ws = wwb.createSheet("Candidate List", 0);
-            
-            //要插入到的Excel表格的行号，默认从0开始           
-            Label labelSL= new Label(0, 0, "SL#");
-            ws.addCell(labelSL);
-            
-            for(int k=0;k<conditionList.size();k++)
-            {
-                Label label = new Label(k+1, 0, conditionList.get(k));
-                ws.addCell(label);
-            }
-            
-            for (int i = 1; i-1 < candidateDatalist.size(); i++) {
-            	LinkedHashMap<String,String> map = candidateDatalist.get(i-1);
-            	int j = 0;
-            	Label labelSL_i= new Label(j, i, i+"");
-                ws.addCell(labelSL_i);
-            	for (Map.Entry<String, String> entry : map.entrySet()) 
-            	{
-            		 Label label= new Label(++j, i, entry.getValue());
-            		 ws.addCell(label);
-            	}
-            }
-          
-           //写进文档
-            wwb.write();
-           // 关闭Excel工作簿对象
-            wwb.close();
-
+        	  String tempfileName =  Constants.PATH+""+Utils.getUUID()+".xls";
+              
+              // 创建可写入的Excel工作簿           
+              File file=new File(tempfileName);
+              if (!file.exists()) {
+                  file.createNewFile();
+              }
+              //写Excel
+            candidateService.transferExportData(candidateDatalist,conditionList,file);
             //获取当前日期
             SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
             String date = df.format(new Date());
-            String filename = "PMO_Candidate_Info_"+date+".xls";
+            String fileName = "PMO_Candidate_Info_"+date+".xls";
 
             // 以流的形式下载文件。
-            InputStream fis = new BufferedInputStream(new FileInputStream(fileName));
+            InputStream fis = new BufferedInputStream(new FileInputStream(tempfileName));
             byte[] buffer = new byte[fis.available()];
             fis.read(buffer);
             fis.close();
             // 清空response
             response.reset();
             // 设置response的Header
-            response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(filename,"UTF-8"));
+            response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
             //response.setContentType("application/octet-stream");
             response.setContentType("application/vnd.ms-excel");
             response.addHeader("Content-Length", "" + file.length());
@@ -199,10 +163,67 @@ public class CandidateController
             toClient.close();
             
            file.delete();         
-     } catch (Exception e) {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-     } 
+        } catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return null;
     }
+    
+    @RequestMapping("/downLoadCandidateResume")
+    @ResponseBody
+    public String downLoadCandidateResume(HttpServletRequest request,HttpServletResponse response)
+    {
+    	String candidateId = request.getParameter("candidateId");
+    	if(null == candidateId || "".equals(candidateId))
+    	{
+    		return "此候选人不存在，请刷新页面！";
+    	}
+    	CandidateInfo candidate = new CandidateInfo();
+    	candidate.setCandidateId(candidateId);
+    	String resumePath = candidateService.queryCandidateResumePath(candidate);
+    	
+        File file=new File(resumePath);
+        if (!file.exists()) {
+        	return "此候选人未上传简历！";
+        }
+        String fileName = resumePath.substring(resumePath.indexOf("_")+1);
+
+        try {
+			// 以流的形式下载文件。
+			InputStream fis = new BufferedInputStream(new FileInputStream(resumePath));
+			byte[] buffer = new byte[fis.available()];
+			fis.read(buffer);
+			fis.close();
+			// 清空response
+			response.reset();
+			// 设置response的Header
+			response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
+			//response.setContentType("application/octet-stream");
+//			response.setContentType("application/vnd.ms-excel");
+			response.addHeader("Content-Length", "" + file.length());
+			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+			
+			toClient.write(buffer);
+			toClient.flush();
+			toClient.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return "2";
+    }
+    
 }
