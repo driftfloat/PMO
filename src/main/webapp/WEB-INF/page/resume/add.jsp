@@ -65,225 +65,6 @@
 var path='<%=path%>';
 </script>
 
-
-<script type="text/javascript">
-$(document).ready(function() {
-
-    $('#candidateForm').bootstrapValidator({
-	//	message: 'This value is not valid',
-
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-        	
-            name: {
-                group: '.group',
-				validators: {
-                    notEmpty: {
-                        message: '请输入中文名'
-                    },
-                    regexp: {
-                        regexp: /^([\u4E00-\u9FA5])*$/,
-
-                        message: '请输入中文字符'
-
-                    },
-                    stringLength: {
-                        max: 25,
-                        message: '请输入25字以内的中文名'
-                    }
-                }
-            },
-            
-            tel: {
-         		group: '.group',
-         		validators: {
-                     notEmpty: {
-                    	 message: '请输入电话号码'
-                     },
-                     regexp: {
-                         regexp: /^1[3|5|7|8]\d{9}$/,
-                         message: '请输入正确的手机号'
-                     },
-                     remote: {
-                    	 type:"POST",
-                    	 url: path+'/service/resume/checkTel',
-                    	 data:{
-                    		 tel:function(){return $("#candidateTel").val();}
-                    	 },
-                    	 message:"手机号码已存在"
-                     },
-                        
-                 }
-             },
-             
-             age: {
-          		group: '.group',
-          		validators: {
-                      notEmpty: {
-                          message: '请输入年龄'
-                      },
-                      
-                  }
-              },
-              
-              gender: {
-          		group: '.group',
-          		validators: {
-                      notEmpty: {
-                          message: '请输入性别'
-                      },
-                      
-                  }
-              },
-              education: {
-          		group: '.group',
-          		validators: {
-                      notEmpty: {
-                          message: '请输入学历'
-                      },
-                      
-                  }
-              },
-              major: {
-          		group: '.group',
-          		validators: {
-                      notEmpty: {
-                          message: '请确认是否是计算机专业'
-                      },
-                      
-                  }
-              },
-              experience_years: {
-          		group: '.group',
-          		validators: {
-                      notEmpty: {
-                          message: '请输入工作年限'
-                      },
-                      
-                  }
-              },
-              
-              skill: {
-          		group: '.group',
-          		validators: {
-                      notEmpty: {
-                          message: '请输入技能'
-                      },
-                      
-                  }
-              },
-              graduate_date: {
-          		group: '.group',
-          		validators: {
-                      notEmpty: {
-                          message: '请输入毕业时间'
-                      },
-                      
-                  }
-              },
-              
-              English_level: {
-          		group: '.group',
-          		validators: {
-                      notEmpty: {
-                          message: '请输入英语水平'
-                      },
-                      
-                  }
-              },
-              candidate_status: {
-          		group: '.group',
-          		validators: {
-                      notEmpty: {
-                          message: '请输入候选人状态'
-                      },
-                      
-                  }
-              },
-              
-              source: {
-          		group: '.group',
-          		validators: {
-                      notEmpty: {
-                          message: '请输入简历来源'
-                      },
-                      
-                  }
-              },
-              role: {
-          		group: '.group',
-          		validators: {
-                      notEmpty: {
-                          message: '请输入角色'
-                      },
-                      
-                  }
-              },
-              
-              email: {
-         		group: '.group',
-         		validators: {
-                     notEmpty: {
-                         message: '请输入邮箱号'
-                     },
-                     regexp: {
-                         regexp: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
-                         message: '请输入正确的邮箱号'
-                     },
-                    
-                 }
-             },
-             resume_path: {
-         		group: '.group',
-         		validators: {
-                     notEmpty: {
-                         message: '简历未上传'
-                     },
-                 }
-             },
-             
-        }
-    });
-});
-
-$(function () {
-    $("#upload").click(function () {
-        ajaxFileUpload();
-    })
-})
- function ajaxFileUpload()
-{
-	if($("#uploadId").val()==''){
-		return;
-	}
-$.ajaxFileUpload({
-        url:path+'/service/uploadFile.html',//用于文件上传的服务器端请求地址
-        secureuri:false ,//一般设置为false
-        fileElementId:'uploadId',//文件上传控件的id属性  <input type="file" id="upload" name="upload" />
-        dataType: 'text',//返回值类型 一般设置为json
-        success: function (data)  //服务器成功响应处理函数
-        {
-          var jsonOut = eval('('+data+')');
-          
-          $("#resume_path").val(jsonOut.url)
-          alert("上传成功！");
-            
-           
-        },
-        error: function (data, status, e)//服务器响应失败处理函数
-        {
-            alert(e);
-        }
-    });
-return false;
-}
-	
-</script>
-
 <body>
 	<!-- topbar starts -->
 	<c:import url="/service/manage/top" />
@@ -304,14 +85,14 @@ return false;
 								</h2>
 							</div>
 							<div id="register" class="box-content" style="overflow: auto;">
-							<form id="candidateForm" method="post" action="<%=path %>/service/resume/add.html" enctype="multipart/form-data">
+							<form id="candidateForm" method="post" enctype="multipart/form-data">
 							    
 								<div class="form-group">
 								<div id="successAlert" class="alert alert-success" style="display: none;"></div>
 										<div class="group">
 											<label class="col-sm-2 control-label">Name</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="name"
+												<input type="text" class="form-control" name="candidateName"
 													id="candidateName" />
 											</div>
 										</div>
@@ -335,7 +116,7 @@ return false;
 										<div class="group">
 										<label class="col-lg-2 control-label">Gender</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="gender" data-bv-notempty>
+											<select class="form-control" id="gender" name="gender" data-bv-notempty>
 												<option value="0" selected="selected">男</option>
 												<option value="1">女</option>
 											</select>
@@ -348,7 +129,7 @@ return false;
 										<div class="group">
 										<label class="col-lg-2 control-label">Education</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="education" data-bv-notempty>
+											<select class="form-control" id="education" name="education" data-bv-notempty>
 												<option value="">-- option--</option>
 												<option value="0">博士</option>
 												<option value="1">研究生</option>
@@ -363,7 +144,7 @@ return false;
 											<label class="col-sm-2 control-label">College</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="college"
-													id="College" />
+													id="college" />
 											</div>
 										</div>
 								</div>
@@ -372,7 +153,7 @@ return false;
 										<div class="group">
 										<label class="col-lg-2 control-label">Is Computer major</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="major" data-bv-notempty
+											<select class="form-control" id="major" name="major" data-bv-notempty
 												>
 												<option value="">-- option--</option>
 												<option value="0"> Yes</option>
@@ -384,7 +165,7 @@ return false;
 											<label class="col-sm-2 control-label">Experience Years</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="experience_years"
-													id="EXPERIENCE_YEARS" />
+													id="experience_years" />
 											</div>
 										</div>
 								</div>
@@ -395,7 +176,7 @@ return false;
 										<div class="col-lg-4">
 											<select class="form-control" name="skill" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="skill" data-bv-group=".group">
-												<option value="">-- 请选择--</option>
+												<option value="">-- option--</option>
 											</select>
 										</div>
 										</div>
@@ -408,7 +189,7 @@ return false;
 													id="GRADUATE_DATE1" name="GRADUATE_DATE1"> <span
 													class="input-group-addon"><span
 													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
-													id="GRADUATE_DATE2" name="graduate_date" />
+													id="graduate_date" name="graduate_date" />
 											</div>
 										</div>
 									    </div>
@@ -418,17 +199,17 @@ return false;
 										<div class="group">
 										<label class="col-lg-2 control-label">English Level</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="English_level" data-bv-notempty>
+											<select class="form-control" name="English_level" id="English_level" data-bv-notempty>
 												<option value="">-- option --</option>
-												<option value="0">简单使用</option>
-												<option value="1">流利沟通</option>
+												<option value="0">非工作语言</option>
+												<option value="1">工作语言</option>
 											</select>
 										</div>
 										</div>
 										<div class="group">
 										<label class="col-lg-2 control-label">Candidate Status</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="candidate_status" data-bv-notempty>
+											<select class="form-control" name="candidate_status" id="candidate_status" data-bv-notempty>
 												<option value="">-- option --</option>
 												<option value="0">招聘中</option>
 												<option value="1">offer中</option>
@@ -467,14 +248,10 @@ return false;
 									<div class="group">
 										<label class="col-lg-2 control-label">Source</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="source" data-bv-notempty>
-												<option value="">-- option --</option>
-												<option value="0">51job</option>
-												<option value="1">智联招聘</option>
-												<option value="2">Boss直聘</option>
-												<option value="3">中华英才网</option>
-												<option value="4">其他</option>
-											</select>
+											<select class="form-control" name="source" data-bv-notempty
+											data-bv-notempty-message="请选择简历来源" id="source" data-bv-group=".group">
+											<option value="">-- option--</option>
+										</select>
 										</div>
 										</div>
 										
@@ -483,7 +260,7 @@ return false;
 									<div class="col-lg-4">
 										<select class="form-control" name="role" data-bv-notempty
 											data-bv-notempty-message="请选择角色" id="role" data-bv-group=".group">
-											<option value="">-- 请选择--</option>
+											<option value="">--option--</option>
 										</select>
 									</div>
 									</div>
@@ -491,23 +268,69 @@ return false;
 								</div>
 								<br/><br/>
 								<div class="form-group">
-									
-									<div class="group">
-											<label class="col-sm-2 control-label">Upload Resume</label>
+										
+										<div class="group">
+										<div class="group">
+											<label class="col-sm-2 control-label">Expected Salary</label>
 											<div class="col-sm-4">
-												<input type="hidden" name="resume_path" id="resume_path">
-												<span style="display: block;"><input  type="file" name="file" id="uploadId" style="display: inline;"/>
-												<input style="display: inline;" type="button" id = "upload" value="UPLOAD"/></span>
+												<input type="text" class="form-control" name="expected_salary"
+													id="expected_salary" />
 											</div>
 										</div>
+									</div>
+									<div class="group">
+										<div class="group">
+											<label class="col-sm-2 control-label">Real Salary</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="real_salary"
+													id="real_salary" />
+											</div>
+										</div>
+									</div>
+								</div>
+								<br/><br/>
+								
+								
+								<div class="form-group">
+										
+										<div class="group">
+										<div class="group">
+											<label class="col-sm-2 control-label">Old_Company</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="old_company"
+													id="old_company" />
+											</div>
+										</div>
+									</div>
+									<div class="group">
+										<div class="group">
+											<label class="col-sm-2 control-label">Remark</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="remark"
+													id="remark" />
+											</div>
+										</div>
+									</div>
+								</div>
+								<br/><br/>
+								<div class="form-group">
+									
+									<div class="group">
+										<label class="col-sm-2 control-label">Upload Resume</label>
+										<div class="col-sm-4">
+											<input type="hidden" name="resume_path" id="resume_path">
+											<span style="display: block;"><input  type="file" name="file" id="uploadId" style="display: inline;"/>
+											<input style="display: inline;" type="button" id = "upload" value="UPLOAD"/></span>
+										</div>
+									</div>
 									
 								</div>
 								
-								<br/><br/><br/><br/>
+								<br/><br/><br/>
 								
 								<div class="form-group">
 									    <div style="text-align:center;width:100%;">
-									    <input type="submit" value="INPUT"
+									    <input type="button" onclick="addCandidate()" value="INPUT"
 										class="button btn btn-primary" data-dismiss="modal"
 										
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
@@ -579,6 +402,7 @@ return false;
 
 	<script type="text/javascript" src="<%=path %>/js/pmo/updateEmployeeInfo.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/pmo/ajaxfileupload.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/resumeInput.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>

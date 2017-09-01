@@ -114,6 +114,11 @@ function editEmployeeInfo(employeeId){
 	$("#employeeId").val(employeeId);
 	$("#editForm").submit();
 }
+function updateResumeInfo(candidateId){
+	$("#editForm").attr("action",path+"/service/resume/updateResume.html");
+	$("#candidateId").val(candidateId);
+	$("#editForm").submit();
+}
 
 function loadCandidateList(pageState)
 {
@@ -162,9 +167,9 @@ function loadCandidateList(pageState)
 				$("<td>"+ result.data[i].skill+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].userName+ "</td>").appendTo(tr);
 				$("<td><a href='javascript:void(0);'" +
-						"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
+						"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
 						"&nbsp;&nbsp;<a href='javascript:void(0);'" +
-							"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>DETAIL</a>" +
+							"onclick=editResumeInfo('"+result.data[i].candidateId+"')>DETAIL</a>" +
 						"&nbsp;&nbsp;<a href='javascript:void(0);'" +
 							"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>RESUME</a>" +
 				"</td>").appendTo(tr);
