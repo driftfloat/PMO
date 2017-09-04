@@ -43,4 +43,17 @@
 		where HSBC_DEPT_NAME=#{id}
 		GROUP BY HSBC_SUBDEPT_NAME
 	</select>
+	
+	<select id="queryHsbcSubDeptId" parameterType="java.util.HashMap" resultType="String">
+		select HSBC_SUBDEPT_ID
+		from t_hsbc_dept
+		<where>
+			<if test="hsbcSubDeptName!=null and hsbcSubDeptName!=''">
+				and HSBC_SUBDEPT_NAME = #{hsbcSubDeptName}
+			</if>
+			<if test="hsbcDeptName!=null and hsbcDeptName!=''">
+				and HSBC_DEPT_NAME = #{hsbcDeptName}
+			</if>
+		</where>
+	</select>
 </mapper>

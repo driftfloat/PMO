@@ -1,6 +1,8 @@
 package com.pmo.dashboard.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -44,4 +46,11 @@ public class HSBCDeptServiceImpl implements HSBCDeptService
 		return list;
 	}
 
+	public String queryHsbcSubDeptId(String str1, String str2) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("hsbcSubDeptName", str1);
+		params.put("hsbcDeptName", str2);
+		String hsbcSubDeptId = hsbcDeptMapper.queryHsbcSubDeptId(params);
+		return hsbcSubDeptId;
+	}
 }

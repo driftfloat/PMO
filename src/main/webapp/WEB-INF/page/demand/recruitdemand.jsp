@@ -48,6 +48,7 @@
 <link href='<%=path %>/css/animate.min.css' rel='stylesheet'>
 <link href='<%=path%>/css/bootstrap-datetimepicker.css' rel='stylesheet'>
 <link href='<%=path%>/css/bootstrap-datetimepicker.min.css' rel='stylesheet'>
+<link href='<%=path%>/css/style.css' rel='stylesheet'>
 
 <!-- jQuery -->
 <script src="<%=path %>/bower_components/jquery/jquery.min.js"></script>
@@ -84,18 +85,18 @@ var path='<%=path%>';
 								</h2>
 							</div>
 							<div id="register" class="box-content" style="overflow: auto;">
-							<form id="recruitdemandForm" method="post">
-							    <div class="form-group">
+							<form  id="recruitdemandForm" method="post">
+							    <div class="form-group hidden">
 									    <input type="hidden" name="demandId" id="demandId" value="${demandId}"/>
 								</div>
 									
-							    <br/>
+							    
 								<div class="form-group">
 								<div id="successAlert" class="alert alert-success" style="display: none;"></div>
 										<div class="group">
 											<label class="col-sm-2 control-label">RR</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="rr"
+												<input type="text" class="form-control" name="rr"  
 													id="rr" />
 											</div>
 										</div>
@@ -107,14 +108,14 @@ var path='<%=path%>';
 											</div>
 										</div>
 								</div>
-								<br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 											<label class="col-lg-2 control-label">SKILL</label>
 											<div class="col-lg-4">
 											<select class="form-control" name="skill" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="skill" data-bv-group=".group">
-												<option value="">-- 请选择--</option>
+												data-bv-notempty-message="Pleaser Select Your Skill " id="skill" data-bv-group=".group">
+												<option value="">-- Option--</option>
 											</select>
 										</div>
 										</div>
@@ -127,36 +128,77 @@ var path='<%=path%>';
 										</div>
 										</div>
 								</div>
-								<br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">POSITION</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="position" data-bv-notempty
-												data-bv-notempty-message="请选择职位" id="position" data-bv-group=".group">
-												<option value="">-- 请选择--</option>								
+												data-bv-notempty-message="Please Select Your Position" id="position" data-bv-group=".group">
+												<option value="">-- Option--</option>								
+											</select>
+										</div>
+										</div>
+										
+										<div class="group">
+											<label class="col-sm-2 control-label">CS SubDept</label>
+											<div class="col-sm-4">
+												<select class="form-control" name="csSubDept" data-bv-notempty
+												data-bv-notempty-message="Please Select Your CsSubDept" id="csSubDept" data-bv-group=".group">
+												<option value="">-- Option--</option>
+												
+									        </select>
+											</div>
+										</div>
+								</div>
+								
+								<div class="form-group">
+										<div class="group">
+										<label class="col-lg-2 control-label">HSBC Dept</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="hsbcDept" data-bv-notempty
+												data-bv-notempty-message="Please Select Your HsbcDept" id="hsbcDept" data-bv-group=".group">
+												<option value="">-- Option --</option>
 											</select>
 										</div>
 										</div>
 										<div class="group">
-										<label class="col-sm-2 control-label">HSBC SubDeptId</label>
-										<div class="col-sm-4">
-											<input type="text" class="form-control" name="hsbcSubDeptId"
-													id="hsbcSubDeptId" />
+										<label class="col-lg-2 control-label">HSBC Sub Dept</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="hsbcSubDept" data-bv-notempty
+												data-bv-notempty-message="Please Select Your HsbcSubDept" id="hsbcSubDept" data-bv-group=".group">
+												<option value="">-- Option --</option>
+											</select>
 										</div>
 										</div>
+										
+										
 								</div>
-								<br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
+										<label class="col-sm-2 control-label">STATUS</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="status" data-bv-notempty
+												data-bv-notempty-message="Please Select Your Status" id="status" data-bv-group=".group">
+												<option value="">-- Option--</option>
+												
+									        </select>
+										</div>
+									    </div>
+									    <div class="group">
 										<label class="col-lg-2 control-label">LOCATION</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="location" data-bv-notempty
-												data-bv-notempty-message="请选择" id="location" data-bv-group=".group">
-												<option value="">-- 请选择--</option>								
+												data-bv-notempty-message="Please Select Your Location" id="location" data-bv-group=".group">
+												<option value="">-- Option--</option>								
 											</select>
 										</div>
 										</div>
+									    
+								</div>
+								
+								<div class="form-group">
 										<div class="group">
 										<label class="col-sm-2 control-label">ReqPublishedDate</label>
 										<div class="col-md-4">
@@ -172,105 +214,20 @@ var path='<%=path%>';
 											</div>
 										</div>
 										</div>
-								</div>
-								<br/><br/>
-								<div class="form-group">
 										<div class="group">
-										<label class="col-sm-2 control-label">STATUS</label>
+										<label class="col-lg-2 control-label">hrPriority</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="status" data-bv-notempty
-												data-bv-notempty-message="请选择状态" id="status" data-bv-group=".group">
-												<option value="">-- 请选择--</option>
-												
-									        </select>
-										</div>
-									    </div>
-									    <div class="group">
-										<label class="col-lg-2 control-label">Staff Name</label>
-										<div class="col-lg-4">
-											<input type="text" class="form-control" name="staffName"
-													id="staffName" />
-										</div>
-										</div>
-								</div>
-								<br/><br/>
-								<div class="form-group">
-										<div class="group">
-										<label class="col-lg-2 control-label">Proposed Joining Date</label>
-										<div class="col-lg-4">
-											<div class="input-group date form_datetime col-sm-12"
-												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" disabled="disabled"
-													id="proposedJoiningDate1" name="proposedJoiningDate1"> 
-													<span class="input-group-addon">
-														<span class="glyphicon glyphicon-th">
-														</span>
-													</span> 
-													<input type="hidden" id="proposedJoiningDate2" name="proposedJoiningDate2" />
-											</div>
-										</div>
-										</div>
-										<div class="group">
-										<label class="col-sm-2 control-label">DC Cleared</label>
-										<div class="col-md-4">
-											<input type="text" class="form-control" name="dcCleared"
-													id="dcCleared" />
-										</div>
-									</div>
-								</div>
-								<br/><br/>
-								<div class="form-group">
-									<div class="group">
-										<label class="col-sm-2 control-label">Sow Signed</label>
-										<div class="col-md-4">
-											<select class="form-control" name="sowSigned" data-bv-notempty
-												data-bv-notempty-message="请选择" id="sowSigned" data-bv-group=".group">
-												<option value="">-- 请选择--</option>
-												
-									        </select>
-										</div>
-									</div>
-									<div class="group">
-										<label class="col-lg-2 control-label">Onboarded</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="onboarded" data-bv-notempty
-												data-bv-notempty-message="请选择" id="onboarded" data-bv-group=".group">
-												<option value="">-- 请选择--</option>
-												
-									        </select>
-										</div>
-										</div>
-								</div>
-								<br/><br/>
-								<div class="form-group">
-										<div class="group">
-										<label class="col-lg-2 control-label">Abort</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="abort" data-bv-notempty
-												data-bv-notempty-message="请选择" id="abort" data-bv-group=".group">
-												<option value="">-- 请选择--</option>
-											</select>
-										</div>
-										</div>
-										<div class="group">
-										<label class="col-lg-2 control-label">Delayed</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="delayed" data-bv-notempty
-												data-bv-notempty-message="请选择" id="delayed" data-bv-group=".group">
-												<option value="">-- 请选择--</option>
+											<select class="form-control" name="hrPriority" data-bv-notempty
+												data-bv-notempty-message="Please Select Your HrPriority" id="hrPriority" data-bv-group=".group">
+												<option value="">-- Option--</option>
 											</select>
 										</div>
 										</div>
 								</div>
-								<br/><br/>
+								
 								<div class="form-group">
-										<div class="group">
-										<label class="col-lg-2 control-label">Reason</label>
-										<div class="col-lg-4">
-											<input type="text" class="form-control" name="reason"
-													id="reason" />
-										</div>
-										</div>
+								       
+										
 										<div class="group">
 										<label class="col-sm-2 control-label">Remark</label>
 										<div class="col-md-4">
@@ -278,40 +235,8 @@ var path='<%=path%>';
 													id="remark" />
 										</div>
 									    </div>
-								</div>
-								<br/><br/>
-								
-								<div class="form-group">
-								        <div class="group">
-											<label class="col-sm-2 control-label">CS SubDept</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="csSubDept"
-													id="csSubDept" />
-											</div>
-										</div>
-										<div class="group">
-										<label class="col-lg-2 control-label">DO Number</label>
-										<div class="col-lg-4">
-											<input type="text" class="form-control" name="doNumber"
-													id="doNumber" />
-										</div>
-										</div>
 										
 								</div>
-								<br/><br/>
-								<div class="form-group">
-										<div class="group">
-										<label class="col-lg-2 control-label">hrPriority</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="hrPriority" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="hrPriority" data-bv-group=".group">
-												<option value="">-- 请选择--</option>
-											</select>
-										</div>
-										</div>
-								</div>
-												
-								<br/><br/><br/>
 								
 								<div class="form-group">
 									    <div style="text-align:center;width:50%;float:left">
@@ -328,7 +253,7 @@ var path='<%=path%>';
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
 									    </div>
 								</div>
-								<br/><br/>
+								
 							</form>
 							</div>
 						</div>
@@ -389,7 +314,9 @@ var path='<%=path%>';
 	<!-- application script for Charisma demo -->
 	<script src="<%=path %>/js/charisma.js"></script>
 
+    <%-- <script type="text/javascript" src="<%=path %>/js/pmo/loadHSBCDept.js"></script>  --%>
 	<script type="text/javascript" src="<%=path %>/js/pmo/recruitdemand.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/demandvalid.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>
