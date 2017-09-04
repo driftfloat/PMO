@@ -4,7 +4,7 @@
 <mapper namespace="com.pmo.dashboard.dao.ResumeMapper">
 	<resultMap id="candidateMap" type="com.pmo.dashboard.entity.Resume">
 		<id property="id" column="CANDIDATE_ID" javaType="String" /> 
-		<result property="name" column="CANDIDATE_NAME" javaType="String" />
+		<result property="candidateName" column="CANDIDATE_NAME" javaType="String" />
 		<result property="age" column="CANDIDATE_AGE" javaType="String" />
 		<result property="gender" column="CANDIDATE_SEX" javaType="String" />
 		<result property="tel" column="TEL" javaType="String" />
@@ -18,22 +18,29 @@
 		<result property="candidate_status" column="CANDIDATE_STATUS" javaType="String" />
 		<result property="resume_path" column="RESUME_PATH" javaType="String" />
 		<result property="hr" column="LOCK_PERSON" javaType="String" />
-		
 		<result property="create_date" column="CREATE_DATE" javaType="String" />
 		<result property="update_date" column="UPDATE_DATE" javaType="String" />
 		<result property="source" column="SOURCE" javaType="String" />
 		<result property="role" column="ROLE" javaType="String" />
 		<result property="entry_date" column="ENTRY_DATE" javaType="String" />
 		<result property="email" column="EMAIL" javaType="String" />
+		
+		<result property="expected_salary" column="EXPECTED_SALARY" javaType="String" />
+		<result property="real_salary" column="REAL_SALARY" javaType="String" />
+		<result property="arrival_date" column="ARRIVAL_DATE" javaType="String" />
+		<result property="old_company" column="OLD_COMPANY" javaType="String" />
+		<result property="remark" column="REMARK" javaType="String" />
+		<result property="create_user" column="CREAT_USER" javaType="String" />
 	</resultMap>
 	
 	
 	<insert id="add" parameterType="com.pmo.dashboard.entity.Resume">
 	    insert into t_candidate 
 	    values
-	    (#{id},#{name},#{age},#{gender},#{tel},#{education},#{college},#{major},#{experience_years},#{skill},#{graduate_date},#{English_level},
-	    #{candidate_status},#{resume_path},#{hr},#{create_date},#{update_date},#{source},#{role},#{entry_date},#{email})
-	</insert>
+	    (#{id},#{candidateName},#{age},#{gender},#{tel},#{education},#{college},#{major},#{experience_years},#{skill},#{graduate_date},#{English_level},
+	    #{candidate_status},#{resume_path},#{hr},#{create_date},#{update_date},#{source},#{role},#{entry_date},#{email},
+	    #{expected_salary},#{real_salary},#{arrival_date},#{old_company},#{remark},#{create_user})
+	</insert>      
 	
 	<select id="selectTel" parameterType="String" resultType="com.pmo.dashboard.entity.Resume">
 		select * from t_candidate where TEL=#{tel}

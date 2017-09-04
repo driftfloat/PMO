@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
 <meta charset="utf-8">
-<title>面试者信息录入</title>
+<title>修改候选人信息</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description"
 	content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
@@ -85,21 +85,21 @@ var path='<%=path%>';
 								</h2>
 							</div>
 							<div id="register" class="box-content" style="overflow: auto;">
-							<form id="candidateForm" method="post" enctype="multipart/form-data">
+							<form id="updateResumeForm" method="post" action ="/Pmo/service/resume/updateResume.html" enctype="multipart/form-data">
 							    
 								<div class="form-group">
 								<div id="successAlert" class="alert alert-success" style="display: none;"></div>
 										<div class="group">
 											<label class="col-sm-2 control-label">Name</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="candidateName"
-													id="candidateName" />
+												<input type="text" class="form-control" name="candidateName" value="${resume.candidateName}"
+													id="candidateName"/>
 											</div>
 										</div>
 										<div class="group">
 											<label class="col-sm-2 control-label">Tel</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="tel"
+												<input type="text" class="form-control" name="tel" value="${ resume.tel }"
 													id="candidateTel" />
 											</div>
 										</div>
@@ -109,14 +109,14 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-sm-2 control-label">Age</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="age"
+												<input type="text" class="form-control" name="age" value="${ resume.age }"
 													id="candidateAge" />
 											</div>
 										</div>
 										<div class="group">
 										<label class="col-lg-2 control-label">Gender</label>
 										<div class="col-lg-4">
-											<select class="form-control" id="gender" name="gender" data-bv-notempty>
+											<select class="form-control" id="gender" name="gender"  data-bv-notempty>
 												<option value="0" selected="selected">男</option>
 												<option value="1">女</option>
 											</select>
@@ -143,7 +143,7 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-sm-2 control-label">College</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="college"
+												<input type="text" class="form-control" name="college" value="${ resume.college }"
 													id="college" />
 											</div>
 										</div>
@@ -165,7 +165,7 @@ var path='<%=path%>';
 											<label class="col-sm-2 control-label">Experience Years</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="experience_years"
-													id="experience_years" />
+													id="experience_years" value="${ resume.experience_years }"/>
 											</div>
 										</div>
 								</div>
@@ -186,10 +186,10 @@ var path='<%=path%>';
 											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
 												<input class="form-control" type="text" disabled="disabled"
-													id="GRADUATE_DATE1" name="GRADUATE_DATE1"> <span
+													id="GRADUATE_DATE1" name="GRADUATE_DATE1"/> <span
 													class="input-group-addon"><span
 													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
-													id="graduate_date" name="graduate_date" />
+													id="graduate_date" name="graduate_date" value="${ resume.graduate_date }"/>
 											</div>
 										</div>
 									    </div>
@@ -227,7 +227,7 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-sm-2 control-label">Email</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="email"
+												<input type="text" class="form-control" name="email" value="${ resume.email }"
 													id="email" />
 											</div>
 										</div>
@@ -237,7 +237,7 @@ var path='<%=path%>';
 											<label class="col-sm-2 control-label">Entry_date</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="entry_date"
-													id="entry_date" />
+													id="entry_date" value="${ resume.entry_date }"/>
 											</div>
 										</div>
 									</div>
@@ -274,7 +274,7 @@ var path='<%=path%>';
 											<label class="col-sm-2 control-label">Expected Salary</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="expected_salary"
-													id="expected_salary" />
+													id="expected_salary" value="${ resume.expected_salary }"/>
 											</div>
 										</div>
 									</div>
@@ -283,7 +283,7 @@ var path='<%=path%>';
 											<label class="col-sm-2 control-label">Real Salary</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="real_salary"
-													id="real_salary" />
+													id="real_salary" value="${ resume.real_salary }"/>
 											</div>
 										</div>
 									</div>
@@ -298,7 +298,7 @@ var path='<%=path%>';
 											<label class="col-sm-2 control-label">Old_Company</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="old_company"
-													id="old_company" />
+													id="old_company" value="${ resume.old_company }"/>
 											</div>
 										</div>
 									</div>
@@ -307,7 +307,7 @@ var path='<%=path%>';
 											<label class="col-sm-2 control-label">Remark</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="remark"
-													id="remark" />
+													id="remark" value="${ resume.remark }"/>
 											</div>
 										</div>
 									</div>
@@ -330,9 +330,8 @@ var path='<%=path%>';
 								
 								<div class="form-group">
 									    <div style="text-align:center;width:100%;">
-									    <input type="button" onclick="addCandidate()" value="INPUT"
+									    <input type="submit" value="UPDATE"
 										class="button btn btn-primary" data-dismiss="modal"
-										
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
 									    </div>
 								</div>

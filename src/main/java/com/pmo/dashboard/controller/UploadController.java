@@ -35,7 +35,7 @@ public class UploadController {
 		String originalFileName = file.getOriginalFilename();
 		//System.out.println(originalFileName);
 		//获取唯一文件名
-		String fileName = UUID.randomUUID().toString().replaceAll("-", "")+originalFileName;
+		String fileName = UUID.randomUUID().toString().replaceAll("-", "")+"_"+originalFileName;
 		
 		//相对路径
 		String url = "c:\\resume\\" + fileName;

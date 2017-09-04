@@ -12,7 +12,7 @@ public class Resume {
 	private String id;
 	
 	//姓名
-	private String name;
+	private String candidateName;
 	
 	//年龄
 	private String age;
@@ -53,6 +53,84 @@ public class Resume {
 	//HR
 	private String hr;
 	
+	//期望薪资
+	private String expected_salary;
+	
+	//实际薪资
+	private String real_salary;
+	
+	//到岗日期
+	private String arrival_date;
+	
+	
+	//上家公司
+	private String old_company;
+	
+	//备注
+	private String remark;
+	
+	//创建人
+	private String create_user;
+	
+
+	
+	public String getArrival_date() {
+		return arrival_date;
+	}
+
+	public void setArrival_date(String arrival_date) {
+		this.arrival_date = arrival_date;
+	}
+
+	
+	public String getExpected_salary() {
+		return expected_salary;
+	}
+
+	public void setExpected_salary(String expected_salary) {
+		this.expected_salary = expected_salary;
+	}
+
+	public String getReal_salary() {
+		return real_salary;
+	}
+
+	public void setReal_salary(String real_salary) {
+		this.real_salary = real_salary;
+	}
+
+	public String getOld_company() {
+		return old_company;
+	}
+
+	public void setOld_company(String old_company) {
+		this.old_company = old_company;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public String getCreate_user() {
+		return create_user;
+	}
+
+	public void setCreate_user(String create_user) {
+		this.create_user = create_user;
+	}
+
+	public String getCandidateName() {
+		return candidateName;
+	}
+
+	public void setCandidateName(String candidateName) {
+		this.candidateName = candidateName;
+	}
+	
 	public String getHr() {
 		return hr;
 	}
@@ -85,14 +163,6 @@ public class Resume {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getAge() {
