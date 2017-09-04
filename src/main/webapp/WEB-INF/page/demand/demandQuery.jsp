@@ -276,9 +276,7 @@ var path='<%=path%>';
 									<label><input type="checkbox" name="Status"/>Status&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Proposed Date of Joining"/>Proposed Date of Joining&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="SOW signed"/>SOW signed&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Onboarded Yes / No"/>Onboarded Yes / No&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Abort"/>Abort&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Delayed"/>Delayed&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="BGV Cleared"/>BGV Cleared&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Reason for Abort / Delay"/>Reason for Abort / Delay&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Remark"/>Remark&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="交付部"/>交付部&nbsp;&nbsp;</label>

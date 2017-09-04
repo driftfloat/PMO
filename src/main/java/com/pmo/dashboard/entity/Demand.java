@@ -32,17 +32,13 @@ public class Demand
     
     private String status;
     
-    private String staffName;
+    private String candidateName;
     
     private String proposedJoiningDate;
     
     private String sowSigned;
     
-    private String onboarded;
-    
-    private String abort;
-    
-    private String delayed;
+    private String bgvCleared;
     
     private String reason;
     
@@ -168,12 +164,12 @@ public class Demand
 		this.status = status;
 	}
 
-	public String getStaffName() {
-		return staffName;
+	public String getCandidateName() {
+		return candidateName;
 	}
 
-	public void setStaffName(String staffName) {
-		this.staffName = staffName;
+	public void setCandidateName(String candidateName) {
+		this.candidateName = candidateName;
 	}
 
 	public String getProposedJoiningDate() {
@@ -192,28 +188,12 @@ public class Demand
 		this.sowSigned = sowSigned;
 	}
 
-	public String getOnboarded() {
-		return onboarded;
+	public String getBgvCleared() {
+		return bgvCleared;
 	}
 
-	public void setOnboarded(String onboarded) {
-		this.onboarded = onboarded;
-	}
-
-	public String getAbort() {
-		return abort;
-	}
-
-	public void setAbort(String abort) {
-		this.abort = abort;
-	}
-
-	public String getDelayed() {
-		return delayed;
-	}
-
-	public void setDelayed(String delayed) {
-		this.delayed = delayed;
+	public void setBgvCleared(String bgvCleared) {
+		this.bgvCleared = bgvCleared;
 	}
 
 	public String getReason() {
@@ -266,13 +246,14 @@ public class Demand
 
 	public Demand() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public Demand(String demandId, String rr, String jobCode, String skill, String requestor, String position,
 			String hsbcSubDeptId, HSBCDept hsbcDept, String location, String reqPublishedDate, String ageing,
-			String profilesNo, String interviewedNo, String status, String staffName, String proposedJoiningDate,
-			String sowSigned, String onboarded, String abort, String delayed, String reason, String remark,
-			String csSubDept, String plannedOnboardDate, String doNumber, String hrPriority) {
+			String profilesNo, String interviewedNo, String status, String candidateName, String proposedJoiningDate,
+			String sowSigned, String bgvCleared, String reason, String remark, String csSubDept,
+			String plannedOnboardDate, String doNumber, String hrPriority) {
 		super();
 		this.demandId = demandId;
 		this.rr = rr;
@@ -288,12 +269,10 @@ public class Demand
 		this.profilesNo = profilesNo;
 		this.interviewedNo = interviewedNo;
 		this.status = status;
-		this.staffName = staffName;
+		this.candidateName = candidateName;
 		this.proposedJoiningDate = proposedJoiningDate;
 		this.sowSigned = sowSigned;
-		this.onboarded = onboarded;
-		this.abort = abort;
-		this.delayed = delayed;
+		this.bgvCleared = bgvCleared;
 		this.reason = reason;
 		this.remark = remark;
 		this.csSubDept = csSubDept;
@@ -301,5 +280,5 @@ public class Demand
 		this.doNumber = doNumber;
 		this.hrPriority = hrPriority;
 	}
-    
+
 }

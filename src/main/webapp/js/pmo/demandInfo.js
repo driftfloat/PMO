@@ -114,7 +114,6 @@ function loadSubDepartment(){
 	$("#department").change(function(){
 		//var department = $("#department option:selected").text();
 		var department = $("#department").val();
-		//alert(department);
 		//$("#sub_department").find("option").remove();
 		$("#sub_department").empty();
 		$("#sub_department").append("<option value=''>-- select --</option>");
@@ -127,7 +126,9 @@ function loadSubDepartment(){
 			data:{"hsbcDeptName":department},
 			success:function(data){
 				$.each(data, function(i,item){
-					$("#sub_department").append("<option value='"+item.hsbcSubDeptName+"'>"+item.hsbcSubDeptName+"</option>")
+					if(item.hsbcSubDeptName){
+						$("#sub_department").append("<option value='"+item.hsbcSubDeptName+"'>"+item.hsbcSubDeptName+"</option>");
+					}
 				})
 			}
 		});
@@ -167,11 +168,16 @@ function loadDemandList(currPage){
 				var td1 = $("<td>"+result.list[i].rr+"</td>");
 				var td2 = $("<td>"+result.list[i].skill+"</td>");
 				var td3 = $("<td>"+result.list[i].position+"</td>");
-				var td4 = $("<td>"+result.list[i].hsbcDept.hsbcDeptName+"</td>");
-				var td5 = $("<td>"+result.list[i].hsbcDept.hsbcSubDeptName+"</td>");
+				if(result.list[i].hsbcDept == null){
+					var td4 = $("<td></td>");
+					var td5 = $("<td></td>");
+				}else{
+					var td4 = $("<td>"+result.list[i].hsbcDept.hsbcDeptName+"</td>");
+					var td5 = $("<td>"+result.list[i].hsbcDept.hsbcSubDeptName+"</td>");
+				}
 				var td6 = $("<td>"+result.list[i].status+"</td>");
 				var td7 = $("<td>"+result.list[i].csSubDept+"</td>");
-				var td8 = $("<td><div class='btn-group btn-group-sm'><button class='btn btn-primary' onclick='demandDetail("+result.list[i].demandId+")'>详情</button></div></td>");
+				var td8 = $("<td><div class='btn-group btn-group-sm'><a href='javascript:void(0);' class='btn btn-primary' onclick='demandDetail("+result.list[i].demandId+")'>详情</a></div></td>");
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
@@ -186,7 +192,7 @@ function loadDemandList(currPage){
 			$("#pageCount").html(result.pageCondition.totalPage);
 			$("#currentPage").html(result.pageCondition.currPage);
 			//request.setAttribute("totalPage",result.pageCondition.totalPage);
-			var html='<li><a href="javascript:void(0);" id="fristPage">首页</a></li><li><a href="javascript:void(0);" id="previousPage" >上页</a></li>';
+			var html='<li><a href="javascript:void(0);" id="fristPage">首页</a></li><li><a href="javascript:void(0);" id="previousPage" >上一页</a></li>';
 			/*if(result.pageCondition.currPage==1){
 				html='<li><a href="#" id="fristPage" onclick="loadDemandList(1)">首页</a></li><li><a href="#" id="previousPage" >&laquo;</a></li><li><a href="#" id="nextPage" >&raquo;</a></li><li><a href="#" id="lastPage" >末页</a></li>';
 			}else if(result.pageCondition.currPage==result.pageCondition.totalPage){
@@ -194,7 +200,7 @@ function loadDemandList(currPage){
 			}else {
 				html='<li><a href="#" id="fristPage" onclick="loadDemandList(1)">首页</a></li><li><a href="#" id="previousPage" >&laquo;</a></li><li><a href="#">'+(result.pageCondition.currPage-1)+'</a></li><li><a href="#">'+result.pageCondition.currPage+'</a></li><li><a href="#">'+(result.pageCondition.currPage+1)+'</a></li><li><a href="#" id="nextPage" >&raquo;</a></li><li><a href="#" id="lastPage" >末页</a></li>';
 			}*/
-			var page = 4;
+			/*var page = 4;
 			if(result.pageCondition.totalPage <= page){
 				for (var i = 1; i <= result.pageCondition.totalPage; i++) {
 					html +='<li><a href="javascript:void(0);" onclick="loadDemandList('+i+')">'+i+'</a></li>';
@@ -216,17 +222,17 @@ function loadDemandList(currPage){
 			}
 			if(result.pageCondition.totalPage>page && result.pageCondition.currPage < result.pageCondition.totalPage - page){
 				html += '<li class="disabled"><a href="javascript:void(0);">...</a></li>';
-			}
-			html += '<li><a href="javascript:void(0);" id="nextPage" >下页</a></li><li><a href="javascript:void(0);" id="lastPage" >末页</a></li>';
-			if(result.pageCondition.totalPage>page){
+			}*/
+			html += '<li><a href="javascript:void(0);" id="nextPage" >下一页</a></li><li><a href="javascript:void(0);" id="lastPage" >末页</a></li>';
+			/*if(result.pageCondition.totalPage>page){
 				html += '跳至<input style="height:39px;width:39px" type="text" id="toPage">页</input><li style="float:right"><a href="javascript:void(0);" id="sure" >确定</a></li>';
-			}
+			}*/
 			$("ul.pagination-centered").html(html);
 			console.log($("ul.pagination-centered"));
-			$("#sure").click(function(){
+			/*$("#sure").click(function(){
 				var pageNum = $("#toPage").val();
 				loadDemandList(pageNum);
-			})
+			})*/
 			$("#fristPage").attr("onclick","loadDemandList(1)");
 			if(result.pageCondition.currPage <= result.pageCondition.totalPage){
 				$("#previousPage").attr("onclick","loadDemandList("+(result.pageCondition.currPage - 1)+")");
@@ -285,4 +291,13 @@ function demandDetail(demandId){
 	var url = path+'/service/demand/demandDetail';
 	$("#detailForm").attr("action",url);
 	$("#detailForm").submit();
+	/*$.ajax({
+		url:path+'/service/demand/demandDetail',
+		dataType:"json",
+		type:"post",
+		data:{"demandId":demandId},
+		success:function(result){
+			
+		}
+	})*/
 }

@@ -16,12 +16,10 @@
 		<result property="profilesNo" column="PROFILES_NO" javaType="String" />
 		<result property="interviewedNo" column="INTERVIEWED_NO" javaType="String" />
 		<result property="status" column="STATUS" javaType="String" />
-		<result property="staffName" column="STAFF_NAME" javaType="String" />
+		<result property="candidateName" column="CANDIDATE_NAME" javaType="String" />
 		<result property="proposedJoiningDate" column="PROPOSED_JOINING_DATE" javaType="String" />
 		<result property="sowSigned" column="SOW_SIGNED" javaType="String" />
-		<result property="onboarded" column="ONBOARDED" javaType="String" />
-		<result property="abort" column="ABORT" javaType="String" />
-		<result property="delayed" column="DELAYED" javaType="String" />
+		<result property="bgvCleared" column="BGV_CLEARED" javaType="String" />
 		<result property="reason" column="REASON" javaType="String" />
 		<result property="remark" column="REMARK" javaType="String" />
 		<result property="csSubDept" column="CS_SUBDEPT" javaType="String" />

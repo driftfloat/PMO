@@ -223,18 +223,11 @@ public class DemandController {
 					Label lab = new Label(j++, i+1, demandList.get(i).getSowSigned());
 					ws.addCell(lab);
 				}
-				if(condition.indexOf("Onboarded Yes / No")!= -1){
-					Label lab = new Label(j++, i+1, demandList.get(i).getOnboarded());
+				if(condition.indexOf("BGV Cleared")!= -1){
+					Label lab = new Label(j++, i+1, demandList.get(i).getBgvCleared());
 					ws.addCell(lab);
 				}
-				if(condition.indexOf("Abort")!= -1){
-					Label lab = new Label(j++, i+1, demandList.get(i).getAbort());
-					ws.addCell(lab);
-				}
-				if(condition.indexOf("Delayed")!= -1){
-					Label lab = new Label(j++, i+1, demandList.get(i).getDelayed());
-					ws.addCell(lab);
-				}
+				
 				if(condition.indexOf("Reason for Abort / Delay")!= -1){
 					Label lab = new Label(j++, i+1, demandList.get(i).getReason());
 					ws.addCell(lab);

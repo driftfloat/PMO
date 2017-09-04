@@ -92,21 +92,19 @@ $(function(){
 							    <form id="demandForm" method="post" class="form-horizontal">
 									
 										<div class="group">
-										<label class="col-lg-2 control-label">Tech/Skill</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="skill" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="skill" data-bv-group=".group">
-												<option value="${demand.skill }">${demand.skill }</option>
-											</select>
-										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">RR #</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control"  name="rr" value="${demand.rr }"
+													id="rr"/>
+											</div>
 										</div>
 										<div class="group">
-										<label class="col-lg-2 control-label">Position</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="position" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="position" data-bv-group=".group">
-												<option value="${demand.position }">${demand.position }</option>
-											</select>
+											<label class="col-sm-2 control-label">Job Code</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="jobCode" value="${demand.jobCode }"
+													id="jobCode"/>
+											</div>
 										</div>
 										</div>
 										</br></br></br>
@@ -141,12 +139,12 @@ $(function(){
 												</select>
 											</div>
 										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">RR #</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control"  name="rr" value="${demand.rr }"
-													id="rr"/>
-											</div>
+										<label class="col-lg-2 control-label">Tech/Skill</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="skill" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="skill" data-bv-group=".group">
+												<option value="${demand.skill }">${demand.skill }</option>
+											</select>
 										</div>
 										</br></br></br>
 										
@@ -160,14 +158,23 @@ $(function(){
 												</select>
 											</div>
 										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">Staff Name</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="candidateName" value="${demand.candidateName }"
+													id="requestor"/>
+											</div>
+										</div>
 										</br></br></br>
 										
 										<div class="group">
-											<label class="col-sm-2 control-label">Job Code</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="jobCode" value="${demand.jobCode }"
-													id="jobCode"/>
-											</div>
+										<label class="col-lg-2 control-label">Position</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="position" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="position" data-bv-group=".group">
+												<option value="${demand.position }">${demand.position }</option>
+											</select>
+										</div>
 										</div>
 										<div class="group">
 											<label class="col-sm-2 control-label">Requestor</label>
@@ -234,25 +241,10 @@ $(function(){
 											</div>
 										</div>
 										<div class="group">
-											<label class="col-sm-2 control-label">Onboarded Yes / No</label>
+											<label class="col-sm-2 control-label">BGV Cleared</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="onboarded" value="${demand.onboarded }"
-													id="onboarded"/>
-											</div>
-										</div>
-										</br></br></br>
-										<div class="group">
-											<label class="col-sm-2 control-label">Abort</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="abort" value="${demand.abort }"
-													id="abort"/>
-											</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">Delayed</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="delayed" value="${demand.delayed }"
-													id="delayed"/>
+												<input type="text" class="form-control" name="bgvCleared" value="${demand.bgvCleared }"
+													id="bgvCleared"/>
 											</div>
 										</div>
 										</br></br></br>
@@ -353,7 +345,7 @@ $(function(){
 	<!-- application script for Charisma demo -->
 	<script src="<%=path %>/js/charisma.js"></script>
 
-	<script type="text/javascript" src="<%=path %>/js/pmo/demandDetail.js"></script>
+	<%-- <script type="text/javascript" src="<%=path %>/js/pmo/demandDetail.js"></script> --%>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>
