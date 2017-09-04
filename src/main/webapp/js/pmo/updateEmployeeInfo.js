@@ -5,6 +5,7 @@ $(function(){
 	loadEngagementType();
 	loadRole();
 	loadSkill();
+	loadSource();
 	loadBillingEntity();
 	loadBillingCurrency();
 	loadResourceStatus();
@@ -261,6 +262,15 @@ function loadSkill(){
 	       $.each(data, function(i, item) {
 	    	   $("#skill").append("<option>"+item.name+"</option>");
 	       })
+	});
+}
+
+function loadSource(){
+	var url = path+'/json/source.json'
+	$.getJSON(url,  function(data) {
+		$.each(data, function(i, item) {
+			$("#source").append("<option>"+item.name+"</option>");
+		})
 	});
 }
 

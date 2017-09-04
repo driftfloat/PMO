@@ -33,11 +33,16 @@ public class ResumeController {
 	
 	@Resource
 	private ResumeService resumeService;
+	
+	@RequestMapping("/updateResume")
+	public String updateResume(String candidateId){
+		System.out.println(candidateId);
+		return null;
+		
+	}
 	/**
 	 * 跳转到录入信息的页面
 	 * 
-	 * @param request
-	 * @param response
 	 * @return 信息录入页面
 	 */
 	@RequestMapping("/input")
@@ -66,16 +71,30 @@ public class ResumeController {
         return resultString;
 	}
 	@RequestMapping("/add")
+	@ResponseBody
 	public String add(Resume resume,Model model ){
-		String uuid = Utils.getUUID();
-		resume.setId(uuid);
-		resume.setHr("小翠");
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String todayDate = df.format(new Date());
-        resume.setCreate_date(todayDate);
-		//调用service
-        resumeService.add(resume);
-		return null;
+		
+			//设置或选人
+			String uuid = Utils.getUUID();
+			resume.setId(uuid);
+			
+			//设置候选人的HR
+			resume.setHr("小翠");
+			
+			//设置创建时间
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			String todayDate = df.format(new Date());
+			resume.setCreate_date(todayDate);
+			
+		try{
+			//调用service层  执行保存操作
+			resumeService.add(resume);
+			return "0";
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return "1";
+		}
 		
 	}
 }

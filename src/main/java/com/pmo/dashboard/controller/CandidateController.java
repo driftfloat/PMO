@@ -1,6 +1,20 @@
 package com.pmo.dashboard.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,9 +27,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.pmo.dashboard.entity.CandidateInfo;
 import com.pmo.dashboard.entity.PageCondition;
 import com.pmo.dashboard.util.Constants;
+import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.CandidateService;
 
 @Controller
@@ -32,7 +48,7 @@ public class CandidateController
     public String getCandidate(final HttpServletRequest request,
             final HttpServletResponse response)
     {
-    	return "employee/candidateinfo";
+    	return "candidate/candidateinfo";
     }
     
     @RequestMapping("/queryCandidateList")
@@ -79,4 +95,135 @@ public class CandidateController
         result.put("pageInfo", page);
         return result;
     }
+    
+    @RequestMapping("/transformCandidateData")
+    @ResponseBody
+    public String transformCandidateData(CandidateInfo candidate,HttpServletRequest request)
+    {
+        String exportDataColumn = candidate.getExportDataColumn(); 
+        if(exportDataColumn == null || "".equals(exportDataColumn))
+        {
+        	return "0";
+        }
+        if(exportDataColumn.lastIndexOf(",") == exportDataColumn.length()-1){
+        	exportDataColumn = exportDataColumn.substring(0, exportDataColumn.length()-1);
+        }
+        candidate.setExportDataColumn(exportDataColumn);
+        List<LinkedHashMap<String,String>> candidateDatalist = candidateService.queryExportData(candidate);
+        request.getSession().setAttribute("candidate", candidate);
+        request.getSession().setAttribute("candidateDatalist", candidateDatalist);
+        return "1";
+    }
+    
+    @RequestMapping("/exportExcel")
+    @ResponseBody
+    public HttpServletResponse exportExcel(HttpServletRequest request,HttpServletResponse response)
+    {
+    	CandidateInfo candidate = (CandidateInfo) request.getSession().getAttribute("candidate");
+        if(candidate == null)
+        {
+        	return null;
+        }
+        @SuppressWarnings("unchecked")
+        List<LinkedHashMap<String,String>> candidateDatalist = (List<LinkedHashMap<String,String>>) request.getSession().getAttribute("candidateDatalist");
+        
+        List<String> conditionList = Arrays.asList(candidate.getExportPageColumn().split(","));
+        
+        try {
+        	  String tempfileName =  Constants.PATH+""+Utils.getUUID()+".xls";
+              
+              // 创建可写入的Excel工作簿           
+              File file=new File(tempfileName);
+              if (!file.exists()) {
+                  file.createNewFile();
+              }
+              //写Excel
+            candidateService.transferExportData(candidateDatalist,conditionList,file);
+            //获取当前日期
+            SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+            String date = df.format(new Date());
+            String fileName = "PMO_Candidate_Info_"+date+".xls";
+
+            // 以流的形式下载文件。
+            InputStream fis = new BufferedInputStream(new FileInputStream(tempfileName));
+            byte[] buffer = new byte[fis.available()];
+            fis.read(buffer);
+            fis.close();
+            // 清空response
+            response.reset();
+            // 设置response的Header
+            response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
+            //response.setContentType("application/octet-stream");
+            response.setContentType("application/vnd.ms-excel");
+            response.addHeader("Content-Length", "" + file.length());
+            OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+            
+            toClient.write(buffer);
+            toClient.flush();
+            toClient.close();
+            
+           file.delete();         
+        } catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return null;
+    }
+    
+    @RequestMapping("/downLoadCandidateResume")
+    @ResponseBody
+    public String downLoadCandidateResume(HttpServletRequest request,HttpServletResponse response)
+    {
+    	String candidateId = request.getParameter("candidateId");
+    	if(null == candidateId || "".equals(candidateId))
+    	{
+    		return "此候选人不存在，请刷新页面！";
+    	}
+    	CandidateInfo candidate = new CandidateInfo();
+    	candidate.setCandidateId(candidateId);
+    	String resumePath = candidateService.queryCandidateResumePath(candidate);
+    	
+        File file=new File(resumePath);
+        if (!file.exists()) {
+        	return "此候选人未上传简历！";
+        }
+        String fileName = resumePath.substring(resumePath.indexOf("_")+1);
+
+        try {
+			// 以流的形式下载文件。
+			InputStream fis = new BufferedInputStream(new FileInputStream(resumePath));
+			byte[] buffer = new byte[fis.available()];
+			fis.read(buffer);
+			fis.close();
+			// 清空response
+			response.reset();
+			// 设置response的Header
+			response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
+			//response.setContentType("application/octet-stream");
+//			response.setContentType("application/vnd.ms-excel");
+			response.addHeader("Content-Length", "" + file.length());
+			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+			
+			toClient.write(buffer);
+			toClient.flush();
+			toClient.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return "2";
+    }
+    
 }

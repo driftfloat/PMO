@@ -8,9 +8,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
+
 <meta charset="utf-8">
-<title>面试者信息录入</title>
+<title>PMO</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description"
 	content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
@@ -64,7 +64,6 @@
 <script>
 var path='<%=path%>';
 </script>
-
 <body>
 	<!-- topbar starts -->
 	<c:import url="/service/manage/top" />
@@ -81,258 +80,251 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> Candidate Input
+									<i class="glyphicon glyphicon-user"></i> 招聘需求信息
 								</h2>
 							</div>
 							<div id="register" class="box-content" style="overflow: auto;">
-							<form id="candidateForm" method="post" enctype="multipart/form-data">
-							    
+							<form id="recruitdemandForm" method="post">
+							    <div class="form-group">
+									    <input type="hidden" name="demandId" id="demandId" value="${demandId}"/>
+								</div>
+									
+							    <br/>
 								<div class="form-group">
 								<div id="successAlert" class="alert alert-success" style="display: none;"></div>
 										<div class="group">
-											<label class="col-sm-2 control-label">Name</label>
+											<label class="col-sm-2 control-label">RR</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="candidateName"
-													id="candidateName" />
+												<input type="text" class="form-control" name="rr"
+													id="rr" />
 											</div>
 										</div>
 										<div class="group">
-											<label class="col-sm-2 control-label">Tel</label>
+											<label class="col-sm-2 control-label">Job Code</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="tel"
-													id="candidateTel" />
-											</div>
-										</div>
-								</div>
-								<br/><br/><br/>
-								<div class="form-group">
-										<div class="group">
-											<label class="col-sm-2 control-label">Age</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="age"
-													id="candidateAge" />
-											</div>
-										</div>
-										<div class="group">
-										<label class="col-lg-2 control-label">Gender</label>
-										<div class="col-lg-4">
-											<select class="form-control" id="gender" name="gender" data-bv-notempty>
-												<option value="0" selected="selected">男</option>
-												<option value="1">女</option>
-											</select>
-											
-										</div>
-										</div>
-								</div>
-								<br/><br/>
-								<div class="form-group">
-										<div class="group">
-										<label class="col-lg-2 control-label">Education</label>
-										<div class="col-lg-4">
-											<select class="form-control" id="education" name="education" data-bv-notempty>
-												<option value="">-- option--</option>
-												<option value="0">博士</option>
-												<option value="1">研究生</option>
-												<option value="2">本科</option>
-												<option value="3">大专</option>
-												<option value="4">高中</option>
-											</select>
-											
-										</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">College</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="college"
-													id="college" />
+												<input type="text" class="form-control" name="jobCode"
+													id="jobCode" />
 											</div>
 										</div>
 								</div>
 								<br/><br/>
 								<div class="form-group">
 										<div class="group">
-										<label class="col-lg-2 control-label">Is Computer major</label>
-										<div class="col-lg-4">
-											<select class="form-control" id="major" name="major" data-bv-notempty
-												>
-												<option value="">-- option--</option>
-												<option value="0"> Yes</option>
-												<option value="1"> No</option>
-											</select>
-										</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">Experience Years</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="experience_years"
-													id="experience_years" />
-											</div>
-										</div>
-								</div>
-								<br/><br/>
-								<div class="form-group">
-										<div class="group">
-										<label class="col-lg-2 control-label">Skill</label>
-										<div class="col-lg-4">
+											<label class="col-lg-2 control-label">SKILL</label>
+											<div class="col-lg-4">
 											<select class="form-control" name="skill" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="skill" data-bv-group=".group">
-												<option value="">-- option--</option>
+												<option value="">-- 请选择--</option>
 											</select>
 										</div>
 										</div>
 										<div class="group">
-										<label class="col-sm-2 control-label">Graduate Date</label>
+										<label class="col-lg-2 control-label">REQUESTOR</label>
+										<div class="col-lg-4">
+											
+												<input type="text" class="form-control" name="requestor"
+													id="requestor" />
+										</div>
+										</div>
+								</div>
+								<br/><br/>
+								<div class="form-group">
+										<div class="group">
+										<label class="col-lg-2 control-label">POSITION</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="position" data-bv-notempty
+												data-bv-notempty-message="请选择职位" id="position" data-bv-group=".group">
+												<option value="">-- 请选择--</option>								
+											</select>
+										</div>
+										</div>
+										<div class="group">
+										<label class="col-sm-2 control-label">HSBC SubDeptId</label>
+										<div class="col-sm-4">
+											<input type="text" class="form-control" name="hsbcSubDeptId"
+													id="hsbcSubDeptId" />
+										</div>
+										</div>
+								</div>
+								<br/><br/>
+								<div class="form-group">
+										<div class="group">
+										<label class="col-lg-2 control-label">LOCATION</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="location" data-bv-notempty
+												data-bv-notempty-message="请选择" id="location" data-bv-group=".group">
+												<option value="">-- 请选择--</option>								
+											</select>
+										</div>
+										</div>
+										<div class="group">
+										<label class="col-sm-2 control-label">ReqPublishedDate</label>
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
 												<input class="form-control" type="text" disabled="disabled"
-													id="GRADUATE_DATE1" name="GRADUATE_DATE1"> <span
-													class="input-group-addon"><span
-													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
-													id="graduate_date" name="graduate_date" />
+													id="reqPublishedDate1" name="reqPublishedDate1"> 
+													<span class="input-group-addon">
+														<span class="glyphicon glyphicon-th">
+														</span>
+													</span> 
+													<input type="hidden" id="reqPublishedDate2" name="reqPublishedDate2" />
 											</div>
+										</div>
+										</div>
+								</div>
+								<br/><br/>
+								<div class="form-group">
+										<div class="group">
+										<label class="col-sm-2 control-label">STATUS</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="status" data-bv-notempty
+												data-bv-notempty-message="请选择状态" id="status" data-bv-group=".group">
+												<option value="">-- 请选择--</option>
+												
+									        </select>
+										</div>
+									    </div>
+									    <div class="group">
+										<label class="col-lg-2 control-label">Staff Name</label>
+										<div class="col-lg-4">
+											<input type="text" class="form-control" name="staffName"
+													id="staffName" />
+										</div>
+										</div>
+								</div>
+								<br/><br/>
+								<div class="form-group">
+										<div class="group">
+										<label class="col-lg-2 control-label">Proposed Joining Date</label>
+										<div class="col-lg-4">
+											<div class="input-group date form_datetime col-sm-12"
+												data-link-field="dt_set_order_time_input">
+												<input class="form-control" type="text" disabled="disabled"
+													id="proposedJoiningDate1" name="proposedJoiningDate1"> 
+													<span class="input-group-addon">
+														<span class="glyphicon glyphicon-th">
+														</span>
+													</span> 
+													<input type="hidden" id="proposedJoiningDate2" name="proposedJoiningDate2" />
+											</div>
+										</div>
+										</div>
+										<div class="group">
+										<label class="col-sm-2 control-label">DC Cleared</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" name="dcCleared"
+													id="dcCleared" />
+										</div>
+									</div>
+								</div>
+								<br/><br/>
+								<div class="form-group">
+									<div class="group">
+										<label class="col-sm-2 control-label">Sow Signed</label>
+										<div class="col-md-4">
+											<select class="form-control" name="sowSigned" data-bv-notempty
+												data-bv-notempty-message="请选择" id="sowSigned" data-bv-group=".group">
+												<option value="">-- 请选择--</option>
+												
+									        </select>
+										</div>
+									</div>
+									<div class="group">
+										<label class="col-lg-2 control-label">Onboarded</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="onboarded" data-bv-notempty
+												data-bv-notempty-message="请选择" id="onboarded" data-bv-group=".group">
+												<option value="">-- 请选择--</option>
+												
+									        </select>
+										</div>
+										</div>
+								</div>
+								<br/><br/>
+								<div class="form-group">
+										<div class="group">
+										<label class="col-lg-2 control-label">Abort</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="abort" data-bv-notempty
+												data-bv-notempty-message="请选择" id="abort" data-bv-group=".group">
+												<option value="">-- 请选择--</option>
+											</select>
+										</div>
+										</div>
+										<div class="group">
+										<label class="col-lg-2 control-label">Delayed</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="delayed" data-bv-notempty
+												data-bv-notempty-message="请选择" id="delayed" data-bv-group=".group">
+												<option value="">-- 请选择--</option>
+											</select>
+										</div>
+										</div>
+								</div>
+								<br/><br/>
+								<div class="form-group">
+										<div class="group">
+										<label class="col-lg-2 control-label">Reason</label>
+										<div class="col-lg-4">
+											<input type="text" class="form-control" name="reason"
+													id="reason" />
+										</div>
+										</div>
+										<div class="group">
+										<label class="col-sm-2 control-label">Remark</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" name="remark"
+													id="remark" />
 										</div>
 									    </div>
 								</div>
 								<br/><br/>
+								
+								<div class="form-group">
+								        <div class="group">
+											<label class="col-sm-2 control-label">CS SubDept</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="csSubDept"
+													id="csSubDept" />
+											</div>
+										</div>
+										<div class="group">
+										<label class="col-lg-2 control-label">DO Number</label>
+										<div class="col-lg-4">
+											<input type="text" class="form-control" name="doNumber"
+													id="doNumber" />
+										</div>
+										</div>
+										
+								</div>
+								<br/><br/>
 								<div class="form-group">
 										<div class="group">
-										<label class="col-lg-2 control-label">English Level</label>
+										<label class="col-lg-2 control-label">hrPriority</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="English_level" id="English_level" data-bv-notempty>
-												<option value="">-- option --</option>
-												<option value="0">非工作语言</option>
-												<option value="1">工作语言</option>
+											<select class="form-control" name="hrPriority" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="hrPriority" data-bv-group=".group">
+												<option value="">-- 请选择--</option>
 											</select>
 										</div>
 										</div>
-										<div class="group">
-										<label class="col-lg-2 control-label">Candidate Status</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="candidate_status" id="candidate_status" data-bv-notempty>
-												<option value="">-- option --</option>
-												<option value="0">招聘中</option>
-												<option value="1">offer中</option>
-												<option value="2">已入职</option>
-												<option value="3">闲置</option>
-												<option value="4">暂不关注</option>
-											</select>
-										</div>
-										</div>
 								</div>
-								<br/><br/>
-								<div class="form-group">
-										
-										<div class="group">
-										<div class="group">
-											<label class="col-sm-2 control-label">Email</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="email"
-													id="email" />
-											</div>
-										</div>
-									</div>
-									<div class="group">
-										<div class="group">
-											<label class="col-sm-2 control-label">Entry_date</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="entry_date"
-													id="entry_date" />
-											</div>
-										</div>
-									</div>
-									
-								</div>
-								<br/><br/>
-								<div class="form-group">
-									<div class="group">
-										<label class="col-lg-2 control-label">Source</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="source" data-bv-notempty
-											data-bv-notempty-message="请选择简历来源" id="source" data-bv-group=".group">
-											<option value="">-- option--</option>
-										</select>
-										</div>
-										</div>
-										
-									<div class="group">
-									<label class="col-lg-2 control-label">Role</label>
-									<div class="col-lg-4">
-										<select class="form-control" name="role" data-bv-notempty
-											data-bv-notempty-message="请选择角色" id="role" data-bv-group=".group">
-											<option value="">--option--</option>
-										</select>
-									</div>
-									</div>
-									
-								</div>
-								<br/><br/>
-								<div class="form-group">
-										
-										<div class="group">
-										<div class="group">
-											<label class="col-sm-2 control-label">Expected Salary</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="expected_salary"
-													id="expected_salary" />
-											</div>
-										</div>
-									</div>
-									<div class="group">
-										<div class="group">
-											<label class="col-sm-2 control-label">Real Salary</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="real_salary"
-													id="real_salary" />
-											</div>
-										</div>
-									</div>
-								</div>
-								<br/><br/>
-								
-								
-								<div class="form-group">
-										
-										<div class="group">
-										<div class="group">
-											<label class="col-sm-2 control-label">Old_Company</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="old_company"
-													id="old_company" />
-											</div>
-										</div>
-									</div>
-									<div class="group">
-										<div class="group">
-											<label class="col-sm-2 control-label">Remark</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="remark"
-													id="remark" />
-											</div>
-										</div>
-									</div>
-								</div>
-								<br/><br/>
-								<div class="form-group">
-									
-									<div class="group">
-										<label class="col-sm-2 control-label">Upload Resume</label>
-										<div class="col-sm-4">
-											<input type="hidden" name="resume_path" id="resume_path">
-											<span style="display: block;"><input  type="file" name="file" id="uploadId" style="display: inline;"/>
-											<input style="display: inline;" type="button" id = "upload" value="UPLOAD"/></span>
-										</div>
-									</div>
-									
-								</div>
-								
+												
 								<br/><br/><br/>
 								
 								<div class="form-group">
-									    <div style="text-align:center;width:100%;">
-									    <input type="button" onclick="addCandidate()" value="INPUT"
+									    <div style="text-align:center;width:50%;float:left">
+									    <input type="button" value="添&nbsp;&nbsp;加"
+										name="subscribe" id="sub_search" href="#"
 										class="button btn btn-primary" data-dismiss="modal"
-										
+										onclick="addDemand()"
+										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
+									    </div>
+									    <div style="text-align:center;width:50%;float:right">
+									    <input type="reset" value="重&nbsp;&nbsp;置"
+										name="subscribe" id="sub_add" href="#"
+										class="button btn btn-primary" data-dismiss="modal"
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
 									    </div>
 								</div>
@@ -349,9 +341,6 @@ var path='<%=path%>';
 		</div>
 
 		<hr>
-
-		 
-		
 
 		<c:import url="/service/manage/footer" />
 
@@ -400,9 +389,7 @@ var path='<%=path%>';
 	<!-- application script for Charisma demo -->
 	<script src="<%=path %>/js/charisma.js"></script>
 
-	<script type="text/javascript" src="<%=path %>/js/pmo/updateEmployeeInfo.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/pmo/ajaxfileupload.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/pmo/resumeInput.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/recruitdemand.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>
