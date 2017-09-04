@@ -24,7 +24,17 @@ public class CandidateInfo extends PageCondition
 	private String role;
 	private String entyDate;
 	private String email;
-	
+	private String expectedSalary;
+	private String realSalary;
+	private String arrivalDate;
+	private String oldCompany;
+	private String remark;
+	private String createUser;
+	private String workYearsStart;
+	private String workYearsEnd;
+	private String exportDataColumn;
+	private String exportPageColumn;
+
 	private String pageState;
 	
 	public String getCandidateId() {
@@ -164,6 +174,66 @@ public class CandidateInfo extends PageCondition
 	}
 	public void setPageState(String pageState) {
 		this.pageState = pageState;
+	}
+	public String getWorkYearsStart() {
+		return workYearsStart;
+	}
+	public void setWorkYearsStart(String workYearsStart) {
+		this.workYearsStart = workYearsStart;
+	}
+	public String getWorkYearsEnd() {
+		return workYearsEnd;
+	}
+	public void setWorkYearsEnd(String workYearsEnd) {
+		this.workYearsEnd = workYearsEnd;
+	}
+	public String getExportDataColumn() {
+		return exportDataColumn;
+	}
+	public void setExportDataColumn(String exportDataColumn) {
+		this.exportDataColumn = exportDataColumn;
+	}
+	public String getExportPageColumn() {
+		return exportPageColumn;
+	}
+	public void setExportPageColumn(String exportPageColumn) {
+		this.exportPageColumn = exportPageColumn;
+	}
+	public String getExpectedSalary() {
+		return expectedSalary;
+	}
+	public void setExpectedSalary(String expectedSalary) {
+		this.expectedSalary = expectedSalary;
+	}
+	public String getRealSalary() {
+		return realSalary;
+	}
+	public void setRealSalary(String realSalary) {
+		this.realSalary = realSalary;
+	}
+	public String getArrivalDate() {
+		return arrivalDate;
+	}
+	public void setArrivalDate(String arrivalDate) {
+		this.arrivalDate = arrivalDate;
+	}
+	public String getOldCompany() {
+		return oldCompany;
+	}
+	public void setOldCompany(String oldCompany) {
+		this.oldCompany = oldCompany;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getCreateUser() {
+		return createUser;
+	}
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
 	}
 	
 }
