@@ -87,7 +87,6 @@ var path='<%=path%>';
 							    
 							    <form id="demandForm" method="post" class="form-horizontal">
 									
-									
 										<div class="group">
 										<label class="col-lg-2 control-label">Tech/Skill</label>
 										<div class="col-lg-4">
@@ -150,7 +149,7 @@ var path='<%=path%>';
 										<div class="group">
 										<label class="col-lg-2 control-label">事业部</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="csDept.csBuName" data-bv-notempty
+											<select class="form-control" name="csBuName" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="csBuName" data-bv-group=".group">
 												<option value="">-- select--</option>
 											</select>
@@ -159,7 +158,7 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-sm-2 control-label">交付部</label>
 											<div class="col-sm-4">
-												<select class="form-control" name="csDept.scSubDeptName" data-bv-notempty
+												<select class="form-control" name="csSubDept" data-bv-notempty
 													data-bv-notempty-message="请选择角色" id="scSubDeptName" data-bv-group=".group">
 													<option value="">-- select--</option>
 												</select>
@@ -198,6 +197,7 @@ var path='<%=path%>';
 												<th>Sub - Department</th>
 												<th>Status</th>
 												<th>交付部</th>
+												<th>详情</th>
 											</tr>
 										</thead>
 										
@@ -218,8 +218,11 @@ var path='<%=path%>';
 									</div>
 									
 								</form>
-								<form action="" id="editForm" method="post" target="_blank">
-									<input id="employeeId" name="employeeId" type="hidden" />
+								<form action="" id="detailForm" method="post" target="_blank">
+									<input id="demandId" name="demandId" type="hidden" />
+								</form>
+								<form action="" id="conditionForm" method="post">
+							    	<input type="hidden" id="condition" name="condition">
 								</form>
 
 							</div>
@@ -258,39 +261,28 @@ var path='<%=path%>';
 							class="table table-striped table-bordered">
 							<thead>
 								<tr>
-									<label><input type="checkbox" name="HSBC Staff ID"/>HSBC Staff ID&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Staff Name"/>Staff Name&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="LN"/>LN&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Staff Region"/>Staff Region&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Staff Location (country)"/>Staff Location (country)&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Location Type (HSBCOffice/ODC)"/>Location Type (HSBCOffice/ODC)&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Onshore or Offshore"/>Onshore or Offshore&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="HSBC Dept/">HSBC Dept&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="HSBC Sub Dept"/>HSBC Sub Dept&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="HSBC Manager"/>HSBC Manager&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Project Name"/>Project Name&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Project Description"/>Project Description&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="SOW#"/>SOW#&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="SOW# Expired Date"/>SOW# Expired Date&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Staff Category(CATG/CATB)"/>Staff Category(CATG/CATB)&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Engagement Type (T&M/FixedCost)"/>Engagement Type (T&M/FixedCost)&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="HSBC DOJ"/>HSBC DOJ&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Experience on HSBC account in Months"/>Experience on HSBC account in Months&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Graduation Date"/>Graduation Date&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Total Experience in Months"/>Total Experience in Months&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="MSA Role"/>MSA Role&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Skills/Technology"/>Skills/Technology&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Billing Entity"/>Billing Entity&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Billing Currency"/>Billing Currency&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Bill Rate"/>Bill Rate&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Resource Status (Active/Terminated)"/>Resource Status (Active/Terminated)&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="If terminated,mention LWD"/>If terminated,mention LWD&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Reason for Termination"/>Reason for Termination&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="E-HR"/>E-HR&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="AM"/>AM&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="RR #"/>RR #&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Job Code"/>Job Code&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Tech/Skill"/>Tech/Skill&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Requestor"/>Requestor&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Position"/>Position&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Department"/>Department&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Sub - Department"/>Sub - Department&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Location"/>Location&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Req published Date"/>Req published Date&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Ageing"/>Ageing&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="No. of Profiles Sent to HSBC"/>No. of Profiles Sent to HSBC&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="No of Profiles Interviewed"/>No of Profiles Interviewed&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Status"/>Status&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Proposed Date of Joining"/>Proposed Date of Joining&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="SOW signed"/>SOW signed&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="BGV Cleared"/>BGV Cleared&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Reason for Abort / Delay"/>Reason for Abort / Delay&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Remark"/>Remark&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="交付部"/>交付部&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="大部门"/>大部门&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="niche skill"/>niche skill&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Planned Onboard date"/>Planned Onboard date&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="DO number"/>DO number&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="HR Priority"/>HR Priority&nbsp;&nbsp;</label>
 								</tr>
 							</thead>
 							<tbody>
