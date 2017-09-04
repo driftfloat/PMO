@@ -10,4 +10,5 @@ public interface HSBCDeptService
     List<HSBCDept> queryHSBCDubDeptNameById(String hsbcSubDeptId);
     HSBCDept queryHSBCSubDeptById(String hsbcProjectId);
     public List<HSBCDept> queryHSBCSubDeptNameByDeptName(String hsbcDeptName);
+    public String queryHsbcSubDeptId(String str1,String str2);
 }

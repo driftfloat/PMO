@@ -5,4 +5,5 @@ import com.pmo.dashboard.entity.AddDemand;
 public interface AddDemandService {
 
 	boolean addDemand(AddDemand demand);
+	
 }
