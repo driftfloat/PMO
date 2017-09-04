@@ -63,6 +63,10 @@
 </head>
 <script>
 var path='<%=path%>';
+$(function(){
+	   $("input").attr("readonly",true);
+	   $("select").attr("readonly",true);
+	});
 </script>
 <body>
 	<!-- topbar starts -->
@@ -80,7 +84,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> 招聘需求查询
+									<i class="glyphicon glyphicon-user"></i> 招聘需求详情
 								</h2>
 							</div>
 							<div id="demandInfo" class="box-content">
@@ -92,7 +96,7 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" name="skill" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="skill" data-bv-group=".group">
-												<option value="">-- select--</option>
+												<option value="${demand.skill }">${demand.skill }</option>
 											</select>
 										</div>
 										</div>
@@ -101,7 +105,7 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" name="position" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="position" data-bv-group=".group">
-												<option value="">-- select--</option>
+												<option value="${demand.position }">${demand.position }</option>
 											</select>
 										</div>
 										</div>
@@ -111,7 +115,7 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" name="hsbcDept.hsbcDeptName" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="department" data-bv-group=".group">
-												<option value="">-- select--</option>
+												<option value="${demand.hsbcDept.hsbcDeptName }">${demand.hsbcDept.hsbcDeptName }</option>
 											</select>
 										</div>
 										</div>
@@ -120,7 +124,7 @@ var path='<%=path%>';
 											<div class="col-sm-4">
 												<select class="form-control" name="hsbcDept.hsbcSubDeptName" data-bv-notempty
 													data-bv-notempty-message="请选择角色" id="sub_department" data-bv-group=".group">
-													<option value="">-- select--</option>
+													<option value="${demand.hsbcDept.hsbcSubDeptName }">${demand.hsbcDept.hsbcSubDeptName }</option>
 												</select>
 											</div>
 										</div>
@@ -133,98 +137,164 @@ var path='<%=path%>';
 											<div class="col-sm-4">
 												<select class="form-control" name="status" data-bv-notempty
 													data-bv-notempty-message="请选择角色" id="status" data-bv-group=".group">
-													<option value="">-- select--</option>
+													<option value="${demand.status }">${demand.status }</option>
 												</select>
 											</div>
 										</div>
 										<div class="group">
 											<label class="col-sm-2 control-label">RR #</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="rr"
+												<input type="text" class="form-control"  name="rr" value="${demand.rr }"
 													id="rr"/>
 											</div>
 										</div>
 										</br></br></br>
 										
-										<div class="group">
-										<label class="col-lg-2 control-label">事业部</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="csBuName" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="csBuName" data-bv-group=".group">
-												<option value="">-- select--</option>
-											</select>
-										</div>
-										</div>
+										
 										<div class="group">
 											<label class="col-sm-2 control-label">交付部</label>
 											<div class="col-sm-4">
 												<select class="form-control" name="csSubDept" data-bv-notempty
 													data-bv-notempty-message="请选择角色" id="scSubDeptName" data-bv-group=".group">
-													<option value="">-- select--</option>
+													<option value="${demand.csSubDept }">${demand.csSubDept }</option>
 												</select>
 											</div>
 										</div>
 										</br></br></br>
 										
-										<div class="form-group">
-									    <div style="text-align:center;width:50%;float:left">
-									    <input type="button" value="查&nbsp;&nbsp;询"
-										name="searchBtn" id="searchBtn" href="#"
-										class="button btn btn-primary" data-dismiss="modal"
-										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
-									    </div>
-									    <div style="text-align:center;width:50%;float:right">
-									    <input type="reset" value="导出Excel" disabled="disabled"
-										name="exportExcel" id="exportExcel" href="#"
-										class="button btn btn-primary" data-dismiss="modal"
-										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
-									    </div>
-								        </div>
-								        
-								        <div >
-									    <a href="" id="exceltHref" style="display:none;">导出</a>
-									    </div>
-								    
-									<div style="overflow: auto;">
-									<table id="demandList"
-										class="table table-striped table-bordered">
-										<thead>
-											<tr>
-												<th>RR</th>
-												<th>Tech/Skill</th>
-												<th>Position</th>
-												<th>Department</th>
-												<th>Sub - Department</th>
-												<th>Status</th>
-												<th>交付部</th>
-												<th>详情</th>
-											</tr>
-										</thead>
+										<div class="group">
+											<label class="col-sm-2 control-label">Job Code</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="jobCode" value="${demand.jobCode }"
+													id="jobCode"/>
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">Requestor</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="requestor" value="${demand.requestor }"
+													id="requestor"/>
+											</div>
+										</div>
+										</br></br></br>
 										
-									</table>
-									</div>
-									<div class="pagination">
-										<ul class="pagination pagination-centered">
-											<%-- <li><a href="#" id="fristPage" onclick="loadDemandList(1)">首页</a></li>
-											<li><a href="#" id="previousPage" >&laquo;</a></li>
-										<c:forEach begin="1" end="<% %>" step="1" varStatus="status" >
-											<li><a href="#">${status.count }</a></li>
-										</c:forEach>
-											<li><a href="#" id="nextPage" >&raquo;</a></li>
-											<li><a href="#" id="lastPage" >末页</a></li> --%>
-										</ul>
-										<br>
-										共<span id="pageCount"></span>页   第<span id="currentPage"></span>页
-									</div>
-									
-								</form>
-								<form action="" id="detailForm" method="post" target="_blank">
-									<input id="demandId" name="demandId" type="hidden" />
-								</form>
-								<form action="" id="conditionForm" method="post">
-							    	<input type="hidden" id="condition" name="condition">
-								</form>
-
+										<div class="group">
+											<label class="col-sm-2 control-label">Location</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="location" value="${demand.location }"
+													id="location"/>
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">Req published Date</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="reqPublishedDate" value="${demand.reqPublishedDate }"
+													id="reqPublishedDate"/>
+											</div>
+										</div>
+										</br></br></br>
+										
+										<div class="group">
+											<label class="col-sm-2 control-label">Ageing</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="ageing" value="${demand.ageing }"
+													id="ageing"/>
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">No. of Profiles Sent to HSBC</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="profilesNo" value="${demand.profilesNo }"
+													id="profilesNo"/>
+											</div>
+										</div>
+										</br></br></br>
+										
+										<div class="group">
+											<label class="col-sm-2 control-label">No of Profiles Interviewed</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="interviewedNo" value="${demand.interviewedNo }"
+													id="interviewedNo"/>
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">Proposed Date of Joining</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="proposedJoiningDate" value="${demand.proposedJoiningDate }"
+													id="proposedJoiningDate"/>
+											</div>
+										</div>
+										</br></br></br>
+										
+										<div class="group">
+											<label class="col-sm-2 control-label">SOW signed</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="sowSigned" value="${demand.sowSigned }"
+													id="sowSigned"/>
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">Onboarded Yes / No</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="onboarded" value="${demand.onboarded }"
+													id="onboarded"/>
+											</div>
+										</div>
+										</br></br></br>
+										<div class="group">
+											<label class="col-sm-2 control-label">Abort</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="abort" value="${demand.abort }"
+													id="abort"/>
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">Delayed</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="delayed" value="${demand.delayed }"
+													id="delayed"/>
+											</div>
+										</div>
+										</br></br></br>
+										<div class="group">
+											<label class="col-sm-2 control-label">Reason for Abort / Delay</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="reason" value="${demand.reason }"
+													id="reason"/>
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">Remark</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="remark" value="${demand.remark }"
+													id="rr"/>
+											</div>
+										</div>
+										</br></br></br>
+										<div class="group">
+											<label class="col-sm-2 control-label">Planned Onboard date</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="plannedOnboardDate" value="${demand.plannedOnboardDate }"
+													id="plannedOnboardDate"/>
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">DO number</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="doNumber" value="${demand.doNumber }"
+													id="doNumber"/>
+											</div>
+										</div>
+										</br></br></br>
+										<div class="group">
+											<label class="col-sm-2 control-label">HR Priority</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="hrPriority" value="${demand.hrPriority }"
+													id="hrPriority"/>
+											</div>
+										</div>
+										
+										</br></br></br>
 							</div>
 						</div>
 				</div>
@@ -236,75 +306,6 @@ var path='<%=path%>';
 		</div>
 
 		<hr>
-
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-
-
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="box-header well" data-original-title="">
-						<h2>
-							<i class="glyphicon glyphicon-user"></i> 列表项
-						</h2>
-
-						<div class="box-icon">
-							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
-								class="glyphicon glyphicon-chevron-up"></i></a> <a
-								class="btn btn-round btn-default" href="#" data-dismiss="modal">
-								<i class="glyphicon glyphicon-remove"></i>
-							</a>
-						</div>
-					</div>
-					<div id="excelCheckBox" class="box-content">
-						<table id="excelBox"
-							class="table table-striped table-bordered">
-							<thead>
-								<tr>
-									<label><input type="checkbox" name="RR #"/>RR #&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Job Code"/>Job Code&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Tech/Skill"/>Tech/Skill&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Requestor"/>Requestor&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Position"/>Position&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Department"/>Department&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Sub - Department"/>Sub - Department&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Location"/>Location&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Req published Date"/>Req published Date&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Ageing"/>Ageing&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="No. of Profiles Sent to HSBC"/>No. of Profiles Sent to HSBC&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="No of Profiles Interviewed"/>No of Profiles Interviewed&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Status"/>Status&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Proposed Date of Joining"/>Proposed Date of Joining&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="SOW signed"/>SOW signed&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Onboarded Yes / No"/>Onboarded Yes / No&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Abort"/>Abort&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Delayed"/>Delayed&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Reason for Abort / Delay"/>Reason for Abort / Delay&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Remark"/>Remark&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="交付部"/>交付部&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="Planned Onboard date"/>Planned Onboard date&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="DO number"/>DO number&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="HR Priority"/>HR Priority&nbsp;&nbsp;</label>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-						<div class="center">
-							<a class="btn btn-success" href="#" onClick="exportCondition()"> <i
-								class="glyphicon glyphicon-ok icon-white" ></i> 确定
-							</a> <a class="btn btn-info" href="#" data-dismiss="modal"> <i
-								class="glyphicon glyphicon-remove icon-white"></i> 取消
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!--/span-->
-		</div>
-		 
-		
-
 		<c:import url="/service/manage/footer" />
 
 	</div>
@@ -352,7 +353,7 @@ var path='<%=path%>';
 	<!-- application script for Charisma demo -->
 	<script src="<%=path %>/js/charisma.js"></script>
 
-	<script type="text/javascript" src="<%=path %>/js/pmo/demandInfo.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/demandDetail.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>

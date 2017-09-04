@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class DemandServiceImpl implements DemandService{
 	CSDeptMapper csDeptMapper;
 	
 	@Override
-	public List<Demand> queryDemandList(Demand demand,PageCondition pageCondition,String csBuName) {
+	public List<Demand> queryDemandList(Demand demand,PageCondition pageCondition,String csBuName,HttpServletRequest request) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		if(StringUtils.isNotBlank(demand.getHsbcDept().getHsbcDeptName()) || StringUtils.isNotBlank(demand.getHsbcDept().getHsbcSubDeptName())){
 			//查询满足条件的所有部门id
@@ -51,6 +52,7 @@ public class DemandServiceImpl implements DemandService{
 		}
 		params.put("csBuName", csBuName);
 		params.put("demand", demand);
+		request.getSession().setAttribute("demandParams", params);
 		params.put("pageCondition", pageCondition);
 		//计算查询起始行号
 		int num = (pageCondition.getCurrPage() - 1)*pageCondition.getPageSize();
@@ -61,6 +63,16 @@ public class DemandServiceImpl implements DemandService{
 		int queryDemandCount = demandMapper.queryDemandCount(params);
 		pageCondition.setTotalPage((int) Math.ceil(queryDemandCount*1.0 / pageCondition.getPageSize()));
 		//将部门信息设置到需求信息中
+		for (Demand demands : list) {
+			HSBCDept hsbcDept = hsbcDeptMapper.queryDemandHSBCSubDeptById(demands.getHsbcSubDeptId());
+			demands.setHsbcDept(hsbcDept);
+		}
+		return list;
+	}
+
+	@Override
+	public List<Demand> queryAllDemand(Map<String, Object> params) {
+		List<Demand> list = demandMapper.queryAllDemand(params);
 		for (Demand demands : list) {
 			HSBCDept hsbcDept = hsbcDeptMapper.queryDemandHSBCSubDeptById(demands.getHsbcSubDeptId());
 			demands.setHsbcDept(hsbcDept);

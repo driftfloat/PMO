@@ -14,6 +14,29 @@ $(function(){
 	loadCsBuName();
 	loadScSubDeptName();
 })
+
+$("#skill").change(function(){
+	$("#exportExcel").attr("disabled", true);
+})
+$("#position").change(function(){
+	$("#exportExcel").attr("disabled", true);
+})
+$("#department").change(function(){
+	$("#exportExcel").attr("disabled", true);
+})
+$("#sub_department").change(function(){
+	$("#exportExcel").attr("disabled", true);
+})
+$("#status").change(function(){
+	$("#exportExcel").attr("disabled", true);
+})
+$("#csBuName").change(function(){
+	$("#exportExcel").attr("disabled", true);
+})
+$("#scSubDeptName").change(function(){
+	$("#exportExcel").attr("disabled", true);
+})
+
 /*加载skill本地json信息*/
 function loadSkill(){
 	var url = path+'/json/skill.json';
@@ -110,6 +133,7 @@ function loadSubDepartment(){
 		});
 	});
 }
+	
 /*根据条件和当前页加载查询到的信息*/
 function loadDemandList(currPage){
 	var skill= $("#skill").val();
@@ -131,9 +155,12 @@ function loadDemandList(currPage){
 		data:{"csBuName":csBuName,"skill":skill,"position":position,"hsbcDept.hsbcDeptName":department,"hsbcDept.hsbcSubDeptName":sub_department,
 			"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept},
 		success:function(result){
-			console.log(1111111);
-			console.log(result);
 			//alert(result.list.length);
+			if(result.list.length > 0){
+				$("#exportExcel").removeAttr("disabled");
+			}else{
+				$("#demandList").append("<tr><td colspan='7' style='text-align:center'>暂无数据！</td></tr>");
+			}
 			//$.each(reslut, function(i,data){
 			for (var i = 0; i < result.list.length; i++) {
 				var tr = $("<tr id='"+result.list[i].rr+"'></tr>");
@@ -144,6 +171,7 @@ function loadDemandList(currPage){
 				var td5 = $("<td>"+result.list[i].hsbcDept.hsbcSubDeptName+"</td>");
 				var td6 = $("<td>"+result.list[i].status+"</td>");
 				var td7 = $("<td>"+result.list[i].csSubDept+"</td>");
+				var td8 = $("<td><div class='btn-group btn-group-sm'><button class='btn btn-primary' onclick='demandDetail("+result.list[i].demandId+")'>详情</button></div></td>");
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
@@ -151,6 +179,7 @@ function loadDemandList(currPage){
 				td5.appendTo(tr);
 				td6.appendTo(tr);
 				td7.appendTo(tr);
+				td8.appendTo(tr);
 				$("#demandList").append(tr);
 			}
 			//alert(result.pageCondition.totalPage);
@@ -229,6 +258,31 @@ function loadDemandList(currPage){
 		}
 	})
 	
-	
 }
+
+$('#exportExcel').bind("click", function(){
 	
+	$('#myModal').modal('show');
+	
+});
+
+function exportCondition(){
+	var condition="";
+	$("label").find(":checkbox:checked").each(function(){
+		condition += $(this).attr("name") +",";
+	});
+	var url = path+'/service/demand/exportExcel';
+	$("#condition").val(condition);
+	$("#conditionForm").attr("action",url);
+	$("#conditionForm").submit();
+	
+	$('#myModal').modal('hide');
+	$("[type='checkbox']").removeAttr("checked");
+}
+
+function demandDetail(demandId){
+	$("#demandId").val(demandId);
+	var url = path+'/service/demand/demandDetail';
+	$("#detailForm").attr("action",url);
+	$("#detailForm").submit();
+}
