@@ -23,12 +23,12 @@ $(document).ready(function() {
                         max: 20,
                         message: '请输入长度在1到20位之间的用户名'
                     },
-                     remote: {
+                    /* remote: {
                         url: path+'/service/user/checkUser',
                         message: '用戶名不存在',
                        //delay :  2000,//per 2s send a request
                         type: 'POST'
-                    }
+                    }*/
                  }
             },
 
