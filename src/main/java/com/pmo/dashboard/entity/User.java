@@ -22,8 +22,22 @@ public class User {
 	
 	//用户类型
 	private String user_type;
+	
+	//所属部门
+	private CSDept cSDept;
+	
+	
+	public CSDept getcSDept()
+    {
+        return cSDept;
+    }
 
-	public String getUserId() {
+    public void setcSDept(CSDept cSDept)
+    {
+        this.cSDept = cSDept;
+    }
+
+    public String getUserId() {
 		return userId;
 	}
 
