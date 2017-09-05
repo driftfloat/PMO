@@ -125,7 +125,6 @@ var path='<%=path%>';
 												<option value="0">招聘中</option>
 												<option value="1">offer中</option>
 												<option value="2">已入职</option>
-												<option value="3">闲置中</option>
 											</select>
 										</div>
 									</div>
@@ -193,9 +192,16 @@ var path='<%=path%>';
 									</div>
 									<br/><br/><br/>
 									<div class="group">
-										<label class="col-sm-2 control-label">LOCK HR</label>
-										<div class="col-sm-4">
-											<input type="text" class="form-control" name="userName" id="userName" />
+										<label class="col-lg-2 control-label">INTERVIEW STATUS</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="interviewStatus" id="interviewStatus" data-bv-group=".group">
+												<option value="">--Option--</option>
+												<option value="0">未推送</option>
+												<option value="1">已推送</option>
+												<option value="2">面试中</option>
+												<option value="3">面试完成</option>
+												<option value="4">已退回</option>
+											</select>
 										</div>
 									</div>
 									<div class="form-group">
@@ -227,13 +233,13 @@ var path='<%=path%>';
 												<th>TEL</th>
 												<th>EMAIL</th>
 												<th>SOURCE</th>
-												<th>STATUS</th>
+												<th>CANDIDATE STATUS</th>
 												<th>EDUCATION</th>
 												<th>WORK YEARS</th>
 												<th>MAJOR TYPE</th>
 												<th>ENGLISH LEVEL</th>
 												<th>SKILL</th>
-												<th>LOCK HR</th>
+												<th>INTERVIEW STATUS</th>
 												<th>OPERATION</th>
 											</tr>
 										</thead>
@@ -255,7 +261,7 @@ var path='<%=path%>';
 									</div>
 								</form>
 								<form action="" id="editForm" method="post" target="_blank">
-									<input id="candidateId" name="candidateId" type="hidden" />
+									<input id="employeeId" name="employeeId" type="hidden" />
 								</form>
 							</div>
 						</div>
@@ -372,7 +378,7 @@ var path='<%=path%>';
 	<!-- application script for Charisma demo -->
 	<script src="<%=path %>/js/charisma.js"></script>
 
-	<script type="text/javascript" src="<%=path %>/js/pmo/candidateInfo.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/myCandidateInfo.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>

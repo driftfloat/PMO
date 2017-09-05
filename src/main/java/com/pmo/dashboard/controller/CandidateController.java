@@ -70,10 +70,6 @@ public class CandidateController
     	 }else if("3".equals(expriencesWork)){
     		 candidate.setWorkYearsStart("11");
     	 }
-    	 if("-- ALL--".equalsIgnoreCase(candidate.getSkill()))
-    	 {
-    		 candidate.setSkill("");
-    	 }
 		 int dataCount = candidateService.queryCandidateCount(candidate);
 	     page.setDataCount(dataCount+"");
 		 page.setPageCount((dataCount-1)/10 + 1 +"");
@@ -224,6 +220,65 @@ public class CandidateController
 			e.printStackTrace();
 		}
     	return "2";
+    }
+    
+    
+    
+    @RequestMapping("/getMyCandidate")
+    public String getMyCandidate(final HttpServletRequest request,
+            final HttpServletResponse response)
+    {
+    	return "candidate/myCandidateinfo";
+    }
+    
+    @RequestMapping("/queryMyCandidateList")
+    @ResponseBody
+    public Object queryMyCandidateList(CandidateInfo candidate,HttpServletRequest request)
+    {
+    	String lockPerson = (String) request.getSession().getAttribute("userId");
+    	lockPerson = "1";//临时测试用，避免为空。
+    	if(null == lockPerson || "".equals(lockPerson))
+    	{
+    		return null;
+    	}
+    	candidate.setLockPerson(lockPerson);
+    	
+    	String pageState = candidate.getPageState();
+    	PageCondition page = new PageCondition();
+
+     	String  expriencesWork = candidate.getExperienceYears();
+    	 if("0".equals(expriencesWork)){
+    		 candidate.setWorkYearsEnd("2");
+    	 }else if("1".equals(expriencesWork)){
+    		 candidate.setWorkYearsStart("3");
+    		 candidate.setWorkYearsEnd("5");
+    	 }else if("2".equals(expriencesWork)){
+    		 candidate.setWorkYearsStart("6");
+    		 candidate.setWorkYearsEnd("10");
+    	 }else if("3".equals(expriencesWork)){
+    		 candidate.setWorkYearsStart("11");
+    	 }
+    	
+		 int dataCount = candidateService.queryMyCandidateCount(candidate);
+	     page.setDataCount(dataCount+"");
+		 page.setPageCount((dataCount-1)/10 + 1 +"");
+		 page.setPageDataCount(Constants.PAGE_DATA_COUNT+"");
+    	 if("".equals(pageState) || pageState == null ||"frist".equals(pageState)){
+    		 page.setCurrentPage("1");
+         }else if("next".equals(pageState)){
+        	 page.setCurrentPage(Integer.valueOf(candidate.getCurrentPage())+1+"");
+         }else if("previous".equals(pageState)){
+        	 page.setCurrentPage(Integer.valueOf(candidate.getCurrentPage())-1+"");
+         }else if("last".equals(pageState)){
+        	 page.setCurrentPage(page.getPageCount());
+         }
+    	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*Constants.PAGE_DATA_COUNT+"");
+    	candidate.setPageDataCount(Constants.PAGE_DATA_COUNT+"");
+        List<CandidateInfo> list = candidateService.queryMyCandidateList(candidate);
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("data", list);
+        result.put("pageInfo", page);
+        return result;
     }
     
 }
