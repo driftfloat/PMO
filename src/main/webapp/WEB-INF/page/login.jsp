@@ -49,6 +49,7 @@
     <!-- The fav icon -->
     <link rel="shortcut icon" href="<%=path %>/img/favicon.ico">
 	<style type="text/css">
+	small{font-size:16px;}
 	</style>
 </head>
 
@@ -71,10 +72,10 @@
     <div class="row">
         <div style="min-width: 320px;" class="well col-md-5 center login-box new-login-box">
     
-            <!-- <div class="alert alert-info new-login-box-header" id="loginAlert">
-                Welcome to SpiderNet
-            </div> -->
-            <form id="loginForm" class="form-horizontal" method="post">
+            <div class="alert alert-info new-login-box-header" id="loginAlert" style="display: none;">
+                <!-- Welcome to SpiderNet -->
+            </div>
+            <form id="loginForm" class="form-horizontal" method="post" action="/Pmo/service/user/login">
                 <fieldset>
               		<div class="form-group" style="border-color:none ">
 	              		
@@ -102,9 +103,10 @@
                         <label class="remember" for="remember"><input type="checkbox" id="remember">  记住用户名</label>
                     </div>-->
                     <div class="clearfix"></div>
-
+						
                     <p class="center col-md-5 p-style">
-                        <button type="button" id="submitBtn" class="btn btn-primary btn-primary-new">登录</button>
+                    	<!-- <input type="submit" class="btn btn-primary btn-primary-new" value="登录"/> -->
+                        <button type="submit" id="submitBtn" class="btn btn-primary btn-primary-new">登录</button>
                     </p>
                 </fieldset>
             </form>

@@ -24,6 +24,7 @@
                 <span>PMO</span></a>
             <!-- user dropdown starts -->
             <div class="btn-group pull-right">
+            	<span style="float: left;margin-right: 20px;font-size: 1.2em;" >你好：${ sessionScope.loginUser.nickname}</span>
                 <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> ${sessionScope.employee.getName()}</span>
                     <span class="caret"></span>
