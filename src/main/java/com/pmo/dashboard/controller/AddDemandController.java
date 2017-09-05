@@ -19,8 +19,9 @@ import com.pom.dashboard.service.AddDemandService;
 public class AddDemandController {
 	
 	@Resource
-	private AddDemandService demandService;
+	private AddDemandService addDemandService;
 	
+	@SuppressWarnings("unused")
 	private static Logger logger = LoggerFactory
             .getLogger(AddDemandController.class);
 	
@@ -29,7 +30,7 @@ public class AddDemandController {
     public String recruitdemand(final HttpServletRequest request,
             final HttpServletResponse response)
     {
-        return "/employee/recruitdemand";
+        return "/demand/recruitdemand";
     }
  
 
@@ -39,7 +40,7 @@ public class AddDemandController {
     {      
     	String demandId = Utils.getUUID();
     	demand.setDemandId(demandId);
-    	boolean resultFlag = demandService.addDemand(demand);
+    	boolean resultFlag = addDemandService.addDemand(demand);
         return resultFlag;
     }
 

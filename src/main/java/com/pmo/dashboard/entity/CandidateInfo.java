@@ -30,6 +30,7 @@ public class CandidateInfo extends PageCondition
 	private String oldCompany;
 	private String remark;
 	private String createUser;
+	private String interviewStatus;
 	private String workYearsStart;
 	private String workYearsEnd;
 	private String exportDataColumn;
@@ -234,6 +235,12 @@ public class CandidateInfo extends PageCondition
 	}
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
+	}
+	public String getInterviewStatus() {
+		return interviewStatus;
+	}
+	public void setInterviewStatus(String interviewStatus) {
+		this.interviewStatus = interviewStatus;
 	}
 	
 }

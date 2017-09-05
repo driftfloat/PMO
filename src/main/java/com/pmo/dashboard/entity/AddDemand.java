@@ -21,7 +21,9 @@ public class AddDemand
     
     private String hsbcSubDeptId;
     
-    private HSBCDept hsbcDept;
+    private String hsbcDept;
+    
+	private String hsbcSubDept;
     
     private String location;
     
@@ -38,8 +40,7 @@ public class AddDemand
     private String staffName;
     
     private String proposedJoiningDate;
-    
-    private String dcCleared;
+   
     
     private String sowSigned;
     
@@ -51,9 +52,6 @@ public class AddDemand
     
     private String reason;
     
-    private String nextAction;
-    
-    private String status2;
     
     private String remark;
     
@@ -64,26 +62,19 @@ public class AddDemand
     private String doNumber;
     
     private String hrPriority;
-    
-    private String reqReceivedDate;
-    
-    private String ageingReceived;
-    
-    private String demandPriority;
-    
+            
     private String creatDate;
     
     private String updateDate;
-    
-    private String recruitmentCycle;
-    
+        
     private String completionDay;
     
     private String completionDate;
     
     private String onboardDate;
 
-	
+	private String bgvCleared;
+
 	
 
 
@@ -143,12 +134,21 @@ public class AddDemand
 		this.hsbcSubDeptId = hsbcSubDeptId;
 	}
 
-	public HSBCDept getHsbcDept() {
+	public String getHsbcDept() {
 		return hsbcDept;
 	}
 
-	public void setHsbcDept(HSBCDept hsbcDept) {
+	public void setHsbcDept(String hsbcDept) {
 		this.hsbcDept = hsbcDept;
+	}
+
+	
+	public String getHsbcSubDept() {
+		return hsbcSubDept;
+	}
+
+	public void setHsbcSubDept(String hsbcSubDept) {
+		this.hsbcSubDept = hsbcSubDept;
 	}
 
 	public String getLocation() {
@@ -215,13 +215,6 @@ public class AddDemand
 		this.proposedJoiningDate = proposedJoiningDate;
 	}
 
-	public String getDcCleared() {
-		return dcCleared;
-	}
-
-	public void setDcCleared(String dcCleared) {
-		this.dcCleared = dcCleared;
-	}
 
 	public String getSowSigned() {
 		return sowSigned;
@@ -261,22 +254,6 @@ public class AddDemand
 
 	public void setReason(String reason) {
 		this.reason = reason;
-	}
-
-	public String getNextAction() {
-		return nextAction;
-	}
-
-	public void setNextAction(String nextAction) {
-		this.nextAction = nextAction;
-	}
-
-	public String getStatus2() {
-		return status2;
-	}
-
-	public void setStatus2(String status2) {
-		this.status2 = status2;
 	}
 
 	public String getRemark() {
@@ -319,29 +296,6 @@ public class AddDemand
 		this.hrPriority = hrPriority;
 	}
 
-	public String getReqReceivedDate() {
-		return reqReceivedDate;
-	}
-
-	public void setReqReceivedDate(String reqReceivedDate) {
-		this.reqReceivedDate = reqReceivedDate;
-	}
-
-	public String getAgeingReceived() {
-		return ageingReceived;
-	}
-
-	public void setAgeingReceived(String ageingReceived) {
-		this.ageingReceived = ageingReceived;
-	}
-
-	public String getDemandPriority() {
-		return demandPriority;
-	}
-
-	public void setDemandPriority(String demandPriority) {
-		this.demandPriority = demandPriority;
-	}
 
 	public String getCreatDate() {
 		return creatDate;
@@ -359,13 +313,6 @@ public class AddDemand
 		this.updateDate = updateDate;
 	}
 
-	public String getRecruitmentCycle() {
-		return recruitmentCycle;
-	}
-
-	public void setRecruitmentCycle(String recruitmentCycle) {
-		this.recruitmentCycle = recruitmentCycle;
-	}
 
 	public String getCompletionDay() {
 		return completionDay;
@@ -391,16 +338,25 @@ public class AddDemand
 		this.onboardDate = onboardDate;
 	}
 
+
+	
+	public String getBgvCleared() {
+		return bgvCleared;
+	}
+
+	public void setBgvCleared(String bgvCleared) {
+		this.bgvCleared = bgvCleared;
+	}
+
 	
 
 	public AddDemand(String demandId, String rr, String jobCode, String skill, String requestor, String position,
-			String hsbcSubDeptId, HSBCDept hsbcDept, String location, String reqPublishedDate, String ageing,
-			String profilesNo, String interviewedNo, String status, String staffName, String proposedJoiningDate,
-			String dcCleared, String sowSigned, String onboarded, String abort, String delayed, String reason,
-			String nextAction, String status2, String remark, String csSubDept, String plannedOnboardDate,
-			String doNumber, String hrPriority, String reqReceivedDate, String ageingReceived, String demandPriority,
-			String creatDate, String updateDate, String recruitmentCycle, String completionDay, String completionDate,
-			String onboardDate) {
+			String hsbcSubDeptId, String hsbcDept, String hsbcSubDept, String location, String reqPublishedDate,
+			String ageing, String profilesNo, String interviewedNo, String status, String staffName,
+			String proposedJoiningDate, String sowSigned, String onboarded, String abort, String delayed, String reason,
+			String remark, String csSubDept, String plannedOnboardDate, String doNumber, String hrPriority,
+			String creatDate, String updateDate, String completionDay, String completionDate, String onboardDate,
+			String bgvCleared) {
 		super();
 		this.demandId = demandId;
 		this.rr = rr;
@@ -410,6 +366,7 @@ public class AddDemand
 		this.position = position;
 		this.hsbcSubDeptId = hsbcSubDeptId;
 		this.hsbcDept = hsbcDept;
+		this.hsbcSubDept = hsbcSubDept;
 		this.location = location;
 		this.reqPublishedDate = reqPublishedDate;
 		this.ageing = ageing;
@@ -418,28 +375,22 @@ public class AddDemand
 		this.status = status;
 		this.staffName = staffName;
 		this.proposedJoiningDate = proposedJoiningDate;
-		this.dcCleared = dcCleared;
 		this.sowSigned = sowSigned;
 		this.onboarded = onboarded;
 		this.abort = abort;
 		this.delayed = delayed;
 		this.reason = reason;
-		this.nextAction = nextAction;
-		this.status2 = status2;
 		this.remark = remark;
 		this.csSubDept = csSubDept;
 		this.plannedOnboardDate = plannedOnboardDate;
 		this.doNumber = doNumber;
 		this.hrPriority = hrPriority;
-		this.reqReceivedDate = reqReceivedDate;
-		this.ageingReceived = ageingReceived;
-		this.demandPriority = demandPriority;
 		this.creatDate = creatDate;
 		this.updateDate = updateDate;
-		this.recruitmentCycle = recruitmentCycle;
 		this.completionDay = completionDay;
 		this.completionDate = completionDate;
 		this.onboardDate = onboardDate;
+		this.bgvCleared = bgvCleared;
 	}
 
 	public AddDemand() {

@@ -21,7 +21,6 @@ $(function(){
 window.onload = function(){
 	loadEmployeeInfo();
 }
-
 function dateType(){
 	$('.form_datetime').datetimepicker({
 		weekStart: 1,

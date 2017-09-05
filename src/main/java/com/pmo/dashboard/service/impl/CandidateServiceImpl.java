@@ -88,20 +88,21 @@ public class CandidateServiceImpl implements CandidateService
 						education = "高中";
 					}
 					map.put("EDUCATION", education);
-
-					String source = map.get("SOURCE");
-					if ("0".equals(source)){
-						source = "51job";
-					}else if ("1".equals(source)){
-						source = "智联招聘";
-					}else if ("2".equals(source)){
-						source = "Boss直聘";
-					}else if ("3".equals(source)){
-						source = "中华英才网";
-					}else if ("4".equals(source)){
-						source = "其他";
+					
+					String interviewStatus = map.get("INTERVIEW_STATUS");
+					if ("0".equals(interviewStatus)){
+						interviewStatus = "未推送";
+					}else if ("1".equals(interviewStatus)){
+						interviewStatus = "已推送";
+					}else if ("2".equals(interviewStatus)){
+						interviewStatus = "面试中";
+					}else if ("3".equals(interviewStatus)){
+						interviewStatus = "面试完成";
+					}else if ("4".equals(interviewStatus)){
+						interviewStatus = "已退回";
 					}
-					map.put("SOURCE", source);
+					map.put("INTERVIEW_STATUS", interviewStatus);
+					
 				}
 			}
 		} catch (Exception e) {
@@ -152,19 +153,19 @@ public class CandidateServiceImpl implements CandidateService
 					}
 					candidateInfo.setEducation(education);
 					
-					String source = candidateInfo.getSource();
-					if ("0".equals(source)){
-						source = "51job";
-					}else if ("1".equals(source)){
-						source = "智联招聘";
-					}else if ("2".equals(source)){
-						source = "Boss直聘";
-					}else if ("3".equals(source)){
-						source = "中华英才网";
-					}else if ("4".equals(source)){
-						source = "其他";
+					String interviewStatus = candidateInfo.getInterviewStatus();
+					if ("0".equals(interviewStatus)){
+						interviewStatus = "未推送";
+					}else if ("1".equals(interviewStatus)){
+						interviewStatus = "已推送";
+					}else if ("2".equals(interviewStatus)){
+						interviewStatus = "面试中";
+					}else if ("3".equals(interviewStatus)){
+						interviewStatus = "面试完成";
+					}else if ("4".equals(interviewStatus)){
+						interviewStatus = "已退回";
 					}
-					candidateInfo.setSource(source);
+					candidateInfo.setInterviewStatus(interviewStatus);
 				}
 			}
 		} catch (Exception e) {
@@ -258,6 +259,18 @@ public class CandidateServiceImpl implements CandidateService
 	public String queryCandidateResumePath(CandidateInfo candidate) 
 	{
 		return candidateMapper.queryCandidateResumePath(candidate);
+	}
+
+	@Override
+	public List<CandidateInfo> queryMyCandidateList(CandidateInfo candidate) 
+	{
+		return transferData(candidateMapper.queryMyCandidateList(candidate));
+	}
+
+	@Override
+	public int queryMyCandidateCount(CandidateInfo candidate) 
+	{
+		return candidateMapper.queryMyCandidateCount(candidate);
 	}
 
 }

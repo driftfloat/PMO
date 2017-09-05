@@ -11,4 +11,6 @@ public interface CandidateMapper
     int queryCandidateCount(CandidateInfo candidate);
     String queryCandidateResumePath(CandidateInfo candidate);
     List<LinkedHashMap<String,String>> queryExportData(CandidateInfo candidate);
+    List<CandidateInfo> queryMyCandidateList(CandidateInfo candidate);
+    int queryMyCandidateCount(CandidateInfo candidate);
 }

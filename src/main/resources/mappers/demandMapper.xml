@@ -16,24 +16,16 @@
 		<result property="profilesNo" column="PROFILES_NO" javaType="String" />
 		<result property="interviewedNo" column="INTERVIEWED_NO" javaType="String" />
 		<result property="status" column="STATUS" javaType="String" />
-		<result property="staffName" column="STAFF_NAME" javaType="String" />
+		<result property="candidateName" column="CANDIDATE_NAME" javaType="String" />
 		<result property="proposedJoiningDate" column="PROPOSED_JOINING_DATE" javaType="String" />
-		<result property="dcCleared" column="DC_CLEARED" javaType="String" />
 		<result property="sowSigned" column="SOW_SIGNED" javaType="String" />
-		<result property="onboarded" column="ONBOARDED" javaType="String" />
-		<result property="abort" column="ABORT" javaType="String" />
-		<result property="delayed" column="DELAYED" javaType="String" />
+		<result property="bgvCleared" column="BGV_CLEARED" javaType="String" />
 		<result property="reason" column="REASON" javaType="String" />
-		<result property="nextAction" column="NEXT_ACTION" javaType="String" />
-		<result property="status2" column="STATUS2" javaType="String" />
 		<result property="remark" column="REMARK" javaType="String" />
 		<result property="csSubDept" column="CS_SUBDEPT" javaType="String" />
 		<result property="plannedOnboardDate" column="PLANNED_ONBOARD_DATE" javaType="String" />
 		<result property="doNumber" column="DO_NUMBER" javaType="String" />
-		<result property="level" column="LEVEL" javaType="String" />
 		<result property="hrPriority" column="HR_PRIORITY" javaType="String" />
-		<result property="reqReceivedDate" column="REQ_RECEIVED_DATE" javaType="String" />
-		<result property="ageingReceived" column="AGEING_RECEIVED" javaType="String" />
 		<association property="hsbcDept" javaType="com.pmo.dashboard.entity.HSBCDept">
 			<id column="hsbcSubDeptId" property="HSBC_SUBDEPT_ID"/>
 			<id column="hsbcSubDeptName" property="HSBC_SUBDEPT_NAME"/>
@@ -87,6 +79,12 @@
 	<select id="queryDemandCount" parameterType="java.util.HashMap" resultType="int">
 		select count(1) 
 		from  t_demand
+		<include refid="queryWhere"/>
+	</select>
+	
+	<select id="queryAllDemand" parameterType="java.util.HashMap" resultMap="demandMap">
+		select * 
+		from t_demand
 		<include refid="queryWhere"/>
 	</select>
 </mapper>
