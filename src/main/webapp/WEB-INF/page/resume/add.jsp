@@ -401,7 +401,7 @@ var path='<%=path%>';
 	<!-- application script for Charisma demo -->
 	<script src="<%=path %>/js/charisma.js"></script>
 
-	<script type="text/javascript" src="<%=path %>/js/pmo/updateEmployeeInfo.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/resumeInput2.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/pmo/ajaxfileupload.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/pmo/resumeInput.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
