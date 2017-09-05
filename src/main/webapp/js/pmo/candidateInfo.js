@@ -68,7 +68,7 @@ function editEmployeeInfo(employeeId){
 	$("#editForm").submit();
 }
 function updateResumeInfo(candidateId){
-	$("#editForm").attr("action",path+"/service/resume/updateResume.html");
+	$("#editForm").attr("action",path+"/service/resume/toUpdateResume.html");
 	$("#candidateId").val(candidateId);
 	$("#editForm").submit();
 }

@@ -34,9 +34,10 @@ public class ResumeController {
 	@Resource
 	private ResumeService resumeService;
 	
-	@RequestMapping("/updateResume")
-	public String updateResume(String candidateId){
-		System.out.println(candidateId);
+	@RequestMapping("/toUpdateResume")
+	public String updateResume(String candidateId,Model model){
+		
+		//System.out.println(candidateId);
 		return null;
 		
 	}

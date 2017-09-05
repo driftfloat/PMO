@@ -130,7 +130,7 @@ var path='<%=path%>';
 										<label class="col-lg-2 control-label">Education</label>
 										<div class="col-lg-4">
 											<select class="form-control" id="education" name="education" data-bv-notempty>
-												<option value="">-- option--</option>
+												<option value="">-- Option--</option>
 												<option value="0">博士</option>
 												<option value="1">研究生</option>
 												<option value="2">本科</option>
@@ -155,7 +155,7 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" id="major" name="major" data-bv-notempty
 												>
-												<option value="">-- option--</option>
+												<option value="">-- Option--</option>
 												<option value="0"> Yes</option>
 												<option value="1"> No</option>
 											</select>
@@ -176,7 +176,7 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" name="skill" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="skill" data-bv-group=".group">
-												<option value="">-- option--</option>
+												<option value="">-- Option--</option>
 											</select>
 										</div>
 										</div>
@@ -200,7 +200,7 @@ var path='<%=path%>';
 										<label class="col-lg-2 control-label">English Level</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="English_level" id="English_level" data-bv-notempty>
-												<option value="">-- option --</option>
+												<option value="">-- Option --</option>
 												<option value="0">非工作语言</option>
 												<option value="1">工作语言</option>
 											</select>
@@ -210,12 +210,13 @@ var path='<%=path%>';
 										<label class="col-lg-2 control-label">Candidate Status</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="candidate_status" id="candidate_status" data-bv-notempty>
-												<option value="">-- option --</option>
+												<option value="">-- Option --</option>
 												<option value="0">招聘中</option>
 												<option value="1">offer中</option>
 												<option value="2">已入职</option>
 												<option value="3">闲置</option>
 												<option value="4">暂不关注</option>
+												<option value="6">入职它司</option>
 											</select>
 										</div>
 										</div>
@@ -250,7 +251,7 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" name="source" data-bv-notempty
 											data-bv-notempty-message="请选择简历来源" id="source" data-bv-group=".group">
-											<option value="">-- option--</option>
+											<option value="">-- Option--</option>
 										</select>
 										</div>
 										</div>
@@ -319,7 +320,7 @@ var path='<%=path%>';
 										<label class="col-sm-2 control-label">Upload Resume</label>
 										<div class="col-sm-4">
 											<input type="hidden" name="resume_path" id="resume_path">
-											<span style="display: block;"><input  type="file" name="file" id="uploadId" style="display: inline;"/>
+											<span style="display: block;"><input  type="file" name="file" id="uploadId" style="display: inline;width:200px;"/>
 											<input style="display: inline;" type="button" id = "upload" value="UPLOAD"/></span>
 										</div>
 									</div>

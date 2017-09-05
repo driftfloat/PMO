@@ -58,6 +58,13 @@ public class EmployeeController {
     private HSBCProjectService hsbcProjectService;
 
 	
+    @RequestMapping("/welcome")
+    public String welcome(final HttpServletRequest request,
+            final HttpServletResponse response)
+    {
+        return "welcome";
+    }
+	
     @RequestMapping("/index")
     public String index(final HttpServletRequest request,
             final HttpServletResponse response)
