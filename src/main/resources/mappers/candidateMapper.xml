@@ -31,6 +31,7 @@
 		<result property="oldCompany" 		column="OLD_COMPANY" 		javaType="String" />
 		<result property="remark" 			column="REMARK" 			javaType="String" />
 		<result property="createUser" 		column="CREATE_USER" 		javaType="String" />
+		<result property="interviewStatus" 	column="INTERVIEW_STATUS" 	javaType="String" />
 	</resultMap>
 	
 	<select id="queryCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
@@ -42,6 +43,7 @@
         	t_user b 
         on a.LOCK_PERSION = b.USER_ID
         WHERE 
+			CANDIDATE_STATUS not in (4,5,6) 
         	<include refid="candidateWherePart"/>
 		ORDER BY CANDIDATE_STATUS,EXPERIENCE_YEARS desc,EDUCATION,MAJOR_STATUS,CANDIDATE_ID 
         LIMIT #{currentPage},#{pageDataCount};
@@ -56,6 +58,7 @@
         	t_user b 
         on a.LOCK_PERSION = b.USER_ID
         WHERE 
+			CANDIDATE_STATUS not in (4,5,6) 
         	<include refid="candidateWherePart"/>
 			;
 	</select>
@@ -85,8 +88,29 @@
         ORDER BY CANDIDATE_STATUS,EXPERIENCE_YEARS desc,EDUCATION,MAJOR_STATUS,CANDIDATE_ID;
 	</select>
 	
+	<select id="queryMyCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
+	    SELECT 
+	    	a.* 
+        FROM 
+        	t_candidate a 
+        WHERE 
+			a.LOCK_PERSION=#{lockPerson} and CANDIDATE_STATUS not in (3,4,5,6) 
+        	<include refid="candidateWherePart"/>
+		ORDER BY CANDIDATE_STATUS,INTERVIEW_STATUS,EDUCATION,MAJOR_STATUS,CANDIDATE_ID 
+        LIMIT #{currentPage},#{pageDataCount};
+	</select>
+	<select id="queryMyCandidateCount" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="int" >
+	    SELECT 
+	    	count(0) 
+        FROM 
+        	t_candidate a 
+        WHERE 
+			a.LOCK_PERSION=#{lockPerson} and CANDIDATE_STATUS not in (3,4,5,6) 
+        	<include refid="candidateWherePart"/>
+			;
+	</select>
+	
 	<sql id="candidateWherePart">
-		CANDIDATE_STATUS != 5 
 		<if test="candidateName != null and candidateName != ''">
 			AND CANDIDATE_NAME = #{candidateName}
 		</if>
@@ -122,6 +146,9 @@
 		</if>
 		<if test="source != null and source != ''">
 			AND SOURCE = #{source}
+		</if>
+		<if test="interviewStatus != null and interviewStatus != ''">
+			AND INTERVIEW_STATUS = #{interviewStatus}
 		</if>
     </sql>
 	

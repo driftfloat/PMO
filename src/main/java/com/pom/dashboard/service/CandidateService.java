@@ -16,4 +16,8 @@ public interface CandidateService
     List<LinkedHashMap<String, String>> queryExportData(CandidateInfo candidate);
     
     void transferExportData( List<LinkedHashMap<String,String>> candidateDatalist,List<String> conditionList,File file);
+    
+    List<CandidateInfo> queryMyCandidateList(CandidateInfo candidate);
+
+	int queryMyCandidateCount(CandidateInfo candidate);
 }

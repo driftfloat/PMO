@@ -2,6 +2,7 @@ var currentPage = "";//当前页码
 var pageCount = "";//共几页 
 var exportdata;
 $(function(){
+	loadCandidateList();	
 	loadCandidateSkillInfo();
 })
 
@@ -49,6 +50,7 @@ function exportCondition(){
 			}
 		}
 	})
+	
 }
 
 function exportData(){
@@ -60,9 +62,9 @@ function exportData(){
 	$("[type='checkbox']").attr("checked","checked");
 }
 
-function updateResumeInfo(candidateId){
-	$("#editForm").attr("action",path+"/service/resume/updateResume.html");
-	$("#candidateId").val(candidateId);
+function editEmployeeInfo(employeeId){
+	$("#editForm").attr("action",path+"/service/employee/updateEmployeeInfo.html");
+	$("#employeeId").val(employeeId);
 	$("#editForm").submit();
 }
 
@@ -95,7 +97,7 @@ function loadCandidateList(pageState)
 	candidate.append("currentPage",currentPage);
 	candidate.append("pageCount",pageCount);
 	$.ajax({
-		url:path+"/service/candidate/queryCandidateList",
+		url:path+"/service/candidate/queryMyCandidateList",
 		dataType:"json",
 		async:true,
 		data:candidate,
@@ -120,32 +122,51 @@ function loadCandidateList(pageState)
 				tr.appendTo(tbody);
 				$("<td><a href='javascript:void(0);'" +
 						"onclick=viewCandidataInfo('"+result.data[i].candidateId+"')>" +
-						result.data[i].candidateName+"</a></td>" +
-				"<td>"+ result.data[i].candidateSex+ "</td>" +
-				"<td>"+ result.data[i].candidateAge+ "</td>" +
-				"<td>"+ result.data[i].candidateTel+ "</td>" +
-				"<td>"+ result.data[i].email+ "</td>" +
-				"<td>"+ result.data[i].source+ "</td>" +
-				"<td>"+ result.data[i].candidateStatus+ "</td>" +
-				"<td>"+ result.data[i].education+ "</td>" +
-				"<td>"+ result.data[i].experienceYears+ "</td>" +
-				"<td>"+ result.data[i].majorStatus+ "</td>" +
-				"<td>"+ result.data[i].englishLevel+ "</td>" +
-				"<td>"+ result.data[i].skill+ "</td>" +
-				"<td>"+ result.data[i].userName+ "</td>").appendTo(tr);
-				
-				if(result.data[i].candidateStatus == '闲置中'){
+						result.data[i].candidateName+"</a></td>"+
+				"<td>"+ result.data[i].candidateSex+ "</td>"+
+				"<td>"+ result.data[i].candidateAge+ "</td>"+
+				"<td>"+ result.data[i].candidateTel+ "</td>"+
+				"<td>"+ result.data[i].email+ "</td>"+
+				"<td>"+ result.data[i].source+ "</td>"+
+				"<td>"+ result.data[i].candidateStatus+ "</td>"+
+				"<td>"+ result.data[i].education+ "</td>"+
+				"<td>"+ result.data[i].experienceYears+ "</td>"+
+				"<td>"+ result.data[i].majorStatus+ "</td>"+
+				"<td>"+ result.data[i].englishLevel+ "</td>"+
+				"<td>"+ result.data[i].skill+ "</td>"+
+				"<td>"+ result.data[i].interviewStatus+ "</td>").appendTo(tr);
+				if(result.data[i].candidateStatus == '招聘中'){
+					if(result.data[i].interviewStatus == '未推送'){
+						$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+								"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+								"onclick=pushCandidateToDept('"+result.data[i].candidateId+"')>PUSH</a>" +
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"')>FEEDBACK</a>" +
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
+						"</td>").appendTo(tr);
+					}
+					if(result.data[i].interviewStatus == '已推送'){
+						$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+								"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+								"onclick=backCandidateToDept('"+result.data[i].candidateId+"')>BACK</a>" +
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"')>FEEDBACK</a>" +
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
+						"</td>").appendTo(tr);
+					}
+				}else{
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-						"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
+							"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
+						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"')>FEEDBACK</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
 					"</td>").appendTo(tr);
-				}else{
-					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
-					"</td>").appendTo(tr);
 				}
-				
 			}
 			$("#candidateList").append("</tbdoy>");
 			currentPage = parseInt(result.pageInfo.currentPage);
