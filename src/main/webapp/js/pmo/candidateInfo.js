@@ -2,6 +2,7 @@ var currentPage = "";//当前页码
 var pageCount = "";//共几页 
 var exportdata;
 $(function(){
+	loadCandidateList(); 
 	loadCandidateSkillInfo();
 })
 

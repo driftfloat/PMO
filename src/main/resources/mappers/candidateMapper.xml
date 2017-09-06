@@ -32,8 +32,17 @@
 		<result property="remark" 			column="REMARK" 			javaType="String" />
 		<result property="createUser" 		column="CREATE_USER" 		javaType="String" />
 		<result property="interviewStatus" 	column="INTERVIEW_STATUS" 	javaType="String" />
+		<result property="csSubdeptName" 	column="CS_SUBDEPT_NAME" 	javaType="String" />
 	</resultMap>
-	
+	<resultMap id="candidatePushMap" type="com.pmo.dashboard.entity.CandidatePush">
+		<id 	property="pushId" 		column="PUSH_ID" 		javaType="String" />
+		<result property="candidateId" 	column="CANDIDATE_ID" 	javaType="String" />
+		<result property="csSubDeptId" 	column="CS_SUBDEPT_ID" 	javaType="String" />
+		<result property="pushUserId" 	column="PUSH_USER_ID" 	javaType="String" />
+		<result property="pushStatus" 	column="PUSH_STATUS" 	javaType="String" />
+		<result property="pushDate" 	column="PUSH_DATE" 		javaType="String" />
+		
+	</resultMap>
 	<select id="queryCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
 	    SELECT 
 	    	a.*,b.USER_NAME 
@@ -53,10 +62,7 @@
 	    SELECT 
 	    	count(0) 
         FROM 
-        	t_candidate a
-        left join 
-        	t_user b 
-        on a.LOCK_PERSION = b.USER_ID
+        	t_candidate a 
         WHERE 
 			CANDIDATE_STATUS not in (4,5,6) 
         	<include refid="candidateWherePart"/>
@@ -90,15 +96,22 @@
 	
 	<select id="queryMyCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
 	    SELECT 
-	    	a.* 
+	    	a.*,c.CS_SUBDEPT_NAME 
         FROM 
         	t_candidate a 
+        LEFT JOIN 
+        	t_candidate_push b
+        ON a.CANDIDATE_ID = b.CANDIDATE_ID 
+        LEFT JOIN 
+        	t_cs_dept c
+        ON b.CS_SUBDEPT_ID = c.CS_SUBDEPT_ID 
         WHERE 
 			a.LOCK_PERSION=#{lockPerson} and CANDIDATE_STATUS not in (3,4,5,6) 
         	<include refid="candidateWherePart"/>
-		ORDER BY CANDIDATE_STATUS,INTERVIEW_STATUS,EDUCATION,MAJOR_STATUS,CANDIDATE_ID 
+		ORDER BY CANDIDATE_STATUS,INTERVIEW_STATUS,c.CS_SUBDEPT_NAME,MAJOR_STATUS,CANDIDATE_ID 
         LIMIT #{currentPage},#{pageDataCount};
 	</select>
+	
 	<select id="queryMyCandidateCount" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="int" >
 	    SELECT 
 	    	count(0) 
@@ -109,7 +122,28 @@
         	<include refid="candidateWherePart"/>
 			;
 	</select>
-	
+	<select id="queryCusDeptInfo" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="java.util.HashMap" >
+	    SELECT 
+	    	CS_SUBDEPT_ID 	as csSubDeptId,
+	    	CS_SUBDEPT_NAME as csSubDeptName
+        FROM 
+        	t_cs_dept a 
+        group by CS_SUBDEPT_ID,CS_SUBDEPT_NAME 
+        ORDER BY CS_SUBDEPT_NAME;
+	</select>
+	<select id="queryCandidateForId" parameterType="java.lang.String" resultMap="candidateMap" >
+	    SELECT * FROM t_candidate a WHERE CANDIDATE_ID = #{candidateId};
+	</select>
+	<update id="updateCandidateInterviewStatus" parameterType="com.pmo.dashboard.entity.CandidateInfo">
+	    update t_candidate set INTERVIEW_STATUS = #{interviewStatus} WHERE CANDIDATE_ID = #{candidateId}; 
+	</update>
+	<insert id="insertCandidatePushData" parameterType="com.pmo.dashboard.entity.CandidatePush">
+	    insert into t_candidate_push (PUSH_ID,CANDIDATE_ID,CS_SUBDEPT_ID,PUSH_USER_ID,PUSH_STATUS,PUSH_DATE)
+	    values (#{pushId},#{candidateId},#{csSubDeptId},#{pushUserId},#{pushStatus},#{pushDate})
+	</insert>
+	<update id="updateCandidatePushStatus" parameterType="com.pmo.dashboard.entity.CandidatePush">
+	    update t_candidate_push set PUSH_STATUS = #{pushStatus} WHERE CANDIDATE_ID = #{candidateId} and PUSH_USER_ID = #{pushUserId}; 
+	</update>
 	<sql id="candidateWherePart">
 		<if test="candidateName != null and candidateName != ''">
 			AND CANDIDATE_NAME = #{candidateName}
