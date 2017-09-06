@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.pmo.dashboard.dao.CandidateMapper;
 import com.pmo.dashboard.entity.CandidateInfo;
+import com.pmo.dashboard.entity.CandidatePush;
 import com.pom.dashboard.service.CandidateService;
 
 import jxl.Workbook;
@@ -271,6 +272,47 @@ public class CandidateServiceImpl implements CandidateService
 	public int queryMyCandidateCount(CandidateInfo candidate) 
 	{
 		return candidateMapper.queryMyCandidateCount(candidate);
+	}
+
+	@Override
+	public List<Map<String,String>> queryCusDeptInfo() 
+	{
+		return candidateMapper.queryCusDeptInfo();
+	}
+
+	@Override
+	public CandidateInfo queryCandidateForId(String candidateId) 
+	{
+		return candidateMapper.queryCandidateForId(candidateId);
+	}
+
+	@Override
+	public boolean updateCandidateInterviewStatus(CandidateInfo candidate) 
+	{
+		if(candidateMapper.updateCandidateInterviewStatus(candidate) > 0)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean insertCandidatePushData(CandidatePush candidatePush) 
+	{
+		if(candidateMapper.insertCandidatePushData(candidatePush) > 0)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateCandidatePushStatus(CandidatePush candidatePush) {
+		if(candidateMapper.updateCandidatePushStatus(candidatePush) > 0)
+		{
+			return true;
+		}
+		return false;
 	}
 
 }

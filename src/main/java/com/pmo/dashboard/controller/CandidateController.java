@@ -29,7 +29,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmo.dashboard.entity.CandidateInfo;
+import com.pmo.dashboard.entity.CandidatePush;
 import com.pmo.dashboard.entity.PageCondition;
+import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.CandidateService;
@@ -222,8 +224,6 @@ public class CandidateController
     	return "2";
     }
     
-    
-    
     @RequestMapping("/getMyCandidate")
     public String getMyCandidate(final HttpServletRequest request,
             final HttpServletResponse response)
@@ -235,8 +235,8 @@ public class CandidateController
     @ResponseBody
     public Object queryMyCandidateList(CandidateInfo candidate,HttpServletRequest request)
     {
-    	String lockPerson = (String) request.getSession().getAttribute("userId");
-    	lockPerson = "1";//临时测试用，避免为空。
+    	User user =  (User)request.getSession().getAttribute("loginUser");
+    	String lockPerson = user.getUserId();
     	if(null == lockPerson || "".equals(lockPerson))
     	{
     		return null;
@@ -279,6 +279,98 @@ public class CandidateController
         result.put("data", list);
         result.put("pageInfo", page);
         return result;
+    }
+    @RequestMapping("/loadCusDeptInfo")
+    @ResponseBody
+    public Object loadCusDeptInfo()
+    {
+    	return candidateService.queryCusDeptInfo();
+    }
+    @RequestMapping("/pushCandidateOk")
+    @ResponseBody
+    public String pushCandidateOk(CandidatePush candidatePush,HttpServletRequest request)
+    {
+    	String candidateId = candidatePush.getCandidateId();
+    	//判断此候选人是否可以被推送
+    	CandidateInfo candiadate = candidateService.queryCandidateForId(candidateId);
+    	if(null == candiadate)
+    	{
+    		return "0";
+    	}
+    	if(!"0".equals(candiadate.getCandidateStatus()))
+    	{
+    		return "1";
+    	}
+    	if("1".equals(candiadate.getInterviewStatus()) || "2".equals(candiadate.getInterviewStatus()))
+    	{
+    		return "2";
+    	}
+    	//更改候选人状态
+    	CandidateInfo candidate = new CandidateInfo();
+    	candidate.setCandidateId(candidateId);
+    	candidate.setInterviewStatus("1");
+    	boolean updateFlag = candidateService.updateCandidateInterviewStatus(candidate);
+    	if(!updateFlag)
+    	{
+    		return "3";
+    	}
+    	//t_candidate_push表新增一条推送记录。
+    	String pushId = Utils.getUUID();
+    	candidatePush.setPushId(pushId);
+    	
+    	User user =  (User)request.getSession().getAttribute("loginUser");
+    	candidatePush.setPushUserId(user.getUserId());
+    	
+    	candidatePush.setPushStatus("0");//0表示进行中，1表示完成状态
+    	
+        candidatePush.setPushDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+    	
+    	boolean insertFlag = candidateService.insertCandidatePushData(candidatePush);
+    	if(!insertFlag)
+    	{
+    		return "4";
+    	}
+    	return "5";
+    }
+    
+    @RequestMapping("/backCandidateToDept")
+    @ResponseBody
+    public String backCandidateToDept(HttpServletRequest request)
+    {
+    	String candidateId = request.getParameter("candidateId");
+    	//判断此候选人状态
+    	CandidateInfo candiadate = candidateService.queryCandidateForId(candidateId);
+    	if(null == candiadate)
+    	{
+    		return "0";
+    	}
+    	if(!"0".equals(candiadate.getCandidateStatus()) || !"1".equals(candiadate.getInterviewStatus()))
+    	{
+    		return "1";
+    	}
+    	
+    	//更改候选人状态
+    	CandidateInfo candidate = new CandidateInfo();
+    	candidate.setCandidateId(candidateId);
+    	candidate.setInterviewStatus("0");
+    	boolean updateFlag = candidateService.updateCandidateInterviewStatus(candidate);
+    	if(!updateFlag)
+    	{
+    		return "2";
+    	}
+    	//t_candidate_push表新增一条推送记录。
+    	User user =  (User)request.getSession().getAttribute("loginUser");
+    	CandidatePush candidatePush = new CandidatePush();
+    	candidatePush.setCandidateId(candidateId);
+    	candidatePush.setPushUserId(user.getUserId());   	
+    	candidatePush.setPushStatus("1");//0表示进行中，1表示完成状态
+    	    	
+    	boolean insertFlag = candidateService.updateCandidatePushStatus(candidatePush);
+    	if(!insertFlag)
+    	{
+    		return "2";
+    	}
+    	return "3";
     }
     
 }

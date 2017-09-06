@@ -62,9 +62,98 @@ function exportData(){
 	$("[type='checkbox']").attr("checked","checked");
 }
 
-function editEmployeeInfo(employeeId){
-	$("#editForm").attr("action",path+"/service/employee/updateEmployeeInfo.html");
-	$("#employeeId").val(employeeId);
+function pushCandidateToDept(candidateId,candidateName){	
+	exportdata = new FormData(document.getElementById("candidateForm"));
+	$('#myCandidatePushModal').on('show.bs.modal', function (e) {
+		loadCusDeptInfo();
+		$('#pushCandidateId').val(candidateId);
+		$('#pushCandidateName').val(candidateName);
+	});
+	$('#myCandidatePushModal').modal('show');	
+};
+function loadCusDeptInfo(){
+	$.ajax({
+		url:path+'/service/candidate/loadCusDeptInfo',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(list){
+			for(var i = 0;i<list.length;i++){
+				$("#csSubdeptName").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csSubDeptName+"</option>");
+			}
+		}
+	})
+}
+
+function pushCandidateOk(){
+	var csSubDeptId = $("#csSubdeptName").find("option:selected").val();	
+	if(csSubDeptId == ''){
+		alert("请选择推送部门！");
+		return;
+	}
+	var candidatePush = new FormData();
+	candidatePush.append("csSubDeptId",csSubDeptId);
+	candidatePush.append("candidateId",$("#pushCandidateId").val());
+	
+	$.ajax({
+		url:path+'/service/candidate/pushCandidateOk',
+		dataType:"json",
+		data:candidatePush,
+		async:true,
+		cache:false,
+		processData:false,
+        contentType:false,
+		type:"post",
+		success:function(flag){
+			if(flag == '5'){
+				alert("推送成功！");
+			}else if(flag == '0'){
+				alert("推送失败！此候选人不存在，请刷新页面重试！");
+			}else if(flag == '1'){
+				alert("推送失败！此候选人状态不在招聘中！不能推送！");
+			}else if(flag == '2'){
+				alert("推送失败！请勿重复推送！");
+			}else if(flag == '3'){
+				alert("推送失败！更新候选人状态失败，请刷新页面重试！");
+			}else if(flag == '4'){
+				alert("推送失败！新增推送候选人数据失败，请刷新页面重试！");
+			}
+			$('#myCandidatePushModal').modal('hide');	
+			loadCandidateList();
+		}
+	})
+}
+
+function backCandidateToDept(candidateId){
+	if(confirm("确定要撤回吗?"))
+	{
+		$.ajax({
+			url:path+'/service/candidate/backCandidateToDept',
+			dataType:"json",
+			data:{"candidateId":candidateId},
+			async:true,
+			cache:false,
+			type:"post",
+			success:function(flag){
+				if(flag == '3'){
+					alert("撤回成功！");
+				}else if(flag == '0'){
+					alert("撤回失败！此候选人不存在，请刷新页面重试！");
+				}else if(flag == '1'){
+					alert("撤回失败！此候选人当前状态不能撤回！");
+				}else if(flag == '2'){
+					alert("撤回失败！更新候选人状态失败，请刷新页面重试！");
+				}	
+				loadCandidateList();
+			}
+		})
+	}
+}
+
+function updateResumeInfo(candidateId){
+	$("#editForm").attr("action",path+"/service/resume/updateResume.html");
+	$("#candidateId").val(candidateId);
 	$("#editForm").submit();
 }
 
@@ -137,10 +226,11 @@ function loadCandidateList(pageState)
 				"<td>"+ result.data[i].interviewStatus+ "</td>").appendTo(tr);
 				if(result.data[i].candidateStatus == '招聘中'){
 					if(result.data[i].interviewStatus == '未推送'){
-						$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
+						$("<td></td>"+
+							"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+								"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=pushCandidateToDept('"+result.data[i].candidateId+"')>PUSH</a>" +
+								"onclick=pushCandidateToDept('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>PUSH</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"')>FEEDBACK</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
@@ -148,8 +238,9 @@ function loadCandidateList(pageState)
 						"</td>").appendTo(tr);
 					}
 					if(result.data[i].interviewStatus == '已推送'){
-						$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
+						$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
+							"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+								"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=backCandidateToDept('"+result.data[i].candidateId+"')>BACK</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
@@ -159,8 +250,9 @@ function loadCandidateList(pageState)
 						"</td>").appendTo(tr);
 					}
 				}else{
-					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=editEmployeeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
+					$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
+						"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"')>FEEDBACK</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +

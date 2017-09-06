@@ -62,7 +62,7 @@ var path='<%=path%>';
 									<i class="glyphicon glyphicon-user">&nbsp;CANDIDATE&nbsp;LIST</i> 
 								</h2>
 							</div>
-							<div id="employeeInfo" class="box-content">
+							<div id="candidateInfo" class="box-content">
 							    <form id="candidateForm" method="post" class="form-horizontal">
 									<div class="group">
 										<label class="col-sm-2 control-label">NAME</label>
@@ -240,6 +240,7 @@ var path='<%=path%>';
 												<th>ENGLISH LEVEL</th>
 												<th>SKILL</th>
 												<th>INTERVIEW STATUS</th>
+												<th>SUBDEPT NAME</th>
 												<th>OPERATION</th>
 											</tr>
 										</thead>
@@ -337,7 +338,55 @@ var path='<%=path%>';
 			</div>
 			<!--/span-->
 		</div>
-
+		<div class="modal fade" id="myCandidatePushModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="box-header well" data-original-title="">
+						<h2>
+							<i class="glyphicon glyphicon-user"></i> 推送候选人
+						</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
+								class="glyphicon glyphicon-chevron-up"></i></a> <a
+								class="btn btn-round btn-default" href="#" data-dismiss="modal">
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</div>
+					</div>
+					<div id="excelCheckBox" class="box-content">
+					 <form id="pushCandidateForm" method="post" class="form-horizontal">
+						<div class="group">
+							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
+							<div class="col-sm-4" style="width:60%;">
+								<input type="text" class="form-control" name="pushCandidateName" id="pushCandidateName" disabled="disabled" />
+								<input type="hidden"  name="pushCandidateId" id="pushCandidateId" />
+							</div>
+						</div>
+						<br/><br/><br/>
+						<div class="group">
+							<label class="col-lg-2 control-label" style="width:30%;">SUBDEPT NAME</label>
+							<div class="col-lg-4" style="width:60%;">
+								<select class="form-control" name="csSubdeptName" id="csSubdeptName" data-bv-group=".group">
+									<option value="">--Option--</option>
+								</select>
+							</div>
+						</div>
+						<br/><br/><br/>
+						<div class="center">
+							<a class="btn btn-success" href="#" onClick="pushCandidateOk()"> 
+								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
+							</a> &nbsp;&nbsp;&nbsp;
+							<a class="btn btn-info" href="#" data-dismiss="modal"> 
+								<i class="glyphicon glyphicon-remove icon-white"></i> 取消
+							</a>
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!--/span-->
+		</div>
 		<c:import url="/service/manage/footer" />
 
 	</div>

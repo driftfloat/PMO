@@ -35,6 +35,7 @@ public class CandidateInfo extends PageCondition
 	private String workYearsEnd;
 	private String exportDataColumn;
 	private String exportPageColumn;
+	private String csSubdeptName;
 
 	private String pageState;
 	
@@ -241,6 +242,12 @@ public class CandidateInfo extends PageCondition
 	}
 	public void setInterviewStatus(String interviewStatus) {
 		this.interviewStatus = interviewStatus;
+	}
+	public String getCsSubdeptName() {
+		return csSubdeptName;
+	}
+	public void setCsSubdeptName(String csSubdeptName) {
+		this.csSubdeptName = csSubdeptName;
 	}
 	
 }
