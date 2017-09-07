@@ -20,4 +20,5 @@ public interface CandidateMapper
     int updateCandidateInterviewStatus(CandidateInfo candidate);
     int insertCandidatePushData(CandidatePush candidatePush);
     int updateCandidatePushStatus(CandidatePush candidatePush);
+    boolean updateCandidateStatus(CandidateInfo candidate);
 }

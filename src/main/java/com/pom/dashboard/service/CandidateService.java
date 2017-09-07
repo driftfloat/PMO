@@ -33,4 +33,6 @@ public interface CandidateService
 	boolean insertCandidatePushData(CandidatePush candidatePush);
 	
 	boolean updateCandidatePushStatus(CandidatePush candidatePush);
+	
+	boolean updateCandidateStatus(CandidateInfo candidate);
 }

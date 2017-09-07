@@ -12,6 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -131,6 +132,11 @@ public class CandidateController
         	  String tempfileName =  Constants.PATH+""+Utils.getUUID()+".xls";
               
               // 创建可写入的Excel工作簿           
+        	  File path=new File( Constants.PATH);
+        	  if(!path.exists())
+        	  {
+        		  path.mkdirs();
+        	  }
               File file=new File(tempfileName);
               if (!file.exists()) {
                   file.createNewFile();
@@ -149,9 +155,12 @@ public class CandidateController
             fis.close();
             // 清空response
             response.reset();
-            // 设置response的Header
-            response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
-            //response.setContentType("application/octet-stream");
+
+	        String userAgent = request.getHeader("User-Agent");  
+	        byte[] bytes = userAgent.contains("MSIE") ? fileName.getBytes() : fileName.getBytes("UTF-8"); // name.getBytes("UTF-8")处理safari的乱码问题  
+	        fileName = new String(bytes, "ISO-8859-1"); // 各浏览器基本都支持ISO编码  
+	        response.setHeader("Content-disposition", String.format("attachment; filename=\"%s\"", fileName)); // 文件名外的双引号处理firefox的空格截断问题  
+			
             response.setContentType("application/vnd.ms-excel");
             response.addHeader("Content-Length", "" + file.length());
             OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
@@ -201,10 +210,13 @@ public class CandidateController
 			fis.close();
 			// 清空response
 			response.reset();
-			// 设置response的Header
-			response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
-			//response.setContentType("application/octet-stream");
-//			response.setContentType("application/vnd.ms-excel");
+			
+	        String userAgent = request.getHeader("User-Agent");  
+	        byte[] bytes = userAgent.contains("MSIE") ? fileName.getBytes() : fileName.getBytes("UTF-8"); // name.getBytes("UTF-8")处理safari的乱码问题  
+	        fileName = new String(bytes, "ISO-8859-1"); // 各浏览器基本都支持ISO编码  
+	        response.setHeader("Content-disposition", String.format("attachment; filename=\"%s\"", fileName)); // 文件名外的双引号处理firefox的空格截断问题  
+			
+			response.setContentType("application/octet-stream");
 			response.addHeader("Content-Length", "" + file.length());
 			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
 			
@@ -371,6 +383,12 @@ public class CandidateController
     		return "2";
     	}
     	return "3";
+    }
+    @RequestMapping("/updateCandidateStatusOk")
+    @ResponseBody
+    public boolean updateCandidateStatusOk(CandidateInfo candidate,HttpServletRequest request)
+    {    	
+    	return candidateService.updateCandidateStatus(candidate);
     }
     
 }

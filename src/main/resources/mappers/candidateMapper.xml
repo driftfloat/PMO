@@ -90,6 +90,7 @@
         	t_user c 
         on a.CREATE_USER = c.USER_ID
         WHERE 
+        	CANDIDATE_STATUS not in (4,5,6) 
         	<include refid="candidateWherePart"/>
         ORDER BY CANDIDATE_STATUS,EXPERIENCE_YEARS desc,EDUCATION,MAJOR_STATUS,CANDIDATE_ID;
 	</select>
@@ -144,6 +145,10 @@
 	<update id="updateCandidatePushStatus" parameterType="com.pmo.dashboard.entity.CandidatePush">
 	    update t_candidate_push set PUSH_STATUS = #{pushStatus} WHERE CANDIDATE_ID = #{candidateId} and PUSH_USER_ID = #{pushUserId}; 
 	</update>
+	<update id="updateCandidateStatus" parameterType="com.pmo.dashboard.entity.CandidateInfo">
+	    update t_candidate set CANDIDATE_STATUS = #{candidateStatus} WHERE CANDIDATE_ID = #{candidateId}; 
+	</update>
+	
 	<sql id="candidateWherePart">
 		<if test="candidateName != null and candidateName != ''">
 			AND CANDIDATE_NAME = #{candidateName}
