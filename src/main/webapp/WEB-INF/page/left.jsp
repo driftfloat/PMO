@@ -51,13 +51,11 @@
                               
                             </ul>
                         </li>
+                          <li><a class="ajax-link" href="<%=path %>/service/candidate/getCandidate.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;候选人列表</span></a>
+                        </li>
                         
-
-                        
-
-                         
-
-
+                          <li><a class="ajax-link" href="<%=path %>/service/candidate/interviewFeedBackInfo.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;面试官反馈</span></a>
+                        </li>
                          
                     </ul>
                 </div>

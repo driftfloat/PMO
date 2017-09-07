@@ -21,4 +21,10 @@ public interface CandidateMapper
     int insertCandidatePushData(CandidatePush candidatePush);
     int updateCandidatePushStatus(CandidatePush candidatePush);
     boolean updateCandidateStatus(CandidateInfo candidate);
+  
+	List<CandidateInfo> queryinterviewFeedBack(CandidateInfo candidate);
+
+	int queryinterviewFeedBackCount(CandidateInfo candidate);
+
+	int updateInterviewFeedBack(CandidateInfo candidate);
 }

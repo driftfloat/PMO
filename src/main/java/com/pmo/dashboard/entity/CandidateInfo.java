@@ -36,7 +36,36 @@ public class CandidateInfo extends PageCondition
 	private String exportDataColumn;
 	private String exportPageColumn;
 	private String csSubdeptName;
+	private String interviewFeedBack;
+	private String interviewId;
+	private String csSubDept;
+	private String interviewDate;
+	
+	public String getInterviewDate() {
+		return interviewDate;
+	}
+	public void setInterviewDate(String interviewDate) {
+		this.interviewDate = interviewDate;
+	}
+	public String getCsSubDept() {
+		return csSubDept;
+	}
+	public void setCsSubDept(String csSubDept) {
+		this.csSubDept = csSubDept;
+	}
 
+	public String getInterviewId() {
+		return interviewId;
+	}
+	public void setInterviewId(String interviewId) {
+		this.interviewId = interviewId;
+	}
+	public String getInterviewFeedBack() {
+		return interviewFeedBack;
+	}
+	public void setInterviewFeedBack(String interviewFeedBack) {
+		this.interviewFeedBack = interviewFeedBack;
+	}
 	private String pageState;
 	
 	public String getCandidateId() {
