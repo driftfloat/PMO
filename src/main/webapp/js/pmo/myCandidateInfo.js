@@ -62,8 +62,53 @@ function exportData(){
 	$("[type='checkbox']").attr("checked","checked");
 }
 
+function updateCandidateStatus(candidateId,candidateName){	
+	$('#myCandidateStatusModal').on('show.bs.modal', function (e) {
+		$('#updateCandidateStatusId').val(candidateId);
+		$('#updateCandidateStatusName').val(candidateName);
+		$("#updateMyCandidateStatus").val("");
+//		var status = $("#updateMyCandidateStatus");
+//		for(i = 0 ;i <= status.options.length; i++){
+//			if(status.options[i].text == candidateStatus){
+//				status.options[i].selected = true;
+//				break;
+//			}
+//		}
+	});
+	$('#myCandidateStatusModal').modal('show');	
+	
+};
+function updateCandidateStatusOk(){
+	var candidateStatus = $("#updateMyCandidateStatus").find("option:selected").val();	
+	if(candidateStatus == ''){
+		alert("请选择要更新状态！");
+		return;
+	}
+	var updateMycandidateStatus = new FormData();
+	updateMycandidateStatus.append("candidateId",$("#updateCandidateStatusId").val());
+	updateMycandidateStatus.append("candidateStatus",candidateStatus);
+	
+	$.ajax({
+		url:path+'/service/candidate/updateCandidateStatusOk',
+		dataType:"json",
+		data:updateMycandidateStatus,
+		async:true,
+		cache:false,
+		processData:false,
+        contentType:false,
+		type:"post",
+		success:function(flag){
+			if(flag){
+				alert("更新成功！");
+			}else{
+				alert("更新失败！请刷新页面重试！");
+			}
+			$('#myCandidateStatusModal').modal('hide');	
+			loadCandidateList();
+		}
+	})
+}
 function pushCandidateToDept(candidateId,candidateName){	
-	exportdata = new FormData(document.getElementById("candidateForm"));
 	$('#myCandidatePushModal').on('show.bs.modal', function (e) {
 		loadCusDeptInfo();
 		$('#pushCandidateId').val(candidateId);
@@ -202,7 +247,7 @@ function loadCandidateList(pageState)
 				$("#exportCandidateExcel").attr("disabled",true);
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
-				$("<td colspan='14' style='color: red;text-align: center;'>未查询到数据！</td>").appendTo(tr);
+				$("<td colspan='15' style='color: red;text-align: center;'>未查询到数据！</td>").appendTo(tr);
 			}else{
 				$("#exportCandidateExcel").removeAttr("disabled");
 			}
@@ -232,6 +277,8 @@ function loadCandidateList(pageState)
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=pushCandidateToDept('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>PUSH</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>STATUS</a>" +
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"')>FEEDBACK</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
@@ -244,6 +291,8 @@ function loadCandidateList(pageState)
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=backCandidateToDept('"+result.data[i].candidateId+"')>BACK</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>STATUS</a>" +
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"')>FEEDBACK</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
@@ -253,6 +302,8 @@ function loadCandidateList(pageState)
 					$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
 						"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>STATUS</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"')>FEEDBACK</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +

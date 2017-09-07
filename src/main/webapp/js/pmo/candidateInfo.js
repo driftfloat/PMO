@@ -53,12 +53,10 @@ function exportCondition(){
 }
 
 function exportData(){
+	$('#myCandidateListModal').modal('hide');
 	var url = path+'/service/candidate/exportExcel';
 	$("#exceltHrefCandidate").attr("href",url);
 	document.getElementById("exceltHrefCandidate").click();
-	
-	$('#myCandidateListModal').modal('hide');
-	$("[type='checkbox']").attr("checked","checked");
 }
 
 function updateResumeInfo(candidateId){

@@ -1,6 +1,7 @@
 package com.pmo.dashboard.service.impl;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -103,7 +104,6 @@ public class CandidateServiceImpl implements CandidateService
 						interviewStatus = "已退回";
 					}
 					map.put("INTERVIEW_STATUS", interviewStatus);
-					
 				}
 			}
 		} catch (Exception e) {
@@ -167,6 +167,19 @@ public class CandidateServiceImpl implements CandidateService
 						interviewStatus = "已退回";
 					}
 					candidateInfo.setInterviewStatus(interviewStatus);
+					
+					@SuppressWarnings("rawtypes")
+					Class cls = candidateInfo.getClass();  
+					Field[] fields = cls.getDeclaredFields(); 
+					for ( int i = 0; i < fields.length; i++ )  
+					{  
+						Field f = fields[i];  
+				        f.setAccessible(true);
+						if(f.get(candidateInfo) == null)
+						{
+							 f.set(candidateInfo, "");
+						}
+					}  
 				}
 			}
 		} catch (Exception e) {
@@ -175,7 +188,7 @@ public class CandidateServiceImpl implements CandidateService
 		}
 		return candidateList;
 	}
-
+	
 	@Override
 	public void transferExportData(List<LinkedHashMap<String, String>> candidateDatalist, List<String> conditionList,File file) {
 		try {
@@ -313,6 +326,12 @@ public class CandidateServiceImpl implements CandidateService
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean updateCandidateStatus(CandidateInfo candidate) 
+	{
+		return candidateMapper.updateCandidateStatus(candidate);
 	}
 
 }
