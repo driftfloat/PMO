@@ -9,10 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -391,4 +389,48 @@ public class CandidateController
     	return candidateService.updateCandidateStatus(candidate);
     }
     
+	@RequestMapping("/interviewFeedBackInfo")
+	public String interviewFeedBackInfo(final HttpServletRequest request, final HttpServletResponse response) {
+		return "candidate/interviewFeedBackInfo";
+	}
+    	
+	@RequestMapping("/updateInterviewFeedBack")
+	@ResponseBody
+	public boolean updateInterviewFeedBack(String interviewId, String feedBackInfo, String interviewStatus) {
+		CandidateInfo candidate = new CandidateInfo();
+		candidate.setInterviewFeedBack(feedBackInfo);
+		candidate.setInterviewId(interviewId);
+		candidate.setInterviewStatus(interviewStatus);
+		boolean flag = candidateService.updateInterviewFeedBack(candidate);
+		return flag;
+	}
+    	
+    @RequestMapping("/queryInterviewFeedBack")
+	@ResponseBody
+	public Object queryCandidateListOfInterview(CandidateInfo candidate) {
+		String pageState = candidate.getPageState();
+		PageCondition page = new PageCondition();
+
+		int dataCount = candidateService.queryinterviewFeedBackCount(candidate);
+		page.setDataCount(dataCount + "");
+		page.setPageCount((dataCount - 1) / 10 + 1 + "");
+		page.setPageDataCount(Constants.PAGE_DATA_COUNT + "");
+		if ("".equals(pageState) || pageState == null || "frist".equals(pageState)) {
+			page.setCurrentPage("1");
+		} else if ("next".equals(pageState)) {
+			page.setCurrentPage(Integer.valueOf(candidate.getCurrentPage()) + 1 + "");
+		} else if ("previous".equals(pageState)) {
+			page.setCurrentPage(Integer.valueOf(candidate.getCurrentPage()) - 1 + "");
+		} else if ("last".equals(pageState)) {
+			page.setCurrentPage(page.getPageCount());
+		}
+
+		candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage()) - 1) * Constants.PAGE_DATA_COUNT + "");
+		candidate.setPageDataCount(Constants.PAGE_DATA_COUNT + "");
+		List<CandidateInfo> list = candidateService.queryinterviewFeedBack(candidate);
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("data", list);
+		result.put("pageInfo", page);
+		return result;
+	}
 }

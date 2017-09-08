@@ -35,4 +35,10 @@ public interface CandidateService
 	boolean updateCandidatePushStatus(CandidatePush candidatePush);
 	
 	boolean updateCandidateStatus(CandidateInfo candidate);
+
+	List<CandidateInfo> queryinterviewFeedBack(CandidateInfo candidate);
+
+	int queryinterviewFeedBackCount(CandidateInfo candidate);
+
+	boolean updateInterviewFeedBack(CandidateInfo candidate);
 }
