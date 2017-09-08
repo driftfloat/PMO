@@ -40,7 +40,14 @@ public class CandidateInfo extends PageCondition
 	private String interviewId;
 	private String csSubDept;
 	private String interviewDate;
+	private String userId;
 	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public String getInterviewDate() {
 		return interviewDate;
 	}

@@ -118,9 +118,10 @@ var path='<%=path%>';
 										</div>
 									</div>
 								</form>
-						<!-- 		<form action="" id="editForm" method="post" target="_blank">
+						 		<form action="" id="editForm" method="post" target="_blank">
 									<input id="interviewId" name="interviewId" type="hidden" />
-								</form> -->
+									<input id="candidateId" name="candidateId" type="hidden" />
+								</form>
 							</div>
 						</div>
 					</div>
@@ -150,8 +151,7 @@ var path='<%=path%>';
 					</div>
 					<div class="box-content">
 						<form id="interviewForm">
-							<input type="hidden" name="interviewId" id="interviewId"
-								value="${interviewId}" />
+							<!-- <input type="hidden" name="interviewId" id="interviewId" /> -->
 							<div class="group">
 								<label class="col-sm-2 control-label">Candidate Name:</label>
 								<div class="col-sm-4">
