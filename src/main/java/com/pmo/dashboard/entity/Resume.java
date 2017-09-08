@@ -76,17 +76,16 @@ public class Resume {
 	private String interview_status;
 	
 	
-	public String getInterview_status()
-    {
-        return interview_status;
-    }
+	
+	public String getInterview_status() {
+		return interview_status;
+	}
 
-    public void setInterview_status(String interview_status)
-    {
-        this.interview_status = interview_status;
-    }
+	public void setInterview_status(String interview_status) {
+		this.interview_status = interview_status;
+	}
 
-    public String getArrival_date() {
+	public String getArrival_date() {
 		return arrival_date;
 	}
 

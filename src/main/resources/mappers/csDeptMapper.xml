@@ -5,14 +5,13 @@
 	<resultMap id="csDeptMap" type="com.pmo.dashboard.entity.CSDept">
 		<id property="csSubDeptId" column="CS_SUBDEPT_ID" javaType="String" />
 		<result property="csSubDeptName" column="CS_SUBDEPT_NAME" javaType="String" />
-		<result property="csDeptName" column="CS_DEPT_NAME" javaType="String" />
-		<result property="csBuName" column="CS_BU_NAME" javaType="String" />
+		<result property="csDeptName" column="CS_DEPT_NAME" javaType="String" />		<result property="csBuName" column="CS_BU_NAME" javaType="String" />
 		<result property="am" column="AM" javaType="String" />
 	</resultMap>
 	
-	<select id="queryCSDeptName" resultMap="csDeptMap">
+	<!-- <select id="queryCSDeptName" resultMap="csDeptMap">
 	    SELECT * FROM t_cs_dept GROUP BY CS_DEPT_NAME ORDER BY CS_DEPT_NAME ASC; 
-	</select>
+	</select> -->
 	
 	<select id="queryCSSubDeptName" parameterType="String" resultMap="csDeptMap">
 	    SELECT * FROM t_cs_dept WHERE CS_DEPT_NAME = (SELECT CS_DEPT_NAME FROM t_cs_dept WHERE CS_SUBDEPT_ID = #{csSubDeptId}) ORDER BY CS_SUBDEPT_NAME ASC; 
@@ -30,7 +29,7 @@
 	    SELECT *  FROM t_cs_dept WHERE CS_BU_NAME = #{csBuName} GROUP BY CS_SUBDEPT_NAME
 	</select>
 	
-	<!-- <select id="queryCsSubDeptByCsBuName" parameterType="String" resultType="String">
+	<select id="queryCsSubDeptByCsBuName" parameterType="String" resultType="String">
 	    SELECT CS_SUBDEPT_NAME  FROM t_cs_dept WHERE CS_BU_NAME = #{csBuName} GROUP BY CS_SUBDEPT_NAME
-	</select> -->
+	</select>
 </mapper>

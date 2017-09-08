@@ -24,18 +24,17 @@ public class User {
 	private String user_type;
 	
 	//所属部门
-	private CSDept cSDept;
+	private CSDept csDept;
 	
 	
-	public CSDept getcSDept()
-    {
-        return cSDept;
-    }
 
-    public void setcSDept(CSDept cSDept)
-    {
-        this.cSDept = cSDept;
-    }
+	public CSDept getCsDept() {
+		return csDept;
+	}
+
+	public void setCsDept(CSDept csDept) {
+		this.csDept = csDept;
+	}
 
     public String getUserId() {
 		return userId;

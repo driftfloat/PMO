@@ -1060,6 +1060,11 @@
             if (oldViewMode == this.viewMode && this.autoclose) {
               this.hide();
             }
+
+            if($("#GRADUATE_DATE1").length != 0){
+          	  $('#candidateForm').data("bootstrapValidator").revalidateField($("#GRADUATE_DATE1"));
+          	  $("#GRADUATE_DATE1").keyup();
+            }
             break;
         }
       }
