@@ -48,7 +48,11 @@
 			<mvc:exclude-mapping path="/**/*.jpeg" />
 			<bean class="com.pmo.interceptor.PageInterceptor" />
 		</mvc:interceptor>
- 	</mvc:interceptors> 
+		<mvc:interceptor>  
+                <mvc:mapping path="/**"/>
+                <bean class="com.pmo.interceptor.LoginInterceptor"></bean>  
+        </mvc:interceptor>
+	</mvc:interceptors> 
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">

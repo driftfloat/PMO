@@ -57,6 +57,10 @@ $(document).ready(function() {
                       notEmpty: {
                           message: '请输入年龄'
                       },
+                      regexp: {
+                          regexp: "^[1-9][0-9]$",
+                          message: '年龄必须两位整数'
+                      }
                       
                   }
               },
@@ -107,13 +111,16 @@ $(document).ready(function() {
                       
                   }
               },
-              graduate_date: {
+              GRADUATE_DATE1: {
           		group: '.group',
           		validators: {
                       notEmpty: {
                           message: '请输入毕业时间'
                       },
-                      
+                      date : {  
+                          format : 'YYYY-MM-DD',  
+                          message : '日期格式不正确'  
+                      }
                   }
               },
               
@@ -176,8 +183,36 @@ $(document).ready(function() {
                      },
                  }
              },
+             expected_salary: {
+            	 group: '.group',
+            	 validators: {
+            		 regexp: {
+            	            regexp: "^[1-9][0-9]*$",
+            	            message: '期望薪资为大于0的正整数'
+            	        },
+            	 }
+             },
+             real_salary: {
+            	 group: '.group',
+            	 validators: {
+            		 regexp: {
+            			 regexp: "^[1-9][0-9]*$",
+            			 message: '实际薪资为大于0的正整数'
+            		 },
+            	 }
+             },
              
         }
+    }).on('success.form.bv', function(e) {
+        // Prevent submit form
+        e.preventDefault();
+
+        var $form     = $(e.target);
+            validator = $form.data('bootstrapValidator');
+        if(validator){
+        	addCandidate(e.target);
+        }
+
     });
 });
 
@@ -185,7 +220,26 @@ $(function () {
     $("#upload").click(function () {
         ajaxFileUpload();
     })
+    dateType();
 })
+
+function dateType(){
+	$('.form_datetime').datetimepicker({
+		weekStart: 1,
+		minView:'month',
+		todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+		language:'zh-CN',
+		format: 'yyyy-mm-dd',
+		pickerPosition: 'bottom-left',
+		showMeridian: 1
+	});
+}
+
+
  function ajaxFileUpload()
 {
 	if($("#uploadId").val()==''){
@@ -236,7 +290,6 @@ function addCandidate(){
 	var source = $("#source").val();
 	var role = $("#role").val();
 	var resume_path = $("#resume_path").val();
-	
 	var expected_salary = $("#expected_salary").val();
 	var real_salary = $("#real_salary").val();
 	var old_company = $("#old_company").val();

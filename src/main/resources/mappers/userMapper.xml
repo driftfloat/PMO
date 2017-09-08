@@ -20,5 +20,9 @@
 		select * from t_user where USER_NAME = #{userName} and PASSWORD = #{password}
 	</select>
 	
+	<update id="updatePwd" parameterType="String">
+		update t_user set PASSWORD = #{newPwd} where USER_ID = #{userId}
+	
+	</update>
 	
 </mapper>

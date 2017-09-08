@@ -16,4 +16,6 @@ public interface UserMapper {
 
 	User login(@Param("userName") String userName,@Param("password") String password);
 
+	void updatePwd(@Param("userId")String userId, @Param("newPwd")String newPwd);
+
 }

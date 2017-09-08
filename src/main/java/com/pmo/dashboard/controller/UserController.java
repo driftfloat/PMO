@@ -81,10 +81,33 @@ public class UserController {
 		
 	}
 	
+	/**
+	 * 跳转到首页的方法
+	 * 
+	 * @return
+	 */
 	@RequestMapping("/welcome")
 	public String welcome(){
 		
 		return "welcome";
+	}
+	
+	
+	/**
+	 * 修改密码的方法
+	 * 
+	 * @param newPassword
+	 * @return
+	 */
+	@RequestMapping("/updatePassword")
+	public String updatePassword(String newPwd,HttpSession session){
+		//获取用户id
+		User exitUser = (User) session.getAttribute("loginUser");
+		String userId = exitUser.getUserId();
+		//调用service层
+		userService.updatePwd(userId,newPwd);
+		return "0";
+		
 	}
 }
 
