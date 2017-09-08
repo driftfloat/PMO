@@ -3,10 +3,7 @@ package com.pom.dashboard.service;
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-
 import com.pmo.dashboard.entity.CandidateInfo;
-import com.pmo.dashboard.entity.CandidatePush;
 
 public interface CandidateService
 {
@@ -23,22 +20,6 @@ public interface CandidateService
     List<CandidateInfo> queryMyCandidateList(CandidateInfo candidate);
 
 	int queryMyCandidateCount(CandidateInfo candidate);
+	boolean updateCandidateInfo(CandidateInfo candidate);
 	
-	List<Map<String,String>> queryCusDeptInfo();  
-	
-	CandidateInfo queryCandidateForId(String candidateId);
-	
-	boolean updateCandidateInterviewStatus(CandidateInfo candidate);
-	
-	boolean insertCandidatePushData(CandidatePush candidatePush);
-	
-	boolean updateCandidatePushStatus(CandidatePush candidatePush);
-	
-	boolean updateCandidateStatus(CandidateInfo candidate);
-
-	List<CandidateInfo> queryinterviewFeedBack(CandidateInfo candidate);
-
-	int queryinterviewFeedBackCount(CandidateInfo candidate);
-
-	boolean updateInterviewFeedBack(CandidateInfo candidate);
 }

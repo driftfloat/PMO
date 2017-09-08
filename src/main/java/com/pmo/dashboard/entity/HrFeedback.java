@@ -2,7 +2,7 @@ package com.pmo.dashboard.entity;
 
 import java.util.Date;
 
-public class CandidateInfo extends PageCondition
+public class HrFeedback extends PageCondition
 {
 	private String candidateId;
 	private String candidateName;
@@ -37,9 +37,14 @@ public class CandidateInfo extends PageCondition
 	private String workYearsEnd;
 	private String exportDataColumn;
 	private String exportPageColumn;
+	private String csSubdeptName;
+	private String interviewFeedBack;
+	private String interviewId;
+	private String csSubDept;
+	private String interviewDate;
+	private String userId;
     private String hrFeedBack;
     private String FeedbackId;
-    private String userId;
     public Date getFeedbacktime() {
 		return feedbacktime;
 	}
@@ -53,6 +58,30 @@ public class CandidateInfo extends PageCondition
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	public String getInterviewDate() {
+		return interviewDate;
+	}
+	public void setInterviewDate(String interviewDate) {
+		this.interviewDate = interviewDate;
+	}
+	public String getCsSubDept() {
+		return csSubDept;
+	}
+	public void setCsSubDept(String csSubDept) {
+		this.csSubDept = csSubDept;
+	}
+
+	public String getInterviewId() {
+		return interviewId;
+	}
+	public void setInterviewId(String interviewId) {
+		this.interviewId = interviewId;
+	}
+	public String getInterviewFeedBack() {
+		return interviewFeedBack;
+	}
+	public void setInterviewFeedBack(String interviewFeedBack) {
+		this.interviewFeedBack = interviewFeedBack;}
 	public String getFeedbackId() {
 		return FeedbackId;
 	}
@@ -270,6 +299,12 @@ public class CandidateInfo extends PageCondition
 	}
 	public void setInterviewStatus(String interviewStatus) {
 		this.interviewStatus = interviewStatus;
+	}
+	public String getCsSubdeptName() {
+		return csSubdeptName;
+	}
+	public void setCsSubdeptName(String csSubdeptName) {
+		this.csSubdeptName = csSubdeptName;
 	}
 	
 }

@@ -53,6 +53,38 @@ function exportCondition(){
 	
 }
 
+function feedbackCandidateInfo(candidateId,candidateName){
+	$("#candidateId").val(candidateId);
+	$("#candidateNameId").val(candidateName);
+	$('#feedBackDialog').modal('show');
+	
+}
+
+function updateHRFeedBack(){
+	var candidateId=$("#candidateId").val();
+	var hrFeedBack=$("#interviewFeedBack").val();
+	$.ajax({
+		url:path+"/service/candidate/candidateFeedback",
+		dataType:"json",
+		async:true,
+		data:{'candidateId':candidateId,'hrFeedBack':hrFeedBack},
+		cache:false,
+		type:"post",
+		success:function(result){
+			if(result)
+			{
+			     $('#feedBackDialog').modal('hide');
+			     loadCandidateList();	
+			}else{
+				
+			}
+		}
+	})
+	
+}
+	
+
+
 function exportData(){
 	var url = path+'/service/candidate/exportExcel';
 	$("#exceltHrefCandidate").attr("href",url);
@@ -202,6 +234,8 @@ function updateResumeInfo(candidateId){
 	$("#editForm").submit();
 }
 
+
+
 function downLoadCandidateResume(candidateId,resumePath){
 	if(resumePath == null || resumePath == ''){
 		alert("未上传此候选人简历");
@@ -279,7 +313,7 @@ function loadCandidateList(pageState)
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>STATUS</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"')>FEEDBACK</a>" +
+								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
 						"</td>").appendTo(tr);
@@ -293,7 +327,7 @@ function loadCandidateList(pageState)
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>STATUS</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"')>FEEDBACK</a>" +
+								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
 						"</td>").appendTo(tr);
@@ -305,7 +339,7 @@ function loadCandidateList(pageState)
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>STATUS</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"')>FEEDBACK</a>" +
+							"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
 					"</td>").appendTo(tr);
