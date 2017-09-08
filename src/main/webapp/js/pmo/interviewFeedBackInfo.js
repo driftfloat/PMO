@@ -51,7 +51,6 @@ function loadCandidateList(pageState) {
 	if (null != pageState) {
 		candidate.append("pageState", pageState);
 	}
-	candidate.append("userName", 1);
 	candidate.append("currentPage", currentPage);
 	candidate.append("pageCount", pageCount);
 	$.ajax({
@@ -64,6 +63,9 @@ function loadCandidateList(pageState) {
 				contentType : false,
 				type : "post",
 				success : function(result) {
+					if(result==null){
+						return;
+					}
 					$("#candidateList tbody").remove();
 					var tbody = $("<tbody>");
 					tbody.appendTo($("#candidateList"));
@@ -87,16 +89,21 @@ function loadCandidateList(pageState) {
 						$("<td>" + result.data[i].englishLevel + "</td>")
 								.appendTo(tr);
 						$("<td>" + result.data[i].skill + "</td>").appendTo(tr);
-						$("<td><a href='javascript:void(0);'"
+						$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' "
 								+ "onclick=interviewFeedBack('"
 								+ result.data[i].interviewId + "','"
 								+ result.data[i].candidateName + "','"
+								+ result.data[i].candidateId + "','"
 								+ result.data[i].userName + "','"
 								+ result.data[i].csSubDept
-								+ "')>FeedBack</a>&nbsp;&nbsp;<a href='javascript:void(0);'"
-								+ "onclick=downloadResume('"
-								+ result.data[i].interviewId + 
-										"')>RESUME</a></td>").appendTo(tr);
+								+ "')>FeedBack</a>&nbsp;&nbsp;<a href='javascript:void(0);' class='btn btn-info btn-small'"
+								+ "onclick=downLoadCandidateResume('"
+								+ result.data[i].interviewId +"','"
+								+result.data[i].resumePath.replace(/\s+/g, "")
+								+"')>RESUME</a>&nbsp;&nbsp;" 
+								+"<a href='javascript:void(0);' class='btn btn-info btn-small' "
+								+"onclick=interviewRecord('"
+								+result.data[i].interviewId+"')>面试记录</a></td>").appendTo(tr);
 					}
 					$("#candidateList").append("</tbdoy>");
 					currentPage = parseInt(result.pageInfo.currentPage);
@@ -125,13 +132,13 @@ function loadCandidateList(pageState) {
 			})
 }
 
-// function interviewFeedBack(interviewId){
-// $("#editForm").attr("action",path+"/service/candidate/interviewFeedBack.html");
-// $("#interviewId").val(interviewId);
-// $("#editForm").submit();
-// }
+ function interviewRecord(interviewId){
+	 $("#editForm").attr("action",path+"/service/candidate/interviewFeedBack.html");
+	 $("#interviewId").val(interviewId);
+	 $("#editForm").submit();
+ }
 
-function interviewFeedBack(interviewId, candidateName, interviewName, csSubDept) {
+function interviewFeedBack(interviewId, candidateName, candidateId, interviewName, csSubDept) {
 	$('#interviewFeedBack').val("");
 	$('#interviewStatus').val("");
 	$(".has-feedback").removeClass("has-feedback");
@@ -140,20 +147,28 @@ function interviewFeedBack(interviewId, candidateName, interviewName, csSubDept)
 	$("small").css("display","none");
 	$(".form-control-feedback").css("display","none");
 	$("#interviewId").val(interviewId);
-	$('#feedBackDialog').modal('show');
-	$('#candidateName').val(candidateName);
 	$('#interviewName').val(interviewName);
+	$('#candidateName').val(candidateName);
+	$('#candidateId').val(candidateId);
 	$('#csSubDept').val(csSubDept);
+	$('#feedBackDialog').modal('show');
 }
 
-function downloadResume(interviewId) {
-	alert(0);
+function downLoadCandidateResume(candidateId,resumePath){
+	if(resumePath == null || resumePath == ''){
+		alert("未上传此候选人简历");
+		return;
+	}
+	var url = path+'/service/candidate/downLoadCandidateResume?candidateId='+candidateId;
+	$("#exceltHrefCandidate").attr("href",url);
+	document.getElementById("exceltHrefCandidate").click();
 }
 
 function updateInterviewFeedBack(e) {
 	var interviewId = $('#interviewId').val();
 	var feedBackInfo = $('#interviewFeedBack').val();
 	var interviewStatus = $('#interviewStatus').val();
+	var candidateId = $('#candidateId').val();
 	
 	// 取选中的text值
 	// $('#interviewStatus').find("option:selected").text()
@@ -163,7 +178,8 @@ function updateInterviewFeedBack(e) {
 		data : {
 			"interviewId" : interviewId,
 			"feedBackInfo" : feedBackInfo,
-			"interviewStatus" : interviewStatus
+			"interviewStatus" : interviewStatus,
+			"candidateId" : candidateId
 		},
 		async : true,
 		cache : false,
@@ -176,3 +192,8 @@ function updateInterviewFeedBack(e) {
 		}
 	})
 }
+
+
+//if($("#GRADUATE_DATE1").length != 0){
+//	  $('#candidateForm').data("bootstrapValidator").revalidateField($("#GRADUATE_DATE1"));
+//}

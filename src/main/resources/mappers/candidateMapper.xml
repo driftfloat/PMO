@@ -37,6 +37,7 @@
 		<result property="interviewId" 		column="INTERVIEW_ID" 		javaType="String" />
 		<result property="interviewDate" 	column="INTERVIEW_DATE" 	javaType="String" />
 		<result property="csSubDept" 		column="CS_SUBDEPT_NAME" 	javaType="String" />
+		<result property="userId" 		column="USER_ID" 	javaType="String" />
 	</resultMap>
 	<resultMap id="candidatePushMap" type="com.pmo.dashboard.entity.CandidatePush">
 		<id 	property="pushId" 		column="PUSH_ID" 		javaType="String" />
@@ -53,7 +54,7 @@
 			LEFT JOIN t_candidate_interview ci ON ci.INTERVIEWER_ID = a.USER_ID
 			LEFT JOIN t_candidate b on ci.CANDIDATE_ID = b.CANDIDATE_ID
 			LEFT JOIN t_cs_dept dept on dept.CS_SUBDEPT_ID = ci.CSSUBDEPT
-	        WHERE USER_NAME = #{userName} and (ci.FEEDBACK='' or ci.FEEDBACK is null)
+	        WHERE USER_ID = #{userId} and (ci.FEEDBACK='' or ci.FEEDBACK is null)
 			ORDER BY ci.INTERVIEW_DATE
 	        LIMIT #{currentPage},#{pageDataCount};
 	</select>
