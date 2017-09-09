@@ -192,8 +192,6 @@ function updateResumeInfo(candidateId){
 	$("#editForm").submit();
 }
 
-
-
 function downLoadCandidateResume(candidateId,resumePath){
 	if(resumePath == null || resumePath == ''){
 		alert("未上传此候选人简历");
@@ -223,7 +221,7 @@ function loadCandidateList(pageState)
 	candidate.append("currentPage",currentPage);
 	candidate.append("pageCount",pageCount);
 	$.ajax({
-		url:path+"/service/candidate/queryMyCandidateList",
+		url:path+"/service/candidate/queryMyWaitEntryCandidateList",
 		dataType:"json",
 		async:true,
 		data:candidate,
@@ -239,7 +237,7 @@ function loadCandidateList(pageState)
 				$("#exportCandidateExcel").attr("disabled",true);
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
-				$("<td colspan='15' style='color: red;text-align: center;'>未查询到数据！</td>").appendTo(tr);
+				$("<td colspan='13' style='color: red;text-align: center;'>未查询到数据！</td>").appendTo(tr);
 			}else{
 				$("#exportCandidateExcel").removeAttr("disabled");
 			}
@@ -255,53 +253,18 @@ function loadCandidateList(pageState)
 				"<td>"+ result.data[i].email+ "</td>"+
 				"<td>"+ result.data[i].source+ "</td>"+
 				"<td>"+ result.data[i].candidateStatus+ "</td>"+
-				"<td>"+ result.data[i].education+ "</td>"+
 				"<td>"+ result.data[i].experienceYears+ "</td>"+
-				"<td>"+ result.data[i].majorStatus+ "</td>"+
-				"<td>"+ result.data[i].englishLevel+ "</td>"+
 				"<td>"+ result.data[i].skill+ "</td>"+
-				"<td>"+ result.data[i].interviewStatus+ "</td>").appendTo(tr);
-				if(result.data[i].candidateStatus == '招聘中'){
-					if(result.data[i].interviewStatus == '未推送'){
-						$("<td></td>"+
-							"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=pushCandidateToDept('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>PUSH</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>STATUS</a>" +
-							"<a href=' ' class='btn btn-info btn-small' " +
-								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
-						"</td>").appendTo(tr);
-					}
-					if(result.data[i].interviewStatus == '已推送'){
-						$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
-							"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=backCandidateToDept('"+result.data[i].candidateId+"')>BACK</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>STATUS</a>" +
-							"<a href=' ' class='btn btn-info btn-small' " +
-								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
-						"</td>").appendTo(tr);
-					}
-				}else{
-					$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
-						"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +					
-								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>STATUS</a>" +
-							"<a href=' ' class='btn btn-info btn-small' " +
-								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
-						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
-					"</td>").appendTo(tr);
-				}
+				"<td>"+ result.data[i].interviewStatus+ "</td>"+
+				"<td>"+ result.data[i].csSubdeptName+ "</td>"+
+				"<td>"+ result.data[i].demandStatus+ "</td>"+
+				"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+						"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>ENTRY</a>"+
+					"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+						"onclick=pushCandidateToDept('"+result.data[i].candidateId+"')>ABORT</a>" +
+					"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+						"onclick=updateCandidateStatus('"+result.data[i].candidateId+"')>DELAY</a>" +
+				"</td>").appendTo(tr);
 			}
 			$("#candidateList").append("</tbdoy>");
 			currentPage = parseInt(result.pageInfo.currentPage);

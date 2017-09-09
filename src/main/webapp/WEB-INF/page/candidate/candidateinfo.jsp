@@ -62,7 +62,7 @@ var path='<%=path%>';
 									<i class="glyphicon glyphicon-user">&nbsp;CANDIDATE&nbsp;LIST</i> 
 								</h2>
 							</div>
-							<div id="employeeInfo" class="box-content">
+							<div id="candidateInfo" class="box-content">
 							    <form id="candidateForm" method="post" class="form-horizontal">
 									<div class="group">
 										<label class="col-sm-2 control-label">NAME</label>
@@ -199,13 +199,13 @@ var path='<%=path%>';
 										</div>
 									</div>
 									<div class="form-group">
-									    <div style="text-align:center;width:25%;float:right;">
+									    <div style="text-align:center;width:20%;float:right;margin-right:40px;margin-top:10px;">
 									    	<input type="button" value="查&nbsp;&nbsp;询"
 												name="searchCandidateBtn" id="searchCandidateBtn" 
 												class="button btn btn-primary" data-dismiss="modal"
 												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto;cursor:pointer;">
 									    </div>
-									    <div style="text-align:center;width:25%;float:right;">
+									    <div style="text-align:center;width:20%;float:right;margin-right: 60px;margin-top:10px;">
 									    	<input type="reset" value="导出Excel" disabled="disabled"
 												name="exportCandidateExcel" id="exportCandidateExcel"
 												class="button btn btn-primary" data-dismiss="modal"
@@ -240,7 +240,7 @@ var path='<%=path%>';
 										<tbody></tbody>
 									</table>
 									</div>
-									<div>
+									<div style="height:70px">
 										<div style="max-width:400px;float:left">
 											<ul class="pagination pagination-centered">
 												<li><a href="#" id="fristPage" onclick="loadCandidateList('frist')">首页</a></li>

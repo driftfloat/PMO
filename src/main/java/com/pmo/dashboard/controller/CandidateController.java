@@ -29,8 +29,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmo.dashboard.entity.CandidateInfo;
-import com.pmo.dashboard.entity.Demand;
+import com.pmo.dashboard.entity.CandidatePush;
 import com.pmo.dashboard.entity.PageCondition;
+import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.CandidateService;
@@ -254,8 +255,8 @@ public class CandidateController
     @ResponseBody
     public Object queryMyCandidateList(CandidateInfo candidate,HttpServletRequest request)
     {
-    	String lockPerson = (String) request.getSession().getAttribute("userId");
-    	lockPerson = "1";//临时测试用，避免为空。
+    	User user =  (User)request.getSession().getAttribute("loginUser");
+    	String lockPerson = user.getUserId();
     	if(null == lockPerson || "".equals(lockPerson))
     	{
     		return null;
@@ -299,5 +300,132 @@ public class CandidateController
         result.put("pageInfo", page);
         return result;
     }
+
+    @RequestMapping("/loadCusDeptInfo")
+    @ResponseBody
+    public Object loadCusDeptInfo()
+    {
+    	return candidateService.queryCusDeptInfo();
+    }
     
+    @RequestMapping("/pushCandidateOk")
+    @ResponseBody
+    public String pushCandidateOk(CandidatePush candidatePush,HttpServletRequest request)
+    {
+    	return candidateService.pushCandidateOk(candidatePush,request);
+    }
+    
+    @RequestMapping("/backCandidateToDept")
+    @ResponseBody
+    public String backCandidateToDept(HttpServletRequest request)
+    {
+    	return candidateService.backCandidateToDept(request);
+    }
+    
+    @RequestMapping("/updateCandidateStatusOk")
+    @ResponseBody
+    public boolean updateCandidateStatusOk(CandidateInfo candidate,HttpServletRequest request)
+    {    	
+    	return candidateService.updateCandidateStatus(candidate);
+    }
+    
+	@RequestMapping("/interviewFeedBackInfo")
+	public String interviewFeedBackInfo(final HttpServletRequest request, final HttpServletResponse response) {
+		return "candidate/interviewFeedBackInfo";
+	}
+    	
+	@RequestMapping("/updateInterviewFeedBack")
+	@ResponseBody
+	public boolean updateInterviewFeedBack(String interviewId, String feedBackInfo, String interviewStatus) {
+		CandidateInfo candidate = new CandidateInfo();
+		candidate.setInterviewFeedBack(feedBackInfo);
+		candidate.setInterviewId(interviewId);
+		candidate.setInterviewStatus(interviewStatus);
+		boolean flag = candidateService.updateInterviewFeedBack(candidate);
+		return flag;
+	}
+    	
+    @RequestMapping("/queryInterviewFeedBack")
+	@ResponseBody
+	public Object queryCandidateListOfInterview(CandidateInfo candidate) {
+		String pageState = candidate.getPageState();
+		PageCondition page = new PageCondition();
+
+		int dataCount = candidateService.queryinterviewFeedBackCount(candidate);
+		page.setDataCount(dataCount + "");
+		page.setPageCount((dataCount - 1) / 10 + 1 + "");
+		page.setPageDataCount(Constants.PAGE_DATA_COUNT + "");
+		if ("".equals(pageState) || pageState == null || "frist".equals(pageState)) {
+			page.setCurrentPage("1");
+		} else if ("next".equals(pageState)) {
+			page.setCurrentPage(Integer.valueOf(candidate.getCurrentPage()) + 1 + "");
+		} else if ("previous".equals(pageState)) {
+			page.setCurrentPage(Integer.valueOf(candidate.getCurrentPage()) - 1 + "");
+		} else if ("last".equals(pageState)) {
+			page.setCurrentPage(page.getPageCount());
+		}
+
+		candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage()) - 1) * Constants.PAGE_DATA_COUNT + "");
+		candidate.setPageDataCount(Constants.PAGE_DATA_COUNT + "");
+		List<CandidateInfo> list = candidateService.queryinterviewFeedBack(candidate);
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("data", list);
+		result.put("pageInfo", page);
+		return result;
+	}
+    
+	@RequestMapping("/getMyWaitEntryCandidate")
+	public String getMyWaitEntryCandidate() 
+	{
+		return "candidate/myWaitEntryCandidateinfo";
+	}
+	@RequestMapping("/queryMyWaitEntryCandidateList")
+    @ResponseBody
+    public Object queryMyWaitEntryCandidateList(CandidateInfo candidate,HttpServletRequest request)
+    {
+    	User user =  (User)request.getSession().getAttribute("loginUser");
+    	String lockPerson = user.getUserId();
+    	if(null == lockPerson || "".equals(lockPerson))
+    	{
+    		return null;
+    	}
+    	candidate.setLockPerson(lockPerson);
+    	
+    	String pageState = candidate.getPageState();
+    	PageCondition page = new PageCondition();
+
+     	String  expriencesWork = candidate.getExperienceYears();
+    	 if("0".equals(expriencesWork)){
+    		 candidate.setWorkYearsEnd("2");
+    	 }else if("1".equals(expriencesWork)){
+    		 candidate.setWorkYearsStart("3");
+    		 candidate.setWorkYearsEnd("5");
+    	 }else if("2".equals(expriencesWork)){
+    		 candidate.setWorkYearsStart("6");
+    		 candidate.setWorkYearsEnd("10");
+    	 }else if("3".equals(expriencesWork)){
+    		 candidate.setWorkYearsStart("11");
+    	 }
+    	
+		 int dataCount = candidateService.queryMyWaitEntryCandidateCount(candidate);
+	     page.setDataCount(dataCount+"");
+		 page.setPageCount((dataCount-1)/10 + 1 +"");
+		 page.setPageDataCount(Constants.PAGE_DATA_COUNT+"");
+    	 if("".equals(pageState) || pageState == null ||"frist".equals(pageState)){
+    		 page.setCurrentPage("1");
+         }else if("next".equals(pageState)){
+        	 page.setCurrentPage(Integer.valueOf(candidate.getCurrentPage())+1+"");
+         }else if("previous".equals(pageState)){
+        	 page.setCurrentPage(Integer.valueOf(candidate.getCurrentPage())-1+"");
+         }else if("last".equals(pageState)){
+        	 page.setCurrentPage(page.getPageCount());
+         }
+    	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*Constants.PAGE_DATA_COUNT+"");
+    	candidate.setPageDataCount(Constants.PAGE_DATA_COUNT+"");
+        List<CandidateInfo> list = candidateService.queryMyWaitEntryCandidateList(candidate);
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("data", list);
+        result.put("pageInfo", page);
+        return result;
+    }
 }

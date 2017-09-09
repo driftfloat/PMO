@@ -3,7 +3,10 @@ package com.pom.dashboard.service;
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import com.pmo.dashboard.entity.CandidateInfo;
+import com.pmo.dashboard.entity.CandidatePush;
 
 public interface CandidateService
 {
@@ -20,6 +23,24 @@ public interface CandidateService
     List<CandidateInfo> queryMyCandidateList(CandidateInfo candidate);
 
 	int queryMyCandidateCount(CandidateInfo candidate);
-	boolean updateCandidateInfo(CandidateInfo candidate);
 	
+	List<Map<String,String>> queryCusDeptInfo();  
+	
+	boolean updateCandidateStatus(CandidateInfo candidate);
+
+	List<CandidateInfo> queryinterviewFeedBack(CandidateInfo candidate);
+
+	int queryinterviewFeedBackCount(CandidateInfo candidate);
+
+	boolean updateInterviewFeedBack(CandidateInfo candidate);
+	
+	String pushCandidateOk(CandidatePush candidatePush,HttpServletRequest request);
+	
+	String backCandidateToDept(HttpServletRequest request);
+	
+	int queryMyWaitEntryCandidateCount(CandidateInfo candidate);
+	
+	List<CandidateInfo> queryMyWaitEntryCandidateList(CandidateInfo candidate);
+	
+	boolean updateCandidateInfo(CandidateInfo candidateinfo);
 }

@@ -1,7 +1,5 @@
 package com.pmo.dashboard.entity;
 
-import java.util.Date;
-
 public class CandidateInfo extends PageCondition
 {
 	private String candidateId;
@@ -40,13 +38,20 @@ public class CandidateInfo extends PageCondition
     private String hrFeedBack;
     private String FeedbackId;
     private String userId;
-    public Date getFeedbacktime() {
+	private String pageState;
+	private String interviewFeedBack;
+	private String interviewId;
+	private String interviewDate;
+	private String csSubDept;
+	private String csSubdeptName;
+	private String feedbacktime;
+	
+    public String getFeedbacktime() {
 		return feedbacktime;
 	}
-	public void setFeedbacktime(Date feedbacktime) {
+	public void setFeedbacktime(String feedbacktime) {
 		this.feedbacktime = feedbacktime;
 	}
-	private Date feedbacktime;
 	public String getUserId() {
 		return userId;
 	}
@@ -65,7 +70,6 @@ public class CandidateInfo extends PageCondition
 	public void setHrFeedback(String hrFeedback) {
 		this.hrFeedBack = hrFeedback;
 	}
-	private String pageState;
 	
 	public String getCandidateId() {
 		return candidateId;
@@ -270,6 +274,39 @@ public class CandidateInfo extends PageCondition
 	}
 	public void setInterviewStatus(String interviewStatus) {
 		this.interviewStatus = interviewStatus;
+	}
+	public String getInterviewFeedBack() {
+		return interviewFeedBack;
+	}
+	public void setInterviewFeedBack(String interviewFeedBack) {
+		this.interviewFeedBack = interviewFeedBack;
+	}
+	public String getInterviewId() {
+		return interviewId;
+	}
+	public void setInterviewId(String interviewId) {
+		this.interviewId = interviewId;
+	}
+	public String getInterviewDate() {
+		return interviewDate;
+	}
+	public void setInterviewDate(String interviewDate) {
+		this.interviewDate = interviewDate;
+	}
+	public String getCsSubDept() {
+		return csSubDept;
+	}
+	public void setCsSubDept(String csSubDept) {
+		this.csSubDept = csSubDept;
+	}
+	public void setHrFeedBack(String hrFeedBack) {
+		this.hrFeedBack = hrFeedBack;
+	}
+	public String getCsSubdeptName() {
+		return csSubdeptName;
+	}
+	public void setCsSubdeptName(String csSubdeptName) {
+		this.csSubdeptName = csSubdeptName;
 	}
 	
 }
