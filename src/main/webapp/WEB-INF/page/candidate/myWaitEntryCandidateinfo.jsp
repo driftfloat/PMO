@@ -170,9 +170,9 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" name="demandStatus" id="demandStatus" data-bv-group=".group">
 												<option value="">--Option--</option>
-												<option value="0">Offermade</option>
-												<option value="1">Onboard</option>
-												<option value="2">delay</option>
+												<option value="OfferMade">OfferMade</option>
+												<option value="Onboard">Onboard</option>
+												<option value="delay">delay</option>
 											</select>
 										</div>
 									</div>
@@ -231,9 +231,6 @@ var path='<%=path%>';
 										</div>
 									</div>
 								</form>
-								<form action="" id="editForm" method="post" target="_blank">
-									<input id="employeeId" name="employeeId" type="hidden" />
-								</form>
 							</div>
 						</div>
 					</div>
@@ -243,6 +240,9 @@ var path='<%=path%>';
 			</div>
 			<!--/#content.col-md-0-->
 		</div>
+		<form id="editForm" action="">
+			<input type="hidden" id="candidateId" ></input>
+		</form>
 		<hr>
 		<div class="modal fade" id="myCandidateListModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
@@ -308,18 +308,19 @@ var path='<%=path%>';
 			</div>
 			<!--/span-->
 		</div>
-		<div class="modal fade" id="myCandidatePushModal" tabindex="-1" role="dialog"
+		<div class="modal fade" id="entryMyWaitCandidateModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="box-header well" data-original-title="">
 						<h2>
-							<i class="glyphicon glyphicon-user"></i> 推送候选人
+							<i class="glyphicon glyphicon-user"></i> 添加候选人入职信息
 						</h2>
 						<div class="box-icon">
-							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
-								class="glyphicon glyphicon-chevron-up"></i></a> <a
-								class="btn btn-round btn-default" href="#" data-dismiss="modal">
+							<a href="#" class="btn btn-round btn-default  btn-minimize ">
+								<i class="glyphicon glyphicon-chevron-up"></i>
+							</a> 
+							<a class="btn btn-round btn-default" href="#" data-dismiss="modal">
 								<i class="glyphicon glyphicon-remove"></i>
 							</a>
 						</div>
@@ -329,22 +330,34 @@ var path='<%=path%>';
 						<div class="group">
 							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
 							<div class="col-sm-4" style="width:60%;">
-								<input type="text" class="form-control" name="pushCandidateName" id="pushCandidateName" disabled="disabled" />
-								<input type="hidden"  name="pushCandidateId" id="pushCandidateId" />
+								<input type="text" class="form-control" name="entryMyWaitCandidateName" id="entryMyWaitCandidateName" disabled="disabled" />
+								<input type="hidden"  name="entryMyWaitCandidateId" id="entryMyWaitCandidateId" />
 							</div>
 						</div>
 						<br/><br/><br/>
 						<div class="group">
-							<label class="col-lg-2 control-label" style="width:30%;">SUBDEPT NAME</label>
+							<label class="col-lg-2 control-label" style="width:30%;">REAL SALARY</label>
 							<div class="col-lg-4" style="width:60%;">
-								<select class="form-control" name="csSubdeptName" id="csSubdeptName" data-bv-group=".group">
-									<option value="">--Option--</option>
-								</select>
+								<input type="text" class="form-control" name="entryMyWaitCandidateRealSalary" id="entryMyWaitCandidateRealSalary" />
+							</div>
+						</div>
+						<br/><br/><br/>
+						<div class="group">
+							<label class="col-lg-2 control-label" style="width:30%;">ARRIVAL DATE</label>
+							<div class="col-md-4">
+								<div class="input-group date form_datetime col-sm-12"
+									data-link-field="dt_set_order_time_input">
+									<input class="form-control" type="text" disabled="disabled"
+										id="entryMyWaitCandidateArrivalDate" name="entryMyWaitCandidateArrivalDate"> <span
+										class="input-group-addon"><span
+										class="glyphicon glyphicon-th"></span></span> <input type="hidden"
+										id="entryMyWaitCandidateArrivalDate1" name="entryMyWaitCandidateArrivalDate1" />
+								</div>
 							</div>
 						</div>
 						<br/><br/><br/>
 						<div class="center">
-							<a class="btn btn-success" href="#" onClick="pushCandidateOk()"> 
+							<a class="btn btn-success" href="#" onClick="entryMyWaitCandidateOk()"> 
 								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
 							</a> &nbsp;&nbsp;&nbsp;
 							<a class="btn btn-info" href="#" data-dismiss="modal"> 
@@ -357,13 +370,13 @@ var path='<%=path%>';
 			</div>
 			<!--/span-->
 		</div>
-		<div class="modal fade" id="myCandidateStatusModal" tabindex="-1" role="dialog"
+		<div class="modal fade" id="abortMyWaitCandidateModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="box-header well" data-original-title="">
 						<h2>
-							<i class="glyphicon glyphicon-user"></i> 更新候选人状态
+							<i class="glyphicon glyphicon-user"></i> Abort候选人
 						</h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
@@ -378,15 +391,15 @@ var path='<%=path%>';
 						<div class="group">
 							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
 							<div class="col-sm-4" style="width:60%;">
-								<input type="text" class="form-control" name="updateCandidateStatusName" id="updateCandidateStatusName" disabled="disabled" />
-								<input type="hidden"  name="updateCandidateStatusId" id="updateCandidateStatusId" />
+								<input type="text" class="form-control" name="abortMyWaitCandidateName" id="abortMyWaitCandidateName" disabled="disabled" />
+								<input type="hidden"  name="abortMyWaitCandidateId" id="abortMyWaitCandidateId" />
 							</div>
 						</div>
 						<br/><br/><br/>
 						<div class="group">
 							<label class="col-lg-2 control-label" style="width:30%;">CANDIDATE STATUS</label>
 							<div class="col-lg-4" style="width:60%;">
-								<select class="form-control" id="updateMyCandidateStatus" data-bv-group=".group">
+								<select class="form-control" id="abortMyWaitCandidateStatus" data-bv-group=".group">
 									<option value="">--Option--</option>
 									<option value="0">招聘中</option>
 									<option value="1">offer中</option>
@@ -399,8 +412,69 @@ var path='<%=path%>';
 							</div>
 						</div>
 						<br/><br/><br/>
+						<div class="group">
+							<label class="col-sm-2 control-label" style="width:30%;">REMARK</label>
+							<div class="col-sm-4" style="width:60%;">
+								<textarea id = "abortMyWaitCandidateRemark" style="width:80%;height:100px"></textarea>
+							</div>
+						</div>
+						<br/><br/><br/>
 						<div class="center">
-							<a class="btn btn-success" href="#" onClick="updateCandidateStatusOk()"> 
+							<a class="btn btn-success" href="#" onClick="abortMyWaitCandidateOk()"> 
+								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
+							</a> &nbsp;&nbsp;&nbsp;
+							<a class="btn btn-info" href="#" data-dismiss="modal"> 
+								<i class="glyphicon glyphicon-remove icon-white"></i> 取消
+							</a>
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!--/span-->
+		</div>
+		<div class="modal fade" id="delayMyWaitCandidateModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="box-header well" data-original-title="">
+						<h2>
+							<i class="glyphicon glyphicon-user"></i> 候选人到岗延期
+						</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
+								class="glyphicon glyphicon-chevron-up"></i></a> <a
+								class="btn btn-round btn-default" href="#" data-dismiss="modal">
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</div>
+					</div>
+					<div id="excelCheckBox" class="box-content">
+					 <form id="pushCandidateForm" method="post" class="form-horizontal">
+						<div class="group">
+							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
+							<div class="col-sm-4" style="width:60%;">
+								<input type="text" class="form-control" name="delayMyWaitCandidateName" id="delayMyWaitCandidateName" disabled="disabled" />
+								<input type="hidden"  name="delayMyWaitCandidateId" id="delayMyWaitCandidateId" />
+							</div>
+						</div>
+						<br/><br/><br/>
+						<div class="group">
+							<label class="col-lg-2 control-label" style="width:30%;">ARRIVAL DATE</label>
+							<div class="col-md-4">
+								<div class="input-group date form_datetime col-sm-12"
+									data-link-field="dt_set_order_time_input">
+									<input class="form-control" type="text" disabled="disabled"
+										id="delayMyWaitCandidateArrivalDate" name="delayMyWaitCandidateArrivalDate"> <span
+										class="input-group-addon"><span
+										class="glyphicon glyphicon-th"></span></span> <input type="hidden"
+										id="delayMyWaitCandidateArrivalDate1" name="delayMyWaitCandidateArrivalDate1" />
+								</div>
+							</div>
+						</div>
+						<br/><br/><br/>
+						<div class="center">
+							<a class="btn btn-success" href="#" onClick="delayMyWaitCandidateOk()"> 
 								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
 							</a> &nbsp;&nbsp;&nbsp;
 							<a class="btn btn-info" href="#" data-dismiss="modal"> 

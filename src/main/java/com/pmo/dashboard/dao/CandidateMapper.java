@@ -20,6 +20,7 @@ public interface CandidateMapper
     List<CandidateInfo> queryMyCandidateList(CandidateInfo candidate);
     
     int queryMyCandidateCount(CandidateInfo candidate);
+    
     boolean updateCandidateInfo(CandidateInfo candidate);
     
     List<Map<String,String>> queryCusDeptInfo();
@@ -39,4 +40,22 @@ public interface CandidateMapper
 	int queryinterviewFeedBackCount(CandidateInfo candidate);
 
 	int updateInterviewFeedBack(CandidateInfo candidate);
+	
+	int queryMyWaitEntryCandidateCount(CandidateInfo candidate);
+	
+	List<CandidateInfo> queryMyWaitEntryCandidateList(CandidateInfo candidate);
+	
+	boolean updateCandidateEntryInfo(CandidateInfo candidate);
+	
+	boolean updateCandidateDelayArrivalDate(CandidateInfo candidate);
+	
+	boolean updateCandidateAbortInfo(CandidateInfo candidate);
+	
+	List<Map<String,String>> queryDemandForCandidateId(CandidateInfo candidate);
+	
+	boolean updateDemandAbortColumnInfo(CandidateInfo candidate);
+	
+	boolean insertDemandForAbortCandidate(Map<String,String> map);
+	
+	boolean updateDemandStatusDelay(CandidateInfo candidate);
 }

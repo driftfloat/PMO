@@ -42,9 +42,9 @@ public class CandidateInfo extends PageCondition
 	private String interviewFeedBack;
 	private String interviewId;
 	private String interviewDate;
-	private String csSubDept;
 	private String csSubdeptName;
 	private String feedbacktime;
+	private String demandStatus;
 	
     public String getFeedbacktime() {
 		return feedbacktime;
@@ -293,12 +293,6 @@ public class CandidateInfo extends PageCondition
 	public void setInterviewDate(String interviewDate) {
 		this.interviewDate = interviewDate;
 	}
-	public String getCsSubDept() {
-		return csSubDept;
-	}
-	public void setCsSubDept(String csSubDept) {
-		this.csSubDept = csSubDept;
-	}
 	public void setHrFeedBack(String hrFeedBack) {
 		this.hrFeedBack = hrFeedBack;
 	}
@@ -307,6 +301,12 @@ public class CandidateInfo extends PageCondition
 	}
 	public void setCsSubdeptName(String csSubdeptName) {
 		this.csSubdeptName = csSubdeptName;
+	}
+	public String getDemandStatus() {
+		return demandStatus;
+	}
+	public void setDemandStatus(String demandStatus) {
+		this.demandStatus = demandStatus;
 	}
 	
 }

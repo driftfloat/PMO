@@ -1,11 +1,29 @@
 var currentPage = "";//当前页码
 var pageCount = "";//共几页 
 var exportdata;
+var statusMap = {"招聘中":"0","offer中":"1","已入职":"2","闲置中":"3","暂不关注":"4","黑名单":"5","入职他司":"6"};
+
 $(function(){
 	loadCandidateList();	
 	loadCandidateSkillInfo();
+	loadCusDeptInfo();
+	dateType();
 })
-
+function dateType(){
+	$('.form_datetime').datetimepicker({
+		weekStart: 1,
+		minView:'month',
+		todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+		language:'zh-CN',
+		format: 'yyyy-mm-dd',
+		pickerPosition: 'bottom-left',
+		showMeridian: 1
+	});
+}
 $('#searchCandidateBtn').bind("click", function(){
 	loadCandidateList();
 });
@@ -50,9 +68,7 @@ function exportCondition(){
 			}
 		}
 	})
-	
 }
-
 function exportData(){
 	var url = path+'/service/candidate/exportExcel';
 	$("#exceltHrefCandidate").attr("href",url);
@@ -61,27 +77,32 @@ function exportData(){
 	$('#myCandidateListModal').modal('hide');
 	$("[type='checkbox']").attr("checked","checked");
 }
-var statusMap = {"招聘中":"0","offer中":"1","已入职":"2","闲置中":"3","暂不关注":"4","黑名单":"5","入职他司":"6"};
-function updateCandidateStatus(candidateId,candidateName,candidateStatus){	
-	$('#updateCandidateStatusId').val(candidateId);
-	$('#updateCandidateStatusName').val(candidateName);
-	$("#updateMyCandidateStatus").val(statusMap[candidateStatus]);
-	$('#myCandidateStatusModal').modal('show');
-};
-function updateCandidateStatusOk(){
-	var candidateStatus = $("#updateMyCandidateStatus").find("option:selected").val();	
-	if(candidateStatus == ''){
-		alert("请选择要更新状态！");
+
+function entryMyWaitCandidate(candidateId,candidateName){
+	$('#entryMyWaitCandidateId').val(candidateId);
+	$('#entryMyWaitCandidateName').val(candidateName);
+	$('#entryMyWaitCandidateModal').modal('show');
+}
+function entryMyWaitCandidateOk(){
+	var realSalary = $("#entryMyWaitCandidateRealSalary").val();	
+	if(realSalary == ''){
+		alert("请填写候选人实际薪资！");
 		return;
 	}
-	var updateMycandidateStatus = new FormData();
-	updateMycandidateStatus.append("candidateId",$("#updateCandidateStatusId").val());
-	updateMycandidateStatus.append("candidateStatus",candidateStatus);
+	var arrivalDate = $("#entryMyWaitCandidateArrivalDate").val();	
+	if(arrivalDate == ''){
+		alert("请选择候选人实际到岗日期！");
+		return;
+	}
+	var candidate = new FormData();
+	candidate.append("candidateId",$("#entryMyWaitCandidateId").val());
+	candidate.append("arrivalDate",arrivalDate);
+	candidate.append("realSalary",realSalary);
 	
 	$.ajax({
-		url:path+'/service/candidate/updateCandidateStatusOk',
+		url:path+'/service/candidate/entryMyWaitCandidateOk',
 		dataType:"json",
-		data:updateMycandidateStatus,
+		data:candidate,
 		async:true,
 		cache:false,
 		processData:false,
@@ -89,23 +110,95 @@ function updateCandidateStatusOk(){
 		type:"post",
 		success:function(flag){
 			if(flag){
-				alert("更新成功！");
+				alert("入职信息填写成功！");
 			}else{
-				alert("更新失败！请刷新页面重试！");
+				alert("入职信息填写失败！请刷新页面重试！");
 			}
-			$('#myCandidateStatusModal').modal('hide');	
+			$('#entryMyWaitCandidateModal').modal('hide');	
 			loadCandidateList();
 		}
 	})
 }
-function pushCandidateToDept(candidateId,candidateName){	
-	$('#myCandidatePushModal').on('show.bs.modal', function (e) {
-		loadCusDeptInfo();
-		$('#pushCandidateId').val(candidateId);
-		$('#pushCandidateName').val(candidateName);
-	});
-	$('#myCandidatePushModal').modal('show');	
-};
+
+function abortMyWaitCandidate(candidateId,candidateName,candidateStatus,remark){
+	$('#abortMyWaitCandidateId').val(candidateId);
+	$('#abortMyWaitCandidateName').val(candidateName);
+	$("#abortMyWaitCandidateStatus").val(statusMap[candidateStatus]);
+	$('#abortMyWaitCandidateRemark').val(remark);
+	$('#abortMyWaitCandidateModal').modal('show');
+}
+function abortMyWaitCandidateOk(){
+	var candidateStatus = $("#abortMyWaitCandidateStatus").val();	
+	if(candidateStatus == ''){
+		alert("候选人状态不能为空！");
+		return;
+	}
+	var remark = $("#abortMyWaitCandidateRemark").val();	
+	if(remark == ''){
+		alert("请填写具体备注信息！");
+		return;
+	}
+	var candidate = new FormData();
+	candidate.append("candidateId",$("#abortMyWaitCandidateId").val());
+	candidate.append("candidateStatus",candidateStatus);
+	candidate.append("remark",remark);
+	
+	$.ajax({
+		url:path+'/service/candidate/abortMyWaitCandidateOk',
+		dataType:"json",
+		data:candidate,
+		async:true,
+		cache:false,
+		processData:false,
+        contentType:false,
+		type:"post",
+		success:function(flag){
+			if(flag){
+				alert("abort成功！");
+			}else{
+				alert("abort失败！请刷新页面重试！");
+			}
+			$('#abortMyWaitCandidateModal').modal('hide');	
+			loadCandidateList();
+		}
+	})
+}
+function delayMyWaitCandidate(candidateId,candidateName){	
+	$('#delayMyWaitCandidateId').val(candidateId);
+	$('#delayMyWaitCandidateName').val(candidateName);
+	$('#delayMyWaitCandidateModal').modal('show');
+}
+function delayMyWaitCandidateOk(){
+	var arrivalDate = $("#delayMyWaitCandidateArrivalDate").val();	
+	if(arrivalDate == ''){
+		alert("候选人到岗日期不能为空！");
+		return;
+	}
+	var candidate = new FormData();
+	candidate.append("candidateId",$("#delayMyWaitCandidateId").val());
+	candidate.append("arrivalDate",arrivalDate);
+	
+	$.ajax({
+		url:path+'/service/candidate/delayMyWaitCandidateOk',
+		dataType:"json",
+		data:candidate,
+		async:true,
+		cache:false,
+		processData:false,
+        contentType:false,
+		type:"post",
+		success:function(flag){
+			if(flag){
+				alert("延期成功！");
+			}else{
+				alert("延期失败！请刷新页面重试！");
+			}
+			$('#delayMyWaitCandidateModal').modal('hide');	
+			loadCandidateList();
+		}
+	})
+}
+
 function loadCusDeptInfo(){
 	$.ajax({
 		url:path+'/service/candidate/loadCusDeptInfo',
@@ -121,85 +214,10 @@ function loadCusDeptInfo(){
 	})
 }
 
-function pushCandidateOk(){
-	var csSubDeptId = $("#csSubdeptName").find("option:selected").val();	
-	if(csSubDeptId == ''){
-		alert("请选择推送部门！");
-		return;
-	}
-	var candidatePush = new FormData();
-	candidatePush.append("csSubDeptId",csSubDeptId);
-	candidatePush.append("candidateId",$("#pushCandidateId").val());
-	
-	$.ajax({
-		url:path+'/service/candidate/pushCandidateOk',
-		dataType:"json",
-		data:candidatePush,
-		async:true,
-		cache:false,
-		processData:false,
-        contentType:false,
-		type:"post",
-		success:function(flag){
-			if(flag == '5'){
-				alert("推送成功！");
-			}else if(flag == '0'){
-				alert("推送失败！此候选人不存在，请刷新页面重试！");
-			}else if(flag == '1'){
-				alert("推送失败！此候选人状态不在招聘中！不能推送！");
-			}else if(flag == '2'){
-				alert("推送失败！请勿重复推送！");
-			}else if(flag == '3'){
-				alert("推送失败！更新候选人状态失败，请刷新页面重试！");
-			}else if(flag == '4'){
-				alert("推送失败！新增推送候选人数据失败，请刷新页面重试！");
-			}
-			$('#myCandidatePushModal').modal('hide');	
-			loadCandidateList();
-		}
-	})
-}
-
-function backCandidateToDept(candidateId){
-	if(confirm("确定要撤回吗?"))
-	{
-		$.ajax({
-			url:path+'/service/candidate/backCandidateToDept',
-			dataType:"json",
-			data:{"candidateId":candidateId},
-			async:true,
-			cache:false,
-			type:"post",
-			success:function(flag){
-				if(flag == '3'){
-					alert("撤回成功！");
-				}else if(flag == '0'){
-					alert("撤回失败！此候选人不存在，请刷新页面重试！");
-				}else if(flag == '1'){
-					alert("撤回失败！此候选人当前状态不能撤回！");
-				}else if(flag == '2'){
-					alert("撤回失败！更新候选人状态失败，请刷新页面重试！");
-				}	
-				loadCandidateList();
-			}
-		})
-	}
-}
-
 function updateResumeInfo(candidateId){
 	$("#editForm").attr("action",path+"/service/resume/updateResume.html");
 	$("#candidateId").val(candidateId);
 	$("#editForm").submit();
-}
-
-function downLoadCandidateResume(candidateId,resumePath){
-	if(resumePath == null || resumePath == ''){
-		alert("未上传此候选人简历");
-		return;
-	}
-	var url = path+'/service/candidate/downLoadCandidateResume?candidateId='+candidateId;
-	$("#exceltHrefCandidate").attr("href",url);
-	document.getElementById("exceltHrefCandidate").click();
 }
 
 function loadCandidateSkillInfo(){
@@ -257,14 +275,24 @@ function loadCandidateList(pageState)
 				"<td>"+ result.data[i].skill+ "</td>"+
 				"<td>"+ result.data[i].interviewStatus+ "</td>"+
 				"<td>"+ result.data[i].csSubdeptName+ "</td>"+
-				"<td>"+ result.data[i].demandStatus+ "</td>"+
-				"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-						"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>ENTRY</a>"+
-					"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-						"onclick=pushCandidateToDept('"+result.data[i].candidateId+"')>ABORT</a>" +
-					"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-						"onclick=updateCandidateStatus('"+result.data[i].candidateId+"')>DELAY</a>" +
-				"</td>").appendTo(tr);
+				"<td>"+ result.data[i].demandStatus+ "</td>").appendTo(tr);
+				if(result.data[i].demandStatus == 'Onboard'){
+					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
+					"</td>").appendTo(tr);
+				}else{
+					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
+						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=entryMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>ENTRY</a>"+
+						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=abortMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"'," +
+								"'"+result.data[i].candidateStatus+"','"+result.data[i].remark+"')>ABORT</a>" +
+						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=delayMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>DELAY</a>" +
+					"</td>").appendTo(tr);
+				}
+				
 			}
 			$("#candidateList").append("</tbdoy>");
 			currentPage = parseInt(result.pageInfo.currentPage);

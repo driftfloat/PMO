@@ -36,7 +36,7 @@
 		<result property="interviewFeedBack" 	column="FEEDBACK" 		javaType="String" />
 		<result property="interviewId" 		column="INTERVIEW_ID" 		javaType="String" />
 		<result property="interviewDate" 	column="INTERVIEW_DATE" 	javaType="String" />
-		<result property="csSubDept" 		column="CS_SUBDEPT_NAME" 	javaType="String" />
+		<result property="demandStatus" 	column="STATUS" 			javaType="String" />
 	</resultMap>
 	<resultMap id="candidatePushMap" type="com.pmo.dashboard.entity.CandidatePush">
 		<id 	property="pushId" 		column="PUSH_ID" 		javaType="String" />
@@ -184,10 +184,73 @@
 	<update id="updateCandidateStatus" parameterType="com.pmo.dashboard.entity.CandidateInfo">
 	    update t_candidate set CANDIDATE_STATUS = #{candidateStatus} WHERE CANDIDATE_ID = #{candidateId}; 
 	</update>
-	
+	<select id="queryMyWaitEntryCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
+		SELECT 
+	    	a.*,c.CS_SUBDEPT_NAME,d.STATUS as demandStatus 
+        FROM 
+        	t_candidate a 
+        LEFT JOIN 
+        	(select * from 
+				(select CANDIDATE_ID,CS_SUBDEPT_ID  
+					from  t_candidate_push a
+					where PUSH_DATE = 
+						(select max(PUSH_DATE) from t_candidate_push b  
+							where a.CANDIDATE_ID = b.CANDIDATE_ID
+						)  
+				)a  
+				group by CANDIDATE_ID
+			)b
+        ON a.CANDIDATE_ID = b.CANDIDATE_ID 
+        LEFT JOIN 
+        	t_cs_dept c
+        ON b.CS_SUBDEPT_ID = c.CS_SUBDEPT_ID 
+        INNER JOIN 
+        	t_demand d 
+        ON a.CANDIDATE_ID = d.CANDIDATE_ID 
+        WHERE 
+			a.LOCK_PERSION=#{lockPerson} and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','delay','Onboard')
+        	<include refid="candidateWherePart"/>
+		ORDER BY d.STATUS,CANDIDATE_STATUS,INTERVIEW_STATUS,c.CS_SUBDEPT_NAME,MAJOR_STATUS,CANDIDATE_ID 
+        LIMIT #{currentPage},#{pageDataCount};
+	</select>
+	<select id="queryMyWaitEntryCandidateCount" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="int" >
+		SELECT 
+	    	count(0) 
+        FROM 
+        	t_candidate a 
+        INNER JOIN 
+        	t_demand d 
+        ON a.CANDIDATE_ID = d.CANDIDATE_ID 
+        WHERE 
+			a.LOCK_PERSION=#{lockPerson} and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','delay','Onboard')
+        	<include refid="candidateWherePart"/>
+        ;
+	</select>
+	<update id="updateCandidateEntryInfo" parameterType="com.pmo.dashboard.entity.CandidateInfo">
+	    update t_candidate set REAL_SALARY = #{realSalary},ARRIVAL_DATE = #{arrivalDate} WHERE CANDIDATE_ID = #{candidateId}; 
+	</update>
+	<update id="updateCandidateDelayArrivalDate" parameterType="com.pmo.dashboard.entity.CandidateInfo">
+	    update t_candidate set ARRIVAL_DATE = #{arrivalDate} WHERE CANDIDATE_ID = #{candidateId}; 
+	</update>
+	<update id="updateDemandStatusDelay" parameterType="com.pmo.dashboard.entity.CandidateInfo">
+	    update t_demand set STATUS = 'delay' WHERE CANDIDATE_ID = #{candidateId} and STATUS in ('OfferMade','Offermade');
+	</update>
+	<update id="updateCandidateAbortInfo" parameterType="com.pmo.dashboard.entity.CandidateInfo">
+	    update t_candidate set CANDIDATE_STATUS = #{candidateStatus},REMARK = #{remark} WHERE CANDIDATE_ID = #{candidateId}; 
+	</update>
+	<update id="updateDemandAbortColumnInfo" parameterType="com.pmo.dashboard.entity.CandidateInfo">
+	    update t_demand set STATUS = 'Abort' WHERE CANDIDATE_ID = #{candidateId} and STATUS in ('OfferMade','Offermade','delay'); 
+	</update>
+	<select id="queryDemandForCandidateId" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="java.util.HashMap" >
+		select * from t_demand where CANDIDATE_ID = #{candidateId} and STATUS in ('OfferMade','Offermade','delay'); 
+	</select>
+	<insert id="insertDemandForAbortCandidate" parameterType="java.util.HashMap">
+	    insert into t_demand (DEMAND_ID,RR,JOB_CODE,SKILL,REQUESTOR,POSITION,HSBC_SUBDEPT_ID,LOCATION,REQ_PUBLISHED_DATE,AGEING,PROFILES_NO,INTERVIEWED_NO,`STATUS`,PROPOSED_JOINING_DATE,SOW_SIGNED,REASON,REMARK,CS_SUBDEPT,PLANNED_ONBOARD_DATE,DO_NUMBER,HR_PRIORITY,CREATE_DATE,COMPLETION_DATE)
+	    	values (#{DEMAND_ID},#{RR},#{JOB_CODE},#{SKILL},#{REQUESTOR},#{POSITION},#{HSBC_SUBDEPT_ID},#{LOCATION},#{REQ_PUBLISHED_DATE},#{AGEING},#{PROFILES_NO},#{INTERVIEWED_NO},'OPEN',#{PROPOSED_JOINING_DATE},#{SOW_SIGNED},#{REASON},#{REMARK},#{CS_SUBDEPT},#{PLANNED_ONBOARD_DATE},#{DO_NUMBER},#{HR_PRIORITY},#{CREATE_DATE},#{COMPLETION_DATE})
+	</insert>
 	<sql id="candidateWherePart">
 		<if test="candidateName != null and candidateName != ''">
-			AND CANDIDATE_NAME = #{candidateName}
+			AND a.CANDIDATE_NAME = #{candidateName}
 		</if>
 		<if test="candidateTel != null and candidateTel != ''">
 			AND TEL like CONCAT('%',#{candidateTel},'%')
@@ -208,7 +271,7 @@
 			AND EDUCATION = #{education}
 		</if>
 		<if test="skill != null and skill != ''">
-			AND SKILL = #{skill}
+			AND a.SKILL = #{skill}
 		</if>
 		<if test="email != null and email != ''">
 			AND EMAIL like CONCAT('%',#{email},'%')
@@ -224,6 +287,12 @@
 		</if>
 		<if test="interviewStatus != null and interviewStatus != ''">
 			AND INTERVIEW_STATUS = #{interviewStatus}
+		</if>
+		<if test="demandStatus != null and demandStatus != ''">
+			AND STATUS = #{demandStatus}
+		</if>
+		<if test="csSubdeptName != null and csSubdeptName != ''">
+			AND CS_SUBDEPT_NAME = #{csSubdeptName}
 		</if>
     </sql>
 	

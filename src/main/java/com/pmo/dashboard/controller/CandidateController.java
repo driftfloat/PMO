@@ -428,4 +428,25 @@ public class CandidateController
         result.put("pageInfo", page);
         return result;
     }
+	
+	@RequestMapping("/entryMyWaitCandidateOk")
+    @ResponseBody
+    public boolean entryMyWaitCandidateOk(CandidateInfo candidate)
+    {
+		return candidateService.entryMyWaitCandidateOk(candidate);
+    }
+	
+	@RequestMapping("/delayMyWaitCandidateOk")
+    @ResponseBody
+    public boolean delayMyWaitCandidateOk(CandidateInfo candidate)
+    {
+		return candidateService.delayMyWaitCandidateOk(candidate);
+    }
+	
+	@RequestMapping("/abortMyWaitCandidateOk")
+    @ResponseBody
+    public boolean abortMyWaitCandidateOk(CandidateInfo candidate)
+    {
+		return candidateService.abortMyWaitCandidateOk(candidate);
+    }
 }

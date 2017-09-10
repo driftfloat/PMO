@@ -254,9 +254,6 @@ var path='<%=path%>';
 										</div>
 									</div>
 								</form>
-								<form action="" id="editForm" method="post" target="_blank">
-									<input id="candidateId" name="candidateId" type="hidden" />
-								</form>
 							</div>
 						</div>
 					</div>
@@ -266,6 +263,9 @@ var path='<%=path%>';
 			</div>
 			<!--/#content.col-md-0-->
 		</div>
+		<form id="editForm" action="">
+			<input type="hidden" id="candidateId" ></input>
+		</form>
 		<hr>
 		<div class="modal fade" id="myCandidateListModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">

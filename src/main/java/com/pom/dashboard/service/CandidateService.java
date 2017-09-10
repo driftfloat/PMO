@@ -43,4 +43,10 @@ public interface CandidateService
 	List<CandidateInfo> queryMyWaitEntryCandidateList(CandidateInfo candidate);
 	
 	boolean updateCandidateInfo(CandidateInfo candidateinfo);
+	
+	boolean entryMyWaitCandidateOk(CandidateInfo candidateinfo);
+	
+	boolean delayMyWaitCandidateOk(CandidateInfo candidateinfo);
+	
+	boolean abortMyWaitCandidateOk(CandidateInfo candidateinfo);
 }

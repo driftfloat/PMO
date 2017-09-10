@@ -397,15 +397,85 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
-	public int queryMyWaitEntryCandidateCount(CandidateInfo candidate) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int queryMyWaitEntryCandidateCount(CandidateInfo candidate) 
+	{
+		return candidateMapper.queryMyWaitEntryCandidateCount(candidate);
 	}
 
 	@Override
-	public List<CandidateInfo> queryMyWaitEntryCandidateList(CandidateInfo candidate) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CandidateInfo> queryMyWaitEntryCandidateList(CandidateInfo candidate) 
+	{
+		return transferData(candidateMapper.queryMyWaitEntryCandidateList(candidate));
+	}
+
+	@Override
+	public boolean entryMyWaitCandidateOk(CandidateInfo candidate) {
+		String candidateId = candidate.getCandidateId();
+    	//判断此候选人状态
+    	CandidateInfo candiadate = candidateMapper.queryCandidateForId(candidateId);
+    	if(null == candiadate)
+    	{
+    		return false;
+    	}
+    	//更改候选人状态
+    	return candidateMapper.updateCandidateEntryInfo(candidate);
+	}
+
+	@Override
+	public boolean delayMyWaitCandidateOk(CandidateInfo candidate) {
+		String candidateId = candidate.getCandidateId();
+    	//判断此候选人状态
+    	CandidateInfo candiadate = candidateMapper.queryCandidateForId(candidateId);
+    	if(null == candiadate)
+    	{
+    		return false;
+    	}
+    	//更改候选人状态
+    	boolean candidateFlag = candidateMapper.updateCandidateDelayArrivalDate(candidate);
+    	if(!candidateFlag)
+    	{
+    		return false;
+    	}
+    	return candidateMapper.updateDemandStatusDelay(candidate);
+	}
+
+	@Override
+	@Transactional
+	public boolean abortMyWaitCandidateOk(CandidateInfo candidate) {
+		String candidateId = candidate.getCandidateId();
+    	//判断此候选人状态
+    	CandidateInfo candiadate = candidateMapper.queryCandidateForId(candidateId);
+    	if(null == candiadate)
+    	{
+    		return false;
+    	}
+    	//更改候选人状态
+    	boolean candidateFlag = candidateMapper.updateCandidateAbortInfo(candidate);
+    	if(!candidateFlag)
+    	{
+    		return false;
+    	}
+    	//获取此候选人对应的需求对象信息
+    	List<Map<String,String>> demandList = candidateMapper.queryDemandForCandidateId(candidate);
+    	if(demandList == null || demandList.size() <= 0)
+    	{
+    		return false;
+    	}
+    	//更新需求表
+    	boolean demandUpdateFlag = candidateMapper.updateDemandAbortColumnInfo(candidate);
+    	if(!demandUpdateFlag)
+    	{
+    		return false;
+    	}
+    	//新插入一条需求信息
+    	Map<String,String> demandMap = demandList.get(0);
+    	demandMap.put("DEMAND_ID", Utils.getUUID());
+    	boolean demanInsertFlag = candidateMapper.insertDemandForAbortCandidate(demandMap);
+    	if(!demanInsertFlag)
+    	{
+    		return false;
+    	}
+    	return true;
 	}
 
 }
