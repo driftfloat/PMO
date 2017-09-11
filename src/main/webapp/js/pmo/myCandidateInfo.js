@@ -53,38 +53,6 @@ function exportCondition(){
 	
 }
 
-function feedbackCandidateInfo(candidateId,candidateName){
-	$("#candidateId").val(candidateId);
-	$("#candidateNameId").val(candidateName);
-	$('#feedBackDialog').modal('show');
-	
-}
-
-function updateHRFeedBack(){
-	var candidateId=$("#candidateId").val();
-	var hrFeedBack=$("#interviewFeedBack").val();
-	$.ajax({
-		url:path+"/service/candidate/candidateFeedback",
-		dataType:"json",
-		async:true,
-		data:{'candidateId':candidateId,'hrFeedBack':hrFeedBack},
-		cache:false,
-		type:"post",
-		success:function(result){
-			if(result)
-			{
-			     $('#feedBackDialog').modal('hide');
-			     loadCandidateList();	
-			}else{
-				
-			}
-		}
-	})
-	
-}
-	
-
-
 function exportData(){
 	var url = path+'/service/candidate/exportExcel';
 	$("#exceltHrefCandidate").attr("href",url);
@@ -93,22 +61,12 @@ function exportData(){
 	$('#myCandidateListModal').modal('hide');
 	$("[type='checkbox']").attr("checked","checked");
 }
-
-function updateCandidateStatus(candidateId,candidateName){	
-	$('#myCandidateStatusModal').on('show.bs.modal', function (e) {
-		$('#updateCandidateStatusId').val(candidateId);
-		$('#updateCandidateStatusName').val(candidateName);
-		$("#updateMyCandidateStatus").val("");
-//		var status = $("#updateMyCandidateStatus");
-//		for(i = 0 ;i <= status.options.length; i++){
-//			if(status.options[i].text == candidateStatus){
-//				status.options[i].selected = true;
-//				break;
-//			}
-//		}
-	});
-	$('#myCandidateStatusModal').modal('show');	
-	
+var statusMap = {"招聘中":"0","offer中":"1","已入职":"2","闲置中":"3","暂不关注":"4","黑名单":"5","入职他司":"6"};
+function updateCandidateStatus(candidateId,candidateName,candidateStatus){	
+	$('#updateCandidateStatusId').val(candidateId);
+	$('#updateCandidateStatusName').val(candidateName);
+	$("#updateMyCandidateStatus").val(statusMap[candidateStatus]);
+	$('#myCandidateStatusModal').modal('show');
 };
 function updateCandidateStatusOk(){
 	var candidateStatus = $("#updateMyCandidateStatus").find("option:selected").val();	
@@ -311,8 +269,8 @@ function loadCandidateList(pageState)
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=pushCandidateToDept('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>PUSH</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>STATUS</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>STATUS</a>" +
+							"<a href=' ' class='btn btn-info btn-small' " +
 								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
@@ -325,8 +283,8 @@ function loadCandidateList(pageState)
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=backCandidateToDept('"+result.data[i].candidateId+"')>BACK</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>STATUS</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>STATUS</a>" +
+							"<a href=' ' class='btn btn-info btn-small' " +
 								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
@@ -335,11 +293,11 @@ function loadCandidateList(pageState)
 				}else{
 					$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
 						"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>STATUS</a>" +
-						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
+								"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +					
+								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>STATUS</a>" +
+							"<a href=' ' class='btn btn-info btn-small' " +
+								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
 					"</td>").appendTo(tr);

@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
 <meta charset="utf-8">
-<title>MyCandidateList</title>
+<title>CandidateList</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description"
 	content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
@@ -59,10 +59,10 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user">&nbsp;MY&nbsp;CANDIDATE&nbsp;LIST</i> 
+									<i class="glyphicon glyphicon-user">&nbsp;MY&nbsp;WAIT&nbsp;ENTRY&nbsp;CANDIDATE&nbsp;LIST</i> 
 								</h2>
 							</div>
-							<div id="employeeInfo" class="box-content">
+							<div id="candidateInfo" class="box-content">
 							    <form id="candidateForm" method="post" class="form-horizontal">
 									<div class="group">
 										<label class="col-sm-2 control-label">NAME</label>
@@ -136,15 +136,10 @@ var path='<%=path%>';
 										</div>
 									</div>
 									<div class="group">
-										<label class="col-lg-2 control-label">EDUCATION</label>
+										<label class="col-sm-2 control-label">SKILL</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="education" id="education" data-bv-group=".group">
+											<select class="form-control" name="skill" id="skill" data-bv-group=".group">
 												<option value="">--Option--</option>
-												<option value="0">博士</option>
-												<option value="1">研究生</option>
-												<option value="2">本科</option>
-												<option value="3">大专</option>
-												<option value="4">高中</option>
 											</select>
 										</div>
 									</div>
@@ -162,45 +157,22 @@ var path='<%=path%>';
 										</div>
 									</div>
 									<div class="group">
-										<label class="col-lg-2 control-label">MAJOR TYPE</label>
+										<label class="col-lg-2 control-label">SUBDEPT NAME</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="majorStatus" id="majorStatus" data-bv-group=".group">
+											<select class="form-control" name="csSubdeptName" id="csSubdeptName" data-bv-group=".group">
 												<option value="">--Option--</option>
-												<option value="0">计算机相关专业</option>
-												<option value="1">非计算机相关专业</option>
 											</select>
 										</div>
 									</div>
 									<br/><br/><br/>
 									<div class="group">
-										<label class="col-sm-2 control-label">SKILL</label>
+										<label class="col-lg-2 control-label">DEMAND STATUS</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="skill" id="skill" data-bv-group=".group">
+											<select class="form-control" name="demandStatus" id="demandStatus" data-bv-group=".group">
 												<option value="">--Option--</option>
-											</select>
-										</div>
-									</div>
-									<div class="group">
-										<label class="col-lg-2 control-label">ENGLIST LEVEL</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="englishLevel" id="englishLevel" data-bv-group=".group">
-												<option value="">--Option--</option>
-												<option value="0">非工作语言</option>
-												<option value="1">工作语言</option>
-											</select>
-										</div>
-									</div>
-									<br/><br/><br/>
-									<div class="group">
-										<label class="col-lg-2 control-label">INTERVIEW STATUS</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="interviewStatus" id="interviewStatus" data-bv-group=".group">
-												<option value="">--Option--</option>
-												<option value="0">未推送</option>
-												<option value="1">已推送</option>
-												<option value="2">面试中</option>
-												<option value="3">面试完成</option>
-												<option value="4">已退回</option>
+												<option value="OfferMade">OfferMade</option>
+												<option value="Onboard">Onboard</option>
+												<option value="delay">delay</option>
 											</select>
 										</div>
 									</div>
@@ -234,13 +206,11 @@ var path='<%=path%>';
 												<th>EMAIL</th>
 												<th>SOURCE</th>
 												<th>CANDIDATE STATUS</th>
-												<th>EDUCATION</th>
 												<th>WORK YEARS</th>
-												<th>MAJOR TYPE</th>
-												<th>ENGLISH LEVEL</th>
 												<th>SKILL</th>
 												<th>INTERVIEW STATUS</th>
 												<th>SUBDEPT NAME</th>
+												<th>DEMAND STATUS</th>
 												<th>OPERATION</th>
 											</tr>
 										</thead>
@@ -319,7 +289,6 @@ var path='<%=path%>';
 									<label><input type="checkbox" checked="checked" name="ENTY_DATE" value="Enty Date"/>Enty Date&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="ARRIVAL_DATE" value="Arrival Date"/>Arrival Date&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="c.NICKNAME as createUser" value="Create User"/>Create User&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="INTERVIEW_STATUS" value="Interview Status"/>Interview Status&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="REMARK" value="Remark"/>Remark&nbsp;&nbsp;</label>
 								</tr>
 							</thead>
@@ -339,18 +308,19 @@ var path='<%=path%>';
 			</div>
 			<!--/span-->
 		</div>
-		<div class="modal fade" id="myCandidatePushModal" tabindex="-1" role="dialog"
+		<div class="modal fade" id="entryMyWaitCandidateModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="box-header well" data-original-title="">
 						<h2>
-							<i class="glyphicon glyphicon-user"></i> 推送候选人
+							<i class="glyphicon glyphicon-user"></i> 添加候选人入职信息
 						</h2>
 						<div class="box-icon">
-							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
-								class="glyphicon glyphicon-chevron-up"></i></a> <a
-								class="btn btn-round btn-default" href="#" data-dismiss="modal">
+							<a href="#" class="btn btn-round btn-default  btn-minimize ">
+								<i class="glyphicon glyphicon-chevron-up"></i>
+							</a> 
+							<a class="btn btn-round btn-default" href="#" data-dismiss="modal">
 								<i class="glyphicon glyphicon-remove"></i>
 							</a>
 						</div>
@@ -360,22 +330,34 @@ var path='<%=path%>';
 						<div class="group">
 							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
 							<div class="col-sm-4" style="width:60%;">
-								<input type="text" class="form-control" name="pushCandidateName" id="pushCandidateName" disabled="disabled" />
-								<input type="hidden"  name="pushCandidateId" id="pushCandidateId" />
+								<input type="text" class="form-control" name="entryMyWaitCandidateName" id="entryMyWaitCandidateName" disabled="disabled" />
+								<input type="hidden"  name="entryMyWaitCandidateId" id="entryMyWaitCandidateId" />
 							</div>
 						</div>
 						<br/><br/><br/>
 						<div class="group">
-							<label class="col-lg-2 control-label" style="width:30%;">SUBDEPT NAME</label>
+							<label class="col-lg-2 control-label" style="width:30%;">REAL SALARY</label>
 							<div class="col-lg-4" style="width:60%;">
-								<select class="form-control" name="csSubdeptName" id="csSubdeptName" data-bv-group=".group">
-									<option value="">--Option--</option>
-								</select>
+								<input type="text" class="form-control" name="entryMyWaitCandidateRealSalary" id="entryMyWaitCandidateRealSalary" />
+							</div>
+						</div>
+						<br/><br/><br/>
+						<div class="group">
+							<label class="col-lg-2 control-label" style="width:30%;">ARRIVAL DATE</label>
+							<div class="col-md-4">
+								<div class="input-group date form_datetime col-sm-12"
+									data-link-field="dt_set_order_time_input">
+									<input class="form-control" type="text" disabled="disabled"
+										id="entryMyWaitCandidateArrivalDate" name="entryMyWaitCandidateArrivalDate"> <span
+										class="input-group-addon"><span
+										class="glyphicon glyphicon-th"></span></span> <input type="hidden"
+										id="entryMyWaitCandidateArrivalDate1" name="entryMyWaitCandidateArrivalDate1" />
+								</div>
 							</div>
 						</div>
 						<br/><br/><br/>
 						<div class="center">
-							<a class="btn btn-success" href="#" onClick="pushCandidateOk()"> 
+							<a class="btn btn-success" href="#" onClick="entryMyWaitCandidateOk()"> 
 								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
 							</a> &nbsp;&nbsp;&nbsp;
 							<a class="btn btn-info" href="#" data-dismiss="modal"> 
@@ -388,13 +370,13 @@ var path='<%=path%>';
 			</div>
 			<!--/span-->
 		</div>
-		<div class="modal fade" id="myCandidateStatusModal" tabindex="-1" role="dialog"
+		<div class="modal fade" id="abortMyWaitCandidateModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="box-header well" data-original-title="">
 						<h2>
-							<i class="glyphicon glyphicon-user"></i> 更新候选人状态
+							<i class="glyphicon glyphicon-user"></i> Abort候选人
 						</h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
@@ -409,15 +391,15 @@ var path='<%=path%>';
 						<div class="group">
 							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
 							<div class="col-sm-4" style="width:60%;">
-								<input type="text" class="form-control" name="updateCandidateStatusName" id="updateCandidateStatusName" disabled="disabled" />
-								<input type="hidden"  name="updateCandidateStatusId" id="updateCandidateStatusId" />
+								<input type="text" class="form-control" name="abortMyWaitCandidateName" id="abortMyWaitCandidateName" disabled="disabled" />
+								<input type="hidden"  name="abortMyWaitCandidateId" id="abortMyWaitCandidateId" />
 							</div>
 						</div>
 						<br/><br/><br/>
 						<div class="group">
 							<label class="col-lg-2 control-label" style="width:30%;">CANDIDATE STATUS</label>
 							<div class="col-lg-4" style="width:60%;">
-								<select class="form-control" id="updateMyCandidateStatus" data-bv-group=".group">
+								<select class="form-control" id="abortMyWaitCandidateStatus" data-bv-group=".group">
 									<option value="">--Option--</option>
 									<option value="0">招聘中</option>
 									<option value="1">offer中</option>
@@ -430,8 +412,15 @@ var path='<%=path%>';
 							</div>
 						</div>
 						<br/><br/><br/>
+						<div class="group">
+							<label class="col-sm-2 control-label" style="width:30%;">REMARK</label>
+							<div class="col-sm-4" style="width:60%;">
+								<textarea id = "abortMyWaitCandidateRemark" style="width:80%;height:100px"></textarea>
+							</div>
+						</div>
+						<br/><br/><br/>
 						<div class="center">
-							<a class="btn btn-success" href="#" onClick="updateCandidateStatusOk()"> 
+							<a class="btn btn-success" href="#" onClick="abortMyWaitCandidateOk()"> 
 								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
 							</a> &nbsp;&nbsp;&nbsp;
 							<a class="btn btn-info" href="#" data-dismiss="modal"> 
@@ -444,52 +433,63 @@ var path='<%=path%>';
 			</div>
 			<!--/span-->
 		</div>
-		<div class="modal fade" id="hrfeedBackbox" tabindex="-1"
-			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="delayMyWaitCandidateModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="box-header well" data-original-title="">
 						<h2>
-							<i class="glyphicon glyphicon-user"></i> HR反馈
+							<i class="glyphicon glyphicon-user"></i> 候选人到岗延期
 						</h2>
 						<div class="box-icon">
-							<a href="#" class="btn btn-round btn-default  btn-minimize ">
-								<i class="glyphicon glyphicon-chevron-up"></i>
-							</a> 
-							<a class="btn btn-round btn-default" href="#" data-dismiss="modal">
+							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
+								class="glyphicon glyphicon-chevron-up"></i></a> <a
+								class="btn btn-round btn-default" href="#" data-dismiss="modal">
 								<i class="glyphicon glyphicon-remove"></i>
 							</a>
 						</div>
 					</div>
-					<div class="box-content">
-						<input type="hidden" name="hrcandidateId" id="hrcandidateId"
-							 />
+					<div id="excelCheckBox" class="box-content">
+					 <form id="pushCandidateForm" method="post" class="form-horizontal">
 						<div class="group">
-							<label class="col-sm-2 control-label">Candidate Name:</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" name="candidateNameId" id="candidateNameId" />
+							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
+							<div class="col-sm-4" style="width:60%;">
+								<input type="text" class="form-control" name="delayMyWaitCandidateName" id="delayMyWaitCandidateName" disabled="disabled" />
+								<input type="hidden"  name="delayMyWaitCandidateId" id="delayMyWaitCandidateId" />
 							</div>
 						</div>
 						<br/><br/><br/>
 						<div class="group">
-							<label class="col-sm-2 control-label">Feedback:</label>
-							<textarea id="hrFeedBack" class="form-control" style="margin:15px;width: 80%;" rows="5"></textarea>
+							<label class="col-lg-2 control-label" style="width:30%;">ARRIVAL DATE</label>
+							<div class="col-md-4">
+								<div class="input-group date form_datetime col-sm-12"
+									data-link-field="dt_set_order_time_input">
+									<input class="form-control" type="text" disabled="disabled"
+										id="delayMyWaitCandidateArrivalDate" name="delayMyWaitCandidateArrivalDate"> <span
+										class="input-group-addon"><span
+										class="glyphicon glyphicon-th"></span></span> <input type="hidden"
+										id="delayMyWaitCandidateArrivalDate1" name="delayMyWaitCandidateArrivalDate1" />
+								</div>
+							</div>
 						</div>
+						<br/><br/><br/>
 						<div class="center">
-							<a class="btn btn-success" href="#"
-								onClick="updateHRFeedBack()"> 
-								<i class="glyphicon glyphicon-ok icon-white"></i> 确定
-							</a> 
+							<a class="btn btn-success" href="#" onClick="delayMyWaitCandidateOk()"> 
+								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
+							</a> &nbsp;&nbsp;&nbsp;
 							<a class="btn btn-info" href="#" data-dismiss="modal"> 
 								<i class="glyphicon glyphicon-remove icon-white"></i> 取消
 							</a>
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>
+			<!--/span-->
 		</div>
 		<c:import url="/service/manage/footer" />
-	</div>	
+
+	</div>
 	<!--/.fluid-container-->
 
 	<!-- external javascript -->
@@ -527,8 +527,7 @@ var path='<%=path%>';
 	<!-- application script for Charisma demo -->
 	<script src="<%=path %>/js/charisma.js"></script>
 
-	<script type="text/javascript" src="<%=path %>/js/pmo/myCandidateInfo.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/pmo/hrfeedback.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/myWaitEntryCandidateInfo.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>
