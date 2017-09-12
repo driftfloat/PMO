@@ -82,7 +82,6 @@ var path='<%=path%>';
 											class="table table-striped table-bordered">
 											<thead>
 												<tr>
-													<th>INTREVIEW DATE</th>
 													<th>NAME</th>
 													<th>SEX</th>
 													<th>AGE</th>
@@ -181,7 +180,7 @@ var path='<%=path%>';
 							<div class="group">
 								<label class="col-sm-2 control-label">csSubDept:</label>
 								<div class="col-sm-4">
-									<input type="text" readonly="true" class="form-control" name="csSubDeptName" id="csSubDeptName" />
+									<input type="text" readonly="true" class="form-control" name="csSubDept" id="csSubDept" />
 								</div>
 							</div>
 							
@@ -253,7 +252,7 @@ var path='<%=path%>';
 	<script src="<%=path%>/js/charisma.js"></script>
 
 	<script type="text/javascript"
-		src="<%=path%>/js/pmo/interviewFeedBackInfo.js"></script>
+		src="<%=path%>/js/pmo/interviewRecordInfo.js"></script>
 	<script type="text/javascript"
 		src="<%=path%>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript"

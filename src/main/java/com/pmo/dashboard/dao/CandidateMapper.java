@@ -58,4 +58,10 @@ public interface CandidateMapper
 	boolean insertDemandForAbortCandidate(Map<String,String> map);
 	
 	boolean updateDemandStatusDelay(CandidateInfo candidate);
+
+	List<CandidateInfo> getInterviewRecordByCandId(String candidateId);
+
+	int getCandidateListCount();
+
+	List<CandidateInfo> getCandidateList(CandidateInfo candidate);
 }

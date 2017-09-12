@@ -1,5 +1,5 @@
-var currentPage = "";// 当前页码
-var pageCount = "";// 共几页
+var currentPage = "";//当前页码
+var pageCount = "";//共几页 
 $(function() {
 	loadCandidateList();
 	
@@ -94,16 +94,13 @@ function loadCandidateList(pageState) {
 								+ result.data[i].interviewId + "','"
 								+ result.data[i].candidateName + "','"
 								+ result.data[i].candidateId + "','"
-								+ result.data[i].userName + "','"
-								+ result.data[i].csSubDept
+								+ result.data[i].nickName + "','"
+								+ result.data[i].csSubdeptName
 								+ "')>FeedBack</a>&nbsp;&nbsp;<a href='javascript:void(0);' class='btn btn-info btn-small'"
 								+ "onclick=downLoadCandidateResume('"
 								+ result.data[i].interviewId +"','"
 								+result.data[i].resumePath.replace(/\s+/g, "")
-								+"')>RESUME</a>&nbsp;&nbsp;" 
-								+"<a href='javascript:void(0);' class='btn btn-info btn-small' "
-								+"onclick=interviewRecord('"
-								+result.data[i].interviewId+"')>面试记录</a></td>").appendTo(tr);
+								+"')>RESUME</a></td>").appendTo(tr);
 					}
 					$("#candidateList").append("</tbdoy>");
 					currentPage = parseInt(result.pageInfo.currentPage);
@@ -132,13 +129,7 @@ function loadCandidateList(pageState) {
 			})
 }
 
- function interviewRecord(interviewId){
-	 $("#editForm").attr("action",path+"/service/candidate/interviewFeedBack.html");
-	 $("#interviewId").val(interviewId);
-	 $("#editForm").submit();
- }
-
-function interviewFeedBack(interviewId, candidateName, candidateId, interviewName, csSubDept) {
+function interviewFeedBack(interviewId, candidateName, candidateId, interviewName, csSubDeptName) {
 	$('#interviewFeedBack').val("");
 	$('#interviewStatus').val("");
 	$(".has-feedback").removeClass("has-feedback");
@@ -150,7 +141,7 @@ function interviewFeedBack(interviewId, candidateName, candidateId, interviewNam
 	$('#interviewName').val(interviewName);
 	$('#candidateName').val(candidateName);
 	$('#candidateId').val(candidateId);
-	$('#csSubDept').val(csSubDept);
+	$('#csSubDeptName').val(csSubDeptName);
 	$('#feedBackDialog').modal('show');
 }
 
