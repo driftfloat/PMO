@@ -49,11 +49,12 @@
                         <li class="accordion">
                             <a href="#"><i class="glyphicon glyphicon-tasks"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;面试管理</span></a>
                             <ul class="nav nav-pills nav-stacked">
-                              
+	                            <li><a class="ajax-link" href="<%=path %>/service/candidate/interviewFeedBackInfo.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;面试官反馈</span></a></li>
+		                        
+		                        <li><a class="ajax-link" href="<%=path %>/service/interview/interviewRecordInfo.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;面试记录</span></a></li>
                             </ul>
                         </li>
-                          <li><a class="ajax-link" href="<%=path %>/service/candidate/interviewFeedBackInfo.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;面试官反馈</span></a>
-                        </li>
+
                          
                     </ul>
                 </div>

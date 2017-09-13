@@ -37,6 +37,9 @@
 		<result property="interviewId" 		column="INTERVIEW_ID" 		javaType="String" />
 		<result property="interviewDate" 	column="INTERVIEW_DATE" 	javaType="String" />
 		<result property="demandStatus" 	column="STATUS" 			javaType="String" />
+		<result property="userId" 			column="USER_ID" 			javaType="String" />
+		<result property="fatherInterviewId" 		column="FATHER_INTERVIEW_ID" 	javaType="String" />
+		<result property="interviewSerrial" 		column="INTERVIEW_SERIAL" 		javaType="String" />
 	</resultMap>
 	<resultMap id="candidatePushMap" type="com.pmo.dashboard.entity.CandidatePush">
 		<id 	property="pushId" 		column="PUSH_ID" 		javaType="String" />
@@ -48,9 +51,9 @@
 	</resultMap>
 
 	<select id="queryinterviewFeedBack" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
-		SELECT a.USER_NAME,b.*,ci.FEEDBACK,ci.INTERVIEW_ID,ci.INTERVIEW_DATE,dept.CS_SUBDEPT_NAME
+		SELECT a.nickName,b.*,ci.FEEDBACK,ci.INTERVIEW_ID,ci.INTERVIEW_DATE,dept.CS_SUBDEPT_NAME
 			FROM t_user a 
-			LEFT JOIN t_candidate_interview ci ON ci.INTERVIEWER_ID = a.USER_ID
+			JOIN t_candidate_interview ci ON ci.INTERVIEWER_ID = a.USER_ID
 			LEFT JOIN t_candidate b on ci.CANDIDATE_ID = b.CANDIDATE_ID
 			LEFT JOIN t_cs_dept dept on dept.CS_SUBDEPT_ID = ci.CSSUBDEPT
 	        WHERE USER_NAME = #{userName} and (ci.FEEDBACK='' or ci.FEEDBACK is null)
@@ -296,4 +299,23 @@
 		</if>
     </sql>
 	
+	<select id="getCandidateListCount" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="int" >
+			SELECT count(0) FROM t_candidate
+	</select>
+	
+	<select id="getCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
+			SELECT * FROM t_candidate
+				LIMIT #{currentPage},#{pageDataCount};
+	</select>
+	
+	<select id="getInterviewRecordByCandId" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
+		SELECT a.NICKNAME,b.*,ci.FEEDBACK,ci.FATHER_INTERVIEW_ID,ci.INTERVIEW_SERIAL,
+			ci.INTERVIEW_DATE,dept.CS_SUBDEPT_NAME,ci.INTERVIEW_STATUS
+			FROM t_user a 
+			JOIN t_candidate_interview ci ON ci.INTERVIEWER_ID = a.USER_ID
+			LEFT JOIN t_candidate b on ci.CANDIDATE_ID = b.CANDIDATE_ID
+			LEFT JOIN t_cs_dept dept on dept.CS_SUBDEPT_ID = ci.CSSUBDEPT
+	        WHERE b.CANDIDATE_ID = #{candidateId}
+			ORDER BY ci.INTERVIEW_DATE;
+	</select>
 </mapper>
