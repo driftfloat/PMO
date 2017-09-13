@@ -4,32 +4,33 @@ public class Employee
 {
     
     private String employeeId;
+    private String eHr;
+    private String lob;
     private String hsbcStaffId;
     private String staffName;
     private String ln;
     private String staffRegion;
     private String staffLocation;
     private String locationType;
-    private String onShoreOrOffShore;
+    private String onshoreOrOffshore;
+    private String csSubDept;
+    private String hsbcSubDept;
+    private String projectName;
+    private String projectManager;
     private String sow;
     private String sowExpiredDate;
     private String staffCategory;
     private String engagementType;
-    private String hsbcDoj;
+    private String hsbcDOJ;
     private String graduationDate;
-    private String billingEntity;
-    private String billCurrency;
-    private String billRate;
-    private String resourceStatus;
-    private String mentionLWD;
-    private String reasonForTermination;
-    private String eHr;
-    private String nicheSkill;
-    private String hsbcProjectId;
     private String role;
     private String skill;
-    private String csSubDeptId;
-    
+    private String billingCurrency;
+    private String billRate;
+    private String resourceStatus;
+    private String terminatedDate;
+    private String terminationReason;
+    private String interviewStatus;
     public String getEmployeeId()
     {
         return employeeId;
@@ -37,6 +38,22 @@ public class Employee
     public void setEmployeeId(String employeeId)
     {
         this.employeeId = employeeId;
+    }
+    public String geteHr()
+    {
+        return eHr;
+    }
+    public void seteHr(String eHr)
+    {
+        this.eHr = eHr;
+    }
+    public String getLob()
+    {
+        return lob;
+    }
+    public void setLob(String lob)
+    {
+        this.lob = lob;
     }
     public String getHsbcStaffId()
     {
@@ -86,13 +103,45 @@ public class Employee
     {
         this.locationType = locationType;
     }
-    public String getOnShoreOrOffShore()
+    public String getOnshoreOrOffshore()
     {
-        return onShoreOrOffShore;
+        return onshoreOrOffshore;
     }
-    public void setOnShoreOrOffShore(String onShoreOrOffShore)
+    public void setOnshoreOrOffshore(String onshoreOrOffshore)
     {
-        this.onShoreOrOffShore = onShoreOrOffShore;
+        this.onshoreOrOffshore = onshoreOrOffshore;
+    }
+    public String getCsSubDept()
+    {
+        return csSubDept;
+    }
+    public void setCsSubDept(String csSubDept)
+    {
+        this.csSubDept = csSubDept;
+    }
+    public String getHsbcSubDept()
+    {
+        return hsbcSubDept;
+    }
+    public void setHsbcSubDept(String hsbcSubDept)
+    {
+        this.hsbcSubDept = hsbcSubDept;
+    }
+    public String getProjectName()
+    {
+        return projectName;
+    }
+    public void setProjectName(String projectName)
+    {
+        this.projectName = projectName;
+    }
+    public String getProjectManager()
+    {
+        return projectManager;
+    }
+    public void setProjectManager(String projectManager)
+    {
+        this.projectManager = projectManager;
     }
     public String getSow()
     {
@@ -126,13 +175,13 @@ public class Employee
     {
         this.engagementType = engagementType;
     }
-    public String getHsbcDoj()
+    public String getHsbcDOJ()
     {
-        return hsbcDoj;
+        return hsbcDOJ;
     }
-    public void setHsbcDoj(String hsbcDoj)
+    public void setHsbcDOJ(String hsbcDOJ)
     {
-        this.hsbcDoj = hsbcDoj;
+        this.hsbcDOJ = hsbcDOJ;
     }
     public String getGraduationDate()
     {
@@ -141,78 +190,6 @@ public class Employee
     public void setGraduationDate(String graduationDate)
     {
         this.graduationDate = graduationDate;
-    }
-    public String getBillingEntity()
-    {
-        return billingEntity;
-    }
-    public void setBillingEntity(String billingEntity)
-    {
-        this.billingEntity = billingEntity;
-    }
-    public String getBillCurrency()
-    {
-        return billCurrency;
-    }
-    public void setBillCurrency(String billCurrency)
-    {
-        this.billCurrency = billCurrency;
-    }
-    public String getBillRate()
-    {
-        return billRate;
-    }
-    public void setBillRate(String billRate)
-    {
-        this.billRate = billRate;
-    }
-    public String getResourceStatus()
-    {
-        return resourceStatus;
-    }
-    public void setResourceStatus(String resourceStatus)
-    {
-        this.resourceStatus = resourceStatus;
-    }
-    public String getMentionLWD()
-    {
-        return mentionLWD;
-    }
-    public void setMentionLWD(String mentionLWD)
-    {
-        this.mentionLWD = mentionLWD;
-    }
-    public String getReasonForTermination()
-    {
-        return reasonForTermination;
-    }
-    public void setReasonForTermination(String reasonForTermination)
-    {
-        this.reasonForTermination = reasonForTermination;
-    }
-    public String geteHr()
-    {
-        return eHr;
-    }
-    public void seteHr(String eHr)
-    {
-        this.eHr = eHr;
-    }
-    public String getNicheSkill()
-    {
-        return nicheSkill;
-    }
-    public void setNicheSkill(String nicheSkill)
-    {
-        this.nicheSkill = nicheSkill;
-    }
-    public String getHsbcProjectId()
-    {
-        return hsbcProjectId;
-    }
-    public void setHsbcProjectId(String hsbcProjectId)
-    {
-        this.hsbcProjectId = hsbcProjectId;
     }
     public String getRole()
     {
@@ -230,60 +207,102 @@ public class Employee
     {
         this.skill = skill;
     }
-    public String getCsSubDeptId()
+    public String getBillingCurrency()
     {
-        return csSubDeptId;
+        return billingCurrency;
     }
-    public void setCsSubDeptId(String csSubDeptId)
+    public void setBillingCurrency(String billingCurrency)
     {
-        this.csSubDeptId = csSubDeptId;
+        this.billingCurrency = billingCurrency;
+    }
+    public String getBillRate()
+    {
+        return billRate;
+    }
+    public void setBillRate(String billRate)
+    {
+        this.billRate = billRate;
+    }
+    public String getResourceStatus()
+    {
+        return resourceStatus;
+    }
+    public void setResourceStatus(String resourceStatus)
+    {
+        this.resourceStatus = resourceStatus;
+    }
+    public String getTerminatedDate()
+    {
+        return terminatedDate;
+    }
+    public void setTerminatedDate(String terminatedDate)
+    {
+        this.terminatedDate = terminatedDate;
+    }
+    public String getTerminationReason()
+    {
+        return terminationReason;
+    }
+    public void setTerminationReason(String terminationReason)
+    {
+        this.terminationReason = terminationReason;
+    }
+    public String getInterviewStatus()
+    {
+        return interviewStatus;
+    }
+    public void setInterviewStatus(String interviewStatus)
+    {
+        this.interviewStatus = interviewStatus;
     }
     
-    
-    
-    public Employee(String employeeId, String hsbcStaffId, String staffName,
-            String ln, String staffRegion, String staffLocation,
-            String locationType, String onShoreOrOffShore, String sow,
-            String sowExpiredDate, String staffCategory, String engagementType,
-            String hsbcDoj, String graduationDate, String billingEntity,
-            String billCurrency, String billRate, String resourceStatus,
-            String mentionLWD, String reasonForTermination, String eHr,
-            String nicheSkill, String hsbcProjectId, String role, String skill,
-            String csSubDeptId)
+    public Employee()
+    {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+    public Employee(String employeeId, String eHr, String lob,
+            String hsbcStaffId, String staffName, String ln, String staffRegion,
+            String staffLocation, String locationType, String onshoreOrOffshore,
+            String csSubDept, String hsbcSubDept, String projectName,
+            String projectManager, String sow, String sowExpiredDate,
+            String staffCategory, String engagementType, String hsbcDOJ,
+            String graduationDate, String role, String skill,
+            String billingCurrency, String billRate, String resourceStatus,
+            String terminatedDate, String terminationReason)
     {
         super();
         this.employeeId = employeeId;
+        this.eHr = eHr;
+        this.lob = lob;
         this.hsbcStaffId = hsbcStaffId;
         this.staffName = staffName;
         this.ln = ln;
         this.staffRegion = staffRegion;
         this.staffLocation = staffLocation;
         this.locationType = locationType;
-        this.onShoreOrOffShore = onShoreOrOffShore;
+        this.onshoreOrOffshore = onshoreOrOffshore;
+        this.csSubDept = csSubDept;
+        this.hsbcSubDept = hsbcSubDept;
+        this.projectName = projectName;
+        this.projectManager = projectManager;
         this.sow = sow;
         this.sowExpiredDate = sowExpiredDate;
         this.staffCategory = staffCategory;
         this.engagementType = engagementType;
-        this.hsbcDoj = hsbcDoj;
+        this.hsbcDOJ = hsbcDOJ;
         this.graduationDate = graduationDate;
-        this.billingEntity = billingEntity;
-        this.billCurrency = billCurrency;
-        this.billRate = billRate;
-        this.resourceStatus = resourceStatus;
-        this.mentionLWD = mentionLWD;
-        this.reasonForTermination = reasonForTermination;
-        this.eHr = eHr;
-        this.nicheSkill = nicheSkill;
-        this.hsbcProjectId = hsbcProjectId;
         this.role = role;
         this.skill = skill;
-        this.csSubDeptId = csSubDeptId;
+        this.billingCurrency = billingCurrency;
+        this.billRate = billRate;
+        this.resourceStatus = resourceStatus;
+        this.terminatedDate = terminatedDate;
+        this.terminationReason = terminationReason;
     }
-    public Employee()
-    {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+    
+    
+    
     
     
 

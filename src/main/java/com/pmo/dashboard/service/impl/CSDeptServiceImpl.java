@@ -17,19 +17,6 @@ public class CSDeptServiceImpl implements CSDeptService
     @Resource
     private CSDeptMapper csDeptMapper;
     
-    @Override
-    public List<CSDept> queryCSDeptName()
-    {
-        List<CSDept> list = csDeptMapper.queryCSDeptName();
-        return list;
-    }
-
-    @Override
-    public List<CSDept> queryCSSubDeptName(String csSubDeptId)
-    {
-        List<CSDept> list = csDeptMapper.queryCSSubDeptName(csSubDeptId);
-        return list;
-    }
 
     @Override
     public CSDept queryCSDeptById(String csSubDeptId)
@@ -50,5 +37,12 @@ public class CSDeptServiceImpl implements CSDeptService
 		List<CSDept> list = csDeptMapper.queryCSSubDeptNameByCsBuName(csBuName);
 		return list;
 	}
+
+    @Override
+    public List<CSDept> queryAllCSDept()
+    {
+        List<CSDept> list = csDeptMapper.queryAllCSDept();
+        return list;
+    }
 
 }

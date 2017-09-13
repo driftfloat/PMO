@@ -6,7 +6,6 @@ $(function(){
 	loadRole();
 	loadSkill();
 	loadSource();
-	loadBillingEntity();
 	loadBillingCurrency();
 	loadResourceStatus();
 	loadNicheSkill();
@@ -37,43 +36,18 @@ function dateType(){
 	});
 }
 
-function loadPersonalCSDept(employee){
-	var csSubDeptId = employee.csSubDeptId;
-	$.ajax({
-		url:path+'/service/csDept/queryCSDeptById',
-		dataType:"json",
-		async:true,
-		data:{"csSubDeptId":csSubDeptId},
-		cache:false,
-		type:"post",
-		success:function(csDept){
-			//$('#csDept').find("option[text='RTP']").attr("selected",true);
-			$("#csDept option:contains('"+csDept.csDeptName+"')").attr('selected', true);
-			loadCSSubDept(csDept);
-		}
-	})
-}
-
 
 function loadPersonalHSBCDept(employee){
-	var hsbcProjectId = employee.hsbcProjectId;
-	$.ajax({
-		url:path+'/service/hsbcDept/queryHSBCSubDeptById',
-		dataType:"json",
-		async:true,
-		data:{"hsbcProjectId":hsbcProjectId},
-		cache:false,
-		type:"post",
-		success:function(hsbcDept){
-			//$('#csDept').find("option[text='RTP']").attr("selected",true);
-			$("#hsbcDept option:contains('"+hsbcDept.hsbcDeptName+"')").attr('selected', true);
-			loadHSBCSubDept(hsbcDept,employee);
-		}
-	})
+	$('#hsbcDept').val(employee.hsbcSubDept)
+	var hsbcDept = $('#hsbcDept').val();
+	loadHSBCSubDept(hsbcDept,employee);
+	
 }
 
 function updateEmployee(){
 	var employeeId = $('#employeeId').val();
+	var eHr = $('#eHr').val();
+	var lob = $('#lob').val();
 	var hsbcStaffId = $('#hsbcStaffId').val();
 	var staffName = $('#staffName').val();
 	var LN = $('#LN').val();
@@ -81,28 +55,27 @@ function updateEmployee(){
 	var staffLocation = $('#staffLocation').val();
 	var locationType = $('#locationType').val();
 	var onshoreOrOffshore = $('#onshoreOrOffshore').val();
-	var projectName = $('#projectName').val();
+	var csSubDept = $('#csSubDept').val();
+	var hsbcSubDept = $('#hsbcSubDept').val();
+	var projectName = $('#hsbcProjectName').val();
+	var projectManager = $('#hsbcProjectManager').val();
 	var sow = $('#sow').val();
 	var sowExpiredDate = $('#sowExpiredDate1').val();
 	var staffCategory = $('#staffCategory').val();
 	var engagementType = $('#engagementType').val();
-	var hsbcDOJ = $('#hsbcDOJ2').val();
+	var hsbcDOJ = $('#hsbcDOJ1').val();
 	var graduationDate = $('#graduationDate1').val();
 	var role = $('#role').val();
 	var skill = $('#skill').val();
-	var billingEntity = $('#billingEntity').val();
 	var billingCurrency = $('#billingCurrency').val();
 	var billRate = $('#billRate').val();
 	var resourceStatus = $('#resourceStatus').val();
 	var terminatedDate = $('#terminatedDate1').val();
 	var terminationReason = $('#terminationReason').val();
-	var eHr = $('#eHr').val();
-	var csSubDept = $('#csSubDept').val();
-	var nicheSkill = $('#nicheSkill').val();
 	$.ajax({
 		url:path+'/service/employee/updateEmployee',
 		dataType:"json",
-		data:{"employeeId":employeeId,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"projectName":projectName,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingEntity":billingEntity,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason,"eHr":eHr,"csSubDept":csSubDept,"nicheSkill":nicheSkill},
+		data:{"employeeId":employeeId,"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason},
 		async:true,
 		cache:false,
 		type:"post",
@@ -113,6 +86,9 @@ function updateEmployee(){
 				setTimeout(function () {
 					$('#successAlert').hide();
 				}, 2000);
+			}
+			if(!resultFlag){
+				alert('1');
 			}
 		}
 	})
@@ -130,30 +106,30 @@ function loadEmployeeInfo(){
 		type:"post",
 		success:function(employee){
 			$('#hsbcStaffId').val(employee.hsbcStaffId);
+			$('#lob').val(employee.lob);
+			$('#hsbcProjectName').val(employee.projectName);
+			$('#hsbcProjectManager').val(employee.projectManager);
 			$('#staffName').val(employee.staffName);
 			$('#LN').val(employee.ln);
 			$('#staffRegion').val(employee.staffRegion);
 			$('#staffLocation').val(employee.staffLocation);
 			$('#locationType').val(employee.locationType);
-			$('#onshoreOrOffshore').val(employee.onShoreOrOffShore);
-			$('#projectName').val(employee.hsbcProjectId);
+			$('#onshoreOrOffshore').val(employee.onshoreOrOffshore);
 			$('#sow').val(employee.sow);
 			$('#sowExpiredDate1').val(employee.sowExpiredDate);
 			$('#staffCategory').val(employee.staffCategory);
 			$('#engagementType').val(employee.engagementType);
-			$('#hsbcDOJ1').val(employee.hsbcDoj);
+			$('#hsbcDOJ1').val(employee.hsbcDOJ);
 			$('#graduationDate1').val(employee.graduationDate);
 			$('#role').val(employee.role);
 			$('#skill').val(employee.skill);
-			$('#billingEntity').val(employee.billingEntity);
-			$('#billingCurrency').val(employee.billCurrency);
+			$('#billingCurrency').val(employee.billingCurrency);
 			$('#billRate').val(employee.billRate);
 			$('#resourceStatus').val(employee.resourceStatus);
-			$('#terminatedDate1').val(employee.mentionLWD);
-			$('#terminationReason').val(employee.reasonForTermination);
+			$('#terminatedDate1').val(employee.terminatedDate);
+			$('#terminationReason').val(employee.terminationReason);
 			$('#eHr').val(employee.eHr);
-			$('#nicheSkill').val(employee.nicheSkill);
-			loadPersonalCSDept(employee);
+			$('#csSubDept').val(employee.csSubDept)
 			loadPersonalHSBCDept(employee);
 		}
 	})
@@ -306,43 +282,19 @@ function loadEngagementType(){
 
 function loadCSDept(){
 	$.ajax({
-		url:path+'/service/csDept/queryCSDeptName',
+		url:path+'/service/csDept/queryAllCSSubDept',
 		dataType:"json",
 		async:true,
 		cache:false,
 		type:"post",
 		success:function(list){
-			for(var i = 0;i<list.length;i++){
-				$("#csDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csDeptName+"</option>");
-			}
-		}
-	})
-}
-
-
-function loadCSSubDept(csDept){
-	var csSubDeptId = $('#csDept').val();
-	$("#csSubDept").find("option").remove(); 
-	$("#csSubDept").append("<option value=''>-- 请选择项目 --</option>");
-	$.ajax({
-		url:path+'/service/csDept/queryCSSubDeptName',
-		dataType:"json",
-		async:true,
-		data:{"csSubDeptId":csSubDeptId},
-		cache:false,
-		type:"post",
-		success:function(list){
-			$("#csSubDept").find("option").remove(); 
-			$("#csSubDept").append("<option value=''>-- 请选择子交付部 --</option>");
 			for(var i = 0;i<list.length;i++){
 				$("#csSubDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csSubDeptName+"</option>");
 			}
-			if(csDept != null && csDept != ''){
-				$("#csSubDept option:contains('"+csDept.csSubDeptName+"')").attr('selected', true);
-			}
 		}
 	})
 }
+
 
 
 $("#csDept").change(function(){
@@ -368,8 +320,6 @@ function loadDept(){
 
 function loadHSBCSubDept(hsbcDept,employee){
 	var hsbcSubDeptId = $('#hsbcDept').val();
-	$("#projectName").find("option").remove(); 
-	$("#projectName").append("<option value=''>-- 请选择项目 --</option>");
 	$.ajax({
 		url:path+'/service/hsbcDept/querySubDeptName',
 		dataType:"json",
@@ -378,14 +328,17 @@ function loadHSBCSubDept(hsbcDept,employee){
 		cache:false,
 		type:"post",
 		success:function(list){
-			$("#hsbcSubDept").find("option").remove(); 
-			$("#hsbcSubDept").append("<option value=''>-- 请选择子交付部 --</option>");
-			for(var i = 0;i<list.length;i++){
-				$("#hsbcSubDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcSubDeptName+"</option>");
+			if(list.length == 1 && list[0].hsbcSubDeptName == null){
+				$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
+			}else{
+				$("#hsbcSubDept").find("option").remove(); 
+				$("#hsbcSubDept").append("<option value=''>-- 请选择子交付部 --</option>");
+				for(var i = 0;i<list.length;i++){
+					$("#hsbcSubDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcSubDeptName+"</option>");
+				}
 			}
 			if(hsbcDept != null && hsbcDept != ''){
-				$("#hsbcSubDept option:contains('"+hsbcDept.hsbcSubDeptName+"')").attr('selected', true);
-				loadHSBCProject(employee);
+				$("#hsbcSubDept").val(employee.hsbcSubDept)
 			}
 		}
 	})
@@ -396,31 +349,9 @@ $("#hsbcDept").change(function(){
 	loadHSBCSubDept();
 })
 
-$("#hsbcSubDept").change(function(){
-	loadHSBCProject();
-})
 
-function loadHSBCProject(employee){
-	var hsbcSubDeptId = $('#hsbcSubDept').val();
-	$.ajax({
-		url:path+'/service/hsbcProject/queryprojcetName',
-		dataType:"json",
-		async:true,
-		data:{"hsbcSubDeptId":hsbcSubDeptId},
-		cache:false,
-		type:"post",
-		success:function(list){
-			$("#projectName").find("option").remove(); 
-			$("#projectName").append("<option value=''>-- 请选择项目 --</option>");
-			for(var i = 0;i<list.length;i++){
-				$("#projectName").append("<option value='"+list[i].hsbcProjectId+"'>"+list[i].hsbcProjectName+"</option>");
-			}
-			if(employee != null && employee != ''){
-				selectProjectName(employee);
-			}
-		}
-	})
-}
+
+
 
 
 function selectProjectName(employee){

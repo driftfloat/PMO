@@ -26,24 +26,6 @@ public class CSDeptController
     @Resource
     private CSDeptService csDeptService;
     
-    @RequestMapping("/queryCSDeptName")
-    @ResponseBody
-    public List queryCSDeptName(final HttpServletRequest request,
-            final HttpServletResponse response)
-    {
-        List<CSDept> list = csDeptService.queryCSDeptName();
-        return list;
-    }
-    
-    @RequestMapping("/queryCSSubDeptName")
-    @ResponseBody
-    public List queryCSSubDeptName(final HttpServletRequest request,
-            final HttpServletResponse response)
-    {
-        String csSubDeptId = request.getParameter("csSubDeptId");
-        List<CSDept> list = csDeptService.queryCSSubDeptName(csSubDeptId);
-        return list;
-    }
     
     @RequestMapping("/queryCSDeptById")
     @ResponseBody
@@ -61,6 +43,15 @@ public class CSDeptController
             final HttpServletResponse response)
     {
         List<CSDept> list = csDeptService.queryAllCSSubDeptName();
+        return list;
+    }
+    
+    @RequestMapping("/queryAllCSSubDept")
+    @ResponseBody
+    public Object queryAllCSSubDept(final HttpServletRequest request,
+            final HttpServletResponse response)
+    {
+        List<CSDept> list = csDeptService.queryAllCSDept();
         return list;
     }
 

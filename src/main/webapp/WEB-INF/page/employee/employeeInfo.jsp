@@ -89,11 +89,11 @@ var path='<%=path%>';
 									
 									
 										<div class="group">
-										<label class="col-lg-2 control-label">事业部</label>
+										<label class="col-lg-2 control-label">BU</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="csBu" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="csBu" data-bv-group=".group">
-												<option value="">-- 请选择--</option>
+												<option value="">-- Option--</option>
 												<option value="">第一事业部</option>
 												<option value="">第二事业部</option>
 												<option value="">第三事业部</option>
@@ -103,23 +103,21 @@ var path='<%=path%>';
 										</div>
 										</div>
 										<div class="group">
-										<label class="col-lg-2 control-label">大部门</label>
+										<label class="col-lg-2 control-label">Dept</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="csDept" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="csDept" data-bv-group=".group">
-												<option value="">-- 请选择--</option>
+											<select class="form-control" name="csSubDept" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="csSubDept" data-bv-group=".group">
+												<option value="">-- Option--</option>
 											</select>
 										</div>
 										</div>
 										</br></br></br>
 										<div class="group">
-										<label class="col-lg-2 control-label">交付部</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="csSubDept" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="csSubDept" data-bv-group=".group">
-												<option value="">-- 请选择--</option>
-											</select>
-										</div>
+											<label class="col-sm-2 control-label">LOB</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="lob"
+													id="lob" />
+											</div>
 										</div>
 										<div class="group">
 											<label class="col-sm-2 control-label">HSBC Staff ID</label>
@@ -170,7 +168,6 @@ var path='<%=path%>';
 												<th>ER</th>
 												<th>姓名</th>
 												<th>LN</th>
-												<th>大部门</th>
 												<th>交付部</th>
 												<th>操作</th>
 											</tr>

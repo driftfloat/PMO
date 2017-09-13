@@ -96,7 +96,7 @@ function exportCondition(){
 	$.ajax({
 		url:path+'/service/employeeInfo/setEmpConditon',
 		dataType:"json",
-		data:{"condition":condition,"csDeptName":csDeptName,"csSubDeptName":csSubDeptName,"csBuName":csBuName},
+		data:{"condition":condition,"csSubDeptName":csSubDeptName,"csBuName":csBuName},
 		async:true,
 		cache:false,
 		type:"post",
@@ -180,7 +180,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 		url:path+"/service/employeeInfo/queryEmployeeList",
 		dataType:"json",
 		async:true,
-		data:{"pageState":pageState,"csBuName":csBuName,"csDeptName":csDeptName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr},
+		data:{"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr},
 		cache:false,
 		type:"post",
 		success:function(result){
@@ -210,20 +210,16 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 						+ result.data[i].ln
 						+ "</td>");
 				var td5 = $("<td>"
-						+ result.data[i].csDeptName
-						+ "</td>");
-				var td6 = $("<td>"
 						+ result.data[i].csSubDeptName
 						+ "</td>");
 				//var td7 = $("<td><a class='btn btn-info' href='javascript:void(0);'> <i class='glyphicon glyphicon-edit icon-white'></i> 编辑</a></td>");
-				var td7 = $("<td><a class='btn btn-info' href='javascript:void(0);'  onclick=editEmployeeInfo('"+result.data[i].employeeId+"')> <i class='glyphicon glyphicon-edit icon-white'></i> 编辑</a></td>");
+				var td6 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"')>EDIT</a></td>");
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
 				td4.appendTo(tr);
 				td5.appendTo(tr);
 				td6.appendTo(tr);
-				td7.appendTo(tr);
 				
 			}
 			$("#employeeList").append("</tbdoy>");

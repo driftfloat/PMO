@@ -7,7 +7,6 @@ $(function(){
 	loadBillingEntity();
 	loadBillingCurrency();
 	loadResourceStatus();
-	loadNicheSkill();
 	loadCSDept();
 	loadStaffRegion();
 	loadStaffLocation();
@@ -19,6 +18,8 @@ $(function(){
 
 function addEmployee(){
 	
+	var eHr = $('#eHr').val();
+	var lob = $('#lob').val();
 	var hsbcStaffId = $('#hsbcStaffId').val();
 	var staffName = $('#staffName').val();
 	var LN = $('#LN').val();
@@ -26,7 +27,10 @@ function addEmployee(){
 	var staffLocation = $('#staffLocation').val();
 	var locationType = $('#locationType').val();
 	var onshoreOrOffshore = $('#onshoreOrOffshore').val();
-	var projectName = $('#projectName').val();
+	var csSubDept = $('#csSubDept').val();
+	var hsbcSubDept = $('#hsbcSubDept').val();
+	var projectName = $('#hsbcProjectName').val();
+	var projectManager = $('#hsbcProjectManager').val();
 	var sow = $('#sow').val();
 	var sowExpiredDate = $('#sowExpiredDate1').val();
 	var staffCategory = $('#staffCategory').val();
@@ -35,19 +39,17 @@ function addEmployee(){
 	var graduationDate = $('#graduationDate1').val();
 	var role = $('#role').val();
 	var skill = $('#skill').val();
-	var billingEntity = $('#billingEntity').val();
 	var billingCurrency = $('#billingCurrency').val();
 	var billRate = $('#billRate').val();
 	var resourceStatus = $('#resourceStatus').val();
 	var terminatedDate = $('#terminatedDate1').val();
 	var terminationReason = $('#terminationReason').val();
-	var eHr = $('#eHr').val();
-	var csSubDept = $('#csSubDept').val();
-	var nicheSkill = $('#nicheSkill').val();
+	
+	
 	$.ajax({
 		url:path+'/service/employee/addEmployee',
 		dataType:"json",
-		data:{"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"projectName":projectName,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingEntity":billingEntity,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason,"eHr":eHr,"csSubDept":csSubDept,"nicheSkill":nicheSkill},
+		data:{"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason},
 		async:true,
 		cache:false,
 		type:"post",
@@ -113,14 +115,7 @@ function loadStaffLocation(){
 }
 
 
-function loadNicheSkill(){
-	var url = path+'/json/nicheSkill.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#nicheSkill").append("<option>"+item.name+"</option>");
-	       })
-	});
-}
+
 
 function loadStaffRegion(){
 	var url = path+'/json/staffRegion.json'
@@ -202,14 +197,14 @@ function loadEngagementType(){
 
 function loadCSDept(){
 	$.ajax({
-		url:path+'/service/csDept/queryCSDeptName',
+		url:path+'/service/csDept/queryAllCSSubDept',
 		dataType:"json",
 		async:true,
 		cache:false,
 		type:"post",
 		success:function(list){
 			for(var i = 0;i<list.length;i++){
-				$("#csDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csDeptName+"</option>");
+				$("#csSubDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csSubDeptName+"</option>");
 			}
 		}
 	})
@@ -267,9 +262,13 @@ $("#hsbcDept").change(function(){
 		type:"post",
 		success:function(list){
 			$("#hsbcSubDept").find("option").remove(); 
+			if(list.length == 1 && list[0].hsbcSubDeptName == null){
+				$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
+			}else{
 			$("#hsbcSubDept").append("<option value=''>-- 请选择子交付部 --</option>");
 			for(var i = 0;i<list.length;i++){
 				$("#hsbcSubDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcSubDeptName+"</option>");
+			}
 			}
 		}
 	})

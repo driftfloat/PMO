@@ -1,16 +1,5 @@
 package com.pmo.dashboard.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,22 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.Employee;
-import com.pmo.dashboard.entity.EmployeePageCondition;
-import com.pmo.dashboard.entity.HSBCDept;
-import com.pmo.dashboard.entity.HSBCProject;
-import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.CSDeptService;
 import com.pom.dashboard.service.EmployeeService;
 import com.pom.dashboard.service.HSBCDeptService;
 import com.pom.dashboard.service.HSBCProjectService;
-
-import jxl.Workbook;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
 
 @Controller
 @RequestMapping(value="/employee")
@@ -107,7 +86,10 @@ public class EmployeeController {
     public boolean addEmployee(final HttpServletRequest request,
             final HttpServletResponse response)
     {
-        String employeeId = Utils.getUUID();
+        
+        String employeeId = Utils.getUUID(); 
+        String eHr = request.getParameter("eHr");
+        String lob = request.getParameter("lob");
         String hsbcStaffId = request.getParameter("hsbcStaffId");
         String staffName = request.getParameter("staffName");
         String LN = request.getParameter("LN");
@@ -115,7 +97,10 @@ public class EmployeeController {
         String staffLocation = request.getParameter("staffLocation");
         String locationType = request.getParameter("locationType");
         String onshoreOrOffshore = request.getParameter("onshoreOrOffshore");
+        String csSubDept = request.getParameter("csSubDept");
+        String hsbcSubDept = request.getParameter("hsbcSubDept");
         String projectName = request.getParameter("projectName");
+        String projectManager = request.getParameter("projectManager");
         String sow = request.getParameter("sow");
         String sowExpiredDate = request.getParameter("sowExpiredDate");
         String staffCategory = request.getParameter("staffCategory");
@@ -124,25 +109,21 @@ public class EmployeeController {
         String graduationDate = request.getParameter("graduationDate");
         String role = request.getParameter("role");
         String skill = request.getParameter("skill");
-        String billingEntity = request.getParameter("billingEntity");
         String billingCurrency = request.getParameter("billingCurrency");
         String billRate = request.getParameter("billRate");
         String resourceStatus = request.getParameter("resourceStatus");
         String terminatedDate = request.getParameter("terminatedDate");
         String terminationReason = request.getParameter("terminationReason");
-        String eHr = request.getParameter("eHr");
-        String csSubDept = request.getParameter("csSubDept");
-        String nicheSkill = request.getParameter("nicheSkill");
         
-        Employee employee = new Employee(employeeId,hsbcStaffId,staffName,
-                LN,staffRegion,staffLocation,
-                locationType, onshoreOrOffshore, sow,
-                sowExpiredDate, staffCategory, engagementType,
-                hsbcDOJ, graduationDate, billingEntity,
+        Employee employee = new Employee(employeeId,eHr,lob,
+                hsbcStaffId, staffName, LN, staffRegion,
+                staffLocation, locationType, onshoreOrOffshore,
+                csSubDept, hsbcSubDept, projectName,
+                projectManager, sow, sowExpiredDate,
+                staffCategory, engagementType, hsbcDOJ,
+                graduationDate, role, skill,
                 billingCurrency, billRate, resourceStatus,
-                terminatedDate, terminationReason, eHr,
-                nicheSkill, projectName, role, skill,
-                csSubDept);
+                terminatedDate, terminationReason);
         
         boolean resultFlag = employeeService.addEmployee(employee);
         
@@ -156,6 +137,8 @@ public class EmployeeController {
             final HttpServletResponse response)
     {
         String employeeId = request.getParameter("employeeId");
+        String eHr = request.getParameter("eHr");
+        String lob = request.getParameter("lob");
         String hsbcStaffId = request.getParameter("hsbcStaffId");
         String staffName = request.getParameter("staffName");
         String LN = request.getParameter("LN");
@@ -163,7 +146,10 @@ public class EmployeeController {
         String staffLocation = request.getParameter("staffLocation");
         String locationType = request.getParameter("locationType");
         String onshoreOrOffshore = request.getParameter("onshoreOrOffshore");
+        String csSubDept = request.getParameter("csSubDept");
+        String hsbcSubDept = request.getParameter("hsbcSubDept");
         String projectName = request.getParameter("projectName");
+        String projectManager = request.getParameter("projectManager");
         String sow = request.getParameter("sow");
         String sowExpiredDate = request.getParameter("sowExpiredDate");
         String staffCategory = request.getParameter("staffCategory");
@@ -172,25 +158,21 @@ public class EmployeeController {
         String graduationDate = request.getParameter("graduationDate");
         String role = request.getParameter("role");
         String skill = request.getParameter("skill");
-        String billingEntity = request.getParameter("billingEntity");
         String billingCurrency = request.getParameter("billingCurrency");
         String billRate = request.getParameter("billRate");
         String resourceStatus = request.getParameter("resourceStatus");
         String terminatedDate = request.getParameter("terminatedDate");
         String terminationReason = request.getParameter("terminationReason");
-        String eHr = request.getParameter("eHr");
-        String csSubDept = request.getParameter("csSubDept");
-        String nicheSkill = request.getParameter("nicheSkill");
         
-        Employee employee = new Employee(employeeId,hsbcStaffId,staffName,
-                LN,staffRegion,staffLocation,
-                locationType, onshoreOrOffshore, sow,
-                sowExpiredDate, staffCategory, engagementType,
-                hsbcDOJ, graduationDate, billingEntity,
+        Employee employee = new Employee(employeeId,eHr,lob,
+                hsbcStaffId, staffName, LN, staffRegion,
+                staffLocation, locationType, onshoreOrOffshore,
+                csSubDept, hsbcSubDept, projectName,
+                projectManager, sow, sowExpiredDate,
+                staffCategory, engagementType, hsbcDOJ,
+                graduationDate, role, skill,
                 billingCurrency, billRate, resourceStatus,
-                terminatedDate, terminationReason, eHr,
-                nicheSkill, projectName, role, skill,
-                csSubDept);
+                terminatedDate, terminationReason);
         
         boolean resultFlag = employeeService.updateEmployee(employee);
         
@@ -198,7 +180,7 @@ public class EmployeeController {
     }
     
     
-    @RequestMapping("/exportExcel")
+    /*@RequestMapping("/exportExcel")
     @ResponseBody
     public HttpServletResponse exportExcel(HttpServletRequest request,
              HttpServletResponse response)
@@ -462,6 +444,6 @@ public class EmployeeController {
         
         return null;
     }
-    
+    */
 }
 

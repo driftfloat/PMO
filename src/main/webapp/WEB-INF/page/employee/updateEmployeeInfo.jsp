@@ -88,10 +88,29 @@ var path='<%=path%>';
 							    <div class="form-group">
 									    <input type="hidden" name="employeeId" id="employeeId" value="${employeeId}"/>
 								</div>
-									
+								<div id="successAlert" class="alert alert-success" style="display: none;"></div>	
 							    <br/>
 								<div class="form-group">
-								<div id="successAlert" class="alert alert-success" style="display: none;"></div>
+										<div class="group">
+											<label class="col-sm-2 control-label">E-HR</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="eHr"
+													id="eHr" />
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">LOB</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="lob"
+													id="lob" />
+											</div>
+										</div>
+										
+								</div>
+								<br/><br/>
+							    
+								<div class="form-group">
+								
 										<div class="group">
 											<label class="col-sm-2 control-label">HSBC Staff ID</label>
 											<div class="col-sm-4">
@@ -159,6 +178,19 @@ var path='<%=path%>';
 										</div>
 										</div>
 										<div class="group">
+										<label class="col-lg-2 control-label">CS Dept</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="csSubDept" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="csSubDept" data-bv-group=".group">
+												<option value="">-- 请选择--</option>
+											</select>
+										</div>
+										</div>
+								</div>
+								
+								<br/><br/>
+								<div class="form-group">
+								        <div class="group">
 										<label class="col-lg-2 control-label">HSBC Dept</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="hsbcDept" data-bv-notempty
@@ -167,9 +199,6 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
-								</div>
-								<br/><br/>
-								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">HSBC Sub Dept</label>
 										<div class="col-lg-4">
@@ -179,14 +208,22 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
+								</div>
+								<br/><br/>
+								<div class="form-group">
 										<div class="group">
-										<label class="col-lg-2 control-label">Project Name</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="projectName" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="projectName" data-bv-group=".group">
-												<option value="">-- 请选择项目 --</option>
-											</select>
+											<label class="col-sm-2 control-label">HSBC Project Name</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="hsbcProjectName"
+													id="hsbcProjectName" />
+											</div>
 										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">HSBC Project Manager</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="hsbcProjectManager"
+													id="hsbcProjectManager" />
+											</div>
 										</div>
 								</div>
 								<br/><br/>
@@ -215,7 +252,7 @@ var path='<%=path%>';
 								<br/><br/>
 								<div class="form-group">
 										<div class="group">
-										<label class="col-lg-2 control-label">Staff Category(CATG/CATB)</label>
+										<label class="col-lg-2 control-label">Staff Category</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="staffCategory" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="staffCategory" data-bv-group=".group">
@@ -224,7 +261,7 @@ var path='<%=path%>';
 										</div>
 										</div>
 										<div class="group">
-										<label class="col-lg-2 control-label">Engagement Type (T&M/FixedCost)</label>
+										<label class="col-lg-2 control-label">Engagement Type</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="engagementType" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="engagementType" data-bv-group=".group">
@@ -286,15 +323,6 @@ var path='<%=path%>';
 								<br/><br/>
 								<div class="form-group">
 										<div class="group">
-										<label class="col-lg-2 control-label">Billing Entity</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="billingEntity" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="billingEntity" data-bv-group=".group">
-												<option value="">-- 请选择--</option>
-											</select>
-										</div>
-										</div>
-										<div class="group">
 										<label class="col-lg-2 control-label">Billing Currency</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="billingCurrency" data-bv-notempty
@@ -303,9 +331,6 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
-								</div>
-								<br/><br/>
-								<div class="form-group">
 										<div class="group">
 											<label class="col-sm-2 control-label">Bill Rate</label>
 											<div class="col-sm-4">
@@ -313,8 +338,11 @@ var path='<%=path%>';
 													id="billRate" />
 											</div>
 										</div>
+								</div>
+								<br/><br/>
+								<div class="form-group">
 										<div class="group">
-										<label class="col-lg-2 control-label">Resource Status (Active/Terminated)</label>
+										<label class="col-lg-2 control-label">Resource Status</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="resourceStatus" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="resourceStatus" data-bv-group=".group">
@@ -322,9 +350,6 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
-								</div>
-								<br/><br/>
-								<div class="form-group">
 										<div class="group">
 										<label class="col-sm-2 control-label">If terminated,mention LWD</label>
 										<div class="col-md-4">
@@ -338,6 +363,10 @@ var path='<%=path%>';
 											</div>
 										</div>
 									    </div>
+								</div>
+								<br/><br/>
+								<div class="form-group">
+										
 										<div class="group">
 											<label class="col-sm-2 control-label">Reason for Termination</label>
 											<div class="col-sm-4">
@@ -347,45 +376,6 @@ var path='<%=path%>';
 										</div>
 								</div>
 								<br/><br/>
-								<div class="form-group">
-										<div class="group">
-											<label class="col-sm-2 control-label">E-HR</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="eHr"
-													id="eHr" />
-											</div>
-										</div>
-										<div class="group">
-										<label class="col-lg-2 control-label">大部门</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="csDept" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="csDept" data-bv-group=".group">
-												<option value="">-- 请选择--</option>
-											</select>
-										</div>
-										</div>
-								</div>
-								<br/><br/>
-								<div class="form-group">
-										<div class="group">
-										<label class="col-lg-2 control-label">交付部</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="csSubDept" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="csSubDept" data-bv-group=".group">
-												<option value="">-- 请选择--</option>
-											</select>
-										</div>
-										</div>
-										<div class="group">
-										<label class="col-lg-2 control-label">Niche Skill</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="nicheSkill" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="nicheSkill" data-bv-group=".group">
-												<option value="">-- 请选择--</option>
-											</select>
-										</div>
-										</div>
-								</div>
 								<br/><br/><br/>
 								
 								<div class="form-group">

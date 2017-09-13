@@ -6,7 +6,6 @@ public class CSDept
     private String csSubDeptId;
     private String csBuName;
     private String csSubDeptName;
-    private String csDeptName;
     private String am;
     public String getCsSubDeptId()
     {
@@ -32,14 +31,6 @@ public class CSDept
     {
         this.csSubDeptName = csSubDeptName;
     }
-    public String getCsDeptName()
-    {
-        return csDeptName;
-    }
-    public void setCsDeptName(String csDeptName)
-    {
-        this.csDeptName = csDeptName;
-    }
     public String getAm()
     {
         return am;
@@ -49,13 +40,12 @@ public class CSDept
         this.am = am;
     }
     public CSDept(String csSubDeptId, String csBuName, String csSubDeptName,
-            String csDeptName, String am)
+            String am)
     {
         super();
         this.csSubDeptId = csSubDeptId;
         this.csBuName = csBuName;
         this.csSubDeptName = csSubDeptName;
-        this.csDeptName = csDeptName;
         this.am = am;
     }
     public CSDept()
@@ -63,7 +53,5 @@ public class CSDept
         super();
         // TODO Auto-generated constructor stub
     }
-    
-    
     
 }
