@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmo.dashboard.dao.StayinMapper">
+	<resultMap id="stayinMap" type="com.pmo.dashboard.entity.StayinCandidate">
+		<id 	property="candidateId" 		column="CANDIDATE_ID" 		javaType="String" />
+		<result property="candidateName" 	column="CANDIDATE_NAME" 	javaType="String" />
+		<result property="candidateAge" 	column="CANDIDATE_AGE" 		javaType="String" />
+		<result property="candidateSex" 	column="CANDIDATE_SEX" 		javaType="String" />
+		<result property="candidateTel" 	column="TEL" 				javaType="String" />
+		<result property="education" 		column="EDUCATION" 			javaType="String" />
+		<result property="skill" 			column="SKILL" 				javaType="String" />
+		<result property="experienceYears" 	column="EXPERIENCE_YEARS" 	javaType="String" />
+		<result property="candidateStatus" 	column="CANDIDATE_STATUS" 	javaType="String" />
+		<result property="collage" 			column="COLLEGE" 			javaType="String" />
+		<result property="majorStatus" 		column="MAJOR_STATUS" 		javaType="String" />
+		<result property="graduateDate" 	column="GRADUATE_DATE" 		javaType="String" />
+		<result property="englishLevel" 	column="ENGLISH_LEVEL" 		javaType="String" />
+		<result property="resumePath" 		column="RESUME_PATH" 		javaType="String" />
+		<result property="lockPerson" 		column="LOCK_PERSION" 		javaType="String" />
+		<result property="userName" 		column="USER_NAME" 			javaType="String" />
+		<result property="createDate" 		column="CREATE_DATE" 		javaType="String" />
+		<result property="updateDate" 		column="UPDATE_DATE" 		javaType="String" />
+		<result property="source" 			column="SOURCE" 			javaType="String" />
+		<result property="role" 			column="ROLE" 				javaType="String" />
+		<result property="entyDate" 		column="ENTY_DATE" 			javaType="String" />
+		<result property="email" 			column="EMAIL" 				javaType="String" />
+		<result property="expectedSalary" 	column="EXPECTED_SALARY" 	javaType="String" />
+		<result property="realSalary" 		column="REAL_SALARY" 		javaType="String" />
+		<result property="arrivalDate" 		column="ARRIVAL_DATE" 		javaType="String" />
+		<result property="oldCompany" 		column="OLD_COMPANY" 		javaType="String" />
+		<result property="remark" 			column="REMARK" 			javaType="String" />
+		<result property="createUser" 		column="CREATE_USER" 		javaType="String" />
+	</resultMap>
+	
+	<select id="queryStayinList" parameterType="com.pmo.dashboard.entity.StayinCandidate" resultMap="stayinMap" >
+	    SELECT a.*,d.STATUS FROM 
+        	t_candidate a
+        right join 
+        	t_demand d 
+        on a.CANDIDATE_ID = d.CANDIDATE_ID
+        WHERE 
+        	d.STATUS ='OfferMade' and 
+		    <include refid="candidateWherePart"/>
+	</select>
+	
+	<select id="queryCandidateCount" parameterType="com.pmo.dashboard.entity.StayinCandidate" resultType="int" >
+	    SELECT 
+	    	count(0) 
+        FROM 
+        	t_candidate a
+        right join 
+        	t_demand d 
+        on a.CANDIDATE_ID = d.CANDIDATE_ID
+        WHERE 
+        	d.STATUS ='OfferMade' and
+        	<include refid="candidateWherePart"/>
+			;
+	</select>
+	
+	
+	<select id="queryExportData" parameterType="com.pmo.dashboard.entity.StayinCandidate" resultType="java.util.LinkedHashMap" >
+	    SELECT 
+	    	${exportDataColumn}
+        FROM 
+        	t_candidate a
+         right join 
+        	t_demand d 
+        on a.CANDIDATE_ID = d.CANDIDATE_ID
+        WHERE 
+        	<include refid="candidateWherePart"/>
+       <!--  ORDER BY CANDIDATE_STATUS,EXPERIENCE_YEARS desc,EDUCATION,MAJOR_STATUS,CANDIDATE_ID; -->
+	</select>
+	
+	<select id="queryDemand" parameterType="com.pmo.dashboard.entity.AddDemand" resultType="boolean">
+	    SELECT c.* from t_demand c 
+	    WHERE c.CANDIDATE_ID = #{candidateId}
+	</select>
+	
+	<sql id="candidateWherePart">
+		CANDIDATE_STATUS != 5 
+		<if test="candidateName != null and candidateName != ''">
+			AND a.CANDIDATE_NAME = #{candidateName}
+		</if>
+		<if test="candidateTel != null and candidateTel != ''">
+			AND a.TEL like CONCAT('%',#{candidateTel},'%')
+		</if>
+		<if test="candidateStatus != null and candidateStatus != ''">
+			AND a.CANDIDATE_STATUS = #{candidateStatus}
+		</if>
+<!-- 		<if test="majorStatus != null and majorStatus != ''">
+			AND a.MAJOR_STATUS = #{majorStatus}
+		</if> -->
+		<if test="workYearsStart != null and workYearsStart != ''">
+			AND a.EXPERIENCE_YEARS >= ${workYearsStart}
+		</if>
+		<if test="workYearsEnd != null and workYearsEnd != ''">
+			AND a.EXPERIENCE_YEARS <![CDATA[<=]]> ${workYearsEnd}
+		</if>
+		<if test="role != null and role != ''">
+			AND a.ROLE= #{role}
+		</if>
+		<if test="skill != null and skill != ''">
+			AND a.SKILL = #{skill}
+		</if>
+		<if test="email != null and email != ''">
+			AND a.EMAIL like CONCAT('%',#{email},'%')
+		</if>
+<!-- 		<if test="englishLevel != null and englishLevel != ''">
+			AND a.ENGLISH_LEVEL = #{englishLevel}
+		</if> -->
+		<if test="createDate != null and createDate != ''">
+			AND a.CREATE_DATE = #{createDate}
+		</if>
+		<if test="updateDate != null and updateDate != ''">
+			AND a.UPDATE_DATE = #{updateDate}
+		</if>
+		<if test="remark != null and remark != ''">
+			AND a.REMARK = #{remark}
+		</if>
+		
+    </sql>
+	
+</mapper>

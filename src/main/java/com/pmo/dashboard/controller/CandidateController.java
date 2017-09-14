@@ -90,6 +90,10 @@ public class CandidateController
     	 }else if("3".equals(expriencesWork)){
     		 candidate.setWorkYearsStart("11");
     	 }
+    	 if("-- ALL--".equalsIgnoreCase(candidate.getSkill()))
+    	 {
+    		 candidate.setSkill("");
+    	 }
 		 int dataCount = candidateService.queryCandidateCount(candidate);
 	     page.setDataCount(dataCount+"");
 		 page.setPageCount((dataCount-1)/10 + 1 +"");
@@ -112,6 +116,7 @@ public class CandidateController
         return result;
     }
     
+    //下载
     @RequestMapping("/transformCandidateData")
     @ResponseBody
     public String transformCandidateData(CandidateInfo candidate,HttpServletRequest request)

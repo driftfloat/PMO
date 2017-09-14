@@ -31,6 +31,7 @@
 		<result property="plannedOnboardDate" column="PLANNED_ONBOARD_DATE" javaType="String" />
 		<result property="doNumber" column="DO_NUMBER" javaType="String" />
 		<result property="hrPriority" column="HR_PRIORITY" javaType="String" />
+		<result property="candidateId" column="CANDIDATE_ID" javaType="String" />
 		<!-- <result property="reqReceivedDate" column="REQ_RECEIVED_DATE" javaType="String" /> -->
 		<!-- <result property="ageingReceived" column="AGEING_RECEIVED" javaType="String" /> -->
 		<!-- <result property="demandPriority" column="DEMAND_PRIORITY" javaType="String"/> -->

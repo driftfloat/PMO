@@ -43,12 +43,17 @@
                             <ul class="nav nav-pills nav-stacked">
                                <li><a class="ajax-link" href="<%=path %>/service/demand/recruitdemand.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;招聘需求</span></a></li>
                                <li><a class="ajax-link" href="<%=path %>/service/demand/demandInfo.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;招聘需求查询</span></a></li>
+                               <li><a class="ajax-link" href="<%=path %>/service/stayin/stayin.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;待入职员工查看</span></a>
+                               </li>
                             </ul>
                         </li>
                         
                         <li class="accordion">
                             <a href="#"><i class="glyphicon glyphicon-tasks"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;面试管理</span></a>
                             <ul class="nav nav-pills nav-stacked">
+                                <li><a class="ajax-link" href="<%=path %>/service/interviewer/rm.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;面试官列表</span></a>
+                                </li>
+
 	                            <li><a class="ajax-link" href="<%=path %>/service/candidate/interviewFeedBackInfo.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;面试官反馈</span></a></li>
 		                        
 		                        <li><a class="ajax-link" href="<%=path %>/service/interview/interviewRecordInfo.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;面试记录</span></a></li>
@@ -56,8 +61,6 @@
 		                        <li><a class="ajax-link" href="<%=path %>/service/rmCandidate/myCandidate.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;已推送的候选人</span></a></li>
                             </ul>
                         </li>
-
-                         
                     </ul>
                 </div>
             </div>

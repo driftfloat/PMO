@@ -33,7 +33,7 @@ public class AddDemandController {
         return "/demand/recruitdemand";
     }
  
-
+    
     @RequestMapping("/addDemand")
     @ResponseBody
     public boolean addDemand(AddDemand demand)
@@ -43,6 +43,7 @@ public class AddDemandController {
     	boolean resultFlag = addDemandService.addDemand(demand);
         return resultFlag;
     }
+    
 
     
 }
