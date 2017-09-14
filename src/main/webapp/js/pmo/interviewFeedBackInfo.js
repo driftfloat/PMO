@@ -98,7 +98,7 @@ function loadCandidateList(pageState) {
 								+ result.data[i].csSubdeptName
 								+ "')>FeedBack</a>&nbsp;&nbsp;<a href='javascript:void(0);' class='btn btn-info btn-small'"
 								+ "onclick=downLoadCandidateResume('"
-								+ result.data[i].interviewId +"','"
+								+ result.data[i].candidateId +"','"
 								+result.data[i].resumePath.replace(/\s+/g, "")
 								+"')>RESUME</a></td>").appendTo(tr);
 					}

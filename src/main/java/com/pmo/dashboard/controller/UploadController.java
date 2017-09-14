@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pmo.dashboard.util.Constants;
+
 /**
  * 文件上传的controller
  * 
@@ -36,10 +38,16 @@ public class UploadController {
 		String fileName = UUID.randomUUID().toString().replaceAll("-", "")+"_"+originalFileName;
 		
 		//相对路径
-		String url = "c:\\resume\\" + fileName;
+		String url = Constants.RESUME_PATH + fileName;
 		
 		//上传路径
 		//String url = request.getSession().getServletContext().getRealPath("")+path;
+		
+		File subFile = new File(Constants.RESUME_PATH);
+		
+		if(!subFile.exists()){
+			subFile.mkdirs();
+		}
 		
 		file.transferTo(new File(url));
 		

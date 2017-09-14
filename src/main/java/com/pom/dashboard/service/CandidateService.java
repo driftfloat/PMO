@@ -49,4 +49,6 @@ public interface CandidateService
 	boolean delayMyWaitCandidateOk(CandidateInfo candidateinfo);
 	
 	boolean abortMyWaitCandidateOk(CandidateInfo candidateinfo);
+	
+	CandidateInfo queryCandidateForId(String candidateId);
 }

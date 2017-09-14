@@ -206,15 +206,15 @@ public class CandidateController
     	{
     		return "此候选人不存在，请刷新页面！";
     	}
-    	CandidateInfo candidate = new CandidateInfo();
-    	candidate.setCandidateId(candidateId);
-    	String resumePath = candidateService.queryCandidateResumePath(candidate);
-    	
+    	CandidateInfo candidate = candidateService.queryCandidateForId(candidateId);
+    	String resumePath = candidate.getResumePath();
         File file=new File(resumePath);
         if (!file.exists()) {
         	return "此候选人未上传简历！";
         }
-        String fileName = resumePath.substring(resumePath.indexOf("_")+1);
+        
+        String suffix = resumePath.substring(resumePath.lastIndexOf("."));
+        String fileName = candidate.getCandidateName()+"简历"+suffix;
 
         try {
 			// 以流的形式下载文件。
@@ -352,10 +352,17 @@ public class CandidateController
     	
     @RequestMapping("/queryInterviewFeedBack")
 	@ResponseBody
-	public Object queryCandidateListOfInterview(CandidateInfo candidate) {
+	public Object queryCandidateListOfInterview(CandidateInfo candidate, HttpServletRequest request) {
 		String pageState = candidate.getPageState();
 		PageCondition page = new PageCondition();
 
+		 User user = (User) request.getSession().getAttribute("loginUser");
+		 String userId = user.getUserId();
+		 if (userId == null) {
+		 return null;
+		 }
+		 candidate.setUserId(userId);
+		
 		int dataCount = candidateService.queryinterviewFeedBackCount(candidate);
 		page.setDataCount(dataCount + "");
 		page.setPageCount((dataCount - 1) / 10 + 1 + "");
