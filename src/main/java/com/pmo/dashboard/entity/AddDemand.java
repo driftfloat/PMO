@@ -52,6 +52,7 @@ public class AddDemand
     
     private String reason;
     
+    private String candidateId;
     
     private String remark;
     
@@ -143,6 +144,15 @@ public class AddDemand
 	}
 
 	
+	
+	public String getCandidateId() {
+		return candidateId;
+	}
+
+	public void setCandidateId(String candidateId) {
+		this.candidateId = candidateId;
+	}
+
 	public String getHsbcSubDept() {
 		return hsbcSubDept;
 	}
@@ -350,13 +360,15 @@ public class AddDemand
 
 	
 
+	
+
 	public AddDemand(String demandId, String rr, String jobCode, String skill, String requestor, String position,
 			String hsbcSubDeptId, String hsbcDept, String hsbcSubDept, String location, String reqPublishedDate,
 			String ageing, String profilesNo, String interviewedNo, String status, String staffName,
 			String proposedJoiningDate, String sowSigned, String onboarded, String abort, String delayed, String reason,
-			String remark, String csSubDept, String plannedOnboardDate, String doNumber, String hrPriority,
-			String creatDate, String updateDate, String completionDay, String completionDate, String onboardDate,
-			String bgvCleared) {
+			String candidateId, String remark, String csSubDept, String plannedOnboardDate, String doNumber,
+			String hrPriority, String creatDate, String updateDate, String completionDay, String completionDate,
+			String onboardDate, String bgvCleared) {
 		super();
 		this.demandId = demandId;
 		this.rr = rr;
@@ -380,6 +392,7 @@ public class AddDemand
 		this.abort = abort;
 		this.delayed = delayed;
 		this.reason = reason;
+		this.candidateId = candidateId;
 		this.remark = remark;
 		this.csSubDept = csSubDept;
 		this.plannedOnboardDate = plannedOnboardDate;

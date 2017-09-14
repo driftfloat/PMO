@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmo.dashboard.dao.InterviewerMapper">
+	<resultMap id="interviewerMap" type="com.pmo.dashboard.entity.Interviewer">
+		<id property="employeeId" column="EMPLOYEE_ID" javaType="String" />
+		<result property="ehr" column="E_HR" javaType="String" />
+		<result property="staffName" column="STAFF_NAME" javaType="String" />
+		<result property="staffRegion" column="STAFF_REGION" javaType="String" />
+		<result property="experienceYearas" column="GRADUATION_DATE" javaType="String" />
+		<result property="role" column="ROLE" javaType="String" /> 
+		<result property="skill" column="SKILL" javaType="String" />
+		<result property="status" column="INTERVIERW_STATUS" javaType="String" />
+		<result property="hsbcStaffId" column="HSBC_STAFF_ID" javaType="String" />
+		<result property="lob" column="LOB" javaType="String" />
+		<result property="csSubDeptId" column="CS_SUBDEPT_ID" javaType="String" />
+		
+	</resultMap>
+	
+	 <sql id="queryWhere">
+	   <where>
+	      <if test="interviewer.ehr!=null and interviewer.ehr!=''"> 
+	          and E_HR = #{interviewer.ehr}
+	      </if>
+	      <if test="interviewer.staffRegion!=null and interviewer.staffRegion!=''"> 
+	          and STAFF_REGION = #{interviewer.staffRegion}
+	      </if>
+	      <if test="interviewer.staffName!=null and interviewer.staffName!=''"> 
+	          and STAFF_NAME = #{interviewer.staffName}
+	      </if>
+	      <if test="interviewer.role!=null and interviewer.role!=''"> 
+	          and ROLE = #{interviewer.role}
+	      </if>
+	      <if test="interviewer.skill!=null and interviewer.skill!=''"> 
+	          and SKILL = #{interviewer.skill}
+	      </if>
+	      <if test="interviewer.status!=null and interviewer.status!=''"> 
+	          and INTERVIERW_STATUS = #{interviewer.status}
+	      </if>
+	      <if test="interviewer.hsbcStaffId!=null and interviewer.hsbcStaffId!=''"> 
+	          and HSBC_STAFF_ID = #{interviewer.hsbcStaffId}
+	      </if>
+	      <if test="interviewer.lob!=null and interviewer.lob!=''"> 
+	          and LOB = #{interviewer.lob}
+	      </if>
+	      <if test="interviewer.csSubDeptId!=null and interviewer.csSubDeptId!=''"> 
+	          and CS_SUBDEPT_ID = #{interviewer.csSubDeptId}
+	      </if>
+	      <if test="interviewer.experienceYearas!=null and interviewer.experienceYearas!=''"> 
+	          and GRADUATION_DATE = #{interviewer.experienceYearas}
+	      </if>
+	   </where>
+	 </sql>
+	
+	  <select id="queryInterviewerList" parameterType="java.util.HashMap" resultMap="interviewerMap">
+	      select * from t_employee
+	      <include refid="queryWhere"></include>
+	      limit #{num}, #{interviewer.pageSize} 
+	  </select>
+	  <select id="queryInterviewerCount" parameterType="java.util.HashMap" resultType="int">
+	       select count(1) from t_employee
+	       <include refid="queryWhere"></include>
+	  </select>
+	  
+	  <update id="update" parameterType="com.pmo.dashboard.entity.Interviewer" >
+	        update t_employee set INTERVIERW_STATUS = #{status} where EMPLOYEE_ID = #{employeeId}
+	  </update>
+	  
+	  <insert id="insertInterviewerToUser" parameterType="com.pmo.dashboard.entity.Interviewer" >
+	       insert into t_user (USER_ID,USER_NAME,NICKNAME,PASSWORD,USER_TYPE,CSDEPT_ID) 
+	       values(#{employeeId},#{ehr},#{staffName},"123","2",#{csSubDeptId})
+	       
+	  </insert>
+	  <select id="select" parameterType="String" resultType="com.pmo.dashboard.entity.Interviewer">
+	    select STAFF_NAME as staffName,E_HR as ehr,CS_SUBDEPT_ID as csSubDeptId from t_employee where EMPLOYEE_ID = #{employeeId}
+	  </select>
+</mapper>
