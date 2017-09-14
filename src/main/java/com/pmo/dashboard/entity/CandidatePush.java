@@ -1,5 +1,7 @@
 package com.pmo.dashboard.entity;
 
+import java.util.List;
+
 /**
  * 候选人推送实体类
  * @author tianzhao
@@ -18,6 +20,9 @@ public class CandidatePush {
 	private String pushStatus;
 	
 	private String pushDate;
+	
+	/** 一对多关联面试表 */
+	private List<CandidateInterview> interviewList;
 	
 	private CandidateInfo candidateInfo;
 	
@@ -100,6 +105,14 @@ public class CandidatePush {
 
 	public CandidatePush() {
 		super();
+	}
+
+	public List<CandidateInterview> getInterviewList() {
+		return interviewList;
+	}
+
+	public void setInterviewList(List<CandidateInterview> interviewList) {
+		this.interviewList = interviewList;
 	}
 
 }

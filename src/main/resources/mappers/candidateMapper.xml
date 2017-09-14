@@ -318,4 +318,9 @@
 	        WHERE b.CANDIDATE_ID = #{candidateId}
 			ORDER BY ci.INTERVIEW_DATE;
 	</select>
+	
+	<update id="updateInterviewStatusById" parameterType="java.util.HashMap">
+		update t_candidate set INTERVIEW_STATUS = #{interviewStatus}
+		where CANDIDATE_ID = #{candidateId}
+	</update>
 </mapper>

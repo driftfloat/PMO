@@ -191,48 +191,6 @@ function loadDemandList(currPage){
 			//alert(result.pageCondition.totalPage);
 			$("#pageCount").html(result.pageCondition.totalPage);
 			$("#currentPage").html(result.pageCondition.currPage);
-			//request.setAttribute("totalPage",result.pageCondition.totalPage);
-			var html='<li><a href="javascript:void(0);" id="fristPage">首页</a></li><li><a href="javascript:void(0);" id="previousPage" >上一页</a></li>';
-			/*if(result.pageCondition.currPage==1){
-				html='<li><a href="#" id="fristPage" onclick="loadDemandList(1)">首页</a></li><li><a href="#" id="previousPage" >&laquo;</a></li><li><a href="#" id="nextPage" >&raquo;</a></li><li><a href="#" id="lastPage" >末页</a></li>';
-			}else if(result.pageCondition.currPage==result.pageCondition.totalPage){
-				html='<li><a href="#" id="fristPage" onclick="loadDemandList(1)">首页</a></li><li><a href="#" id="previousPage" >&laquo;</a></li><li><a href="#">'+(result.pageCondition.totalPage-2)+'</a></li><li><a href="#">'+(result.pageCondition.totalPage-1)+'</a></li><li><a href="#">'+(result.pageCondition.totalPage)+'</a></li><li><a href="#" id="nextPage" >&raquo;</a></li><li><a href="#" id="lastPage" >末页</a></li>';
-			}else {
-				html='<li><a href="#" id="fristPage" onclick="loadDemandList(1)">首页</a></li><li><a href="#" id="previousPage" >&laquo;</a></li><li><a href="#">'+(result.pageCondition.currPage-1)+'</a></li><li><a href="#">'+result.pageCondition.currPage+'</a></li><li><a href="#">'+(result.pageCondition.currPage+1)+'</a></li><li><a href="#" id="nextPage" >&raquo;</a></li><li><a href="#" id="lastPage" >末页</a></li>';
-			}*/
-			/*var page = 4;
-			if(result.pageCondition.totalPage <= page){
-				for (var i = 1; i <= result.pageCondition.totalPage; i++) {
-					html +='<li><a href="javascript:void(0);" onclick="loadDemandList('+i+')">'+i+'</a></li>';
-				}
-			}else{
-				if(result.pageCondition.currPage >= result.pageCondition.totalPage -page){
-					for (var i = result.pageCondition.totalPage - page; i <= result.pageCondition.totalPage; i++) {
-						html +='<li><a href="javascript:void(0);" onclick="loadDemandList('+i+')">'+i+'</a></li>';
-					}
-				}else{
-					for (var i = result.pageCondition.currPage; i <= result.pageCondition.totalPage; i++) {
-						if(i <=result.pageCondition.currPage + page){
-							html +='<li><a href="javascript:void(0);" onclick="loadDemandList('+i+')">'+i+'</a></li>';
-						}else{
-							html +='<li style="display:none;"><a href="javascript:void(0);" onclick="loadDemandList('+i+')">'+i+'</a></li>';
-						}
-					}
-				}
-			}
-			if(result.pageCondition.totalPage>page && result.pageCondition.currPage < result.pageCondition.totalPage - page){
-				html += '<li class="disabled"><a href="javascript:void(0);">...</a></li>';
-			}*/
-			html += '<li><a href="javascript:void(0);" id="nextPage" >下一页</a></li><li><a href="javascript:void(0);" id="lastPage" >末页</a></li>';
-			/*if(result.pageCondition.totalPage>page){
-				html += '跳至<input style="height:39px;width:39px" type="text" id="toPage">页</input><li style="float:right"><a href="javascript:void(0);" id="sure" >确定</a></li>';
-			}*/
-			$("ul.pagination-centered").html(html);
-			console.log($("ul.pagination-centered"));
-			/*$("#sure").click(function(){
-				var pageNum = $("#toPage").val();
-				loadDemandList(pageNum);
-			})*/
 			$("#fristPage").attr("onclick","loadDemandList(1)");
 			if(result.pageCondition.currPage <= result.pageCondition.totalPage){
 				$("#previousPage").attr("onclick","loadDemandList("+(result.pageCondition.currPage - 1)+")");
@@ -244,21 +202,20 @@ function loadDemandList(currPage){
 				$("#nextPage").removeAttr('onclick');
 				$("#lastPage").parent("li").addClass("disabled");
 				$("#lastPage").removeAttr('onclick');
+				$("#fristPage").parent("li").removeClass("disabled");
+				$("#previousPage").parent("li").removeClass("disabled");
 			}
 			if(result.pageCondition.currPage==1){
 				$("#fristPage").parent("li").addClass("disabled");
 				$("#fristPage").removeAttr('onclick');
 				$("#previousPage").parent("li").addClass("disabled");
 				$("#previousPage").removeAttr('onclick');
+				$("#nextPage").parent("li").removeClass("disabled");
+				$("#lastPage").parent("li").removeClass("disabled");
 			}
 			$("ul.pagination-centered li a").each(function(){
-				if($(this).text()==result.pageCondition.currPage){
-					//$(this).parent("li").addClass("disabled");
-					$(this).parent("li").addClass("active");
-					$(this).removeAttr('onclick');
-					//$(this).parent("li").removeClass("active");
-					//$(this).parent("li").siblings("li").addClass("active");
-					//$(this).parent("li").siblings("li").removeClass("disabled");
+				if( 1 < result.pageCondition.currPage && result.pageCondition.currPage < result.pageCondition.totalPage){
+					$(this).parent("li").siblings("li").removeClass("disabled");
 				}
 			});
 		}
@@ -291,13 +248,4 @@ function demandDetail(demandId){
 	var url = path+'/service/demand/demandDetail';
 	$("#detailForm").attr("action",url);
 	$("#detailForm").submit();
-	/*$.ajax({
-		url:path+'/service/demand/demandDetail',
-		dataType:"json",
-		type:"post",
-		data:{"demandId":demandId},
-		success:function(result){
-			
-		}
-	})*/
 }

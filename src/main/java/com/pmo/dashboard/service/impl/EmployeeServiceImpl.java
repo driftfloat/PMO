@@ -1,6 +1,8 @@
 package com.pmo.dashboard.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -50,4 +52,15 @@ public class EmployeeServiceImpl implements EmployeeService
         return list;
     }
 
+	@Override
+	public List<Employee> queryEmployeeByCsSubDeptId(String csSubDeptId) {
+		//面试官状态
+		String intervierwStatus = "1";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("csSubDeptId", csSubDeptId);
+		params.put("intervierwStatus", intervierwStatus);
+		List<Employee> list = employeeMapper.queryEmployeeByCsSubDeptId(params);
+		return list;
+	}
+	
 }

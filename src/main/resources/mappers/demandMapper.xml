@@ -17,6 +17,7 @@
 		<result property="interviewedNo" column="INTERVIEWED_NO" javaType="String" />
 		<result property="status" column="STATUS" javaType="String" />
 		<result property="candidateName" column="CANDIDATE_NAME" javaType="String" />
+		<result property="candidateId" column="CANDIDATE_ID" javaType="String" />
 		<result property="proposedJoiningDate" column="PROPOSED_JOINING_DATE" javaType="String" />
 		<result property="sowSigned" column="SOW_SIGNED" javaType="String" />
 		<result property="bgvCleared" column="BGV_CLEARED" javaType="String" />
@@ -87,4 +88,15 @@
 		from t_demand
 		<include refid="queryWhere"/>
 	</select>
+	
+	<select id="queryOfferDemandList" parameterType="com.pmo.dashboard.entity.CandidatePush" resultMap="demandMap">
+		select *
+		from t_demand
+		where CS_SUBDEPT = #{csDept.csSubDeptName}
+	</select>
+	
+	<update id="updateCandidateIdById" parameterType="java.util.HashMap">
+		update t_demand set CANDIDATE_ID = #{candidateId}
+		where DEMAND_ID = #{demandId}
+	</update>
 </mapper>
