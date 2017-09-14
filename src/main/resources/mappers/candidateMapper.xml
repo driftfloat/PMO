@@ -56,7 +56,7 @@
 			JOIN t_candidate_interview ci ON ci.INTERVIEWER_ID = a.USER_ID
 			LEFT JOIN t_candidate b on ci.CANDIDATE_ID = b.CANDIDATE_ID
 			LEFT JOIN t_cs_dept dept on dept.CS_SUBDEPT_ID = ci.CSSUBDEPT
-	        WHERE USER_NAME = #{userName} and (ci.FEEDBACK='' or ci.FEEDBACK is null)
+	        WHERE USER_ID = #{userId} and (ci.FEEDBACK='' or ci.FEEDBACK is null)
 			ORDER BY ci.INTERVIEW_DATE
 	        LIMIT #{currentPage},#{pageDataCount};
 	</select>
@@ -96,7 +96,7 @@
 	     SELECT count(0) 
         	FROM t_user a 
 			LEFT JOIN t_candidate_interview ci ON ci.INTERVIEWER_ID = a.USER_ID
-        	WHERE USER_NAME = #{userName} and ci.FEEDBACK is NOT null;
+        	WHERE USER_ID = #{userId} and (ci.FEEDBACK='' or ci.FEEDBACK is null);
 	</select>
 	
 	<select id="queryCandidateResumePath" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="java.lang.String" >

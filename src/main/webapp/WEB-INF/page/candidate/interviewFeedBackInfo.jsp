@@ -200,6 +200,9 @@ var path='<%=path%>';
 									<i class="glyphicon glyphicon-remove icon-white"></i> 取消
 								</button>
 							</div>
+							<div >
+								<a href="" id="exceltHrefCandidate" style="display:none;">导出</a>
+							</div>
 						</form>
 					</div>
 				</div>

@@ -478,4 +478,9 @@ public class CandidateServiceImpl implements CandidateService {
     	return true;
 	}
 
+	@Override
+	public CandidateInfo queryCandidateForId(String candidateId) {
+		return candidateMapper.queryCandidateForId(candidateId);
+	}
+
 }
