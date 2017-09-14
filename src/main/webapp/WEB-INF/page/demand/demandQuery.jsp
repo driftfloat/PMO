@@ -205,13 +205,10 @@ var path='<%=path%>';
 									</div>
 									<div class="pagination">
 										<ul class="pagination pagination-centered">
-											<%-- <li><a href="#" id="fristPage" onclick="loadDemandList(1)">首页</a></li>
-											<li><a href="#" id="previousPage" >&laquo;</a></li>
-										<c:forEach begin="1" end="<% %>" step="1" varStatus="status" >
-											<li><a href="#">${status.count }</a></li>
-										</c:forEach>
-											<li><a href="#" id="nextPage" >&raquo;</a></li>
-											<li><a href="#" id="lastPage" >末页</a></li> --%>
+											<li><a href="#" id="fristPage">首页</a></li>
+											<li><a href="#" id="previousPage" >上一页</a></li>
+											<li><a href="#" id="nextPage" >下一页</a></li>
+											<li><a href="#" id="lastPage" >末页</a></li>
 										</ul>
 										<br>
 										共<span id="pageCount"></span>页   第<span id="currentPage"></span>页

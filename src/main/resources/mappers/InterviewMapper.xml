@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmo.dashboard.dao.InterviewMapper">
+	<resultMap id="interviewMap" type="com.pmo.dashboard.entity.CandidateInterview">
+		<id property="interviewId" column="INTERVIEW_ID" javaType="String" />
+		<result property="candidateId" column="CANDIDATE_ID" javaType="String" />
+		<result property="interviewerId" column="INTERVIEWER_ID" javaType="String" />
+		<result property="interviewStatus" column="INTERVIEW_STATUS" javaType="String" />
+		<result property="interviewDate" column="INTERVIEW_DATE" javaType="String" />
+		<result property="cssubDept" column="CSSUBDEPT" javaType="String" />
+		<result property="interviewType" column="INTERVIEW_TYPE" javaType="String" />
+		<result property="fatherInterviewId" column="FATHER_INTERVIEW_ID" javaType="String" />
+		<result property="interviewSerial" column="INTERVIEW_SERIAL" javaType="String" />
+	</resultMap>
+	
+	<insert id="addInterview" parameterType="com.pmo.dashboard.entity.CandidateInterview">
+		insert into t_candidate_interview 
+				(INTERVIEW_ID,CANDIDATE_ID,INTERVIEWER_ID,FEEDBACK,
+				INTERVIEW_STATUS,INTERVIEW_DATE,CSSUBDEPT,INTERVIEW_TYPE,
+				FATHER_INTERVIEW_ID,INTERVIEW_SERIAL)
+		values(#{interviewId},#{candidateId},#{interviewerId},#{feedback},
+				#{interviewStatus},#{interviewDate},#{cssubDept},#{interviewType},
+				#{fatherInterviewId},#{interviewSerial})
+	</insert>
+	
+	<select id="queryNewInterviewByCandidateId" parameterType="java.util.HashMap" resultMap="interviewMap">
+		select *  
+		from  t_candidate_interview a
+		where 
+			CANDIDATE_ID = #{candidateId}
+			and INTERVIEW_DATE = 
+			(select max(INTERVIEW_DATE) from t_candidate_interview b  
+			where a.CANDIDATE_ID = b.CANDIDATE_ID and b.CSSUBDEPT = #{csSubDeptId}) 
+	</select>
+	
+</mapper>

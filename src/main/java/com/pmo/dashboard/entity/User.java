@@ -26,7 +26,7 @@ public class User {
 	//所属部门
 	private CSDept csDept;
 	
-	
+	private String csDeptId;
 
 	public CSDept getCsDept() {
 		return csDept;
@@ -75,6 +75,13 @@ public class User {
 	public void setUser_type(String user_type) {
 		this.user_type = user_type;
 	}
-	
+
+	public String getCsDeptId() {
+		return csDeptId;
+	}
+
+	public void setCsDeptId(String csDeptId) {
+		this.csDeptId = csDeptId;
+	}
 	
 }

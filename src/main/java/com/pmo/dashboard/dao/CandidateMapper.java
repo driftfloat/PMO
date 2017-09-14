@@ -64,4 +64,6 @@ public interface CandidateMapper
 	int getCandidateListCount();
 
 	List<CandidateInfo> getCandidateList(CandidateInfo candidate);
+	
+	void updateInterviewStatusById(Map<String, Object> params);
 }

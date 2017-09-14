@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmo.dashboard.dao.RmCandidateMapper">
+	<resultMap id="candidatePushMap" type="com.pmo.dashboard.entity.CandidatePush">
+		<id property="pushId" column="PUSH_ID" javaType="String" />
+		<!-- <result property="interviewId" column="INTERVIEW_ID" javaType="String" /> -->
+		<result property="candidateId" column="CANDIDATE_ID" javaType="String" />
+		<result property="csSubDeptId" column="CS_SUBDEPT_ID" javaType="String" />
+		<result property="pushUserId" column="PUSH_USER_ID" javaType="String" />
+		<result property="pushStatus" column="PUSH_STATUS" javaType="String" />
+		<result property="pushDate" column="PUSH_DATE" javaType="String" />
+		<association property="csDept" javaType="com.pmo.dashboard.entity.CSDept" 
+			resultMap="com.pmo.dashboard.dao.CSDeptMapper.csDeptMap"/>
+		<association property="user" javaType="com.pmo.dashboard.entity.User" 
+			resultMap="com.pmo.dashboard.dao.UserMapper.userMap"/>
+		<association property="candidateInfo" javaType="com.pmo.dashboard.entity.CandidateInfo" 
+			resultMap="com.pmo.dashboard.dao.CandidateMapper.candidateMap"/>
+		<collection property="interviewList" ofType="com.pmo.dashboard.entity.CandidateInterview">
+			<id property="interviewId" column="INTERVIEW_ID" javaType="String" />
+			<result property="candidateId" column="CANDIDATE_ID" javaType="String" />
+			<result property="interviewerId" column="INTERVIEWER_ID" javaType="String" />
+			<result property="interviewStatus" column="INTER_STATUS" javaType="String" />
+			<result property="interviewDate" column="INTERVIEW_DATE" javaType="String" />
+			<result property="cssubDept" column="CSSUBDEPT" javaType="String" />
+			<result property="interviewType" column="INTERVIEW_TYPE" javaType="String" />
+			<result property="fatherInterviewId" column="FATHER_INTERVIEW_ID" javaType="String" />
+			<result property="interviewSerial" column="INTERVIEW_SERIAL" javaType="String" />
+		</collection>
+	</resultMap>
+	
+	<sql id="candidateWhere">
+		from 
+			t_candidate_push cp
+		left join 
+			t_user u 
+		on cp.PUSH_USER_ID = u.USER_ID
+		left join 
+			t_cs_dept cd 
+		on cp.CS_SUBDEPT_ID = cd.CS_SUBDEPT_ID
+		left join 
+			t_candidate c 
+		on cp.CANDIDATE_ID = c.CANDIDATE_ID
+		LEFT JOIN 
+		( select * from  t_candidate_interview a where INTERVIEW_DATE =
+		(select max(INTERVIEW_DATE) from t_candidate_interview b 
+			where a.CANDIDATE_ID = b.CANDIDATE_ID and b.CSSUBDEPT = #{csSubDeptId})
+			 )inter 
+		on inter.CANDIDATE_ID = cp.CANDIDATE_ID 
+		where 
+			cp.CS_SUBDEPT_ID = #{csSubDeptId}
+			and cp.PUSH_STATUS = #{status}
+		ORDER BY PUSH_ID
+	</sql>
+	
+	<select id="queryCandidateCount" parameterType="java.util.HashMap" resultType="int">
+		select count(1)
+		from t_candidate_push
+		where CS_SUBDEPT_ID = #{csSubDeptId} and PUSH_STATUS = #{status}
+	</select>
+	
+	<select id="queryPushedCandidate" parameterType="java.util.HashMap" resultMap="candidatePushMap">
+		select *,inter.INTERVIEW_STATUS inter_status
+		<include refid="candidateWhere"/>
+		limit #{num}, #{pageCondition.pageSize}
+	</select>
+	
+	<update id="updateCandidateStatus" parameterType="java.util.HashMap">
+		update t_candidate_push
+		set PUSH_STATUS = #{status}
+		where PUSH_ID = #{pushId}
+	</update>
+	
+	<!-- <update id="updateInterviewId" parameterType="java.util.HashMap">
+		update t_candidate_push
+		set INTERVIEW_ID = #{interviewId}
+		where CANDIDATE_ID = #{candidateId}
+	</update> -->
+</mapper>

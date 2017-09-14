@@ -11,4 +11,5 @@ public interface EmployeeService
     Employee queryEmployeeById(String employeeId);
     boolean updateEmployee(Employee employee);
     List<Employee> queryEmployeeList(EmployeePageCondition employeePageCondition);
+    List<Employee> queryEmployeeByCsSubDeptId(String csSubDeptId);
 }

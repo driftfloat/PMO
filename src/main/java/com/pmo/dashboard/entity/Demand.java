@@ -34,6 +34,8 @@ public class Demand
     
     private String candidateName;
     
+    private String candidateId;
+    
     private String proposedJoiningDate;
     
     private String sowSigned;
@@ -170,6 +172,14 @@ public class Demand
 
 	public void setCandidateName(String candidateName) {
 		this.candidateName = candidateName;
+	}
+
+	public String getCandidateId() {
+		return candidateId;
+	}
+
+	public void setCandidateId(String candidateId) {
+		this.candidateId = candidateId;
 	}
 
 	public String getProposedJoiningDate() {

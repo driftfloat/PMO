@@ -11,9 +11,12 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.pmo.dashboard.dao.CSDeptMapper;
+import com.pmo.dashboard.dao.CandidateMapper;
 import com.pmo.dashboard.dao.DemandMapper;
 import com.pmo.dashboard.dao.HSBCDeptMapper;
+import com.pmo.dashboard.dao.RmCandidateMapper;
 import com.pmo.dashboard.entity.CSDept;
+import com.pmo.dashboard.entity.CandidatePush;
 import com.pmo.dashboard.entity.Demand;
 import com.pmo.dashboard.entity.HSBCDept;
 import com.pmo.dashboard.entity.PageCondition;
@@ -36,6 +39,12 @@ public class DemandServiceImpl implements DemandService{
 	
 	@Resource
 	CSDeptMapper csDeptMapper;
+	
+	@Resource
+	RmCandidateMapper rmCandidateMapper;
+	
+	@Resource
+	CandidateMapper candidateMapper;
 	
 	@Override
 	public List<Demand> queryDemandList(Demand demand,PageCondition pageCondition,String csBuName,HttpServletRequest request) {
@@ -80,4 +89,25 @@ public class DemandServiceImpl implements DemandService{
 		return list;
 	}
 
+	@Override
+	public List<Demand> queryOfferDemandList(CandidatePush candidatePush) {
+		List<Demand> list = demandMapper.queryOfferDemandList(candidatePush);
+		return list;
+	}
+
+	@Override
+	public void updateCandidateIdById(String candidateId, String demandId, String pushId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("candidateId", candidateId);
+		params.put("demandId", demandId);
+		params.put("pushId", pushId);
+		//表示推送表的已发offer的状态
+		params.put("status", "2");
+		//表示候选人表的面试状态
+		params.put("interviewStatus", "5");
+		demandMapper.updateCandidateIdById(params);
+		rmCandidateMapper.updateCandidateStatus(params);
+		candidateMapper.updateInterviewStatusById(params);
+	}
+	
 }
