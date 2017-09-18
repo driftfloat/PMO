@@ -8,14 +8,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="utf-8">
 <title>Pmo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description"
 	content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
 <meta name="author" content="Muhammad Usman">
-
 <!-- The styles -->
 <link href="<%=path %>/css/bootstrap-cerulean.min.css" rel="stylesheet">
 <link href="<%=path %>/css/charisma-app.css" rel="stylesheet">
@@ -39,11 +37,28 @@
 <script src="<%=path %>/bower_components/jquery/jquery.min.js"></script>
 <!-- The fav icon -->
 <link rel="shortcut icon" href="<%=path %>/img/favicon.ico">
+<style>
+.table th, .table td { 
+text-align: center;
+vertical-align: middle!important;
+}
+.bootstrap-dialog-message{
+	overflow: auto;
+}
+.modal-lg {
+    width: 1070px!important;
+}
+.bootstrap-dialog-message {
+    overflow: auto;
+    height: 400px;
+}
+</style>
 </head>
 <script>
 var path='<%=path%>';
 </script>
 <body>
+
 	<!-- topbar starts -->
 	<c:import url="/service/manage/top" />
 	<!-- topbar ends -->
@@ -59,7 +74,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user">查看待入职员工</i> 
+									<i class="glyphicon glyphicon-user">RM查看待入职员工</i> 
 								</h2>
 							</div>
 							<div id="addDemand" class="box-content">
@@ -142,6 +157,7 @@ var path='<%=path%>';
 												<th>ENGLISH LEVEL</th>
 												<th>EDUCATION</th>
 												<th>WORK YEARS</th>
+												<th>DEMANDID</th>
 												<th>操作</th>
 											</tr>
 										</thead>
@@ -243,7 +259,7 @@ var path='<%=path%>';
 			<!--/span-->
 		</div>
 
-        
+        <div style="display: none" id="table_area" ></div>
 		<c:import url="/service/manage/footer" />
 	</div>
 	<!--/.fluid-container-->
