@@ -63,18 +63,77 @@ function exportData(){
 }
 var statusMap = {"招聘中":"0","offer中":"1","已入职":"2","闲置中":"3","暂不关注":"4","黑名单":"5","入职他司":"6"};
 function updateCandidateStatus(candidateId,candidateName,candidateStatus){	
+		 
 	$('#updateCandidateStatusId').val(candidateId);
 	$('#updateCandidateStatusName').val(candidateName);
-	$("#updateMyCandidateStatus").val(statusMap[candidateStatus]);
+	$("#myCandidateStatus").val(statusMap[candidateStatus]);
 	$('#myCandidateStatusModal').modal('show');
 };
-function updateCandidateStatusOk(){
-	var candidateStatus = $("#updateMyCandidateStatus").find("option:selected").val();	
-	if(candidateStatus == ''){
-		alert("请选择要更新状态！");
-		return;
-	}
+$(document).ready(function() {  
+	$('#myCandidateStatusModal').on('hide.bs.modal', function(e) {  
+        $('#statusCandidateForm').bootstrapValidator('resetForm', true);   
+    });
+	$('#myCandidatePushModal').on('hide.bs.modal', function(e) {  
+        $('#pushCandidateForm').bootstrapValidator('resetForm', true);   
+    });
+	$("#statusSubmit").on("click", function(){
+		   var bootstrapValidator = $("#statusCandidateForm").data('bootstrapValidator');
+		   bootstrapValidator.validate();
+		   if(bootstrapValidator.isValid())
+			   updateStatus();
+		   else return;
+
+		});
+	$("#pushSubmit").on("click", function(){
+		   var bootstrapValidator = $("#pushCandidateForm").data('bootstrapValidator');
+		   bootstrapValidator.validate();
+		   if(bootstrapValidator.isValid())
+			   pushCandidateOk();
+		   else return;
+
+		});
+	
+	//Verify the input information when the Candidate'status is updated 
+	$('#statusCandidateForm').bootstrapValidator({
+		 feedbackIcons: {
+	            valid: 'glyphicon glyphicon-ok',
+	            invalid: 'glyphicon glyphicon-remove',
+	            validating: 'glyphicon glyphicon-refresh'
+	        },
+	        fields: {       	
+	        	myCandidateStatus: {
+	          		validators: {
+	          			 notEmpty: {
+	                          message: 'Please select status'
+	                      }
+	                  }
+	              }
+	     
+	        }
+	    });	   
+	//Verify the input information when the Candidate  is pushed 
+	$('#pushCandidateForm').bootstrapValidator({
+		 feedbackIcons: {
+	            valid: 'glyphicon glyphicon-ok',
+	            invalid: 'glyphicon glyphicon-remove',
+	            validating: 'glyphicon glyphicon-refresh'
+	        },
+	        fields: {       	
+	        	csSubdeptName: {
+	          		validators: {
+	          			 notEmpty: {
+	                          message: 'Please select department'
+	                      }
+	                  }
+	              }
+	     
+	        }
+	    });	   
+});
+
+function updateStatus(){
 	var updateMycandidateStatus = new FormData();
+	var candidateStatus = $("#myCandidateStatus").find("option:selected").val();
 	updateMycandidateStatus.append("candidateId",$("#updateCandidateStatusId").val());
 	updateMycandidateStatus.append("candidateStatus",candidateStatus);
 	
@@ -89,7 +148,7 @@ function updateCandidateStatusOk(){
 		type:"post",
 		success:function(flag){
 			if(flag){
-				alert("更新成功！");
+				alert("更新成功！");				    
 			}else{
 				alert("更新失败！请刷新页面重试！");
 			}
@@ -121,12 +180,14 @@ function loadCusDeptInfo(){
 	})
 }
 
+
+
 function pushCandidateOk(){
 	var csSubDeptId = $("#csSubdeptName").find("option:selected").val();	
-	if(csSubDeptId == ''){
+	/*if(csSubDeptId == ''){
 		alert("请选择推送部门！");
 		return;
-	}
+	}*/
 	var candidatePush = new FormData();
 	candidatePush.append("csSubDeptId",csSubDeptId);
 	candidatePush.append("candidateId",$("#pushCandidateId").val());
