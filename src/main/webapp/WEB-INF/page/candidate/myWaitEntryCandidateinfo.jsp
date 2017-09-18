@@ -320,13 +320,13 @@ var path='<%=path%>';
 							<a href="#" class="btn btn-round btn-default  btn-minimize ">
 								<i class="glyphicon glyphicon-chevron-up"></i>
 							</a> 
-							<a class="btn btn-round btn-default" href="#" data-dismiss="modal">
+							<a class="btn btn-round btn-default" href="#" data-dismiss="modal" onClick="entryClearData()">
 								<i class="glyphicon glyphicon-remove"></i>
 							</a>
 						</div>
 					</div>
 					<div id="excelCheckBox" class="box-content">
-					 <form id="pushCandidateForm" method="post" class="form-horizontal">
+					 <form id="entryCandidateForm" method="post" class="form-horizontal">
 						<div class="group">
 							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
 							<div class="col-sm-4" style="width:60%;">
@@ -338,29 +338,32 @@ var path='<%=path%>';
 						<div class="group">
 							<label class="col-lg-2 control-label" style="width:30%;">REAL SALARY</label>
 							<div class="col-lg-4" style="width:60%;">
-								<input type="text" class="form-control" name="entryMyWaitCandidateRealSalary" id="entryMyWaitCandidateRealSalary" />
+								<input type="text" class="form-control" name="entryMyWaitCandidateRealSalary" id="entryMyWaitCandidateRealSalary" data-bv-group=".group"/>
 							</div>
 						</div>
 						<br/><br/><br/>
+						
 						<div class="group">
 							<label class="col-lg-2 control-label" style="width:30%;">ARRIVAL DATE</label>
-							<div class="col-md-4">
-								<div class="input-group date form_datetime col-sm-12"
-									data-link-field="dt_set_order_time_input">
-									<input class="form-control" type="text" disabled="disabled"
-										id="entryMyWaitCandidateArrivalDate" name="entryMyWaitCandidateArrivalDate"> <span
-										class="input-group-addon"><span
-										class="glyphicon glyphicon-th"></span></span> <input type="hidden"
-										id="entryMyWaitCandidateArrivalDate1" name="entryMyWaitCandidateArrivalDate1" />
+							<div class="col-lg-7" >
+								<div class="input-group date form_datetime  "
+									data-link-field="dt_set_order_time_input" >
+									<input class="form-control" type="text"  readonly
+										id="entryMyWaitCandidateArrivalDate" name="entryMyWaitCandidateArrivalDate"    data-bv-group=".group">  
+										  <span class="input-group-addon"><span
+													class="glyphicon glyphicon-calendar" id="arrivalDate"></span></span> <input   type="hidden"
+										id="entryMyWaitCandidateArrivalDate1" name="entryMyWaitCandidateArrivalDate1" data-bv-group=".group"/>
 								</div>
 							</div>
-						</div>
-						<br/><br/><br/>
+							</div>
+						
+						
+						<br/><br/><br/><br/>
 						<div class="center">
-							<a class="btn btn-success" href="#" onClick="entryMyWaitCandidateOk()"> 
+							<a class="btn btn-success" href="#"   id="entryMyWaitCandidateSubmit" > 
 								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
 							</a> &nbsp;&nbsp;&nbsp;
-							<a class="btn btn-info" href="#" data-dismiss="modal"> 
+							<a class="btn btn-info" href="#" data-dismiss="modal" onClick="entryClearData()"> 
 								<i class="glyphicon glyphicon-remove icon-white"></i> 取消
 							</a>
 						</div>
@@ -381,13 +384,13 @@ var path='<%=path%>';
 						<div class="box-icon">
 							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
 								class="glyphicon glyphicon-chevron-up"></i></a> <a
-								class="btn btn-round btn-default" href="#" data-dismiss="modal">
+								class="btn btn-round btn-default" href="#" data-dismiss="modal" onClick="abortClearData()">
 								<i class="glyphicon glyphicon-remove"></i>
 							</a>
 						</div>
 					</div>
 					<div id="excelCheckBox" class="box-content">
-					 <form id="pushCandidateForm" method="post" class="form-horizontal">
+					 <form id="abortCandidateForm" method="post" class="form-horizontal">
 						<div class="group">
 							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
 							<div class="col-sm-4" style="width:60%;">
@@ -399,7 +402,7 @@ var path='<%=path%>';
 						<div class="group">
 							<label class="col-lg-2 control-label" style="width:30%;">CANDIDATE STATUS</label>
 							<div class="col-lg-4" style="width:60%;">
-								<select class="form-control" id="abortMyWaitCandidateStatus" data-bv-group=".group">
+								<select class="form-control" id="abortMyWaitCandidateStatus" name="abortMyWaitCandidateStatus" data-bv-group=".group">
 									<option value="">--Option--</option>
 									<option value="0">招聘中</option>
 									<option value="1">offer中</option>
@@ -415,15 +418,15 @@ var path='<%=path%>';
 						<div class="group">
 							<label class="col-sm-2 control-label" style="width:30%;">REMARK</label>
 							<div class="col-sm-4" style="width:60%;">
-								<textarea id = "abortMyWaitCandidateRemark" style="width:80%;height:100px"></textarea>
+								<textarea id = "abortMyWaitCandidateRemark" name = "abortMyWaitCandidateRemark" class="form-control" style="width:80%;height:100px" data-bv-group=".group"></textarea>
 							</div>
 						</div>
-						<br/><br/><br/>
+						<br/><br/><br/><br/><br/><br/>
 						<div class="center">
-							<a class="btn btn-success" href="#" onClick="abortMyWaitCandidateOk()"> 
+							<a class="btn btn-success" href="#" id="abortSubmit"> 
 								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
 							</a> &nbsp;&nbsp;&nbsp;
-							<a class="btn btn-info" href="#" data-dismiss="modal"> 
+							<a class="btn btn-info" href="#" data-dismiss="modal" onClick="abortClearData()"> 
 								<i class="glyphicon glyphicon-remove icon-white"></i> 取消
 							</a>
 						</div>
@@ -444,13 +447,13 @@ var path='<%=path%>';
 						<div class="box-icon">
 							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
 								class="glyphicon glyphicon-chevron-up"></i></a> <a
-								class="btn btn-round btn-default" href="#" data-dismiss="modal">
+								class="btn btn-round btn-default" href="#" data-dismiss="modal" onClick="delayClearData()">
 								<i class="glyphicon glyphicon-remove"></i>
 							</a>
 						</div>
 					</div>
 					<div id="excelCheckBox" class="box-content">
-					 <form id="pushCandidateForm" method="post" class="form-horizontal">
+					 <form id="delayCandidateForm" method="post" class="form-horizontal">
 						<div class="group">
 							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
 							<div class="col-sm-4" style="width:60%;">
@@ -461,23 +464,23 @@ var path='<%=path%>';
 						<br/><br/><br/>
 						<div class="group">
 							<label class="col-lg-2 control-label" style="width:30%;">ARRIVAL DATE</label>
-							<div class="col-md-4">
-								<div class="input-group date form_datetime col-sm-12"
+							<div class="col-lg-7">
+								<div class="input-group date form_datetime1"
 									data-link-field="dt_set_order_time_input">
-									<input class="form-control" type="text" disabled="disabled"
+									<input class="form-control" type="text" readonly
 										id="delayMyWaitCandidateArrivalDate" name="delayMyWaitCandidateArrivalDate"> <span
 										class="input-group-addon"><span
-										class="glyphicon glyphicon-th"></span></span> <input type="hidden"
+										class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
 										id="delayMyWaitCandidateArrivalDate1" name="delayMyWaitCandidateArrivalDate1" />
 								</div>
 							</div>
 						</div>
-						<br/><br/><br/>
+						<br/><br/><br/><br/>
 						<div class="center">
-							<a class="btn btn-success" href="#" onClick="delayMyWaitCandidateOk()"> 
+							<a class="btn btn-success" href="#" id="delaySubmit"> 
 								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
 							</a> &nbsp;&nbsp;&nbsp;
-							<a class="btn btn-info" href="#" data-dismiss="modal"> 
+							<a class="btn btn-info" href="#" data-dismiss="modal" onClick="delayClearData()"> 
 								<i class="glyphicon glyphicon-remove icon-white"></i> 取消
 							</a>
 						</div>

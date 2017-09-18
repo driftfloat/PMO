@@ -375,7 +375,7 @@ var path='<%=path%>';
 						</div>
 						<br/><br/><br/>
 						<div class="center">
-							<a class="btn btn-success" href="#" onClick="pushCandidateOk()"> 
+							<a class="btn btn-success" href="#" id="pushSubmit" > 
 								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
 							</a> &nbsp;&nbsp;&nbsp;
 							<a class="btn btn-info" href="#" data-dismiss="modal"> 
@@ -405,7 +405,7 @@ var path='<%=path%>';
 						</div>
 					</div>
 					<div id="excelCheckBox" class="box-content">
-					 <form id="pushCandidateForm" method="post" class="form-horizontal">
+					 <form id="statusCandidateForm" method="post" class="form-horizontal">
 						<div class="group">
 							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
 							<div class="col-sm-4" style="width:60%;">
@@ -417,7 +417,7 @@ var path='<%=path%>';
 						<div class="group">
 							<label class="col-lg-2 control-label" style="width:30%;">CANDIDATE STATUS</label>
 							<div class="col-lg-4" style="width:60%;">
-								<select class="form-control" id="updateMyCandidateStatus" data-bv-group=".group">
+								<select class="form-control" id="myCandidateStatus" name="myCandidateStatus" data-bv-group=".group">
 									<option value="">--Option--</option>
 									<option value="0">招聘中</option>
 									<option value="1">offer中</option>
@@ -431,13 +431,14 @@ var path='<%=path%>';
 						</div>
 						<br/><br/><br/>
 						<div class="center">
-							<a class="btn btn-success" href="#" onClick="updateCandidateStatusOk()"> 
+							<a class="btn btn-success" href="#" id="statusSubmit" > 
 								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
 							</a> &nbsp;&nbsp;&nbsp;
 							<a class="btn btn-info" href="#" data-dismiss="modal"> 
 								<i class="glyphicon glyphicon-remove icon-white"></i> 取消
 							</a>
 						</div>
+						
 						</form>
 					</div>
 				</div>

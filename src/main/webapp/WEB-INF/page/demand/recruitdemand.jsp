@@ -97,14 +97,14 @@ var path='<%=path%>';
 											<label class="col-sm-2 control-label">RR</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="rr"  
-													id="rr" />
+													id="rr" data-bv-group=".group"/>
 											</div>
 										</div>
 										<div class="group">
 											<label class="col-sm-2 control-label">Job Code</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="jobCode"
-													id="jobCode" />
+													id="jobCode" data-bv-group=".group"/>
 											</div>
 										</div>
 								</div>
@@ -121,10 +121,9 @@ var path='<%=path%>';
 										</div>
 										<div class="group">
 										<label class="col-lg-2 control-label">REQUESTOR</label>
-										<div class="col-lg-4">
-											
+										<div class="col-lg-4">											
 												<input type="text" class="form-control" name="requestor"
-													id="requestor" />
+													id="requestor" data-bv-group=".group"/>
 										</div>
 										</div>
 								</div>
