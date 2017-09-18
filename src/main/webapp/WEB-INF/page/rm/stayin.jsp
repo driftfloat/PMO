@@ -245,7 +245,6 @@ var path='<%=path%>';
 
         
 		<c:import url="/service/manage/footer" />
-
 	</div>
 	<!--/.fluid-container-->
 
@@ -285,9 +284,11 @@ var path='<%=path%>';
 	<script src="<%=path %>/js/charisma.js"></script>
 
 	<script type="text/javascript" src="<%=path %>/js/pmo/stayinEmployee.js"></script>
+	<!-- 郭开峰引入的关于对待入职的员工onborad的js -->
+	<script type="text/javascript" src="<%=path %>/js/pmo/employeeOnborad.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=path %>/js/bootstrap-dialog.js"></script>
 </body>
 </html>

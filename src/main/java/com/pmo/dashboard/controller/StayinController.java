@@ -81,7 +81,8 @@ public class StayinController
     	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*Constants.PAGE_DATA_COUNT+"");
     	candidate.setPageDataCount(Constants.PAGE_DATA_COUNT+"");
         List<StayinCandidate> list = StayinService.queryStayinList(candidate);
-        
+        //gkf 加入session
+        request.getSession().setAttribute("candidateList", list);
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("data", list);
         result.put("pageInfo", page);

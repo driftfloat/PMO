@@ -1,5 +1,7 @@
 package com.pmo.dashboard.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,10 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pmo.dashboard.entity.Demand;
 import com.pmo.dashboard.entity.Employee;
+import com.pmo.dashboard.entity.StayinCandidate;
 import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.CSDeptService;
 import com.pom.dashboard.service.EmployeeService;
@@ -44,10 +49,37 @@ public class EmployeeController {
         return "welcome";
     }
 	
-    @RequestMapping("/index")
+    @SuppressWarnings("unchecked")
+	@RequestMapping("/index")
     public String index(final HttpServletRequest request,
-            final HttpServletResponse response)
+            final HttpServletResponse response,Model model,String candId)
     {
+    	Employee em = new Employee();
+		List<StayinCandidate> list1 = (List<StayinCandidate>) request.getSession().getAttribute("candidateList");
+    	List<Demand> list2 = (List<Demand>) request.getSession().getAttribute("demandList");
+    	//拿到需求和待入职的人员信息  gkf
+    	if(list1!=null &&list1.size()>0&&list2!=null &&list2.size()>0) {
+    		for(StayinCandidate candidate :list1 ) {
+    			if(candidate.getCandidateId().equals(candId)) {
+    				em.setStaffName(candidate.getCandidateName());
+    				//em.setBillRate();
+    				em.setGraduationDate(candidate.getGraduateDate());
+    			}
+    		}
+    		for(Demand demand:list2) {
+    			if(candId.equals(demand.getCandidateId())) {
+    				em.setStaffRegion(demand.getLocation());
+    				em.setStaffLocation("China");
+    				em.setSow(demand.getDoNumber());
+    				em.setRole(demand.getPosition());
+    				em.setSkill(demand.getSkill());
+    				em.setResourceStatus("Active");
+    			}
+    		}
+    		model.addAttribute("employee", em);
+			return "OnboardEmployeeInsert";
+    	}
+    	
         return "index";
     }
     
