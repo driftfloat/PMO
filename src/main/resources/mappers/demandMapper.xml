@@ -25,6 +25,7 @@
 		<result property="remark" column="REMARK" javaType="String" />
 		<result property="csSubDept" column="CS_SUBDEPT" javaType="String" />
 		<result property="plannedOnboardDate" column="PLANNED_ONBOARD_DATE" javaType="String" />
+		<result property="onboardDate" column="ONBOARD_DATE" javaType="String" />
 		<result property="doNumber" column="DO_NUMBER" javaType="String" />
 		<result property="hrPriority" column="HR_PRIORITY" javaType="String" />
 		<association property="hsbcDept" javaType="com.pmo.dashboard.entity.HSBCDept">
@@ -98,5 +99,13 @@
 	<update id="updateCandidateIdById" parameterType="java.util.HashMap">
 		update t_demand set CANDIDATE_ID = #{candidateId}
 		where DEMAND_ID = #{demandId}
+	</update>
+	
+	<!-- gkf onBoard  -->
+	<update id="updateDemandOnBoardById" parameterType="java.util.HashMap">
+		update t_demand set STATUS = 'Onboard', BGV_CLEARED = 'Completed',SOW_SIGNED = 'Fully signed off',
+		PROFILES_NO = #{profilesNo},INTERVIEWED_NO = #{interviewedNo},DO_NUMBER = #{doNumber},COMPLETION_DATE = date_format(now(),'%Y-%m-%d'),
+		UPDATE_DATE= date_format(now(),'%Y-%m-%d'),ONBOARD_DATE = #{onboardDate}
+		where CANDIDATE_ID = #{candidateId}
 	</update>
 </mapper>

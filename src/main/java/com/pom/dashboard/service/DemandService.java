@@ -19,4 +19,6 @@ public interface DemandService {
 	public List<Demand> queryAllDemand(Map<String, Object> params);
 	public List<Demand> queryOfferDemandList(CandidatePush candidatePush);
 	public void updateCandidateIdById(String candidateId, String demandId, String pushId);
+	//gkf add
+	public boolean updateDemandOnBoardById(Demand demand);
 }

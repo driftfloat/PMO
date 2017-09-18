@@ -301,4 +301,33 @@ public class DemandController {
 		return "/demand/demandDetail";
 	}
 	
+	/**
+	 * 员工入场需求页面信息展示
+	 * gkf
+	 * @return
+	 */
+	@RequestMapping("/demandOnboard")
+	public String demandOnboar(String candidateId,Model model,HttpServletRequest request){
+		List<Demand> list = (List<Demand>) request.getSession().getAttribute("demandList");
+		for (Demand demand : list) {
+			if(candidateId.equals(demand.getCandidateId())){
+				model.addAttribute("demand", demand);
+				return "/demand/demandOnboard";
+			}
+		}
+		return "/demand/demandOnboard";
+	}
+	
+	/**
+	 * gkf 
+	 * 员工入场后相应需求信息修改
+	 * @param requset
+	 * @param demand
+	 * @return
+	 */
+	@RequestMapping("/updateDemandOnBoardById")
+	@ResponseBody
+	public boolean updateDemandOnBoardById(Demand demand ) {
+		return demandService.updateDemandOnBoardById(demand);
+	}
 }
