@@ -12,6 +12,6 @@ public interface StayinMapper
     
     public int queryCandidateCount(StayinCandidate candidate);
     List<LinkedHashMap<String,String>> queryExportData(StayinCandidate candidate);
-    //根据相关需求查询模态窗口的需求
-	public boolean queryDemand(AddDemand demand);
+
+ 
 }

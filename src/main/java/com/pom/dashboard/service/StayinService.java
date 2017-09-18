@@ -18,7 +18,11 @@ public interface StayinService
 	//gengju 条件导出查询的列表
     List<LinkedHashMap<String, String>> queryExportData(StayinCandidate candidate);
 	//查询相关需求
-    public List<AddDemand> queryDemand(AddDemand demand);
+    public List<AddDemand> queryDemand();
+	//更改候选人对应需求方法
+    public boolean updateDemand(AddDemand d);
+	//变更之后要把更改原来的需求为null
+    public boolean updateDemandAfter(AddDemand d1);
 
     
 }

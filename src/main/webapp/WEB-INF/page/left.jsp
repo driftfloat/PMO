@@ -43,7 +43,7 @@
                             <ul class="nav nav-pills nav-stacked">
                                <li><a class="ajax-link" href="<%=path %>/service/demand/recruitdemand.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;招聘需求</span></a></li>
                                <li><a class="ajax-link" href="<%=path %>/service/demand/demandInfo.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;招聘需求查询</span></a></li>
-                               <li><a class="ajax-link" href="<%=path %>/service/stayin/stayin.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;待入职员工查看</span></a>
+                               <li><a class="ajax-link" href="<%=path %>/service/stayin/stayin.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;RM待入职员工查看</span></a>
                                </li>
                             </ul>
                         </li>

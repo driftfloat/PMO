@@ -34,7 +34,7 @@ public class StayinCandidate extends PageCondition
 	private String workYearsEnd;
 	private String exportDataColumn;
 	private String exportPageColumn;
-
+    private String demandId;
 	private String pageState;
 	
 	public String getCandidateId() {
@@ -235,5 +235,59 @@ public class StayinCandidate extends PageCondition
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
+	public String getDemandId() {
+		return demandId;
+	}
+	public void setDemandId(String demandId) {
+		this.demandId = demandId;
+	}
+	public StayinCandidate()
+	{
+		
+	}
+	public StayinCandidate(String candidateId, String candidateName, String candidateAge, String candidateSex,
+			String candidateTel, String education, String skill, String experienceYears, String candidateStatus,
+			String collage, String majorStatus, String graduateDate, String englishLevel, String resumePath,
+			String lockPerson, String userName, String createDate, String updateDate, String source, String role,
+			String entyDate, String email, String expectedSalary, String realSalary, String arrivalDate,
+			String oldCompany, String remark, String createUser, String workYearsStart, String workYearsEnd,
+			String exportDataColumn, String exportPageColumn, String demandId, String pageState) {
+		super();
+		this.candidateId = candidateId;
+		this.candidateName = candidateName;
+		this.candidateAge = candidateAge;
+		this.candidateSex = candidateSex;
+		this.candidateTel = candidateTel;
+		this.education = education;
+		this.skill = skill;
+		this.experienceYears = experienceYears;
+		this.candidateStatus = candidateStatus;
+		this.collage = collage;
+		this.majorStatus = majorStatus;
+		this.graduateDate = graduateDate;
+		this.englishLevel = englishLevel;
+		this.resumePath = resumePath;
+		this.lockPerson = lockPerson;
+		this.userName = userName;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+		this.source = source;
+		this.role = role;
+		this.entyDate = entyDate;
+		this.email = email;
+		this.expectedSalary = expectedSalary;
+		this.realSalary = realSalary;
+		this.arrivalDate = arrivalDate;
+		this.oldCompany = oldCompany;
+		this.remark = remark;
+		this.createUser = createUser;
+		this.workYearsStart = workYearsStart;
+		this.workYearsEnd = workYearsEnd;
+		this.exportDataColumn = exportDataColumn;
+		this.exportPageColumn = exportPageColumn;
+		this.demandId = demandId;
+		this.pageState = pageState;
+	}
+	
 	
 }
