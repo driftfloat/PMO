@@ -60,7 +60,7 @@ public class StayinController
     //查询列表
     @RequestMapping("/queryStayinList")
     @ResponseBody
-    public Object queryStayinList(StayinCandidate candidate)
+    public Object queryStayinList(StayinCandidate candidate,HttpServletRequest request)
     {
     	 String pageState = candidate.getPageState();
     	 PageCondition page = new PageCondition();
