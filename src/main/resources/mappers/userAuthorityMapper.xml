@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmo.dashboard.dao.UserAuthorityMapper">
+	<resultMap id="userAuthorityMap" type="com.pmo.dashboard.entity.UserAuthority">
+	    <id property="menuId" column="menu_id" javaType="String" />
+		<result property="userId" column="user_id" javaType="String" /> 
+		<result property="menuParentId" column="menu_parent_id" javaType="String" />
+		<result property="menuName" column="menu_name" javaType="String" />
+		<result property="menuUrl" column="menu_url" javaType="String" />
+		<result property="menuStatus" column="menu_status" javaType="String" />
+	</resultMap>
+	
+	
+	
+	<select id="queryUserAuthority" parameterType="String" resultMap="userAuthorityMap">
+		select t.menu_id,t.user_id,m.menu_parent_id,m.menu_name,m.menu_url,m.menu_status 
+		   from t_user_menu t,t_menu m where t.menu_id=m.menu_id and m.menu_status=1
+		   and  t.user_id= #{userId}
+		   order by t.menu_id
+	</select>
+	
+	<select id="queryUserMenu" parameterType="String" resultMap="userAuthorityMap">
+		select m.menu_id,null as user_id,m.menu_parent_id,m.menu_name,m.menu_url,m.menu_status 
+		   from t_menu m where m.menu_url like CONCAT('%','${menuUrl}','%' )  and m.menu_status=1
+	</select>
+	
+	<select id="queryUserAuthorityMenu" parameterType="String" resultMap="userAuthorityMap">
+		select m.menu_id,t.user_id,m.menu_parent_id,m.menu_name,m.menu_url,m.menu_status 
+		   from t_user_menu t,t_menu m where t.menu_id=m.menu_id and t.user_id= #{userId} 
+		    and m.menu_url like CONCAT('%','${menuUrl}','%' ) and m.menu_status=1
+    </select>
+	
+	<select id="queryMenus"   resultMap="userAuthorityMap">
+		select m.menu_id,null as user_id,m.menu_parent_id,m.menu_name,m.menu_url,m.menu_status 
+		   from t_menu m where   m.menu_status=1
+	</select>
+	
+	<select id="queryUserAuthorityMenus" parameterType="String" resultMap="userAuthorityMap">
+		select m.menu_id,t.user_id,m.menu_parent_id,m.menu_name,m.menu_url,m.menu_status 
+		   from t_user_menu t,t_menu m where t.menu_id=m.menu_id and t.user_id= #{userId}  
+		    and  m.menu_status=1
+    </select>
+</mapper>
