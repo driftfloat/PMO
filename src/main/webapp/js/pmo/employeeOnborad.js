@@ -25,7 +25,6 @@ function updateDemand(){
 	var profilesNo = $("#profilesNo").val();
 	var interviewedNo = $('#interviewedNo').val();
 	var onboardDate1 = $('#onboardDate1').val();
-	alert(onboardDate1);
 	var doNumber = $('#doNumber').val();
 	$.ajax({
 		url:path+'/service/demand/updateDemandOnBoardById',
