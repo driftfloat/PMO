@@ -14,31 +14,27 @@
 	
 	
 	<select id="queryUserAuthority" parameterType="String" resultMap="userAuthorityMap">
-		select t.menu_id,t.user_id,m.menu_parent_id,m.menu_name,m.menu_url,m.menu_status 
+		<!-- select t.menu_id,t.user_id,m.menu_parent_id,m.menu_name,m.menu_url,m.menu_status 
 		   from t_user_menu t,t_menu m where t.menu_id=m.menu_id and m.menu_status=1
 		   and  t.user_id= #{userId}
-		   order by t.menu_id
+		   order by t.menu_id -->
+		   select m.menu_id,null as user_id,m.menu_parent_id,m.menu_name,m.menu_url,m.menu_status 
+		   from t_menu m 
+           where
+				 m.menu_id in(
+				 select t.menu_id
+				 from t_user_menu t,t_menu mo where t.menu_id=mo.menu_id and mo.menu_status=1
+				 and  t.user_type in (${userType})		   
+				)       
+		   order by m.menu_id
+		   
 	</select>
 	
-	<select id="queryUserMenu" parameterType="String" resultMap="userAuthorityMap">
-		select m.menu_id,null as user_id,m.menu_parent_id,m.menu_name,m.menu_url,m.menu_status 
-		   from t_menu m where m.menu_url like CONCAT('%','${menuUrl}','%' )  and m.menu_status=1
-	</select>
 	
-	<select id="queryUserAuthorityMenu" parameterType="String" resultMap="userAuthorityMap">
-		select m.menu_id,t.user_id,m.menu_parent_id,m.menu_name,m.menu_url,m.menu_status 
-		   from t_user_menu t,t_menu m where t.menu_id=m.menu_id and t.user_id= #{userId} 
-		    and m.menu_url like CONCAT('%','${menuUrl}','%' ) and m.menu_status=1
-    </select>
 	
 	<select id="queryMenus"   resultMap="userAuthorityMap">
 		select m.menu_id,null as user_id,m.menu_parent_id,m.menu_name,m.menu_url,m.menu_status 
 		   from t_menu m where   m.menu_status=1
 	</select>
 	
-	<select id="queryUserAuthorityMenus" parameterType="String" resultMap="userAuthorityMap">
-		select m.menu_id,t.user_id,m.menu_parent_id,m.menu_name,m.menu_url,m.menu_status 
-		   from t_user_menu t,t_menu m where t.menu_id=m.menu_id and t.user_id= #{userId}  
-		    and  m.menu_status=1
-    </select>
 </mapper>
