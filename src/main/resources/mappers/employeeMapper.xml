@@ -65,4 +65,14 @@
 	<select id="queryEmployeeByCsSubDeptId" parameterType="java.util.HashMap" resultMap="employeeMap">
 	    SELECT * FROM t_employee WHERE CS_SUBDEPT_ID = #{csSubDeptId} and INTERVIERW_STATUS = #{intervierwStatus};
 	</select>
+	
+	<select id="selectByEhr" parameterType="String" resultMap="employeeMap">
+		select * from t_employee e  where e.E_HR=#{eHr}
+	</select>
+	<select id="selectByLob" parameterType="String" resultMap="employeeMap">
+		select * from t_employee e  where e.LOB=#{lob}
+	</select>
+	<select id="selectByHSBCStaffID" parameterType="String" resultMap="employeeMap">
+		select * from t_employee e  where e.HSBC_STAFF_ID=#{staffId}
+	</select>
 </mapper>

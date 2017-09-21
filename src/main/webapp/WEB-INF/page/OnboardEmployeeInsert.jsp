@@ -48,7 +48,7 @@
 <link href='<%=path %>/css/animate.min.css' rel='stylesheet'>
 <link href='<%=path%>/css/bootstrap-datetimepicker.css' rel='stylesheet'>
 <link href='<%=path%>/css/bootstrap-datetimepicker.min.css' rel='stylesheet'>
-
+<link href='<%=path%>/css/style.css' rel='stylesheet'>
 <!-- jQuery -->
 <script src="<%=path %>/bower_components/jquery/jquery.min.js"></script>
 
@@ -85,7 +85,7 @@ var path='<%=path%>';
 							</div>
 							<div id="register" class="box-content" style="overflow: auto;">
 							<form id="registerEmployeeForm" method="post">
-							    <br/>
+							    
 							    <div id="successAlert" class="alert alert-success" style="display: none;"></div>
 							    <div class="form-group">
 										<div class="group">
@@ -104,7 +104,7 @@ var path='<%=path%>';
 										</div>
 										
 								</div>
-								<br/><br/>
+								
 							    
 								<div class="form-group">
 								
@@ -123,7 +123,7 @@ var path='<%=path%>';
 											</div>
 										</div>
 								</div>
-								<br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 											<label class="col-sm-2 control-label">LN</label>
@@ -142,7 +142,7 @@ var path='<%=path%>';
 										</div>
 										</div>
 								</div>
-								<br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Staff Location</label>
@@ -162,7 +162,7 @@ var path='<%=path%>';
 										</div>
 										</div>
 								</div>
-								<br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Onshore or Offshore</label>
@@ -184,7 +184,7 @@ var path='<%=path%>';
 										</div>
 								</div>
 								
-								<br/><br/>
+								
 								<div class="form-group">
 								        <div class="group">
 										<label class="col-lg-2 control-label">HSBC Dept</label>
@@ -205,7 +205,7 @@ var path='<%=path%>';
 										</div>
 										</div>
 								</div>
-								<br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 											<label class="col-sm-2 control-label">HSBC Project Name</label>
@@ -222,7 +222,7 @@ var path='<%=path%>';
 											</div>
 										</div>
 								</div>
-								<br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 											<label class="col-sm-2 control-label">SOW#</label>
@@ -245,7 +245,7 @@ var path='<%=path%>';
 										</div>
 									    </div>
 								</div>
-								<br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Staff Category</label>
@@ -266,7 +266,7 @@ var path='<%=path%>';
 										</div>
 										</div>
 								</div>
-								<br/><br/>
+								
 								<div class="form-group">
 									<div class="group">
 										<label class="col-sm-2 control-label">HSBC DOJ</label>
@@ -295,7 +295,7 @@ var path='<%=path%>';
 										</div>
 									</div>
 								</div>
-								<br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">MSA Role</label>
@@ -314,7 +314,7 @@ var path='<%=path%>';
 										</div>
 										</div>
 								</div>
-								<br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Billing Currency</label>
@@ -333,7 +333,7 @@ var path='<%=path%>';
 											</div>
 										</div>
 								</div>
-								<br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Resource Status</label>
@@ -357,7 +357,7 @@ var path='<%=path%>';
 										</div>
 									    </div>
 								</div>
-								<br/><br/>
+								
 								<div class="form-group">
 										
 										<div class="group">
@@ -368,10 +368,10 @@ var path='<%=path%>';
 											</div>
 										</div>
 								</div>
-								<br/><br/>
 								
 								
-								<br/><br/><br/>
+								
+								
 								
 								<div class="form-group">
 									    <div style="text-align:center;width:50%;float:left">
@@ -388,7 +388,7 @@ var path='<%=path%>';
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
 									    </div>
 								</div>
-								<br/><br/>
+								
 							</form>
 							</div>
 						</div>
@@ -453,6 +453,7 @@ var path='<%=path%>';
 	<script src="<%=path %>/js/charisma.js"></script>
 
 	<script type="text/javascript" src="<%=path %>/js/pmo/loadHSBCDept.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/employeeValid.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>
