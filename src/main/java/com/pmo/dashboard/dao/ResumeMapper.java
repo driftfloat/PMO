@@ -1,5 +1,9 @@
 package com.pmo.dashboard.dao;
 
+import java.util.List;
+import java.util.Map;
+
+import com.pmo.dashboard.entity.Demand;
 import com.pmo.dashboard.entity.Resume;
 
 /**
@@ -18,5 +22,9 @@ public interface ResumeMapper {
 	void add(Resume resume);
 
 	Resume selectTel(String tel);
+	
+	public List<Resume> queryResumeInfoById(String canID);
+	
+	int upd(Resume resume);
 
 }

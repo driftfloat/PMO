@@ -311,7 +311,7 @@ function loadDept(){
 		type:"post",
 		success:function(list){
 			for(var i = 0;i<list.length;i++){
-				$("#hsbcDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcDeptName+"</option>");
+				$("#hsbcDept").append("<option value='"+list[i].Id+"'>"+list[i].hsbcDeptName+"</option>");
 			}
 		}
 	})

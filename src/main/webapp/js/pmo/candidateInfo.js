@@ -60,7 +60,7 @@ function exportData(){
 }
 
 function updateResumeInfo(candidateId){
-	$("#editForm").attr("action",path+"/service/resume/toUpdateResume.html");
+	$("#editForm").attr("action",path+"/service/resume/toUpdateResume");
 	$("#candidateId").val(candidateId);
 	$("#editForm").submit();
 }
@@ -132,6 +132,7 @@ function loadCandidateList(pageState)
 				"<td>"+ result.data[i].englishLevel+ "</td>" +
 				"<td>"+ result.data[i].skill+ "</td>" +
 				"<td>"+ result.data[i].userName+ "</td>").appendTo(tr);
+//				"<td><div class=''><a href='javascript:void(0);' class='btn btn-primary' onclick='updateResumeInfo("+result.date[i].cansisateId+")'>详情</a></div></td>";
 				
 				if(result.data[i].candidateStatus == '闲置中'){
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +

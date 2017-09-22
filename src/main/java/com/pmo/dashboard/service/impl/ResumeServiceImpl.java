@@ -1,5 +1,8 @@
 package com.pmo.dashboard.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -31,6 +34,18 @@ public class ResumeServiceImpl implements ResumeService {
 	public Resume searchTel(String tel) {
 		// TODO Auto-generated method stub
 		return resumeMapper.selectTel(tel);
+	}
+	
+	
+	@Override
+	public List<Resume> queryResumeInfoById(String canID) {
+		// TODO Auto-generated method stub
+		return resumeMapper.queryResumeInfoById(canID);
+	}
+	@Override
+	public void upd(Resume resume) {
+		resumeMapper.upd(resume);
+		
 	}
 
 }

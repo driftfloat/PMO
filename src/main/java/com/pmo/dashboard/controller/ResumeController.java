@@ -1,23 +1,42 @@
 package com.pmo.dashboard.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.persistence.metamodel.Bindable;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.Validate;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.config.ForwardConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.pmo.dashboard.entity.CandidateInfo;
+import com.pmo.dashboard.entity.Demand;
+import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.Resume;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Utils;
+import com.pom.dashboard.service.CandidateService;
 import com.pom.dashboard.service.ResumeService;
 
 /**
@@ -25,13 +44,17 @@ import com.pom.dashboard.service.ResumeService;
  * 
  * @author dilu
  * @version 1.0 2017-8-25 15:09:30
+ * @param <updateResume>
  */
 @Controller
 @RequestMapping(value="/resume")
-public class ResumeController {
+public class ResumeController<updateResume> {
 	
 	@Resource
+	@Autowired
 	private ResumeService resumeService;
+	
+
 	
 	/**
 	 * 修改候选人的方法
@@ -41,12 +64,49 @@ public class ResumeController {
 	 * @return
 	 */
 	@RequestMapping("/toUpdateResume")
-	public String updateResume(String candidateId,Model model){
-		
-		//System.out.println(candidateId);
+	public String updateResume(String candidateId,Model model,HttpServletRequest request){
+//		String  candidateId = req.getParameter("candidateId");
+//		req.setAttribute("candidateId", candidateId);
+		boolean result = true;
+		List<Resume> list =resumeService.queryResumeInfoById(candidateId);
+/*		for(Resume resume: list){
+			if(resume.getId().equals(candidateId)){
+			model.addAttribute("resume",resume);
+			return "/editresume/updateResume";
+			}
+		}*/
+		if(list!=null&&list.size()>0){
+			model.addAttribute("resume",list.get(0));
+			
+			return "/editresume/updateResume";
+		}
+	
+
 		return null;
-		
+
 	}
+	
+	
+	@RequestMapping("/toUpdateResumeNew")
+	@ResponseBody
+	public String toUpdateResumeNew(final HttpServletRequest request,
+           Resume resume, Model model){
+		return "true";
+
+	}
+
+	   @RequestMapping("/queryResumeInfoById")
+	    @ResponseBody
+	    public Object queryResumeInfoById(final HttpServletRequest request,
+	            final HttpServletResponse response)
+	    {
+	        String candidateId = request.getParameter("candidateId");
+	        
+	        List<Resume> resume = resumeService.queryResumeInfoById(candidateId);
+	        
+	        return resume.get(0);
+	     }
+
 	/**
 	 * 跳转到录入信息的页面
 	 * 

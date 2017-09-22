@@ -1,5 +1,8 @@
 package com.pom.dashboard.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.pmo.dashboard.entity.Resume;
 
 /**
@@ -16,7 +19,11 @@ public interface ResumeService {
 	 * @param candidate
 	 */
 	void add(Resume resume);
+	
+	void upd(Resume resume);
 
 	Resume searchTel(String tel);
+	
+	public List<Resume> queryResumeInfoById(String canID);
 
 }

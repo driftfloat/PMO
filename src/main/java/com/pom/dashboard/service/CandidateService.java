@@ -51,4 +51,9 @@ public interface CandidateService
 	boolean abortMyWaitCandidateOk(CandidateInfo candidateinfo);
 	
 	CandidateInfo queryCandidateForId(String candidateId);
+
+	static List<CandidateInfo> queryCandidateNameById(String candidateId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

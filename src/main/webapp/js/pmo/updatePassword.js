@@ -28,3 +28,34 @@ function updatePassword(){
 		$("#updateAlert").css({color:"red"});
 	}
 }
+	
+	  //退出登陆
+	$("#loginOut1").bind("click",function(){
+		
+		
+		   alert("你确定要退出登陆吗？");
+		   
+//		   location.replace("<%=path%>/UserController/welcome"); 
+		  $("#loginOut2");
+		  alert("1221");
+		
+		})
+	function loginOut(){
+		$.ajax({
+			url : path+"/service/user/loginOut",
+			
+			type : "post",
+			async : true,
+			cache : false,
+			dataType : "json",
+			data : {'newPwd':newPwd},
+			//timeout : 20000,
+			success : function(data) {
+				 alert("1wwwwwww21");
+				} 
+			});
+		
+	}
+	
+ 	
+	

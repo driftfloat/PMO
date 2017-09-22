@@ -271,7 +271,7 @@ var path='<%=path%>';
 			<!--/#content.col-md-0-->
 		</div>
 		<form id="editForm" action="">
-			<input type="hidden" id="candidateId" ></input>
+			<input type="hidden" id="candidateId" name="candidateId" ></input>
 		</form>
 		<hr>
 		<div class="modal fade" id="myCandidateListModal" tabindex="-1" role="dialog"

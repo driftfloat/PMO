@@ -28,6 +28,7 @@ public class CandidateInfo extends PageCondition {
 	private String arrivalDate;
 	private String oldCompany;
 	private String remark;
+	
 	private String createUser;
 	private String interviewStatus;
 	private String workYearsStart;
