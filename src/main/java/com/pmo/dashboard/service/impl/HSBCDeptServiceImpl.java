@@ -53,4 +53,11 @@ public class HSBCDeptServiceImpl implements HSBCDeptService
 		String hsbcSubDeptId = hsbcDeptMapper.queryHsbcSubDeptId(params);
 		return hsbcSubDeptId;
 	}
+
+    @Override
+    public HSBCDept queryDemandHSBCSubDeptById(String hsbcSubDeptId)
+    {
+        HSBCDept hsbcDept = hsbcDeptMapper.queryDemandHSBCSubDeptById(hsbcSubDeptId);
+        return hsbcDept;
+    }
 }

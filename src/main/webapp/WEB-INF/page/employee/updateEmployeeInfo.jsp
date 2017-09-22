@@ -367,12 +367,22 @@ var path='<%=path%>';
 							
 								<div class="form-group">
 										
-										<div class="group">
+										<!-- <div class="group">
 											<label class="col-sm-2 control-label">Reason for Termination</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="terminationReason"
 													id="terminationReason" />
 											</div>
+										</div> -->
+										
+										<div class="group">
+										<label class="col-lg-2 control-label">Reason for Termination</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="terminationReason" data-bv-notempty
+												data-bv-notempty-message="" id="terminationReason" data-bv-group=".group">
+												<option value="">-- 请选择--</option>
+											</select>
+										</div>
 										</div>
 								</div>
 								

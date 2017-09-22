@@ -1,5 +1,15 @@
 package com.pmo.dashboard.controller;
 
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,14 +27,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.Demand;
 import com.pmo.dashboard.entity.Employee;
+import com.pmo.dashboard.entity.EmployeePageCondition;
+import com.pmo.dashboard.entity.HSBCDept;
 import com.pmo.dashboard.entity.StayinCandidate;
+import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.CSDeptService;
 import com.pom.dashboard.service.EmployeeService;
 import com.pom.dashboard.service.HSBCDeptService;
 import com.pom.dashboard.service.HSBCProjectService;
+
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
 
 @Controller
 @RequestMapping(value="/employee")
@@ -214,6 +233,7 @@ public class EmployeeController {
         
         return resultFlag;
     }
+
     /**
      * 校验Ehr是否存在
      * gkf
@@ -294,14 +314,15 @@ public class EmployeeController {
             je.printStackTrace();
         }
         return resultString;
-	}
-	
-    /*@RequestMapping("/exportExcel")
+    }
+@RequestMapping("/exportExcel")
     @ResponseBody
     public HttpServletResponse exportExcel(HttpServletRequest request,
              HttpServletResponse response)
     {
-        EmployeePageCondition empListCondition = (EmployeePageCondition) request.getSession().getAttribute("empListCondition");
+        //EmployeePageCondition empListCondition = (EmployeePageCondition) request.getSession().getAttribute("empListCondition");
+        
+        EmployeePageCondition empListCondition = (EmployeePageCondition) request.getSession().getAttribute("employeePageCondition");
         
         List<String> conditionList = (List<String>) request.getSession().getAttribute("conditionList");
         
@@ -336,22 +357,20 @@ public class EmployeeController {
                    ws.addCell(labelSL);
                
                for(int k=0;k<conditionList.size();k++){
-                   
                    Label label = new Label(k+1, 0, conditionList.get(k));
+                   
                    ws.addCell(label);
                }
                
                //
                CSDept csDept = new CSDept();
                HSBCDept hsbcDept = new HSBCDept();
-               HSBCProject hsbcProject = new HSBCProject();
                
                
                for (int i = 1; i-1 < listE.size(); i++) {
                    
-                   csDept = csDeptService.queryCSDeptById(listE.get(i-1).getCsSubDeptId());
-                   hsbcProject = hsbcProjectService.queryProjectName(listE.get(i-1).getHsbcProjectId());
-                   hsbcDept = hsbcDeptService.queryHSBCSubDeptById(listE.get(i-1).getHsbcProjectId());
+                   csDept = csDeptService.queryCSDeptById(listE.get(i-1).getCsSubDept());
+                   hsbcDept = hsbcDeptService.queryHSBCSubDeptById(listE.get(i-1).getHsbcSubDept());
                    
                    int j = 0;
                    
@@ -360,6 +379,11 @@ public class EmployeeController {
                    
                    if(conditionList.contains("HSBC Staff ID")){
                        Label label= new Label(++j, i, listE.get(i-1).getHsbcStaffId());
+                       ws.addCell(label);
+                   }
+                   
+                   if(conditionList.contains("LOB")){
+                       Label label= new Label(++j, i, listE.get(i-1).getLob());
                        ws.addCell(label);
                    }
                    
@@ -389,7 +413,7 @@ public class EmployeeController {
                    }
                    
                    if(conditionList.contains("Onshore or Offshore")){
-                       Label label= new Label(++j, i, listE.get(i-1).getOnShoreOrOffShore());
+                       Label label= new Label(++j, i, listE.get(i-1).getOnshoreOrOffshore());
                        ws.addCell(label);
                    }
                    
@@ -399,22 +423,22 @@ public class EmployeeController {
                    }
                    
                    if(conditionList.contains("HSBC Sub Dept")){
-                       Label label= new Label(++j, i, hsbcDept.getHsbcSubDeptName());
+                       Label label = null;
+                       if(hsbcDept.getHsbcSubDeptName() == null || ("").equals(hsbcDept.getHsbcSubDeptName())){
+                           label= new Label(++j, i, hsbcDept.getHsbcDeptName());
+                       }else{
+                           label= new Label(++j, i, hsbcDept.getHsbcSubDeptName());
+                       }
                        ws.addCell(label);
                    }
                    
                    if(conditionList.contains("HSBC Manager")){
-                       Label label= new Label(++j, i, hsbcProject.getHsbcManager());
+                       Label label= new Label(++j, i, listE.get(i-1).getProjectManager());
                        ws.addCell(label);
                    }
                    
                    if(conditionList.contains("Project Name")){
-                       Label label= new Label(++j, i, hsbcProject.getHsbcProjectName());
-                       ws.addCell(label);
-                   }
-                   
-                   if(conditionList.contains("Project Description")){
-                       Label label= new Label(++j, i, hsbcProject.getHsbcProjectDescription());
+                       Label label= new Label(++j, i, listE.get(i-1).getProjectName());
                        ws.addCell(label);
                    }
                    
@@ -439,12 +463,12 @@ public class EmployeeController {
                    }
                    
                    if(conditionList.contains("HSBC DOJ")){
-                       Label label= new Label(++j, i, listE.get(i-1).getHsbcDoj());
+                       Label label= new Label(++j, i, listE.get(i-1).getHsbcDOJ());
                        ws.addCell(label);
                    }
                    
                    if(conditionList.contains("Experience on HSBC account in Months")){
-                       Label label= new Label(++j, i, Utils.caculateMonth(listE.get(i-1).getHsbcDoj())+"");
+                       Label label= new Label(++j, i, Utils.caculateMonth(listE.get(i-1).getHsbcDOJ())+"");
                        ws.addCell(label);
                    }
                    
@@ -468,13 +492,8 @@ public class EmployeeController {
                        ws.addCell(label);
                    }
                    
-                   if(conditionList.contains("Billing Entity")){
-                       Label label= new Label(++j, i, listE.get(i-1).getBillingEntity());
-                       ws.addCell(label);
-                   }
-                   
                    if(conditionList.contains("Billing Currency")){
-                       Label label= new Label(++j, i, listE.get(i-1).getBillCurrency());
+                       Label label= new Label(++j, i, listE.get(i-1).getBillingCurrency());
                        ws.addCell(label);
                    }
                    
@@ -488,13 +507,13 @@ public class EmployeeController {
                        ws.addCell(label);
                    }
                    
-                   if(conditionList.contains("If terminated,mention LWD")){
-                       Label label= new Label(++j, i, listE.get(i-1).getMentionLWD());
+                   if(conditionList.contains("If terminated mention LWD")){
+                       Label label= new Label(++j, i, listE.get(i-1).getTerminatedDate());
                        ws.addCell(label);
                    }
                    
                    if(conditionList.contains("Reason for Termination")){
-                       Label label= new Label(++j, i, listE.get(i-1).getReasonForTermination());
+                       Label label= new Label(++j, i, listE.get(i-1).getTerminationReason());
                        ws.addCell(label);
                    }
                    
@@ -508,21 +527,10 @@ public class EmployeeController {
                        ws.addCell(label);
                    }
                    
-                   if(conditionList.contains("交付部")){
+                   if(conditionList.contains("CS Dept")){
                        Label label= new Label(++j, i, csDept.getCsSubDeptName());
                        ws.addCell(label);
                    }
-                   
-                   if(conditionList.contains("大部门")){
-                       Label label= new Label(++j, i, csDept.getCsDeptName());
-                       ws.addCell(label);
-                   }
-                   
-                   if(conditionList.contains("niche skill")){
-                       Label label= new Label(++j, i, listE.get(i-1).getNicheSkill());
-                       ws.addCell(label);
-                   }
-                   
                    
                }
              
@@ -560,6 +568,7 @@ public class EmployeeController {
         
         return null;
     }
-    */
+    
 }
+
 

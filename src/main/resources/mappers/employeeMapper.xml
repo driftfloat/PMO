@@ -52,6 +52,12 @@
 		<if test="csSubDeptName != null and csSubDeptName != ''">
 				AND CS_SUBDEPT_NAME = #{csSubDeptName}
 		</if>
+		<if test="eHr != null and eHr != ''">
+				AND E_Hr = #{eHr}
+		</if>
+		<if test="lob != null and lob != ''">
+				AND LOB = #{lob}
+		</if>
 		<if test="csbuName != null and csbuName != ''">
 				AND CS_BU_NAME = #{csbuName}
 		</if>

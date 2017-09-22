@@ -42,6 +42,8 @@ public class EmployeeInfoController
         
         String eHr = request.getParameter("eHr");
         
+        String lob = request.getParameter("lob");
+        
         String csDeptName = request.getParameter("csDeptName");
         
         String csSubDeptName = request.getParameter("csSubDeptName");
@@ -58,6 +60,7 @@ public class EmployeeInfoController
             currentPage = "0";
             employeePageCondition.setHsbcStaffId(hsbcStaffId);
             employeePageCondition.seteHr(eHr);
+            employeePageCondition.setLob(lob);
             employeePageCondition.setCsSubDeptName(csSubDeptName);
             employeePageCondition.setCsDeptName(csDeptName);
             employeePageCondition.setCsbuName(csBuName);
@@ -97,27 +100,21 @@ public class EmployeeInfoController
     
     @RequestMapping("/setEmpConditon")
     @ResponseBody
-    public void setEmpConditon(final HttpServletRequest request,
+    public boolean setEmpConditon(final HttpServletRequest request,
             final HttpServletResponse response)
     {
-        String csDeptName = request.getParameter("csDeptName");
-        String csSubDeptName = request.getParameter("csSubDeptName");
-        String csBuName = request.getParameter("csBuName");
+       
         String condition = request.getParameter("condition");
         
         String[] excelCondition = condition.split(",");
         
         List<String> conditionList = Arrays.asList(excelCondition);
         
-        
-        EmployeePageCondition empListCondition = new EmployeePageCondition();
-        
-        empListCondition.setCsDeptName(csDeptName);
-        empListCondition.setCsSubDeptName(csSubDeptName);
-        empListCondition.setCsbuName(csBuName);
-        request.getSession().setAttribute("empListCondition", empListCondition);
-        
         request.getSession().setAttribute("conditionList", conditionList);
+        
+        boolean resultFlag = true;
+        
+        return resultFlag;
         
     }
     

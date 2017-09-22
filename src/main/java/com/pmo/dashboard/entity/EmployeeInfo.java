@@ -9,6 +9,9 @@ public class EmployeeInfo
     private String ln;
     private String csDeptName;
     private String csSubDeptName;
+    private String lob;
+    
+    
     public String getEmployeeId()
     {
         return employeeId;
@@ -65,9 +68,22 @@ public class EmployeeInfo
     {
         this.csSubDeptName = csSubDeptName;
     }
+    public String getLob()
+    {
+        return lob;
+    }
+    public void setLob(String lob)
+    {
+        this.lob = lob;
+    }
+    public EmployeeInfo()
+    {
+        super();
+        // TODO Auto-generated constructor stub
+    }
     public EmployeeInfo(String employeeId, String hsbcStaffId, String eHr,
             String staffName, String ln, String csDeptName,
-            String csSubDeptName)
+            String csSubDeptName, String lob)
     {
         super();
         this.employeeId = employeeId;
@@ -77,11 +93,7 @@ public class EmployeeInfo
         this.ln = ln;
         this.csDeptName = csDeptName;
         this.csSubDeptName = csSubDeptName;
-    }
-    public EmployeeInfo()
-    {
-        super();
-        // TODO Auto-generated constructor stub
+        this.lob = lob;
     }
     
 }
