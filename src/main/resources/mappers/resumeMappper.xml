@@ -53,8 +53,8 @@
 	
 
     <update id="upd" parameterType="com.pmo.dashboard.entity.Resume">
-	    update t_candidate set candidate_name = #{candidateName}，CANDIDATE_AGE=#{age},CANDIDATE_SEX = #{gender},
-	    	TEL = #{tel},EDUCATION =#{education}, COLLEGE = #{college}, MAJOR_STATUS=#{major},EXPERIENCE_YEARS=#{experience_years},
+	    update t_candidate set candidate_name = #{candidateName}，age=#{age},gender = #{gender},
+	    	tel = #{tel},EDUCATION =#{education}, college = #{college}, major=#{major},EXPERIENCE_YEARS=#{experience_years},
 	    	SKILL=#{skill},GRADUATE_DATE=#{graduate_date},ENGLISH_LEVEL=#{English_level},CANDIDATE_STATUS=#{candidate_status},
 	    	CREATE_DATE=#{create_date},SOURCE=#{source},
 	    	ROLE=#{role},enty_date=#{entry_date},EMAIL=#{email},EXPECTED_SALARY=#{expected_salary},REAL_SALARY=#{real_salary},

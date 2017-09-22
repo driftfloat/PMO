@@ -33,6 +33,8 @@ function loadDept(){
 }
 
 $("#hsbcDept").change(function(){
+	$('#recruitdemandForm').data("bootstrapValidator").updateStatus("hsbcSubDept",  "NOT_VALIDATED",  null ); 
+	 
 	var hsbcDeptName = $('#hsbcDept').val();
 	$.ajax({
 		url:path+'/service/demand/loadSubDepartment',
@@ -60,9 +62,11 @@ function loadCsSubDept(){
 	});
 }
 function addDemand(){
-	var isvalid = false;
-	isvalid = $('#recruitdemandForm').data('bootstrapValidator').isValid();
-	if(isvalid){
+	//var isvalid = false;
+	//isvalid = $('#recruitdemandForm').data('bootstrapValidator').isValid();
+	 var bootstrapValidator = $("#recruitdemandForm").data('bootstrapValidator');
+	   bootstrapValidator.validate();
+	if(bootstrapValidator.isValid()){
 		var demandId=$('#demandId').val();
 		var rr=$('#rr').val();
 		var jobCode=$('#jobCode').val();
@@ -123,7 +127,7 @@ function addDemand(){
 			success:function(resultFlag){
 				if(resultFlag){
 					$("html,body").animate({scrollTop:0}, 500);
-					$('#successAlert').html('需求信息添加成功').show();
+					$('#successAlert').html('The information was added successfully').show();
 					setTimeout(function () {
 						$('#successAlert').hide();
 					}, 2000);
@@ -132,7 +136,8 @@ function addDemand(){
 		})
 	}else{
 		//Do something for invalid
-		alert('请填写正确的信息');
+		//alert('请填写正确的信息');
+		return ;
 	}
 }
 function loadSkill(){

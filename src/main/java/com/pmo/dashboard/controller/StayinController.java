@@ -22,6 +22,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -81,7 +82,8 @@ public class StayinController
     	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*Constants.PAGE_DATA_COUNT+"");
     	candidate.setPageDataCount(Constants.PAGE_DATA_COUNT+"");
         List<StayinCandidate> list = StayinService.queryStayinList(candidate);
-        
+        //gkf 加入session
+        request.getSession().setAttribute("candidateList", list);
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("data", list);
         result.put("pageInfo", page);
@@ -107,17 +109,43 @@ public class StayinController
         request.getSession().setAttribute("candidateDatalist", candidateDatalist);
         return "1";
     }
+    //查询模态窗口需求列表
     @RequestMapping("/queryDemandList")
     @ResponseBody
-    public Object demandQuery(String candidateId,HttpServletRequest request){
-    	
-    	AddDemand demand = new  AddDemand();
-    
-    	
-    	return null;
+    public List<AddDemand> demandQuery(String candidateId,String demandId,HttpServletRequest request,HttpServletResponse response) throws Exception{
+    	//把传过来的保存到session中
+    	 request.getSession().setAttribute("candidateId",candidateId);
+    	 request.getSession().setAttribute("demandId", demandId);
+    	List<AddDemand> result = StayinService.queryDemand();
+
+    	return result;
     }
     	
+    //更改候选人对应的需求（选择之后）
+    @RequestMapping("/UpdateDemand")
+    @ResponseBody
+    public Object updateDemand(final HttpServletRequest request,
+            final HttpServletResponse response){
+       /* String candidateId = request.getParameter("candidateId");*/
+        String demandId =request.getParameter("demandId");
+    	AddDemand d = new AddDemand();
+    	d.setDemandId(demandId);
+    	String candidateId = (String) request.getSession().getAttribute("candidateId");
+    	d.setCandidateId(candidateId);
     	
+    	boolean resultFlag = StayinService.updateDemand(d);
+    	//变更之前的需求需设置为null
+    	AddDemand d1 = new AddDemand();
+    	String demandId2 = (String) request.getSession().getAttribute("demandId");
+    	d1.setDemandId(demandId2);
+    	boolean resultFlag2 = StayinService.updateDemandAfter(d1);
+    	
+    	boolean flag = resultFlag & resultFlag2;
+    	return flag;
+    
+    }
+    
+    //更改候选人之后变更自己本省对应的需求为null
     
     //导出表格
     @RequestMapping("/exportExcel")

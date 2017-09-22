@@ -20,7 +20,7 @@ public interface ResumeService {
 	 */
 	void add(Resume resume);
 	
-	void upd(Resume resume);
+	boolean upd(Resume resume);
 
 	Resume searchTel(String tel);
 	

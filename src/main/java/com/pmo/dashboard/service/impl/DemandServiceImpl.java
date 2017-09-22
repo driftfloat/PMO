@@ -109,5 +109,23 @@ public class DemandServiceImpl implements DemandService{
 		rmCandidateMapper.updateCandidateStatus(params);
 		candidateMapper.updateInterviewStatusById(params);
 	}
+
+	//gkf add 17-09-15
+	@Override
+	public boolean updateDemandOnBoardById(Demand demand) {
+		// TODO Auto-generated method stub
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("candidateId", demand.getCandidateId());
+		params.put("profilesNo", demand.getProfilesNo());
+		params.put("interviewedNo", demand.getInterviewedNo());
+		params.put("doNumber", demand.getDoNumber());
+		params.put("onboardDate", demand.getOnboardDate());
+		params.put("plannedOnboardDate", demand.getPlannedOnboardDate());
+		int res = demandMapper.updateDemandOnBoardById(params);
+		if(res>0) {
+			return true;
+		}
+		return false;
+	}
 	
 }

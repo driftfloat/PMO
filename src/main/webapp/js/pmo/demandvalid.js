@@ -44,31 +44,21 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Please enter your jobCode'
-                    },
-                    /*stringLength: {
-                        min: 1,
-                        max: 15,
-                        message: '请输入长度在1到15位密码'
-                    },*/
+                    }
                 }
             },
             skill: {
                 validators: {
                     notEmpty: {
                         message: 'Please enter your jobCode'
-                    },
-                    /*stringLength: {
-                        min: 1,
-                        max: 15,
-                        message: '请输入长度在1到15位密码'
-                    },*/
+                    }
                 }
             },
             requestor: {
                 validators: {
                     notEmpty: {
                         message: 'Please enter your requestor'
-                    },
+                    }
 
                 }
             },
@@ -76,7 +66,7 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Please select your position'
-                    },
+                    }
 
                 }
             },
@@ -85,11 +75,11 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Please enter your hsbcSubDeptId'
-                    },
+                    }
 
                 }
             },
-            staffName: {
+           /* staffName: {
                 validators: {
                     notEmpty: {
                         message: '请输入中文名字'
@@ -99,15 +89,15 @@ $(document).ready(function() {
 
                         message: '请输入中文字符'
 
-                    },
+                    }
 
                 }
-            },
+            },*/
             status: {
                 validators: {
                     notEmpty: {
                         message: 'Please select your status'
-                    },
+                    }
 
                 }
             },
@@ -115,7 +105,7 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Please select your hrPriority'
-                    },
+                    }
 
                 }
             },
@@ -123,10 +113,10 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Please Choose your Date'
-                    },
+                    }
 
                 }
-            },
+            }
         }
     }) /*.on('success.form.bv', function(e) {
         // Prevent submit form

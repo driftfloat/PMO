@@ -17,52 +17,58 @@ $(function(){
 
 
 function addEmployee(){
-	
-	var eHr = $('#eHr').val();
-	var lob = $('#lob').val();
-	var hsbcStaffId = $('#hsbcStaffId').val();
-	var staffName = $('#staffName').val();
-	var LN = $('#LN').val();
-	var staffRegion = $('#staffRegion').val();
-	var staffLocation = $('#staffLocation').val();
-	var locationType = $('#locationType').val();
-	var onshoreOrOffshore = $('#onshoreOrOffshore').val();
-	var csSubDept = $('#csSubDept').val();
-	var hsbcSubDept = $('#hsbcSubDept').val();
-	var projectName = $('#hsbcProjectName').val();
-	var projectManager = $('#hsbcProjectManager').val();
-	var sow = $('#sow').val();
-	var sowExpiredDate = $('#sowExpiredDate1').val();
-	var staffCategory = $('#staffCategory').val();
-	var engagementType = $('#engagementType').val();
-	var hsbcDOJ = $('#hsbcDOJ2').val();
-	var graduationDate = $('#graduationDate1').val();
-	var role = $('#role').val();
-	var skill = $('#skill').val();
-	var billingCurrency = $('#billingCurrency').val();
-	var billRate = $('#billRate').val();
-	var resourceStatus = $('#resourceStatus').val();
-	var terminatedDate = $('#terminatedDate1').val();
-	var terminationReason = $('#terminationReason').val();
-	
-	
-	$.ajax({
-		url:path+'/service/employee/addEmployee',
-		dataType:"json",
-		data:{"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason},
-		async:true,
-		cache:false,
-		type:"post",
-		success:function(resultFlag){
-			if(resultFlag){
-				$("html,body").animate({scrollTop:0}, 500);
-				$('#successAlert').html('员工'+staffName+'信息添加成功').show();
-				setTimeout(function () {
-					$('#successAlert').hide();
-				}, 2000);
+	var bootstrapValidator = $("#registerEmployeeForm").data('bootstrapValidator');
+	bootstrapValidator.validate();
+	if(bootstrapValidator.isValid()){
+		var eHr = $('#eHr').val();
+		var lob = $('#lob').val();
+		var hsbcStaffId = $('#hsbcStaffId').val();
+		var staffName = $('#staffName').val();
+		var LN = $('#LN').val();
+		var staffRegion = $('#staffRegion').val();
+		var staffLocation = $('#staffLocation').val();
+		var locationType = $('#locationType').val();
+		var onshoreOrOffshore = $('#onshoreOrOffshore').val();
+		var csSubDept = $('#csSubDept').val();
+		var hsbcSubDept = $('#hsbcSubDept').val();
+		var projectName = $('#hsbcProjectName').val();
+		var projectManager = $('#hsbcProjectManager').val();
+		var sow = $('#sow').val();
+		var sowExpiredDate = $('#sowExpiredDate1').val();
+		var staffCategory = $('#staffCategory').val();
+		var engagementType = $('#engagementType').val();
+		var hsbcDOJ = $('#hsbcDOJ2').val();
+		var graduationDate = $('#graduationDate1').val();
+		var role = $('#role').val();
+		var skill = $('#skill').val();
+		var billingCurrency = $('#billingCurrency').val();
+		var billRate = $('#billRate').val();
+		var resourceStatus = $('#resourceStatus').val();
+		var terminatedDate = $('#terminatedDate1').val();
+		var terminationReason = $('#terminationReason').val();
+		
+		
+		$.ajax({
+			url:path+'/service/employee/addEmployee',
+			dataType:"json",
+			data:{"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason},
+			async:true,
+			cache:false,
+			type:"post",
+			success:function(resultFlag){
+				if(resultFlag){
+					$("html,body").animate({scrollTop:0}, 500);
+					$('#successAlert').html('员工'+staffName+'信息添加成功').show();
+					setTimeout(function () {
+						$('#successAlert').hide();
+					}, 2000);
+				}
 			}
-		}
-	})
+		})
+		
+	}else{
+		return;
+	}
 	
 	
 }
@@ -262,14 +268,19 @@ $("#hsbcDept").change(function(){
 		type:"post",
 		success:function(list){
 			$("#hsbcSubDept").find("option").remove(); 
+//			if(list.length == 1 && list[0].hsbcSubDeptName == null){
+//				$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
+//			}else{
+			$("#hsbcSubDept").append("<option value=''>-- 请选择子交付部 --</option>");
 			if(list.length == 1 && list[0].hsbcSubDeptName == null){
 				$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
 			}else{
-			$("#hsbcSubDept").append("<option value=''>-- 请选择子交付部 --</option>");
-			for(var i = 0;i<list.length;i++){
-				$("#hsbcSubDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcSubDeptName+"</option>");
+				for(var i = 0;i<list.length;i++){
+					$("#hsbcSubDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcSubDeptName+"</option>");
+				}
 			}
-			}
+			
+			//}
 		}
 	})
 })

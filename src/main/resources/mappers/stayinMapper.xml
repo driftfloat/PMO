@@ -31,16 +31,17 @@
 		<result property="oldCompany" 		column="OLD_COMPANY" 		javaType="String" />
 		<result property="remark" 			column="REMARK" 			javaType="String" />
 		<result property="createUser" 		column="CREATE_USER" 		javaType="String" />
+		<result property="demandId"         column="DEMANDID"           javaType="String"/>
 	</resultMap>
 	
 	<select id="queryStayinList" parameterType="com.pmo.dashboard.entity.StayinCandidate" resultMap="stayinMap" >
-	    SELECT a.*,d.STATUS FROM 
+	    SELECT a.*,d.STATUS,d.DEMAND_ID DEMANDID FROM 
         	t_candidate a
         right join 
         	t_demand d 
         on a.CANDIDATE_ID = d.CANDIDATE_ID
         WHERE 
-        	d.STATUS ='OfferMade' and 
+        	d.STATUS IN ('OfferMade','Delayed') and 
 		    <include refid="candidateWherePart"/>
 	</select>
 	
@@ -53,7 +54,7 @@
         	t_demand d 
         on a.CANDIDATE_ID = d.CANDIDATE_ID
         WHERE 
-        	d.STATUS ='OfferMade' and
+        	d.STATUS IN('OfferMade','Delayed') and
         	<include refid="candidateWherePart"/>
 			;
 	</select>
@@ -68,14 +69,10 @@
         	t_demand d 
         on a.CANDIDATE_ID = d.CANDIDATE_ID
         WHERE 
-        	<include refid="candidateWherePart"/>
+        	<include refid="candidateWherePart"/>;
        <!--  ORDER BY CANDIDATE_STATUS,EXPERIENCE_YEARS desc,EDUCATION,MAJOR_STATUS,CANDIDATE_ID; -->
 	</select>
-	
-	<select id="queryDemand" parameterType="com.pmo.dashboard.entity.AddDemand" resultType="boolean">
-	    SELECT c.* from t_demand c 
-	    WHERE c.CANDIDATE_ID = #{candidateId}
-	</select>
+
 	
 	<sql id="candidateWherePart">
 		CANDIDATE_STATUS != 5 

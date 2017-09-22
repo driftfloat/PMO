@@ -37,6 +37,17 @@ public class HSBCDeptController
     }
     
     
+    @RequestMapping("/queryDeptById")
+    @ResponseBody
+    public HSBCDept queryDeptById(final HttpServletRequest request,
+            final HttpServletResponse response)
+    {
+        String hsbcSubDeptId = request.getParameter("hsbcSubDeptId");
+        HSBCDept hsbcDept = hsbcDeptService.queryDemandHSBCSubDeptById(hsbcSubDeptId);
+        return hsbcDept;
+    }
+    
+    
     @RequestMapping("/querySubDeptName")
     @ResponseBody
     public List querySubDeptName(final HttpServletRequest request,

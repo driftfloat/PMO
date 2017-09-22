@@ -6,8 +6,6 @@ var csBuName0 = "";
 
 $(function(){
 	
-	loadCSDept();
-	
 	loadEmployeeList();
 	
 	loadCSSubDept();
@@ -30,7 +28,7 @@ $("#csBu").change(function(){
 })
 
 
-function loadCSDept(){
+/*function loadCSDept(){
 	$.ajax({
 		url:path+'/service/csDept/queryCSDeptName',
 		dataType:"json",
@@ -43,25 +41,25 @@ function loadCSDept(){
 			}
 		}
 	})
-}
+}*/
 
 
 $('#searchBtn').bind("click", function(){
 	var csDeptName = $("#csDept").find("option:selected").text();
 
-	if(csDeptName.indexOf('请选择')!=-1){
+	if(csDeptName.indexOf('Option')!=-1){
 		csDeptName = "";
 	}
 	
 	var csBuName = $("#csBu").find("option:selected").text();
 
-	if(csBuName.indexOf('请选择')!=-1){
+	if(csBuName.indexOf('Option')!=-1){
 		csBuName = "";
 	}
 	
 	var csSubDeptName = $("#csSubDept").find("option:selected").text();
 	
-	if(csSubDeptName.indexOf('请选择')!=-1){
+	if(csSubDeptName.indexOf('Option')!=-1){
 		csSubDeptName = "";
 	}
 	
@@ -86,29 +84,25 @@ function exportCondition(){
 			condition += lb.eq(i).attr("name")+",";
 		}
 	}
-	
-	var csDeptName = csDeptName0;
-
-	var csSubDeptName = csSubDeptName0;
-	
-	var csBuName = csBuName0;
 
 	$.ajax({
 		url:path+'/service/employeeInfo/setEmpConditon',
 		dataType:"json",
-		data:{"condition":condition,"csSubDeptName":csSubDeptName,"csBuName":csBuName},
+		data:{"condition":condition},
 		async:true,
 		cache:false,
 		type:"post",
+		success:function(resultFlag){
+			var url = path+'/service/employee/exportExcel';
+			$("#exceltHref").attr("href",url);
+			document.getElementById("exceltHref").click();
+			$('#myModal').modal('hide');
+			$("[type='checkbox']").removeAttr("checked");
+
+		}
 	})
 	
-	var url = path+'/service/employee/exportExcel';
-	$("#exceltHref").attr("href",url);
-	document.getElementById("exceltHref").click();
 	
-	
-	$('#myModal').modal('hide');
-	$("[type='checkbox']").removeAttr("checked");
 }
 
 
@@ -127,27 +121,6 @@ function loadCSSubDept(){
 	})
 }
 
-/*$("#csDept").change(function(){
-	var csSubDeptId = $('#csDept').val();
-	$("#csSubDept").find("option").remove(); 
-	$("#csSubDept").append("<option value=''>-- 请选择项目 --</option>");
-	$.ajax({
-		url:path+'/service/csDept/queryCSSubDeptName',
-		dataType:"json",
-		async:true,
-		data:{"csSubDeptId":csSubDeptId},
-		cache:false,
-		type:"post",
-		success:function(list){
-			$("#csSubDept").find("option").remove(); 
-			$("#csSubDept").append("<option value=''>-- 请选择子交付部 --</option>");
-			for(var i = 0;i<list.length;i++){
-				$("#csSubDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csSubDeptName+"</option>");
-			}
-		}
-	})
-})
-*/
 
 function editEmployeeInfo(employeeId){
 	$("#editForm").attr("action",path+"/service/employee/updateEmployeeInfo.html");
@@ -173,6 +146,8 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 	var hsbcStaffId = $("#hsbcStaffId").val();
 	
 	var eHr = $("#eHr").val();
+	
+	var lob = $("#lob").val();
 
 	var pageState = pageState;
 	
@@ -180,7 +155,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 		url:path+"/service/employeeInfo/queryEmployeeList",
 		dataType:"json",
 		async:true,
-		data:{"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr},
+		data:{"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob},
 		cache:false,
 		type:"post",
 		success:function(result){
@@ -204,23 +179,26 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 						+ result.data[i].eHr
 						+ "</td>");
 				var td3 = $("<td>"
-						+ result.data[i].staffName
+						+ result.data[i].lob
 						+ "</td>");
 				var td4 = $("<td>"
-						+ result.data[i].ln
+						+ result.data[i].staffName
 						+ "</td>");
 				var td5 = $("<td>"
+						+ result.data[i].ln
+						+ "</td>");
+				var td6 = $("<td>"
 						+ result.data[i].csSubDeptName
 						+ "</td>");
 				//var td7 = $("<td><a class='btn btn-info' href='javascript:void(0);'> <i class='glyphicon glyphicon-edit icon-white'></i> 编辑</a></td>");
-				var td6 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"')>EDIT</a></td>");
+				var td7 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"')>EDIT</a></td>");
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
 				td4.appendTo(tr);
 				td5.appendTo(tr);
 				td6.appendTo(tr);
-				
+				td7.appendTo(tr);
 			}
 			$("#employeeList").append("</tbdoy>");
 			//alert(window.location.href);

@@ -89,11 +89,49 @@ public class ResumeController<updateResume> {
 	
 	@RequestMapping("/toUpdateResumeNew")
 	@ResponseBody
-	public String toUpdateResumeNew(final HttpServletRequest request,
-           Resume resume, Model model){
-		return "true";
-
+	public boolean toUpdateResumeNew(final HttpServletRequest request,
+            final HttpServletResponse response){
+		
+		String id = request.getParameter("id");
+		String candidateName = request.getParameter("candidateName");
+		String age = request.getParameter("age");
+		String gender= request.getParameter("gender");
+		String tel = request.getParameter("tel");
+		String education = request.getParameter("education");
+		String college = request.getParameter("college");
+		String major = request.getParameter("major");
+		String experience_years = request.getParameter("experience_years");
+		String skill =request.getParameter("skill");
+		String graduate_date = request.getParameter("graduate_date");
+		String English_level = request.getParameter("English_level");
+		String candidate_status = request.getParameter("candidate_status");
+		String create_date = request.getParameter("create_date");
+		String source = request.getParameter("source");
+		String role = request.getParameter("role");
+		String entry_date = request.getParameter("entry_date");
+		String email = request.getParameter("email");
+		String expected_salary = request.getParameter("expected_salary");
+		String real_salary = request.getParameter("real_salary");
+		String interview_status = request.getParameter("interview_status");
+		
+		Resume resume = new Resume(id,candidateName,age,gender,tel,education,
+				college,major,experience_years,skill,graduate_date,English_level,
+				candidate_status,create_date,source,role,entry_date,email,expected_salary,
+				real_salary,interview_status);
+		boolean resultFlag = resumeService.upd(resume);
+		
+		return resultFlag;
 	}
+	
+	
+	
+//	@RequestMapping("/toUpdateResumeNew")
+//	@ResponseBody
+//	public String toUpdateResumeNew(final HttpServletRequest request,
+//           Resume resume, Model model){
+//		return "true";
+//
+//	}
 
 	   @RequestMapping("/queryResumeInfoById")
 	    @ResponseBody

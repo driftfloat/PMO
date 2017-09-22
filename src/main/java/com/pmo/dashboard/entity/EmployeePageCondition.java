@@ -7,6 +7,7 @@ public class EmployeePageCondition extends PageCondition
     private String csbuName;
     private String csDeptName;
     private String csSubDeptName;
+    private String lob;
     public String getHsbcStaffId()
     {
         return hsbcStaffId;
@@ -47,15 +48,13 @@ public class EmployeePageCondition extends PageCondition
     {
         this.csSubDeptName = csSubDeptName;
     }
-    public EmployeePageCondition(String hsbcStaffId, String eHr,
-            String csbuName, String csDeptName, String csSubDeptName)
+    public String getLob()
     {
-        super();
-        this.hsbcStaffId = hsbcStaffId;
-        this.eHr = eHr;
-        this.csbuName = csbuName;
-        this.csDeptName = csDeptName;
-        this.csSubDeptName = csSubDeptName;
+        return lob;
+    }
+    public void setLob(String lob)
+    {
+        this.lob = lob;
     }
     public EmployeePageCondition()
     {
@@ -67,7 +66,17 @@ public class EmployeePageCondition extends PageCondition
         super(currentPage, pageCount);
         // TODO Auto-generated constructor stub
     }
+    public EmployeePageCondition(String hsbcStaffId, String eHr,
+            String csbuName, String csDeptName, String csSubDeptName,
+            String lob)
+    {
+        super();
+        this.hsbcStaffId = hsbcStaffId;
+        this.eHr = eHr;
+        this.csbuName = csbuName;
+        this.csDeptName = csDeptName;
+        this.csSubDeptName = csSubDeptName;
+        this.lob = lob;
+    }
     
-    
-
 }

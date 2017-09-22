@@ -8,6 +8,8 @@ $(function(){
 	loadCandidateSkillInfo();
 	loadCusDeptInfo();
 	dateType();
+	dateType1();
+    addMyWaitCandidateValidate();
 })
 function dateType(){
 	$('.form_datetime').datetimepicker({
@@ -22,6 +24,27 @@ function dateType(){
 		format: 'yyyy-mm-dd',
 		pickerPosition: 'bottom-left',
 		showMeridian: 1
+	}).on('changeDate', function(ev){
+		 $('#entryCandidateForm').bootstrapValidator('revalidateField', 'entryMyWaitCandidateArrivalDate'); 
+	});
+}
+
+function dateType1(){
+	$('.form_datetime1').datetimepicker({
+		weekStart: 1,
+		minView:'month',
+		todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+		language:'zh-CN',
+		format: 'yyyy-mm-dd',
+		pickerPosition: 'bottom-left',
+		showMeridian: 1,
+		startDate:new Date()
+	}).on('changeDate', function(ev){
+		 $('#delayCandidateForm').bootstrapValidator('revalidateField', 'delayMyWaitCandidateArrivalDate'); 
 	});
 }
 $('#searchCandidateBtn').bind("click", function(){
@@ -32,6 +55,7 @@ $('#exportCandidateExcel').bind("click", function(){
 	exportdata = new FormData(document.getElementById("candidateForm"));
 	$('#myCandidateListModal').modal('show');	
 });
+
 
 function exportCondition(){
 	var lb = $("label input");
@@ -80,20 +104,132 @@ function exportData(){
 
 function entryMyWaitCandidate(candidateId,candidateName){
 	$('#entryMyWaitCandidateId').val(candidateId);
-	$('#entryMyWaitCandidateName').val(candidateName);
+	$('#entryMyWaitCandidateName').val(candidateName);	
 	$('#entryMyWaitCandidateModal').modal('show');
+	
 }
+
+function  entryClearData(){
+	$('#entryCandidateForm').bootstrapValidator('resetForm', true);
+}
+function  delayClearData(){
+	$('#delayCandidateForm').bootstrapValidator('resetForm', true);
+}
+function  abortClearData(){
+	$('#abortCandidateForm').bootstrapValidator('resetForm', true);
+}
+function addMyWaitCandidateValidate(){
+	$("#entryMyWaitCandidateSubmit").on("click", function(){		
+		   var bootstrapValidator = $("#entryCandidateForm").data('bootstrapValidator');
+		   bootstrapValidator.validate();
+		   if(bootstrapValidator.isValid())
+			   entryMyWaitCandidateOk();
+		   else return;
+
+		});
+	$("#delaySubmit").on("click", function(){		
+		   var bootstrapValidator = $("#delayCandidateForm").data('bootstrapValidator');
+		   bootstrapValidator.validate();
+		   if(bootstrapValidator.isValid())
+			   delayMyWaitCandidateOk();
+		   else return;
+
+		});
+	
+	$("#abortSubmit").on("click", function(){		
+		   var bootstrapValidator = $("#abortCandidateForm").data('bootstrapValidator');
+		   bootstrapValidator.validate();
+		   if(bootstrapValidator.isValid())
+			   abortMyWaitCandidateOk();
+		   else return;
+
+		});
+	$("#entryCandidateForm").bootstrapValidator({
+		 feedbackIcons: {
+	            valid: 'glyphicon glyphicon-ok',
+	            invalid: 'glyphicon glyphicon-remove',
+	            validating: 'glyphicon glyphicon-refresh'
+	        },
+	        fields: {       	
+	        	entryMyWaitCandidateRealSalary: {
+	        		group: '.group',
+	          		validators: {
+	          			 notEmpty: {
+	                          message: 'Please input REAL SALARY'
+	                      }
+	                  }
+	              },
+		          entryMyWaitCandidateArrivalDate: {   
+		        	    group: '.group',
+		          		validators: {
+		                      notEmpty: {
+		                          message: 'Please select ARRIVAL DATE'
+		                      },
+		                      date : {  
+		                          format : 'YYYY-MM-DD',  
+		                          message : 'Time format is incorrect'  
+		                      }
+		                  }
+		              }
+	     
+	        }
+	    });	
+	
+	$("#delayCandidateForm").bootstrapValidator({
+		 feedbackIcons: {
+	            valid: 'glyphicon glyphicon-ok',
+	            invalid: 'glyphicon glyphicon-remove',
+	            validating: 'glyphicon glyphicon-refresh'
+	        },
+	        fields: {       		        	
+	        	delayMyWaitCandidateArrivalDate: {   
+		        	    group: '.group',
+		          		validators: {
+		                      notEmpty: {
+		                          message: 'Please select ARRIVAL DATE'
+		                      },
+		                      date : {  
+		                          format : 'YYYY-MM-DD',  
+		                          message : 'Time format is incorrect'  
+		                      }
+		                      
+		                  }
+		              }
+	     
+	        }
+	    });	
+	
+	$("#abortCandidateForm").bootstrapValidator({
+		 feedbackIcons: {
+	            valid: 'glyphicon glyphicon-ok',
+	            invalid: 'glyphicon glyphicon-remove',
+	            validating: 'glyphicon glyphicon-refresh'
+	        },
+	        fields: {       	
+	        	abortMyWaitCandidateStatus: {
+	        		group: '.group',
+	          		validators: {
+	          			 notEmpty: {
+	                          message: 'Please select CANDIDATE STATUS'
+	                      }
+	                  }
+	              },
+	              abortMyWaitCandidateRemark: {
+	        		group: '.group',
+	          		validators: {
+	          			 notEmpty: {
+	                          message: 'Please select REMARK'
+	                      }
+	                  }
+	              }
+	        }
+	    });	
+}
+
+
 function entryMyWaitCandidateOk(){
-	var realSalary = $("#entryMyWaitCandidateRealSalary").val();	
-	if(realSalary == ''){
-		alert("请填写候选人实际薪资！");
-		return;
-	}
-	var arrivalDate = $("#entryMyWaitCandidateArrivalDate").val();	
-	if(arrivalDate == ''){
-		alert("请选择候选人实际到岗日期！");
-		return;
-	}
+	var realSalary = $("#entryMyWaitCandidateRealSalary").val();		
+	var arrivalDate = $("#entryMyWaitCandidateArrivalDate").val();		
 	var candidate = new FormData();
 	candidate.append("candidateId",$("#entryMyWaitCandidateId").val());
 	candidate.append("arrivalDate",arrivalDate);
@@ -115,6 +251,7 @@ function entryMyWaitCandidateOk(){
 				alert("入职信息填写失败！请刷新页面重试！");
 			}
 			$('#entryMyWaitCandidateModal').modal('hide');	
+			entryClearData();
 			loadCandidateList();
 		}
 	})
@@ -129,15 +266,15 @@ function abortMyWaitCandidate(candidateId,candidateName,candidateStatus,remark){
 }
 function abortMyWaitCandidateOk(){
 	var candidateStatus = $("#abortMyWaitCandidateStatus").val();	
-	if(candidateStatus == ''){
+	/*if(candidateStatus == ''){
 		alert("候选人状态不能为空！");
 		return;
-	}
+	}*/
 	var remark = $("#abortMyWaitCandidateRemark").val();	
-	if(remark == ''){
+	/*if(remark == ''){
 		alert("请填写具体备注信息！");
 		return;
-	}
+	}*/
 	var candidate = new FormData();
 	candidate.append("candidateId",$("#abortMyWaitCandidateId").val());
 	candidate.append("candidateStatus",candidateStatus);
@@ -159,6 +296,7 @@ function abortMyWaitCandidateOk(){
 				alert("abort失败！请刷新页面重试！");
 			}
 			$('#abortMyWaitCandidateModal').modal('hide');	
+			abortClearData();
 			loadCandidateList();
 		}
 	})
@@ -170,10 +308,6 @@ function delayMyWaitCandidate(candidateId,candidateName){
 }
 function delayMyWaitCandidateOk(){
 	var arrivalDate = $("#delayMyWaitCandidateArrivalDate").val();	
-	if(arrivalDate == ''){
-		alert("候选人到岗日期不能为空！");
-		return;
-	}
 	var candidate = new FormData();
 	candidate.append("candidateId",$("#delayMyWaitCandidateId").val());
 	candidate.append("arrivalDate",arrivalDate);
@@ -194,6 +328,7 @@ function delayMyWaitCandidateOk(){
 				alert("延期失败！请刷新页面重试！");
 			}
 			$('#delayMyWaitCandidateModal').modal('hide');	
+			entryClearData1();
 			loadCandidateList();
 		}
 	})

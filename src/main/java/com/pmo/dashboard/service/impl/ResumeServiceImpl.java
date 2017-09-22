@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.pmo.dashboard.dao.ResumeMapper;
+import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.Resume;
 import com.pom.dashboard.service.ResumeService;
 
@@ -43,9 +44,13 @@ public class ResumeServiceImpl implements ResumeService {
 		return resumeMapper.queryResumeInfoById(canID);
 	}
 	@Override
-	public void upd(Resume resume) {
-		resumeMapper.upd(resume);
+	public boolean upd(Resume resume) {
+		if(resumeMapper.upd(resume)>0){
+			return true;
+		}
+		return false;
 		
 	}
+
 
 }

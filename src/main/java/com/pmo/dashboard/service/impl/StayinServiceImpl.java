@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import com.pmo.dashboard.dao.AddDemandMapper;
 import com.pmo.dashboard.dao.StayinMapper;
 import com.pmo.dashboard.entity.AddDemand;
 import com.pmo.dashboard.entity.StayinCandidate;
@@ -29,7 +30,10 @@ public class StayinServiceImpl implements StayinService{
 	
 	@Resource
     private StayinMapper stayinMapper;
-
+	
+	@Resource
+	 private AddDemandMapper adddDemandMapper;
+	
 	@Override
 	public List<StayinCandidate> queryStayinList(StayinCandidate candidate) {
 		
@@ -263,11 +267,32 @@ public class StayinServiceImpl implements StayinService{
 		return resultFlag;
 	}*/
 	@Override
-	public List<AddDemand> queryDemand(AddDemand demand) {
+	public List<AddDemand> queryDemand() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		List<AddDemand> result = adddDemandMapper.queryDemand();
+		return result;
 	}
+	//对应service
+	@Override
+	public boolean updateDemand(AddDemand d) {
+		// TODO Auto-generated method stub
+		boolean result1 = adddDemandMapper.updateDemand(d);
+		 if(result1){
+			 return true;
+		 }else{
+			 return false;
+		 }
+	}
+	@Override
+	public boolean updateDemandAfter(AddDemand d1) {
+		// TODO Auto-generated method stub
+		boolean result2 = adddDemandMapper.updateDemandAfter(d1);
+		if(result2){
+			 return true;
+		}else{
+			 return false;
+	     }
 
-	
-	
+    }
 }

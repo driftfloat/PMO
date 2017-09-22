@@ -12,4 +12,7 @@ public interface EmployeeService
     boolean updateEmployee(Employee employee);
     List<Employee> queryEmployeeList(EmployeePageCondition employeePageCondition);
     List<Employee> queryEmployeeByCsSubDeptId(String csSubDeptId);
+    public List<Employee> selectByEhr(String eHr);
+    public List<Employee> selectByLob(String lob);
+    public List<Employee> selectByHSBCStaffID(String staffId);
 }

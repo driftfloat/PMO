@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pmo.dashboard.dao.AddDemandMapper">
-	<resultMap id="demandMap" type="com.pmo.dashboard.entity.AddDemand">
+	<resultMap id="demandMap" type="com.pmo.dashboard.entity.AddDemand">       
 		<id property="demandId" column="DEMAND_ID" javaType="String" />
 		<result property="rr" column="RR" javaType="String" />
 		<result property="jobCode" column="JOB_CODE" javaType="String" />
@@ -18,27 +18,15 @@
 		<result property="status" column="STATUS" javaType="String" />
 		<result property="staffName" column="CANDIDATE_NAME" javaType="String" />
 		<result property="proposedJoiningDate" column="PROPOSED_JOINING_DATE" javaType="String" />
-		<!-- <result property="dcCleared" column="DC_CLEARED" javaType="String" /> -->
 		<result property="sowSigned" column="SOW_SIGNED" javaType="String" />
-		<!-- <result property="onboarded" column="ONBOARDED" javaType="String" />
-		<result property="abort" column="ABORT" javaType="String" />
-		<result property="delayed" column="DELAYED" javaType="String" />
-		<result property="reason" column="REASON" javaType="String" /> -->
-		<!-- <result property="nextAction" column="NEXT_ACTION" javaType="String" /> -->
-		<!-- <result property="status2" column="STATUS2" javaType="String" /> -->
 		<result property="remark" column="REMARK" javaType="String" />
 		<result property="csSubDept" column="CS_SUBDEPT" javaType="String" />
 		<result property="plannedOnboardDate" column="PLANNED_ONBOARD_DATE" javaType="String" />
 		<result property="doNumber" column="DO_NUMBER" javaType="String" />
 		<result property="hrPriority" column="HR_PRIORITY" javaType="String" />
 		<result property="candidateId" column="CANDIDATE_ID" javaType="String" />
-		<!-- <result property="reqReceivedDate" column="REQ_RECEIVED_DATE" javaType="String" /> -->
-		<!-- <result property="ageingReceived" column="AGEING_RECEIVED" javaType="String" /> -->
-		<!-- <result property="demandPriority" column="DEMAND_PRIORITY" javaType="String"/> -->
 		<result property="creatDate" column="CREATE_DATE" javaType="String"/>
-		<result property="updateDate" column="UPDATE_DATE" javaType="String"/>
-		<!-- <result property="recruitmentCycle" column="RECRUITMENT_CYCLE" javaType="String"/> -->
-		<!-- <result property="completionDay" column="COMPLETION_DAY" javaType="String"/> -->		
+		<result property="updateDate" column="UPDATE_DATE" javaType="String"/>		
 		<result property="completionDate" column="COMPLETION_DATE" javaType="String"/>
 		<result property="onboardDate" column="ONBOARD_DATE" javaType="String"/>
 		<result property="bgvCleared" column="BGV_CLEARED" javaType="String"/>
@@ -53,5 +41,17 @@
 	    insert into t_demand (DEMAND_ID,RR,JOB_CODE,SKILL,REQUESTOR,POSITION,HSBC_SUBDEPT_ID,LOCATION,REQ_PUBLISHED_DATE,AGEING,PROFILES_NO,INTERVIEWED_NO,`STATUS`,CANDIDATE_NAME,PROPOSED_JOINING_DATE,SOW_SIGNED,REASON,REMARK,CS_SUBDEPT,PLANNED_ONBOARD_DATE,DO_NUMBER,HR_PRIORITY,CREATE_DATE,UPDATE_DATE,COMPLETION_DATE,ONBOARD_DATE,BGV_CLEARED)
 	    values (#{demandId},#{rr},#{jobCode},#{skill},#{requestor},#{position},#{hsbcSubDeptId},#{location},#{reqPublishedDate},#{ageing},#{profilesNo},#{interviewedNo},#{status},#{staffName},#{proposedJoiningDate},#{sowSigned},#{reason},#{remark},#{csSubDept},#{plannedOnboardDate},#{doNumber},#{hrPriority},#{creatDate},#{updateDate},#{completionDate},#{onboardDate},#{bgvCleared})
 	</insert>
-	
+		<!-- 查询需求 -->
+	<select id="queryDemand"  parameterType="String"   resultMap="demandMap">
+	     SELECT c.* from t_demand c 
+	    WHERE c.status ='OfferMade' and c.CANDIDATE_ID is null 
+	</select>
+	<!-- 更改模态窗口对应需求 -->
+	<update id="updateDemand" parameterType="com.pmo.dashboard.entity.AddDemand">
+	    UPDATE t_demand set CANDIDATE_ID = #{candidateId}  where DEMAND_ID = #{demandId};
+	</update>
+	<!-- 变更之后要变更之前的需求为null -->
+	 <update id="updateDemandAfter" parameterType="com.pmo.dashboard.entity.AddDemand">
+	   UPDATE t_demand  set CANDIDATE_ID = null  where DEMAND_ID = #{demandId} 
+	</update>
 </mapper>

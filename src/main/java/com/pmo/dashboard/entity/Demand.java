@@ -53,6 +53,17 @@ public class Demand
     private String doNumber;
     
     private String hrPriority;
+    
+    //gkf
+    private String onboardDate;
+
+	public String getOnboardDate() {
+		return onboardDate;
+	}
+
+	public void setOnboardDate(String onboardDate) {
+		this.onboardDate = onboardDate;
+	}
 
 	public String getDemandId() {
 		return demandId;

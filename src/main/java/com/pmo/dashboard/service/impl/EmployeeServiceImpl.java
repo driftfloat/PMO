@@ -62,5 +62,21 @@ public class EmployeeServiceImpl implements EmployeeService
 		List<Employee> list = employeeMapper.queryEmployeeByCsSubDeptId(params);
 		return list;
 	}
+
+	@Override
+	public List<Employee> selectByEhr(String eHr) {
+		return employeeMapper.selectByEhr(eHr);
+	}
+
+	@Override
+	public List<Employee> selectByLob(String lob) {
+		return employeeMapper.selectByLob(lob);
+	}
+
+	@Override
+	public List<Employee> selectByHSBCStaffID(String staffId) {
+		return employeeMapper.selectByHSBCStaffID(staffId);
+	}
+	
 	
 }

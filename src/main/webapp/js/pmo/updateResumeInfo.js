@@ -33,7 +33,7 @@ function loadResumeUpdate(resume){
 	loadId(candidateId,resume);
 }
 
-function toUpdateResume(){
+function toUpdateResumeNew(){
 	
 	var id = $('#candidateId').val();
 	var age = $('#candidateAge').val();
