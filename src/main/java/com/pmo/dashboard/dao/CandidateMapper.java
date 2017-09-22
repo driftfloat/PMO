@@ -66,4 +66,6 @@ public interface CandidateMapper
 	List<CandidateInfo> getCandidateList(CandidateInfo candidate);
 	
 	void updateInterviewStatusById(Map<String, Object> params);
+
+	int lockCandidate(String candidateId);
 }

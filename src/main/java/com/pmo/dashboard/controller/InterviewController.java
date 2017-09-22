@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmo.dashboard.entity.CandidateInfo;
+import com.pmo.dashboard.entity.Employee;
+import com.pmo.dashboard.entity.HSBCDept;
 import com.pmo.dashboard.entity.PageCondition;
+import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
 import com.pom.dashboard.service.InterviewService;
 
@@ -78,5 +81,49 @@ public class InterviewController {
 	public Object getInterviewRecordByCandId(String candidateId) {
 		Map<String, List<CandidateInfo>> map = interviewService.getInterviewRecordByCandId(candidateId);
 		return map;
+	}
+
+	@RequestMapping(value = "/lockCandidate")
+	@ResponseBody
+	public boolean lockCandidate(String candidateId, HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute("loginUser");
+		String userId = user.getUserId();
+
+		return interviewService.lockCandidate(candidateId, userId);
+	}
+
+	@RequestMapping(value = "/getBillRate")
+	@ResponseBody
+	public String getBillRate(Employee employee, HttpServletRequest request) {
+		return interviewService.getBillRate(employee);
+	}
+
+	@RequestMapping("/employeeDetailInfo")
+	public String employeeDetailInfo(HttpServletRequest request, HttpServletResponse response) {
+		String employeeId = request.getParameter("employeeId");
+		request.setAttribute("employeeId", employeeId);
+		return "employee/employeeDetailInfo";
+	}
+
+	@RequestMapping("/queryEmployeeById")
+	@ResponseBody
+	public Employee queryEmployeeDetailById(String employeeId,HttpServletRequest request) {
+		 User user = (User) request.getSession().getAttribute("loginUser");
+		 String userType = user.getUser_type();
+
+		Employee employee = interviewService.queryEmployeeById(employeeId);
+		 if("1".equals(userType)){
+			 employee.setBillRate("****");
+		 }
+		return employee;
+	}
+	
+	
+	@RequestMapping("/queryHSBCSubDeptById")
+	@ResponseBody
+	public HSBCDept queryHSBCSubDeptById(String hsbcSubDeptId) {
+
+		HSBCDept hSBCDept = interviewService.queryHSBCSubDeptById(hsbcSubDeptId);
+		return hSBCDept;
 	}
 }
