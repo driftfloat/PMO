@@ -17,32 +17,18 @@ public class UserAuthorityServiceImpl implements UserAuthorityService {
 	private UserAuthorityMapper userAuthorityMapper;
 	
 	@Override
-	public List<UserAuthority> queryUserAuthority(String userId) {
-		// TODO Auto-generated method stub
-		return userAuthorityMapper.queryUserAuthority(userId);
+	public List<UserAuthority> queryUserAuthority(String userType) {
+		
+		return userAuthorityMapper.queryUserAuthority(userType);
 	}
 
-	@Override
-	public List<UserAuthority> queryMenu(String menuUrl){
-		// TODO Auto-generated method stub
-		return userAuthorityMapper.queryUserMenu(menuUrl);
-	}
 	
-	@Override
-	public List<UserAuthority> queryUserAuthorityMenu(String userId,String menuUrl) {
-		// TODO Auto-generated method stub
-		return userAuthorityMapper.queryUserAuthorityMenu(userId,menuUrl);
-	}
 	
 	@Override
 	public List<UserAuthority> queryMenus(){
-		// TODO Auto-generated method stub
+		
 		return userAuthorityMapper.queryMenus();
 	}
 	
-	@Override
-	public List<UserAuthority> queryUserAuthorityMenus(String userId) {
-		// TODO Auto-generated method stub
-		return userAuthorityMapper.queryUserAuthorityMenus(userId);
-	}
+	
 }
