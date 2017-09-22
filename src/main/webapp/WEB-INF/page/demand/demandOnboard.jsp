@@ -131,11 +131,15 @@ var path='<%=path%>';
 									<div class="group">
 										<label class="col-sm-2 control-label">Planned Onboard
 											date</label>
-										<div class="col-sm-4">
-											<input type="text" class="form-control"
-												name="plannedOnboardDate"
-												value="${demand.plannedOnboardDate }"
-												id="plannedOnboardDate" />
+										<div class="col-md-4">
+											<div class="input-group date form_datetime col-sm-12"
+												data-link-field="dt_set_order_time_input">
+												<input class="form-control" type="text" disabled="disabled"
+													id="plannedOnboardDate1" name="plannedOnboardDate1" value="${demand.plannedOnboardDate }"> <span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
+													id="plannedOnboardDate2" name="plannedOnboardDate2" />
+											</div>
 										</div>
 									</div>
 									<label class="col-lg-2 control-label">Tech/Skill</label>
@@ -254,21 +258,6 @@ var path='<%=path%>';
 												id="proposedJoiningDate" />
 										</div>
 									</div>
-									<%-- <div class="group">
-										<label class="col-sm-2 control-label">Reason for Abort
-											/ Delay</label>
-										<div class="col-sm-4">
-											<input type="text" class="form-control" name="reason"
-												value="${demand.reason }" id="reason" />
-										</div>
-									</div>
-									<div class="group">
-										<label class="col-sm-2 control-label">Remark</label>
-										<div class="col-sm-4">
-											<input type="text" class="form-control" name="remark"
-												value="${demand.remark }" id="rr" />
-										</div>
-									</div>--%>
 									</br>
 									</br>
 									</br> 

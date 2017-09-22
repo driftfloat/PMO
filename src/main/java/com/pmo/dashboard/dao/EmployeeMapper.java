@@ -13,4 +13,7 @@ public interface EmployeeMapper
     int updateEmployee(Employee employee);
     List<Employee> queryEmployeeList(EmployeePageCondition employeePageCondition);
     List<Employee> queryEmployeeByCsSubDeptId(Map<String, Object> params);
+    List<Employee> selectByEhr(String eHr);
+    List<Employee> selectByLob(String lob);
+    List<Employee> selectByHSBCStaffID(String staffId);
 }

@@ -1,6 +1,8 @@
 package com.pmo.dashboard.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pmo.dashboard.entity.Demand;
 import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.StayinCandidate;
@@ -58,7 +62,7 @@ public class EmployeeController {
 		List<StayinCandidate> list1 = (List<StayinCandidate>) request.getSession().getAttribute("candidateList");
     	List<Demand> list2 = (List<Demand>) request.getSession().getAttribute("demandList");
     	//拿到需求和待入职的人员信息  gkf
-    	if(list1!=null &&list1.size()>0&&list2!=null &&list2.size()>0) {
+    	if(list1!=null &&list1.size()>0&&list2!=null &&list2.size()>0&&candId!=null) {
     		for(StayinCandidate candidate :list1 ) {
     			if(candidate.getCandidateId().equals(candId)) {
     				em.setStaffName(candidate.getCandidateName());
@@ -210,8 +214,88 @@ public class EmployeeController {
         
         return resultFlag;
     }
-    
-    
+    /**
+     * 校验Ehr是否存在
+     * gkf
+     * @param eHr
+     * @return
+     */
+    @RequestMapping("/checkEhr")
+    @ResponseBody
+	public String checkEhr(String eHr){
+		boolean result = true;
+		
+		List<Employee> e = employeeService.selectByEhr(eHr);
+		
+		if(e!=null&&e.size()>0){
+			result = false;
+		}
+		Map<String, Boolean> map = new HashMap<>();
+        map.put("valid", result);
+        ObjectMapper mapper = new ObjectMapper();
+        String resultString = "";
+        try {
+            resultString = mapper.writeValueAsString(map);
+        } catch (JsonProcessingException je) {
+            je.printStackTrace();
+        }
+        return resultString;
+	}
+    /**
+     * 校验员工id是否存在
+     * gkf
+     * @param hsbcStaffId
+     * @return
+     */
+    @RequestMapping("/checkHSBCStaffID")
+	@ResponseBody
+	public String checkHSBCStaffID(String hsbcStaffId){
+		boolean result = true;
+		
+		List<Employee> e = employeeService.selectByHSBCStaffID(hsbcStaffId);
+		
+		if(e!=null&&e.size()>0){
+			result = false;
+		}
+		Map<String, Boolean> map = new HashMap<>();
+        map.put("valid", result);
+        ObjectMapper mapper = new ObjectMapper();
+        String resultString = "";
+        try {
+            resultString = mapper.writeValueAsString(map);
+        } catch (JsonProcessingException je) {
+            je.printStackTrace();
+        }
+        return resultString;
+	}
+    /**
+     * 校验lob是否存在
+     * gkf
+     * @param lob
+     * @return
+     */
+    @RequestMapping("/checkLob")
+	@ResponseBody
+	public String checkLob(String lob){
+		boolean result = true;
+		
+		List<Employee> e = employeeService.selectByLob(lob);
+		
+		if(e!=null&&e.size()>0){
+			result = false;
+		}
+		Map<String, Boolean> map = new HashMap<>();
+        map.put("valid", result);
+        ObjectMapper mapper = new ObjectMapper();
+        String resultString = "";
+        try {
+            resultString = mapper.writeValueAsString(map);
+        } catch (JsonProcessingException je) {
+            je.printStackTrace();
+        }
+        return resultString;
+	}
+	
     /*@RequestMapping("/exportExcel")
     @ResponseBody
     public HttpServletResponse exportExcel(HttpServletRequest request,

@@ -120,6 +120,7 @@ public class DemandServiceImpl implements DemandService{
 		params.put("interviewedNo", demand.getInterviewedNo());
 		params.put("doNumber", demand.getDoNumber());
 		params.put("onboardDate", demand.getOnboardDate());
+		params.put("plannedOnboardDate", demand.getPlannedOnboardDate());
 		int res = demandMapper.updateDemandOnBoardById(params);
 		if(res>0) {
 			return true;

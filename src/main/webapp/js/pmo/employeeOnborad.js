@@ -25,6 +25,7 @@ function updateDemand(){
 	var profilesNo = $("#profilesNo").val();
 	var interviewedNo = $('#interviewedNo').val();
 	var onboardDate1 = $('#onboardDate1').val();
+	var plannedOnboardDate1 = $('#plannedOnboardDate1').val();
 	var doNumber = $('#doNumber').val();
 	$.ajax({
 		url:path+'/service/demand/updateDemandOnBoardById',
@@ -32,9 +33,12 @@ function updateDemand(){
 		async:true,
 		cache:false,
 		type:"post",
-		data:{"candidateId":candidateId,"profilesNo":profilesNo,"interviewedNo":interviewedNo,"onboardDate":onboardDate1,"doNumber":doNumber},
+		data:{"candidateId":candidateId,"profilesNo":profilesNo,"interviewedNo":interviewedNo,"onboardDate":onboardDate1,"doNumber":doNumber,"plannedOnboardDate":plannedOnboardDate1},
 		success:function(result){
 				if(result){
+					//子窗口刷新父窗口
+					self.opener.location.reload();
+//					self.close();
 					//员工注册
 					$("#candId").val(candidateId);
 					var url1 = path+'/service/employee/index';
@@ -43,5 +47,4 @@ function updateDemand(){
 				}
 			}
 		});
-	
 }
