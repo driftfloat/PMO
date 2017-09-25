@@ -107,6 +107,7 @@ function loadEmployeeInfo(){
 			loadLocationType(employee);
 			loadOnshoreOrOffshore(employee);
 			loadPersonHsbcDept(employee);
+			loadTerminationReason(employee);
 			
 			$('#hsbcStaffId').val(employee.hsbcStaffId);
 			$('#lob').val(employee.lob);
@@ -120,7 +121,6 @@ function loadEmployeeInfo(){
 			$('#graduationDate1').val(employee.graduationDate);
 			$('#billRate').val(employee.billRate);
 			$('#terminatedDate1').val(employee.terminatedDate);
-			$('#terminationReason').val(employee.terminationReason);
 			$('#eHr').val(employee.eHr);
 			
 		}
@@ -360,6 +360,18 @@ function loadHSBCSubDept(employee){
 			}
 		}
 	})
+}
+
+function loadTerminationReason(employee){
+	var url = path+'/json/terminatedReason.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#terminationReason").append("<option value='"+item.key+"'>"+item.name+"</option>");
+	    	   if(item.key == employee.terminationReason){
+	    		   $('#terminationReason').val(item.key);
+	    	   }
+	       })
+	});
 }
 
 

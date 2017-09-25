@@ -2,22 +2,6 @@
 window.onload = function(){
 	loadEmployeeInfo();
 }
-function dateType(){
-	$('.form_datetime').datetimepicker({
-		weekStart: 1,
-		minView:'month',
-		todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-		language:'zh-CN',
-		format: 'yyyy-mm-dd',
-		pickerPosition: 'bottom-left',
-		showMeridian: 1
-	});
-}
-
 
 function loadEmployeeInfo(){
 	var employeeId = $('#employeeId').val();
@@ -52,10 +36,12 @@ function loadEmployeeInfo(){
 			$('#billRate').val(employee.billRate);
 			$('#resourceStatus').val(employee.resourceStatus);
 			$('#terminatedDate1').val(employee.terminatedDate);
-			$('#terminationReason').val(employee.terminationReason);
+			// $('#terminationReason').val(employee.terminationReason);
 			$('#eHr').val(employee.eHr);
 			$('#csSubDept').val(employee.csSubDept)
 			loadHSBCSubDept(employee.hsbcSubDept);
+			loadTerminationReason(employee);
+			loadCSDept(employee);
 		}
 	})
 }
@@ -72,6 +58,34 @@ function loadHSBCSubDept(hsbcSubDeptId){
 		success:function(data){
 			$("#hsbcSubDept").val(data.hsbcSubDeptName);
 			$("#hsbcDept").val(data.hsbcDeptName);
+		}
+	})
+}
+
+function loadTerminationReason(employee){
+	var url = path+'/json/terminatedReason.json'
+	$.getJSON(url,  function(data) {
+       $.each(data, function(i, item) {
+    	   if(item.key == employee.terminationReason){
+    		   $('#terminationReason').val(item.name);
+    	   }
+       })
+	});
+}
+
+function loadCSDept(employee){
+	$.ajax({
+		url:path+'/service/csDept/queryAllCSSubDept',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(list){
+			for(var i = 0;i<list.length;i++){
+				 if(list[i].csSubDeptId == employee.csSubDept){
+		    		   $('#csSubDept').val(list[i].csSubDeptName);
+		    	   }
+			}
 		}
 	})
 }
