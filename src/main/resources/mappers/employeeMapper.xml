@@ -65,13 +65,13 @@
 	</select>
 	
 	<update id="updateEmployee" parameterType="com.pmo.dashboard.entity.Employee">
-	    update t_employee set E_Hr = #{eHr},LOB = #{lob},HSBC_STAFF_ID = #{hsbcStaffId},STAFF_NAME = #{staffName},LN = #{ln},STAFF_REGION = #{staffRegion},STAFF_LOCATION = #{staffLocation},LOCATION_TYPE = #{locationType},ONSHORE_OR_OFFSHORE = #{onshoreOrOffshore},CS_SUBDEPT_ID = #{csSubDept},HSBC_SUBDEPT_ID = #{hsbcSubDept},HSBC_PROJECT_NAME = #{projectName},HSBC_MANAGER = #{projectManager},SOW = #{sow},SOW_EXPIRED_DATE = #{sowExpiredDate},STAFF_CATEGORY = #{staffCategory},ENGAGEMENT_TYPE = #{engagementType},HSBC_DOJ= #{hsbcDOJ},GRADUATION_DATE = #{graduationDate},BILL_CURRENCY = #{billingCurrency},BILL_RATE = #{billRate},RESOURCE_STATUS = #{resourceStatus},MENTION_LWD = #{terminatedDate},REASON_FOR_TERMINATION = #{terminationReason},ROLE = #{role},SKILL = #{skill} where EMPLOYEE_ID = #{employeeId}    
+	    update t_employee set E_Hr = #{eHr},LOB = #{lob},HSBC_STAFF_ID = #{hsbcStaffId},STAFF_NAME = #{staffName},LN = #{ln},STAFF_REGION = #{staffRegion},STAFF_LOCATION = #{staffLocation},LOCATION_TYPE = #{locationType},ONSHORE_OR_OFFSHORE = #{onshoreOrOffshore},CS_SUBDEPT_ID = #{csSubDept},HSBC_SUBDEPT_ID = #{hsbcSubDept},HSBC_PROJECT_NAME = #{projectName},HSBC_MANAGER = #{projectManager},SOW = #{sow},SOW_EXPIRED_DATE = #{sowExpiredDate},STAFF_CATEGORY = #{staffCategory},ENGAGEMENT_TYPE = #{engagementType},HSBC_DOJ= #{hsbcDOJ},GRADUATION_DATE = #{graduationDate},BILL_CURRENCY = #{billingCurrency},RESOURCE_STATUS = #{resourceStatus},MENTION_LWD = #{terminatedDate},REASON_FOR_TERMINATION = #{terminationReason},ROLE = #{role},SKILL = #{skill} 
 	</update>
 	
 	<select id="queryEmployeeByCsSubDeptId" parameterType="java.util.HashMap" resultMap="employeeMap">
 	    SELECT * FROM t_employee WHERE CS_SUBDEPT_ID = #{csSubDeptId} and INTERVIERW_STATUS = #{intervierwStatus};
 	</select>
-	
+
 	<select id="selectByEhr" parameterType="String" resultMap="employeeMap">
 		select * from t_employee e  where e.E_HR=#{eHr}
 	</select>
@@ -80,5 +80,8 @@
 	</select>
 	<select id="selectByHSBCStaffID" parameterType="String" resultMap="employeeMap">
 		select * from t_employee e  where e.HSBC_STAFF_ID=#{staffId}
+	</select>
+	<select id="getBillRate" parameterType="com.pmo.dashboard.entity.Employee" resultType="java.lang.String">
+	   SELECT BillRate FROM t_rate WHERE Locations = #{staffRegion} AND Role = #{role} AND Technology LIKE CONCAT('%',#{skill},'%')
 	</select>
 </mapper>

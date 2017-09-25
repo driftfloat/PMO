@@ -191,7 +191,8 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 						+ result.data[i].csSubDeptName
 						+ "</td>");
 				//var td7 = $("<td><a class='btn btn-info' href='javascript:void(0);'> <i class='glyphicon glyphicon-edit icon-white'></i> 编辑</a></td>");
-				var td7 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"')>EDIT</a></td>");
+				var td7 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"')>EDIT</a>" +
+						"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>DETAIL</a></td>");
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
@@ -217,4 +218,10 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 			}
 		}
 	})
+}
+
+function employeeDetail(employeeId){
+	$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html");
+	$("#employeeId").val(employeeId);
+	$("#editForm").submit();
 }

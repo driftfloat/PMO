@@ -115,7 +115,7 @@ function loadCandidateList(pageState)
 				$("#exportCandidateExcel").removeAttr("disabled");
 			}
 			for (var i = 0; i < result.data.length; i++) {
-				var tr = $("<tr></tr>");
+				var tr = $("<tr id='"+result.data[i].candidateId+"' ></tr>");
 				tr.appendTo(tbody);
 				$("<td><a href='javascript:void(0);'" +
 						"onclick=viewCandidataInfo('"+result.data[i].candidateId+"')>" +
@@ -131,14 +131,17 @@ function loadCandidateList(pageState)
 				"<td>"+ result.data[i].majorStatus+ "</td>" +
 				"<td>"+ result.data[i].englishLevel+ "</td>" +
 				"<td>"+ result.data[i].skill+ "</td>" +
-				"<td>"+ result.data[i].userName+ "</td>").appendTo(tr);
-//				"<td><div class=''><a href='javascript:void(0);' class='btn btn-primary' onclick='updateResumeInfo("+result.date[i].cansisateId+")'>详情</a></div></td>";
+
+				"<td>"+ result.data[i].nickName+ "</td>").appendTo(tr);
+
 				
 				if(result.data[i].candidateStatus == '闲置中'){
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
 						"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=lock('"+result.data[i].candidateId+"')>LOCK</a>" +
 					"</td>").appendTo(tr);
 				}else{
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
@@ -167,6 +170,25 @@ function loadCandidateList(pageState)
 			if(currentPage == 1){
 				$("#previousPage").removeAttr("onclick");
 				$("#fristPage").removeAttr("onclick");
+			}
+		}
+	})
+}
+
+function lock(candidateId){
+	$.ajax({
+		url:path+'/service/interview/lockCandidate',
+		dataType:"json",
+		data:{"candidateId":candidateId},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			if(result)
+			{
+				$("#"+candidateId).remove();
+			}else{
+				alert('保存失败');
 			}
 		}
 	})

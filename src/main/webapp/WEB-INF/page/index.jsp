@@ -136,7 +136,7 @@ var path='<%=path%>';
 										<label class="col-lg-2 control-label">Staff Region</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="staffRegion" data-bv-notempty
-												data-bv-notempty-message="Please Select  staffRegion" id="staffRegion" data-bv-group=".group">
+												data-bv-notempty-message="Please Select  staffRegion" id="staffRegion" data-bv-group=".group" onchange="changeData()">
 												<option value="">-- 请选择--</option>
 											</select>
 										</div>
@@ -298,7 +298,7 @@ var path='<%=path%>';
 										<label class="col-lg-2 control-label">MSA Role</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="role" data-bv-notempty
-												data-bv-notempty-message="please select  msaRole" id="role" data-bv-group=".group">
+												data-bv-notempty-message="please select  msaRole" id="role" data-bv-group=".group" onchange="changeData()">
 												<option value="">-- 请选择--</option>
 											</select>
 										</div>
@@ -307,7 +307,7 @@ var path='<%=path%>';
 										<label class="col-lg-2 control-label">Skills/Technology</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="skill" data-bv-notempty
-												data-bv-notempty-message="please select  skills" id="skill" data-bv-group=".group">
+												data-bv-notempty-message="please select  skills" id="skill" data-bv-group=".group" onchange="changeData()">
 												<option value="">-- 请选择--</option>
 											</select>
 										</div>
