@@ -46,7 +46,7 @@ public class Resume {
 	
 	//候选人现状    0：招聘中，1：offer中，2：已入职 ，3：闲置 ， 4：黑名单
 	private String candidate_status;
-	
+	 
 	//简历路径
 	private String resume_path;
 	
@@ -74,9 +74,58 @@ public class Resume {
 	
 	//面试者状态
 	private String interview_status;
+
+
+	
+
+	
+	/**
+	 * 
+	 */
+	public Resume() {
+		// TODO Auto-generated constructor stub
+		super();
+	}
+	
+
+	public Resume(String id, String candidateName, String age, String gender, String tel, String education,
+			String college, String major, String experience_years, String skill, String graduate_date,
+			String english_level, String candidate_status, String create_date, String source, String role,
+			String entry_date, String email, String expected_salary, String real_salary, String interview_status) {
+	
+		// TODO Auto-generated constructor stub
+		super();
+		this.id=id;
+		this.candidateName=candidateName;
+		this.age=age;
+		this.gender=gender;
+		this.tel=tel;
+		this.education=education;
+		this.college=college;
+		this.major=major;
+		this.experience_years=experience_years;
+		this.skill=skill;
+		this.graduate_date=graduate_date;
+		this.English_level=english_level;
+		this.candidate_status=candidate_status;
+		this.create_date=create_date;
+		this.source=source;
+		this.role=role;
+		this.entry_date=entry_date;
+		this.email=email;
+		this.expected_salary=expected_salary;
+		this.real_salary=real_salary;
+		this.interview_status=interview_status;
+		
+	}
 	
 	
 	
+	
+	
+	
+
+
 	public String getInterview_status() {
 		return interview_status;
 	}
@@ -253,7 +302,7 @@ public class Resume {
 	}
 
 	public void setEnglish_level(String english_level) {
-		English_level = english_level;
+		this.English_level = english_level;
 	}
 
 	public String getCandidate_status() {

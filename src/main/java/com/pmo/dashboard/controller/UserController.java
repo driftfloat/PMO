@@ -1,9 +1,13 @@
 package com.pmo.dashboard.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -28,6 +32,7 @@ public class UserController {
 
 	@Resource
 	private UserService userService;
+//	private String user;
 	
 	/**
 	 * 验证用户名存在的方法法
@@ -109,5 +114,9 @@ public class UserController {
 		return "0";
 		
 	}
+	
+
+	
 }
+
 

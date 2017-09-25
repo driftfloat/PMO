@@ -5,6 +5,13 @@
 <%
 	String path = request.getContextPath();
 %>
+<%-- <%
+	@page import="controller.UserController"
+%>
+<% 
+ UserController uc = new UserController();
+   String a = uc.loginOut(); 
+%> --%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +44,11 @@
     <link href="<%=path %>/css/login.css" rel="stylesheet">
 
     <!-- jQuery -->
-    <script src="<%=path %>/bower_components/jquery/jquery.min.js"></script>
+    <script src="<%=path %>/bower_components/jquery/jquery.min.js">
+   
+  
+    
+    </script>
 	
     <!-- The fav icon -->
     <link rel="shortcut icon" href="<%=path %>/img/favicon.ico">
@@ -69,7 +80,10 @@
 <!--                 <li><a href="#">个人信息</a></li>-->
 					 <li><a id="editPwd" href="#">密码修改</a></li>
                   	<li class="divider"></li>
-                    <li><a href="<%=path %>/service/manage/logout.html">注销</a></li>
+                 	 <%-- <li><a href="<%=path %>/UserController?method=loginOut" rel="stylesheet">注销</a></li> --%>
+                  <%--  <li><a href="${pageContext.request.contextPath}/LoginOutController">注销</a></li> --%>
+                   <li><a href="<%=path %>/service/logOut/logOut.html">注销</a></li>
+                    
                 </ul>
             </div>
             <!-- user dropdown ends -->
@@ -77,6 +91,11 @@
     </div>
     <!-- topbar ends -->
     
+   <!--  <div class="modal fade" id="loginOut2" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+    
+    </div> -->
+
     <div class="modal fade" id="editPassword" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 		 <form id="editPasswordForm" class="form-horizontal" method="post">

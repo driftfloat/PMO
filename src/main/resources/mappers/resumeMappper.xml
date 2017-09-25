@@ -22,7 +22,7 @@
 		<result property="update_date" column="UPDATE_DATE" javaType="String" />
 		<result property="source" column="SOURCE" javaType="String" />
 		<result property="role" column="ROLE" javaType="String" />
-		<result property="entry_date" column="ENTRY_DATE" javaType="String" />
+		<result property="entry_date" column="ENTY_DATE" javaType="String" />
 		<result property="email" column="EMAIL" javaType="String" />
 		
 		<result property="expected_salary" column="EXPECTED_SALARY" javaType="String" />
@@ -46,4 +46,33 @@
 	<select id="selectTel" parameterType="String" resultType="com.pmo.dashboard.entity.Resume">
 		select * from t_candidate where TEL=#{tel}
 	</select>
+	
+	<select id="queryResumeInfoById" parameterType="String" resultMap="candidateMap">
+		select * from t_candidate where CANDIDATE_ID=#{canID}
+	</select>
+	
+
+    <update id="upd" parameterType="com.pmo.dashboard.entity.Resume">
+	update t_candidate set candidate_name =
+	#{candidateName},CANDIDATE_AGE=#{age},CANDIDATE_SEX = #{gender},
+	TEL = #{tel},EDUCATION =#{education}, college = #{college},
+	MAJOR_STATUS=#{major},EXPERIENCE_YEARS=#{experience_years},
+	SKILL=#{skill},GRADUATE_DATE=#{graduate_date},ENGLISH_LEVEL=#{English_level},CANDIDATE_STATUS=#{candidate_status},
+	CREATE_DATE=#{create_date},SOURCE=#{source},
+	ROLE=#{role},enty_date=#{entry_date},EMAIL=#{email},EXPECTED_SALARY=#{expected_salary},REAL_SALARY=#{real_salary},
+	OLD_COMPANY=#{old_company},REMARK=#{remark},CREAT_USER=#{create_user},INTERVIEW_STATUS=#{interview_status}
+
+	where CANDIDATE_ID=#{id}
+</update>
+	<!-- resume_path=#{resume_path},lock_person=#{hr}, UPDATE_DATE=#{update_date},ARRIVAL_DATE=#{arrival_date},-->
+	<!--  update t_candidate set candidate_name = #{candidateName}，age=#{age},gender = #{gender},
+	    	TEL = #{tel},EDUCATION =#{education}, college = #{college}, major=#{major},EXPERIENCE_YEARS=#{experience_years},
+	    	SKILL=#{skill},GRADUATE_DATE=#{graduate_date},ENGLISH_LEVEL=#{English_level},CANDIDATE_STATUS=#{candidate_status},
+	    	CREATE_DATE=#{create_date},SOURCE=#{source},
+	    	ROLE=#{role},enty_date=#{entry_date},EMAIL=#{email},EXPECTED_SALARY=#{expected_salary},REAL_SALARY=#{real_salary},
+	    	OLD_COMPANY=#{old_company},REMARK=#{remark},CREAT_USER=#{create_user},INTERVIEW_STATUS=#{interview_status}
+	    	
+	     where CANDIDATE_ID=#{id}    -->
+	 
+	
 </mapper>

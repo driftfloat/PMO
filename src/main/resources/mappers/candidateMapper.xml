@@ -49,6 +49,8 @@
 		<result property="pushStatus" 	column="PUSH_STATUS" 	javaType="String" />
 		<result property="pushDate" 	column="PUSH_DATE" 		javaType="String" />		
 	</resultMap>
+	
+
 
 	<select id="queryinterviewFeedBack" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
 		SELECT a.nickName,b.*,ci.FEEDBACK,ci.INTERVIEW_ID,ci.INTERVIEW_DATE,dept.CS_SUBDEPT_NAME

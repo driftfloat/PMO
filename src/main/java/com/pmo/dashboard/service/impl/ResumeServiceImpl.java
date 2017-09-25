@@ -1,10 +1,14 @@
 package com.pmo.dashboard.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.pmo.dashboard.dao.ResumeMapper;
+import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.Resume;
 import com.pom.dashboard.service.ResumeService;
 
@@ -32,5 +36,21 @@ public class ResumeServiceImpl implements ResumeService {
 		// TODO Auto-generated method stub
 		return resumeMapper.selectTel(tel);
 	}
+	
+	
+	@Override
+	public List<Resume> queryResumeInfoById(String canID) {
+		// TODO Auto-generated method stub
+		return resumeMapper.queryResumeInfoById(canID);
+	}
+	@Override
+	public boolean upd(Resume resume) {
+		if(resumeMapper.upd(resume)>0){
+			return true;
+		}
+		return false;
+		
+	}
+
 
 }
