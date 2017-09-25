@@ -88,7 +88,7 @@ $(function(){
 								</h2>
 							</div>
 							<div id="demandInfo" class="box-content">
-							    
+						    
 							    <form id="demandForm" method="post" class="form-horizontal">
 									
 										<div class="group">

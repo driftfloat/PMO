@@ -60,7 +60,7 @@ function exportData(){
 }
 
 function updateResumeInfo(candidateId){
-	$("#editForm").attr("action",path+"/service/resume/toUpdateResume.html");
+	$("#editForm").attr("action",path+"/service/resume/toUpdateResume");
 	$("#candidateId").val(candidateId);
 	$("#editForm").submit();
 }
