@@ -59,7 +59,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user">&nbsp;MY&nbsp;WAIT&nbsp;ENTRY&nbsp;CANDIDATE&nbsp;LIST</i> 
+									<i class="glyphicon glyphicon-user">&nbsp;CANDIDATE&nbsp;LIST</i> 
 								</h2>
 							</div>
 							<div id="candidateInfo" class="box-content">
@@ -125,6 +125,7 @@ var path='<%=path%>';
 												<option value="0">招聘中</option>
 												<option value="1">offer中</option>
 												<option value="2">已入职</option>
+												<option value="3">闲置中</option>
 											</select>
 										</div>
 									</div>
@@ -136,10 +137,15 @@ var path='<%=path%>';
 										</div>
 									</div>
 									<div class="group">
-										<label class="col-sm-2 control-label">SKILL</label>
+										<label class="col-lg-2 control-label">EDUCATION</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="skill" id="skill" data-bv-group=".group">
+											<select class="form-control" name="education" id="education" data-bv-group=".group">
 												<option value="">--Option--</option>
+												<option value="0">博士</option>
+												<option value="1">研究生</option>
+												<option value="2">本科</option>
+												<option value="3">大专</option>
+												<option value="4">高中</option>
 											</select>
 										</div>
 									</div>
@@ -157,23 +163,39 @@ var path='<%=path%>';
 										</div>
 									</div>
 									<div class="group">
-										<label class="col-lg-2 control-label">SUBDEPT NAME</label>
+										<label class="col-lg-2 control-label">MAJOR TYPE</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="csSubdeptName" id="csSubdeptName" data-bv-group=".group">
+											<select class="form-control" name="majorStatus" id="majorStatus" data-bv-group=".group">
 												<option value="">--Option--</option>
+												<option value="0">计算机相关专业</option>
+												<option value="1">非计算机相关专业</option>
 											</select>
 										</div>
 									</div>
 									<br/><br/><br/>
 									<div class="group">
-										<label class="col-lg-2 control-label">DEMAND STATUS</label>
+										<label class="col-sm-2 control-label">SKILL</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="demandStatus" id="demandStatus" data-bv-group=".group">
+											<select class="form-control" name="skill" id="skill" data-bv-group=".group">
 												<option value="">--Option--</option>
-												<option value="OfferMade">OfferMade</option>
-												<option value="Onboard">Onboard</option>
-												<option value="delay">delay</option>
 											</select>
+										</div>
+									</div>
+									<div class="group">
+										<label class="col-lg-2 control-label">ENGLIST LEVEL</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="englishLevel" id="englishLevel" data-bv-group=".group">
+												<option value="">--Option--</option>
+												<option value="0">非工作语言</option>
+												<option value="1">工作语言</option>
+											</select>
+										</div>
+									</div>
+									<br/><br/><br/>
+									<div class="group">
+										<label class="col-sm-2 control-label">LOCK HR</label>
+										<div class="col-sm-4">
+											<input type="text" class="form-control" name="userName" id="userName" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -205,12 +227,13 @@ var path='<%=path%>';
 												<th>TEL</th>
 												<th>EMAIL</th>
 												<th>SOURCE</th>
-												<th>CANDIDATE STATUS</th>
+												<th>STATUS</th>
+												<th>EDUCATION</th>
 												<th>WORK YEARS</th>
+												<th>MAJOR TYPE</th>
+												<th>ENGLISH LEVEL</th>
 												<th>SKILL</th>
-												<th>INTERVIEW STATUS</th>
-												<th>SUBDEPT NAME</th>
-												<th>DEMAND STATUS</th>
+												<th>LOCK HR</th>
 												<th>OPERATION</th>
 											</tr>
 										</thead>
@@ -241,7 +264,7 @@ var path='<%=path%>';
 			<!--/#content.col-md-0-->
 		</div>
 		<form id="editForm" action="">
-			<input type="hidden" id="candidateId" name="candidateId"></input>
+			<input type="hidden" id="candidateId" ></input>
 		</form>
 		<hr>
 		<div class="modal fade" id="myCandidateListModal" tabindex="-1" role="dialog"
@@ -279,7 +302,7 @@ var path='<%=path%>';
 									<label><input type="checkbox" checked="checked" name="SKILL" value="Skill"/>Skill&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="COLLEGE" value="College"/>College&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="GRADUATE_DATE" value="Graduate Date"/>Graduate Date&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="b.NICKNAME as lockHR" value="Lock HR"/>Lock HR&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="b.USER_NAME as lockHR" value="Lock HR"/>Lock HR&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="CREATE_DATE" value="Create Date"/>Create Date&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="UPDATE_DATE" value="Update Date"/>Update Date&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="EXPECTED_SALARY" value="Old Company"/>Expected Salary&nbsp;&nbsp;</label>
@@ -288,7 +311,7 @@ var path='<%=path%>';
 									<label><input type="checkbox" checked="checked" name="OLD_COMPANY" value="Old Company"/>Old Company&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="ENTY_DATE" value="Enty Date"/>Enty Date&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="ARRIVAL_DATE" value="Arrival Date"/>Arrival Date&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="c.NICKNAME as createUser" value="Create User"/>Create User&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="c.USER_NAME as createUser" value="Create User"/>Create User&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="REMARK" value="Remark"/>Remark&nbsp;&nbsp;</label>
 								</tr>
 							</thead>
@@ -308,188 +331,7 @@ var path='<%=path%>';
 			</div>
 			<!--/span-->
 		</div>
-		<div class="modal fade" id="entryMyWaitCandidateModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="box-header well" data-original-title="">
-						<h2>
-							<i class="glyphicon glyphicon-user"></i> 添加候选人入职信息
-						</h2>
-						<div class="box-icon">
-							<a href="#" class="btn btn-round btn-default  btn-minimize ">
-								<i class="glyphicon glyphicon-chevron-up"></i>
-							</a> 
-							<a class="btn btn-round btn-default" href="#" data-dismiss="modal" onClick="entryClearData()">
-								<i class="glyphicon glyphicon-remove"></i>
-							</a>
-						</div>
-					</div>
-					<div id="excelCheckBox" class="box-content">
-					 <form id="entryCandidateForm" method="post" class="form-horizontal">
-						<div class="group">
-							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
-							<div class="col-sm-4" style="width:60%;">
-								<input type="text" class="form-control" name="entryMyWaitCandidateName" id="entryMyWaitCandidateName" disabled="disabled" />
-								<input type="hidden"  name="entryMyWaitCandidateId" id="entryMyWaitCandidateId" />
-							</div>
-						</div>
-						<br/><br/><br/>
-						<div class="group">
-							<label class="col-lg-2 control-label" style="width:30%;">REAL SALARY</label>
-							<div class="col-lg-4" style="width:60%;">
-								<input type="text" class="form-control" name="entryMyWaitCandidateRealSalary" id="entryMyWaitCandidateRealSalary" data-bv-group=".group"/>
-							</div>
-						</div>
-						<br/><br/><br/>
-						
-						<div class="group">
-							<label class="col-lg-2 control-label" style="width:30%;">ARRIVAL DATE</label>
-							<div class="col-lg-7" >
-								<div class="input-group date form_datetime  "
-									data-link-field="dt_set_order_time_input" >
-									<input class="form-control" type="text"  readonly
-										id="entryMyWaitCandidateArrivalDate" name="entryMyWaitCandidateArrivalDate"    data-bv-group=".group">  
-										  <span class="input-group-addon"><span
-													class="glyphicon glyphicon-calendar" id="arrivalDate"></span></span> <input   type="hidden"
-										id="entryMyWaitCandidateArrivalDate1" name="entryMyWaitCandidateArrivalDate1" data-bv-group=".group"/>
-								</div>
-							</div>
-							</div>
-						
-						
-						<br/><br/><br/><br/>
-						<div class="center">
-							<a class="btn btn-success" href="#"   id="entryMyWaitCandidateSubmit" > 
-								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
-							</a> &nbsp;&nbsp;&nbsp;
-							<a class="btn btn-info" href="#" data-dismiss="modal" onClick="entryClearData()"> 
-								<i class="glyphicon glyphicon-remove icon-white"></i> 取消
-							</a>
-						</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<!--/span-->
-		</div>
-		<div class="modal fade" id="abortMyWaitCandidateModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="box-header well" data-original-title="">
-						<h2>
-							<i class="glyphicon glyphicon-user"></i> Abort候选人
-						</h2>
-						<div class="box-icon">
-							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
-								class="glyphicon glyphicon-chevron-up"></i></a> <a
-								class="btn btn-round btn-default" href="#" data-dismiss="modal" onClick="abortClearData()">
-								<i class="glyphicon glyphicon-remove"></i>
-							</a>
-						</div>
-					</div>
-					<div id="excelCheckBox" class="box-content">
-					 <form id="abortCandidateForm" method="post" class="form-horizontal">
-						<div class="group">
-							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
-							<div class="col-sm-4" style="width:60%;">
-								<input type="text" class="form-control" name="abortMyWaitCandidateName" id="abortMyWaitCandidateName" disabled="disabled" />
-								<input type="hidden"  name="abortMyWaitCandidateId" id="abortMyWaitCandidateId" />
-							</div>
-						</div>
-						<br/><br/><br/>
-						<div class="group">
-							<label class="col-lg-2 control-label" style="width:30%;">CANDIDATE STATUS</label>
-							<div class="col-lg-4" style="width:60%;">
-								<select class="form-control" id="abortMyWaitCandidateStatus" name="abortMyWaitCandidateStatus" data-bv-group=".group">
-									<option value="">--Option--</option>
-									<option value="0">招聘中</option>
-									<option value="1">offer中</option>
-									<option value="2">已入职</option>
-									<option value="3">闲置中</option>
-									<option value="4">暂不关注</option>
-									<option value="5">黑名单</option>
-									<option value="6">入职他司</option>
-								</select>
-							</div>
-						</div>
-						<br/><br/><br/>
-						<div class="group">
-							<label class="col-sm-2 control-label" style="width:30%;">REMARK</label>
-							<div class="col-sm-4" style="width:60%;">
-								<textarea id = "abortMyWaitCandidateRemark" name = "abortMyWaitCandidateRemark" class="form-control" style="width:80%;height:100px" data-bv-group=".group"></textarea>
-							</div>
-						</div>
-						<br/><br/><br/><br/><br/><br/>
-						<div class="center">
-							<a class="btn btn-success" href="#" id="abortSubmit"> 
-								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
-							</a> &nbsp;&nbsp;&nbsp;
-							<a class="btn btn-info" href="#" data-dismiss="modal" onClick="abortClearData()"> 
-								<i class="glyphicon glyphicon-remove icon-white"></i> 取消
-							</a>
-						</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<!--/span-->
-		</div>
-		<div class="modal fade" id="delayMyWaitCandidateModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="box-header well" data-original-title="">
-						<h2>
-							<i class="glyphicon glyphicon-user"></i> 候选人到岗延期
-						</h2>
-						<div class="box-icon">
-							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
-								class="glyphicon glyphicon-chevron-up"></i></a> <a
-								class="btn btn-round btn-default" href="#" data-dismiss="modal" onClick="delayClearData()">
-								<i class="glyphicon glyphicon-remove"></i>
-							</a>
-						</div>
-					</div>
-					<div id="excelCheckBox" class="box-content">
-					 <form id="delayCandidateForm" method="post" class="form-horizontal">
-						<div class="group">
-							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
-							<div class="col-sm-4" style="width:60%;">
-								<input type="text" class="form-control" name="delayMyWaitCandidateName" id="delayMyWaitCandidateName" disabled="disabled" />
-								<input type="hidden"  name="delayMyWaitCandidateId" id="delayMyWaitCandidateId" />
-							</div>
-						</div>
-						<br/><br/><br/>
-						<div class="group">
-							<label class="col-lg-2 control-label" style="width:30%;">ARRIVAL DATE</label>
-							<div class="col-lg-7">
-								<div class="input-group date form_datetime1"
-									data-link-field="dt_set_order_time_input">
-									<input class="form-control" type="text" readonly
-										id="delayMyWaitCandidateArrivalDate" name="delayMyWaitCandidateArrivalDate"> <span
-										class="input-group-addon"><span
-										class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
-										id="delayMyWaitCandidateArrivalDate1" name="delayMyWaitCandidateArrivalDate1" />
-								</div>
-							</div>
-						</div>
-						<br/><br/><br/><br/>
-						<div class="center">
-							<a class="btn btn-success" href="#" id="delaySubmit"> 
-								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
-							</a> &nbsp;&nbsp;&nbsp;
-							<a class="btn btn-info" href="#" data-dismiss="modal" onClick="delayClearData()"> 
-								<i class="glyphicon glyphicon-remove icon-white"></i> 取消
-							</a>
-						</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<!--/span-->
-		</div>
+
 		<c:import url="/service/manage/footer" />
 
 	</div>
@@ -530,7 +372,7 @@ var path='<%=path%>';
 	<!-- application script for Charisma demo -->
 	<script src="<%=path %>/js/charisma.js"></script>
 
-	<script type="text/javascript" src="<%=path %>/js/pmo/myWaitEntryCandidateInfo.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/candidateInfo.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>

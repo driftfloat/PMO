@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmo.dashboard.entity.CandidateInfo;
 import com.pmo.dashboard.entity.CandidatePush;
+import com.pmo.dashboard.entity.HSBCDept;
 import com.pmo.dashboard.entity.PageCondition;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
@@ -135,6 +136,17 @@ public class CandidateController
         request.getSession().setAttribute("candidateDatalist", candidateDatalist);
         return "1";
     }
+    
+    @RequestMapping("/queryCandidateName")
+    @ResponseBody
+    public List queryCandidateName(final HttpServletRequest request,
+            final HttpServletResponse response)
+    {
+        String candidateId= request.getParameter("candidateId");
+        List<CandidateInfo> list = CandidateService.queryCandidateNameById(candidateId);
+        return list;
+    }
+    
     
     @RequestMapping("/exportExcel")
     @ResponseBody
