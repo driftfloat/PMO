@@ -131,9 +131,7 @@ function loadCandidateList(pageState)
 				"<td>"+ result.data[i].majorStatus+ "</td>" +
 				"<td>"+ result.data[i].englishLevel+ "</td>" +
 				"<td>"+ result.data[i].skill+ "</td>" +
-
 				"<td>"+ result.data[i].nickName+ "</td>").appendTo(tr);
-
 				
 				if(result.data[i].candidateStatus == '闲置中'){
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +

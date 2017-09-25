@@ -112,7 +112,7 @@ public class InterviewController {
 		 String userType = user.getUser_type();
 
 		Employee employee = interviewService.queryEmployeeById(employeeId);
-		 if("1".equals(userType)){
+		 if("5".equals(userType)||"6".equals(userType)){
 			 employee.setBillRate("****");
 		 }
 		return employee;

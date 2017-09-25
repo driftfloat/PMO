@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmo.dashboard.entity.EmployeeInfo;
 import com.pmo.dashboard.entity.EmployeePageCondition;
+import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
 import com.pom.dashboard.service.EmployeeInfoService;
 
@@ -92,6 +93,9 @@ public class EmployeeInfoController
         
         List<EmployeeInfo> list = employeeInfoService.queryEmployeeList(employeePageCondition);
         Map<String,Object> result = new HashMap<String,Object>();
+        
+		User user = (User) request.getSession().getAttribute("loginUser");
+	    result.put("user", user);
         result.put("data", list);
         result.put("pageInfo", request.getSession().getAttribute("employeePageCondition"));
         return result;
