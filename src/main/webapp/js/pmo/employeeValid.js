@@ -98,6 +98,54 @@ $(document).ready(function() {
 
                 }
             },
+            graduationDate1: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select Graduation Date'
+                    },
+                    date : {  
+                        format : 'YYYY-MM-DD',  
+                        message : 'Time format is incorrect'  
+                    }
+
+                }
+            },
+            hsbcDOJ1: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select hsbcDOJ1'
+                    },
+                    date : {  
+                        format : 'YYYY-MM-DD',  
+                        message : 'Time format is incorrect'  
+                    }
+
+                }
+            },
+            sowExpiredDate1: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select If terminated,mention LWD'
+                    },
+                    date : {  
+                        format : 'YYYY-MM-DD',  
+                        message : 'Time format is incorrect'  
+                    }
+
+                }
+            },
+            terminatedDate1: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select Date'
+                    },
+                    date : {  
+                        format : 'YYYY-MM-DD',  
+                        message : 'Time format is incorrect'  
+                    }
+
+                }
+            },
             billRate: {
                 validators: {
                     notEmpty: {
@@ -186,7 +234,7 @@ $(document).ready(function() {
 
                 }
             },
-
+            
             hsbcProjectName: {
                 validators: {
                     notEmpty: {

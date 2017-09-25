@@ -13,6 +13,9 @@ $(function(){
 	loadLocationType();
 	loadOnshoreOrOffshore();
 	dateType();
+	dateType0();
+	dateType1();
+	dateType2();
 })
 
 
@@ -87,9 +90,68 @@ function dateType(){
 		format: 'yyyy-mm-dd',
 		pickerPosition: 'bottom-left',
 		showMeridian: 1
+	}).on('changeDate', function(ev){
+		 $('#registerEmployeeForm').bootstrapValidator('revalidateField', 'hsbcDOJ1'); 
+	
 	});
 }
 
+function dateType0(){
+	$('.form_datetime0').datetimepicker({
+		weekStart: 1,
+		minView:'month',
+		todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+		language:'zh-CN',
+		format: 'yyyy-mm-dd',
+		pickerPosition: 'bottom-left',
+		showMeridian: 1
+	}).on('changeDate', function(ev){
+		 $('#registerEmployeeForm').bootstrapValidator('revalidateField', 'graduationDate1'); 
+	
+	});
+}
+
+function dateType1(){
+	$('.form_datetime1').datetimepicker({
+		weekStart: 1,
+		minView:'month',
+		todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+		language:'zh-CN',
+		format: 'yyyy-mm-dd',
+		pickerPosition: 'bottom-left',
+		showMeridian: 1
+	}).on('changeDate', function(ev){
+	
+		 $('#registerEmployeeForm').bootstrapValidator('revalidateField', 'sowExpiredDate1'); 
+		
+	});
+}
+
+function dateType2(){
+	$('.form_datetime2').datetimepicker({
+		weekStart: 1,
+		minView:'month',
+		todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+		language:'zh-CN',
+		format: 'yyyy-mm-dd',
+		pickerPosition: 'bottom-left',
+		showMeridian: 1
+	}).on('changeDate', function(ev){		 
+		 $('#registerEmployeeForm').bootstrapValidator('revalidateField', 'terminatedDate1'); 
+	});
+}
 
 function loadOnshoreOrOffshore(){
 	var url = path+'/json/onshoreOrOffshore.json'
