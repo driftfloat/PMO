@@ -1,5 +1,29 @@
 
     [
-        {"name":"JAVA开发"},
-        {"name":"前端开发"}
+        {"name":"Architect"},
+        {"name":"Business Analyst"}
+		{"name":"Developer"},
+		{"name":"Intermediate"},
+		{"name":"Junior"},
+		{"name":"Junior Coach Role"},
+		{"name":"Junior Developer"},
+		{"name":"Junior Tester"},
+		{"name":"Level 1 Coach Role"},
+		{"name":"Level 2 Coach Role"},
+		{"name":"Programme Manager"},
+		{"name":"Project Manager"},
+		{"name":"QA Analyst"},
+		{"name":"Scrum Master"},
+		{"name":"Senior"},
+		{"name":"Senior Business Analyst"},
+		{"name":"Senior Developer"},
+		{"name":"Senior Scrum Master"},
+		{"name":"Senior Test Manager"}
+		{"name":"Senior Tester"},
+		{"name":"Senior Transition Manager"},
+		{"name":"Support Manager"},
+		{"name":"Test Manager"},
+		{"name":"Tester"}
+		{"name":"Trainee"},
+		{"name":"Transition Manager"}
     ]

@@ -19,6 +19,7 @@ import com.pmo.dashboard.entity.EmployeeInfo;
 import com.pmo.dashboard.entity.EmployeePageCondition;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
+import com.pom.dashboard.service.CSDeptService;
 import com.pom.dashboard.service.EmployeeInfoService;
 
 @Controller
@@ -30,6 +31,9 @@ public class EmployeeInfoController
     
     @Resource
     private EmployeeInfoService employeeInfoService;
+    
+    @Resource
+    private CSDeptService csDeptService;
 
     
     @RequestMapping("/queryEmployeeList")
@@ -50,6 +54,28 @@ public class EmployeeInfoController
         String csSubDeptName = request.getParameter("csSubDeptName");
         
         String csBuName = request.getParameter("csBuName");
+        
+        User user = (User) request.getSession().getAttribute("loginUser");
+        
+        
+        
+        String userType = user.getUser_type();
+        
+       
+        if(("".equals(csSubDeptName) || csSubDeptName == null) &&
+                ("".equals(csBuName) || csBuName == null)){
+            
+            if("1".equals(userType)|| "2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
+                csBuName = user.getBu();
+            }
+            
+            if("2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
+                csSubDeptName = csDeptService.queryCSDeptById(user.getCsDeptId()).getCsSubDeptName();
+            }
+            
+        }
+        
+        
         
         int countPage = 0;
         
@@ -94,7 +120,7 @@ public class EmployeeInfoController
         List<EmployeeInfo> list = employeeInfoService.queryEmployeeList(employeePageCondition);
         Map<String,Object> result = new HashMap<String,Object>();
         
-		User user = (User) request.getSession().getAttribute("loginUser");
+        result.put("csSubDeptName", csSubDeptName);
 	    result.put("user", user);
         result.put("data", list);
         result.put("pageInfo", request.getSession().getAttribute("employeePageCondition"));

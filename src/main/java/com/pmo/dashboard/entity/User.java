@@ -26,6 +26,9 @@ public class User {
 	//所属部门
 	private CSDept csDept;
 	
+	//事业部
+	private String bu;
+	
 	private String csDeptId;
 
 	public CSDept getCsDept() {
@@ -83,5 +86,16 @@ public class User {
 	public void setCsDeptId(String csDeptId) {
 		this.csDeptId = csDeptId;
 	}
+
+    public String getBu()
+    {
+        return bu;
+    }
+
+    public void setBu(String bu)
+    {
+        this.bu = bu;
+    }
+	
 	
 }

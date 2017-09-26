@@ -363,17 +363,7 @@ var path='<%=path%>';
 									    </div>
 								</div>
 								
-								<div class="form-group">
-										
-										<div class="group">
-											<label class="col-sm-2 control-label">Reason for Termination</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="terminationReason"
-													id="terminationReason" />
-											</div>
-										</div>
-										
-								</div>
+								
 								
 								<div class="form-group">
 									    <div style="text-align:center;width:50%;float:left">

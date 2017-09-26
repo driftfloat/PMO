@@ -8,8 +8,6 @@ $(function(){
 	
 	loadEmployeeList();
 	
-	loadCSSubDept();
-	
 })
 
 
@@ -106,7 +104,11 @@ function exportCondition(){
 }
 
 
-function loadCSSubDept(){
+
+
+
+function loadCSSubDept(result){
+	var userType = result.user.user_type;
 	$.ajax({
 		url:path+'/service/csDept/queryAllCSSubDeptName',
 		dataType:"json",
@@ -116,6 +118,11 @@ function loadCSSubDept(){
 		success:function(list){
 			for(var i = 0;i<list.length;i++){
 				$("#csSubDept").append("<option>"+list[i].csSubDeptName+"</option>");
+			}
+			
+			if(userType=='2' || userType=='3' || userType=='4'){
+				$('#csSubDept').val(result.csSubDeptName);
+				$("#csSubDept").attr("disabled","disabled");
 			}
 		}
 	})
@@ -128,7 +135,19 @@ function editEmployeeInfo(employeeId){
 	$("#editForm").submit();
 }
 
-
+function loadCSBu(result){
+	var userType = result.user.user_type;
+	var url = path+'/json/csBuName.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#csBu").append("<option>"+item.name+"</option>");
+	       })
+	       if(userType=='1' || userType=='2' || userType=='3' || userType=='4'){
+				$('#csBu').val(result.user.bu);
+				$("#csBu").attr("disabled","disabled");
+			}
+	});
+}
 
 function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 	var csDeptName = csDeptName;
@@ -221,7 +240,16 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 			if(pageNum == 1){
 				$("#previousPage").removeAttr("onclick");
 			}
+			
+			
+			
+			
+			
+			loadCSSubDept(result);
+			
+			loadCSBu(result);
 		}
+		
 	})
 }
 

@@ -21,6 +21,36 @@ function dateType(){
 	});
 }
 
+function changeData(){
+	var staffRegion = $('#staffRegion').val();
+	var role = $('#role').val();
+	var skill = $('#skill').val();
+	if('' == staffRegion || staffRegion== null){
+		return;
+	}
+	if('' == role || role== null){
+		return;
+	}
+	if('' == skill || skill== null){
+		return;
+	}
+	
+	$.ajax({
+		url:path+'/service/interview/getBillRate',
+		dataType:"json",
+		async:true,
+		data:{"staffRegion":staffRegion,"role":role,"skill":skill},
+		cache:false,
+		type:"post",
+		success:function(data){
+			if(data != null){
+				$('#billRate').val(data);
+			}
+		}
+	})
+}
+
+
 
 function updateEmployee(){
 	var bootstrapValidator = $("#updateEmployeeForm").data('bootstrapValidator');

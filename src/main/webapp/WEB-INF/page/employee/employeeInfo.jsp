@@ -94,11 +94,11 @@ var path='<%=path%>';
 											<select class="form-control" name="csBu" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="csBu" data-bv-group=".group">
 												<option value="">-- Option--</option>
-												<option value="">第一事业部</option>
-												<option value="">第二事业部</option>
-												<option value="">第三事业部</option>
-												<option value="">第四事业部</option>
-												<option value="">业务部门</option>
+												<!-- <option value="1">第一事业部</option>
+												<option value="2">第二事业部</option>
+												<option value="3">第三事业部</option>
+												<option value="4">第四事业部</option>
+												<option value="5">业务部门</option> -->
 											</select>
 										</div>
 										</div>
@@ -255,7 +255,9 @@ var path='<%=path%>';
 									<label><input type="checkbox" name="MSA Role"/>MSA Role&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Skills/Technology"/>Skills/Technology&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Billing Currency"/>Billing Currency&nbsp;&nbsp;</label>
+									<c:if test="${!(sessionScope.loginUser.user_type eq '5') || (sessionScope.loginUser.user_type eq '6')}">
 									<label><input type="checkbox" name="Bill Rate"/>Bill Rate&nbsp;&nbsp;</label>
+									</c:if>
 									<label><input type="checkbox" name="Resource Status (Active/Terminated)"/>Resource Status (Active/Terminated)&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="If terminated mention LWD"/>If terminated mention LWD&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Reason for Termination"/>Reason for Termination&nbsp;&nbsp;</label>

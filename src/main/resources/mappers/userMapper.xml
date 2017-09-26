@@ -9,6 +9,7 @@
 		<result property="password" column="PASSWORD" javaType="String" />
 		<result property="user_type" column="USER_TYPE" javaType="String" />
 		<result property="csDeptId" column="CSDEPT_ID" javaType="String" />
+		<result property="bu" column="BU" javaType="String" />
 	</resultMap>
 	
 	
