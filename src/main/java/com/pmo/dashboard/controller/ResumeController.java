@@ -1,6 +1,5 @@
 package com.pmo.dashboard.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,35 +7,21 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.persistence.metamodel.Bindable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.Validate;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.config.ForwardConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import com.pmo.dashboard.entity.CandidateInfo;
-import com.pmo.dashboard.entity.Demand;
-import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.Resume;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Utils;
-import com.pom.dashboard.service.CandidateService;
 import com.pom.dashboard.service.ResumeService;
 
 /**
