@@ -28,6 +28,7 @@
 		<result property="onboardDate" column="ONBOARD_DATE" javaType="String" />
 		<result property="doNumber" column="DO_NUMBER" javaType="String" />
 		<result property="hrPriority" column="HR_PRIORITY" javaType="String" />
+		<result property="completionDay" column="COMPLETION_DAY" javaType="String" />
 		<association property="hsbcDept" javaType="com.pmo.dashboard.entity.HSBCDept">
 			<id column="hsbcSubDeptId" property="HSBC_SUBDEPT_ID"/>
 			<id column="hsbcSubDeptName" property="HSBC_SUBDEPT_NAME"/>

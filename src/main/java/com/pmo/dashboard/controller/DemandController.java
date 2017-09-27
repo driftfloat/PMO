@@ -31,6 +31,7 @@ import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.Demand;
 import com.pmo.dashboard.entity.HSBCDept;
 import com.pmo.dashboard.entity.PageCondition;
+import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.CSDeptService;
@@ -120,11 +121,27 @@ public class DemandController {
 			pageCondition.setCurrPage(1);
 		}
 		//String csBuName = request.getParameter("csBuName");
+		  User user = (User) request.getSession().getAttribute("loginUser");
+	      String userType = user.getUser_type();
+		 if(("".equals(demand.getCsSubDept()) || demand.getCsSubDept() == null) &&
+	                ("".equals(csBuName) || csBuName == null)){
+	            
+	            if("1".equals(userType)|| "2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
+	                csBuName = user.getBu();
+	            }
+	            
+	            if("2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
+	            	demand.setCsSubDept(csDeptService.queryCSDeptById(user.getCsDeptId()).getCsSubDeptName());
+	            }
+	            
+	        }
 		List<Demand> list = demandService.queryDemandList(demand,pageCondition,csBuName,request);
 		//把查询到的结果存到session中
 		request.getSession().setAttribute("demandList", list);
 		Map<String,Object> result = new HashMap<String,Object>();
 		result.put("list", list);
+		result.put("csSubDept", demand.getCsSubDept());
+	    result.put("user", user);
 		result.put("pageCondition", pageCondition);
 		return result;
 	}
@@ -146,8 +163,15 @@ public class DemandController {
 			
 			String fileName =  Constants.PATH+""+Utils.getUUID()+".xls";
 			// 创建可写入的Excel工作簿
+			
 			File file = new File(fileName);
+		    File fileDir =new File(Constants.PATH);
+		    if(!fileDir.exists()||!fileDir.isDirectory())
+			    {
+		    	fileDir.mkdir();
+			    }
 			if(!file.exists()){
+			
 				file.createNewFile();
 			}
 			//以fileName为文件名来创建一个Workbook
@@ -167,6 +191,7 @@ public class DemandController {
 					Label lab = new Label(j++, i+1, demandList.get(i).getRr());
 					ws.addCell(lab);
 				}
+				System.out.println("=="+demandList.get(i).getRr());
 				if(condition.indexOf("Job Code")!= -1){
 					Label lab = new Label(j++, i+1, demandList.get(i).getJobCode());
 					ws.addCell(lab);
@@ -215,6 +240,10 @@ public class DemandController {
 					Label lab = new Label(j++, i+1, demandList.get(i).getStatus());
 					ws.addCell(lab);
 				}
+				if(condition.indexOf("Candidate Name")!= -1){
+					Label lab = new Label(j++, i+1, demandList.get(i).getCandidateName());
+					ws.addCell(lab);
+				}
 				if(condition.indexOf("Proposed Date of Joining")!= -1){
 					Label lab = new Label(j++, i+1, demandList.get(i).getProposedJoiningDate());
 					ws.addCell(lab);
@@ -250,6 +279,14 @@ public class DemandController {
 				}
 				if(condition.indexOf("HR Priority")!= -1){
 					Label lab = new Label(j++, i+1, demandList.get(i).getHrPriority());
+					ws.addCell(lab);
+				}
+				if(condition.indexOf("Completion Day")!= -1){
+					Label lab = new Label(j++, i+1, demandList.get(i).getCompletionDay());
+					ws.addCell(lab);
+				}
+				if(condition.indexOf("Onboard Date")!= -1){
+					Label lab = new Label(j++, i+1, demandList.get(i).getOnboardDate());
 					ws.addCell(lab);
 				}
 			}

@@ -147,7 +147,7 @@ var path='<%=path%>';
 										</br></br></br>
 										
 										<div class="group">
-										<label class="col-lg-2 control-label">事业部</label>
+										<label class="col-lg-2 control-label">BU</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="csBuName" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="csBuName" data-bv-group=".group">
@@ -156,10 +156,10 @@ var path='<%=path%>';
 										</div>
 										</div>
 										<div class="group">
-											<label class="col-sm-2 control-label">交付部</label>
+											<label class="col-sm-2 control-label">CsDept</label>
 											<div class="col-sm-4">
 												<select class="form-control" name="csSubDept" data-bv-notempty
-													data-bv-notempty-message="请选择角色" id="scSubDeptName" data-bv-group=".group">
+													data-bv-notempty-message="请选择角色" id="csSubDept" data-bv-group=".group">
 													<option value="">-- select--</option>
 												</select>
 											</div>
@@ -174,8 +174,8 @@ var path='<%=path%>';
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
 									    </div>
 									    <div style="text-align:center;width:50%;float:right">
-									    <input type="reset" value="导出Excel" disabled="disabled"
-										name="exportExcel" id="exportExcel" href="#"
+									    <input type="button" value="导出Excel" disabled="disabled"
+										name="exportExcel" id="exportExcel"
 										class="button btn btn-primary" data-dismiss="modal"
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
 									    </div>
@@ -196,8 +196,8 @@ var path='<%=path%>';
 												<th>Department</th>
 												<th>Sub - Department</th>
 												<th>Status</th>
-												<th>交付部</th>
-												<th>详情</th>
+												<th>CsDpet</th>
+												<th>Operate</th>
 											</tr>
 										</thead>
 										
@@ -271,15 +271,18 @@ var path='<%=path%>';
 									<label><input type="checkbox" name="No. of Profiles Sent to HSBC"/>No. of Profiles Sent to HSBC&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="No of Profiles Interviewed"/>No of Profiles Interviewed&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Status"/>Status&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Candidate Name"/>Candidate Name&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Proposed Date of Joining"/>Proposed Date of Joining&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="SOW signed"/>SOW signed&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="BGV Cleared"/>BGV Cleared&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Reason for Abort / Delay"/>Reason for Abort / Delay&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Remark"/>Remark&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="交付部"/>交付部&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="交付部"/>CsDept&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Planned Onboard date"/>Planned Onboard date&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="DO number"/>DO number&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="HR Priority"/>HR Priority&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="HR Priority"/>HR Priority&nbsp;&nbsp;</label>									
+									<label><input type="checkbox" name="Completion Day"/>Completion Day&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Onboard Date"/>Onboard Date&nbsp;&nbsp;</label>
 								</tr>
 							</thead>
 							<tbody>

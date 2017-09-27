@@ -150,7 +150,7 @@ $(function(){
 										
 										
 										<div class="group">
-											<label class="col-sm-2 control-label">交付部</label>
+											<label class="col-sm-2 control-label">Cs Dept</label>
 											<div class="col-sm-4">
 												<select class="form-control" name="csSubDept" data-bv-notempty
 													data-bv-notempty-message="请选择角色" id="scSubDeptName" data-bv-group=".group">
