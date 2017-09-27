@@ -57,6 +57,15 @@ public class Demand
     //gkf
     private String onboardDate;
 
+    private String completionDay;
+	public String getCompletionDay() {
+		return completionDay;
+	}
+
+	public void setCompletionDay(String completionDay) {
+		this.completionDay = completionDay;
+	}
+
 	public String getOnboardDate() {
 		return onboardDate;
 	}

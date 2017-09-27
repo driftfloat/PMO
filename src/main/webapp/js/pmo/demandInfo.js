@@ -11,8 +11,8 @@ $(function(){
 	$("#searchBtn").click(function(){
 		loadDemandList();
 	})
-	loadCsBuName();
-	loadScSubDeptName();
+	/*loadCsBuName();
+	loadScSubDeptName();*/
 })
 
 $("#skill").change(function(){
@@ -73,8 +73,24 @@ function loadCsBuName(){
 		})
 	})
 }
+function loadCSBu(result){
+	var userType = result.user.user_type;
+	var url = path+'/json/csBuName.json'
+	$.getJSON(url,  function(data) {
+		$("#csBuName").empty();
+		$("#csBuName").append("<option value=''>-- select --</option>");
+	       $.each(data, function(i, item) {
+	    	   $("#csBuName").append("<option>"+item.name+"</option>");
+	       })
+	       if(userType=='1' || userType=='2' || userType=='3' || userType=='4'){
+				$('#csBuName').val(result.user.bu);
+				$("#csBuName").attr("disabled","disabled");
+			}
+	});
+}
+
 /*加载交付部*/
-function loadScSubDeptName(){
+/*function loadScSubDeptName(){
 	$("#csBuName").change(function(){
 		var csBuName = $("#csBuName").val();
 		$("#scSubDeptName").empty();
@@ -92,6 +108,29 @@ function loadScSubDeptName(){
 				})
 			}
 		})
+	})
+}
+*/
+function loadCSSubDept(result){
+	var userType = result.user.user_type;
+	$.ajax({
+		url:path+'/service/csDept/queryAllCSSubDeptName',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(list){
+			$("#csSubDept").empty();
+			$("#csSubDept").append("<option value=''>-- select --</option>");
+			for(var i = 0;i<list.length;i++){
+				$("#csSubDept").append("<option>"+list[i].csSubDeptName+"</option>");
+			}
+			
+			if(userType=='2' || userType=='3' || userType=='4'){
+				$('#csSubDept').val(result.csSubDept);
+				$("#csSubDept").attr("disabled","disabled");
+			}
+		}
 	})
 }
 /*异步加载Department信息*/
@@ -143,8 +182,8 @@ function loadDemandList(currPage){
 	var sub_department= $("#sub_department").val();
 	var status= $("#status").val();
 	var rr= $("#rr").val();
-	var csBuName = $("#csBuName").val();
-	var csSubDept = $("#scSubDeptName").val();
+	var csBuName = $("#csBu").val();
+	var csSubDept = $("#scSubDept").val();
 	//$("#demandList").empty();
 	$("#demandList  tr:not(:first)").html("");
 	$.ajax({
@@ -177,7 +216,7 @@ function loadDemandList(currPage){
 				}
 				var td6 = $("<td>"+result.list[i].status+"</td>");
 				var td7 = $("<td>"+result.list[i].csSubDept+"</td>");
-				var td8 = $("<td><div class='btn-group btn-group-sm'><a href='javascript:void(0);' class='btn btn-primary' onclick='demandDetail("+result.list[i].demandId+")'>详情</a></div></td>");
+				var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick='demandDetail("+result.list[i].demandId+")'>DETAIL</a></td>");
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
@@ -218,6 +257,9 @@ function loadDemandList(currPage){
 					$(this).parent("li").siblings("li").removeClass("disabled");
 				}
 			});
+			
+            loadCSSubDept(result);			
+			loadCSBu(result);
 		}
 	})
 	

@@ -1,7 +1,7 @@
 
     [
         {"name":"Architect"},
-        {"name":"Business Analyst"}
+        {"name":"Business Analyst"},
 		{"name":"Developer"},
 		{"name":"Intermediate"},
 		{"name":"Junior"},
@@ -18,12 +18,12 @@
 		{"name":"Senior Business Analyst"},
 		{"name":"Senior Developer"},
 		{"name":"Senior Scrum Master"},
-		{"name":"Senior Test Manager"}
+		{"name":"Senior Test Manager"},
 		{"name":"Senior Tester"},
 		{"name":"Senior Transition Manager"},
 		{"name":"Support Manager"},
 		{"name":"Test Manager"},
-		{"name":"Tester"}
+		{"name":"Tester"},
 		{"name":"Trainee"},
 		{"name":"Transition Manager"}
     ]
