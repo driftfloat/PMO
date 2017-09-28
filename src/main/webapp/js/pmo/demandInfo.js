@@ -13,6 +13,8 @@ $(function(){
 	})
 	/*loadCsBuName();
 	loadScSubDeptName();*/
+	
+	
 })
 
 $("#skill").change(function(){
@@ -80,7 +82,7 @@ function loadCSBu(result){
 		$("#csBuName").empty();
 		$("#csBuName").append("<option value=''>-- select --</option>");
 	       $.each(data, function(i, item) {
-	    	   $("#csBuName").append("<option>"+item.name+"</option>");
+	    	   $("#csBuName").append("<option value='"+item.name+"'>"+item.name+"</option>");
 	       })
 	       if(userType=='1' || userType=='2' || userType=='3' || userType=='4'){
 				$('#csBuName').val(result.user.bu);
@@ -114,7 +116,7 @@ function loadCSBu(result){
 function loadCSSubDept(result){
 	var userType = result.user.user_type;
 	$.ajax({
-		url:path+'/service/csDept/queryAllCSSubDeptName',
+		url:path+'/service/csDept/queryAllCSSubDept',
 		dataType:"json",
 		async:true,
 		cache:false,
@@ -123,7 +125,7 @@ function loadCSSubDept(result){
 			$("#csSubDept").empty();
 			$("#csSubDept").append("<option value=''>-- select --</option>");
 			for(var i = 0;i<list.length;i++){
-				$("#csSubDept").append("<option>"+list[i].csSubDeptName+"</option>");
+				$("#csSubDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csSubDeptName+"</option>");
 			}
 			
 			if(userType=='2' || userType=='3' || userType=='4'){

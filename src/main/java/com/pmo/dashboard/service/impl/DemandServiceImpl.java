@@ -75,6 +75,9 @@ public class DemandServiceImpl implements DemandService{
 		for (Demand demands : list) {
 			HSBCDept hsbcDept = hsbcDeptMapper.queryDemandHSBCSubDeptById(demands.getHsbcSubDeptId());
 			demands.setHsbcDept(hsbcDept);
+			 CSDept csDept=new CSDept();
+			 csDept=csDeptMapper.queryCSDeptById(demands.getCsSubDept());
+			 demands.setCsSubDept(csDept==null?"":csDept.getCsSubDeptName());
 		}
 		return list;
 	}
@@ -85,6 +88,9 @@ public class DemandServiceImpl implements DemandService{
 		for (Demand demands : list) {
 			HSBCDept hsbcDept = hsbcDeptMapper.queryDemandHSBCSubDeptById(demands.getHsbcSubDeptId());
 			demands.setHsbcDept(hsbcDept);
+			CSDept csDept=new CSDept();
+			 csDept=csDeptMapper.queryCSDeptById(demands.getCsSubDept());
+			 demands.setCsSubDept(csDept==null?"":csDept.getCsSubDeptName());
 		}
 		return list;
 	}
