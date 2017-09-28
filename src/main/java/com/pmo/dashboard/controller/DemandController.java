@@ -131,7 +131,7 @@ public class DemandController {
 	            }
 	            
 	            if("2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
-	            	demand.setCsSubDept(csDeptService.queryCSDeptById(user.getCsDeptId()).getCsSubDeptName());
+	            	demand.setCsSubDept(csDeptService.queryCSDeptById(user.getCsDeptId()).getCsSubDeptId());
 	            }
 	            
 	        }
