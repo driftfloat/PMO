@@ -45,5 +45,19 @@ public class AddDemandController {
     }
     
 
+    /**
+     * add by jama
+     * 修改招聘需求信息
+     * @param demand
+     * @return
+     */
+    @RequestMapping("/updateDemand")
+    @ResponseBody
+    public boolean updateDemand(AddDemand demand){      
+    	//String demandId = Utils.getUUID();
+    	//demand.setDemandId(demandId);
+    	boolean resultFlag = addDemandService.updateDemand(demand);
+        return resultFlag;
+    }
     
 }
