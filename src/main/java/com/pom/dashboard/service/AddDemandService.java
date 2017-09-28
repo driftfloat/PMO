@@ -6,4 +6,6 @@ public interface AddDemandService {
 
 	boolean addDemand(AddDemand demand);
 	
+	public boolean updateDemand(AddDemand demand);
+	
 }

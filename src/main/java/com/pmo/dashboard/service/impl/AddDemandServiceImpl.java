@@ -34,4 +34,21 @@ public class AddDemandServiceImpl implements AddDemandService{
 		return false;
 	}
 	
+	/**
+	 * 更新招聘需求信息
+	 * add by jama
+	 */
+	@Override
+	public boolean updateDemand(AddDemand demand) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("hsbcSubDeptName", demand.getHsbcSubDept());
+		params.put("hsbcDeptName",demand.getHsbcDept() );
+		String hsbcSubDeptId = hsbcDeptMapper.queryHsbcSubDeptId(params);
+		demand.setHsbcSubDeptId(hsbcSubDeptId);
+		if(addDemandMapper.modifyDemand(demand)>0){
+			return true;
+		}
+		return false;
+	}
+	
 }

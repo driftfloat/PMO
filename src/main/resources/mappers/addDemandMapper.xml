@@ -54,4 +54,12 @@
 	 <update id="updateDemandAfter" parameterType="com.pmo.dashboard.entity.AddDemand">
 	   UPDATE t_demand  set CANDIDATE_ID = null  where DEMAND_ID = #{demandId} 
 	</update>
+	
+	<update id="modifyDemand" parameterType="com.pmo.dashboard.entity.AddDemand" >
+		update t_demand set RR = #{rr}, JOB_CODE = #{jobCode},SKILL = #{skill},REQUESTOR = #{requestor},POSITION = #{position},HSBC_SUBDEPT_ID = #{hsbcSubDeptId},LOCATION = #{location},
+                    REQ_PUBLISHED_DATE = #{reqPublishedDate},AGEING = #{ageing},PROFILES_NO = #{profilesNo},INTERVIEWED_NO = #{interviewedNo},STATUS = #{status},PROPOSED_JOINING_DATE = #{proposedJoiningDate},
+					BGV_CLEARED = #{bgvCleared},SOW_SIGNED = #{sowSigned},REASON = #{reason},REMARK = #{remark},CS_SUBDEPT = #{csSubDept},PLANNED_ONBOARD_DATE = #{plannedOnboardDate},DO_NUMBER = #{doNumber},
+					HR_PRIORITY = #{hrPriority},CANDIDATE_NAME = #{staffName}
+	        WHERE DEMAND_ID = #{demandId};
+	</update>
 </mapper>

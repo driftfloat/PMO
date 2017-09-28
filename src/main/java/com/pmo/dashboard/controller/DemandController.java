@@ -367,4 +367,37 @@ public class DemandController {
 	public boolean updateDemandOnBoardById(Demand demand ) {
 		return demandService.updateDemandOnBoardById(demand);
 	}
+	
+	/**
+	 * add by jama 
+	 * 查询全部交付部
+	 * @param csBuName
+	 * @return
+	 */
+	@RequestMapping("/loadAllScSubDeptName")
+	@ResponseBody
+	public List<CSDept> loadAllScSubDeptName(){
+		List<CSDept> list = csDeptService.queryAllCSSubDeptName();
+		return list;
+	}
+	
+	/**
+	 * 编辑不全需求信息
+	 * add by jama
+	 * @param demandId
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/demandDetailUpdate")
+	public String demandDetailUpdate(String demandId,Model model,HttpServletRequest request){
+		List<Demand> list = (List<Demand>) request.getSession().getAttribute("demandList");
+		for (Demand demand : list) {
+			if(demand.getDemandId().equals(demandId)){
+				model.addAttribute("demand", demand);
+				return "/demand/demandDetailEdit";
+			}
+		}
+		return "/demand/demandDetailEdit";
+	}
 }
