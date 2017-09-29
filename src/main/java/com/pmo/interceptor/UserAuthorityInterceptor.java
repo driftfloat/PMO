@@ -39,11 +39,17 @@ public class UserAuthorityInterceptor implements HandlerInterceptor {
 		}		
 		
 		String src=request.getRequestURL().toString();
+		src=urlDistinct(src);
 		String url="";
-		if(src.indexOf(".")==-1) {
+		if(src.indexOf("WEB-INF")!=-1||src.indexOf("Pmo")+3==src.length()){
+		    return true;
+		}else if(src.indexOf("Pmo")>src.lastIndexOf(".")) {
 			url=src.substring(src.indexOf("Pmo")+3, src.length());
 		}else {
-			url=src.substring(src.indexOf("Pmo")+3, src.indexOf("."));
+			url=src.substring(src.indexOf("Pmo")+3, src.lastIndexOf("."));
+			if(url.indexOf(".")!=-1){
+			    url=url.substring(0, url.indexOf("."));
+			}
 		}
 		
            if(ifExistMenu(menus,url)) {				
@@ -86,6 +92,21 @@ public class UserAuthorityInterceptor implements HandlerInterceptor {
 			return false;
 		}
 		
+	}
+	
+	static String urlDistinct(String str){
+	    if(str==null||str.length()<1){
+	        return "";
+	    }else{
+	        String s[]=str.split("/");
+	        
+	        StringBuffer sb=new StringBuffer();
+	        for (String string : s) {
+	            if(!"".equals(string))
+	                sb.append("/"+string);
+	        }
+	        return sb.toString();
+	    }
 	}
 
 }
