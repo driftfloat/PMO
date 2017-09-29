@@ -18,7 +18,7 @@
 	</select>
 	
 	<select id="queryAllCSSubDeptName" resultMap="csDeptMap">
-	    SELECT DISTINCT CS_SUBDEPT_NAME FROM t_cs_dept
+	    SELECT DISTINCT CS_SUBDEPT_NAME,CS_SUBDEPT_ID FROM t_cs_dept
 	</select>
 	
 	<select id="queryCSSubDeptNameByCsBuName" parameterType="String" resultMap="csDeptMap">

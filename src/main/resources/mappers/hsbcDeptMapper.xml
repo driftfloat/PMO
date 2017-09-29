@@ -40,7 +40,7 @@
 	<select id="queryHSBCSubDeptNameByDeptName" parameterType="String" resultMap="hsbcDeptMap">
 		select * 
 		from t_hsbc_dept 
-		where HSBC_DEPT_NAME=#{id}
+		where HSBC_DEPT_NAME=#{hsbcDeptName}
 		GROUP BY HSBC_SUBDEPT_NAME
 	</select>
 	

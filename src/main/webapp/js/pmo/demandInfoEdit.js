@@ -175,7 +175,7 @@ function loadScSubDeptNameEdit(){
 		type:"post",
 		success:function(data){
 			$.each(data, function(i,item){
-				$("#csSubDeptEdit").append("<option value='"+item.csSubDeptName+"'>"+item.csSubDeptName+"</option>");
+				$("#csSubDeptEdit").append("<option value='"+item.csSubDeptId+"'>"+item.csSubDeptName+"</option>");
 			});
 			//add by jama 设置业务部回显值
 			var responseValue = $("#csSubDeptEdit").val();
@@ -214,7 +214,7 @@ function loadDepartmentEdit(){
 				   break;
 			   }  
 		    }
-		    genSubDept4Dept(resSubDeptValue);
+		   genSubDept4Dept(resSubDeptValue);
 		}
 	})
 }
@@ -234,10 +234,23 @@ $("#hsbcDeptEdit").change(function(){
 		cache:false,
 		type:"post",
 		success:function(list){
-			$("#hsbcSubDeptEdit").find("option").remove(); 
+			/*$("#hsbcSubDeptEdit").find("option").remove(); 
 			$("#hsbcSubDeptEdit").append("<option value=''>-- Option --</option>");
 			for(var i = 0;i<list.length;i++){
-				$("#hsbcSubDeptEdit").append("<option value='"+list[i].hsbcSubDeptName+"'>"+list[i].hsbcSubDeptName+"</option>");
+				$("#hsbcSubDeptEdit").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcSubDeptName+"</option>");
+			}*/
+			// ---gkf modify---
+			$("#hsbcSubDeptEdit").find("option").remove(); 
+//			if(list.length == 1 && list[0].hsbcSubDeptName == null){
+//				$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
+//			}else{
+			$("#hsbcSubDeptEdit").append("<option value=''>-- Option --</option>");
+			if(list.length == 1 && list[0].hsbcSubDeptName == null){
+				$("#hsbcSubDeptEdit").append("<option value='"+$('#hsbcDeptEdit').find("option:selected").val()+"'>"+$('#hsbcDeptEdit').find("option:selected").text()+"</option>");
+			}else{
+				for(var i = 0;i<list.length;i++){
+					$("#hsbcSubDeptEdit").append("<option value='"+list[i].hsbcSubDeptName+"'>"+list[i].hsbcSubDeptName+"</option>");
+				}
 			}
 		}
 	})
@@ -257,8 +270,10 @@ function genSubDept4Dept(resSubDeptValue){
 		data:{"hsbcDeptName":department},
 		success:function(data){
 			$.each(data, function(i,item){
-				if(item.hsbcSubDeptName){
+				if(item.hsbcSubDeptName!=null){
 					$("#hsbcSubDeptEdit").append("<option value='"+item.hsbcSubDeptName+"'>"+item.hsbcSubDeptName+"</option>");
+				}else{
+					$("#hsbcSubDeptEdit").append("<option value='"+item.hsbcDeptName+"'>"+item.hsbcDeptName+"</option>");
 				}
 			});
 			//add by jama 设置子部门回显
@@ -267,7 +282,7 @@ function genSubDept4Dept(resSubDeptValue){
 			}
 			var responseValue = $("#hsbcSubDeptEdit").val();
 			var all_options = document.getElementById("hsbcSubDeptEdit").options;
-		    for (i=0; i<all_options.length; i++){
+		    for (i=1; i<all_options.length; i++){
 			   if (all_options[i].value == responseValue){
 				   document.getElementById("hsbcSubDeptEdit").options[i].selected = true;
 				   break;
@@ -463,9 +478,9 @@ function demandDetailUpdate(demandId){
 }
 
 function updateDemand(){
-	var isvalid = false;
-	//isvalid = $('#recruitdemandFormEdit').data('bootstrapValidator').isValid();
-	//if(isvalid){
+	var bootstrapValidator = $("#recruitdemandFormEdit").data('bootstrapValidator');
+	   bootstrapValidator.validate();
+	if(bootstrapValidator.isValid()){
 		var demandId=$('#demandIdEdit').val();
 		var rr=$('#rrEdit').val();
 		var jobCode=$('#jobCodeEdit').val();
@@ -530,9 +545,11 @@ function updateDemand(){
 					setTimeout(function () {
 						$('#successAlert').hide();
 					}, 2000);
+					self.opener.location.reload(); 
 				}
 			}
 		})
+	}
 	/*}else{
 		//Do something for invalid
 		alert('请填写正确的信息');
