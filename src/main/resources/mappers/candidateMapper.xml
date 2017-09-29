@@ -148,7 +148,7 @@
         	t_cs_dept c
         ON b.CS_SUBDEPT_ID = c.CS_SUBDEPT_ID 
         WHERE 
-			a.LOCK_PERSION=#{lockPerson} and CANDIDATE_STATUS not in (3,4,5,6) 
+			LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS not in (3,4,5,6) 
         	<include refid="candidateWherePart"/>
 		ORDER BY CANDIDATE_STATUS,INTERVIEW_STATUS,c.CS_SUBDEPT_NAME,MAJOR_STATUS,CANDIDATE_ID 
         LIMIT #{currentPage},#{pageDataCount};
@@ -160,7 +160,7 @@
         FROM 
         	t_candidate a 
         WHERE 
-			a.LOCK_PERSION=#{lockPerson} and CANDIDATE_STATUS not in (3,4,5,6) 
+			LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS not in (3,4,5,6) 
         	<include refid="candidateWherePart"/>
 			;
 	</select>

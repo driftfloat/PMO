@@ -153,12 +153,10 @@ var path='<%=path%>';
 								
 								<div class="form-group">
 										<div class="group">
-											<label class="col-sm-2 control-label">CS SubDept</label>
+											<label class="col-sm-2 control-label">DO number</label>
 											<div class="col-sm-4">
-												<select class="form-control" name="csSubDeptEdit" data-bv-notempty
-												data-bv-notempty-message="Please Select Your CsSubDept" id="csSubDeptEdit" data-bv-group=".group">
-												<option value="${demand.csSubDept }">-- Option--</option>
-									        	</select>
+												<input type="text" class="form-control" name="doNumberEdit" value="${demand.doNumber }"
+													id="doNumberEdit"/>
 											</div>
 										</div>
 										<div class="group">
@@ -200,18 +198,12 @@ var path='<%=path%>';
 											</div>
 										</div>
 										<div class="group">
-											<label class="col-sm-2 control-label">Req published Date</label>
-											<div class="col-md-4">
-												<div class="input-group date form_datetime col-sm-12"
-													data-link-field="dt_set_order_time_input">
-													<input class="form-control" type="text" disabled="disabled"
-														id="reqPublishedDate1Edit" name="reqPublishedDate1Edit"> 
-														<span class="input-group-addon">
-															<span class="glyphicon glyphicon-th">
-															</span>
-														</span> 
-														<input type="hidden" id="reqPublishedDate2Edit" name="reqPublishedDate2Edit" value="${demand.reqPublishedDate }"/>
-												</div>
+											<label class="col-sm-2 control-label">CS SubDept</label>
+											<div class="col-sm-4">
+												<select class="form-control" name="csSubDeptEdit" data-bv-notempty
+												data-bv-notempty-message="Please Select Your CsSubDept" id="csSubDeptEdit" data-bv-group=".group">
+												<option value="${demand.csSubDept }">-- Option--</option>
+									        	</select>
 											</div>
 										</div>
 								</div>
@@ -285,18 +277,33 @@ var path='<%=path%>';
 								</div>
 								
 								<div class="form-group">
-									<div class="group">
-											<label class="col-sm-2 control-label">Planned Onboard date</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="plannedOnboardDateEdit" value="${demand.plannedOnboardDate }"
-													id="plannedOnboardDateEdit"/>
+										<div class="group">
+										<label class="col-sm-2 control-label">Planned Onboard
+											date</label>
+										<div class="col-md-4">
+											<div class="input-group date form_datetime1 col-sm-12"
+												data-link-field="dt_set_order_time_input">
+												<input class="form-control" type="text" readonly data-bv-group=".group"
+													id="plannedOnboardDate1" name="plannedOnboardDate1" value="${demand.plannedOnboardDate }"> <span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
+													id="plannedOnboardDate2" name="plannedOnboardDate2" />
 											</div>
 										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">DO number</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="doNumberEdit" value="${demand.doNumber }"
-													id="doNumberEdit"/>
+									</div>
+									<div class="group">
+											<label class="col-sm-2 control-label">Req published Date</label>
+											<div class="col-md-4">
+												<div class="input-group date form_datetime col-sm-12"
+													data-link-field="dt_set_order_time_input">
+													<input class="form-control" type="text" readonly data-bv-group=".group"
+														id="reqPublishedDate1Edit" name="reqPublishedDate1Edit" value="${demand.reqPublishedDate }"> 
+														<span class="input-group-addon">
+															<span class="glyphicon glyphicon-th">
+															</span>
+														</span> 
+														<input type="hidden" id="reqPublishedDate2Edit" name="reqPublishedDate2Edit" />
+												</div>
 											</div>
 										</div>
 								</div>

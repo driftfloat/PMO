@@ -278,6 +278,11 @@ public class CandidateController
     	{
     		return null;
     	}
+    	String nickname = user.getNickname();
+    	if("管理员".equals(nickname) || "招聘经理".equals(nickname))
+    	{
+    		lockPerson="all";
+    	}
     	candidate.setLockPerson(lockPerson);
     	
     	String pageState = candidate.getPageState();

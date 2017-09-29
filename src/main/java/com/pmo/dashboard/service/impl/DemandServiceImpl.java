@@ -68,6 +68,9 @@ public class DemandServiceImpl implements DemandService{
 		params.put("num", num);
 		//查询所有满足条件的需求信息
 		List<Demand> list = demandMapper.queryDemandList(params);
+		
+		//把查询到的结果存到session中
+		request.getSession().setAttribute("demandList", demandMapper.queryDemandList(params));
 		//设置总页数
 		int queryDemandCount = demandMapper.queryDemandCount(params);
 		pageCondition.setTotalPage((int) Math.ceil(queryDemandCount*1.0 / pageCondition.getPageSize()));
@@ -75,6 +78,9 @@ public class DemandServiceImpl implements DemandService{
 		for (Demand demands : list) {
 			HSBCDept hsbcDept = hsbcDeptMapper.queryDemandHSBCSubDeptById(demands.getHsbcSubDeptId());
 			demands.setHsbcDept(hsbcDept);
+			if(hsbcDept.getHsbcSubDeptName()==null||"".equals(hsbcDept.getHsbcSubDeptName())) {
+				hsbcDept.setHsbcSubDeptName(hsbcDept.getHsbcDeptName());
+			}
 			 CSDept csDept=new CSDept();
 			 csDept=csDeptMapper.queryCSDeptById(demands.getCsSubDept());
 			 demands.setCsSubDept(csDept==null?"":csDept.getCsSubDeptName());

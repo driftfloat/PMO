@@ -7,7 +7,7 @@ import com.pmo.dashboard.entity.HSBCDept;
 public interface HSBCDeptService
 {
     List<HSBCDept> queryHSBCDeptName();
-    List<HSBCDept> queryHSBCDubDeptNameById(String hsbcSubDeptId);
+    List<HSBCDept> queryHSBCDubDeptNameById(String hsbcDeptName);
     HSBCDept queryHSBCSubDeptById(String hsbcProjectId);
     List<HSBCDept> queryHSBCSubDeptNameByDeptName(String hsbcDeptName);
     String queryHsbcSubDeptId(String str1,String str2);

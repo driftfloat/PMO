@@ -6,6 +6,7 @@ $(function(){
 	loadStatus();
 	loadHrPriority();
 	dateType();
+	dateType1();
 	loadCsSubDept();
 })
 
@@ -54,12 +55,18 @@ $("#hsbcDept").change(function(){
 })
 
 function loadCsSubDept(){
-	var url = path+'/json/cssubdept.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#csSubDept").append("<option>"+item.name+"</option>");
-	       })
-	});
+	$.ajax({
+		url:path+'/service/csDept/queryAllCSSubDept',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(list){
+			for(var i = 0;i<list.length;i++){
+				$("#csSubDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csSubDeptName+"</option>");
+			}
+		}
+	})
 }
 function addDemand(){
 	//var isvalid = false;
@@ -197,6 +204,26 @@ function dateType(){
 		format: 'yyyy-mm-dd',
 		pickerPosition: 'bottom-left',
 		showMeridian: 1
+	}).on('changeDate', function(ev){
+		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField', 'reqPublishedDate1Edit'); 
+	});
+}
+
+function dateType1(){
+	$('.form_datetime1').datetimepicker({
+		weekStart: 1,
+		minView:'month',
+		todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+		language:'zh-CN',
+		format: 'yyyy-mm-dd',
+		pickerPosition: 'bottom-left',
+		showMeridian: 1
+	}).on('changeDate', function(ev){
+		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField', 'plannedOnboardDate1'); 
 	});
 }
 

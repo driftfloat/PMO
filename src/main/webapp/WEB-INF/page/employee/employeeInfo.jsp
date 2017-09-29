@@ -103,7 +103,7 @@ var path='<%=path%>';
 										</div>
 										</div>
 										<div class="group">
-										<label class="col-lg-2 control-label">Dept</label>
+										<label class="col-lg-2 control-label">CSDept</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="csSubDept" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="csSubDept" data-bv-group=".group">
@@ -167,10 +167,10 @@ var path='<%=path%>';
 												<th>StaffId</th>
 												<th>ER</th>
 												<th>LOB</th>
-												<th>姓名</th>
+												<th>StaffName</th>
 												<th>LN</th>
-												<th>交付部</th>
-												<th>操作</th>
+												<th>CSDept</th>
+												<th>Operate</th>
 											</tr>
 										</thead>
 										

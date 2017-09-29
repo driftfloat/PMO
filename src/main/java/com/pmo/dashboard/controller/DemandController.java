@@ -136,8 +136,7 @@ public class DemandController {
 	            
 	        }
 		List<Demand> list = demandService.queryDemandList(demand,pageCondition,csBuName,request);
-		//把查询到的结果存到session中
-		request.getSession().setAttribute("demandList", list);
+		
 		Map<String,Object> result = new HashMap<String,Object>();
 		result.put("list", list);
 		result.put("csSubDept", demand.getCsSubDept());
@@ -394,6 +393,12 @@ public class DemandController {
 		List<Demand> list = (List<Demand>) request.getSession().getAttribute("demandList");
 		for (Demand demand : list) {
 			if(demand.getDemandId().equals(demandId)){
+				HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
+				
+				if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
+					hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
+				}
+				demand.setHsbcDept(hSBCDept);
 				model.addAttribute("demand", demand);
 				return "/demand/demandDetailEdit";
 			}
