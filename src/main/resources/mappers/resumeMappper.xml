@@ -53,26 +53,11 @@
 	
 
     <update id="upd" parameterType="com.pmo.dashboard.entity.Resume">
-	update t_candidate set candidate_name =
-	#{candidateName},CANDIDATE_AGE=#{age},CANDIDATE_SEX = #{gender},
-	TEL = #{tel},EDUCATION =#{education}, college = #{college},
-	MAJOR_STATUS=#{major},EXPERIENCE_YEARS=#{experience_years},
-	SKILL=#{skill},GRADUATE_DATE=#{graduate_date},ENGLISH_LEVEL=#{English_level},CANDIDATE_STATUS=#{candidate_status},
-	CREATE_DATE=#{create_date},SOURCE=#{source},
-	ROLE=#{role},enty_date=#{entry_date},EMAIL=#{email},EXPECTED_SALARY=#{expected_salary},REAL_SALARY=#{real_salary},
-	OLD_COMPANY=#{old_company},REMARK=#{remark},CREAT_USER=#{create_user},INTERVIEW_STATUS=#{interview_status}
+	update t_candidate set candidate_name =#{candidateName},RESUME_PATH=#{resume_path},CANDIDATE_AGE=#{age},CANDIDATE_SEX=#{gender},TEL=#{tel},EDUCATION=#{education}, COLLEGE=#{college},MAJOR_STATUS=#{major},EXPERIENCE_YEARS=#{experience_years},SKILL=#{skill},GRADUATE_DATE=#{graduate_date},ENGLISH_LEVEL=#{English_level},CANDIDATE_STATUS=#{candidate_status},CREATE_DATE=#{create_date},SOURCE=#{source},ROLE=#{role},ENTY_DATE=#{entry_date},EMAIL=#{email},EXPECTED_SALARY=#{expected_salary},REAL_SALARY=#{real_salary},OLD_COMPANY=#{old_company},REMARK=#{remark},INTERVIEW_STATUS=#{interview_status}
 
 	where CANDIDATE_ID=#{id}
 </update>
-	<!-- resume_path=#{resume_path},lock_person=#{hr}, UPDATE_DATE=#{update_date},ARRIVAL_DATE=#{arrival_date},-->
-	<!--  update t_candidate set candidate_name = #{candidateName}，age=#{age},gender = #{gender},
-	    	TEL = #{tel},EDUCATION =#{education}, college = #{college}, major=#{major},EXPERIENCE_YEARS=#{experience_years},
-	    	SKILL=#{skill},GRADUATE_DATE=#{graduate_date},ENGLISH_LEVEL=#{English_level},CANDIDATE_STATUS=#{candidate_status},
-	    	CREATE_DATE=#{create_date},SOURCE=#{source},
-	    	ROLE=#{role},enty_date=#{entry_date},EMAIL=#{email},EXPECTED_SALARY=#{expected_salary},REAL_SALARY=#{real_salary},
-	    	OLD_COMPANY=#{old_company},REMARK=#{remark},CREAT_USER=#{create_user},INTERVIEW_STATUS=#{interview_status}
-	    	
-	     where CANDIDATE_ID=#{id}    -->
+
 	 
 	
 </mapper>

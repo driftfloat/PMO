@@ -3,6 +3,8 @@ package com.pom.dashboard.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts.config.ActionConfig;
+
 import com.pmo.dashboard.entity.Resume;
 
 /**
@@ -25,5 +27,7 @@ public interface ResumeService {
 	Resume searchTel(String tel);
 	
 	public List<Resume> queryResumeInfoById(String canID);
+
+
 
 }

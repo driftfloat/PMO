@@ -40,6 +40,20 @@ $(document).ready(function() {
                  }
             },
 
+            reqPublishedDate1: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please entry date'
+                    },
+                    date : {  
+                        format : 'YYYY-MM-DD',  
+                        message : 'Time format is incorrect'  
+                    }
+
+                }
+            },
+            
+            
             jobCode: {
                 validators: {
                     notEmpty: {
@@ -47,6 +61,8 @@ $(document).ready(function() {
                     }
                 }
             },
+            
+            
             skill: {
                 validators: {
                     notEmpty: {
@@ -131,6 +147,18 @@ $(document).ready(function() {
     }) ;*/
 });
 
+//验证jobCode
+function jobCode(field,alerttxt){
+	with(field){
+		if(value==null || value=="" ||!value==jobCode){
+			alert(alerttxt);
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+}
 
 
 /*function login(e) {

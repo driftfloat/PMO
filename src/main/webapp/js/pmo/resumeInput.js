@@ -256,7 +256,6 @@ $.ajaxFileUpload({
           
           $("#resume_path").val(jsonOut.url)
           alert("上传成功！");
-            
            
         },
         error: function (data, status, e)//服务器响应失败处理函数

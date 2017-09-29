@@ -203,15 +203,15 @@ var path='<%=path%>';
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" disabled="disabled"
+												 <input class="form-control" type="text" readonly data-bv-group=".group"
 													id="reqPublishedDate1" name="reqPublishedDate1"> 
 													<span class="input-group-addon">
 														<span class="glyphicon glyphicon-th">
 														</span>
-													</span> 
+													</span>
 													<input type="hidden" id="reqPublishedDate2" name="reqPublishedDate2" />
 											</div>
-										</div>
+										</div> 
 										</div>
 										<div class="group">
 										<label class="col-lg-2 control-label">hrPriority</label>
