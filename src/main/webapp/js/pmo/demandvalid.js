@@ -118,17 +118,133 @@ $(document).ready(function() {
                 }
             }
         }
-    }) /*.on('success.form.bv', function(e) {
-        // Prevent submit form
-        e.preventDefault();
+    }) 
+    
+    //对编辑页面加校验
+    $('#recruitdemandFormEdit').bootstrapValidator({
+		message: 'This value is not valid',
 
-        var $form     = $(e.target);
-            validator = $form.data('bootstrapValidator');
-        if(validator){
-        	login(e.target);
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+        	rrEdit: {
+				validators: {
+                    notEmpty: {
+                        message: 'Please enter your rr'
+                    },
+                 }
+            },
+
+            jobCodeEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your jobCode'
+                    }
+                }
+            },
+            
+            requestorEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your requestor'
+                    }
+
+                }
+            },
+            ageingEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your ageing'
+                    }
+
+                }
+            },
+
+            profilesNoEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your profilesNo'
+                    }
+
+                }
+            },
+            interviewedNoEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your interviewedNo'
+                    }
+
+                }
+            },
+            proposedJoiningDateEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your proposedJoiningDate'
+                    }
+
+                }
+            },
+            sowSignedEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your sowSigned'
+                    }
+
+                }
+            },
+            bgvClearedEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your bgvCleared'
+                    }
+
+                }
+            },
+            reasonEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your reason'
+                    }
+
+                }
+            },
+            remarkEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your remark'
+                    }
+
+                }
+            },
+            doNumberEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your doNumber'
+                    }
+
+                }
+            },
+            reqPublishedDate1Edit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please Choose your Date'
+                    }
+
+                }
+            },
+            plannedOnboardDate1: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please Choose your Date'
+                    }
+
+                }
+            }
         }
-
-    }) ;*/
+    }) 
 });
 
 
