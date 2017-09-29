@@ -218,7 +218,8 @@ function loadDemandList(currPage){
 				}
 				var td6 = $("<td>"+result.list[i].status+"</td>");
 				var td7 = $("<td>"+result.list[i].csSubDept+"</td>");
-				var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick='demandDetail("+result.list[i].demandId+")'>DETAIL</a><a href=' ' class='btn btn-info btn-small' onclick='demandDetailUpdate("+result.list[i].demandId+")'>EDIT</a></td>");
+				var demandId = result.list[i].demandId;
+				var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick='demandDetail("+demandId+")'>DETAIL</a><a href=' ' class='btn btn-info btn-small' onclick='demandDetailUpdate("+demandId+")'>EDIT</a></td>");
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
@@ -296,6 +297,7 @@ function demandDetail(demandId){
 
 //add by jama
 function demandDetailUpdate(demandId){
+	alert(demandId);
 	$("#demandId").val(demandId);
 	var url = path+'/service/demand/demandDetailUpdate';
 	$("#detailForm").attr("action",url);

@@ -7,7 +7,7 @@ $(function(){
 	loadDepartmentEdit();
 	//loadSubDepartmentEdit();
 	
-	loadDemandListEdit();
+	//loadDemandListEdit();
 	$("#searchBtn").click(function(){
 		loadDemandListEdit();
 	})

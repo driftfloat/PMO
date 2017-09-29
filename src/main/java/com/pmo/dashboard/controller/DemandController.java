@@ -394,9 +394,10 @@ public class DemandController {
 		for (Demand demand : list) {
 			if(demand.getDemandId().equals(demandId)){
 				HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
-				
-				if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
-					hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
+				if(hSBCDept!=null) {
+					if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
+						hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
+					}
 				}
 				demand.setHsbcDept(hSBCDept);
 				model.addAttribute("demand", demand);
