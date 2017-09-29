@@ -90,8 +90,9 @@ public class Resume {
 
 	public Resume(String id, String candidateName, String age, String gender, String tel, String education,
 			String college, String major, String experience_years, String skill, String graduate_date,
-			String english_level, String candidate_status, String create_date, String source, String role,
-			String entry_date, String email, String expected_salary, String real_salary, String interview_status) {
+			String English_level, String candidate_status, String create_date, String source, String role,
+			String entry_date, String email, String expected_salary, String real_salary, String interview_status,String remark,
+			String old_company, String resume_path) {
 	
 		// TODO Auto-generated constructor stub
 		super();
@@ -106,7 +107,7 @@ public class Resume {
 		this.experience_years=experience_years;
 		this.skill=skill;
 		this.graduate_date=graduate_date;
-		this.English_level=english_level;
+		this.English_level=English_level;
 		this.candidate_status=candidate_status;
 		this.create_date=create_date;
 		this.source=source;
@@ -116,7 +117,9 @@ public class Resume {
 		this.expected_salary=expected_salary;
 		this.real_salary=real_salary;
 		this.interview_status=interview_status;
-		
+		this.remark=remark;
+		this.old_company=old_company;
+		this.resume_path=resume_path;
 	}
 	
 	
