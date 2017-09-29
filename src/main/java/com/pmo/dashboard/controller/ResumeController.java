@@ -1,5 +1,6 @@
 package com.pmo.dashboard.controller;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -98,11 +99,20 @@ public class ResumeController<updateResume> {
 		String expected_salary = request.getParameter("expected_salary");
 		String real_salary = request.getParameter("real_salary");
 		String interview_status = request.getParameter("interview_status");
+		String remark = request.getParameter("remark");
+		String old_company = request.getParameter("old_company");
 		
+		String oldPath =  resumeService.queryResumeInfoById(id).get(0).getResume_path();
+		File oldFile = new File(oldPath);
+		oldFile.delete();
+		System.out.println("旧文件删除成功！");
+		
+		
+		String resume_path = request.getParameter("resume_path");
 		Resume resume = new Resume(id,candidateName,age,gender,tel,education,
 				college,major,experience_years,skill,graduate_date,English_level,
 				candidate_status,create_date,source,role,entry_date,email,expected_salary,
-				real_salary,interview_status);
+				real_salary,interview_status, remark, old_company,resume_path);
 		boolean resultFlag = resumeService.upd(resume);
 		
 		return resultFlag;
