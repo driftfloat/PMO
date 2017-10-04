@@ -121,7 +121,7 @@ var userType='<%=userType%>'
 											</div>
 										</div>
 									</div>
-								<div class="form-group">
+								<%-- <div class="form-group">
 										<div class="group">
 											<label class="col-sm-2 control-label">RR</label>
 											<div class="col-sm-4">
@@ -136,7 +136,7 @@ var userType='<%=userType%>'
 													id="jobCodeEdit" />
 											</div>
 										</div>
-								</div>
+								</div> --%>
 								
 								<div class="form-group">
 								         <div class="group">
@@ -210,7 +210,7 @@ var userType='<%=userType%>'
 											</div>
 									    </div>
 								</div>
-								<div class="form-group">
+								<%-- <div class="form-group">
 								         <div class="group">
 											<label class="col-sm-2 control-label">No. of Profiles Sent to HSBC</label>
 											<div class="col-sm-4">
@@ -225,7 +225,7 @@ var userType='<%=userType%>'
 													id="interviewedNoEdit"/>
 											</div>
 										</div>
-								</div>
+								</div> --%>
 								<div class="form-group">
 								        <div class="group">
 											<label class="col-sm-2 control-label">Req published Date</label>
@@ -251,7 +251,7 @@ var userType='<%=userType%>'
 										</div>
 								
 								</div>
-								<div class="form-group">
+								<%-- <div class="form-group">
 								       <div class="group">
 										<label class="col-lg-2 control-label">HSBC Department</label>
 										<div class="col-lg-4">
@@ -272,7 +272,7 @@ var userType='<%=userType%>'
 											</select>
 										</div>
 										</div>
-								</div>
+								</div> --%>
 								<div class="form-group">
 								         <div class="group">
 											<label class="col-lg-2 control-label">HSBC Requestor</label>
@@ -308,7 +308,7 @@ var userType='<%=userType%>'
 											</div>
 										</div>
 								</div>
-								<div class="form-group" id="btype"style='display:none'>
+								<%-- <div class="form-group" id="btype"style='display:none'>
 								        <div class="group" id="bgvEdit" style='display:none'>
 											<label class="col-sm-2 control-label">BGV Cleared</label>
 											<div class="col-sm-4">
@@ -323,8 +323,15 @@ var userType='<%=userType%>'
 													id="doNumberEdit"/>
 											</div>
 										</div>
-								</div>
+								</div> --%>
 								<div class="form-group"id="ctype" style='display:none'>
+								      <div class="group" id="contract" style='display:none'>
+											<label class="col-sm-2 control-label">Contract Reference</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="doNumberEdit" value="${demand.doNumber }"
+													id="doNumberEdit"/>
+											</div>
+										</div>
 								       <div class="group" id="reasonAbort" style='display:none'>
 											<label class="col-sm-2 control-label">Reason for Abort</label>
 											<div class="col-sm-4">
@@ -419,7 +426,7 @@ var userType='<%=userType%>'
 	<script src="<%=path %>/js/charisma.js"></script>
 
     <%-- <script type="text/javascript" src="<%=path %>/js/pmo/loadHSBCDept.js"></script>  --%>
-	<script type="text/javascript" src="<%=path %>/js/pmo/recruitdemanda.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/recruitdemandafixedprice.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/pmo/demandvalid.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>

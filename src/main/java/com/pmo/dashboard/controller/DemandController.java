@@ -459,7 +459,7 @@ public class DemandController {
 	 * @return
 	 */
 	@RequestMapping("/demandDetailUpdate")
-	public String demandDetailUpdate(String demandId,Model model,HttpServletRequest request){
+	public String demandDetailUpdate(String demandId,Model model,HttpServletRequest request,String engagementType){
 		List<Demand> list = (List<Demand>) request.getSession().getAttribute("demandList");
 		for (Demand demand : list) {
 			if(demand.getDemandId().equals(demandId)){
@@ -471,7 +471,14 @@ public class DemandController {
 				}
 				demand.setHsbcDept(hSBCDept);
 				model.addAttribute("demand", demand);
-				return "/demand/demandDetailEdit";
+				if("1".equals(engagementType)){
+					return "/demand/demandDetailEditFixedprice";
+				}else if("2".equals(engagementType)){
+					return "/demand/demandDetailEditSupport";
+				}else{
+					return "/demand/demandDetailEdit";
+				}
+				
 			}
 		}
 		return "/demand/demandDetailEdit";
