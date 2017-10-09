@@ -6,7 +6,7 @@ $(function(){
 	loadSkill();
 	loadBillingEntity();
 	loadBillingCurrency();
-	loadResourceStatus();
+  //loadResourceStatus();
 	loadCSDept();
 	loadStaffRegion();
 	loadStaffLocation();
@@ -15,8 +15,14 @@ $(function(){
 	dateType();
 	dateType0();
 	dateType1();
-	dateType2();
+  //dateType2();
+	
 })
+
+	$("#staffRegion").change(function(){
+		var staffRegion = $("#staffRegion").val();
+		$("#staffLocation").val(regionMap.get(staffRegion));
+	});
 
 
 function addEmployee(){
@@ -46,15 +52,13 @@ function addEmployee(){
 		var skill = $('#skill').val();
 		var billingCurrency = $('#billingCurrency').val();
 		var billRate = $('#billRate').val();
-		var resourceStatus = $('#resourceStatus').val();
-		var terminatedDate = $('#terminatedDate1').val();
 		var terminationReason = $('#terminationReason').val();
 		
 
 		$.ajax({
 			url:path+'/service/employee/addEmployee',
 			dataType:"json",
-			data:{"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate},
+			data:{"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":'Active',"terminatedDate":''},
 			async:true,
 			cache:false,
 			type:"post",
@@ -135,23 +139,23 @@ function dateType1(){
 	});
 }
 
-function dateType2(){
-	$('.form_datetime2').datetimepicker({
-		weekStart: 1,
-		minView:'month',
-		todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-		language:'zh-CN',
-		format: 'yyyy-mm-dd',
-		pickerPosition: 'bottom-left',
-		showMeridian: 1
-	}).on('changeDate', function(ev){		 
-		 $('#registerEmployeeForm').bootstrapValidator('revalidateField', 'terminatedDate1'); 
-	});
-}
+//function dateType2(){
+//	$('.form_datetime2').datetimepicker({
+//		weekStart: 1,
+//		minView:'month',
+//		todayBtn:  1,
+//		autoclose: 1,
+//		todayHighlight: 1,
+//		startView: 2,
+//		forceParse: 0,
+//		language:'zh-CN',
+//		format: 'yyyy-mm-dd',
+//		pickerPosition: 'bottom-left',
+//		showMeridian: 1
+//	}).on('changeDate', function(ev){		 
+//		 $('#registerEmployeeForm').bootstrapValidator('revalidateField', 'terminatedDate1'); 
+//	});
+//}
 
 function loadOnshoreOrOffshore(){
 	var url = path+'/json/onshoreOrOffshore.json'
@@ -183,13 +187,13 @@ function loadStaffLocation(){
 }
 
 
-
-
+var regionMap = new Map();
 function loadStaffRegion(){
 	var url = path+'/json/staffRegion.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
 	    	   $("#staffRegion").append("<option>"+item.name+"</option>");
+	    	   regionMap.set(item.name,item.key);
 	       })
 	});
 }

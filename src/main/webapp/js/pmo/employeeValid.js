@@ -134,7 +134,7 @@ $(document).ready(function() {
 
                 }
             },
-            terminatedDate1: {
+            /*terminatedDate1: {
                 validators: {
                     notEmpty: {
                         message: 'Please select Date'
@@ -145,7 +145,7 @@ $(document).ready(function() {
                     }
 
                 }
-            },
+            },*/
             billRate: {
                 validators: {
                     notEmpty: {

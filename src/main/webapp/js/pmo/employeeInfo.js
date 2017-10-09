@@ -70,7 +70,10 @@ $('#exportExcel').bind("click", function(){
 	
 });
 
+function selectAll(){
 
+	$("input[type='checkbox']").attr("checked",'true');
+}
 
 function exportCondition(){
 	var lb = $("label input");
