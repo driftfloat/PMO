@@ -27,7 +27,6 @@ $(function(){
 
 function addEmployee(){
 	var bootstrapValidator = $("#registerEmployeeForm").data('bootstrapValidator');
-	debugger
 	bootstrapValidator.validate();
 	if(bootstrapValidator.isValid()){
 		var eHr = $('#eHr').val();
