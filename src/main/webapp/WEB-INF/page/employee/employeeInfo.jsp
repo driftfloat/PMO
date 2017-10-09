@@ -270,6 +270,8 @@ var path='<%=path%>';
 							</tbody>
 						</table>
 						<div class="center">
+							<a class="btn btn-success" href="#" onClick="selectAll()"> 全选
+							</a> 
 							<a class="btn btn-success" href="#" onClick="exportCondition()"> <i
 								class="glyphicon glyphicon-ok icon-white" ></i> 确定
 							</a> <a class="btn btn-info" href="#" data-dismiss="modal"> <i

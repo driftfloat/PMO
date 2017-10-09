@@ -333,12 +333,12 @@ var path='<%=path%>';
 											<label class="col-sm-2 control-label">Bill Rate</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="billRate"
-													id="billRate" />
+													id="billRate" data-bv-group=".group"/>
 											</div>
 										</div>
 								</div>
 								
-								<div class="form-group">
+								<!-- <div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Resource Status</label>
 										<div class="col-lg-4">
@@ -361,7 +361,7 @@ var path='<%=path%>';
 											</div>
 										</div>
 									    </div>
-								</div>
+								</div> -->
 								
 								
 								
