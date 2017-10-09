@@ -49,10 +49,12 @@ public class DemandServiceImpl implements DemandService{
 	@Override
 	public List<Demand> queryDemandList(Demand demand,PageCondition pageCondition,String csBuName,HttpServletRequest request) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		if(StringUtils.isNotBlank(demand.getHsbcDept().getHsbcDeptName()) || StringUtils.isNotBlank(demand.getHsbcDept().getHsbcSubDeptName())){
-			//查询满足条件的所有部门id
-			List<String> hsbcSubDeptIdList = hsbcDeptMapper.queryHSBCSubDeptId(demand);
-			params.put("hsbcSubDeptIdList", hsbcSubDeptIdList);
+		if(demand.getHsbcDept()!=null) {
+			if(StringUtils.isNotBlank(demand.getHsbcDept().getHsbcDeptName()) || StringUtils.isNotBlank(demand.getHsbcDept().getHsbcSubDeptName())){
+				//查询满足条件的所有部门id
+				List<String> hsbcSubDeptIdList = hsbcDeptMapper.queryHSBCSubDeptId(demand);
+				params.put("hsbcSubDeptIdList", hsbcSubDeptIdList);
+			}
 		}
 		if(StringUtils.isNotBlank(csBuName)){
 			//查询满足事业部的所有交付部
@@ -78,8 +80,12 @@ public class DemandServiceImpl implements DemandService{
 		for (Demand demands : list) {
 			HSBCDept hsbcDept = hsbcDeptMapper.queryDemandHSBCSubDeptById(demands.getHsbcSubDeptId());
 			demands.setHsbcDept(hsbcDept);
-			if(hsbcDept.getHsbcSubDeptName()==null||"".equals(hsbcDept.getHsbcSubDeptName())) {
-				hsbcDept.setHsbcSubDeptName(hsbcDept.getHsbcDeptName());
+			if(hsbcDept!=null) {
+				if(hsbcDept.getHsbcSubDeptName()==null||"".equals(hsbcDept.getHsbcSubDeptName())) {
+					hsbcDept.setHsbcSubDeptName(hsbcDept.getHsbcDeptName());
+				}
+			}else {
+				demands.setHsbcDept(new HSBCDept());
 			}
 			 CSDept csDept=new CSDept();
 			 csDept=csDeptMapper.queryCSDeptById(demands.getCsSubDept());
