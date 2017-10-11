@@ -10,6 +10,17 @@ $(function(){
 	
 })
 
+function loadResourceStatus(){
+	var url = path+'/json/resourceStatus.json'
+	$.getJSON(url,  function(data) {
+		   $("#resourceStatus").empty();
+		   $("#resourceStatus").append("<option value=''>--Option--</option>");
+	       $.each(data, function(i, item) {
+	    	   $("#resourceStatus").append("<option>"+item.name+"</option>");
+	       })
+	});
+}
+
 
 $("#csDept").change(function(){
 	$("#exportExcel").attr("disabled", true);
@@ -119,6 +130,8 @@ function loadCSSubDept(result){
 		cache:false,
 		type:"post",
 		success:function(list){
+			$("#csSubDept").empty();
+			$("#csSubDept").append("<option value=''>--Option--</option>");
 			for(var i = 0;i<list.length;i++){
 				$("#csSubDept").append("<option>"+list[i].csSubDeptName+"</option>");
 			}
@@ -142,6 +155,8 @@ function loadCSBu(result){
 	var userType = result.user.user_type;
 	var url = path+'/json/csBuName.json'
 	$.getJSON(url,  function(data) {
+		   $("#csBu").empty();
+		   $("#csBu").append("<option value=''>--Option--</option>");
 	       $.each(data, function(i, item) {
 	    	   $("#csBu").append("<option>"+item.name+"</option>");
 	       })
@@ -170,6 +185,10 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 	var eHr = $("#eHr").val();
 	
 	var lob = $("#lob").val();
+	
+	var resourceStatus = $("#resourceStatus").val();
+	
+	var staffName = $("#staffName").val();
 
 	var pageState = pageState;
 	
@@ -177,7 +196,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 		url:path+"/service/employeeInfo/queryEmployeeList",
 		dataType:"json",
 		async:true,
-		data:{"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob},
+		data:{"staffName":staffName,"resourceStatus":resourceStatus,"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob},
 		cache:false,
 		type:"post",
 		success:function(result){
@@ -212,12 +231,15 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 				var td6 = $("<td>"
 						+ result.data[i].csSubDeptName
 						+ "</td>");
+				var td7 = $("<td>"
+						+ result.data[i].resourceStatus
+						+ "</td>");
 				//var td7 = $("<td><a class='btn btn-info' href='javascript:void(0);'> <i class='glyphicon glyphicon-edit icon-white'></i> 编辑</a></td>");
-				var td7 = null;
+				var td8 = null;
 				if(userType=='5' || userType=='6'){
-					td7 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>DETAIL</a></td>");
+					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>DETAIL</a></td>");
 				}else{
-					td7 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"')>EDIT</a>" +
+					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"')>EDIT</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>DETAIL</a></td>");
 				}
 				td1.appendTo(tr);
@@ -227,6 +249,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 				td5.appendTo(tr);
 				td6.appendTo(tr);
 				td7.appendTo(tr);
+				td8.appendTo(tr);
 			}
 			$("#employeeList").append("</tbdoy>");
 			//alert(window.location.href);
@@ -246,7 +269,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 			
 			
 			
-			
+			loadResourceStatus();
 			
 			loadCSSubDept(result);
 			

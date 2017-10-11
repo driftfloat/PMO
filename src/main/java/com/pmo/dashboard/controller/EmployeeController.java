@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -418,13 +417,20 @@ public class EmployeeController {
                    }
                    
                    if(conditionList.contains("HSBC Dept")){
-                       Label label= new Label(++j, i, hsbcDept.getHsbcDeptName());
+                       Label label = null;
+                       if(hsbcDept == null){
+                           label= new Label(++j, i, "");
+                       }else{
+                           label= new Label(++j, i, hsbcDept.getHsbcDeptName());
+                       }
                        ws.addCell(label);
                    }
                    
                    if(conditionList.contains("HSBC Sub Dept")){
                        Label label = null;
-                       if(hsbcDept.getHsbcSubDeptName() == null || ("").equals(hsbcDept.getHsbcSubDeptName())){
+                       if(hsbcDept == null){
+                           label= new Label(++j, i, "");
+                       }else if(hsbcDept.getHsbcSubDeptName() == null || ("").equals(hsbcDept.getHsbcSubDeptName())){
                            label= new Label(++j, i, hsbcDept.getHsbcDeptName());
                        }else{
                            label= new Label(++j, i, hsbcDept.getHsbcSubDeptName());
@@ -468,17 +474,33 @@ public class EmployeeController {
                    }
                    
                    if(conditionList.contains("Experience on HSBC account in Months")){
-                       Label label= new Label(++j, i, Utils.caculateMonth(listE.get(i-1).getHsbcDOJ())+"");
+                       Label label = null; 
+                       if(listE.get(i-1).getHsbcDOJ() == null){
+                           label= new Label(++j, i, "");
+                       }else{
+                           label= new Label(++j, i, Utils.caculateMonth(listE.get(i-1).getHsbcDOJ())+"");
+                       }
                        ws.addCell(label);
                    }
                    
                    if(conditionList.contains("Graduation Date")){
-                       Label label= new Label(++j, i, listE.get(i-1).getGraduationDate());
+                       Label label = null;
+                       if(listE.get(i-1).getGraduationDate() == null){
+                           label= new Label(++j, i, "");
+                       }else{
+                           label= new Label(++j, i, listE.get(i-1).getGraduationDate());
+                       }
                        ws.addCell(label);
                    }
                    
                    if(conditionList.contains("Total Experience in Months")){
-                       Label label= new Label(++j, i, Utils.caculateMonth(listE.get(i-1).getGraduationDate())+"");
+                       Label label = null;
+                       if(listE.get(i-1).getGraduationDate() == null){
+                           label= new Label(++j, i, "");
+                       }else{
+                           label= new Label(++j, i, Utils.caculateMonth(listE.get(i-1).getGraduationDate())+"");
+                       }
+                       
                        ws.addCell(label);
                    }
                    
@@ -540,6 +562,9 @@ public class EmployeeController {
                wwb.close();
                
                String filename = "GSV Engagement Dashboard_"+date+".xls";
+               
+               //fileName = URLEncoder.encode(filename,"UTF-8");
+               //fileName = fileName.replace("+", " ");
 
                // 以流的形式下载文件。
                InputStream fis = new BufferedInputStream(new FileInputStream(fileName));
@@ -549,7 +574,7 @@ public class EmployeeController {
                // 清空response
                response.reset();
                // 设置response的Header
-               response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(filename,"UTF-8"));
+               response.addHeader("Content-Disposition", "attachment;filename=" + filename);
                //response.setContentType("application/octet-stream");
                response.setContentType("application/vnd.ms-excel");
                response.addHeader("Content-Length", "" + file.length());

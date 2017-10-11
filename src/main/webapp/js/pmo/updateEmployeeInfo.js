@@ -106,8 +106,6 @@ function updateEmployee(){
 	}else{
 		return;
 	}
-	
-	
 }
 
 
@@ -339,6 +337,8 @@ function loadPersonHsbcDept(employee){
 }
 
 
+
+
 function loadDept(employee,hsbcDept){
 	$.ajax({
 		url:path+'/service/hsbcDept/queryDeptName',
@@ -380,7 +380,7 @@ function loadHSBCSubDept(employee){
 				$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
 			}else{
 				$("#hsbcSubDept").find("option").remove(); 
-				$("#hsbcSubDept").append("<option value=''>-- 请选择子交付部 --</option>");
+				$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
 				for(var i = 0;i<list.length;i++){
 					$("#hsbcSubDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcSubDeptName+"</option>");
 				}
@@ -407,6 +407,26 @@ function loadTerminationReason(employee){
 
 
 $("#hsbcDept").change(function(){
-	loadHSBCSubDept();
+	var hsbcSubDeptId = $("#hsbcDept").val();
+	$.ajax({
+		url:path+'/service/hsbcDept/querySubDeptName',
+		dataType:"json",
+		async:true,
+		data:{"hsbcSubDeptId":hsbcSubDeptId},
+		cache:false,
+		type:"post",
+		success:function(list){
+			$("#hsbcSubDept").find("option").remove(); 
+			if(list.length == 1 && list[0].hsbcSubDeptName == null){
+				$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
+			}else{
+				$("#hsbcSubDept").find("option").remove(); 
+				$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
+				for(var i = 0;i<list.length;i++){
+					$("#hsbcSubDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcSubDeptName+"</option>");
+				}
+			}
+		}
+	})
 })
 

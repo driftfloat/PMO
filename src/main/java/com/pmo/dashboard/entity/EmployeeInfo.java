@@ -10,6 +10,7 @@ public class EmployeeInfo
     private String csDeptName;
     private String csSubDeptName;
     private String lob;
+    private String resourceStatus;
     
     
     public String getEmployeeId()
@@ -76,6 +77,14 @@ public class EmployeeInfo
     {
         this.lob = lob;
     }
+    public String getResourceStatus()
+    {
+        return resourceStatus;
+    }
+    public void setResourceStatus(String resourceStatus)
+    {
+        this.resourceStatus = resourceStatus;
+    }
     public EmployeeInfo()
     {
         super();
@@ -95,5 +104,22 @@ public class EmployeeInfo
         this.csSubDeptName = csSubDeptName;
         this.lob = lob;
     }
+    public EmployeeInfo(String employeeId, String hsbcStaffId, String eHr,
+            String staffName, String ln, String csDeptName,
+            String csSubDeptName, String lob, String resourceStatus)
+    {
+        super();
+        this.employeeId = employeeId;
+        this.hsbcStaffId = hsbcStaffId;
+        this.eHr = eHr;
+        this.staffName = staffName;
+        this.ln = ln;
+        this.csDeptName = csDeptName;
+        this.csSubDeptName = csSubDeptName;
+        this.lob = lob;
+        this.resourceStatus = resourceStatus;
+    }
+    
+    
     
 }

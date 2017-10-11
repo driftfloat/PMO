@@ -10,10 +10,11 @@
 		<result property="csSubDeptName" column="CS_SUBDEPT_NAME" javaType="String" />
 		<result property="hsbcStaffId" column="HSBC_STAFF_ID" javaType="String" />
 		<result property="lob" column="LOB" javaType="String" />
+		<result property="resourceStatus" column="RESOURCE_STATUS" javaType="String" />
 	</resultMap>
 	
 	<select id="queryEmployeeList" parameterType="com.pmo.dashboard.entity.EmployeePageCondition" resultMap="employeeInfoMap" >
-	    SELECT e.EMPLOYEE_ID,e.HSBC_STAFF_ID,e.E_HR,e.LOB,e.STAFF_NAME,e.LN,d.CS_SUBDEPT_NAME
+	    SELECT e.EMPLOYEE_ID,e.HSBC_STAFF_ID,e.E_HR,e.LOB,e.STAFF_NAME,e.LN,d.CS_SUBDEPT_NAME,e.RESOURCE_STATUS
         FROM t_employee AS e
         LEFT JOIN t_cs_dept AS d
         ON e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID
@@ -36,6 +37,12 @@
 			</if>
 			<if test="csbuName != null and csbuName != ''">
 				AND d.CS_BU_NAME = #{csbuName}
+			</if>
+			<if test="resourceStatus != null and resourceStatus != ''">
+				AND e.RESOURCE_STATUS = #{resourceStatus}
+			</if>
+			<if test="staffName != null and staffName != ''">
+				AND e.STAFF_NAME = #{staffName}
 			</if>
 		
         LIMIT #{currentPage},10;
@@ -65,6 +72,12 @@
 			</if>
 			<if test="csbuName != null and csbuName != ''">
 				AND d.CS_BU_NAME = #{csbuName}
+			</if>
+			<if test="resourceStatus != null and resourceStatus != ''">
+				AND e.RESOURCE_STATUS = #{resourceStatus}
+			</if>
+			<if test="staffName != null and staffName != ''">
+				AND e.STAFF_NAME = #{staffName}
 			</if>
 		
 	</select>

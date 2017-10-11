@@ -103,7 +103,7 @@ var path='<%=path%>';
 										</div>
 										</div>
 										<div class="group">
-										<label class="col-lg-2 control-label">CSDept</label>
+										<label class="col-lg-2 control-label">DU</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="csSubDept" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="csSubDept" data-bv-group=".group">
@@ -137,8 +137,25 @@ var path='<%=path%>';
 													id="eHr" />
 											</div>
 										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">Staff Name</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="staffName"
+													id="staffName" />
+											</div>
+										</div>
 										</br></br></br>
 										
+										<div class="group">
+										<label class="col-lg-2 control-label">Status</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="resourceStatus" data-bv-notempty
+												data-bv-notempty-message="please select  resourceStatus" id="resourceStatus" data-bv-group=".group">
+												<option value="">--Option--</option>
+											</select>
+										</div>
+										</div>
+										</br></br></br>
 										
 										<div class="form-group">
 									    <div style="text-align:center;width:50%;float:left">
@@ -148,7 +165,7 @@ var path='<%=path%>';
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
 									    </div>
 									    <div style="text-align:center;width:50%;float:right">
-									    <input type="reset" value="导出Excel" disabled="disabled"
+									    <input type="button" value="导出Excel" disabled="disabled"
 										name="exportExcel" id="exportExcel" href="#"
 										class="button btn btn-primary" data-dismiss="modal"
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
@@ -169,7 +186,8 @@ var path='<%=path%>';
 												<th>LOB</th>
 												<th>StaffName</th>
 												<th>LN</th>
-												<th>CSDept</th>
+												<th>DU</th>
+												<th>Status</th>
 												<th>Operate</th>
 											</tr>
 										</thead>

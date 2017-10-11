@@ -8,6 +8,8 @@ public class EmployeePageCondition extends PageCondition
     private String csDeptName;
     private String csSubDeptName;
     private String lob;
+    private String resourceStatus;
+    private String staffName;
     public String getHsbcStaffId()
     {
         return hsbcStaffId;
@@ -56,6 +58,22 @@ public class EmployeePageCondition extends PageCondition
     {
         this.lob = lob;
     }
+    public String getResourceStatus()
+    {
+        return resourceStatus;
+    }
+    public void setResourceStatus(String resourceStatus)
+    {
+        this.resourceStatus = resourceStatus;
+    }
+    public String getStaffName()
+    {
+        return staffName;
+    }
+    public void setStaffName(String staffName)
+    {
+        this.staffName = staffName;
+    }
     public EmployeePageCondition()
     {
         super();
@@ -78,5 +96,20 @@ public class EmployeePageCondition extends PageCondition
         this.csSubDeptName = csSubDeptName;
         this.lob = lob;
     }
+    public EmployeePageCondition(String hsbcStaffId, String eHr,
+            String csbuName, String csDeptName, String csSubDeptName,
+            String lob, String resourceStatus, String staffName)
+    {
+        super();
+        this.hsbcStaffId = hsbcStaffId;
+        this.eHr = eHr;
+        this.csbuName = csbuName;
+        this.csDeptName = csDeptName;
+        this.csSubDeptName = csSubDeptName;
+        this.lob = lob;
+        this.resourceStatus = resourceStatus;
+        this.staffName = staffName;
+    }
+    
     
 }
