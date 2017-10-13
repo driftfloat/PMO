@@ -480,6 +480,7 @@ function demandDetailUpdate(demandId){
 function updateDemand(){
 	var bootstrapValidator = $("#recruitdemandFormEdit").data('bootstrapValidator');
 	   bootstrapValidator.validate();
+	   alert("dafdsfdsfds");
 	if(bootstrapValidator.isValid()){
 		var demandId=$('#demandIdEdit').val();
 		var rr=$('#rrEdit').val();
@@ -522,7 +523,6 @@ function updateDemand(){
 		//var completionDay=$('#completionDay').val();
 		//var completionDate=$('#completionDate').val();
 		//var onboardDate=$('#onboardDate').val();
-		
 		$.ajax({
 			url:path+'/service/demand/updateDemand',
 			dataType:"json",

@@ -119,6 +119,14 @@ public class DemandController {
 	public Object demandQuery(String csBuName,Demand demand,PageCondition pageCondition,HttpServletRequest request){
 		if("".equals(pageCondition.getCurrPage()) || pageCondition.getCurrPage() == null){
 			pageCondition.setCurrPage(1);
+			request.getSession().setAttribute("demandCondition", demand);
+			request.getSession().setAttribute("demandBUCondition", csBuName);
+		}
+		
+		
+		if(!("".equals(pageCondition.getCurrPage()) || pageCondition.getCurrPage() == null)){
+			csBuName = (String) request.getSession().getAttribute("demandBUCondition");
+			demand = (Demand) request.getSession().getAttribute("demandCondition");
 		}
 		//String csBuName = request.getParameter("csBuName");
 		  User user = (User) request.getSession().getAttribute("loginUser");

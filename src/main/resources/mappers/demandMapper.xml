@@ -73,16 +73,92 @@
 	</sql>
 	
 	<select id="queryDemandList" parameterType="java.util.HashMap" resultMap="demandMap">
-		select * 
-		from  t_demand
-		<include refid="queryWhere"/>
+		select *
+		from  t_demand a,t_cs_dept b 
+		<where>
+		    b.cs_subdept_id=a.cs_subdept
+			<if test="demand.skill!=null and demand.skill!=''">
+				and a.SKILL = #{demand.skill}
+			</if>
+			<if test="demand.position!=null and demand.position!=''">
+				and a.position = #{demand.position}
+			</if>
+			<if test="demand.status!=null and demand.status!=''">
+				and a.status = #{demand.status}
+			</if>
+			<if test="demand.rr!=null and demand.rr!=''">
+				and a.rr = #{demand.rr}
+			</if>
+			<if test="csBuName!=null and csBuName!=''">
+				and B.CS_BU_NAME = #{csBuName}
+			</if>
+			 <choose>
+				<when test="demand.csSubDept!=null and demand.csSubDept!=''">
+					and a.CS_SUBDEPT = #{demand.csSubDept}
+				</when>
+				<otherwise>
+					<!-- <if test="csBuName!=null and csBuName!=''">
+						and B.CS_BU_NAME=
+						<foreach item="item" collection="csSubDeptList" open="(" separator="," close=")">
+							#{item.csSubDeptName}
+						</foreach>
+					</if> -->
+				</otherwise>
+			</choose>
+			<if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
+				and HSBC_SUBDEPT_ID in 
+				<foreach item="item" collection="hsbcSubDeptIdList" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
 		limit #{num}, #{pageCondition.pageSize}
 	</select>
 	
 	<select id="queryDemandCount" parameterType="java.util.HashMap" resultType="int">
-		select count(1) 
-		from  t_demand
-		<include refid="queryWhere"/>
+		select count(1)
+		from  t_demand a,t_cs_dept b 
+		<where>
+		    b.cs_subdept_id=a.cs_subdept
+			<if test="demand.skill!=null and demand.skill!=''">
+				and a.SKILL = #{demand.skill}
+			</if>
+			<if test="demand.position!=null and demand.position!=''">
+				and a.position = #{demand.position}
+			</if>
+			<if test="demand.status!=null and demand.status!=''">
+				and a.status = #{demand.status}
+			</if>
+			<if test="demand.rr!=null and demand.rr!=''">
+				and a.rr = #{demand.rr}
+			</if>
+			<if test="csBuName!=null and csBuName!=''">
+				and b.CS_BU_NAME = #{csBuName}
+			</if>
+			<if test="demand.csSubDept!=null and demand.csSubDept!=''">
+			    and a.CS_SUBDEPT = #{demand.csSubDept}
+			</if>
+			 <!-- <choose>
+				<when test="demand.csSubDept!=null and demand.csSubDept!=''">
+					and a.CS_SUBDEPT = #{csSubDept}
+				</when>
+				<otherwise> -->
+					<!-- <if test="csBuName!=null and csBuName!=''">
+						and B.CS_BU_NAME=
+						<foreach item="item" collection="csSubDeptList" open="(" separator="," close=")">
+							#{item.csSubDeptName}
+						</foreach>
+					</if> -->
+			<!-- 	</otherwise>
+			</choose> -->
+			<if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
+				and HSBC_SUBDEPT_ID in 
+				<foreach item="item" collection="hsbcSubDeptIdList" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+		
 	</select>
 	
 	<select id="queryAllDemand" parameterType="java.util.HashMap" resultMap="demandMap">

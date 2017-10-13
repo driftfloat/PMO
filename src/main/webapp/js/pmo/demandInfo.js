@@ -92,7 +92,7 @@ function loadCSBu(result){
 }
 
 /*加载交付部*/
-/*function loadScSubDeptName(){
+function loadScSubDeptName(){
 	$("#csBuName").change(function(){
 		var csBuName = $("#csBuName").val();
 		$("#scSubDeptName").empty();
@@ -112,7 +112,7 @@ function loadCSBu(result){
 		})
 	})
 }
-*/
+
 function loadCSSubDept(result){
 	var userType = result.user.user_type;
 	$.ajax({
@@ -184,8 +184,8 @@ function loadDemandList(currPage){
 	var sub_department= $("#sub_department").val();
 	var status= $("#status").val();
 	var rr= $("#rr").val();
-	var csBuName = $("#csBu").val();
-	var csSubDept = $("#scSubDept").val();
+	var csBuName = $("#csBuName").val();
+	var csSubDept = $("#csSubDept").val();
 	//$("#demandList").empty();
 	$("#demandList  tr:not(:first)").html("");
 	$.ajax({
@@ -219,7 +219,7 @@ function loadDemandList(currPage){
 				var td6 = $("<td>"+result.list[i].status+"</td>");
 				var td7 = $("<td>"+result.list[i].csSubDept+"</td>");
 				var demandId = result.list[i].demandId;
-				var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick='demandDetail("+demandId+")'>DETAIL</a><a href=' ' class='btn btn-info btn-small' onclick='demandDetailUpdate("+demandId+")'>EDIT</a></td>");
+				var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"')>DETAIL</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate('"+demandId+"')>EDIT</a></td>");
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
@@ -297,9 +297,24 @@ function demandDetail(demandId){
 
 //add by jama
 function demandDetailUpdate(demandId){
-	alert(demandId);
 	$("#demandId").val(demandId);
 	var url = path+'/service/demand/demandDetailUpdate';
 	$("#detailForm").attr("action",url);
 	$("#detailForm").submit();
 }
+
+
+/*function demandDetailUpdate(){
+	var demandId = "1";
+	$.ajax({
+		url:path+'/service/demand/demandDetailUpdate ',
+		dataType:"json",
+		async:false,
+		data:{"demandId":demandId},
+		cache:false,
+		type:"post",
+		success:function(data){
+			alert("success");
+		}
+	})
+}*/
