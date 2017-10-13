@@ -4,13 +4,9 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -39,11 +35,7 @@ import com.pom.dashboard.service.DemandService;
 import com.pom.dashboard.service.HSBCDeptService;
 
 import jxl.Workbook;
-import jxl.format.Alignment;
-import jxl.format.Border;
-import jxl.format.BorderLineStyle;
 import jxl.write.Label;
-import jxl.write.WritableCellFormat;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
@@ -216,11 +208,21 @@ public class DemandController {
 					ws.addCell(lab);
 				}
 				if(condition.indexOf("Department")!= -1){
-					Label lab = new Label(j++, i+1, demandList.get(i).getHsbcDept().getHsbcDeptName());
+				    Label lab = null;
+				    if(demandList.get(i).getHsbcDept() == null){
+				        lab = new Label(j++, i+1, "");
+				    }else{
+				        lab = new Label(j++, i+1, demandList.get(i).getHsbcDept().getHsbcDeptName());
+				    }
 					ws.addCell(lab);
 				}
 				if(condition.indexOf("Sub - Department")!= -1){
-					Label lab = new Label(j++, i+1, demandList.get(i).getHsbcDept().getHsbcSubDeptName());
+				    Label lab = null;
+                    if(demandList.get(i).getHsbcDept() == null){
+                        lab = new Label(j++, i+1, "");
+                    }else{
+                        lab = new Label(j++, i+1, demandList.get(i).getHsbcDept().getHsbcSubDeptName());
+                    }
 					ws.addCell(lab);
 				}
 				if(condition.indexOf("Location")!= -1){
@@ -312,7 +314,7 @@ public class DemandController {
             // 清空response
             response.reset();
             // 设置response的Header
-            response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(filename,"UTF-8"));
+            response.addHeader("Content-Disposition", "attachment;filename=" +filename);
             //response.setContentType("application/octet-stream");
             response.setContentType("application/vnd.ms-excel");
             response.addHeader("Content-Length", "" + file.length());

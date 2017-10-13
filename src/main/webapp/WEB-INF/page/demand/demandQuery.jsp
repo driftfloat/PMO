@@ -91,7 +91,7 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" name="csBuName" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="csBuName" data-bv-group=".group">
-												<option value="">-- select--</option>
+												<option value="">--Option--</option>
 											</select>
 										</div>
 										</div>
@@ -100,7 +100,7 @@ var path='<%=path%>';
 											<div class="col-sm-4">
 												<select class="form-control" name="csSubDept" data-bv-notempty
 													data-bv-notempty-message="请选择角色" id="csSubDept" data-bv-group=".group">
-													<option value="">-- select--</option>
+													<option value="">--Option--</option>
 												</select>
 											</div>
 										</div>
@@ -110,7 +110,7 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" name="skill" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="skill" data-bv-group=".group">
-												<option value="">-- select--</option>
+												<option value="">--Option--</option>
 											</select>
 										</div>
 										</div>
@@ -119,7 +119,7 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" name="position" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="position" data-bv-group=".group">
-												<option value="">-- select--</option>
+												<option value="">--Option--</option>
 											</select>
 										</div>
 										</div>
@@ -129,7 +129,7 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" name="hsbcDept.hsbcDeptName" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="department" data-bv-group=".group">
-												<option value="">-- select--</option>
+												<option value="">--Option--</option>
 											</select>
 										</div>
 										</div>
@@ -138,7 +138,7 @@ var path='<%=path%>';
 											<div class="col-sm-4">
 												<select class="form-control" name="hsbcDept.hsbcSubDeptName" data-bv-notempty
 													data-bv-notempty-message="请选择角色" id="sub_department" data-bv-group=".group">
-													<option value="">-- select--</option>
+													<option value="">--Option--</option>
 												</select>
 											</div>
 										</div>
@@ -151,7 +151,7 @@ var path='<%=path%>';
 											<div class="col-sm-4">
 												<select class="form-control" name="status" data-bv-notempty
 													data-bv-notempty-message="请选择角色" id="status" data-bv-group=".group">
-													<option value="">-- select--</option>
+													<option value="">--Option--</option>
 												</select>
 											</div>
 										</div>
@@ -288,6 +288,8 @@ var path='<%=path%>';
 							</tbody>
 						</table>
 						<div class="center">
+						<a class="btn btn-success" href="#" onClick="selectAll()"> 全选
+							</a>
 							<a class="btn btn-success" href="#" onClick="exportCondition()"> <i
 								class="glyphicon glyphicon-ok icon-white" ></i> 确定
 							</a> <a class="btn btn-info" href="#" data-dismiss="modal"> <i

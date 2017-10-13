@@ -238,7 +238,7 @@ function loadSkill(){
 
 
 function loadRole(){
-	var url = path+'/json/msaRole.json'
+	var url = path+'/json/role.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
 	    	   $("#role").append("<option>"+item.name+"</option>");
@@ -337,7 +337,7 @@ $("#hsbcDept").change(function(){
 //			if(list.length == 1 && list[0].hsbcSubDeptName == null){
 //				$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
 //			}else{
-			$("#hsbcSubDept").append("<option value=''>-- 请选择子交付部 --</option>");
+			$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
 			if(list.length == 1 && list[0].hsbcSubDeptName == null){
 				$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
 			}else{

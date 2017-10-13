@@ -270,7 +270,7 @@ function loadSource(){
 
 
 function loadRole(employee){
-	var url = path+'/json/msaRole.json'
+	var url = path+'/json/role.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
 	    	   $("#role").append("<option>"+item.name+"</option>");

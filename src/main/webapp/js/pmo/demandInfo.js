@@ -57,6 +57,14 @@ function loadPosition(){
 		})
 	})
 }
+
+/*导出Excel全选*/
+function selectAll(){
+
+	$("input[type='checkbox']").attr("checked",'true');
+}
+
+
 /*加载status本地json信息*/
 function loadDemandStatus(){
 	var url = path+'/json/demandStatus.json';
@@ -198,10 +206,11 @@ function loadDemandList(currPage){
 			"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept},
 		success:function(result){
 			//alert(result.list.length);
+			var userType = result.user.user_type;
 			if(result.list.length > 0){
 				$("#exportExcel").removeAttr("disabled");
 			}else{
-				$("#demandList").append("<tr><td colspan='7' style='text-align:center'>暂无数据！</td></tr>");
+				$("#demandList").append("<tr><td colspan='8' style='text-align:center'>暂无数据！</td></tr>");
 			}
 			//$.each(reslut, function(i,data){
 			for (var i = 0; i < result.list.length; i++) {
@@ -209,17 +218,32 @@ function loadDemandList(currPage){
 				var td1 = $("<td>"+result.list[i].rr+"</td>");
 				var td2 = $("<td>"+result.list[i].skill+"</td>");
 				var td3 = $("<td>"+result.list[i].position+"</td>");
-				if(result.list[i].hsbcDept == null){
+				/*if(result.list[i].hsbcDept == null){
 					var td4 = $("<td></td>");
 					var td5 = $("<td></td>");
 				}else{
 					var td4 = $("<td>"+result.list[i].hsbcDept.hsbcDeptName+"</td>");
 					var td5 = $("<td>"+result.list[i].hsbcDept.hsbcSubDeptName+"</td>");
+				}*/
+				if(result.list[i].hsbcDept.hsbcDeptName == null){
+					var td4 = $("<td></td>");
+				}else{
+					var td4 = $("<td>"+result.list[i].hsbcDept.hsbcDeptName+"</td>");
+				}
+				if(result.list[i].hsbcDept.hsbcSubDeptName == null){
+					var td5 = $("<td></td>");
+				}else{
+					var td5 = $("<td>"+result.list[i].hsbcDept.hsbcSubDeptName+"</td>");
 				}
 				var td6 = $("<td>"+result.list[i].status+"</td>");
 				var td7 = $("<td>"+result.list[i].csSubDept+"</td>");
 				var demandId = result.list[i].demandId;
-				var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"')>DETAIL</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate('"+demandId+"')>EDIT</a></td>");
+				if(userType=='5' || userType=='6'){
+					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"')>DETAIL</a></td>");
+				}else{
+					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"')>DETAIL</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate('"+demandId+"')>EDIT</a></td>");
+				}
+				
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
