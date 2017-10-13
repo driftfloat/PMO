@@ -86,7 +86,25 @@ var path='<%=path%>';
 							<div id="demandInfo" class="box-content">
 							    
 							    <form id="demandForm" method="post" class="form-horizontal">
-									
+									    <div class="group">
+										<label class="col-lg-2 control-label">BU</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="csBuName" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="csBuName" data-bv-group=".group">
+												<option value="">-- select--</option>
+											</select>
+										</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">DU</label>
+											<div class="col-sm-4">
+												<select class="form-control" name="csSubDept" data-bv-notempty
+													data-bv-notempty-message="请选择角色" id="csSubDept" data-bv-group=".group">
+													<option value="">-- select--</option>
+												</select>
+											</div>
+										</div>
+										<br><br><br>
 										<div class="group">
 										<label class="col-lg-2 control-label">Tech/Skill</label>
 										<div class="col-lg-4">
@@ -146,25 +164,6 @@ var path='<%=path%>';
 										</div>
 										</br></br></br>
 										
-										<div class="group">
-										<label class="col-lg-2 control-label">BU</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="csBuName" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="csBuName" data-bv-group=".group">
-												<option value="">-- select--</option>
-											</select>
-										</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">CsDept</label>
-											<div class="col-sm-4">
-												<select class="form-control" name="csSubDept" data-bv-notempty
-													data-bv-notempty-message="请选择角色" id="csSubDept" data-bv-group=".group">
-													<option value="">-- select--</option>
-												</select>
-											</div>
-										</div>
-										<br><br><br>
 										
 										<div class="form-group">
 									    <div style="text-align:center;width:50%;float:left">

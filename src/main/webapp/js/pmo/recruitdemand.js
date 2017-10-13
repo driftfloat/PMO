@@ -48,7 +48,13 @@ $("#hsbcDept").change(function(){
 			$("#hsbcSubDept").find("option").remove(); 
 			$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
 			for(var i = 0;i<list.length;i++){
-				$("#hsbcSubDept").append("<option value='"+list[i].hsbcSubDeptName+"'>"+list[i].hsbcSubDeptName+"</option>");
+				if(list.length == 1 && list[0].hsbcSubDeptName == null){
+					$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
+				}else{
+					for(var i = 0;i<list.length;i++){
+						$("#hsbcSubDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcSubDeptName+"</option>");
+					}
+				}
 			}
 		}
 	})
