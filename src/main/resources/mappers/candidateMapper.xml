@@ -213,7 +213,7 @@
         	t_demand d 
         ON a.CANDIDATE_ID = d.CANDIDATE_ID 
         WHERE 
-			a.LOCK_PERSION=#{lockPerson} and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','delay','Onboard')
+			 CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','delay','Onboard')
         	<include refid="candidateWherePart"/>
 		ORDER BY d.STATUS,CANDIDATE_STATUS,INTERVIEW_STATUS,c.CS_SUBDEPT_NAME,MAJOR_STATUS,CANDIDATE_ID 
         LIMIT #{currentPage},#{pageDataCount};
@@ -225,7 +225,7 @@
         	t_candidate a 
         INNER JOIN 
         	t_demand d 
-        ON a.CANDIDATE_ID = d.CANDIDATE_ID 
+        ON a.CANDIDATE_ID  = d.CANDIDATE_ID 
         WHERE 
 			a.LOCK_PERSION=#{lockPerson} and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','delay','Onboard')
         	<include refid="candidateWherePart"/>
@@ -311,7 +311,7 @@
 	</select>
 	
 	<select id="getInterviewRecordByCandId" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
-		SELECT a.NICKNAME,b.*,ci.FEEDBACK,ci.FATHER_INTERVIEW_ID,ci.INTERVIEW_SERIAL,
+		SELECT a.NICKNAME,ci.FEEDBACK,ci.FATHER_INTERVIEW_ID,ci.INTERVIEW_SERIAL,
 			ci.INTERVIEW_DATE,dept.CS_SUBDEPT_NAME,ci.INTERVIEW_STATUS
 			FROM t_user a 
 			JOIN t_candidate_interview ci ON ci.INTERVIEWER_ID = a.USER_ID
@@ -322,7 +322,7 @@
 	</select>
 	
 	<update id="updateInterviewStatusById" parameterType="java.util.HashMap">
-		update t_candidate set INTERVIEW_STATUS = #{interviewStatus}
+		update t_candidate set INTERVIEW_STATUS = #{interviewStatus},CANDIDATE_STATUS = '1'
 		where CANDIDATE_ID = #{candidateId}
 	</update>
 	

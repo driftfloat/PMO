@@ -40,7 +40,7 @@
 	    values
 	    (#{id},#{candidateName},#{age},#{gender},#{tel},#{education},#{college},#{major},#{experience_years},#{skill},#{graduate_date},#{English_level},
 	    #{candidate_status},#{resume_path},#{hr},#{create_date},#{update_date},#{source},#{role},#{entry_date},#{email},
-	    #{expected_salary},#{real_salary},#{arrival_date},#{old_company},#{remark},#{create_user},#{interview_status})
+	    #{expected_salary},#{real_salary},#{arrival_date},#{old_company},#{remark},#{create_user},'0')
 	</insert>      
 	
 	<select id="selectTel" parameterType="String" resultType="com.pmo.dashboard.entity.Resume">

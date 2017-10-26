@@ -123,6 +123,8 @@ function loadResume(){
 			$('#create_user').val(resume.createUser);
 			$('#interview_status').val(resume.interviewStatus);
 			$('#resume_path').val(resume.resume_path);
+			
+			$('#source').val(resume.source);
 			 
 			
 			loadRole();
@@ -152,7 +154,7 @@ function loadResume(){
 				var url = path+'/json/source2.json'
 				$.getJSON(url,  function(data) {
 				       $.each(data, function(i, item) {
-				    	   $("#source").append("<option value='"+item.key+"' >"+item.name+"</option>");
+				    	   $("#source").append("<option >"+item.name+"</option>");
 				       })
 				       $('#source').val(resume.source);
 				});

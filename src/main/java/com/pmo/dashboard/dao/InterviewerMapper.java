@@ -3,6 +3,7 @@ package com.pmo.dashboard.dao;
 import java.util.List;
 import java.util.Map;
 import com.pmo.dashboard.entity.Interviewer;
+import com.pmo.dashboard.entity.User;
 
 public interface InterviewerMapper
 {
@@ -15,4 +16,5 @@ public interface InterviewerMapper
 	public int insertInterviewerToUser(Interviewer interviewer);
 	public int update(Interviewer interviewer);
 	public Interviewer select(String employeeId);
+	public User selectUser(String employeeId);
 }

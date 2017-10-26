@@ -282,20 +282,7 @@ var path='<%=path%>';
 											</div>
 										</div>
 									</div>
-									<div class="group">
-										<div class="group">
-											<label class="col-sm-2 control-label">Real Salary</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="real_salary"
-													id="real_salary" />
-											</div>
-										</div>
-									</div>
-								</div>
-								<br/><br/>
 								
-								
-								<div class="form-group">
 									<div class="group">
 										<div class="group">
 											<label class="col-sm-2 control-label">Remark</label>

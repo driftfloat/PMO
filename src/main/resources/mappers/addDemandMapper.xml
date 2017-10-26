@@ -44,15 +44,15 @@
 		<!-- 查询需求 -->
 	<select id="queryDemand"  parameterType="String"   resultMap="demandMap">
 	     SELECT c.* from t_demand c 
-	    WHERE c.status ='OfferMade' and c.CANDIDATE_ID is null 
+	    WHERE c.status ='OPEN' and c.CANDIDATE_ID is null 
 	</select>
 	<!-- 更改模态窗口对应需求 -->
 	<update id="updateDemand" parameterType="com.pmo.dashboard.entity.AddDemand">
-	    UPDATE t_demand set CANDIDATE_ID = #{candidateId}  where DEMAND_ID = #{demandId};
+	    UPDATE t_demand set CANDIDATE_ID = #{candidateId},STATUS = 'OfferMade' where DEMAND_ID = #{demandId};
 	</update>
 	<!-- 变更之后要变更之前的需求为null -->
 	 <update id="updateDemandAfter" parameterType="com.pmo.dashboard.entity.AddDemand">
-	   UPDATE t_demand  set CANDIDATE_ID = null  where DEMAND_ID = #{demandId} 
+	   UPDATE t_demand  set CANDIDATE_ID = null,STATUS = 'Open'  where DEMAND_ID = #{demandId} 
 	</update>
 	
 	<update id="modifyDemand" parameterType="com.pmo.dashboard.entity.AddDemand" >

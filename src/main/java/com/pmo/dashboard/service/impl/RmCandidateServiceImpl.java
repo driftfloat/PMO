@@ -89,6 +89,7 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 		candidateInterview.setFatherInterviewId(newCandidateInterview.getFatherInterviewId());
 		int newSerial = Integer.valueOf(newCandidateInterview.getInterviewSerial())+1;
 		//设置面试轮次加一
+		
 		candidateInterview.setInterviewSerial(String.valueOf(newSerial));
 		interviewMapper.addInterview(candidateInterview);
 		//候选人表interviewStatus=2 表示面试中

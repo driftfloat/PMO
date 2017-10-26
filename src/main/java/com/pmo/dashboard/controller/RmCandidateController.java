@@ -59,7 +59,7 @@ public class RmCandidateController {
 		}
 		User user = (User)request.getSession().getAttribute("loginUser");
 		//表示已推送的候选人状态
-		String status = "1";
+		String status = "0";
 		List<CandidatePush> candidatelist = new ArrayList<CandidatePush>();
 		if(user != null){
 			candidatelist = rmCandidateService.queryPushedCandidate(user.getCsDeptId(),status,pageCondition);

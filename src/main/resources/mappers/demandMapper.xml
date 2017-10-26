@@ -168,13 +168,13 @@
 	</select>
 	
 	<select id="queryOfferDemandList" parameterType="com.pmo.dashboard.entity.CandidatePush" resultMap="demandMap">
-		select *
-		from t_demand
-		where CS_SUBDEPT = #{csDept.csSubDeptName}
+		select a.*
+		from t_demand a,t_cs_dept b
+		where b.cs_subdept_id=a.CS_SUBDEPT and b.cs_subdept_name= #{csDept.csSubDeptName} and a.status='OPEN'
 	</select>
 	
 	<update id="updateCandidateIdById" parameterType="java.util.HashMap">
-		update t_demand set CANDIDATE_ID = #{candidateId}
+		update t_demand set CANDIDATE_ID = #{candidateId}, STATUS = 'OfferMade'
 		where DEMAND_ID = #{demandId}
 	</update>
 	

@@ -51,19 +51,19 @@ function loadMyCandidate(currPage){
 				if(!status){
 					var td13 = $("<td><div class='btn-group btn-group-sm' style='width: 380px;'>" +
 							"<ul >" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-primary' onclick='scheduleInterview(this.id)'>新一轮面试</a></li>&nbsp;" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-primary disabled' onclick='nextInterview(this.id)'>下一次面试</a></li>&nbsp;" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-primary' onclick='interviewBack(this.id)'>退回</a></li>&nbsp;" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-primary disabled'  onclick='offerInterview(this.id)'>offer</a></li></div>"+
+							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small' onclick='scheduleInterview(this.id)'>New Turn</a></li>&nbsp;" +
+							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small ' onclick='nextInterview(this.id)'>Next Interview</a></li>&nbsp;" +
+							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small' onclick='interviewBack(this.id)'>Back</a></li>&nbsp;" +
+							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small '  onclick='offerInterview(this.id)'>Offer</a></li></div>"+
 					"</ul></td>");
 				}else{
 					$("#addInterviewer").removeAttr("disabled");
 					var td13 = $("<td><div class='btn-group btn-group-sm' style='width: 380px;'>" +
 							"<ul >" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-primary disabled' onclick='scheduleInterview(this.id)'>新一轮面试</a></li>&nbsp;" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-primary' onclick='nextInterview(this.id)'>下一次面试</a></li>&nbsp;" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-primary' onclick='interviewBack(this.id)'>退回</a></li>&nbsp;" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-primary' onclick='offerInterview(this.id)'>offer</a></li></div>"+
+							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small ' onclick='scheduleInterview(this.id)'>New Turn</a></li>&nbsp;" +
+							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small' onclick='nextInterview(this.id)'>Next Interview</a></li>&nbsp;" +
+							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small' onclick='interviewBack(this.id)'>Back</a></li>&nbsp;" +
+							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small' onclick='offerInterview(this.id)'>Offer</a></li></div>"+
 					"</ul></td>");
 				}
 							

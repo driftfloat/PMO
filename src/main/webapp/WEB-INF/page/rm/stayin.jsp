@@ -144,7 +144,6 @@ var path='<%=path%>';
 										class="table table-striped table-bordered">
 										<thead>
 											<tr>
-												<th>CANDIDATE ID</th>
 												<th>CANDIDATE NAME</th>
 												<th>SEX</th>
 												<th>AGE</th>
