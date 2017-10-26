@@ -126,8 +126,7 @@ function loadStayinList(pageState)
 				tr.appendTo(tbody);
 				$("<td><a href='javascript:void(0);'" +
 						"onclick=viewCandidataInfo('"+result.data[i].candidateId+"')>" +
-						result.data[i].candidateId+"</a></td>").appendTo(tr);
-				$("<td>"+ result.data[i].candidateName+ "</td>").appendTo(tr);
+						 result.data[i].candidateName+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].candidateSex+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].candidateAge+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].candidateTel+ "</td>").appendTo(tr);

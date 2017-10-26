@@ -47,13 +47,13 @@
 	          and CS_SUBDEPT_ID = #{interviewer.csSubDeptId}
 	      </if>
 	      <if test="interviewer.experienceYearas!=null and interviewer.experienceYearas!=''"> 
-	          and GRADUATION_DATE = #{interviewer.experienceYearas}
+	          and (SUBSTR(SYSDATE(),1,4)-SUBSTR(GRADUATION_DATE,1,4))   = #{interviewer.experienceYearas}
 	      </if>
 	   </where>
 	 </sql>
 	
 	  <select id="queryInterviewerList" parameterType="java.util.HashMap" resultMap="interviewerMap">
-	      select * from t_employee
+	      select * ,(SUBSTR(SYSDATE(),1,4)-SUBSTR(GRADUATION_DATE,1,4))  experienceYearas  from t_employee
 	      <include refid="queryWhere"></include>
 	      limit #{num}, #{interviewer.pageSize} 
 	  </select>
@@ -73,5 +73,9 @@
 	  </insert>
 	  <select id="select" parameterType="String" resultType="com.pmo.dashboard.entity.Interviewer">
 	    select STAFF_NAME as staffName,E_HR as ehr,CS_SUBDEPT_ID as csSubDeptId from t_employee where EMPLOYEE_ID = #{employeeId}
+	  </select>
+	  
+	   <select id="selectUser" parameterType="String" resultType="com.pmo.dashboard.entity.User">
+	    select * from t_user where USER_ID = #{employeeId}
 	  </select>
 </mapper>

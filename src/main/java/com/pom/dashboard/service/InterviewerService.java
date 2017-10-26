@@ -3,6 +3,7 @@ package com.pom.dashboard.service;
 import java.util.List;
 import java.util.Map;
 import com.pmo.dashboard.entity.Interviewer;
+import com.pmo.dashboard.entity.User;
 
 public interface InterviewerService
 {
@@ -14,4 +15,5 @@ public interface InterviewerService
 	public boolean insertInterviewerToUser(Interviewer interviewer);
 	public boolean update(Interviewer interviewer);
 	public Interviewer selectInterviewer(String employeeId);
+	public User selectUser(String employeeId);
 }

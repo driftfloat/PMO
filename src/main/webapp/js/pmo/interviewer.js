@@ -95,7 +95,7 @@ function quXiao(employeeId,status)
 			data:{"employeeId":employeeId,"status":status},
 			success:function(resultFlag){
 				
-				if(interviewer){
+				if(resultFlag){
 					
 					$("html,body").animate({scrollTop:0}, 500);
 					$('#successAlert').html('面试官取消成功').show();
@@ -141,6 +141,13 @@ function loadInterviewerList(currPage){
 			//$.each(reslut, function(i,data){
 			for (var i = 0; i < result.list.length; i++) {
 				var tr = $("<tr></tr>");
+				var status=result.list[i].status;
+				if(status=='1'){
+					status='是';
+				}else{
+					status='否';
+				}
+					
 				$("<td>"+result.list[i].ehr+"</td>"+
 				"<td>"+result.list[i].lob+"</td>"+
 				"<td>"+result.list[i].employeeId+"</td>"+
@@ -148,8 +155,9 @@ function loadInterviewerList(currPage){
 				"<td>"+result.list[i].skill+"</td>"+
 				"<td>"+result.list[i].staffRegion+"</td>"+
 				"<td>"+result.list[i].experienceYearas+"</td>"+
-				"<td>"+result.list[i].status+"</td>").appendTo(tr);
-				if(result.list[i].status == '0' || result.list[i].status == null){
+				"<td>"+status+"</td>").appendTo(tr);
+				if(status == '否' || status == null){
+					
 					$("<td><a href='javascript:void(0);' class='btn btn-primary' " +
 							"onclick=renDing('"+result.list[i].employeeId+"','"+result.list[i].status+"')>认定</a>" +
 						"</td>").appendTo(tr);

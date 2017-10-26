@@ -75,7 +75,7 @@
 
 	
 	<sql id="candidateWherePart">
-		CANDIDATE_STATUS != 5 
+		a.CANDIDATE_STATUS != 5 
 		<if test="candidateName != null and candidateName != ''">
 			AND a.CANDIDATE_NAME = #{candidateName}
 		</if>

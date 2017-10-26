@@ -98,9 +98,4 @@ $(".nav-pills").delegate("li","click",function(e){
 	}
 });
 
-//function tabData(num){
-//	for(var j=1;j<=length;j++){
-//		$('#'+('interviewInfoList'+j)).hide();
-//	}
-//	$('#'+('interviewInfoList'+num)).show();
-//}
+

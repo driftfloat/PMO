@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmo.dashboard.entity.Interviewer;
 import com.pmo.dashboard.entity.PageCondition;
+import com.pmo.dashboard.entity.User;
 import com.pom.dashboard.service.InterviewerService;
 
 @Controller
@@ -79,8 +80,14 @@ public class InterviewerController
     		
     		Interviewer interviewers = interviewerService.selectInterviewer(employeeId);
     		interviewers.setEmployeeId(employeeId);
+    		boolean flag2=true;
+    		User user = interviewerService.selectUser(employeeId);
+    		if("".equals(user)||user==null){
+    		 flag2 = interviewerService.insertInterviewerToUser(interviewers);
+    		}
     		
-    		boolean flag2 = interviewerService.insertInterviewerToUser(interviewers);
+    		
+    		
     		
     		boolean flag = flag1 & flag2;
     		return flag;

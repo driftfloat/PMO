@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import com.pmo.dashboard.dao.InterviewerMapper;
 import com.pmo.dashboard.entity.Interviewer;
+import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
 import com.pom.dashboard.service.InterviewerService;
 
@@ -86,9 +87,14 @@ public class InterviewerServiceImpl implements InterviewerService
 
 	@Override
 	public Interviewer selectInterviewer(String employeeId) {
-		// TODO Auto-generated method stub
 		Interviewer interviewer = interviewerMapper.select(employeeId);
 		return interviewer;
+	}
+
+	@Override
+	public User selectUser(String employeeId) {
+		User user =interviewerMapper.selectUser(employeeId);
+		return user;
 	}
     
      

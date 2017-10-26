@@ -48,7 +48,7 @@ function loadCandidateList(pageState) {
 						$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' "
 								+"onclick=interviewRecord('"
 								+result.data[i].candidateId
-								+"')>面试记录</a></td>").appendTo(tr);
+								+"')>InterviewRecord</a></td>").appendTo(tr);
 					}
 					$("#candidateList").append("</tbdoy>");
 					currentPage = parseInt(result.pageInfo.currentPage);
