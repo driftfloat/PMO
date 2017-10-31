@@ -5,6 +5,16 @@ import java.util.Date;
 public class HrFeedback extends PageCondition
 {
 	private String candidateId;
+	private String candidateNameId;
+	public String getCandidateNameId() {
+		return candidateNameId;
+	}
+	public void setCandidateNameId(String candidateNameId) {
+		this.candidateNameId = candidateNameId;
+	}
+	public void setHrFeedBack(String hrFeedBack) {
+		this.hrFeedBack = hrFeedBack;
+	}
 	private String candidateName;
 	private String candidateAge;
 	private String candidateSex;

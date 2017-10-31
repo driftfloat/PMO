@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -217,6 +218,10 @@ public class ResumeController<updateResume> {
 			int year = (int) Math.floor(cha/ 1000 / 60 / 60 / 24/ 30 /12);
 			// 设置工作年限
 			resume.setExperience_years(String.valueOf(year));
+			
+			String url=(String) session.getAttribute("url");
+			MultipartFile file=(MultipartFile) session.getAttribute("file");
+			file.transferTo(new File(url));
 			
 		try{
 			//调用service层  执行保存操作

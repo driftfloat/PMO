@@ -1,5 +1,7 @@
 package com.pmo.dashboard.controller;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,6 +28,7 @@ public class HrFeedbackController
     	hrFeedback.setFeedbackId(Utils.getUUID());
     	hrFeedback.setCandidateId(candidateId);
     	hrFeedback.setHrFeedback(hrFeedBack);
+    	hrFeedback.setFeedbacktime(new Date());
 		
 		boolean result=hrFeedbackservice.updateCandidateInfo(hrFeedback);
 		if(result){

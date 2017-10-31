@@ -36,7 +36,7 @@ public class UploadController {
 		String originalFileName = file.getOriginalFilename();
 		//System.out.println(originalFileName);
 		//获取唯一文件名
-		String fileName = UUID.randomUUID().toString().replaceAll("-", "")+"_"+originalFileName;
+		String fileName = UUID.randomUUID().toString().replaceAll("-", "")+".pdf";
 		
 		
 		
@@ -47,14 +47,15 @@ public class UploadController {
 		//String url = request.getSession().getServletContext().getRealPath("")+path;
 		
 		File subFile = new File(Constants.RESUME_PATH);
+		request.getSession().setAttribute("url", url);
 		 //判断文件路径是否存在
 		if(!subFile.exists()){
 			 //文件路径不存在时，创建保存文件所需要的路径
 			subFile.mkdirs();
 		}
 
-		
-		file.transferTo(new File(url));
+		request.getSession().setAttribute("file", file);
+		//file.transferTo(new File(url));
 
 		
 		JSONObject jsonObject = new JSONObject();

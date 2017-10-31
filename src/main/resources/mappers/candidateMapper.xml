@@ -187,7 +187,7 @@
 	    update t_candidate_push set PUSH_STATUS = #{pushStatus} WHERE CANDIDATE_ID = #{candidateId} and PUSH_USER_ID = #{pushUserId}; 
 	</update>
 	<update id="updateCandidateStatus" parameterType="com.pmo.dashboard.entity.CandidateInfo">
-	    update t_candidate set CANDIDATE_STATUS = #{candidateStatus} WHERE CANDIDATE_ID = #{candidateId}; 
+	    update t_candidate set CANDIDATE_STATUS = #{candidateStatus},LOCK_PERSION=''  WHERE CANDIDATE_ID = #{candidateId}; 
 	</update>
 	<select id="queryMyWaitEntryCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
 		SELECT 
