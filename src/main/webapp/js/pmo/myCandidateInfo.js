@@ -332,11 +332,11 @@ function loadCandidateList(pageState)
 								"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=pushCandidateToDept('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>PUSH</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"<a href='javascript:void(0);' class='btn btn-info btn-small'  " +
 								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>STATUS</a>" +
-							"<a href=' ' class='btn btn-info btn-small' " +
+								"<a href='javascript:void(0); ' class='btn btn-info btn-small' disabled " +
 								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
 						"</td>").appendTo(tr);
 					}
@@ -346,9 +346,9 @@ function loadCandidateList(pageState)
 								"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=backCandidateToDept('"+result.data[i].candidateId+"')>BACK</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' disabled " +
 								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>STATUS</a>" +
-							"<a href=' ' class='btn btn-info btn-small' " +
+							"<a href='javascript:void(0); ' class='btn btn-info btn-small' " +
 								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
@@ -360,7 +360,7 @@ function loadCandidateList(pageState)
 								"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +					
 								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>STATUS</a>" +
-							"<a href=' ' class='btn btn-info btn-small' " +
+							"<a href='javascript:void(0); ' class='btn btn-info btn-small' " +
 								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +

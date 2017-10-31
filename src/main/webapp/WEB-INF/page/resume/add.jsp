@@ -165,7 +165,7 @@ var path='<%=path%>';
 										<label class="col-sm-2 control-label">Graduate Date</label>
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
-												data-link-field="dt_set_order_time_input">
+												data-link-field="dt_set_order_time_input" >
 												<input class="form-control" type="text" 
 													id="GRADUATE_DATE1" name="GRADUATE_DATE1"/> <span
 													class="input-group-addon" data-bv-notempty-message="请输入日期"><span

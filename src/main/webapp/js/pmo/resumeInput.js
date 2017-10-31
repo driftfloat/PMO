@@ -83,6 +83,25 @@ $(document).ready(function() {
                       
                   }
               },
+              
+              college: {
+                  group: '.group',
+  				validators: {
+                      notEmpty: {
+                          message: '请输入毕业院校名称'
+                      },
+                      regexp: {
+                          regexp: /^([\u4E00-\u9FA5])*$/,
+
+                          message: '请输入中文字符'
+
+                      },
+                      stringLength: {
+                          max: 25,
+                          message: '请输入25字以内的中文名'
+                      }
+                  }
+              },
               major: {
           		group: '.group',
           		validators: {
@@ -175,12 +194,23 @@ $(document).ready(function() {
                     
                  }
              },
+             
              resume_path: {
          		group: '.group',
          		validators: {
                      notEmpty: {
                          message: '简历未上传'
                      },
+                 }
+             },
+             
+             entry_date: {
+                 group: '.group',
+ 				validators: {
+                     stringLength: {
+                         max: 25,
+                         message: '请输入25字以内的入职日期'
+                     }
                  }
              },
              expected_salary: {
@@ -202,6 +232,43 @@ $(document).ready(function() {
             	 }
              },
              
+             remark: {
+                 group: '.group',
+ 				validators: {
+                     notEmpty: {
+                         message: '请输入中文'
+                     },
+                     regexp: {
+                         regexp: /^([\u4E00-\u9FA5])*$/,
+
+                         message: '请输入中文字符'
+
+                     },
+                     stringLength: {
+                         max: 200,
+                         message: '请输入200字以内的备注'
+                     }
+                 }
+             },
+             old_company: {
+                 group: '.group',
+ 				validators: {
+                     notEmpty: {
+                         message: '请输入中文名'
+                     },
+                     regexp: {
+                         regexp: /^([\u4E00-\u9FA5])*$/,
+
+                         message: '请输入中文字符'
+
+                     },
+                     stringLength: {
+                         max: 25,
+                         message: '请输入25字以内的中文名'
+                     }
+                 }
+             },
+             
         }
     }).on('success.form.bv', function(e) {
         // Prevent submit form
@@ -217,17 +284,19 @@ $(document).ready(function() {
 });
 
 $(function () {
+	dateType();
     $("#upload").click(function () {
         ajaxFileUpload();
     })
-    dateType();
 })
+
 
 function dateType(){
 	$('.form_datetime').datetimepicker({
+		endDate:new Date(),
 		weekStart: 1,
 		minView:'month',
-		todayBtn:  1,
+		todayBtn:  2,
 		autoclose: 1,
 		todayHighlight: 1,
 		startView: 2,
@@ -242,29 +311,44 @@ function dateType(){
 
  function ajaxFileUpload()
 {
-	if($("#uploadId").val()==''){
+	 var uploadId = $("#uploadId").val();
+	if(uploadId==''){
+		alert("请选择上传文件！");
 		return;
+	}else{
+		var fileType=uploadId.slice(-3);
+		if(fileType=='pdf'|fileType=='PDF'){
+			$.ajaxFileUpload({
+		        url:path+'/service/uploadFile.html',//用于文件上传的服务器端请求地址
+		        secureuri:false ,//一般设置为false
+		        fileElementId:'uploadId',//文件上传控件的id属性  <input type="file" id="upload" name="upload" />
+		        dataType: 'text',//返回值类型 一般设置为json
+		        catch:false,
+		        success: function (data)  //服务器成功响应处理函数
+		        {
+		          var jsonOut = eval('('+data+')');
+		          
+		          $("#resume_path").val(jsonOut.url)
+		          alert("上传成功！");
+		           
+		        },
+		        error: function (data, status, e)//服务器响应失败处理函数
+		        {
+		            alert(e);
+		        }
+		    });
+			
+		}else{
+			alert("请上传pdf格式的简历！");
+		}
 	}
-$.ajaxFileUpload({
-        url:path+'/service/uploadFile.html',//用于文件上传的服务器端请求地址
-        secureuri:false ,//一般设置为false
-        fileElementId:'uploadId',//文件上传控件的id属性  <input type="file" id="upload" name="upload" />
-        dataType: 'text',//返回值类型 一般设置为json
-        success: function (data)  //服务器成功响应处理函数
-        {
-          var jsonOut = eval('('+data+')');
-          
-          $("#resume_path").val(jsonOut.url)
-          alert("上传成功！");
-           
-        },
-        error: function (data, status, e)//服务器响应失败处理函数
-        {
-            alert(e);
-        }
-    });
+	
+
 return false;
 }
+
+ 
+ 
 
 function addCandidate(){
 	if($("#resume_path").val()==''){
@@ -330,7 +414,7 @@ function addCandidate(){
 				setTimeout(function () {
 					$('#successAlert').hide();
 				}, 4000);
-				window.location.href=path+"/service/resume/input.html";
+				/*window.location.href=path+"/service/resume/input.html";*/
 			}else{
 				alert("录入失败！！！")
 			}

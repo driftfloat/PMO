@@ -3,7 +3,6 @@ function feedbackCandidateInfo(candidateId,candidateName){
 	$("#hrcandidateId").val(candidateId);
 	$("#candidateNameId").val(candidateName);
 	$('#hrfeedBackbox').modal('show');
-	
 }
 
 function updateHRFeedBack(){
@@ -22,7 +21,8 @@ function updateHRFeedBack(){
 			     $('#hrfeedBackbox').modal('hide');
 			     loadCandidateList();	
 			}else{
-				
+				 $('#hrfeedBackbox').modal('hide');
+				 alert("反馈失败。")
 			}
 		}
 	})
