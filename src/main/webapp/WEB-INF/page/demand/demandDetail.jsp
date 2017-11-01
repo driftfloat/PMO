@@ -154,7 +154,7 @@ $(function(){
 											<div class="col-sm-4">
 												<select class="form-control" name="csSubDept" data-bv-notempty
 													data-bv-notempty-message="请选择角色" id="scSubDeptName" data-bv-group=".group">
-													<option value="${demand.csSubDept }">${demand.csSubDept }</option>
+													<option value="${demand.csDeptName }">${demand.csDeptName }</option>
 												</select>
 											</div>
 										</div>

@@ -213,7 +213,7 @@ var path='<%=path%>';
 												<th>Location</th>
 												<th>Experience Years</th>
 												<th>Interviewer Status</th>
-												<th>操作</th>
+												<th>Operate</th>
 											</tr>
 										</thead>
 										

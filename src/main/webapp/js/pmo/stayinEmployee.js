@@ -137,14 +137,21 @@ function loadStayinList(pageState)
 				$("<td>"+ result.data[i].education+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].experienceYears+ "</td>").appendTo(tr);
 				/*$("<td>"+ result.data[i].demandId+ "</td>").appendTo(tr);*/
-				$("<td><a href='javascript:void(0);' class='btn btn-info btn-small'" +
-						"onclick=onboard('"+result.data[i].candidateId+"')>ONBOARD</a>" +
+				if(result.data[i].demandStatus=='offering'){
+					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small'"+
+						     "onclick=queryDemandList('"+result.data[i].candidateId+"','"+result.data[i].demandId+"')>Update</a>" +
+						    /* '"+result[i].demandId+"','"+result[i].candidateId+"'*/
+					"</td>").appendTo(tr);
+				}else{
+					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small'" +
+						"onclick=onboard('"+result.data[i].candidateId+"')>Onboard</a>" +
 					     "&nbsp;&nbsp;" +
 					     "<a href='javascript:void(0);' class='btn btn-info btn-small'"+
-					     "onclick=queryDemandList('"+result.data[i].candidateId+"','"+result.data[i].demandId+"')>UPDATE</a>" +
+					     "onclick=queryDemandList('"+result.data[i].candidateId+"','"+result.data[i].demandId+"')>Update</a>" +
 					    /* '"+result[i].demandId+"','"+result[i].candidateId+"'*/
 				"</td>").appendTo(tr);
-				
+					
+				}
 			}
 			$("#candidateList").append("</tbdoy>");
 			currentPage = parseInt(result.pageInfo.currentPage);

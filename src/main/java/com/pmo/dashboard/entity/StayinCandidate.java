@@ -36,7 +36,14 @@ public class StayinCandidate extends PageCondition
 	private String exportPageColumn;
     private String demandId;
 	private String pageState;
+    private String demandStatus;
 	
+	public String getDemandStatus() {
+		return demandStatus;
+	}
+	public void setDemandStatus(String demandStatus) {
+		this.demandStatus = demandStatus;
+	}
 	public String getCandidateId() {
 		return candidateId;
 	}

@@ -7,7 +7,7 @@
 		<result property="ehr" column="E_HR" javaType="String" />
 		<result property="staffName" column="STAFF_NAME" javaType="String" />
 		<result property="staffRegion" column="STAFF_REGION" javaType="String" />
-		<result property="experienceYearas" column="experienceYearas" javaType="String" />
+		<result property="experienceYearas" column="GRADUATION_DATE" javaType="String" />
 		<result property="role" column="ROLE" javaType="String" /> 
 		<result property="skill" column="SKILL" javaType="String" />
 		<result property="status" column="INTERVIERW_STATUS" javaType="String" />
@@ -47,9 +47,12 @@
 	      <if test="interviewer.csSubDeptId!=null and interviewer.csSubDeptId!=''"> 
 	          and CS_SUBDEPT_ID = #{interviewer.csSubDeptId}
 	      </if>
-	      <if test="interviewer.experienceYearas!=null and interviewer.experienceYearas!=''"> 
-	          and (SUBSTR(SYSDATE(),1,4)-SUBSTR(GRADUATION_DATE,1,4))   = #{interviewer.experienceYearas}
-	      </if>
+	      <if test="interviewer.experienceStart != null and interviewer.experienceStart != ''">
+			AND (SUBSTR(SYSDATE(),1,4)-SUBSTR(GRADUATION_DATE,1,4)) >= ${interviewer.experienceStart}
+		</if>
+		<if test="interviewer.experienceEnd != null and interviewer.experienceEnd != ''">
+			AND (SUBSTR(SYSDATE(),1,4)-SUBSTR(GRADUATION_DATE,1,4)) <![CDATA[<=]]> ${interviewer.experienceEnd}
+		</if>
 	   </where>
 	 </sql>
 	 

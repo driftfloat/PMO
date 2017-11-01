@@ -378,7 +378,8 @@ public class DemandController {
 	 */
 	@RequestMapping("/updateDemandOnBoardById")
 	@ResponseBody
-	public boolean updateDemandOnBoardById(Demand demand ) {
+	public boolean updateDemandOnBoardById(Demand demand ,HttpServletRequest request) {
+		request.getSession().setAttribute("onboardCandidateId", demand.getCandidateId());
 		return demandService.updateDemandOnBoardById(demand);
 	}
 	

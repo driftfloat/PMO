@@ -192,7 +192,7 @@ var path='<%=path%>';
 									<div class="col-lg-4">
 										<select class="form-control" name="role" data-bv-notempty
 											data-bv-notempty-message="请选择角色" id="role" data-bv-group=".group">
-											<option value="">--option--</option>
+											<option value="">--Option--</option>
 										</select>
 									</div>
 									</div>
@@ -213,13 +213,7 @@ var path='<%=path%>';
 										<label class="col-lg-2 control-label">Candidate Status</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="candidate_status" id="candidate_status" data-bv-notempty>
-												<option value="">-- Option --</option>
-												<option value="0">招聘中</option>
-												<option value="1">offer中</option>
-												<option value="2">已入职</option>
-												<option value="3">闲置</option>
-												<option value="4">暂不关注</option>
-												<option value="6">入职它司</option>
+												<option value="0" selected="selected">招聘中</option>
 											</select>
 										</div>
 										</div>
@@ -238,7 +232,7 @@ var path='<%=path%>';
 									</div>
 									<div class="group">
 										<div class="group">
-											<label class="col-sm-2 control-label">Entry_date</label>
+											<label class="col-sm-2 control-label">Entry Date</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="entry_date"
 													id="entry_date" />
@@ -261,7 +255,7 @@ var path='<%=path%>';
 										
 									<div class="group">
 										<div class="group">
-											<label class="col-sm-2 control-label">Old_Company</label>
+											<label class="col-sm-2 control-label">Old Company</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="old_company"
 													id="old_company" />
@@ -301,7 +295,7 @@ var path='<%=path%>';
 										<div class="col-sm-4">
 											<input type="hidden" name="resume_path" id="resume_path">
 											<span style="display: block;"><input  type="file" name="file" id="uploadId" style="display: inline;width:200px;"/>
-											<input style="display: inline;" type="button" id = "upload" value="UPLOAD"/></span>
+											<input style="display: inline;" type="button" id = "upload" value="Upload"/></span>
 										</div>
 									</div>
 									
@@ -310,10 +304,16 @@ var path='<%=path%>';
 								<br/><br/><br/>
 								
 								<div class="form-group">
-									    <div style="text-align:center;width:100%;">
-									    <input type="submit" value="INPUT"
+									    <div style="text-align:center;width:50%;float:left"">
+									    <input type="submit" value="添&nbsp;&nbsp;加"
 										class="button btn btn-primary" data-dismiss="modal"
 										
+										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
+									    </div>
+									    <div style="text-align:center;width:50%;float:right">
+									    <input type="reset" value="重&nbsp;&nbsp;置"
+										name="subscribe" id="sub_add" href="#"
+										class="button btn btn-primary" data-dismiss="modal"
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
 									    </div>
 								</div>

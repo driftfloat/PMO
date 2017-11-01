@@ -1,5 +1,8 @@
 package com.pmo.dashboard.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +47,17 @@ public class InterviewerController
     @ResponseBody
     public Object interviewerQuery(Interviewer interviewer, HttpServletRequest request)
     {
-    	
+    	if("2年以下".equals(interviewer.getExperienceYearas())){
+    		interviewer.setExperienceEnd("2");
+    	}else if("3-5年".equals(interviewer.getExperienceYearas())){
+    		interviewer.setExperienceStart("3");
+    		interviewer.setExperienceEnd("5");
+    	}else if("6-10年".equals(interviewer.getExperienceYearas())){
+    		interviewer.setExperienceStart("6");
+    		interviewer.setExperienceEnd("10");
+    	}else if("11年以上".equals(interviewer.getExperienceYearas())){
+    		interviewer.setExperienceStart("11");
+    	}
     	if(interviewer.getCurrPage() == null || "".equals(interviewer.getCurrPage()))
     	{
     		interviewer.setCurrPage(1);
@@ -52,6 +65,31 @@ public class InterviewerController
     	User user = (User)request.getSession().getAttribute("loginUser");
     	interviewer.setEmployeeId(user.getUserId());
     	List<Interviewer> list = interviewerService.queryInterviewerList(interviewer);
+    	for(int i=0;i<list.size();i++){
+    		//获取毕业时间
+    		String graduate_date=list.get(i).getExperienceYearas();
+    		//将毕业时间转换成毫秒
+    		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    		String todayDate = df.format(new Date());
+    		//将当前时间转换成毫秒
+    		long nt;
+    		long gt;
+    		int year;
+			try {
+				gt = df.parse(graduate_date).getTime();
+				nt = df.parse(todayDate).getTime();
+				long cha = nt-gt;
+			    year = (int) Math.floor(cha/ 1000 / 60 / 60 / 24/ 30 /12);
+			 // 设置工作年限
+	    		list.get(i).setExperienceYearas(String.valueOf(year));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		
+    		
+    		
+    	}
     	Map<String,Object> result = new HashMap<String,Object>();
     	result.put("list", list);
     	result.put("pageCondition", interviewer);

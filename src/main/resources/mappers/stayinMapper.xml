@@ -32,6 +32,7 @@
 		<result property="remark" 			column="REMARK" 			javaType="String" />
 		<result property="createUser" 		column="CREATE_USER" 		javaType="String" />
 		<result property="demandId"         column="DEMANDID"           javaType="String"/>
+		<result property="demandStatus"     column="STATUS"           javaType="String"/>
 	</resultMap>
 	
 	<select id="queryStayinList" parameterType="com.pmo.dashboard.entity.StayinCandidate" resultMap="stayinMap" >
@@ -62,7 +63,7 @@
         on a.LOCK_PERSION = u.USER_ID
         WHERE 
         	LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson})
-        	and d.STATUS IN('OfferMade','Delayed') and
+        	and d.STATUS IN('OfferMade','Delayed','Offering') and
         	<include refid="candidateWherePart"/>
 			;
 	</select>

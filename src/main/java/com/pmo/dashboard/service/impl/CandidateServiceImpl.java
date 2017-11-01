@@ -41,6 +41,7 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	public List<CandidateInfo> queryCandidateList(CandidateInfo candidate) {
+		
 		return transferData(candidateMapper.queryCandidateList(candidate));
 	}
 
@@ -503,6 +504,11 @@ public class CandidateServiceImpl implements CandidateService {
         // TODO Auto-generated method stub
         return candidateMapper.updateCandidateInterviewStatus(candidate);
     }
+
+	@Override
+	public boolean updateOnboardCandidate(String candidateId) {
+		return candidateMapper.updateOnboardCandidate(candidateId);
+	}
 
 
 }
