@@ -362,7 +362,7 @@
 	</select>
 	
 	<update id="updateInterviewStatusById" parameterType="java.util.HashMap">
-		update t_candidate set CANDIDATE_STATUS = '1'
+		update t_candidate set INTERVIEW_STATUS = #{interviewStatus},CANDIDATE_STATUS = '1'
 		where CANDIDATE_ID = #{candidateId}
 	</update>
 	

@@ -53,6 +53,7 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 			candidateList = rmCandidateMapper.queryAllPushedCandidate(params);
 		}else if("3".equals(userType)){
 			candidateList = rmCandidateMapper.queryPushedCandidate(params);
+			
 		}
 		
 		//将面试表的id关联到推送表的InterviewId

@@ -125,7 +125,7 @@ public class DemandServiceImpl implements DemandService{
 		//表示推送表的已发offer的状态
 		params.put("status", "2");
 		//表示候选人表的面试状态
-		//params.put("interviewStatus", "5");
+		params.put("interviewStatus", "3");
 		demandMapper.updateCandidateIdById(params);
 		rmCandidateMapper.updateCandidateStatus(params);
 		candidateMapper.updateInterviewStatusById(params);
