@@ -109,4 +109,27 @@ public class User {
         this.bu = bu;
         this.csdeptId = csDeptId;
     }
+
+    public User(String userId, String userName, String nickname,
+            String password, String userType, CSDept csDept, String bu,
+            String csdeptId)
+    {
+        super();
+        this.userId = userId;
+        this.userName = userName;
+        this.nickname = nickname;
+        this.password = password;
+        this.userType = userType;
+        this.csDept = csDept;
+        this.bu = bu;
+        this.csdeptId = csdeptId;
+    }
+
+    public User()
+    {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+	
+	
 }

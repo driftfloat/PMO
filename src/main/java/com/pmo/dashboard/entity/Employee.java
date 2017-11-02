@@ -35,9 +35,23 @@ public class Employee
     private  String email ;
     private String gbGf;
     private String entryDate;
+    private String rmUserId;
+    private String csSubDeptName;
     
     
-    public String getEmail() {
+	public String getCsSubDeptName() {
+		return csSubDeptName;
+	}
+	public void setCsSubDeptName(String csSubDeptName) {
+		this.csSubDeptName = csSubDeptName;
+	}
+	public String getRmUserId() {
+		return rmUserId;
+	}
+	public void setRmUserId(String rmUserId) {
+		this.rmUserId = rmUserId;
+	}
+	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
@@ -293,7 +307,7 @@ public class Employee
             String staffCategory, String engagementType, String hsbcDOJ,
             String graduationDate, String role, String skill,
             String billingCurrency, String billRate, String resourceStatus,
-            String terminatedDate, String terminationReason,String email, String gbGf,String entryDate)
+            String terminatedDate, String terminationReason,String email, String gbGf,String entryDate,String rmUserId)
     {
         super();
         this.employeeId = employeeId;
@@ -326,6 +340,7 @@ public class Employee
         this.email = email;
         this.gbGf = gbGf;
         this.entryDate = entryDate;
+        this.rmUserId = rmUserId;
     }
     
     

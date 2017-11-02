@@ -37,13 +37,28 @@ function loadEmployeeInfo(){
 			$('#resourceStatus').val(employee.resourceStatus);
 			$('#terminatedDate1').val(employee.terminatedDate);
 			$('#eHr').val(employee.eHr);
-			$('#csSubDept').val(employee.csSubDept)
+			$('#csSubDept').val(employee.csSubDeptName);
 			loadHSBCSubDept(employee.hsbcSubDept);
 			loadTerminationReason(employee);
 			loadCSDept(employee);
 			$('#email').val(employee.email);
 			$('#entryDate1').val(employee.entryDate);
 			$('#gbGf').val(employee.gbGf);
+			
+			if ($('#resourceStatus').val() == "Active") {
+				$("#terminatedDateDiv").hide();
+				$("#terminationReasonDiv").hide();
+			} else if ($('#resourceStatus').val() == "Released") {
+				$("#terminatedDateDiv").show();
+				$("#terminationReasonDiv").hide();
+			}else if ($('#resourceStatus').val() == "Transfer") {
+				$("#terminatedDateDiv").show();
+				$("#terminationReasonDiv").hide();
+			} else {
+				$("#terminatedDateDiv").show();
+				$("#terminationReasonDiv").show();
+			}
+
 		}
 	})
 }

@@ -9,7 +9,6 @@ $(function(){
 	loadBillingCurrency();
   //loadResourceStatus();
 	loadCSDept();
-	loadCsBuNewName();
 	loadUserType();
 	loadStaffRegion();
 	loadStaffLocation();
@@ -19,7 +18,7 @@ $(function(){
 	dateType0();
 	dateType1();
 	dateType2();
-	
+	loadUserForRM();
 })
 
 	$("#staffRegion").change(function(){
@@ -60,7 +59,8 @@ function addEmployee(){
 		var email = $('#email').val();
 		var gbGf = $('#gbGf').val();
 		var entryDate = $('#entryDate1').val();
-
+		var rmName= $("#RM").val();
+		
 		$.ajax({
 			url:path+'/service/employee/addEmployee',
 			dataType:"json",
@@ -69,7 +69,7 @@ function addEmployee(){
 				"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,
 				"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,
 				"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":'Active',"terminatedDate":'',
-				"email":email,"gbGf":gbGf,"entryDate":entryDate},
+				"email":email,"gbGf":gbGf,"entryDate":entryDate,"rmUserId":rmName},
 			async:true,
 			cache:false,
 			type:"post",
@@ -227,35 +227,7 @@ function loadStaffRegion(){
 	});
 }
 
-var csBuNewNameMap = new Map();
-function loadCsBuNewName(){
-	/*var url = path+'/json/csBuNewName.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#bu").append("<option>"+item.name+"</option>");
-	    	   csBuNewNameMap.set(item.name,item.key);
-	       })
-	       $('.selectpicker').selectpicker({
-		        'selectedText': 'cat'
-		    });
-	});*/
-	$.ajax({
-		url:path+'/service/bu/queryBu',
-		dataType:"json",
-		async:true,
-		cache:false,
-		type:"post",
-		success:function(listB){
-			//buMultiselect = listB;
-			for(var i = 0;i<listB.length;i++){
-				$("#bu").append("<option value='"+listB[i].buId+"'>"+listB[i].buName+"</option>");
-			}
-			$('.selectpicker').selectpicker({
-		        'selectedText': 'cat'
-		    });
-		}
-	})
-}
+
 
 var userTypeMap = new Map();
 function loadUserType(){
@@ -365,18 +337,68 @@ function loadCSDept(){
 					$("#csSubDept").append("<option value='"+csSubs[0].csSubDeptId+"'>"+csSubs[0].csSubDeptName+"</option>");
 					$('#csSubDept').val(csSubs[0].csSubDeptId);
 					$("#csSubDept").attr("disabled","disabled");
+					loadUserForRM($('#csSubDept').val());
 				}else if(csSubs.length>1){
 					$("#csSubDept").empty();
 					for(var i = 0;i<csSubs.length;i++){
 						$("#csSubDept").append("<option value='"+csSubs[i].csSubDeptId+"'>"+csSubs[i].csSubDeptName+"</option>");
+					}
+					loadUserForRM($('#csSubDept').val());
+				}else{
+					for(var i = 0;i<result.data.length;i++){
+						$("#csSubDept").append("<option value='"+result.data[i].csSubDeptId+"'>"+result.data[i].csSubDeptName+"</option>");
 					}
 				}
 			}
 		}
 	})
 }
+$("#csSubDept").change(function(){
+	var du =$("#csSubDept").val();
+	loadUserForRM(du);
+})
 
+function loadUserForRM(du){	
+	$.ajax({
+		url:path+'/service/user/getUserForRM',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(list){
+			$("#RM").empty();
+			$("#RM").append("<option value=''>--Option--</option>");	
+			var RMList = new Array();
+			if (du != null && du != "") {
+				for (var i = 0; i < list.length; i++) {
+					var csDeptIds = list[i].csdeptId.split(",");
+					for (var j = 0; j < csDeptIds.length; j++) {
+						if (du == csDeptIds[j]) {
+							RMList.push(list[i]);
+						}
+					}
+				}
+			}else{
+				for(var i = 0;i<list.length;i++){
+					RMList.push(list[i]);
+				}
 
+			}
+			//remove duplicates
+			var newRMList = new Array();
+			for(var i = 0;i < RMList.length;i++){				
+				if(newRMList.indexOf(RMList[i])==-1){
+					newRMList.push(RMList[i]);
+				}
+			}
+			
+			for(var i = 0;i < newRMList.length;i++){
+				$("#RM").append("<option value='"+newRMList[i].userId+"'>"+newRMList[i].nickname+"</option>")
+			}
+			
+		}
+	})
+}
 $("#csDept").change(function(){
 	var csSubDeptId = $('#csDept').val();
 	$("#csSubDept").find("option").remove(); 

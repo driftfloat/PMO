@@ -136,10 +136,10 @@ var path='<%=path%>';
 											</div>
 										</div>
 										<div class="group">
-										<label class="col-lg-2 control-label">Staff Region</label>
-										<div class="col-lg-4">
-											<input type="text" readonly class="form-control" name="staffRegion"
-												id="staffRegion" />
+											<label class="col-sm-2 control-label">Email</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="email" readonly
+													id="email" data-bv-group=".group"/>
 											</div>
 										</div>
 								</div>
@@ -163,18 +163,18 @@ var path='<%=path%>';
 								<br/><br/>
 								<div class="form-group">
 										<div class="group">
-										<label class="col-lg-2 control-label">Onshore or Offshore</label>
-										<div class="col-lg-4">
-											<input type="text" readonly class="form-control" name="onshoreOrOffshore"
-													id="onshoreOrOffshore" />
-										</div>
+										<label class="col-lg-2 control-label">CS Dept</label>
+											<div class="col-lg-4">
+												<input type="text" readonly class="form-control" name="csSubDept"
+														id="csSubDept" />
+											</div>
 										</div>
 										<div class="group">
-										<label class="col-lg-2 control-label">CS Dept</label>
-										<div class="col-lg-4">
-											<input type="text" readonly class="form-control" name="csSubDept"
-													id="csSubDept" />
-										</div>
+											<label class="col-lg-2 control-label">GBGF</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="gbGf" readonly
+													 id="gbGf" data-bv-group=".group"/>
+											</div>
 										</div>
 								</div>
 								
@@ -248,13 +248,7 @@ var path='<%=path%>';
 								</div>
 								<br/><br/>
 								<div class="form-group">
-									<div class="group">
-										<label class="col-lg-2 control-label">HSBC DOJ</label>
-										<div class="col-lg-4">
-										<input type="text" readonly class="form-control" name="hsbcDOJ1"
-											id="hsbcDOJ1" />
-										</div>
-									</div>
+									
 									<div class="group">
 										<label class="col-lg-2 control-label">Graduation Date</label>
 										<div class="col-lg-4">
@@ -262,6 +256,30 @@ var path='<%=path%>';
 											id="graduationDate1" />
 										</div>
 									</div>
+									<div class="group">
+											<label class="col-sm-2 control-label">EntryDate</label>
+											<div class="col-sm-4">
+													<input class="form-control" type="text" readonly data-bv-group=".group"
+														id="entryDate1" name="entryDate1"/> 
+											</div>
+									</div>
+								</div>
+								<br/><br/>
+								<div class="form-group">
+										<div class="group">
+											<label class="col-lg-2 control-label">Onshore or Offshore</label>
+											<div class="col-lg-4">
+												<input type="text" readonly class="form-control" name="onshoreOrOffshore"
+														id="onshoreOrOffshore" />
+											</div>
+										</div>
+										<div class="group">
+										<label class="col-lg-2 control-label">Staff Region</label>
+										<div class="col-lg-4">
+											<input type="text" readonly class="form-control" name="staffRegion"
+												id="staffRegion" />
+											</div>
+										</div>
 								</div>
 								<br/><br/>
 								<div class="form-group">
@@ -300,54 +318,39 @@ var path='<%=path%>';
 								<br/><br/>
 								<div class="form-group">
 										<div class="group">
+											<label class="col-lg-2 control-label">HSBC DOJ</label>
+											<div class="col-lg-4">
+											<input type="text" readonly class="form-control" name="hsbcDOJ1"
+												id="hsbcDOJ1" />
+											</div>
+										</div>
+										<div class="group">
 										<label class="col-lg-2 control-label">Resource Status</label>
 										<div class="col-lg-4">
 											 <input type="text" readonly class="form-control" name="resourceStatus"
 													id="resourceStatus" />
 										</div>
 										</div>
-										<div class="group">
+								</div>
+								<br/><br/>
+								<div class="form-group">
+										<div class="group" style="display:none" id="terminatedDateDiv">
 										<label class="col-sm-2 control-label">LWD</label>
 										<div class="col-lg-4">
 											 <input type="text" readonly class="form-control" name="terminatedDate1"
 													id="terminatedDate1" />
 										</div>
 									    </div>
-								</div>
-								<br/><br/>
-								<div class="form-group">
-										
-										<div class="group">
+									    
+										<div class="group" style="display:none" id="terminationReasonDiv">
 											<label class="col-sm-2 control-label">Reason for Termination</label>
 											<div class="col-sm-4">
 												<input type="text" readonly class="form-control" name="terminationReason"
 													id="terminationReason" />
 											</div>
 										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">Email</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="email" readonly
-													id="email" data-bv-group=".group"/>
-											</div>
-										</div>
-								</div>
-								<br/><br/>
-								<div class="form-group">
-										<div class="group">
-											<label class="col-lg-2 control-label">GB_GF</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="gbGf" readonly
-													 id="gbGf" data-bv-group=".group"/>
-											</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">EntryDate</label>
-											<div class="col-sm-4">
-													<input class="form-control" type="text" readonly data-bv-group=".group"
-														id="entryDate1" name="entryDate1"/> 
-											</div>
-										</div>
+										
+										
 								</div>
 								
 								</form>

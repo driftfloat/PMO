@@ -32,12 +32,14 @@ import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.EmployeePageCondition;
 import com.pmo.dashboard.entity.HSBCDept;
 import com.pmo.dashboard.entity.StayinCandidate;
+import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.CSDeptService;
 import com.pom.dashboard.service.EmployeeService;
 import com.pom.dashboard.service.HSBCDeptService;
 import com.pom.dashboard.service.HSBCProjectService;
+import com.pom.dashboard.service.UserService;
 
 import jxl.Workbook;
 import jxl.write.Label;
@@ -62,6 +64,9 @@ public class EmployeeController {
 	
 	@Resource
     private HSBCProjectService hsbcProjectService;
+	
+	@Resource
+	private UserService userService;
 
 	
     @RequestMapping("/welcome")
@@ -103,7 +108,7 @@ public class EmployeeController {
 			return "OnboardEmployeeInsert";
     	}
     	
-        return "index";
+        return "indexa";
     }
     
     @RequestMapping("/employeeInfo")
@@ -173,7 +178,7 @@ public class EmployeeController {
         String email = request.getParameter("email");
         String gbGf = request.getParameter("gbGf");
         String entryDate = request.getParameter("entryDate");
-        
+        String rmUserId = request.getParameter("rmUserId");
         Employee employee = new Employee(employeeId,eHr,lob,
                 hsbcStaffId, staffName, LN, staffRegion,
                 staffLocation, locationType, onshoreOrOffshore,
@@ -182,7 +187,7 @@ public class EmployeeController {
                 staffCategory, engagementType, hsbcDOJ,
                 graduationDate, role, skill,
                 billingCurrency, billRate, resourceStatus,
-                terminatedDate, terminationReason,email,gbGf,entryDate);
+                terminatedDate, terminationReason,email,gbGf,entryDate,rmUserId);
         
         boolean resultFlag = employeeService.addEmployee(employee);
         
@@ -226,7 +231,7 @@ public class EmployeeController {
         String email = request.getParameter("email");
         String gbGf = request.getParameter("gbGf");
         String entryDate = request.getParameter("entryDate");
-        
+        String rmUserId = request.getParameter("rmUserId");
         Employee employee = new Employee(employeeId,eHr,lob,
                 hsbcStaffId, staffName, LN, staffRegion,
                 staffLocation, locationType, onshoreOrOffshore,
@@ -235,7 +240,7 @@ public class EmployeeController {
                 staffCategory, engagementType, hsbcDOJ,
                 graduationDate, role, skill,
                 billingCurrency, billRate, resourceStatus,
-                terminatedDate, terminationReason,email,gbGf,entryDate);
+                terminatedDate, terminationReason,email,gbGf,entryDate,rmUserId);
         
         boolean resultFlag = employeeService.updateEmployee(employee);
         
@@ -377,15 +382,26 @@ public class EmployeeController {
                    ws.addCell(label);
                }
                
-               //
+               List<CSDept> allCSDept = csDeptService.queryAllCSDept();               
+               List<HSBCDept> allHSBCDept = hsbcDeptService.queryHSBCDeptName();
+               List<User> allRM = userService.getUserForRM();
+               
                CSDept csDept = new CSDept();
                HSBCDept hsbcDept = new HSBCDept();
                
-               
-               for (int i = 1; i-1 < listE.size(); i++) {
-                   
-                   csDept = csDeptService.queryCSDeptById(listE.get(i-1).getCsSubDept());
-                   hsbcDept = hsbcDeptService.queryHSBCSubDeptById(listE.get(i-1).getHsbcSubDept());
+               for (int i = 1; i - 1 < listE.size(); i++) {
+				
+					for (CSDept csD : allCSDept) {
+						if (csD.getCsSubDeptId().equals(listE.get(i - 1).getCsSubDept())) {
+							csDept = csD;
+						}
+					}
+	
+					for (HSBCDept hsbcD : allHSBCDept) {
+						if (hsbcD.getHsbcSubDeptId().equals(listE.get(i - 1).getHsbcSubDept())) {
+							hsbcDept = hsbcD;
+						}
+					}
                    
                    int j = 0;
                    
@@ -395,12 +411,8 @@ public class EmployeeController {
                    if(conditionList.contains("HSBC Staff ID")){
                        Label label= new Label(++j, i, listE.get(i-1).getHsbcStaffId());
                        ws.addCell(label);
-                   }
-                   
-                   if(conditionList.contains("LOB")){
-                       Label label= new Label(++j, i, listE.get(i-1).getLob());
-                       ws.addCell(label);
-                   }
+                   }                  
+                  
                    
                    if(conditionList.contains("Staff Name")){
                        Label label= new Label(++j, i, listE.get(i-1).getStaffName());
@@ -409,6 +421,11 @@ public class EmployeeController {
                    
                    if(conditionList.contains("LN")){
                        Label label= new Label(++j, i, listE.get(i-1).getLn());
+                       ws.addCell(label);
+                   }
+                   
+                   if(conditionList.contains("E-Mail")){
+                       Label label= new Label(++j, i, listE.get(i-1).getEmail());
                        ws.addCell(label);
                    }
                    
@@ -429,6 +446,11 @@ public class EmployeeController {
                    
                    if(conditionList.contains("Onshore or Offshore")){
                        Label label= new Label(++j, i, listE.get(i-1).getOnshoreOrOffshore());
+                       ws.addCell(label);
+                   }
+                   
+                   if(conditionList.contains("GB/GF")){
+                       Label label= new Label(++j, i, listE.get(i-1).getGbGf());
                        ws.addCell(label);
                    }
                    
@@ -530,6 +552,11 @@ public class EmployeeController {
                        ws.addCell(label);
                    }
                    
+                   if(conditionList.contains("Entry Date")){
+                       Label label= new Label(++j, i, listE.get(i-1).getEntryDate());
+                       ws.addCell(label);
+                   }
+                   
                    if(conditionList.contains("Billing Currency")){
                        Label label= new Label(++j, i, listE.get(i-1).getBillingCurrency());
                        ws.addCell(label);
@@ -557,6 +584,22 @@ public class EmployeeController {
                    
                    if(conditionList.contains("E-HR")){
                        Label label= new Label(++j, i, listE.get(i-1).geteHr());
+                       ws.addCell(label);
+                   }
+                   
+                   if(conditionList.contains("LOB")){
+                       Label label= new Label(++j, i, listE.get(i-1).getLob());
+                       ws.addCell(label);
+                   }
+                   
+                   if(conditionList.contains("RM")){
+						String RMName = "";
+						for (User user : allRM) {
+							if (user.getUserId().equalsIgnoreCase(listE.get(i - 1).getRmUserId())) {
+								RMName = user.getNickname();
+							}
+						}
+                       Label label= new Label(++j, i, RMName);
                        ws.addCell(label);
                    }
                    

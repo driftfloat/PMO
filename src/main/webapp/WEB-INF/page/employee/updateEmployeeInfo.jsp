@@ -136,13 +136,11 @@ var path='<%=path%>';
 											</div>
 										</div>
 										<div class="group">
-										<label class="col-lg-2 control-label">Staff Region</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="staffRegion" data-bv-notempty
-												data-bv-notempty-message="please select  staffRegion" id="staffRegion" data-bv-group=".group" onchange="changeData()">
-												<option value="">--Option--</option>
-											</select>
-										</div>
+											<label class="col-sm-2 control-label">Email</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="email"
+													id="email" data-bv-group=".group"/>
+											</div>
 										</div>
 								</div>
 							
@@ -169,20 +167,21 @@ var path='<%=path%>';
 								
 								<div class="form-group">
 										<div class="group">
-										<label class="col-lg-2 control-label">Onshore or Offshore</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="onshoreOrOffshore" data-bv-notempty
-												data-bv-notempty-message="please select value" id="onshoreOrOffshore" data-bv-group=".group">
-												<option value="">--Option--</option>
-											</select>
-										</div>
-										</div>
-										<div class="group">
 										<label class="col-lg-2 control-label">CS Dept</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="csSubDept" data-bv-notempty
 												data-bv-notempty-message="please select csDept" id="csSubDept" data-bv-group=".group">
 												<option value="">--Option--</option>
+											</select>
+										</div>
+										</div>
+										
+										<div class="group">
+										<label class="col-lg-2 control-label">GBGF</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="gbGf" data-bv-notempty
+												data-bv-notempty-message="please select  GB_GF" id="gbGf" data-bv-group=".group">
+											<option value="">--Option--</option>
 											</select>
 										</div>
 										</div>
@@ -226,30 +225,29 @@ var path='<%=path%>';
 											</div>
 										</div>
 								</div>
-							
 								<div class="form-group">
 										<div class="group">
 											<label class="col-sm-2 control-label">SOW#</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="sow"
-													id="sow" />
+													id="sow" data-bv-group=".group"/>
 											</div>
 										</div>
 										<div class="group">
-										<label class="col-sm-2 control-label">SOW# Expired Date</label>
+										<label class="col-sm-2 control-label ">SOW# Expired Date</label>
 										<div class="col-md-4">
-											<div class="input-group date form_datetime col-sm-12"
+											<div class="input-group date form_datetime1 col-sm-12"
 												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" disabled="disabled"
+												<input class="form-control" type="text" readonly data-bv-group=".group"
 													id="sowExpiredDate1" name="sowExpiredDate1"> <span
 													class="input-group-addon"><span
-													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
+													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
 													id="sowExpiredDate2" name="sowExpiredDate2" />
 											</div>
 										</div>
 									    </div>
+										
 								</div>
-							
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Staff Category</label>
@@ -273,24 +271,11 @@ var path='<%=path%>';
 							
 								<div class="form-group">
 									<div class="group">
-										<label class="col-sm-2 control-label">HSBC DOJ</label>
-										<div class="col-md-4">
-											<div class="input-group date form_datetime col-sm-12"
-												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" disabled="disabled"
-													id="hsbcDOJ1" name="hsbcDOJ1"> <span
-													class="input-group-addon"><span
-													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
-													id="hsbcDOJ2" name="hsbcDOJ2" />
-											</div>
-										</div>
-									</div>
-									<div class="group">
 										<label class="col-sm-2 control-label">Graduation Date</label>
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" disabled="disabled"
+												<input class="form-control" type="text" readonly
 													id="graduationDate1" name="graduationDate1"> <span
 													class="input-group-addon"><span
 													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
@@ -298,8 +283,40 @@ var path='<%=path%>';
 											</div>
 										</div>
 									</div>
+									<div class="group">
+										<label class="col-sm-2 control-label">EntryDate</label>
+										<div class="col-md-4">
+											<div class="input-group date form_datetime col-sm-12"
+												data-link-field="dt_set_order_time_input">
+												<input class="form-control" type="text" readonly data-bv-group=".group"
+													id="entryDate1" name="entryDate1"> <span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
+													id="entryDate2" name="entryDate2" />
+											</div>
+										</div>
+									</div>
 								</div>
-							
+								<div class="form-group">
+										<div class="group">
+										<label class="col-lg-2 control-label">Staff Region</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="staffRegion" data-bv-notempty
+												data-bv-notempty-message="please select  staffRegion" id="staffRegion" data-bv-group=".group" onchange="changeData()">
+												<option value="">--Option--</option>
+											</select>
+										</div>
+										</div>
+										<div class="group">
+										<label class="col-lg-2 control-label">Onshore or Offshore</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="onshoreOrOffshore" data-bv-notempty
+												data-bv-notempty-message="please select value" id="onshoreOrOffshore" data-bv-group=".group">
+												<option value="">--Option--</option>
+											</select>
+										</div>
+										</div>
+								</div>
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">MSA Role</label>
@@ -340,34 +357,16 @@ var path='<%=path%>';
 										</div>
 								</div>
 								<div class="form-group">
-										<div class="group">
-											<label class="col-sm-2 control-label">Email</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="email"
-													id="email" data-bv-group=".group"/>
-											</div>
-										</div>
-										<div class="group">
-										<label class="col-lg-2 control-label">GB_GF</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="gbGf" data-bv-notempty
-												data-bv-notempty-message="please select  GB_GF" id="gbGf" data-bv-group=".group">
-											<option value="">--Option--</option>
-											</select>
-										</div>
-										</div>
-								</div>
-								<div class="form-group">
 									<div class="group">
-										<label class="col-sm-2 control-label">EntryDate</label>
+										<label class="col-sm-2 control-label">HSBC DOJ</label>
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" disabled="disabled" data-bv-group=".group"
-													id="entryDate1" name="entryDate1"> <span
+												<input class="form-control" type="text" readonly
+													id="hsbcDOJ1" name="hsbcDOJ1"> <span
 													class="input-group-addon"><span
-													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
-													id="entryDate2" name="entryDate2" />
+													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
+													id="hsbcDOJ2" name="hsbcDOJ2" />
 											</div>
 										</div>
 									</div>
@@ -387,7 +386,7 @@ var path='<%=path%>';
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" disabled="disabled"
+												<input class="form-control" type="text" readonly
 													id="terminatedDate1" name="terminatedDate1"> <span
 													class="input-group-addon"><span
 													class="glyphicon glyphicon-th"></span></span> <input type="hidden"

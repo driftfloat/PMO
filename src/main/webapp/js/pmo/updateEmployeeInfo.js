@@ -4,22 +4,6 @@ $(function() {
 	dateType();
 });
 
-function dateType() {
-	$('.form_datetime').datetimepicker({
-		weekStart : 1,
-		minView : 'month',
-		todayBtn : 1,
-		autoclose : 1,
-		todayHighlight : 1,
-		startView : 2,
-		forceParse : 0,
-		language : 'zh-CN',
-		format : 'yyyy-mm-dd',
-		pickerPosition : 'bottom-left',
-		showMeridian : 1
-	});
-}
-
 function changeData() {
 	var staffRegion = $('#staffRegion').val();
 	var role = $('#role').val();
@@ -174,7 +158,13 @@ function dateType() {
 		format : 'yyyy-mm-dd',
 		pickerPosition : 'bottom-left',
 		showMeridian : 1
-	});
+	}).on('changeDate', function(ev){
+		 $('#updateEmployeeForm').bootstrapValidator('revalidateField', 'sowExpiredDate1'); 
+		 $('#updateEmployeeForm').bootstrapValidator('revalidateField', 'graduationDate1');
+		 $('#updateEmployeeForm').bootstrapValidator('revalidateField', 'entryDate1');
+		 $('#updateEmployeeForm').bootstrapValidator('revalidateField', 'hsbcDOJ1');
+		 $('#updateEmployeeForm').bootstrapValidator('revalidateField', 'terminatedDate1');
+	});;
 }
 
 function loadOnshoreOrOffshore(employee) {
@@ -377,20 +367,26 @@ function loadCSDept(employee) {
 
 function loadPersonHsbcDept(employee) {
 	var hsbcSubDeptId = employee.hsbcSubDept;
-	$.ajax({
-		url : path + '/service/hsbcDept/queryDeptById',
-		dataType : "json",
-		async : true,
-		cache : false,
-		data : {
-			"hsbcSubDeptId" : hsbcSubDeptId
-		},
-		type : "post",
-		success : function(hsbcDept) {
+	if(hsbcSubDeptId==""||hsbcSubDeptId==null){
+		loadDept(employee, hsbcDept);
+	}else{
+		$.ajax({
+			url : path + '/service/hsbcDept/queryDeptById',
+			dataType : "json",
+			async : true,
+			cache : false,
+			data : {
+				"hsbcSubDeptId" : hsbcSubDeptId
+			},
+			type : "post",
+			success : function(hsbcDept) {
 
-			loadDept(employee, hsbcDept);
-		}
-	})
+				loadDept(employee, hsbcDept);
+			}
+		})
+	}
+	
+	
 }
 
 function loadDept(employee, hsbcDept) {
@@ -413,8 +409,6 @@ function loadDept(employee, hsbcDept) {
 					$("#hsbcDept").val(list[i].hsbcSubDeptId);
 				}
 			}
-
-			// $('#hsbcDept').val(employee.hsbcSubDept);
 
 			loadHSBCSubDept(employee);
 		}

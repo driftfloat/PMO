@@ -125,7 +125,7 @@ $(document).ready(function() {
             sowExpiredDate1: {
                 validators: {
                     notEmpty: {
-                        message: 'Please select If terminated,mention LWD'
+                        message: 'Please select sowExpiredDate'
                     },
                     date : {  
                         format : 'YYYY-MM-DD',  
@@ -147,9 +147,7 @@ $(document).ready(function() {
             },
             email: {
                 validators: {
-                    notEmpty: {
-                        message: 'Please input your email'
-                    },
+                    
                     emailAddress:{
                     	message:'Email address is incorrect'
                     }
@@ -167,7 +165,7 @@ $(document).ready(function() {
 
             }
         },
-           
+         
         }
     });
     
@@ -189,11 +187,7 @@ $(document).ready(function() {
                         regexp: /^E\d{9}$/,
                         message: 'Please enter the E-HR（E and 9 digits）'
                     },
-                    /*remote:{
-                    	type:"post",
-                    	url: path+'/service/employee/checkEhr',
-                        message:"eHr already exists"
-                    }*/
+                    
 
                  }
             },
@@ -206,11 +200,7 @@ $(document).ready(function() {
                     numeric: {
                     	message:'Please enter number'
                     },
-                   /* remote:{
-                    	type:"post",
-                    	url: path+'/service/employee/checkLob',
-                        message:"lob already exists"
-                    }*/
+                   
                 }
             },
             hsbcStaffId: {
@@ -221,11 +211,7 @@ $(document).ready(function() {
                     numeric: {
                     	message:'Please enter number'
                     },
-                    /*remote:{
-                    	type:"post",
-                    	url: path+'/service/employee/checkHSBCStaffID',
-                        message:"hsbcStaffId already exists"
-                    }*/
+                   
                 }
             },
             staffName: {
@@ -283,15 +269,71 @@ $(document).ready(function() {
             },
             email: {
                 validators: {
-                    notEmpty: {
-                        message: 'Please input your email'
-                    },
                     emailAddress:{
                     	message:'Email address is incorrect'
                     }
                 }
+            },
+            sowExpiredDate1: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select sowExpiredDate'
+                    },
+                    date : {  
+                        format : 'YYYY-MM-DD',  
+                        message : 'Time format is incorrect'  
+                    }
+
+                }
+            },
+            graduationDate1: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select Graduation Date'
+                    },
+                    date : {  
+                        format : 'YYYY-MM-DD',  
+                        message : 'Time format is incorrect'  
+                    }
+
+                }
+            },
+            entryDate1: {
+            	validators: {
+                notEmpty: {
+                    message: 'Please select EntryDate'
+                },
+                date : {  
+                    format : 'YYYY-MM-DD',  
+                    message : 'Time format is incorrect'  
+                }
+
             }
-           
+        },
+        hsbcDOJ1: {
+            validators: {
+                notEmpty: {
+                    message: 'Please select hsbcDOJ'
+                },
+                date : {  
+                    format : 'YYYY-MM-DD',  
+                    message : 'Time format is incorrect'  
+                }
+
+            }
+        },
+        terminatedDate1: {
+            validators: {
+                notEmpty: {
+                    message: 'Please select terminatedDate'
+                },
+                date : {  
+                    format : 'YYYY-MM-DD',  
+                    message : 'Time format is incorrect'  
+                }
+
+            }
+        },
         }
     }) 
 });

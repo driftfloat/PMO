@@ -34,18 +34,19 @@
 		<result property="email" column="Email" javaType="String" />
 		<result property="gbGf" column="GB_GF" javaType="String" />
 		<result property="entryDate" column="ENTRY_DATE" javaType="String" />
+		<result property="rmUserId" column="RM_USER_ID" javaType="String" />
 	</resultMap>
 	
 	
 	<insert id="addEmployee" parameterType="com.pmo.dashboard.entity.Employee">
-	    insert into t_employee (EMPLOYEE_ID,HSBC_STAFF_ID,STAFF_NAME,LN,STAFF_REGION,STAFF_LOCATION,LOCATION_TYPE,ONSHORE_OR_OFFSHORE,SOW,SOW_EXPIRED_DATE,STAFF_CATEGORY,ENGAGEMENT_TYPE,HSBC_DOJ,GRADUATION_DATE,BILL_CURRENCY,BILL_RATE,RESOURCE_STATUS,MENTION_LWD,REASON_FOR_TERMINATION,E_HR,HSBC_SUBDEPT_ID,SKILL,ROLE,CS_SUBDEPT_ID,LOB,HSBC_MANAGER,HSBC_PROJECT_NAME,Email,GB_GF,ENTRY_DATE)
+	    insert into t_employee (EMPLOYEE_ID,HSBC_STAFF_ID,STAFF_NAME,LN,STAFF_REGION,STAFF_LOCATION,LOCATION_TYPE,ONSHORE_OR_OFFSHORE,SOW,SOW_EXPIRED_DATE,STAFF_CATEGORY,ENGAGEMENT_TYPE,HSBC_DOJ,GRADUATION_DATE,BILL_CURRENCY,BILL_RATE,RESOURCE_STATUS,MENTION_LWD,REASON_FOR_TERMINATION,E_HR,HSBC_SUBDEPT_ID,SKILL,ROLE,CS_SUBDEPT_ID,LOB,HSBC_MANAGER,HSBC_PROJECT_NAME,Email,GB_GF,ENTRY_DATE,RM_USER_ID)
 	    values
 	    (#{employeeId},#{hsbcStaffId},#{staffName},#{ln},#{staffRegion},#{staffLocation},#{locationType},#{onshoreOrOffshore},#{sow},#{sowExpiredDate},#{staffCategory},#{engagementType},#{hsbcDOJ},#{graduationDate},#{billingCurrency},#{billRate},#{resourceStatus},#{terminatedDate},#{terminationReason},#{eHr},#{hsbcSubDept},#{skill},#{role},#{csSubDept},#{lob},#{projectManager},#{projectName},
-	    #{email},#{gbGf},#{entryDate})
+	    #{email},#{gbGf},#{entryDate},#{rmUserId})
 	</insert>
 	
 	<select id="queryEmployeeById" parameterType="String" resultMap="employeeMap">
-	    SELECT * FROM t_employee WHERE EMPLOYEE_ID = #{employeeId};
+	    SELECT e.*,c.CS_SUBDEPT_NAME as csSubDeptName FROM t_employee e left join  t_cs_dept c on e.CS_SUBDEPT_ID= c.CS_SUBDEPT_ID WHERE EMPLOYEE_ID = #{employeeId};
 	</select>
 	
 	<select id="queryEmployeeList" parameterType="com.pmo.dashboard.entity.EmployeePageCondition" resultMap="employeeMap">

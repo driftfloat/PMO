@@ -86,7 +86,7 @@ var path='<%=path%>';
 									<i class="glyphicon glyphicon-user"></i> Add User
 								</h2>
 							</div>
-							<div id="add" class="box-content" style="overflow: auto;">
+							<div id="add" class="box-content" style="overflow: auto;height: 900px;">
 							<form id="addUserForm" method="post">
 							    
 							    <div id="successAlert" class="alert alert-success" style="display: none;"></div>
@@ -120,8 +120,8 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-lg-2 control-label">DU</label>
 											<div class="col-lg-4">
-											  <select class="selectpicker" multiple name="du" data-bv-notempty
-												data-bv-notempty-message="Please Select your DU" id="csSubDept" data-bv-group=".group">
+											  <select class="selectpicker" multiple data-live-search="true" name="du" data-bv-notempty
+												data-bv-notempty-message="Please Select your DU" id="du" data-bv-group=".group">
 											  </select>
 											</div>
 										</div>

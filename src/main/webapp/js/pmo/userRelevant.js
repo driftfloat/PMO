@@ -1,5 +1,6 @@
 $(document).ready(function() {
-	loadCSDept();
+	loadDu();
+	loadBu();
 	$('#addUserForm').bootstrapValidator({
 		message: 'This value is not valid',
 
@@ -73,7 +74,7 @@ function addUser(){
 		var eHr = $("#eHr").val();
 		var name = $("#name").val();
 		var bu = $("#bu").val();
-		var du = $("#csSubDept").val();
+		var du = $("#du").val();
 		var type = $("#type").val();
 		var temp_bu="";
 		var temp_du="";
@@ -108,7 +109,7 @@ function addUser(){
 }
 
 
-function loadCSDept(){
+function loadDu(){
 	$.ajax({
 		url:path+'/service/csDept/queryAllCSSubDept',
 		dataType:"json",
@@ -135,7 +136,26 @@ function loadCSDept(){
 					}
 				}
 			}
+			$('.selectpicker').selectpicker({
+		        'selectedText': 'cat'
+		    });
+			$('.selectpicker').selectpicker('refresh');
 		}
 	})
+}
+
+var csBuMap = new Map();
+function loadBu(){
+	var url = path+'/json/csBuNewName.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#bu").append("<option value='"+item.key+"'>"+item.name+"</option>");
+	    	   csBuMap.set(item.name,item.key);
+	       })
+	       $('.selectpicker').selectpicker({
+		        'selectedText': 'cat'
+		   });
+		   $('.selectpicker').selectpicker('refresh');
+	});
 }
 

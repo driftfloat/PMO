@@ -90,8 +90,7 @@ $('#exportExcel').bind("click", function(){
 });
 
 function selectAll(){
-
-	$("input[type='checkbox']").attr("checked",'true');
+	$("input[type='checkbox']").prop("checked",'true');
 }
 
 function exportCondition(){
@@ -211,7 +210,7 @@ function loadUserForRM(bu,du,rmUserId){
 			var RMList = new Array();
 			if (bu != null && bu != "" && du != null && du != "") {
 				for (var i = 0; i < list.length; i++) {
-					var csDeptIds = list[i].csDeptId.split(",");
+					var csDeptIds = list[i].csdeptId.split(",");
 					for (var j = 0; j < csDeptIds.length; j++) {
 						if (bu == list[i].bu && du == csDeptIds[j]) {
 							RMList.push(list[i]);
@@ -220,7 +219,7 @@ function loadUserForRM(bu,du,rmUserId){
 				}
 			}else if((bu==null || bu=="")&&(du!=null && du != "")){
 				for(var i = 0;i<list.length;i++){
-					var csDeptIds= list[i].csDeptId.split(",");
+					var csDeptIds= list[i].csdeptId.split(",");
 					for(var j = 0;j < csDeptIds.length;j++){
 						if(du==csDeptIds[j]){
 							RMList.push(list[i]);
@@ -229,7 +228,7 @@ function loadUserForRM(bu,du,rmUserId){
 				}
 			}else if((du==null || du=="")&&(bu!=null && bu != "")){
 				for(var i = 0;i<list.length;i++){
-					var csDeptIds= list[i].csDeptId.split(",");
+					var csDeptIds= list[i].csdeptId.split(",");
 					for(var j = 0;j < csDeptIds.length;j++){
 						if(bu==list[i].bu){
 							RMList.push(list[i]);
