@@ -39,7 +39,6 @@ public class UploadController {
 		String fileName = UUID.randomUUID().toString().replaceAll("-", "")+".pdf";
 		
 		
-		
 		//相对路径
 		String url = Constants.RESUME_PATH + fileName;
 		

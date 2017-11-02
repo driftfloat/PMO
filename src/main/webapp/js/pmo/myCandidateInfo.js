@@ -326,7 +326,7 @@ function loadCandidateList(pageState)
 				"<td>"+ result.data[i].skill+ "</td>"+
 				"<td>"+ result.data[i].interviewStatus+ "</td>").appendTo(tr);
 				if(result.data[i].candidateStatus == '招聘中'){
-					if(result.data[i].interviewStatus == '未推送'){
+					if(result.data[i].interviewStatus == '未推送'||result.data[i].interviewStatus == '已退回'){
 						$("<td></td>"+
 							"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
@@ -334,7 +334,7 @@ function loadCandidateList(pageState)
 								"onclick=pushCandidateToDept('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>PUSH</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small'  " +
 								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>STATUS</a>" +
-								"<a href='javascript:void(0); ' class='btn btn-info btn-small' disabled " +
+								"<a href='javascript:void(0); ' class='btn btn-info btn-small' " +
 								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
 								"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +

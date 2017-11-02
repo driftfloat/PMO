@@ -31,7 +31,7 @@
 		<result property="onboardDate" column="ONBOARD_DATE" javaType="String"/>
 		<result property="bgvCleared" column="BGV_CLEARED" javaType="String"/>
 		<association property="hsbcDept" javaType="com.pmo.dashboard.entity.HSBCDept" >
-		    <id column="hsbcSubDeptId" property="HSBC_SUBDEPT_ID"/>
+		    <id column="hsbcSubDeptId" property="HSBC_SUBDEPT_NAME"/>
 			<id column="hsbcSubDeptName" property="HSBC_SUBDEPT_NAME"/>
 			<id column="hsbcDeptName" property="HSBC_DEPT_NAME"/>
 		</association>
@@ -39,12 +39,12 @@
 	
 	<insert id="addDemand" parameterType="com.pmo.dashboard.entity.AddDemand">
 	    insert into t_demand (DEMAND_ID,RR,JOB_CODE,SKILL,REQUESTOR,POSITION,HSBC_SUBDEPT_ID,LOCATION,REQ_PUBLISHED_DATE,AGEING,PROFILES_NO,INTERVIEWED_NO,`STATUS`,CANDIDATE_NAME,PROPOSED_JOINING_DATE,SOW_SIGNED,REASON,REMARK,CS_SUBDEPT,PLANNED_ONBOARD_DATE,DO_NUMBER,HR_PRIORITY,CREATE_DATE,UPDATE_DATE,COMPLETION_DATE,ONBOARD_DATE,BGV_CLEARED)
-	    values (#{demandId},#{rr},#{jobCode},#{skill},#{requestor},#{position},#{hsbcSubDeptId},#{location},#{reqPublishedDate},#{ageing},#{profilesNo},#{interviewedNo},#{status},#{staffName},#{proposedJoiningDate},#{sowSigned},#{reason},#{remark},#{csSubDept},#{plannedOnboardDate},#{doNumber},#{hrPriority},#{creatDate},#{updateDate},#{completionDate},#{onboardDate},#{bgvCleared})
+	    values (#{demandId},#{rr},#{jobCode},#{skill},#{requestor},#{position},#{hsbcSubDept},#{location},#{reqPublishedDate},#{ageing},#{profilesNo},#{interviewedNo},#{status},#{staffName},#{proposedJoiningDate},#{sowSigned},#{reason},#{remark},#{csSubDept},#{plannedOnboardDate},#{doNumber},#{hrPriority},#{creatDate},#{updateDate},#{completionDate},#{onboardDate},#{bgvCleared})
 	</insert>
 		<!-- 查询需求 -->
 	<select id="queryDemand"  parameterType="String"   resultMap="demandMap">
-	     SELECT c.* from t_demand c 
-	    WHERE c.status ='OPEN' and c.CANDIDATE_ID is null 
+	     SELECT c.*,b.HSBC_SUBDEPT_NAME from t_demand c ,t_hsbc_dept b
+	    WHERE  c.HSBC_SUBDEPT_ID=b.HSBC_SUBDEPT_ID and c.status ='OPEN' and c.CANDIDATE_ID is null 
 	</select>
 	<!-- 更改模态窗口对应需求 -->
 	<update id="updateDemand" parameterType="com.pmo.dashboard.entity.AddDemand">

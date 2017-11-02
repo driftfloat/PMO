@@ -7,7 +7,7 @@
 		<result property="ehr" column="E_HR" javaType="String" />
 		<result property="staffName" column="STAFF_NAME" javaType="String" />
 		<result property="staffRegion" column="STAFF_REGION" javaType="String" />
-		<result property="experienceYearas" column="GRADUATION_DATE" javaType="String" />
+		<result property="experienceYearas" column="experienceYearas" javaType="String" />
 		<result property="role" column="ROLE" javaType="String" /> 
 		<result property="skill" column="SKILL" javaType="String" />
 		<result property="status" column="INTERVIERW_STATUS" javaType="String" />
@@ -22,6 +22,7 @@
 	      <if test="interviewer.ehr!=null and interviewer.ehr!=''"> 
 	          and E_HR = #{interviewer.ehr}
 	      </if>
+	     
 	      <if test="interviewer.staffRegion!=null and interviewer.staffRegion!=''"> 
 	          and STAFF_REGION = #{interviewer.staffRegion}
 	      </if>
@@ -51,9 +52,10 @@
 	      </if>
 	   </where>
 	 </sql>
+	 
 	
 	  <select id="queryInterviewerList" parameterType="java.util.HashMap" resultMap="interviewerMap">
-	      select * ,(SUBSTR(SYSDATE(),1,4)-SUBSTR(GRADUATION_DATE,1,4))  experienceYearas  from t_employee
+	      select *  from t_employee
 	      <include refid="queryWhere"></include>
 	      limit #{num}, #{interviewer.pageSize} 
 	  </select>
@@ -100,7 +102,7 @@
 	  
 	  <insert id="insertInterviewerToUser" parameterType="com.pmo.dashboard.entity.Interviewer" >
 	       insert into t_user (USER_ID,USER_NAME,NICKNAME,PASSWORD,USER_TYPE,CSDEPT_ID) 
-	       values(#{employeeId},#{ehr},#{staffName},"123","2",#{csSubDeptId})
+	       values(#{employeeId},#{ehr},#{staffName},"123","10",#{csSubDeptId})
 	       
 	  </insert>
 	  <select id="select" parameterType="String" resultType="com.pmo.dashboard.entity.Interviewer">

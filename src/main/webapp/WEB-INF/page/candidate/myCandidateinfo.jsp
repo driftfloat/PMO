@@ -472,6 +472,21 @@ var path='<%=path%>';
 							</div>
 						</div>
 						<br/><br/><br/>
+						<div class="group" id="recordTable">
+							<label class="col-sm-2 control-label">Record:</label>
+						</div>
+						<br/>
+						
+						<div style="overflow: auto;" >
+									<table id="feedbackList" class="table table-striped table-bordered">
+										<thead>
+											
+										</thead>
+										<tbody></tbody>
+									</table>
+									</div>
+						
+						<br/>
 						<div class="group">
 							<label class="col-sm-2 control-label">Feedback:</label>
 							<textarea id="hrFeedBack" class="form-control" style="margin:15px;width: 80%;" rows="5"></textarea>

@@ -98,10 +98,10 @@ var path='<%=path%>';
 											</div>
 										</div>
 										<div class="group">
-											<label class="col-sm-2 control-label">Employee ID</label>
+											<label class="col-sm-2 control-label">Staff ID</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="employeeid"
-													id="employeeid" />
+												<input type="text" class="form-control" name="hsbcStaffId"
+													id="hsbcStaffId" />
 											</div>
 										</div>
 								</div>
@@ -207,7 +207,7 @@ var path='<%=path%>';
 											<tr>
 												<th>E-HR</th>
 												<th>LOB</th>
-												<th>Employee Id</th>
+												<th>Staff Id</th>
 												<th>Staff Name</th>
 												<th>Skill</th>
 												<th>Location</th>

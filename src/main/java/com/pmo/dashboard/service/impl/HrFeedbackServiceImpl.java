@@ -1,5 +1,7 @@
 package com.pmo.dashboard.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -17,5 +19,11 @@ public class HrFeedbackServiceImpl implements HrFeedbackService {
 	public boolean updateCandidateInfo(HrFeedback hrFeedback) {
 
 		return hrFeedbackMapper.updateCandidateInfo(hrFeedback);
+	}
+
+	@Override
+	public List<HrFeedback> hrfeedbackQuery(String candidateId) {
+		
+		return hrFeedbackMapper.hrfeedbackQuery(candidateId);
 	}
 }
