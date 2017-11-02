@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.xalan.transformer.TransformState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -337,14 +338,10 @@ public class DemandController {
 	 */
 	@RequestMapping("/demandDetail")
 	public String demandDetail(String demandId,Model model,HttpServletRequest request){
-		/*List<Demand> list = (List<Demand>) request.getSession().getAttribute("demandList");
-		for (Demand demand : list) {
-			if(demand.getDemandId().equals(demandId)){
-				model.addAttribute("demand", demand);
-				return "/demand/demandDetail";
-			}
-		}*/
+		
 	    Demand demand = demandService.queryDemandById(demandId);
+	    
+	    
 	    
 	    model.addAttribute("demand", demand);
 	    
@@ -365,6 +362,10 @@ public class DemandController {
 				return "/demand/demandOnboard";
 			}
 		}
+		Demand demand = demandService.queryDemandByCandidateId(candidateId);
+		
+	    model.addAttribute("demand", demand);
+	    request.setAttribute("onboardInfo", demand);
 		return "/demand/demandOnboard";
 	}
 	

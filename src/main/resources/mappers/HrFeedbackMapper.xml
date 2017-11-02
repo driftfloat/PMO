@@ -22,7 +22,7 @@
 	</insert>
 	<select id="hrfeedbackQuery" parameterType="String" resultMap="hrFeedbackMap">
 	 select * from t_candidate_hr_feedback a,t_user b where  a.user_id=b.user_id  and candidate_id=#{candidateId}
-	 order by feedbacktime;
+	 order by FEEDBACK_DATE;
 	</select>
 	
 </mapper>

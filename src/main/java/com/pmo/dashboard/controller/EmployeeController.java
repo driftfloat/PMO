@@ -90,6 +90,7 @@ public class EmployeeController {
     		}
     		for(Demand demand:list2) {
     			if(candId.equals(demand.getCandidateId())) {
+    				Demand demandinfo=(Demand) request.getAttribute("onboardInfo");
     				em.setStaffRegion(demand.getLocation());
     				em.setStaffLocation("China");
     				em.setSow(demand.getDoNumber());

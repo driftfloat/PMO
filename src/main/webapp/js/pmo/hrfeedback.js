@@ -6,7 +6,7 @@ function feedbackCandidateInfo(candidateId,candidateName){
 	$('#feedbackList tbody').html("")
 	$('#hrFeedBack').html("");
 	$.ajax({
-		url:path+"/service/hrfeedback/hrfeedbackQuery",
+		url:path+"/service/hrfeedback/hrfeedbackQuery ",
 		dataType:"json",
 		async:true,
 		data:{'candidateId':candidateId},
@@ -19,7 +19,7 @@ function feedbackCandidateInfo(candidateId,candidateName){
 				$('#recordTable').display = "none";;
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
-				$("<td colspan='14' style='color: red;text-align: center;'>无反馈记录！</td>").appendTo(tr);
+				$("<td colspan='4' style='color: red;text-align: center;'>无反馈记录！</td>").appendTo(tr);
 			}
 			for (var i = 0; i < result.length; i++) {
 				var tr = $("<tr ></tr>");

@@ -29,11 +29,16 @@
 		<result property="doNumber" column="DO_NUMBER" javaType="String" />
 		<result property="hrPriority" column="HR_PRIORITY" javaType="String" />
 		<result property="completionDay" column="COMPLETION_DAY" javaType="String" />
-		<association property="hsbcDept" javaType="com.pmo.dashboard.entity.HSBCDept">
-			<id column="hsbcSubDeptId" property="HSBC_SUBDEPT_ID"/>
-			<id column="hsbcSubDeptName" property="HSBC_SUBDEPT_NAME"/>
-			<id column="hsbcDeptName" property="HSBC_DEPT_NAME"/>
-		</association>
+		
+		<result property="hsbcSubDeptName" column="HSBC_SUBDEPT_NAME" javaType="String" />
+		<result property="hsbcDeptName" column="HSBC_DEPT_NAME" javaType="String" />
+		<result property="csDeptName" column="CS_SUBDEPT_NAME" javaType="String" />
+		<!-- <association property="hsbcDept" javaType="com.pmo.dashboard.entity.HSBCDept">
+		
+			<id column="HSBC_SUBDEPT_ID" property="hsbcSubDeptId" />
+			<id column="HSBC_SUBDEPT_NAME" property="hsbcSubDeptName" />
+			<id column="HSBC_DEPT_NAME" property="hsbcDeptName" />
+		</association> -->
 	</resultMap>
 	
 	<sql id="queryWhere">
@@ -72,10 +77,13 @@
 		</where>
 	</sql>
 	
-	<select id="queryDemandById" parameterType="String" resultType="com.pmo.dashboard.entity.Demand">
-	    SELECT * FROM t_demand WHERE DEMAND_ID = #{demandId};
+	<select id="queryDemandById" parameterType="String" resultMap ="demandMap">
+	    SELECT * FROM t_demand a ,t_cs_dept b,t_hsbc_dept c WHERE a.CS_SUBDEPT=b.CS_SUBDEPT_ID and a.HSBC_SUBDEPT_ID=c.HSBC_SUBDEPT_ID and a.DEMAND_ID = #{demandId};
 	</select>
 	
+	<select id="queryDemandBycandidateId" parameterType="String" resultMap ="demandMap">
+	    SELECT * FROM t_demand a ,t_cs_dept b,t_hsbc_dept c WHERE a.CS_SUBDEPT=b.CS_SUBDEPT_ID and a.HSBC_SUBDEPT_ID=c.HSBC_SUBDEPT_ID and   a.CANDIDATE_ID = #{candidateId};
+	</select>
 	<select id="queryDemandList" parameterType="java.util.HashMap" resultMap="demandMap">
 		select *
 		from  t_demand a,t_cs_dept b 
@@ -178,7 +186,7 @@
 	</select>
 	
 	<update id="updateCandidateIdById" parameterType="java.util.HashMap">
-		update t_demand set CANDIDATE_ID = #{candidateId}, STATUS = 'OfferMade'
+		update t_demand set CANDIDATE_ID = #{candidateId}, STATUS = 'OfferMade',CANDIDATE_NAME= #{candidateName}
 		where DEMAND_ID = #{demandId}
 	</update>
 	

@@ -44,10 +44,11 @@ public class HrFeedbackController
 		}
 		
     }
-    @RequestMapping("/ hrfeedbackQuery")
+    @RequestMapping("/hrfeedbackQuery")
     @ResponseBody
     public List<HrFeedback>  hrfeedbackQuery(String candidateId, HttpServletRequest request){
     	List<HrFeedback> list=hrFeedbackservice.hrfeedbackQuery(candidateId);
+    	
     	return hrFeedbackservice.hrfeedbackQuery(candidateId);
     }
 }
