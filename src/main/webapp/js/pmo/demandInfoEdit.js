@@ -480,9 +480,9 @@ function demandDetailUpdate(demandId){
 function updateDemand(){
 	var bootstrapValidator = $("#recruitdemandFormEdit").data('bootstrapValidator');
 	   bootstrapValidator.validate();
-	   alert("dafdsfdsfds");
 	if(bootstrapValidator.isValid()){
 		var demandId=$('#demandIdEdit').val();
+		var engagementType=$('#engagementType').val();
 		var rr=$('#rrEdit').val();
 		var jobCode=$('#jobCodeEdit').val();
 		var skill=$('#skillEdit').val();
@@ -526,7 +526,7 @@ function updateDemand(){
 		$.ajax({
 			url:path+'/service/demand/updateDemand',
 			dataType:"json",
-			data:{"demandId":demandId,"rr":rr,"jobCode":jobCode,"skill":skill,"requestor":requestor,
+			data:{"demandId":demandId,"rr":rr,"engagementType":engagementType,"jobCode":jobCode,"skill":skill,"requestor":requestor,
 				"position":position,"location":location,
 				"reqPublishedDate":reqPublishedDate,"ageing":ageing,"profilesNo":profilesNo,
 				"interviewedNo":interviewedNo,"status":status,"staffName":staffName,

@@ -48,6 +48,7 @@
 <link href='<%=path %>/css/animate.min.css' rel='stylesheet'>
 <link href='<%=path%>/css/bootstrap-datetimepicker.css' rel='stylesheet'>
 <link href='<%=path%>/css/bootstrap-datetimepicker.min.css' rel='stylesheet'>
+<link href='<%=path%>/css/style.css' rel='stylesheet'>
 
 <!-- jQuery -->
 <script src="<%=path %>/bower_components/jquery/jquery.min.js"></script>
@@ -84,209 +85,270 @@ $(function(){
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> 招聘需求详情
+									<i class="glyphicon glyphicon-user"></i> 招聘需求信息
 								</h2>
 							</div>
-							<div id="demandInfo" class="box-content">
-						    
-							    <form id="demandForm" method="post" class="form-horizontal">
+							<div id="register" class="box-content" style="overflow: auto;">
+							<form  id="recruitdemandFormEdit" method="post">
+							    <div class="form-group hidden">
+									    <input type="hidden" name="demandIdEdit" id="demandIdEdit" value="${demand.demandId}"/>
+									    <input type="hidden" name="status" id="status" value="${demand.status}"/>
+								</div>
 									
+							    
+								<div class="form-group">
+										<div id="successAlert" class="alert alert-success"
+											style="display: none;"></div>
 										<div class="group">
-										<div class="group">
-											<label class="col-sm-2 control-label">RR #</label>
+											<label class="col-sm-2 control-label">Engagement Type</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control"  name="rr" value="${demand.rr }"
-													id="rr"/>
+												<select class="form-control" name="engagementType"
+													data-bv-notempty
+													data-bv-notempty-message="Please Select Your Engagement Type"
+													id="engagementType" data-bv-group=".group">
+                                                    <option value="${demand.engagementType}">${demand.engagementType}</option>
+												</select>
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">Status</label>
+											<div class="col-lg-4">
+												<select class="form-control" name="statusEdit" data-bv-notempty
+													data-bv-notempty-message="Please Select Your Status"
+													id="statusEdit" data-bv-group=".group">
+                                                    <option value="${demand.status}">${demand.status}</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								<div class="form-group">
+										<div class="group">
+											<label class="col-sm-2 control-label">RR</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="rrEdit" value="${demand.rr}" 
+													id="rrEdit" />
 											</div>
 										</div>
 										<div class="group">
 											<label class="col-sm-2 control-label">Job Code</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="jobCode" value="${demand.jobCode }"
-													id="jobCode"/>
+												<input type="text" class="form-control" name="jobCodeEdit" value="${demand.jobCode}"
+													id="jobCodeEdit" />
 											</div>
 										</div>
-										</div>
-										</br></br></br>
-										<div class="group">
-										<label class="col-lg-2 control-label">Department</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="hsbcDept.hsbcDeptName" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="department" data-bv-group=".group">
-												<option value="${demand.hsbcDeptName }">${demand.hsbcDeptName }</option>
-											</select>
-										</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">Sub - Department</label>
-											<div class="col-sm-4">
-												<select class="form-control" name="hsbcDept.hsbcSubDeptName" data-bv-notempty
-													data-bv-notempty-message="请选择角色" id="sub_department" data-bv-group=".group">
-													<option value="${demand.hsbcSubDeptName }">${demand.hsbcSubDeptName }</option>
-												</select>
-											</div>
-										</div>
-										</br></br></br>
-										
-								        <div id="successAlert" class="alert alert-success" style="display: none;"></div>
-										
-										<div class="group">
-											<label class="col-sm-2 control-label">Status</label>
-											<div class="col-sm-4">
-												<select class="form-control" name="status" data-bv-notempty
-													data-bv-notempty-message="请选择角色" id="status" data-bv-group=".group">
-													<option value="${demand.status }">${demand.status }</option>
-												</select>
-											</div>
-										</div>
-										<label class="col-lg-2 control-label">Tech/Skill</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="skill" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="skill" data-bv-group=".group">
-												<option value="${demand.skill }">${demand.skill }</option>
-											</select>
-										</div>
-										</br></br></br>
-										
-										
-										<div class="group">
-											<label class="col-sm-2 control-label">Cs Dept</label>
-											<div class="col-sm-4">
-												<select class="form-control" name="csSubDept" data-bv-notempty
-													data-bv-notempty-message="请选择角色" id="scSubDeptName" data-bv-group=".group">
-													<option value="${demand.csDeptName }">${demand.csDeptName }</option>
+								</div>
+								
+								<div class="form-group">
+								         <div class="group">
+											<label class="col-lg-2 control-label">Skill</label>
+											<div class="col-lg-4">
+												<select class="form-control" name="skillEdit" data-bv-notempty
+													data-bv-notempty-message="Pleaser Select Your Skill " id="skillEdit" data-bv-group=".group">
+													<option value="${demand.skill }"></option>
 												</select>
 											</div>
 										</div>
 										<div class="group">
-											<label class="col-sm-2 control-label">Staff Name</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="candidateName" value="${demand.candidateName }"
-													id="requestor"/>
+											<label class="col-lg-2 control-label">Position</label>
+											<div class="col-lg-4">
+												<select class="form-control" name="positionEdit" data-bv-notempty
+													data-bv-notempty-message="Please Select Your Position" id="positionEdit" data-bv-group=".group">
+													<option value="${demand.position }"></option>								
+												</select>
 											</div>
 										</div>
-										</br></br></br>
-										
-										<div class="group">
-										<label class="col-lg-2 control-label">Position</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="position" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="position" data-bv-group=".group">
-												<option value="${demand.position }">${demand.position }</option>
-											</select>
-										</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">Requestor</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="requestor" value="${demand.requestor }"
-													id="requestor"/>
-											</div>
-										</div>
-										</br></br></br>
-										
-										<div class="group">
-											<label class="col-sm-2 control-label">Location</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="location" value="${demand.location }"
-													id="location"/>
+								</div>
+								<div class="form-group">
+								       <div class="group">
+											<label class="col-lg-2 control-label">Location</label>
+											<div class="col-lg-4">
+												<select class="form-control" name="locationEdit" data-bv-notempty
+													data-bv-notempty-message="Please Select Your Location" id="locationEdit" data-bv-group=".group">
+													<option value="${demand.location }"></option>								
+												</select>
 											</div>
 										</div>
 										<div class="group">
-											<label class="col-sm-2 control-label">Req published Date</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="reqPublishedDate" value="${demand.reqPublishedDate }"
-													id="reqPublishedDate"/>
+										<label class="col-sm-2 control-label">Planned Onboard Date
+											</label>
+										<div class="col-md-4">
+											<div class="input-group date form_datetime1 col-sm-12"
+												data-link-field="dt_set_order_time_input">
+												<input class="form-control" type="text" readonly data-bv-group=".group"
+													id="plannedOnboardDate1" name="plannedOnboardDate1" value="${demand.plannedOnboardDate }"> <span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
+													id="plannedOnboardDate2" name="plannedOnboardDate2" />
 											</div>
 										</div>
-										</br></br></br>
-										
+									</div>
+								</div>
+								
+								<div class="form-group">
 										<div class="group">
-											<label class="col-sm-2 control-label">Ageing</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="ageing" value="${demand.ageing }"
-													id="ageing"/>
+											<label class="col-lg-2 control-label">HR Priority</label>
+											<div class="col-lg-4">
+												<select class="form-control" name="hrPriorityEdit" data-bv-notempty
+													data-bv-notempty-message="Please Select Your HrPriority" id="hrPriorityEdit" data-bv-group=".group">
+													<option value="${demand.hrPriority }"></option>
+												</select>
 											</div>
 										</div>
-										<div class="group">
+								        <div class="group">
+											<label class="col-sm-2 control-label">Remark</label>
+											<div class="col-md-4">
+												<input type="text" class="form-control" name="remarkEdit" value="${demand.remark }"
+														id="remarkEdit" />
+											</div>
+									    </div>
+								</div>
+								<div class="form-group">
+								         <div class="group">
 											<label class="col-sm-2 control-label">No. of Profiles Sent to HSBC</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="profilesNo" value="${demand.profilesNo }"
-													id="profilesNo"/>
+												<input type="text" class="form-control" name="profilesNoEdit" value="${demand.profilesNo }"
+													id="profilesNoEdit"/>
 											</div>
 										</div>
-										</br></br></br>
-										
-										<div class="group">
+								         <div class="group">
 											<label class="col-sm-2 control-label">No of Profiles Interviewed</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="interviewedNo" value="${demand.interviewedNo }"
-													id="interviewedNo"/>
+												<input type="text" class="form-control" name="interviewedNoEdit" value="${demand.interviewedNo }"
+													id="interviewedNoEdit"/>
 											</div>
 										</div>
+								</div>
+								<div class="form-group">
+								        <div class="group">
+											<label class="col-sm-2 control-label">Req published Date</label>
+											<div class="col-md-4">
+												<div class="input-group date form_datetime col-sm-12"
+													data-link-field="dt_set_order_time_input">
+													<input class="form-control" type="text" readonly data-bv-group=".group"
+														id="reqPublishedDate1Edit" name="reqPublishedDate1Edit" value="${demand.reqPublishedDate }"> 
+														<span class="input-group-addon">
+															<span class="glyphicon glyphicon-th">
+															</span>
+														</span> 
+														<input type="hidden" id="reqPublishedDate2Edit" name="reqPublishedDate2Edit" />
+												</div>
+											</div>
+										</div>
+								        <div class="group">
+											<label class="col-sm-2 control-label">Ageing</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="ageingEdit" value="${demand.ageing }"
+													id="ageingEdit"/>
+											</div>
+										</div>
+								
+								</div>
+								<div class="form-group">
+								       <div class="group">
+										<label class="col-lg-2 control-label">HSBC Department</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="hsbcDeptEdit" data-bv-notempty
+												data-bv-notempty-message="Please Select Your HsbcDept" id="hsbcDeptEdit" data-bv-group=".group">
+												<option value="${demand.hsbcDept.hsbcDeptName }"></option>
+											</select>
+										</div>
+										</div>
 										<div class="group">
+										<label class="col-lg-2 control-label">HSBC Sub-Department</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="hsbcSubDeptEdit" data-bv-notempty
+												data-bv-notempty-message="Please Select Your HsbcSubDept" id="hsbcSubDeptEdit" data-bv-group=".group">
+												<option value="${demand.hsbcDept.hsbcSubDeptName }"></option>
+											</select>
+										</div>
+										</div>
+								</div>
+								<div class="form-group">
+								         <div class="group">
+											<label class="col-lg-2 control-label">HSBC Requestor</label>
+											<div class="col-lg-4">
+													<input type="text" class="form-control" name="requestorEdit" value="${demand.requestor }"
+														id="requestorEdit" />
+											</div>
+										</div>
+								        <div class="group">
+											<label class="col-sm-2 control-label">CS Department</label>
+											<div class="col-sm-4">
+												<select class="form-control" name="csSubDeptEdit" data-bv-notempty
+												data-bv-notempty-message="Please Select Your CsSubDept" id="csSubDeptEdit" data-bv-group=".group">
+												<option value="${demand.csSubDept }"></option>
+									        	</select>
+											</div>
+										</div>
+								
+								</div>
+								<div class="form-group" id="atype" style='display:none'>
+										<div class="group" id="staffnameEdit" style='display:none'>
+											<label class="col-sm-2 control-label">Staff Name</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="candidateNameEdit" value="${demand.candidateName }"
+													id="candidateNameEdit"/>
+											</div>
+										</div>
+									    <div class="group" id="joiningEdit" style='display:none'>
 											<label class="col-sm-2 control-label">Proposed Date of Joining</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="proposedJoiningDate" value="${demand.proposedJoiningDate }"
-													id="proposedJoiningDate"/>
+												<input type="text" class="form-control" name="proposedJoiningDateEdit" value="${demand.proposedJoiningDate }"
+													id="proposedJoiningDateEdit"/>
 											</div>
 										</div>
-										</br></br></br>
-										
-										<div class="group">
-											<label class="col-sm-2 control-label">SOW signed</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="sowSigned" value="${demand.sowSigned }"
-													id="sowSigned"/>
-											</div>
-										</div>
-										<div class="group">
+								</div>
+								<div class="form-group" id="btype"style='display:none'>
+								        <div class="group" id="bgvEdit" style='display:none'>
 											<label class="col-sm-2 control-label">BGV Cleared</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="bgvCleared" value="${demand.bgvCleared }"
-													id="bgvCleared"/>
+												<input type="text" class="form-control" name="bgvClearedEdit" value="${demand.bgvCleared }"
+													id="bgvClearedEdit"/>
 											</div>
 										</div>
-										</br></br></br>
-										<div class="group">
-											<label class="col-sm-2 control-label">Reason for Abort / Delay</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="reason" value="${demand.reason }"
-													id="reason"/>
-											</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">Remark</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="remark" value="${demand.remark }"
-													id="rr"/>
-											</div>
-										</div>
-										</br></br></br>
-										<div class="group">
-											<label class="col-sm-2 control-label">Planned Onboard date</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="plannedOnboardDate" value="${demand.plannedOnboardDate }"
-													id="plannedOnboardDate"/>
-											</div>
-										</div>
-										<div class="group">
+										<div class="group" id="donumberEdit" style='display:none'>
 											<label class="col-sm-2 control-label">DO number</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="doNumber" value="${demand.doNumber }"
-													id="doNumber"/>
+												<input type="text" class="form-control" name="doNumberEdit" value="${demand.doNumber }"
+													id="doNumberEdit"/>
 											</div>
 										</div>
-										</br></br></br>
-										<div class="group">
-											<label class="col-sm-2 control-label">HR Priority</label>
+								</div>
+								<div class="form-group"id="ctype" style='display:none'>
+								       <div class="group" id="reasonAbort" style='display:none'>
+											<label class="col-sm-2 control-label">Reason for Abort</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="hrPriority" value="${demand.hrPriority }"
-													id="hrPriority"/>
+												<input type="text" class="form-control" name="reasonEdit" value="${demand.reason }"
+													id="reasonEdit"/>
 											</div>
 										</div>
-										
-										</br></br></br>
+										<div class="group" id="reasonDelayed" style='display:none'>
+											<label class="col-sm-2 control-label">Reason for Delay</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="reasonEdit" value="${demand.reason }"
+													id="reasonEdit"/>
+											</div>
+										</div>
+								</div>
+								
+								
+								<div class="form-group">
+									    <div style="text-align:center;width:50%;float:left">
+									    <input type="button" value="修&nbsp;&nbsp;改"
+										name="subscribe" id="sub_search" href="#"
+										class="button btn btn-primary" data-dismiss="modal"
+										onclick="updateDemand()"
+										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
+									    </div>
+									    <div style="text-align:center;width:50%;float:right">
+									    <input type="reset" value="重&nbsp;&nbsp;置"
+										name="subscribe" id="sub_add" href="#"
+										class="button btn btn-primary" data-dismiss="modal"
+										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
+									    </div>
+								</div>
+								
+							</form>
 							</div>
 						</div>
 				</div>
@@ -298,6 +360,7 @@ $(function(){
 		</div>
 
 		<hr>
+
 		<c:import url="/service/manage/footer" />
 
 	</div>
@@ -345,12 +408,13 @@ $(function(){
 	<!-- application script for Charisma demo -->
 	<script src="<%=path %>/js/charisma.js"></script>
 
-	<%-- <script type="text/javascript" src="<%=path %>/js/pmo/demandDetail.js"></script> --%>
+    <%-- <script type="text/javascript" src="<%=path %>/js/pmo/loadHSBCDept.js"></script>  --%>
+	<script type="text/javascript" src="<%=path %>/js/pmo/recruitdemanda.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/demandvalid.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/demandInfoEdit.js"></script>
 
 </body>
 </html>
-
-

@@ -236,14 +236,20 @@ function loadDemandList(currPage){
 					var td5 = $("<td>"+result.list[i].hsbcDept.hsbcSubDeptName+"</td>");
 				}
 				var td6 = $("<td>"+result.list[i].status+"</td>");
+				var status=result.list[i].status;
 				var td7 = $("<td>"+result.list[i].csSubDept+"</td>");
 				var demandId = result.list[i].demandId;
+				var statusa  = result.list[i].status;
 				if(userType=='5' || userType=='6'){
-					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"')>Detail</a></td>");
+					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a></td>");
+				}else if(status=='Cancel'||status=='Abort'){
+					
+					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a></td>");
+
 				}else{
-					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"')>Detail</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate('"+demandId+"')>Edit</a></td>");
+					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate('"+demandId+"','"+statusa+"')>Edit</a></td>");
+
 				}
-				
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
@@ -312,16 +318,18 @@ function exportCondition(){
 	$("[type='checkbox']").removeAttr("checked");
 }
 
-function demandDetail(demandId){
+function demandDetail(demandId,statusa){
 	$("#demandId").val(demandId);
+	$('#statusa').val(statusa);
 	var url = path+'/service/demand/demandDetail';
 	$("#detailForm").attr("action",url);
 	$("#detailForm").submit();
 }
 
 //add by jama
-function demandDetailUpdate(demandId){
+function demandDetailUpdate(demandId,statusa){
 	$("#demandId").val(demandId);
+	$('#statusa').val(statusa);
 	var url = path+'/service/demand/demandDetailUpdate';
 	$("#detailForm").attr("action",url);
 	$("#detailForm").submit();

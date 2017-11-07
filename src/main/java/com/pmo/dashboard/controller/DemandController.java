@@ -363,7 +363,7 @@ public class DemandController {
 	 * @return
 	 */
 	@RequestMapping("/demandDetail")
-	public String demandDetail(String demandId,Model model,HttpServletRequest request){
+	public String demandDetail(String demandId,String statusa,Model model,HttpServletRequest request){
 		
 	    Demand demand = demandService.queryDemandById(demandId);
 	    

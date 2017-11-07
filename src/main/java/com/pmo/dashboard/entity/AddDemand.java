@@ -9,6 +9,16 @@ public class AddDemand
 
     private String demandId;
     
+    public String getEngagementType() {
+		return engagementType;
+	}
+
+	public void setEngagementType(String engagementType) {
+		this.engagementType = engagementType;
+	}
+
+	private String engagementType;
+    
     private String rr;
     
     private String jobCode;
