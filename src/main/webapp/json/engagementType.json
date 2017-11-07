@@ -1,4 +1,6 @@
 [
         {"name":"Time&Material"},
-        {"name":"Team Delivery"}
+        {"name":"Team Delivery"},
+        {"name":"Fixed Price"},
+        {"name":"Support"}
 ]

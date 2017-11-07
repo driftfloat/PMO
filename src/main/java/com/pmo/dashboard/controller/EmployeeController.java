@@ -698,7 +698,7 @@ public String getTMemployee(final HttpServletRequest request,
         final HttpServletResponse response,String status){
 	
 	if("1".equals(status)){
-		return "index";
+		return "index1";
 	/*}else if("2".equals(status)){
 		return "index2";*/
 	}else if("3".equals(status)){

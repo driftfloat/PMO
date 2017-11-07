@@ -1,7 +1,7 @@
 $(function(){
 	loadDept();
 	loadStaffCategory();
-	loadEngagementType();
+	//loadEngagementType();
 	loadRole();
 	loadSkill();
 	loadGbGf();
