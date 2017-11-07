@@ -5,7 +5,8 @@ $(function(){
 	/*loadDemandStatusEdit();*/
 	loadDepartmentEdit();
 	//loadSubDepartmentEdit();
-	
+	dateType();
+	dateType1();
 	//loadDemandListEdit();
 	$("#searchBtn").click(function(){
 		loadDemandListEdit();
@@ -196,7 +197,41 @@ function loadScSubDeptNameEdit(){
 		}
 	})
 }
+function dateType(){
+	$('.form_datetime').datetimepicker({
+		weekStart: 1,
+		minView:'month',
+		todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+		language:'zh-CN',
+		format: 'yyyy-mm-dd',
+		pickerPosition: 'bottom-left',
+		showMeridian: 1
+	}).on('changeDate', function(ev){
+		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField','plannedOnboardDate1'); 
+	});
+}
 
+function dateType1(){
+	$('.form_datetime').datetimepicker({
+		weekStart: 1,
+		minView:'month',
+		todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+		language:'zh-CN',
+		format: 'yyyy-mm-dd',
+		pickerPosition: 'bottom-left',
+		showMeridian: 1
+	}).on('changeDate', function(ev){
+		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField', 'reqPublishedDate1Edit'); 
+	});
+}
 /*异步加载Department信息*/
 function loadDepartmentEdit(){
 	$.ajax({

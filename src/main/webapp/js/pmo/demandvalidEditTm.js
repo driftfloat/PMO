@@ -7,6 +7,7 @@ $(document).ready(function() {
 	invalid: 'glyphicon glyphicon-remove', 
 	validating: 'glyphicon glyphicon-refresh' 
 	}, 
+	excluded:[":disabled"],
 	fields: { 
 	rrEdit: { 
 	validators: { 
@@ -86,9 +87,16 @@ $(document).ready(function() {
 	 } 
 	}, 
 	plannedOnboardDate1: { 
-	validators: { 
-	
-	 } 
+		validators: {
+            notEmpty: {
+                message: 'Please entry date'
+            },
+            date : {  
+                format : 'YYYY-MM-DD',  
+                message : 'Time format is incorrect'  
+            }
+
+        }
 	} 
 	} 
 	})  
@@ -156,7 +164,7 @@ $(document).ready(function() {
 
                 }
             },
-            plannedOnboardDate1Edit: {
+            plannedOnboardDate1: {
                 validators: {
                     notEmpty: {
                         message: 'Please entry date'
@@ -213,6 +221,14 @@ $(document).ready(function() {
 
                 }
             },
+            remarkEdit: { 
+            	validators: { 
+            		notEmpty: {
+                        message: 'Please select your Remark'
+                    }
+
+            	 } 
+            	}, 
             hsbcDeptEdit: {
                 validators: {
                     notEmpty: {

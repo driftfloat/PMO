@@ -178,13 +178,13 @@ var userType='<%=userType%>'
 										<label class="col-sm-2 control-label">Planned Onboard Date
 											</label>
 										<div class="col-md-4">
-											<div class="input-group date form_datetime1 col-sm-12"
+											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" readonly data-bv-group=".group"value="${demand.plannedOnboardDate }"
+												<input class="form-control" type="text" value="${demand.plannedOnboardDate }"
 													id="plannedOnboardDate1" name="plannedOnboardDate1" > <span
 													class="input-group-addon"><span
 													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
-													id="plannedOnboardDate2" name="plannedOnboardDate2"value="${demand.plannedOnboardDate }" />
+													id="plannedOnboardDate2" name="plannedOnboardDate2"value="${demand.plannedOnboardDate }" data-bv-field="plannedOnboardDate2"/>
 											</div>
 										</div>
 									</div>
@@ -206,7 +206,7 @@ var userType='<%=userType%>'
 											<label class="col-sm-2 control-label">Remark</label>
 											<div class="col-md-4">
 												<input type="text" class="form-control" name="remarkEdit" value="${demand.remark }"
-														id="remarkEdit" />
+														id="remarkEdit" data-bv-group=".group" />
 											</div>
 									    </div>
 								</div>
@@ -215,14 +215,14 @@ var userType='<%=userType%>'
 											<label class="col-sm-2 control-label">No. of Profiles Sent to HSBC</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="profilesNoEdit" value="${demand.profilesNo }"
-													id="profilesNoEdit"/>
+													id="profilesNoEdit" data-bv-group=".group"/>
 											</div>
 										</div>
 								         <div class="group">
 											<label class="col-sm-2 control-label">No of Profiles Interviewed</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="interviewedNoEdit" value="${demand.interviewedNo }"
-													id="interviewedNoEdit"/>
+													id="interviewedNoEdit" data-bv-group=".group"/>
 											</div>
 										</div>
 								</div>
@@ -233,12 +233,12 @@ var userType='<%=userType%>'
 												<div class="input-group date form_datetime col-sm-12"
 													data-link-field="dt_set_order_time_input">
 													<input class="form-control" type="text" readonly data-bv-group=".group"value="${demand.reqPublishedDate }"
-														id="reqPublishedDate1Edit" name="reqPublishedDate1Edit"> 
+														id="reqPublishedDate1Edit" name="reqPublishedDate1Edit" data-bv-group=".group"> 
 														<span class="input-group-addon">
 															<span class="glyphicon glyphicon-th">
 															</span>
 														</span> 
-														<input type="hidden" id="reqPublishedDate2Edit" name="reqPublishedDate2Edit" value="${demand.reqPublishedDate }" />
+														<input type="hidden" id="reqPublishedDate2Edit" name="reqPublishedDate2Edit" value="${demand.reqPublishedDate }"  data-bv-group=".group"/>
 												</div>
 											</div>
 										</div>
@@ -246,7 +246,7 @@ var userType='<%=userType%>'
 											<label class="col-sm-2 control-label">Ageing</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="ageingEdit" value="${demand.ageing }"
-													id="ageingEdit"/>
+													id="ageingEdit" data-bv-group=".group"/>
 											</div>
 										</div>
 								
