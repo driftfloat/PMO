@@ -124,26 +124,6 @@ var path='<%=path%>';
 										</div>
 										</div>
 										</br></br></br>
-										<div class="group">
-										<label class="col-lg-2 control-label">Department</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="hsbcDept.hsbcDeptName" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="department" data-bv-group=".group">
-												<option value="">--Option--</option>
-											</select>
-										</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">Sub - Department</label>
-											<div class="col-sm-4">
-												<select class="form-control" name="hsbcDept.hsbcSubDeptName" data-bv-notempty
-													data-bv-notempty-message="请选择角色" id="sub_department" data-bv-group=".group">
-													<option value="">--Option--</option>
-												</select>
-											</div>
-										</div>
-										</br></br></br>
-										
 								        <div id="successAlert" class="alert alert-success" style="display: none;"></div>
 										
 										<div class="group">
@@ -190,10 +170,10 @@ var path='<%=path%>';
 										<thead>
 											<tr>
 												<th>RR</th>
-												<th>Tech/Skill</th>
+												<th>Job Code</th>
+												<th>Skill</th>
 												<th>Position</th>
-												<th>Department</th>
-												<th>Sub - Department</th>
+												<th>Location</th>
 												<th>Status</th>
 												<th>CsDpet</th>
 												<th>Operate</th>

@@ -118,12 +118,12 @@
 					</if> -->
 				</otherwise>
 			</choose>
-			<if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
+			<!-- <if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
 				and HSBC_SUBDEPT_ID in 
 				<foreach item="item" collection="hsbcSubDeptIdList" open="(" separator="," close=")">
 					#{item}
 				</foreach>
-			</if>
+			</if> -->
 		</where>
 		limit #{num}, #{pageCondition.pageSize}
 	</select>
@@ -148,12 +148,12 @@
 					and a.CS_SUBDEPT = #{demand.csSubDept}
 				</when>
 			</choose>
-			<if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
+			<!-- <if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
 				and HSBC_SUBDEPT_ID in 
 				<foreach item="item" collection="hsbcSubDeptIdList" open="(" separator="," close=")">
 					#{item}
 				</foreach>
-			</if>
+			</if> -->
 		</where>
 		limit #{num}, #{pageCondition.pageSize}
 	</select>
@@ -181,12 +181,12 @@
 			<if test="demand.csSubDept!=null and demand.csSubDept!=''">
 			    and a.CS_SUBDEPT = #{demand.csSubDept}
 			</if>
-			<if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
+			<!-- <if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
 				and HSBC_SUBDEPT_ID in 
 				<foreach item="item" collection="hsbcSubDeptIdList" open="(" separator="," close=")">
 					#{item}
 				</foreach>
-			</if>
+			</if> -->
 		</where>
 		
 	</select>
@@ -213,12 +213,12 @@
 			<if test="demand.csSubDept!=null and demand.csSubDept!=''">
 			    and a.CS_SUBDEPT = #{demand.csSubDept}
 			</if>
-			<if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
+			<!-- <if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
 				and HSBC_SUBDEPT_ID in 
 				<foreach item="item" collection="hsbcSubDeptIdList" open="(" separator="," close=")">
 					#{item}
 				</foreach>
-			</if>
+			</if> -->
 		</where>
 		
 	</select>

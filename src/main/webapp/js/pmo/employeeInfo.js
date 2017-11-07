@@ -292,6 +292,24 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>Detail</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"')>Edit</a></td>");
 				}
+				if((result.data[i].hsbcStaffId)==null){
+					var td2 = $("<td></td>");
+				}
+				if((result.data[i].eHr)==null){
+					var td3 = $("<td></td>");
+				}
+				if((result.data[i].lob)==null){
+					var td4 = $("<td></td>");
+				}
+				if((result.data[i].csSubDeptName)==null){
+					var td6 = $("<td></td>");
+				}
+				if((result.data[i].resourceStatus)==null){
+					var td7 = $("<td></td>");
+				}
+				if((result.data[i].nickname)==null){
+					var td71 = $("<td></td>");
+				}
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
