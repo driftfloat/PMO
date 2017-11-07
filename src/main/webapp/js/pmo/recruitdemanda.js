@@ -394,7 +394,7 @@ function loadpage(){
  });   
         
 }
-    if(status=='offerring'){
+    if(status=='Offerring'){
     	var url = path+'/json/statusoffering.json'
 		$.getJSON(url,  function(data) {
 		       $.each(data, function(i, item) {
