@@ -83,7 +83,7 @@ var path='<%=path%>
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> Add Employee
+									<i class="glyphicon glyphicon-user"></i> Add Demand
 								</h2>
 							</div>
 							 <div id="register" class="box-content" style="overflow: auto;"></div>
@@ -180,7 +180,7 @@ var path='<%=path%>
 			<!-- application script for Charisma demo -->
 			<script src="<%=path%>/js/charisma.js"></script>
 
-			<script type="text/javascript" src="<%=path%>/js/pmo/loadHSBCDept.js"></script>
+			<script type="text/javascript" src="<%=path%>/js/pmo/recruitdemand.js"></script>
 			<script type="text/javascript"
 				src="<%=path%>/js/pmo/employeeValid.js"></script>
 			<script type="text/javascript"
