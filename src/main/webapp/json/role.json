@@ -25,5 +25,19 @@
 		{"name":"Test Manager"},
 		{"name":"Tester"},
 		{"name":"Trainee"},
-		{"name":"Transition Manager"}
+		{"name":"Transition Manager"},
+		{"name":"Head of Human Resource"},
+		{"name":"HR Admin Executive"},
+		{"name":"Senior HR Executive"},
+		{"name":"Finance Executive"},
+		{"name":"Finance Supervisor"},
+		{"name":"Senior Finance Executive"},
+		{"name":"Sr ISR Analyst"},
+		{"name":"Assistant"},
+		{"name":"Manager"},
+		{"name":"RM"},
+		{"name":"BP"},
+		{"name":"Coordinator"},
+		{"name":"Trainer"},
+		{"name":"PMO"}
     ]
