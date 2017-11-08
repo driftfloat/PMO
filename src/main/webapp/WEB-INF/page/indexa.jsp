@@ -88,36 +88,38 @@ var path='<%=path%>';
 							<div id="register" class="box-content" style="overflow: auto;">
 
 								<div class=" row">
-									<div class="col-md-3 col-sm-3 col-xs-6">
+									<div class="col-md-3 col-sm-3 col-xs-6" >
+									 <div id="getTm">
 										<a data-toggle="tooltip" title="6 new members."
 											class="well top-block" href="#"> <img src="images/a.png"/>
-											<div><botton onclick='displayTM()'>Time&Material</botton></div> 
+											<div><botton onclick='displayTM()'>Time&Material  & Team Delivery</botton></div> 
 										</a>
+										</div>
 									</div>
-
-									<div class="col-md-3 col-sm-3 col-xs-6">
+									<!-- <div class="col-md-3 col-sm-3 col-xs-6">
 										<a data-toggle="tooltip" title="4 new pro members."
 											class="well top-block" href="#"> <img src='images/b.png'/>
 
 											<div><botton onclick='displayTD()'>Team Delivery</botton></div>
 										</a>
-									</div>
-
-									<div class="col-md-3 col-sm-3 col-xs-6">
+									</div> -->
+									<div class="col-md-3 col-sm-3 col-xs-6" >
+									    <div id="getFp">
 										<a data-toggle="tooltip" title="$34 new sales."
 											class="well top-block" href="#"> <img src="images/c.png"/>
 
 											<div><botton onclick='displayFP()'>Fixed Price</botton></div> 
 										</a>
+										</div>
 									</div>
-
-									<div class="col-md-3 col-sm-3 col-xs-6">
+									<div class="col-md-3 col-sm-3 col-xs-6" >
+									    <div id="getSupport">
 										<a data-toggle="tooltip" title="12 new messages."
 											class="well top-block" href="#"> <img src="images/206546029366166552.png"/>
 											<div><botton onclick='displaySupport()'>Support</botton></div> 
 										</a>
+										</div>
 									</div>
-
 							<form id="registerEmployeeForm" method="post">
 							    
 							    <div id="successAlert" class="alert alert-success" style="display: none;"></div>

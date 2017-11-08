@@ -88,7 +88,7 @@ var path='<%=path%>';
 							<form id="registerEmployeeForm" method="post">
 							    
 							    <div id="successAlert" class="alert alert-success" style="display: none;"></div>
-							   
+							 
 							    <div class="form-group">
 										<div class="group">
 											<label class="col-sm-2 control-label">E-HR</label>
@@ -108,11 +108,29 @@ var path='<%=path%>';
 								</div>
 								
 								<div class="form-group">
+								
+										<div class="group">
+											<label class="col-sm-2 control-label">HSBC Staff ID</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="hsbcStaffId"
+													id="hsbcStaffId" data-bv-group=".group"/>
+											</div>
+										</div>
 										<div class="group">
 											<label class="col-sm-2 control-label">Staff Name</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="staffName"
 													id="staffName" data-bv-group=".group"/>
+											</div>
+										</div>
+								</div>
+								
+								<div class="form-group">
+										<div class="group">
+											<label class="col-sm-2 control-label">LN</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="LN"
+													id="LN" data-bv-group=".group"/>
 											</div>
 										</div>
 										<div class="group">
@@ -126,12 +144,47 @@ var path='<%=path%>';
 										</div>
 								</div>
 								
-								
-								
-								
+								<div class="form-group">
+										<div class="group">
+										<label class="col-lg-2 control-label">Staff Location</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="staffLocation" data-bv-notempty
+												data-bv-notempty-message="Please Select  StaffLocation" id="staffLocation" data-bv-group=".group">
+												<option value="">--Option--</option>
+											</select>
+										</div>
+										</div>
+										<div class="group">
+										<label class="col-lg-2 control-label">Location Type</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="locationType" data-bv-notempty
+												data-bv-notempty-message="Please Select  LocationType" id="locationType" data-bv-group=".group">
+												<option value="">--Option--</option>
+											</select>
+										</div>
+										</div>
+								</div>
 								
 								<div class="form-group">
-										
+								
+								        <div class="group">
+										<label class="col-lg-2 control-label">RM</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="Rm" data-bv-notempty
+												data-bv-notempty-message="Please Select  RM" id="Rm" data-bv-group=".group">
+												<option value="">--Option--</option>
+											</select>
+										</div>
+										</div>
+										<!-- <div class="group">
+										<label class="col-lg-2 control-label">Onshore or Offshore</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="onshoreOrOffshore" data-bv-notempty
+												data-bv-notempty-message="Please Select  onshore or Offshore" id="onshoreOrOffshore" data-bv-group=".group">
+												<option value="">--Option--</option>
+											</select>
+										</div>
+										</div> -->
 										<div class="group">
 										<label class="col-lg-2 control-label">CS Dept</label>
 										<div class="col-lg-4">
@@ -141,18 +194,72 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
-										 <div class="group">
-										<label class="col-lg-2 control-label">Engagement Type</label>
+								</div>
+								<div class="form-group">
+										<div class="group">
+											<label class="col-sm-2 control-label">HSBC Project Name</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="hsbcProjectName"
+													id="hsbcProjectName" data-bv-group=".group"/>
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">HSBC Project Manager</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="hsbcProjectManager"
+													id="hsbcProjectManager" data-bv-group=".group"/>
+											</div>
+										</div>
+								</div>
+								<div class="form-group">
+										<div class="group">
+										<label class="col-lg-2 control-label">Contract Reference</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="engagementType" data-bv-notempty
-												data-bv-notempty-message="please select  engagementType" id="engagementType" data-bv-group=".group">
+											<input type="text" class="form-control" name="contractreference"
+													id="contractreference" data-bv-group=".group"/>
+											</select>
+										</div>
+										</div>
+										<div class="group">
+										<label class="col-sm-2 control-label">Contract Expired Date</label>
+										<div class="col-md-4">
+											<div class="input-group date form_datetime0 col-sm-12"
+												data-link-field="dt_set_order_time_input">
+												<input class="form-control" type="text" readonly data-bv-group=".group"
+													id="graduationDate1" name="graduationDate1"> <span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
+													id="graduationDate2" name="graduationDate2" />
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								
+								
+								
+								
+								
+								<div class="form-group">
+										<div class="group">
+										<label class="col-lg-2 control-label">Staff Category</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="staffCategory" data-bv-notempty
+												data-bv-notempty-message="please select  staffCategory" id="staffCategory" data-bv-group=".group">
 												<option value="">--Option--</option>
 											</select>
 										</div>
 										</div>
+									<div class="group">
+										<label class="col-lg-2 control-label">Engagement Type</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="engagementType" data-bv-notempty
+												data-bv-notempty-message="please select  engagementType" id="engagementType" data-bv-group=".group">
+												<option value="Fixed Price">Fixed Price</option>
+											</select>
+										</div>
+										</div>
 								</div>
-								
-								
 								
 								<div class="form-group">
 									<div class="group">
@@ -203,9 +310,6 @@ var path='<%=path%>';
 										</div>
 										</div>
 								</div>
-								
-								
-								
 								<div class="form-group">
 										<div class="group">
 											<label class="col-sm-2 control-label">Chinasofti E-Mail</label>
@@ -249,6 +353,8 @@ var path='<%=path%>';
 										</div>
 										</div>
 								</div> 
+								
+								
 								
 								<div class="form-group">
 									    <div style="text-align:center;width:50%;float:left">
