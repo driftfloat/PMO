@@ -90,7 +90,7 @@ var userType='<%=userType%>'
 							<div id="register" class="box-content" style="overflow: auto;">
 							<form  id="recruitdemandFormEdit" method="post">
 							    <div class="form-group hidden">
-									    <input type="hidden" name="demandIdEdit" id="demandIdEdit" value="${demand.demandId}"/>
+									    <input type="hidden" name="demandIdEdit" id="demandIdEdit" value="${demand.demandId}" disabled="true"/>
 									   <%--  <input type="hidden" name="statusEdit" id="statusEdit" value="${demand.status}"/> --%>
 								</div>
 									
@@ -101,14 +101,14 @@ var userType='<%=userType%>'
 										<div class="group">
 											<label class="col-sm-2 control-label">Engagement Type</label>
 											<div class="col-sm-4">
-											<input type="text" name="engagementType" id="engagementType" class="form-control"value="${demand.engagementType}"/>
+											<input type="text" name="engagementType" id="engagementType" class="form-control"value="${demand.engagementType}"disabled="true"/>
 											</div>
 										</div>
 										<div class="group">
 											<label class="col-sm-2 control-label">Status</label>
 											<div class="col-lg-4">
 												 <input type="text"  value="${demand.status}" class="form-control"
-													id="status" /> 
+													id="status" disabled="true"/> 
 											</div>
 										</div>
 									</div>
@@ -118,14 +118,14 @@ var userType='<%=userType%>'
 											<label class="col-lg-2 control-label">Skill</label>
 											<div class="col-lg-4">
 												<input type="text"  value="${demand.skill}" class="form-control"
-													id="skillEdit" />
+													id="skillEdit"disabled="true" />
 											</div>
 										</div>
 										<div class="group">
 											<label class="col-lg-2 control-label">Position</label>
 											<div class="col-lg-4">
 												<input type="text"  value="${demand.position}" class="form-control"
-													id="positionEdit" />
+													id="positionEdit" disabled="true"/>
 											</div>
 										</div>
 								</div>
@@ -134,7 +134,7 @@ var userType='<%=userType%>'
 											<label class="col-lg-2 control-label">Location</label>
 											<div class="col-lg-4">
 												<input type="text"  value="${demand.location}" class="form-control"
-													id="locationEdit" />
+													id="locationEdit" disabled="true"/>
 											</div>
 										</div>
 										<div class="group">
@@ -142,7 +142,7 @@ var userType='<%=userType%>'
 											</label>
 										<div class="col-md-4">
 												<input class="form-control" type="text" 
-													id="plannedOnboardDate1" name="plannedOnboardDate1" value="${demand.plannedOnboardDate }"> 
+													id="plannedOnboardDate1" name="plannedOnboardDate1" value="${demand.plannedOnboardDate }" disabled="true"> 
 										</div>
 									</div>
 								</div>
@@ -152,14 +152,14 @@ var userType='<%=userType%>'
 											<label class="col-lg-2 control-label">HR Priority</label>
 											<div class="col-lg-4">
 												<input type="text" class="form-control" value="${demand.hrPriority}" 
-													id="hrPriorityEdit" />
+													id="hrPriorityEdit" disabled="true"/>
 											</div>
 										</div>
 								        <div class="group">
 											<label class="col-sm-2 control-label">Remark</label>
 											<div class="col-md-4">
 												<input type="text" class="form-control" name="remarkEdit" value="${demand.remark }"
-														id="remarkEdit" />
+														id="remarkEdit"disabled="true" />
 											</div>
 									    </div>
 								</div>
@@ -168,21 +168,21 @@ var userType='<%=userType%>'
 											<label class="col-lg-2 control-label">HSBC Requestor</label>
 											<div class="col-lg-4">
 													<input type="text" class="form-control" name="requestorEdit" value="${demand.requestor }"
-														id="requestorEdit" />
+														id="requestorEdit" disabled="true"/>
 											</div>
 										</div>
 								        <div class="group">
 											<label class="col-sm-2 control-label">CS Department</label>
 											<div class="col-sm-4">
 											<input type="text" class="form-control" name="csSubDeptEdit" value="${demand.csDeptName }"
-														id="csSubDeptEdit" />
+														id="csSubDeptEdit" disabled="true"/>
 											</div>
 										</div>
 										<div class="group" id="staffnameEdit" style='display:none'>
 											<label class="col-sm-2 control-label">Staff Name</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="staffnameEdit" value="${demand.candidateName }"
-													id="staffnameEdit"/>
+													id="staffnameEdit" disabled="true"/>
 											</div>
 										</div>
 								
@@ -192,7 +192,7 @@ var userType='<%=userType%>'
 											<label class="col-sm-2 control-label">Proposed Date of Joining</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="proposedJoiningDateEdit" value="${demand.proposedJoiningDate }"
-													id="proposedJoiningDateEdit"/>
+													id="proposedJoiningDateEdit" disabled="true"/>
 											</div>
 										</div>
 								</div>
@@ -201,14 +201,14 @@ var userType='<%=userType%>'
 											<label class="col-sm-2 control-label">Reason for Abort</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="reasonEdit" value="${demand.reason }"
-													id="reasonEdit"/>
+													id="reasonEdit"disabled="true"/>
 											</div>
 										</div>
 										<div class="group" id="reasonDelayed" style='display:none'>
 											<label class="col-sm-2 control-label">Reason for Delay</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="reasonEdit" value="${demand.reason }"
-													id="reasonEdit"/>
+													id="reasonEdit"disabled="true"/>
 											</div>
 										</div>
 								</div>
