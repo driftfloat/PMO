@@ -293,7 +293,7 @@ $("#sub_add").on("click",function(e){
 });
 
 function loadpage(){
-	var status=$('#status').val();
+	var status=$('#statusInput').val();
 	if(status=='Open'){
 			/*$("#status").append("<option >Frozen</option>");
 			$("#status").append("<option >Cancel</option>");*/
