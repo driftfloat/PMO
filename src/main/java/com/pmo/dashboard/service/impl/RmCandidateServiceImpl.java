@@ -34,14 +34,15 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 	@Resource
 	CandidateMapper candidateMapper;
 	
+	@SuppressWarnings("null")
 	@Override
 	public List<CandidatePush> queryPushedCandidate(User user, String status,PageCondition pageCondition) {
 		Map<String, Object> params = new HashMap<String,Object>();
 		String csSubDeptId = user.getCsdeptId();
+		String[] csSubDeptIds=csSubDeptId.split(",");
 		String userType = user.getUserType();
 		String userId = user.getUserId();
 		params.put("userId", userId);
-		params.put("csSubDeptId", csSubDeptId);
 		params.put("status", status);
 		params.put("pageCondition", pageCondition);
 		params.put("name", pageCondition.getName());
@@ -57,12 +58,30 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 		params.put("num", num);
 		//查找面试表中登录rm的部门下的最近一次面试的数据关联到推送表
 		List<CandidatePush> candidateList = null;
-		if("0".equals(userType)){
-			candidateList = rmCandidateMapper.queryAllPushedCandidate(params);
-		}else if("3".equals(userType)){
-			candidateList = rmCandidateMapper.queryPushedCandidate(params);
-			
+		List<CandidatePush> candidateLista = null;
+		int queryCandidateCount = 0;
+		int queryCandidateCounta = 0;
+        for(int i=0;i<csSubDeptIds.length;i++){
+        	params.put("csSubDeptId", csSubDeptIds[i]);
+        	if("0".equals(userType)){
+    			candidateList = rmCandidateMapper.queryAllPushedCandidate(params);
+    		}else if("5".equals(userType)||"12".equals(userType)||"14".equals(userType)){
+    			candidateList = rmCandidateMapper.queryPushedCandidate(params);
+    			
+    		}
+        	if(candidateLista==null){
+        		candidateLista=candidateList;
+        	}else{
+        	candidateLista.addAll(candidateList);
+        	}
+        	if("0".equals(userType)){
+    			queryCandidateCount = rmCandidateMapper.queryAllCandidateCount(params);
+    		}else if("5".equals(userType)){
+    			queryCandidateCount = rmCandidateMapper.queryCandidateCount(params);
+    		}
+        	queryCandidateCounta+=queryCandidateCount;
 		}
+	
 		
 		//将面试表的id关联到推送表的InterviewId
 		/*for (CandidatePush candidatePush : candidateList) {
@@ -74,14 +93,9 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 			rmCandidateMapper.updateInterviewId(params1);
 		}*/
 		//设置总页数
-		int queryCandidateCount = 0;
-		if("0".equals(userType)){
-			queryCandidateCount = rmCandidateMapper.queryAllCandidateCount(params);
-		}else if("3".equals(userType)){
-			queryCandidateCount = rmCandidateMapper.queryCandidateCount(params);
-		}
-		pageCondition.setTotalPage((int) Math.ceil(queryCandidateCount*1.0 / pageCondition.getPageSize()));
-		return candidateList;
+		
+		pageCondition.setTotalPage((int) Math.ceil(queryCandidateCounta*1.0 / pageCondition.getPageSize()));
+		return candidateLista;
 	}
 
 	@Override

@@ -102,6 +102,12 @@
 			<if test="demand.rr!=null and demand.rr!=''">
 				and a.rr = #{demand.rr}
 			</if>
+			<if test="demand.jobCode!=null and demand.jobCode!=''">
+				and a.JOB_CODE = #{demand.jobCode}
+			</if>
+			<if test="demand.engagementType!=null and demand.engagementType!=''">
+				and a.ENGAGEMENT_TYPE = #{demand.engagementType}
+			</if>
 			<if test="csBuName!=null and csBuName!=''">
 				and B.CS_BU_NAME = #{csBuName}
 			</if>
@@ -143,6 +149,12 @@
 			
 			<if test="demand.rr!=null and demand.rr!=''">
 				and a.rr = #{demand.rr}
+			</if>
+			<if test="demand.jobCode!=null and demand.jobCode!=''">
+				and a.JOB_CODE = #{demand.jobCode}
+			</if>
+			<if test="demand.engagementType!=null and demand.engagementType!=''">
+				and a.ENGAGEMENT_TYPE = #{demand.engagementType}
 			</if>
 			<if test="csBuName!=null and csBuName!=''">
 				and B.CS_BU_NAME = #{csBuName}

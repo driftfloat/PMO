@@ -3,7 +3,7 @@ $(function(){
 	loadSkill();
 	loadPosition();
 	loadDemandStatus();
-	
+	loadEngagementType();
 	loadDemandList();
 	$("#searchBtn").click(function(){
 		loadDemandList();
@@ -262,6 +262,8 @@ function loadDemandList(currPage){
 	var rr= $("#rr").val();
 	var csBuName = $("#csBuName").val();
 	var csSubDept = $("#csSubDept").val();
+	var engagementType=$("#engagementType").val();
+	var jobCode=$("#jobcode").val();
 	//$("#demandList").empty();
 	$("#demandList  tr:not(:first)").html("");
 	$.ajax({
@@ -271,7 +273,7 @@ function loadDemandList(currPage){
 		cache:false,
 		type:"post",
 		data:{"csBuName":csBuName,"skill":skill,"position":position,
-			"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept},
+			"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept,"engagementType":engagementType,"jobCode":jobCode},
 		success:function(result){
 			//alert(result.list.length);
 			var userType = result.user.userType;
@@ -359,7 +361,7 @@ function loadDemandList(currPage){
             loadCSSubDept(result);			
 		}
 	})
-	
+
 }
 
 $('#exportExcel').bind("click", function(){
@@ -408,7 +410,14 @@ function demandDetailUpdate(demandId,statusa,engagementType){
 	$("#detailForm").submit();
 }
 
-
+function loadEngagementType(){
+	var url = path+'/json/engagementType.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#engagementType").append("<option>"+item.name+"</option>");
+	       })
+	});
+}
 /*function demandDetailUpdate(){
 	var demandId = "1";
 	$.ajax({

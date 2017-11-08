@@ -75,7 +75,7 @@ public class UserController {
 		User user = userService.login(userName,password);
 		if(user!=null){
 			try{
-				if(!"0".equals(user.getLoginStatus())){
+				if(!("0".equals(user.getLoginStatus()))){
 					return "2";
 				}
 			}catch(Exception e){
