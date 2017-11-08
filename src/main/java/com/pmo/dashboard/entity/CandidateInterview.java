@@ -29,7 +29,31 @@ public class CandidateInterview {
 	
 	private String projectName;
 	
+	private String confirmStatus;
 	
+	private String mark;
+	  
+	
+	
+	
+
+
+
+	public String getConfirmStatus() {
+		return confirmStatus;
+	}
+
+	public void setConfirmStatus(String confirmStatus) {
+		this.confirmStatus = confirmStatus;
+	}
+
+	public String getMark() {
+		return mark;
+	}
+
+	public void setMark(String mark) {
+		this.mark = mark;
+	}
 
 	public String getProjectName()
     {

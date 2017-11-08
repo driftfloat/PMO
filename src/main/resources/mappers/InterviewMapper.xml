@@ -25,14 +25,26 @@
 				#{fatherInterviewId},#{interviewSerial},#{projectName})
 	</insert>
 	
-	<select id="queryNewInterviewByCandidateId" parameterType="java.util.HashMap" resultMap="interviewMap">
+	<select id="getIntervieInfo" parameterType="String" resultMap="interviewMap">
 		select *  
 		from  t_candidate_interview a
 		where 
 			CANDIDATE_ID = #{candidateId}
-			and INTERVIEW_DATE = 
-			(select max(INTERVIEW_DATE) from t_candidate_interview b  
-			where a.CANDIDATE_ID = b.CANDIDATE_ID and b.CSSUBDEPT = #{csSubDeptId}) 
+			and INTERVIEW_DATE = (select max(INTERVIEW_DATE) from t_candidate_interview b  
+			where a.CANDIDATE_ID = b.CANDIDATE_ID )
 	</select>
 	
+	<update id="updateInterview" parameterType="com.pmo.dashboard.entity.CandidateInterview">
+	   UPDATE T_CANDIDATE_INTERVIEW SET INTERVIEWER_ID=#{interviewerId},INTERVIEW_DATE=#{interviewDate},INTERVIEW_TYPE=#{interviewType},
+	   PROJECT_NAME=#{projectName} WHERE INTERVIEW_ID=#{interviewId}
+	</update>
+    <select id="getConfirminfo" parameterType="com.pmo.dashboard.entity.CandidateInterview" resultMap="interviewMap">
+		select *  
+		from  t_candidate_interview a
+		where 
+			CANDIDATE_ID = #{candidateId}
+			and INTERVIEW_DATE = (select max(INTERVIEW_DATE) from t_candidate_interview b  
+			where a.CANDIDATE_ID = b.CANDIDATE_ID )
+			
+	</select>
 </mapper>
