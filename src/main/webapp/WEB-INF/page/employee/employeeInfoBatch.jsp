@@ -427,7 +427,7 @@ var path='<%=path%>';
 									<label class="col-lg-2 control-label" >Engagement Type</label>
 										<div class="col-lg-8" >
 											<select class="form-control" name="engagementType" data-bv-notempty
-												id="engagementType" data-bv-group=".group">
+												id="engagementType2" data-bv-group=".group">
 												<option value="">--Option--</option>
 											</select>
 										</div>

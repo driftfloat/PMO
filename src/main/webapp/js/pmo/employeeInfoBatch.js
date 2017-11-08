@@ -268,7 +268,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 				var employeeId=result.data[i].employeeId;
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
-				var td1 = $("<td><input id='ls"+ employeeId + "' type='checkbox' onclick=checkedEmployee('"+lob+"','"+staffName+"','"+employeeId+"') ></td>");
+				var td1 = $("<td><input id='ls"+ employeeId + "' type='checkbox' onclick='checkedEmployee(\""+lob+"\",\""+staffName+"\",\""+employeeId+"\")' ></td>");
 				var td2 = $("<td>"
 						+ result.data[i].staffName
 						+ "</td>");
@@ -495,6 +495,13 @@ function loadEngagementType(result){
 		   $("#engagementType").append("<option value=''>--Option--</option>");
 	       $.each(data, function(i, item) {
 	    	   $("#engagementType").append("<option>"+item.name+"</option>");
+	       })
+	       $('#engagementType').val(result.pageInfo.engagementType);
+	       
+	       $("#engagementType2").empty();
+		   $("#engagementType2").append("<option value=''>--Option--</option>");
+	       $.each(data, function(i, item) {
+	    	   $("#engagementType2").append("<option>"+item.name+"</option>");
 	       })
 	       $('#engagementType').val(result.pageInfo.engagementType);
 	});
