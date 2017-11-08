@@ -7,7 +7,7 @@ $(function(){
 	loadGbGf();
 	loadBillingEntity();
 	loadBillingCurrency();
-  //loadResourceStatus();
+    loadResourceStatus();
 	loadCSDept();
 	loadUserType();
 	loadStaffRegion();
@@ -69,7 +69,7 @@ function addEmployee(){
 				"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,
 				"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,
 				"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":'Active',"terminatedDate":'',
-				"email":email,"gbGf":gbGf,"entryDate":entryDate,"rmUserId":rmName},
+				"email":email,"gbGf":gbGf,"entryDate":entryDate,"rmUserId":rmName,"terminationReason":terminationReason},
 			async:true,
 			cache:false,
 			type:"post",
