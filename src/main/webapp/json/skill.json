@@ -29,5 +29,14 @@
         {"name":"Mainframe"},
         {"name":"AS400"},
         {"name":"Management"},
-        {"name":"QA"}
+        {"name":"QA"},
+        {"name":"Unix"},
+        {"name":"Linux"},
+        {"name":"HTML"},
+        {"name":"UI"},
+        {"name":"CBP"},
+        {"name":"Export"},
+        {"name":"Training"},
+        {"name":"Developer"},
+        {"name":"Presale"}
 ]

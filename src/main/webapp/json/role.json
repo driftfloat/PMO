@@ -39,5 +39,11 @@
 		{"name":"BP"},
 		{"name":"Coordinator"},
 		{"name":"Trainer"},
-		{"name":"PMO"}
+		{"name":"PMO"},
+		{"name":"UI"},
+		{"name":"Export"},
+		{"name":"Commissioner"},
+		{"name":"Presale"}
+		
+		
     ]
