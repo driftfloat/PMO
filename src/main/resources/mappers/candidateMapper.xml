@@ -89,7 +89,7 @@
 	</update>
 	<delete id="deleteInterview" parameterType="String" >
 		delete from t_candidate_interview 
-	        WHERE CANDIDATE_ID = #{candidateId} and INTERVIEW_DATE=(select max(INTERVIEW_DATE) from t_candidate_interview );
+	        WHERE CANDIDATE_ID = #{candidateId} AND CONFIRM_STATUS='1';
 	</delete>
 	<select id="queryCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
 	    SELECT 
