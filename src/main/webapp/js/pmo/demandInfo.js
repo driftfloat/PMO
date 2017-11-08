@@ -301,28 +301,30 @@ function loadDemandList(currPage){
 				var td5 = $("<td>"+result.list[i].location+"</td>");
 				var td6 = $("<td>"+result.list[i].status+"</td>");
 				var status=result.list[i].status;
+			/*	var hsbcSubDeptName=result.list[i].hsbcSubDeptName;
+				var csDeptName=result.list[i].csSubDept;*/
 				var td7 = $("<td>"+result.list[i].csSubDept+"</td>");
 				var demandId = result.list[i].demandId;
 				var statusa  = result.list[i].status;
 				var engagementType =result.list[i].engagementType;
-
-
+				/*$("#hsbcsubName").val(hsbcSubDeptName);
+				$("#cssubName").val(cssubName);*/
 				if(userType=='2' || userType=='4' || userType=='6' || userType=='7'  || userType=='9' || userType=='15'){
 
-					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a></td>");
+					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Detail</a></td>");
 				}else if(userType=='13' || userType=='14'){
 					if(result.list[i].csSubDept == result.user.bu){
-						var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate('"+demandId+"','"+statusa+"')>Edit</a></td>");
+						var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Detail</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Edit</a></td>");
 					}else{
-						var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a></td>");
+						var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Detail</a></td>");
 					}
 					
 				}else if(status=='Cancel'||status=='Abort'){
 					
-					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a></td>");
+					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Detail</a></td>");
 
 				}else{
-					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Edit</a></td>");
+					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Detail</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Edit</a></td>");
 
 				}
 				td1.appendTo(tr);
@@ -388,15 +390,20 @@ function exportCondition(){
 	$("#condition").val(condition);
 	$("#conditionForm").attr("action",url);
 	$("#conditionForm").submit();
-	
 	$('#myModal').modal('hide');
 	$("[type='checkbox']").removeAttr("checked");
 }
 
-function demandDetail(demandId,statusa){
+function demandDetail(demandId,statusa,engagementType){
 	$("#demandId").val(demandId);
 	$('#statusa').val(statusa);
-	var url = path+'/service/demand/demandDetail';
+	if(engagementType=="FixedPrice"){
+		var url = path+'/service/demand/demandDetail?engagementType=1';
+	}else if(engagementType=="Support"){
+		var url = path+'/service/demand/demandDetail?engagementType=2';
+	}else{
+		var url = path+'/service/demand/demandDetail?engagementType=3';
+	}
 	$("#detailForm").attr("action",url);
 	$("#detailForm").submit();
 }

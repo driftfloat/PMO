@@ -670,9 +670,27 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
+
 	public boolean updateConfirmStatus(CandidateInterview candidateInterview) {
 		
 		 return candidateInterviewMapper.updateConfirmStatus(candidateInterview);
+	}
+
+	public boolean updateCandidatePushed(String pushId) {
+		
+		return candidateMapper.updateCandidatepushed(pushId);
+	}
+
+	@Override
+	public boolean deleteArrangedinter(String candidateId) {
+		
+		return candidateMapper.deleteInterview(candidateId);
+	}
+
+	@Override
+	public String queryPushedCS(String pushId) {
+		return candidateMapper.queryPushedCS(pushId);
+
 	}
 
 

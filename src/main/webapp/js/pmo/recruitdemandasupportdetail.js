@@ -8,7 +8,7 @@ $(function(){
 	dateType();
 	dateType1();
 	loadCsSubDept();
-
+	//loadEngagementType();
 	loadpage();
 })
 
@@ -57,14 +57,14 @@ function loadDept(){
 		}
 	})
 }
-//function loadEngagementType(){
-//	var url = path+'/json/engagementType.json'
-//	$.getJSON(url,  function(data) {
-//	       $.each(data, function(i, item) {
-//	    	   $("#engagementType").append("<option>"+item.name+"</option>");
-//	       })
-//	});
-//}
+function loadEngagementType(){
+	var url = path+'/json/engagementType.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#engagementType").append("<option>"+item.name+"</option>");
+	       })
+	});
+}
 
 $("#hsbcDept").change(function(){
 	var hsbcSubDeptId = $('#hsbcDept').val();
@@ -325,19 +325,18 @@ function loadpage(){
 	        $("#status").append("<option >Cancel</option>");
 	        $("#status").append("<option >Abort</option>");
 	        $("#status").append("<option >Delayed</option>");*/
-    	var url = path+'/json/statusoffermade.json'
+    	/*var url = path+'/json/statusoffermade.json'
 		$.getJSON(url,  function(data) {
 		       $.each(data, function(i, item) {
 		    	   $("#status").append("<option>"+item.name+"</option>");
 		       })
-		});
+		});*/
 	        $('#atype').show();
 	        $('#btype').show();
-	        $('#ctype').show();
 	        $('#staffnameEdit').show();
 	        $('#joiningEdit').show();
 	        $('#bgvEdit').show();
-	        $('#contract').show();
+	        $('#donumberEdit').show();
 	        $("#status").bind("click",function(){
 	      		 var result=$("#status").find("option:selected").val();
 	      		 if(result=='Abort'){
@@ -366,31 +365,23 @@ function loadpage(){
     	    $("#status").disabled='true';
     	    $('#atype').show();
 	        $('#btype').show();
-	        $('#ctype').show();
 	        $('#staffnameEdit').show();
 	        $('#joiningEdit').show();
 	        $('#bgvEdit').show();
-	        
-	        $('#contract').show();
+	        $('#donumberEdit').show();
 	        
 	}
     if(status=='Delayed'){
     	
     	
-    		var url = path+'/json/statusdelayed.json'
-    		$.getJSON(url,  function(data) {
-    		       $.each(data, function(i, item) {
-    		    	   $("#status").append("<option>"+item.name+"</option>");
-    		       })
-    		});
-    	
+    		
     	/*$("#status").append("<option >Frozen</option>");
         $("#status").append("<option >Cancel</option>");
         $("#status").append("<option >Abort</option>");
         $("#status").append("<option >Onboard</option>");*/
         $('#ctype').show();
         $('#reasonDelayed').show();
-        $("#status").bind("click",function(){
+       /* $("#status").bind("click",function(){
      		 var result=$("#status").find("option:selected").val();
      		 if(result=='Abort'){
                $('#reasonAbort').show();
@@ -398,7 +389,27 @@ function loadpage(){
                $('#reasonAbort').hide();
      		 }
      		 
- });   
+ });   */
+    }
+        if(status=='Abort'){
+        	
+        	
+    		
+        	/*$("#status").append("<option >Frozen</option>");
+            $("#status").append("<option >Cancel</option>");
+            $("#status").append("<option >Abort</option>");
+            $("#status").append("<option >Onboard</option>");*/
+            $('#ctype').show();
+            $('#reasonAbort').show();
+          /*  $("#status").bind("click",function(){
+         		 var result=$("#status").find("option:selected").val();
+         		 if(result=='Abort'){
+                   $('#reasonAbort').show();
+         		 }else{
+                   $('#reasonAbort').hide();
+         		 }
+         		 
+     });   */
         
 }
     if(status=='Offerring'){

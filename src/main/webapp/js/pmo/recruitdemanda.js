@@ -8,7 +8,8 @@ $(function(){
 	dateType();
 	dateType1();
 	loadCsSubDept();
-	loadEngagementType();
+	loadbgv();
+	//loadEngagementType();
 	loadpage();
 })
 
@@ -65,7 +66,14 @@ function loadEngagementType(){
 	       })
 	});
 }
-
+function loadbgv(){
+	var url = path+'/json/bgv.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#bgvClearedEdit").append("<option>"+item.name+"</option>");
+	       })
+	});
+}
 $("#hsbcDept").change(function(){
 	var hsbcSubDeptId = $('#hsbcDept').val();
 	$("#projectName").find("option").remove(); 

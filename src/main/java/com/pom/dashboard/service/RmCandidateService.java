@@ -19,7 +19,7 @@ public interface RmCandidateService {
 	public void addInterview(CandidateInterview candidateInterview,String pushId);
 	
 	public void addNextInterview(CandidateInterview candidateInterview,String pushId);
-	
+	public boolean updateCSinfo(String pushId);
 	public void interviewBack(String pushId);
 	public CandidateInterview getIntervieInfo(String candidateId);
 	public boolean updateInterview(CandidateInterview candidateInterview);

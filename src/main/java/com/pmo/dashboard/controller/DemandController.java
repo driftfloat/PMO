@@ -403,15 +403,19 @@ public class DemandController {
 	 * @return
 	 */
 	@RequestMapping("/demandDetail")
-	public String demandDetail(String demandId,String statusa,Model model,HttpServletRequest request){
+	public String demandDetail(String demandId,String engagementType,String statusa,Model model,HttpServletRequest request){
 		
 	    Demand demand = demandService.queryDemandById(demandId);
 	    
-	    
-	    
 	    model.addAttribute("demand", demand);
+	    if("1".equals(engagementType)){
+			return "/demand/demandDetailfp";
+		}else if("2".equals(engagementType)){
+			return "/demand/demandDetailSupport";
+		}else{
+			return "/demand/demandDetailtm";
+		}
 	    
-		return "/demand/demandDetail";
 	}
 	
 	/**
