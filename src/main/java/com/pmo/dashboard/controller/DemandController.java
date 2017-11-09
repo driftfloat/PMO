@@ -406,17 +406,35 @@ public class DemandController {
 	@RequestMapping("/demandDetail")
 	public String demandDetail(String demandId,String engagementType,String statusa,Model model,HttpServletRequest request){
 		
-	    Demand demand = demandService.queryDemandById(demandId);
-	    
-	    model.addAttribute("demand", demand);
+	    //Demand demand = demandService.queryDemandById(demandId);
+		List<Demand> list = (List<Demand>) request.getSession().getAttribute("demandList");
+		for (Demand demand : list) {
+			if(demand.getDemandId().equals(demandId)){
+				HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
+				if(hSBCDept!=null) {
+					if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
+						hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
+					}
+				}
+	   /* model.addAttribute("demand", demand);
 	    if("1".equals(engagementType)){
 			return "/demand/demandDetailfp";
 		}else if("2".equals(engagementType)){
 			return "/demand/demandDetailSupport";
 		}else{
 			return "/demand/demandDetailtm";
+		}*/
+			}
+			model.addAttribute("demand", demand);
+		    if("1".equals(engagementType)){
+				return "/demand/demandDetailfp";
+			}else if("2".equals(engagementType)){
+				return "/demand/demandDetailSupport";
+			}else{
+				return "/demand/demandDetailtm";
+			}
 		}
-	    
+		return "/demand/demandDetailtm";
 	}
 	
 	/**
