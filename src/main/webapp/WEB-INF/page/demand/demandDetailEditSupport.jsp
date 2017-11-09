@@ -111,8 +111,6 @@ var userType='<%=userType%>'
 										<div class="group">
 											<label class="col-sm-2 control-label">Status</label>
 											<div class="col-lg-4">
-												<%-- <input type="text" style="display:none" value="${demand.status}" 
-													id="statusInput" /> --%>
 												<select class="form-control" name="status" data-bv-notempty
 													data-bv-notempty-message="Please Select Your Status"
 													id="status" data-bv-group=".group">
@@ -121,23 +119,6 @@ var userType='<%=userType%>'
 											</div>
 										</div>
 									</div>
-								<%-- <div class="form-group">
-										<div class="group">
-											<label class="col-sm-2 control-label">RR</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="rrEdit" value="${demand.rr}" 
-													id="rrEdit" />
-											</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">Job Code</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="jobCodeEdit" value="${demand.jobCode}"
-													id="jobCodeEdit" />
-											</div>
-										</div>
-								</div> --%>
-								
 								<div class="form-group">
 								         <div class="group">
 											<label class="col-lg-2 control-label">Skill</label>
@@ -210,69 +191,6 @@ var userType='<%=userType%>'
 											</div>
 									    </div>
 								</div>
-								<%-- <div class="form-group">
-								         <div class="group">
-											<label class="col-sm-2 control-label">No. of Profiles Sent to HSBC</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="profilesNoEdit" value="${demand.profilesNo }"
-													id="profilesNoEdit"/>
-											</div>
-										</div>
-								         <div class="group">
-											<label class="col-sm-2 control-label">No of Profiles Interviewed</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="interviewedNoEdit" value="${demand.interviewedNo }"
-													id="interviewedNoEdit"/>
-											</div>
-										</div>
-								</div> --%>
-								<%-- <div class="form-group">
-								        <div class="group">
-											<label class="col-sm-2 control-label">Req published Date</label>
-											<div class="col-md-4">
-												<div class="input-group date form_datetime col-sm-12"
-													data-link-field="dt_set_order_time_input">
-													<input class="form-control" type="text" readonly data-bv-group=".group"
-														id="reqPublishedDate1Edit" name="reqPublishedDate1Edit" value="${demand.reqPublishedDate }"> 
-														<span class="input-group-addon">
-															<span class="glyphicon glyphicon-th">
-															</span>
-														</span> 
-														<input type="hidden" id="reqPublishedDate2Edit" name="reqPublishedDate2Edit" />
-												</div>
-											</div>
-										</div>
-								        <div class="group">
-											<label class="col-sm-2 control-label">Ageing</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="ageingEdit" value="${demand.ageing }"
-													id="ageingEdit"/>
-											</div>
-										</div>
-								
-								</div> --%>
-								<%-- <div class="form-group">
-								       <div class="group">
-										<label class="col-lg-2 control-label">HSBC Department</label>
-										<div class="col-lg-4">
-											<input type="text" style="display:none" value="${demand.hsbcDept.hsbcDeptName}" 
-													id="hsbcDeptInput" />
-											<select class="form-control" name="hsbcDeptEdit" data-bv-notempty
-												data-bv-notempty-message="Please Select Your HsbcDept" id="hsbcDeptEdit" data-bv-group=".group">
-												<option value="">-- Option --</option>
-											</select>
-										</div>
-										</div>
-										<div class="group">
-										<label class="col-lg-2 control-label">HSBC Sub-Department</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="hsbcSubDeptEdit" data-bv-notempty
-												data-bv-notempty-message="Please Select Your HsbcSubDept" id="hsbcSubDeptEdit" data-bv-group=".group">
-												<option value="${demand.hsbcDept.hsbcSubDeptName }"></option>
-											</select>
-										</div>
-										</div>
-								</div> --%>
 								<div class="form-group">
 								         <div class="group" id="requestor" style='display:none'>
 											<label class="col-lg-2 control-label">HSBC Requestor</label>
@@ -294,7 +212,8 @@ var userType='<%=userType%>'
 											<label class="col-sm-2 control-label">Staff Name</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="candidateNameEdit" value="${demand.candidateName }"
-													id="candidateNameEdit"/>
+													id="candidateNameEdit" data-bv-notempty
+													data-bv-notempty-message="Please Select Your Position"/>
 											</div>
 										</div>
 								

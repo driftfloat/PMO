@@ -1,7 +1,7 @@
 $(function(){
 	loadDept();
 	loadSkill();
-	//loadPosition();
+	loadPosition();
 	loadLocation();
 	//loadStatus();
 	//loadHrPriority();
@@ -228,7 +228,7 @@ function addDemand(){
 	}
 }
 
-$("#skill").change(function(){
+/*$("#skill").change(function(){
 	var skill = $('#skill').val();
 	$.ajax({
 		url:path+'/service/rate/queryRateBySkill',
@@ -247,7 +247,7 @@ $("#skill").change(function(){
 	})
 	
 })
-
+*/
 
 function loadSkill(){
 	var url = path+'/json/skill.json'
