@@ -18,15 +18,15 @@ $(function(){
 	$("#recruitdemandForm").submit();
 }*/
 
-$('#rr').blur(function(){
+/*$('#rr').blur(function(){
 	hrPriority();
 });
 
 $('#jobCode').blur(function(){
 	hrPriority();
-});
+});*/
 
-function hrPriority(){
+/*function hrPriority(){
 	$('#hrPriority').empty();
 	if($('#rr').val() == '' || $('#rr').val() == null){
 		$('#hrPriority').append("<option>4</option>");
@@ -39,7 +39,7 @@ function hrPriority(){
 	}
 	
 	$('#hrPriority').append("<option>3</option>");
-}
+}*/
 
 
 function loadDept(){

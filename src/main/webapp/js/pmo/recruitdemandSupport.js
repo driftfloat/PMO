@@ -17,7 +17,7 @@ $(function(){
 	$("#recruitdemandForm").submit();
 }*/
 
-$('#rr').blur(function(){
+/*$('#rr').blur(function(){
 	hrPriority();
 });
 
@@ -39,7 +39,7 @@ function hrPriority(){
 	
 	$('#hrPriority').append("<option>3</option>");
 }
-
+*/
 
 function loadDept(){
 	$.ajax({
