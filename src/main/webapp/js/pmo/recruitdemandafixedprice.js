@@ -390,13 +390,29 @@ function loadpage(){
         $("#status").append("<option >Onboard</option>");*/
         $('#ctype').show();
         $('#reasonDelayed').show();
+        $('#reasonAbort').hide();
         $("#status").bind("click",function(){
      		 var result=$("#status").find("option:selected").val();
      		 if(result=='Abort'){
+     			 $('#atype').show();
+      	        $('#ctype').show();
+      	        $('#staffnameEdit').show();
+      	        $('#joiningEdit').show();
+      	        $('#contract').show();
                $('#reasonAbort').show();
-     		 }else{
-               $('#reasonAbort').hide();
-     		 }
+               $('#reasonDelayed').hide();
+     		 }else if(result=='Delayed'){
+     			 $('#reasonDelayed').show();
+     	        $('#reasonAbort').hide();
+     	     }else if(result=='Onboard'){
+     	    	 $('#atype').show();
+     	        $('#ctype').show();
+     	        $('#staffnameEdit').show();
+     	        $('#joiningEdit').show();
+     	        
+     	        $('#contract').show();
+     	     }
+     		 
      		 
  });   
         

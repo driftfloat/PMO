@@ -300,22 +300,14 @@ var userType='<%=userType%>'
 													id="candidateNameEdit"/>
 											</div>
 										</div>
-									    <div class="group" id="joiningEdit" style='display:none'>
-											<label class="col-sm-2 control-label">Proposed Date of Joining</label>
+										 <div class="group" id="contract" style='display:none'>
+											<label class="col-sm-2 control-label">Contract Reference</label>
 											<div class="col-sm-4">
-											<div class="input-group date form_datetime col-sm-12"
-													data-link-field="dt_set_order_time_input">
-													<input class="form-control" type="text" readonly data-bv-group=".group"value="${demand.proposedJoiningDate }"
-														id="proposedJoiningDateEdit" name="proposedJoiningDateEdit"> 
-														<span class="input-group-addon">
-															<span class="glyphicon glyphicon-th">
-															</span>
-														</span> 
-														<input type="hidden" id="proposedJoiningDateEdit2" name="proposedJoiningDateEdit2" value="${demand.proposedJoiningDate }" />
-													
-													</div>
+												<input type="text" class="form-control" name="sowSignedEdit" value="${demand.sowSigned }"
+													id="sowSignedEdit"/>
 											</div>
 										</div>
+									   
 								</div>
 								<%-- <div class="form-group" id="btype"style='display:none'>
 								        <div class="group" id="bgvEdit" style='display:none'>
@@ -334,11 +326,20 @@ var userType='<%=userType%>'
 										</div>
 								</div> --%>
 								<div class="form-group"id="ctype" style='display:none'>
-								      <div class="group" id="contract" style='display:none'>
-											<label class="col-sm-2 control-label">Contract Reference</label>
+								      <div class="group" id="joiningEdit" style='display:none'>
+											<label class="col-sm-2 control-label">Proposed Date of Joining</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="doNumberEdit" value="${demand.doNumber }"
-													id="doNumberEdit"/>
+											<div class="input-group date form_datetime col-sm-12"
+													data-link-field="dt_set_order_time_input">
+													<input class="form-control" type="text" readonly data-bv-group=".group"value="${demand.proposedJoiningDate }"
+														id="proposedJoiningDateEdit1" name="proposedJoiningDateEdit1"> 
+														<span class="input-group-addon">
+															<span class="glyphicon glyphicon-th">
+															</span>
+														</span> 
+														<input type="hidden" id="proposedJoiningDateEdit2" name="proposedJoiningDateEdit2" value="${demand.proposedJoiningDate }" />
+													
+													</div>
 											</div>
 										</div>
 								       <div class="group" id="reasonAbort" style='display:none'>
