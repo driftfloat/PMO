@@ -416,22 +416,16 @@ public class DemandController {
 						hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
 					}
 				}
-	   /* model.addAttribute("demand", demand);
-	    if("1".equals(engagementType)){
-			return "/demand/demandDetailfp";
-		}else if("2".equals(engagementType)){
-			return "/demand/demandDetailSupport";
-		}else{
-			return "/demand/demandDetailtm";
-		}*/
-			}
-			model.addAttribute("demand", demand);
-		    if("1".equals(engagementType)){
-				return "/demand/demandDetailfp";
-			}else if("2".equals(engagementType)){
-				return "/demand/demandDetailSupport";
-			}else{
-				return "/demand/demandDetailtm";
+				demand.setHsbcDept(hSBCDept);
+				model.addAttribute("demand", demand);
+				if("1".equals(engagementType)){
+					return "/demand/demandDetailfp";
+				}else if("2".equals(engagementType)){
+					return "/demand/demandDetailSupport";
+				}else{
+					return "/demand/demandDetailtm";
+				}
+				
 			}
 		}
 		return "/demand/demandDetailtm";

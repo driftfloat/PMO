@@ -305,13 +305,13 @@ var userType='<%=userType%>'
 											<div class="col-sm-4">
 											<div class="input-group date form_datetime col-sm-12"
 													data-link-field="dt_set_order_time_input" id="proposedDate">
-													<input class="form-control" type="text" readonly data-bv-group=".group"value="${demand.proposedJoiningDate }"
+													<input class="form-control" type="text" readonly data-bv-group=".group" value="${demand.proposedJoiningDate}"
 														id="proposedJoiningDateEdit1" name="proposedJoiningDateEdit1"> 
 														<span class="input-group-addon">
 															<span class="glyphicon glyphicon-th">
 															</span>
 														</span> 
-														<input type="hidden" id="proposedJoiningDateEdit2" name="proposedJoiningDateEdit2" value="${demand.proposedJoiningDate }" />
+														<input type="hidden" id="proposedJoiningDateEdit2" name="proposedJoiningDateEdit2" value="${demand.proposedJoiningDate}" />
 													
 													</div>
 											</div>
