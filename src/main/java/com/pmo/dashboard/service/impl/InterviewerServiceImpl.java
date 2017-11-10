@@ -3,11 +3,14 @@ package com.pmo.dashboard.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
+
 import com.pmo.dashboard.dao.InterviewerMapper;
+import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.Interviewer;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
@@ -43,9 +46,26 @@ public class InterviewerServiceImpl implements InterviewerService
 		int num = (interviewer.getCurrPage() - 1)*interviewer.getPageSize();
 		map.put("num", num);
 		
-		List<Interviewer> list = interviewerMapper.queryInterviewerList(map);
+		List<Interviewer> list = null;
+		String employeeId = interviewer.getEmployeeId();
+		User user = this.selectUser(employeeId);
+		String userType = null;
+		if(user!=null){
+			userType = user.getUser_type();
+			//userType = "1";
+		}
 		//设置总页数
-		int queryInterviewerCount = interviewerMapper.queryInterviewerCount(map);
+		int queryInterviewerCount;
+		if("1".equals(userType)){
+			list = interviewerMapper.queryInterviewerListByBu(map);
+			queryInterviewerCount = interviewerMapper.queryInterviewerCountByBu(map);
+		}else if("2".equals(userType) || "3".equals(userType)){
+			list = interviewerMapper.queryInterviewerListByDept(map);
+			queryInterviewerCount = interviewerMapper.queryInterviewerCountByDept(map);
+		}else{
+			list = interviewerMapper.queryInterviewerList(map);
+			queryInterviewerCount = interviewerMapper.queryInterviewerCount(map);
+		}
 		interviewer.setTotalPage((int) Math.ceil(queryInterviewerCount*1.0 / interviewer.getPageSize()));
 		return list;
 	}

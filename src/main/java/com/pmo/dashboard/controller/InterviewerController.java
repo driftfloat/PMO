@@ -41,13 +41,15 @@ public class InterviewerController
  
     @RequestMapping("/queryInterviewerList")
     @ResponseBody
-    public Object interviewerQuery(Interviewer interviewer)
+    public Object interviewerQuery(Interviewer interviewer, HttpServletRequest request)
     {
     	
     	if(interviewer.getCurrPage() == null || "".equals(interviewer.getCurrPage()))
     	{
     		interviewer.setCurrPage(1);
 		}
+    	User user = (User)request.getSession().getAttribute("loginUser");
+    	interviewer.setEmployeeId(user.getUserId());
     	List<Interviewer> list = interviewerService.queryInterviewerList(interviewer);
     	Map<String,Object> result = new HashMap<String,Object>();
     	result.put("list", list);
