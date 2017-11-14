@@ -14,6 +14,7 @@ import com.pmo.dashboard.dao.RmCandidateMapper;
 import com.pmo.dashboard.entity.CandidateInterview;
 import com.pmo.dashboard.entity.CandidatePush;
 import com.pmo.dashboard.entity.PageCondition;
+import com.pmo.dashboard.entity.User;
 import com.pom.dashboard.service.RmCandidateService;
 
 /**
@@ -34,8 +35,12 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 	CandidateMapper candidateMapper;
 	
 	@Override
-	public List<CandidatePush> queryPushedCandidate(String csSubDeptId, String status,PageCondition pageCondition) {
+	public List<CandidatePush> queryPushedCandidate(User user, String status,PageCondition pageCondition) {
 		Map<String, Object> params = new HashMap<String,Object>();
+		String csSubDeptId = user.getCsDeptId();
+		String userType = user.getUser_type();
+		String userId = user.getUserId();
+		params.put("userId", userId);
 		params.put("csSubDeptId", csSubDeptId);
 		params.put("status", status);
 		params.put("pageCondition", pageCondition);
@@ -43,7 +48,13 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 		int num = (pageCondition.getCurrPage() - 1)*pageCondition.getPageSize();
 		params.put("num", num);
 		//查找面试表中登录rm的部门下的最近一次面试的数据关联到推送表
-		List<CandidatePush> candidateList = rmCandidateMapper.queryPushedCandidate(params);
+		List<CandidatePush> candidateList = null;
+		if("0".equals(userType)){
+			candidateList = rmCandidateMapper.queryAllPushedCandidate(params);
+		}else if("3".equals(userType)){
+			candidateList = rmCandidateMapper.queryPushedCandidate(params);
+		}
+		
 		//将面试表的id关联到推送表的InterviewId
 		/*for (CandidatePush candidatePush : candidateList) {
 			List<CandidateInterview> interviewList = candidatePush.getInterviewList();
@@ -54,7 +65,12 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 			rmCandidateMapper.updateInterviewId(params1);
 		}*/
 		//设置总页数
-		int queryCandidateCount = rmCandidateMapper.queryCandidateCount(params);
+		int queryCandidateCount = 0;
+		if("0".equals(userType)){
+			queryCandidateCount = rmCandidateMapper.queryAllCandidateCount(params);
+		}else if("3".equals(userType)){
+			queryCandidateCount = rmCandidateMapper.queryCandidateCount(params);
+		}
 		pageCondition.setTotalPage((int) Math.ceil(queryCandidateCount*1.0 / pageCondition.getPageSize()));
 		return candidateList;
 	}

@@ -40,8 +40,12 @@
         right join 
         	t_demand d 
         on a.CANDIDATE_ID = d.CANDIDATE_ID
+        left join 
+        	t_user u
+        on a.LOCK_PERSION = u.USER_ID
         WHERE 
-        	d.STATUS IN ('OfferMade','Delayed') and 
+        	LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson})
+        	and d.STATUS IN ('OfferMade','Delayed') and 
 		    <include refid="candidateWherePart"/>
 	</select>
 	
@@ -53,8 +57,12 @@
         right join 
         	t_demand d 
         on a.CANDIDATE_ID = d.CANDIDATE_ID
+        left join 
+        	t_user u
+        on a.LOCK_PERSION = u.USER_ID
         WHERE 
-        	d.STATUS IN('OfferMade','Delayed') and
+        	LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson})
+        	and d.STATUS IN('OfferMade','Delayed') and
         	<include refid="candidateWherePart"/>
 			;
 	</select>
