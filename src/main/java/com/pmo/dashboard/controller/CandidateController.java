@@ -361,10 +361,10 @@ public class CandidateController
 		CandidateInfo candidate = new CandidateInfo();
 		candidate.setInterviewFeedBack(feedBackInfo);
 		candidate.setInterviewId(interviewId);
+		//面试记录中的面试结果0通过1失败
 		candidate.setCandidateStatus(interviewStatus);
 		candidate.setCandidateId(candidateId);
-		
-		//
+		//候选人表中的面试状态3面试通过4面试失败
 		if("0".equals(interviewStatus)){
 		    candidate.setInterviewStatus("3");
 		}else{

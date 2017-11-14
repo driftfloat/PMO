@@ -51,10 +51,22 @@ public class CandidateInfo extends PageCondition {
 	
 	//面试项目
 	private String projectName;
+	private String interviewType;
+	
 	
 	
 
-	public String getProjectName()
+	public String getInterviewType()
+    {
+        return interviewType;
+    }
+
+    public void setInterviewType(String interviewType)
+    {
+        this.interviewType = interviewType;
+    }
+
+    public String getProjectName()
     {
         return projectName;
     }

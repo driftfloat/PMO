@@ -107,6 +107,7 @@ var path='<%=path%>';
 							<div id="interviewInfoList" class="box-content" style="display:none">
 						    	<div class="control-label" style="">
 									<h5>&nbsp;交付部：<span id="csSubDeptName"></span></h5>
+									<h5>&nbsp;项目：<span id="projectName"></span></h5>
 								</div>
 								<div id="interviewInfo" style="margin-left: 2%;">
 									<hr>
@@ -115,6 +116,12 @@ var path='<%=path%>';
 									</div>
 									<div class="control-label">
 										<label>面试官:  <span id="candidateName"></span></label>
+									</div>
+									<div class="control-label">
+										<label>面试类型:  <span id="interviewType"></span></label>
+									</div>
+									<div class="control-label">
+										<label>面试时间:  <span id="interviewDate"></span></label>
 									</div>
 									<div class="control-label">
 										<label>面试结果: <span id="interviewStatus"></span></label>

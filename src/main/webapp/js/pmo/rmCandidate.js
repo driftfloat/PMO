@@ -158,7 +158,7 @@ function scheduleInterview(pushId){
 			async:true,
 			cache:false,
 			type:"post",
-			data:{"pushId":pushId,"interviewDate":interviewDate,"interviewerId":interviewerId,"projectName":projectName},
+			data:{"pushId":pushId,"interviewDate":interviewDate,"interviewerId":interviewerId,"interviewType":interviewType,"projectName":projectName},
 			success:function(data){
 				if(data == "1"){
 					$('#myModal').modal('hide');

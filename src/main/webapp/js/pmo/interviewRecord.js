@@ -40,7 +40,7 @@ function getInterviewRecord(){
 				num++;
 				for(var j=0;j<obj.length;j++){
 					var candidate = obj[j];
-					
+					console.log(JSON.stringify(candidate));
 					if(j==0){
 						var clonetabNode = tabNode.cloneNode(true); 
 						clonetabNode.setAttribute("id", "tab" + num);
@@ -54,15 +54,21 @@ function getInterviewRecord(){
 						clonedNode.setAttribute("id", "interviewInfoList" + num);
 						sourceListNode.parentNode.appendChild(clonedNode);
 						clonedNode.children[0].children[0].children[0].setAttribute("id", 'csSubDeptName' + num);
+						clonedNode.children[0].children[1].children[0].setAttribute("id", 'projectName' + num);
 						clonedNode.children[1].setAttribute("id", 'interviewInfo' + num  + j);
 						clonedNode.children[1].children[1].children[0].children[0].setAttribute("id", 'th' + num + j);
 						clonedNode.children[1].children[2].children[0].children[0].setAttribute("id", 'candidateName' + num + j);
-						clonedNode.children[1].children[3].children[0].children[0].setAttribute("id", 'interviewStatus' + num + j);
-						clonedNode.children[1].children[4].children[0].children[0].setAttribute("id", 'interviewFeedBack' + num + j);
+						clonedNode.children[1].children[3].children[0].children[0].setAttribute("id", 'interviewType' + num + j);
+						clonedNode.children[1].children[4].children[0].children[0].setAttribute("id", 'interviewDate' + num + j);
+						clonedNode.children[1].children[5].children[0].children[0].setAttribute("id", 'interviewStatus' + num + j);
+						clonedNode.children[1].children[6].children[0].children[0].setAttribute("id", 'interviewFeedBack' + num + j);
 						$('#'+('sp' + num)).text(num);
 						$('#'+('csSubDeptName' + num)).text(candidate.csSubdeptName);
+						$('#'+('projectName' + num)).text(candidate.projectName);
 						$('#'+('th' + num + j)).text(candidate.interviewSerrial);
 						$('#'+('candidateName'+num + j)).text(candidate.nickName);
+						$('#'+('interviewType'+num + j)).text(candidate.interviewType);
+						$('#'+('interviewDate'+num + j)).text(candidate.interviewDate);
 						$('#'+('interviewStatus'+num + j)).text(candidate.interviewStatus);
 						$('#'+('interviewFeedBack'+num + j)).text(candidate.interviewFeedBack);
 					}else{
@@ -71,11 +77,15 @@ function getInterviewRecord(){
 						document.getElementById("interviewInfoList" + num).appendChild(clonedNode); 
 						clonedNode.children[1].children[0].children[0].setAttribute("id", 'th' + num + j);
 						clonedNode.children[2].children[0].children[0].setAttribute("id", 'candidateName' + num + j);
-						clonedNode.children[3].children[0].children[0].setAttribute("id", 'interviewStatus' + num + j);
-						clonedNode.children[4].children[0].children[0].setAttribute("id", 'interviewFeedBack' + num + j);
+						clonedNode.children[3].children[0].children[0].setAttribute("id", 'interviewType' + num + j);
+						clonedNode.children[4].children[0].children[0].setAttribute("id", 'interviewDate' + num + j);
+						clonedNode.children[5].children[0].children[0].setAttribute("id", 'interviewStatus' + num + j);
+						clonedNode.children[6].children[0].children[0].setAttribute("id", 'interviewFeedBack' + num + j);
 
 						$('#'+('th' + num + j)).text(candidate.interviewSerrial);
 						$('#'+('candidateName'+num + j)).text(candidate.nickName);
+						$('#'+('interviewType'+num + j)).text(candidate.interviewType);
+						$('#'+('interviewDate'+num + j)).text(candidate.interviewDate);
 						$('#'+('interviewStatus'+num + j)).text(candidate.interviewStatus);
 						$('#'+('interviewFeedBack'+num + j)).text(candidate.interviewFeedBack);
 					}

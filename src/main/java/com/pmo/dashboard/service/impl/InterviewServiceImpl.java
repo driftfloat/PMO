@@ -48,9 +48,23 @@ public class InterviewServiceImpl implements InterviewService {
 			}
 			if ("0".equals(candidate.getInterviewStatus())) {
 				candidate.setInterviewStatus("通过");
-			} else {
+			}else if("1".equals(candidate.getInterviewStatus())){
 				candidate.setInterviewStatus("未通过");
+			}else{
+			    candidate.setInterviewStatus("面试中");
 			}
+			
+			if(null == candidate.getInterviewFeedBack()){
+			    candidate.setInterviewFeedBack("");
+			}
+			
+			if("0".equals(candidate.getInterviewType())){
+			    candidate.setInterviewType("电话面试");
+			}else if("1".equals(candidate.getInterviewType())){
+                candidate.setInterviewType("现场面试");
+            }
+			
+			
 			listInfo.add(candidate);
 		}
 		return map;
