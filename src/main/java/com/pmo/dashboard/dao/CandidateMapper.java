@@ -65,11 +65,11 @@ public interface CandidateMapper
 
 	List<CandidateInfo> getInterviewRecordByCandId(String candidateId);
 
-	int getCandidateListCount();
+	int getCandidateListCount(CandidateInfo candidate);
 
 	List<CandidateInfo> getCandidateList(CandidateInfo candidate);
 	
 	void updateInterviewStatusById(Map<String, Object> params);
 
-	int lockCandidate(String candidateId);
+	int lockCandidate(Map<String, Object> params);
 }

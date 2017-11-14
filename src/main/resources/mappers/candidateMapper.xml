@@ -40,6 +40,7 @@
 		<result property="userId" 			column="USER_ID" 			javaType="String" />
 		<result property="fatherInterviewId" 		column="FATHER_INTERVIEW_ID" 	javaType="String" />
 		<result property="interviewSerrial" 		column="INTERVIEW_SERIAL" 		javaType="String" />
+		<result property="projectName" 		column="PROJECT_NAME" 		javaType="String" />
 	</resultMap>
 	<resultMap id="candidatePushMap" type="com.pmo.dashboard.entity.CandidatePush">
 		<id 	property="pushId" 		column="PUSH_ID" 		javaType="String" />
@@ -75,7 +76,7 @@
 	</select>
 	
 	<update id="updateInterviewFeedBack" parameterType="com.pmo.dashboard.entity.CandidateInfo" >
-		update t_candidate_interview set FEEDBACK = #{interviewFeedBack}, INTERVIEW_STATUS = #{interviewStatus}
+		update t_candidate_interview set FEEDBACK = #{interviewFeedBack}, INTERVIEW_STATUS = #{candidateStatus}
 	        WHERE INTERVIEW_ID = #{interviewId};
 	</update>
 	
@@ -99,6 +100,9 @@
 	    	count(0) 
         FROM 
         	t_candidate a 
+        left join 
+        	t_user b 
+        on a.LOCK_PERSION = b.USER_ID
         WHERE 
 			CANDIDATE_STATUS not in (4,5,6) 
         	<include refid="candidateWherePart"/>
@@ -320,11 +324,23 @@
     </sql>
 	
 	<select id="getCandidateListCount" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="int" >
-			SELECT count(0) FROM t_candidate
+			SELECT count(0) FROM t_candidate where 1 = 1
+			<if test="candidateName != null and candidateName != ''">
+				AND CANDIDATE_NAME = #{candidateName}
+			</if>
+			<if test="candidateTel != null and candidateTel != ''">
+				AND TEL = #{candidateTel}
+			</if>
 	</select>
 	
 	<select id="getCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
-			SELECT * FROM t_candidate
+			SELECT * FROM t_candidate where 1 = 1
+			<if test="candidateName != null and candidateName != ''">
+				AND CANDIDATE_NAME = #{candidateName}
+			</if>
+			<if test="candidateTel != null and candidateTel != ''">
+				AND TEL = #{candidateTel}
+			</if>
 				LIMIT #{currentPage},#{pageDataCount};
 	</select>
 	
@@ -344,7 +360,7 @@
 		where CANDIDATE_ID = #{candidateId}
 	</update>
 	
-	<update id="lockCandidate" parameterType="java.lang.String">
+	<update id="lockCandidate" parameterType="java.util.HashMap">
 		update t_candidate set CANDIDATE_STATUS = '0',LOCK_PERSION = #{userId}
 		where CANDIDATE_ID = #{candidateId}
 	</update>

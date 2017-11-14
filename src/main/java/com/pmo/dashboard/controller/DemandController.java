@@ -337,13 +337,17 @@ public class DemandController {
 	 */
 	@RequestMapping("/demandDetail")
 	public String demandDetail(String demandId,Model model,HttpServletRequest request){
-		List<Demand> list = (List<Demand>) request.getSession().getAttribute("demandList");
+		/*List<Demand> list = (List<Demand>) request.getSession().getAttribute("demandList");
 		for (Demand demand : list) {
 			if(demand.getDemandId().equals(demandId)){
 				model.addAttribute("demand", demand);
 				return "/demand/demandDetail";
 			}
-		}
+		}*/
+	    Demand demand = demandService.queryDemandById(demandId);
+	    
+	    model.addAttribute("demand", demand);
+	    
 		return "/demand/demandDetail";
 	}
 	

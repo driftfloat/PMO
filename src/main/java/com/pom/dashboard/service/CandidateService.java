@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import com.pmo.dashboard.entity.CandidateInfo;
 import com.pmo.dashboard.entity.CandidatePush;
 
@@ -55,6 +57,9 @@ public interface CandidateService
 	boolean abortMyWaitCandidateOk(CandidateInfo candidateinfo);
 	
 	CandidateInfo queryCandidateForId(String candidateId);
+	
+	boolean updateCandidateInterviewStatus(CandidateInfo candidate);
+	
 
 	static List<CandidateInfo> queryCandidateNameById(String candidateId) {
 		// TODO Auto-generated method stub

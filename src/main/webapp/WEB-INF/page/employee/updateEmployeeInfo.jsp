@@ -378,8 +378,8 @@ var path='<%=path%>';
 										<div class="group">
 										<label class="col-lg-2 control-label">Reason for Termination</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="terminationReason" data-bv-notempty
-												data-bv-notempty-message="" id="terminationReason" data-bv-group=".group">
+											<select class="form-control" name="terminationReason" 
+												 id="terminationReason" data-bv-group=".group">
 												<option value="">--Option--</option>
 											</select>
 										</div>

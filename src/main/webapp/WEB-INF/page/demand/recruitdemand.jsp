@@ -111,7 +111,7 @@ var path='<%=path%>';
 								
 								<div class="form-group">
 										<div class="group">
-											<label class="col-lg-2 control-label">SKILL</label>
+											<label class="col-lg-2 control-label">Skill</label>
 											<div class="col-lg-4">
 											<select class="form-control" name="skill" data-bv-notempty
 												data-bv-notempty-message="Pleaser Select Your Skill " id="skill" data-bv-group=".group">
@@ -120,7 +120,7 @@ var path='<%=path%>';
 										</div>
 										</div>
 										<div class="group">
-										<label class="col-lg-2 control-label">REQUESTOR</label>
+										<label class="col-lg-2 control-label">Requestor</label>
 										<div class="col-lg-4">											
 												<input type="text" class="form-control" name="requestor"
 													id="requestor" data-bv-group=".group"/>
@@ -130,7 +130,7 @@ var path='<%=path%>';
 								
 								<div class="form-group">
 										<div class="group">
-										<label class="col-lg-2 control-label">POSITION</label>
+										<label class="col-lg-2 control-label">Postion</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="position" data-bv-notempty
 												data-bv-notempty-message="Please Select Your Position" id="position" data-bv-group=".group">
@@ -140,7 +140,7 @@ var path='<%=path%>';
 										</div>
 										
 										<div class="group">
-											<label class="col-sm-2 control-label">CS SubDept</label>
+											<label class="col-sm-2 control-label">CS Dept</label>
 											<div class="col-sm-4">
 												<select class="form-control" name="csSubDept" data-bv-notempty
 												data-bv-notempty-message="Please Select Your CsSubDept" id="csSubDept" data-bv-group=".group">
@@ -170,13 +170,11 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
-										
-										
 								</div>
 								
 								<div class="form-group">
 										<div class="group">
-										<label class="col-sm-2 control-label">STATUS</label>
+										<label class="col-sm-2 control-label">Status</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="status" data-bv-notempty
 												data-bv-notempty-message="Please Select Your Status" id="status" data-bv-group=".group">
@@ -186,7 +184,7 @@ var path='<%=path%>';
 										</div>
 									    </div>
 									    <div class="group">
-										<label class="col-lg-2 control-label">LOCATION</label>
+										<label class="col-lg-2 control-label">Location</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="location" data-bv-notempty
 												data-bv-notempty-message="Please Select Your Location" id="location" data-bv-group=".group">
@@ -199,7 +197,7 @@ var path='<%=path%>';
 								
 								<div class="form-group">
 										<div class="group">
-										<label class="col-sm-2 control-label">ReqPublishedDate</label>
+										<label class="col-sm-2 control-label">Req Published Date</label>
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
@@ -214,19 +212,17 @@ var path='<%=path%>';
 										</div> 
 										</div>
 										<div class="group">
-										<label class="col-lg-2 control-label">hrPriority</label>
+										<label class="col-lg-2 control-label">HR Priority</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="hrPriority" data-bv-notempty
 												data-bv-notempty-message="Please Select Your HrPriority" id="hrPriority" data-bv-group=".group">
-												<option value="">-- Option--</option>
+												<option>4</option>
 											</select>
 										</div>
 										</div>
 								</div>
 								
 								<div class="form-group">
-								       
-										
 										<div class="group">
 										<label class="col-sm-2 control-label">Remark</label>
 										<div class="col-md-4">

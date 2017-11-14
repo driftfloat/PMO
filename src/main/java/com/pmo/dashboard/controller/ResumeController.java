@@ -1,6 +1,7 @@
 package com.pmo.dashboard.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -77,7 +78,7 @@ public class ResumeController<updateResume> {
 	@RequestMapping("/toUpdateResumeNew")
 	@ResponseBody
 	public boolean toUpdateResumeNew(final HttpServletRequest request,
-            final HttpServletResponse response){
+            final HttpServletResponse response,HttpSession session ){
 		
 		String id = request.getParameter("id");
 		String candidateName = request.getParameter("candidateName");
@@ -104,12 +105,39 @@ public class ResumeController<updateResume> {
 		String old_company = request.getParameter("old_company");
 		
 		String oldPath =  resumeService.queryResumeInfoById(id).get(0).getResume_path();
-		File oldFile = new File(oldPath);
-		oldFile.delete();
-		System.out.println("旧文件删除成功！");
-		
+		if(oldPath != null && !"".equals(oldPath)){
+		    File oldFile = new File(oldPath);
+	        if(oldFile.exists()){
+	            //删除旧简历
+	            oldFile.delete();
+	        }
+		}
 		
 		String resume_path = request.getParameter("resume_path");
+		
+		if(resume_path == null || "".equals(resume_path)){
+		    resume_path = oldPath;
+		}
+		
+		String url=(String) session.getAttribute("url");
+        MultipartFile file=(MultipartFile) session.getAttribute("file");
+        if(file != null){
+            try
+            {
+                file.transferTo(new File(url));
+            }
+            catch (IllegalStateException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            catch (IOException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+		
 		Resume resume = new Resume(id,candidateName,age,gender,tel,education,
 				college,major,experience_years,skill,graduate_date,English_level,
 				candidate_status,create_date,source,role,entry_date,email,expected_salary,

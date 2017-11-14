@@ -17,22 +17,24 @@ function loadMyCandidate(currPage){
 			}
 			//$.each(result,function(candidatePush){
 			for (var i = 0; i < result.candidatelist.length; i++) {
+				//alert(result.candidatelist[i].candidateInfo.candidateId);
 				var tr = $("<tr id='"+result.candidatelist[i].pushId+"'></tr>");
 				var td1 = $("<td>"+result.candidatelist[i].candidateInfo.candidateName+"</td>");
 				var tmp = result.candidatelist[i].interviewList[0].interviewId;  
-				if (!tmp && typeof(tmp)!="undefined" && tmp!=0){  
+				//alert("tmp:"+tmp+",status:"+result.candidatelist[i].candidateInfo.interviewStatus);
+				var interviewStatus = result.candidatelist[i].candidateInfo.interviewStatus;
+				if (interviewStatus == '1'){  
 					var td2 = $("<td>未安排面试</td>"); 
-				}else{
-					if(result.candidatelist[i].candidateInfo.interviewStatus == '3'){
+				}else if(interviewStatus == '3'){
 						var td2 = $("<td>面试通过</td>");
-					}else if(result.candidatelist[i].candidateInfo.interviewStatus == '4'){
+					}else if(interviewStatus == '4'){
 						var td2 = $("<td>面试失败</td>");
-					}else if(result.candidatelist[i].candidateInfo.interviewStatus == '2'){
+					}else if(interviewStatus == '2'){
 						var td2 = $("<td>面试中</td>");
 					}else{
 						var td2 = $("<td></td>");
 					}
-				}
+				
 				if(result.candidatelist[i].candidateInfo.candidateSex == '0'){
 					var td3 = $("<td>女</td>");
 				}else{
@@ -40,31 +42,44 @@ function loadMyCandidate(currPage){
 				}
 				var td4 = $("<td>"+result.candidatelist[i].candidateInfo.candidateAge+"</td>");
 				var td5 = $("<td>"+result.candidatelist[i].candidateInfo.skill+"</td>");
-				var td6 = $("<td>"+result.candidatelist[i].candidateInfo.education+"</td>");
+				if(result.candidatelist[i].candidateInfo.education == '0'){
+					var td6 = $("<td>博士</td>");
+				}else if(result.candidatelist[i].candidateInfo.education == '1'){
+					var td6 = $("<td>研究生</td>");
+				}else if(result.candidatelist[i].candidateInfo.education == '2'){
+					var td6 = $("<td>本科</td>");
+				}else if(result.candidatelist[i].candidateInfo.education == '3'){
+					var td6 = $("<td>大专</td>");
+				}else if(result.candidatelist[i].candidateInfo.education == '4'){
+					var td6 = $("<td>高中</td>");
+				}
+				//var td6 = $("<td>"+result.candidatelist[i].candidateInfo.education+"</td>");
 				var td7 = $("<td>"+result.candidatelist[i].candidateInfo.experienceYears+"</td>");
 				var td8 = $("<td>"+result.candidatelist[i].candidateInfo.candidateTel+"</td>");
 				var td9 = $("<td>"+result.candidatelist[i].candidateInfo.email+"</td>");
-				var td10 = $("<td>"+result.candidatelist[i].candidateInfo.majorStatus+"</td>");
 				var td11 = $("<td>"+result.candidatelist[i].csDept.csSubDeptName+"</td>");
 				var td12 = $("<td>"+result.candidatelist[i].user.userName+"</td>");
 				var status = result.candidatelist[i].interviewList[0].interviewId; 
-				if(!status){
-					var td13 = $("<td><div class='btn-group btn-group-sm' style='width: 380px;'>" +
-							"<ul >" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small' onclick='scheduleInterview(this.id)'>New Turn</a></li>&nbsp;" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small ' onclick='nextInterview(this.id)'>Next Interview</a></li>&nbsp;" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small' onclick='interviewBack(this.id)'>Back</a></li>&nbsp;" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small '  onclick='offerInterview(this.id)'>Offer</a></li></div>"+
-					"</ul></td>");
-				}else{
-					$("#addInterviewer").removeAttr("disabled");
-					var td13 = $("<td><div class='btn-group btn-group-sm' style='width: 380px;'>" +
-							"<ul >" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small ' onclick='scheduleInterview(this.id)'>New Turn</a></li>&nbsp;" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small' onclick='nextInterview(this.id)'>Next Interview</a></li>&nbsp;" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small' onclick='interviewBack(this.id)'>Back</a></li>&nbsp;" +
-							"<li style='display:inline;'><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' class='btn btn-info btn-small' onclick='offerInterview(this.id)'>Offer</a></li></div>"+
-					"</ul></td>");
+				if(interviewStatus == 1){
+					var td13 = $("<td><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].interviewList[0].projectName+"' class='btn btn-info btn-small' onclick='scheduleInterview(this.id)'>New Turn</a>&nbsp;" +
+							"<a href='javascript:void(0);' disabled='disabled' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].interviewList[0].projectName+"' class='btn btn-info btn-small ' onclick='nextInterview(this.id,this.name)'>Next Interview</a>&nbsp;" +
+							"<a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].candidateInfo.candidateId+"' class='btn btn-info btn-small' onclick='interviewBack(this.id,this.name)'>Back</a>&nbsp;" +
+							"<a href='javascript:void(0);' disabled='disabled' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].candidateInfo.candidateId+"' class='btn btn-info btn-small '  onclick='offerInterview(this.id)'>Offer</a></td>");
+				}else if(interviewStatus == 2){
+					var td13 = $("<td><a href='javascript:void(0);' disabled='disabled' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].interviewList[0].projectName+"' class='btn btn-info btn-small ' onclick='scheduleInterview(this.id)'>New Turn</a>&nbsp;" +
+							"<a href='javascript:void(0);' disabled='disabled' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].interviewList[0].projectName+"' class='btn btn-info btn-small' onclick='nextInterview(this.id,this.name)'>Next Interview</a>&nbsp;" +
+							"<a href='javascript:void(0);' disabled='disabled' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].candidateInfo.candidateId+"' class='btn btn-info btn-small' onclick='interviewBack(this.id,this.name)'>Back</a>&nbsp;" +
+							"<a href='javascript:void(0);' disabled='disabled' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].candidateInfo.candidateId+"' class='btn btn-info btn-small' onclick='offerInterview(this.id)'>Offer</a></td>");
+				}else if(interviewStatus == 3){
+					var td13 = $("<td><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].interviewList[0].projectName+"' class='btn btn-info btn-small ' onclick='scheduleInterview(this.id)'>New Turn</a>&nbsp;" +
+							"<a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].interviewList[0].projectName+"' class='btn btn-info btn-small' onclick='nextInterview(this.id,this.name)'>Next Interview</a>&nbsp;" +
+							"<a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].candidateInfo.candidateId+"' class='btn btn-info btn-small' onclick='interviewBack(this.id,this.name)'>Back</a>&nbsp;" +
+							"<a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].candidateInfo.candidateId+"' class='btn btn-info btn-small' onclick='offerInterview(this.id)'>Offer</a></td>");
+				}else if(interviewStatus == 4){
+					var td13 = $("<td><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].interviewList[0].projectName+"' class='btn btn-info btn-small ' onclick='scheduleInterview(this.id)'>New Turn</a>&nbsp;" +
+							"<a href='javascript:void(0);' disabled='disabled' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].interviewList[0].projectName+"' class='btn btn-info btn-small' onclick='nextInterview(this.id,this.name)'>Next Interview</a>&nbsp;" +
+							"<a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].candidateInfo.candidateId+"' class='btn btn-info btn-small' onclick='interviewBack(this.id,this.name)'>Back</a>&nbsp;" +
+							"<a href='javascript:void(0);' disabled='disabled' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].candidateInfo.candidateId+"' class='btn btn-info btn-small' onclick='offerInterview(this.id)'>Offer</a></td>");
 				}
 							
 				td1.appendTo(tr);
@@ -76,7 +91,6 @@ function loadMyCandidate(currPage){
 				td7.appendTo(tr);
 				td8.appendTo(tr);
 				td9.appendTo(tr);
-				td10.appendTo(tr);
 				td11.appendTo(tr);
 				td12.appendTo(tr);
 				td13.appendTo(tr);
@@ -136,13 +150,15 @@ function scheduleInterview(pushId){
 	$("#addInterviewer").click(function(){
 		var interviewDate = $("#interviewDate").val();
 		var interviewerId = $("#interviewer").val();
+		var projectName = $('#projectName').val();
+		var interviewType = $('#interviewType').val();
 		$.ajax({
 			url:path+'/service/rmCandidate/addInterview',
 			dataType:"json",
 			async:true,
 			cache:false,
 			type:"post",
-			data:{"pushId":pushId,"interviewDate":interviewDate,"interviewerId":interviewerId},
+			data:{"pushId":pushId,"interviewDate":interviewDate,"interviewerId":interviewerId,"projectName":projectName},
 			success:function(data){
 				if(data == "1"){
 					$('#myModal').modal('hide');
@@ -165,23 +181,30 @@ function scheduleInterview(pushId){
 			}
 		})
 		$('#graduationDate1').val("");
+		$('#projectName').val("");
 		$("#interviewer").val("");
+		$('#interviewType').val("");
 	})
 }
 /*下一次面试*/
-function nextInterview(pushId){
+function nextInterview(pushId,projectName){
+	$('#projectName').val(projectName);
+	$('#projectName').attr("disabled","disabled");
 	$('#myModal').modal('show');
 	loadInterviewer();
 	$("#addInterviewer").click(function(){
 		var interviewDate = $("#interviewDate").val();
 		var interviewerId = $("#interviewer").val();
+		var projectName = $("#projectName").val();
+		var interviewType = $("#interviewType").val();
+		
 		$.ajax({
 			url:path+'/service/rmCandidate/addNextInterview',
 			dataType:"json",
 			async:true,
 			cache:false,
 			type:"post",
-			data:{"pushId":pushId,"interviewDate":interviewDate,"interviewerId":interviewerId},
+			data:{"pushId":pushId,"interviewDate":interviewDate,"interviewerId":interviewerId,"projectName":projectName,"interviewType":interviewType},
 			success:function(data){
 				if(data == "1"){
 					$('#myModal').modal('hide');
@@ -204,15 +227,19 @@ function nextInterview(pushId){
 		})
 		$('#graduationDate1').val("");
 		$("#interviewer").val("");
+		$("#interviewType").val("");
+		$("#projectName").val("");
 	})
 }
 /*退回*/
-function interviewBack(pushId){
+function interviewBack(pushId,candidateId){
 	/*BootstrapDialog.show({
         title: 'Default Title',
         message: '确认退回？',
         size: BootstrapDialog.SIZE_NORMAL
 	});*/
+	
+	//alert(pushId+","+candidateId);
 	BootstrapDialog.show({
         title: '面试安排',
         message: '确认退回此候选人？',
@@ -226,7 +253,7 @@ function interviewBack(pushId){
             		async:true,
             		cache:false,
             		type:"post",
-            		data:{"pushId":pushId},
+            		data:{"pushId":pushId,"candidateId":candidateId},
             		success:function(data){
             			loadMyCandidate();
             		}
@@ -245,7 +272,7 @@ function interviewBack(pushId){
 
 function loadInterviewer(){
 	$("#interviewer").empty();
-	$("#interviewer").append("<option value=''>-- select --</option>");
+	$("#interviewer").append("<option value=''>--Option--</option>");
 	$.ajax({
 		url:path+'/service/rmCandidate/loadInterviewer',
 		dataType:"json",
@@ -262,9 +289,9 @@ function loadInterviewer(){
 /* offer */
 function offerInterview(pushId){
 	var str = '<table id="demandList" class="table table-bordered table-hover">'+
-	'<thead><tr><th></th><th>RR</th><th>job Code</th><th>Tech/Skill</th>'+
-	'<th>Position</th><th>Department</th><th>Sub - Department</th>'+
-	'<th>Status</th><th>交付部</th><th>详情</th></tr></thead></table>';
+	'<thead><tr><th></th><th>RR</th><th>Job Code</th><th>Skill</th>'+
+	'<th>Position</th><th>Location</th>'+
+	'<th>Status</th><th>CS Dept</th><th>Detail</th></tr></thead></table>';
 	$("#table_area").append(str);
 
 	$("#demandList").delegate("tr","click",function(e){
@@ -290,23 +317,24 @@ function offerInterview(pushId){
 				var td3 = $("<td>"+result.list[i].jobCode+"</td>");
 				var td4 = $("<td>"+result.list[i].skill+"</td>");
 				var td5 = $("<td>"+result.list[i].position+"</td>");
-				if(result.list[i].hsbcDept == null){
+				/*if(result.list[i].hsbcDept == null){
 					var td6 = $("<td></td>");
 					var td7 = $("<td></td>");
 				}else{
 					var td6 = $("<td>"+result.list[i].hsbcDept.hsbcDeptName+"</td>");
 					var td7 = $("<td>"+result.list[i].hsbcDept.hsbcSubDeptName+"</td>");
-				}
+				}*/
+				var td6 = $("<td>"+result.list[i].location+"</td>");
 				var td8 = $("<td>"+result.list[i].status+"</td>");
 				var td9 = $("<td>"+result.list[i].csSubDept+"</td>");
-				var td10 = $("<td><div class='btn-group btn-group-sm'><a href='javascript:void(0);' class='btn btn-primary' onclick='demandDetail("+result.list[i].demandId+")'>详情</a></div></td>");
+				var td10 = $("<td><div class='btn-group btn-group-sm'><a href='javascript:void(0);' class='btn btn-info btn-small' onclick='demandDetail("+result.list[i].demandId+")'>Detail</a></div></td>");
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
 				td4.appendTo(tr);
 				td5.appendTo(tr);
 				td6.appendTo(tr);
-				td7.appendTo(tr);
+				//td7.appendTo(tr);
 				td8.appendTo(tr);
 				td9.appendTo(tr);
 				td10.appendTo(tr);
@@ -356,4 +384,12 @@ function offerInterview(pushId){
         	$(".bootstrap-dialog-message").css("maxHeight",window.innerHeight-240+"px")
         }
     });
+}
+
+
+function demandDetail(demandId){
+	$("#demandId").val(demandId);
+	var url = path+'/service/demand/demandDetail';
+	$("#detailForm").attr("action",url);
+	$("#detailForm").submit();
 }

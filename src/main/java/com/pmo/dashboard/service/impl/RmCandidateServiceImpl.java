@@ -1,7 +1,5 @@
 package com.pmo.dashboard.service.impl;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,17 +8,12 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.pmo.dashboard.dao.CSDeptMapper;
 import com.pmo.dashboard.dao.CandidateMapper;
 import com.pmo.dashboard.dao.InterviewMapper;
 import com.pmo.dashboard.dao.RmCandidateMapper;
-import com.pmo.dashboard.dao.UserMapper;
-import com.pmo.dashboard.entity.CSDept;
-import com.pmo.dashboard.entity.CandidateInfo;
 import com.pmo.dashboard.entity.CandidateInterview;
 import com.pmo.dashboard.entity.CandidatePush;
 import com.pmo.dashboard.entity.PageCondition;
-import com.pmo.dashboard.entity.User;
 import com.pom.dashboard.service.RmCandidateService;
 
 /**
@@ -99,8 +92,8 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 
 	@Override
 	public void interviewBack(String pushId) {
-		//0表示未推送
-		String status = "0";
+		//1表示已完成
+		String status = "1";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("status", status);
 		params.put("pushId", pushId);

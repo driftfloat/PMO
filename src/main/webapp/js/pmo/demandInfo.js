@@ -88,7 +88,7 @@ function loadCSBu(result){
 	var url = path+'/json/csBuName.json'
 	$.getJSON(url,  function(data) {
 		$("#csBuName").empty();
-		$("#csBuName").append("<option value=''>-- Option --</option>");
+		$("#csBuName").append("<option value=''>--Option--</option>");
 	       $.each(data, function(i, item) {
 	    	   $("#csBuName").append("<option value='"+item.name+"'>"+item.name+"</option>");
 	       })
@@ -104,7 +104,7 @@ function loadScSubDeptName(){
 	$("#csBuName").change(function(){
 		var csBuName = $("#csBuName").val();
 		$("#scSubDeptName").empty();
-		$("#scSubDeptName").append("<option value=''>-- Option --</option>");
+		$("#scSubDeptName").append("<option value=''>--Option--</option>");
 		$.ajax({
 			url:path+'/service/demand/loadScSubDeptName',
 			dataType:"json",
@@ -131,7 +131,7 @@ function loadCSSubDept(result){
 		type:"post",
 		success:function(list){
 			$("#csSubDept").empty();
-			$("#csSubDept").append("<option value=''>-- Option --</option>");
+			$("#csSubDept").append("<option value=''>--Option--</option>");
 			for(var i = 0;i<list.length;i++){
 				$("#csSubDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csSubDeptName+"</option>");
 			}
@@ -165,7 +165,7 @@ function loadSubDepartment(){
 		var department = $("#department").val();
 		//$("#sub_department").find("option").remove();
 		$("#sub_department").empty();
-		$("#sub_department").append("<option value=''>-- Option --</option>");
+		$("#sub_department").append("<option value=''>--Option--</option>");
 		$.ajax({
 			url:path+'/service/demand/loadSubDepartment',
 			dataType:"json",

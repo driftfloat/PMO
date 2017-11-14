@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmo.dashboard.entity.CandidateInfo;
 import com.pmo.dashboard.entity.CandidatePush;
-import com.pmo.dashboard.entity.HSBCDept;
 import com.pmo.dashboard.entity.PageCondition;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
@@ -358,13 +357,24 @@ public class CandidateController
     	
 	@RequestMapping("/updateInterviewFeedBack")
 	@ResponseBody
-	public boolean updateInterviewFeedBack(String interviewId, String feedBackInfo, String interviewStatus) {
+	public boolean updateInterviewFeedBack(String interviewId, String feedBackInfo, String interviewStatus,String candidateId) {
 		CandidateInfo candidate = new CandidateInfo();
 		candidate.setInterviewFeedBack(feedBackInfo);
 		candidate.setInterviewId(interviewId);
-		candidate.setInterviewStatus(interviewStatus);
+		candidate.setCandidateStatus(interviewStatus);
+		candidate.setCandidateId(candidateId);
+		
+		//
+		if("0".equals(interviewStatus)){
+		    candidate.setInterviewStatus("3");
+		}else{
+		    candidate.setInterviewStatus("4");
+		}
+		
+		boolean flags = candidateService.updateCandidateInterviewStatus(candidate);
 		boolean flag = candidateService.updateInterviewFeedBack(candidate);
-		return flag;
+		
+		return flag&&flags;
 	}
     	
     @RequestMapping("/queryInterviewFeedBack")

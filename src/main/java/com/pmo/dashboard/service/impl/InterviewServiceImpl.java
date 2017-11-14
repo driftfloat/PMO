@@ -69,14 +69,14 @@ public class InterviewServiceImpl implements InterviewService {
 	}
 
 	@Override
-	public int getCandidateListCount() {
-		return candidateMapper.getCandidateListCount();
+	public int getCandidateListCount(CandidateInfo candidate) {
+		return candidateMapper.getCandidateListCount(candidate);
 	}
 
 	@Override
-	public boolean lockCandidate(String candidateId, String userId) {
+	public boolean lockCandidate(Map<String, Object> params) {
 		try {
-			int res = candidateMapper.lockCandidate(candidateId);
+			int res = candidateMapper.lockCandidate(params);
 			if (res > 0) {
 				return true;
 			} else {

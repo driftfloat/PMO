@@ -72,42 +72,62 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user">&nbsp;CANDIDATE&nbsp;LIST</i>
+									<i class="glyphicon glyphicon-user">&nbsp;面试记录</i>
 								</h2>
 							</div>
+							
 							<div id="CandidateInfo" class="box-content" >
 								<form id="candidateForm" method="post" class="form-horizontal">
+							<div class="group">
+								<label class="col-sm-2 control-label">Candidate Name</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" name="candidateNames" id="candidateNames" />
+									</div>
+							</div>
+							<div class="group">
+								<label class="col-sm-2 control-label">Tel</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" name="tel" id="tel" />
+									</div>
+							</div>
+							</br></br></br>
+							
+							<div class="form-group">
+								<div style="text-align:center;width:100%;">
+								<input type="button" value="查&nbsp;&nbsp;询"
+								name="searchBtn" id="searchBtn" href="#"
+								class="button btn btn-primary" data-dismiss="modal"
+								style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
+								 </div>
+							</div>
+							
 									<div style='overflow:auto'>
 										<table id="candidateList"
 											class="table table-striped table-bordered">
 											<thead>
 												<tr>
-													<th>NAME</th>
-													<th>SEX</th>
-													<th>AGE</th>
-													<th>TEL</th>
-													<th>EMAIL</th>
-													<th>ROLE</th>
-													<th>WORK YEARS</th>
-													<th>ENGLISH LEVEL</th>
-													<th>SKILL</th>
-													<th>OPERATION</th>
+													<th>Name</th>
+													<th>Sex</th>
+													<th>Age</th>
+													<th>Tel</th>
+													<th>Email</th>
+													<th>Role</th>
+													<th>Work Years</th>
+													<th>English Level</th>
+													<th>Skill</th>
+													<th>Operation</th>
 												</tr>
 											</thead>
 											<tbody></tbody>
 										</table>
-									</div>
-									<div>
+										
+										<div>
 										<div style="max-width: 400px; float: left">
 											<ul class="pagination pagination-centered">
-												<li><a href="#" id="fristPage"
-													onclick="loadCandidateList('frist')">首页</a></li>
-												<li><a href="#" id="previousPage"
-													onclick="loadCandidateList('previous')">上一页</a></li>
-												<li><a href="#" id="nextPage"
-													onclick="loadCandidateList('next')">下一页</a></li>
-												<li><a href="#" id="lastPage"
-													onclick="loadCandidateList('last')">末页</a></li>
+												<li><a href="#" id="fristPage" onclick="loadCandidateList('frist')">首页</a></li>
+												<li><a href="#" id="previousPage" onclick="loadCandidateList('previous')">上一页</a></li>
+												<li><a href="#" id="nextPage" onclick="loadCandidateList('next')">下一页</a></li>
+												<li><a href="#" id="lastPage" onclick="loadCandidateList('last')">末页</a></li>
 											</ul>
 										</div>
 										<div style="max-width: 400px; float: right; margin-top: 30px;">
@@ -115,7 +135,9 @@ var path='<%=path%>';
 												id="currentPage"></span>页&nbsp;/&nbsp;共<span id="pageCount"></span>页&nbsp;&nbsp;共<span
 												id="dataCount"></span>条
 										</div>
+									    </div>
 									</div>
+									
 								</form>
 						 		<form action="" id="editForm" method="post" target="_blank">
 									<input id="interviewId" name="interviewId" type="hidden" />

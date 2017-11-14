@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pmo.dashboard.entity.CSDept;
+import com.pmo.dashboard.entity.CandidateInfo;
 import com.pmo.dashboard.entity.CandidateInterview;
 import com.pmo.dashboard.entity.CandidatePush;
 import com.pmo.dashboard.entity.Demand;
@@ -19,6 +21,8 @@ import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.PageCondition;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Utils;
+import com.pom.dashboard.service.CSDeptService;
+import com.pom.dashboard.service.CandidateService;
 import com.pom.dashboard.service.DemandService;
 import com.pom.dashboard.service.EmployeeService;
 import com.pom.dashboard.service.RmCandidateService;
@@ -40,6 +44,12 @@ public class RmCandidateController {
 	
 	@Resource
 	DemandService demandService;
+	
+	@Resource
+	CandidateService candidateService;
+	
+	@Resource
+    CSDeptService csDeptService;
 
 	@RequestMapping("/myCandidate")
 	public String myCandidate(){
@@ -89,7 +99,7 @@ public class RmCandidateController {
 	 */
 	@RequestMapping("/addInterview")
 	@ResponseBody
-	public Object addInterview(String pushId,String interviewDate,String interviewerId,HttpServletRequest request){
+	public Object addInterview(String pushId,String interviewDate,String interviewerId,String projectName,String interviewType,HttpServletRequest request){
 		List<CandidatePush> candidatelist = (List<CandidatePush>)request.getSession().getAttribute("candidatelist");
 		CandidateInterview candidateInterview = new CandidateInterview();
 		for (CandidatePush candidatePush : candidatelist) {
@@ -100,6 +110,10 @@ public class RmCandidateController {
 				candidateInterview.setInterviewerId(interviewerId);
 				//面试日期
 				candidateInterview.setInterviewDate(interviewDate);
+				//面试项目
+				candidateInterview.setProjectName(projectName);
+				//面试类型
+				candidateInterview.setInterviewType(interviewType);
 				candidateInterview.setCssubDept(candidatePush.getCsSubDeptId());
 				candidateInterview.setFatherInterviewId(candidateInterview.getInterviewId());
 				candidateInterview.setInterviewSerial("1");
@@ -123,7 +137,7 @@ public class RmCandidateController {
 	 */
 	@RequestMapping("/addNextInterview")
 	@ResponseBody
-	public Object addNextInterview(String pushId,String interviewDate,String interviewerId,HttpServletRequest request){
+	public Object addNextInterview(String pushId,String interviewDate,String interviewerId,String projectName,String interviewType,HttpServletRequest request){
 		List<CandidatePush> candidatelist = (List<CandidatePush>)request.getSession().getAttribute("candidatelist");
 		CandidateInterview candidateInterview = new CandidateInterview();
 		for (CandidatePush candidatePush : candidatelist) {
@@ -134,6 +148,11 @@ public class RmCandidateController {
 				candidateInterview.setInterviewerId(interviewerId);
 				//面试日期
 				candidateInterview.setInterviewDate(interviewDate);
+				//面试项目
+				candidateInterview.setProjectName(projectName);
+				//面试类型
+				candidateInterview.setInterviewType(interviewType);
+				
 				candidateInterview.setCssubDept(candidatePush.getCsSubDeptId());
 				//candidateInterview.setFatherInterviewId(candidateInterview.getInterviewId());
 				//candidateInterview.setInterviewSerial("1");
@@ -154,8 +173,12 @@ public class RmCandidateController {
 	 */
 	@RequestMapping("/interviewBack")
 	@ResponseBody
-	public Object interviewBack(String pushId){
-		try {
+	public Object interviewBack(String pushId,String candidateId){
+	    CandidateInfo candidate = new CandidateInfo();
+	    candidate.setCandidateId(candidateId);
+	    candidate.setInterviewStatus("0");
+	    boolean resultFlag = candidateService.updateCandidateInterviewStatus(candidate);
+	    try {
 			rmCandidateService.interviewBack(pushId);
 			return "1";
 		} catch (Exception e) {
@@ -174,13 +197,29 @@ public class RmCandidateController {
 	public Object offerDemandList(String pushId,HttpServletRequest request){
 		List<CandidatePush> candidatelist = (List<CandidatePush>)request.getSession().getAttribute("candidatelist");
 		Map<String, Object> map = new HashMap<String, Object>();
+		List<Demand> list = new ArrayList<Demand>();
 		for (CandidatePush candidatePush : candidatelist) {
 			if(candidatePush.getPushId().equals(pushId)){
-				List<Demand> list = demandService.queryOfferDemandList(candidatePush);
-				map.put("list", list);
-				return map;
+				list = demandService.queryOfferDemandList(candidatePush);
+				break;
 			}
 		}
+		List<CSDept> listD = csDeptService.queryAllCSDept();
+		
+		String csDept = null;
+		
+		//将需求表中交付部的Id转为名称
+		for(int i = 0;i < list.size();i++){
+		    csDept = list.get(i).getCsSubDept();
+		    for(int j = 0;j < listD.size();j++){
+		        if(csDept.equals(listD.get(j).getCsSubDeptId()) ){
+		            csDept = listD.get(j).getCsSubDeptName();
+		            list.get(i).setCsSubDept(csDept);
+		            break;
+		        }
+		    }
+		}
+		map.put("list", list);
 		return map;
 	}
 	

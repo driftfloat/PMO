@@ -36,7 +36,6 @@ function loadResumeUpdate(resume){
 function toUpdateResumeNew(){
 	var id = $('#candidateId').val();
 	var resume_path = $('#resume_path').val();
-	alert(resume_path);
 	$.ajax({
 		url:path+'/service/resume/toUpdateResumeNew',
 		dataType:"json",
@@ -62,8 +61,7 @@ function toUpdateResumeNew(){
 			"source":$('#source').val(),
 			"remark":$('#remark').val(),
 			"interview_status":$('#interview_status').val(),
-//			"resume_path":resume_path
-			
+			"resume_path":resume_path
 			},	
 			
 			
@@ -84,7 +82,7 @@ function toUpdateResumeNew(){
 				
 			}
 			if(!resultFlag){
-				alert('1');
+				alert('修改失败');
 			}
 		}
 	})

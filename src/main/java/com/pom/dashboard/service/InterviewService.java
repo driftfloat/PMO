@@ -9,13 +9,13 @@ import com.pmo.dashboard.entity.HSBCDept;
 
 public interface InterviewService {
 
-	int getCandidateListCount();
+	int getCandidateListCount(CandidateInfo candidate);
 
 	List<CandidateInfo> getCandidateList(CandidateInfo candidate);
 
 	Map<String, List<CandidateInfo>> getInterviewRecordByCandId(String candidateId);
 
-	boolean lockCandidate(String candidateId, String userId);
+	boolean lockCandidate(Map<String, Object> params);
 
 	String getBillRate(Employee employee);
 	

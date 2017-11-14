@@ -36,17 +36,10 @@ public class InterviewController {
 	@ResponseBody
 	public Object getCandidateList(CandidateInfo candidate, HttpServletRequest request) {
 
-		// User user = (User) request.getSession().getAttribute("loginUser");
-		// String userId = user.getUserId();
-		// if (userId == null) {
-		// return null;
-		// }
-		//
-		// candidate.setUserId(userId);
 		String pageState = candidate.getPageState();
 		PageCondition page = new PageCondition();
 
-		int dataCount = interviewService.getCandidateListCount();
+		int dataCount = interviewService.getCandidateListCount(candidate);
 		page.setDataCount(dataCount + "");
 		page.setPageCount((dataCount - 1) / 10 + 1 + "");
 		page.setPageDataCount(Constants.PAGE_DATA_COUNT + "");
@@ -88,8 +81,11 @@ public class InterviewController {
 	public boolean lockCandidate(String candidateId, HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute("loginUser");
 		String userId = user.getUserId();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userId", userId);
+		params.put("candidateId", candidateId);
 
-		return interviewService.lockCandidate(candidateId, userId);
+		return interviewService.lockCandidate(params);
 	}
 
 	@RequestMapping(value = "/getBillRate")

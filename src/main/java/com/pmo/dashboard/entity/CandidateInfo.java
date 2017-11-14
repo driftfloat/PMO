@@ -48,8 +48,23 @@ public class CandidateInfo extends PageCondition {
 	private String nickName;
 	private String fatherInterviewId;
 	private String interviewSerrial;
+	
+	//面试项目
+	private String projectName;
+	
+	
 
-	public String getFeedbacktime() {
+	public String getProjectName()
+    {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName)
+    {
+        this.projectName = projectName;
+    }
+
+    public String getFeedbacktime() {
 		return feedbacktime;
 	}
 

@@ -96,7 +96,6 @@ vertical-align: middle!important;
 												<th>ExperienceYears</th>
 												<th>Telephone</th>
 												<th>Email</th>
-												<th>MajorType</th>
 												<th>ChinaSoft_Dept</th>
 												<th>PushedName</th>
 												<th>operation</th>
@@ -175,11 +174,28 @@ vertical-align: middle!important;
 									</td>
 								</tr>
 								<tr>
+									<td><label class="col-sz-2 control-label">Interview Type</label></td>
+									<td>
+											<select class="form-control" name="interviewType" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="interviewType" data-bv-group=".group">
+												<option value="">--Option--</option>
+												<option value="0">电话面试</option>
+												<option value="1">现场面试</option>
+											</select>
+									</td>
+								</tr>
+								<tr>
+									<td><label class="col-sz-2 control-label">Project</label></td>
+									<td>
+									<input type="text" class="form-control" name="projectName" id="projectName" />
+									</td>
+								</tr>
+								<tr>
 									<td><label class="col-sz-2 control-label">Interviewer</label></td>
 									<td>
 											<select class="form-control" name="interviewer" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="interviewer" data-bv-group=".group">
-												<option value="">-- select--</option>
+												<option value="">--Option--</option>
 											</select>
 									</td>
 								</tr>

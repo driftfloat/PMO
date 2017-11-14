@@ -1,10 +1,10 @@
 $(function(){
 	loadDept();
 	loadSkill();
-	loadPosition();
+	//loadPosition();
 	loadLocation();
 	loadStatus();
-	loadHrPriority();
+	//loadHrPriority();
 	dateType();
 	dateType1();
 	loadCsSubDept();
@@ -13,10 +13,34 @@ $(function(){
 /*function addDemand(){
 	var url = path+'/service/demand/addDemand';
 	alert(url);
-	
 	$("#recruitdemandForm").attr("action",url);
 	$("#recruitdemandForm").submit();
 }*/
+
+$('#rr').blur(function(){
+	hrPriority();
+});
+
+$('#jobCode').blur(function(){
+	hrPriority();
+});
+
+function hrPriority(){
+	$('#hrPriority').empty();
+	if($('#rr').val() == '' || $('#rr').val() == null){
+		$('#hrPriority').append("<option>4</option>");
+		return; 
+	}
+	
+	if($('#jobCode').val() == '' || $('#jobCode').val() == null){
+		$('#hrPriority').append("<option>4</option>");
+		return; 
+	}
+	
+	$('#hrPriority').append("<option>3</option>");
+}
+
+
 
 function loadDept(){
 	$.ajax({
@@ -32,6 +56,7 @@ function loadDept(){
 		}
 	})
 }
+
 
 $("#hsbcDept").change(function(){
 	$('#recruitdemandForm').data("bootstrapValidator").updateStatus("hsbcSubDept",  "NOT_VALIDATED",  null ); 
@@ -74,6 +99,7 @@ function loadCsSubDept(){
 		}
 	})
 }
+
 function addDemand(){
 	//var isvalid = false;
 	//isvalid = $('#recruitdemandForm').data('bootstrapValidator').isValid();
@@ -153,6 +179,28 @@ function addDemand(){
 		return ;
 	}
 }
+
+$("#skill").change(function(){
+	var skill = $('#skill').val();
+	$.ajax({
+		url:path+'/service/rate/queryRateBySkill',
+		dataType:"json",
+		data:{"skill":skill},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(list){
+			$("#position").empty();
+			$("#position").append("<option value=''>--Option--</option>");
+			for(var i = 0;i<list.length;i++){
+				$("#position").append("<option>"+list[i].position+"</option>");
+			}
+		}
+	})
+	
+})
+
+
 function loadSkill(){
 	var url = path+'/json/skill.json'
 	$.getJSON(url,  function(data) {
@@ -162,7 +210,7 @@ function loadSkill(){
 	});
 }
 function loadPosition(){
-	var url = path+'/json/msaRole.json'
+	var url = path+'/json/role.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
 	    	   $("#position").append("<option>"+item.name+"</option>");

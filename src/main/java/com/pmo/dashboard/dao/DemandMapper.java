@@ -15,4 +15,5 @@ public interface DemandMapper
 	public void updateCandidateIdById(Map<String, Object> params);
 	//gkf add method
 	public int updateDemandOnBoardById(Map<String,Object> params);
+	public Demand queryDemandById(String demandId);
 }

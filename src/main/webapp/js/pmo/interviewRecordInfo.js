@@ -9,8 +9,19 @@ function loadCandidateList(pageState) {
 	if (null != pageState) {
 		candidate.append("pageState", pageState);
 	}
+	
+	var candidateName = $('#candidateNames').val();
+	
+	var candidateTel = $('#tel').val();
+	
 	candidate.append("currentPage", currentPage);
+	
 	candidate.append("pageCount", pageCount);
+	
+	candidate.append("candidateName",candidateName);
+	
+	candidate.append("candidateTel",candidateTel);
+	
 	$.ajax({
 				url : path + "/service/interview/getCandidateList",
 				dataType : "json",
@@ -83,6 +94,12 @@ function loadCandidateList(pageState) {
 	 $("#editForm").submit();
  }
 
+ 
+ $("#searchBtn").click(function(){
+	 loadCandidateList("");
+ });
+ 
+ 
 //if($("#GRADUATE_DATE1").length != 0){
 //	  $('#candidateForm').data("bootstrapValidator").revalidateField($("#GRADUATE_DATE1"));
 //}

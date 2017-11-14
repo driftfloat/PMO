@@ -117,9 +117,7 @@ function loadCandidateList(pageState)
 			for (var i = 0; i < result.data.length; i++) {
 				var tr = $("<tr id='"+result.data[i].candidateId+"' ></tr>");
 				tr.appendTo(tbody);
-				$("<td><a href='javascript:void(0);'" +
-						"onclick=viewCandidataInfo('"+result.data[i].candidateId+"')>" +
-						result.data[i].candidateName+"</a></td>" +
+				$("<td>" +result.data[i].candidateName+"</td>" +
 				"<td>"+ result.data[i].candidateSex+ "</td>" +
 				"<td>"+ result.data[i].candidateAge+ "</td>" +
 				"<td>"+ result.data[i].candidateTel+ "</td>" +
@@ -139,7 +137,7 @@ function loadCandidateList(pageState)
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=lock('"+result.data[i].candidateId+"')>LOCK</a>" +
+							"onclick=lock('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>LOCK</a>" +
 					"</td>").appendTo(tr);
 				}else{
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
@@ -173,7 +171,7 @@ function loadCandidateList(pageState)
 	})
 }
 
-function lock(candidateId){
+function lock(candidateId,resumePath){
 	$.ajax({
 		url:path+'/service/interview/lockCandidate',
 		dataType:"json",
@@ -184,7 +182,8 @@ function lock(candidateId){
 		success:function(result){
 			if(result)
 			{
-				$("#"+candidateId).remove();
+				$("#"+candidateId).children().eq(13).html("<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=downLoadCandidateResume('"+candidateId+"','"+resumePath+"')>RESUME</a>");
 			}else{
 				alert('保存失败');
 			}

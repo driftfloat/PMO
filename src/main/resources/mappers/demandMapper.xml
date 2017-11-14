@@ -72,6 +72,10 @@
 		</where>
 	</sql>
 	
+	<select id="queryDemandById" parameterType="String" resultType="com.pmo.dashboard.entity.Demand">
+	    SELECT * FROM t_demand WHERE DEMAND_ID = #{demandId};
+	</select>
+	
 	<select id="queryDemandList" parameterType="java.util.HashMap" resultMap="demandMap">
 		select *
 		from  t_demand a,t_cs_dept b 

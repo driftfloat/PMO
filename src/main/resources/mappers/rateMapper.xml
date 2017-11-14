@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmo.dashboard.dao.RateMapper">
+	<resultMap id="rateMap" type="com.pmo.dashboard.entity.Rate">
+		<result property="location" column="Locations" javaType="String" />
+		<result property="skill" column="Technology" javaType="String" />
+		<result property="position" column="Role" javaType="String" />
+		<result property="billRate" column="BillRate" javaType="String" />
+	</resultMap>
+	
+	<select id="queryRateBySkill" parameterType="String" resultMap="rateMap">
+	    SELECT * FROM t_rate WHERE Locations = 'Xian' AND Technology LIKE CONCAT('%',#{skill},'%')
+	</select>
+	
+</mapper>

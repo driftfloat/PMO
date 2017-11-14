@@ -231,44 +231,6 @@ $(document).ready(function() {
             		 },
             	 }
              },
-             
-             remark: {
-                 group: '.group',
- 				validators: {
-                     notEmpty: {
-                         message: '请输入中文'
-                     },
-                     regexp: {
-                         regexp: /^([\u4E00-\u9FA5])*$/,
-
-                         message: '请输入中文字符'
-
-                     },
-                     stringLength: {
-                         max: 200,
-                         message: '请输入200字以内的备注'
-                     }
-                 }
-             },
-             old_company: {
-                 group: '.group',
- 				validators: {
-                     notEmpty: {
-                         message: '请输入中文名'
-                     },
-                     regexp: {
-                         regexp: /^([\u4E00-\u9FA5])*$/,
-
-                         message: '请输入中文字符'
-
-                     },
-                     stringLength: {
-                         max: 25,
-                         message: '请输入25字以内的中文名'
-                     }
-                 }
-             },
-             
         }
     }).on('success.form.bv', function(e) {
         // Prevent submit form
@@ -279,8 +241,243 @@ $(document).ready(function() {
         if(validator){
         	addCandidate(e.target);
         }
-
     });
+    
+    
+    
+    $('#updateResumeFrom').bootstrapValidator({
+    	//	message: 'This value is not valid',
+
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+            	
+            	candidateName: {
+                    group: '.group',
+    				validators: {
+                        notEmpty: {
+                            message: '请输入中文名'
+                        },
+                        regexp: {
+                            regexp: /^([\u4E00-\u9FA5])*$/,
+
+                            message: '请输入中文字符'
+
+                        },
+                        stringLength: {
+                            max: 25,
+                            message: '请输入25字以内的中文名'
+                        }
+                    }
+                },
+                
+                tel: {
+             		group: '.group',
+             		validators: {
+                         notEmpty: {
+                        	 message: '请输入电话号码'
+                         },
+                         regexp: {
+                             regexp: /^1[3|5|7|8]\d{9}$/,
+                             message: '请输入正确的手机号'
+                         },
+                     }
+                 },
+                 
+                 age: {
+              		group: '.group',
+              		validators: {
+                          notEmpty: {
+                              message: '请输入年龄'
+                          },
+                          regexp: {
+                              regexp: "^[1-9][0-9]$",
+                              message: '年龄必须两位整数'
+                          }
+                          
+                      }
+                  },
+                  
+                  gender: {
+              		group: '.group',
+              		validators: {
+                          notEmpty: {
+                              message: '请输入性别'
+                          },
+                          
+                      }
+                  },
+                  education: {
+              		group: '.group',
+              		validators: {
+                          notEmpty: {
+                              message: '请输入学历'
+                          },
+                          
+                      }
+                  },
+                  
+                  college: {
+                      group: '.group',
+      				validators: {
+                          notEmpty: {
+                              message: '请输入毕业院校名称'
+                          },
+                          regexp: {
+                              regexp: /^([\u4E00-\u9FA5])*$/,
+
+                              message: '请输入中文字符'
+
+                          },
+                          stringLength: {
+                              max: 25,
+                              message: '请输入25字以内的中文名'
+                          }
+                      }
+                  },
+                  major: {
+              		group: '.group',
+              		validators: {
+                          notEmpty: {
+                              message: '请确认是否是计算机专业'
+                          },
+                          
+                      }
+                  },
+                  experience_years: {
+              		group: '.group',
+              		validators: {
+                          notEmpty: {
+                              message: '请输入工作年限'
+                          },
+                          
+                      }
+                  },
+                  
+                  skill: {
+              		group: '.group',
+              		validators: {
+                          notEmpty: {
+                              message: '请输入技能'
+                          },
+                          
+                      }
+                  },
+                  GRADUATE_DATE1: {
+              		group: '.group',
+              		validators: {
+                          notEmpty: {
+                              message: '请输入毕业时间'
+                          },
+                          date : {  
+                              format : 'YYYY-MM-DD',  
+                              message : '日期格式不正确'  
+                          }
+                      }
+                  },
+                  
+                  English_level: {
+              		group: '.group',
+              		validators: {
+                          notEmpty: {
+                              message: '请输入英语水平'
+                          },
+                          
+                      }
+                  },
+                  candidate_status: {
+              		group: '.group',
+              		validators: {
+                          notEmpty: {
+                              message: '请输入候选人状态'
+                          },
+                          
+                      }
+                  },
+                  
+                  source: {
+              		group: '.group',
+              		validators: {
+                          notEmpty: {
+                              message: '请输入简历来源'
+                          },
+                          
+                      }
+                  },
+                  role: {
+              		group: '.group',
+              		validators: {
+                          notEmpty: {
+                              message: '请输入角色'
+                          },
+                          
+                      }
+                  },
+                  
+                  email: {
+             		group: '.group',
+             		validators: {
+                         notEmpty: {
+                             message: '请输入邮箱号'
+                         },
+                         regexp: {
+                             regexp: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
+                             message: '请输入正确的邮箱号'
+                         },
+                        
+                     }
+                 },
+                 
+                 resume_path: {
+             		group: '.group',
+             		validators: {
+                         notEmpty: {
+                             message: '简历未上传'
+                         },
+                     }
+                 },
+                 
+                 entry_date: {
+                     group: '.group',
+     				validators: {
+                         stringLength: {
+                             max: 25,
+                             message: '请输入25字以内的入职日期'
+                         }
+                     }
+                 },
+                 expected_salary: {
+                	 group: '.group',
+                	 validators: {
+                		 regexp: {
+                	            regexp: "^[1-9][0-9]*$",
+                	            message: '期望薪资为大于0的正整数'
+                	        },
+                	 }
+                 },
+                 real_salary: {
+                	 group: '.group',
+                	 validators: {
+                		 regexp: {
+                			 regexp: "^[1-9][0-9]*$",
+                			 message: '实际薪资为大于0的正整数'
+                		 },
+                	 }
+                 },
+            }
+        }).on('success.form.bv', function(e) {
+            // Prevent submit form
+            e.preventDefault();
+
+            var $form     = $(e.target);
+                validator = $form.data('bootstrapValidator');
+            if(validator){
+            	toUpdateResumeNew();
+            }
+        });
 });
 
 $(function () {

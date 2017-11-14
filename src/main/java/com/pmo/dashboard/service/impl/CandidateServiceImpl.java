@@ -60,7 +60,7 @@ public class CandidateServiceImpl implements CandidateService {
 				for (LinkedHashMap<String, String> map : candidateList) {
 					map.put("CANDIDATE_SEX", "0".equals(map.get("CANDIDATE_SEX")) ? "男" : "女");
 					map.put("ENGLISH_LEVEL", "0".equals(map.get("ENGLISH_LEVEL")) ? "非工作语言" : "工作语言");
-					map.put("MAJOR_STATUS", "0".equals(map.get("MAJOR_STATUS")) ? "是" : "否");
+					map.put("MAJOR_STATUS", "0".equals(map.get("MAJOR_STATUS")) ? "计算机专业" : "非计算机专业");
 					String candidateStatus = map.get("CANDIDATE_STATUS");
 					if ("0".equals(candidateStatus)) {
 						candidateStatus = "招聘中";
@@ -121,7 +121,7 @@ public class CandidateServiceImpl implements CandidateService {
 				for (CandidateInfo candidateInfo : candidateList) {
 					candidateInfo.setCandidateSex("0".equals(candidateInfo.getCandidateSex()) ? "男" : "女");
 					candidateInfo.setEnglishLevel("0".equals(candidateInfo.getEnglishLevel()) ? "非工作语言" : "工作语言");
-					candidateInfo.setMajorStatus("0".equals(candidateInfo.getMajorStatus()) ? "是" : "否");
+					candidateInfo.setMajorStatus("0".equals(candidateInfo.getMajorStatus()) ? "计算机专业" : "非计算机专业");
 					String candidateStatus = candidateInfo.getCandidateStatus();
 					if ("0".equals(candidateStatus)) {
 						candidateStatus = "招聘中";
@@ -484,6 +484,7 @@ public class CandidateServiceImpl implements CandidateService {
 		return candidateMapper.queryCandidateForId(candidateId);
 	}
 
+
 	@Override
 	public List queryinterviewAllFeedBack(CandidateInfo candidate) {
 		return candidateMapper.queryinterviewAllFeedBack(candidate);
@@ -493,5 +494,13 @@ public class CandidateServiceImpl implements CandidateService {
 	public int queryinterviewAllFeedBackCount(CandidateInfo candidate) {
 		return candidateMapper.queryinterviewAllFeedBackCount(candidate);
 	}
+
+    @Override
+    public boolean updateCandidateInterviewStatus(CandidateInfo candidate)
+    {
+        // TODO Auto-generated method stub
+        return candidateMapper.updateCandidateInterviewStatus(candidate);
+    }
+
 
 }

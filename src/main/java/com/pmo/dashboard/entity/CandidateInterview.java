@@ -26,8 +26,22 @@ public class CandidateInterview {
 	private String fatherInterviewId;
 	
 	private String interviewSerial;
+	
+	private String projectName;
+	
+	
 
-	public String getInterviewId() {
+	public String getProjectName()
+    {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName)
+    {
+        this.projectName = projectName;
+    }
+
+    public String getInterviewId() {
 		return interviewId;
 	}
 

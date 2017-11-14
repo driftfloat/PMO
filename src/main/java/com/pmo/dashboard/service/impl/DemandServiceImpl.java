@@ -145,5 +145,11 @@ public class DemandServiceImpl implements DemandService{
 		}
 		return false;
 	}
+
+    @Override
+    public Demand queryDemandById(String demandId)
+    {
+        return demandMapper.queryDemandById(demandId);
+    }
 	
 }
