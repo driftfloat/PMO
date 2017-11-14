@@ -277,10 +277,11 @@ public class CandidateController
     	{
     		return null;
     	}
-    	String nickname = user.getNickname();
-    	if("管理员".equals(nickname) || "招聘经理".equals(nickname))
-    	{
+    	String userType = user.getUser_type();
+    	if("0".equals(userType)){
     		lockPerson="all";
+    	}else if("5".equals(userType) || "7".equals(userType)){
+    		lockPerson = user.getUserId();
     	}
     	candidate.setLockPerson(lockPerson);
     	
@@ -438,6 +439,12 @@ public class CandidateController
     	if(null == lockPerson || "".equals(lockPerson))
     	{
     		return null;
+    	}
+    	String userType = user.getUser_type();
+    	if("0".equals(userType)){
+    		lockPerson="all";
+    	}else if("5".equals(userType) || "7".equals(userType)){
+    		lockPerson = user.getUserId();
     	}
     	candidate.setLockPerson(lockPerson);
     	

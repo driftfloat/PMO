@@ -34,6 +34,7 @@ import com.pmo.dashboard.entity.CandidateInfo;
 import com.pmo.dashboard.entity.Interviewer;
 import com.pmo.dashboard.entity.PageCondition;
 import com.pmo.dashboard.entity.StayinCandidate;
+import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.CandidateService;
@@ -65,7 +66,20 @@ public class StayinController
     	 String pageState = candidate.getPageState();
     	 PageCondition page = new PageCondition();
 
-     	
+    	 User user =  (User)request.getSession().getAttribute("loginUser");
+    	 String userType = user.getUser_type();
+    	 String userId = user.getUserId();
+    	 if(null == userId || "".equals(userId))
+     	{
+     		return null;
+     	}
+    	 String lockPerson = "";
+    	 if("0".equals(userType)){
+    		 lockPerson = "all";
+    	 }else if("3".equals(userType)){
+    		 lockPerson = userId;
+    	 }
+    	 candidate.setLockPerson(lockPerson);
 		 int dataCount = StayinService.queryCandidateCount(candidate);
 	     page.setDataCount(dataCount+"");
 		 page.setPageCount((dataCount-1)/10 + 1 +"");

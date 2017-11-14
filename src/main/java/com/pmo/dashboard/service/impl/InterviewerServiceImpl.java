@@ -55,14 +55,14 @@ public class InterviewerServiceImpl implements InterviewerService
 			//userType = "1";
 		}
 		//设置总页数
-		int queryInterviewerCount;
+		int queryInterviewerCount = 0;
 		if("1".equals(userType)){
 			list = interviewerMapper.queryInterviewerListByBu(map);
 			queryInterviewerCount = interviewerMapper.queryInterviewerCountByBu(map);
 		}else if("2".equals(userType) || "3".equals(userType)){
 			list = interviewerMapper.queryInterviewerListByDept(map);
 			queryInterviewerCount = interviewerMapper.queryInterviewerCountByDept(map);
-		}else{
+		}else if("0".equals(userType)){
 			list = interviewerMapper.queryInterviewerList(map);
 			queryInterviewerCount = interviewerMapper.queryInterviewerCount(map);
 		}

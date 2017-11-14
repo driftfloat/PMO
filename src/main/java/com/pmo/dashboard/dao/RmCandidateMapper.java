@@ -13,7 +13,9 @@ import com.pmo.dashboard.entity.CandidatePush;
 public interface RmCandidateMapper {
 
 	public List<CandidatePush> queryPushedCandidate(Map<String, Object> params);
+	public List<CandidatePush> queryAllPushedCandidate(Map<String, Object> params);
 	public int queryCandidateCount(Map<String, Object> params);
+	public int queryAllCandidateCount(Map<String, Object> params);
 	public void updateCandidateStatus(Map<String, Object> params);
 	//public void updateInterviewId(Map<String, Object> params1);
 }

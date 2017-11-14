@@ -49,8 +49,29 @@
 			 )inter 
 		on inter.CANDIDATE_ID = cp.CANDIDATE_ID 
 		where 
-			cp.CS_SUBDEPT_ID = #{csSubDeptId}
+			cp.PUSH_USER_ID = #{userId}
+			and cp.CS_SUBDEPT_ID = #{csSubDeptId}
 			and cp.PUSH_STATUS = #{status}
+		ORDER BY PUSH_ID
+	</sql>
+	
+	<sql id="candidateWhereAll">
+		from 
+			t_candidate_push cp
+		left join 
+			t_user u 
+		on cp.PUSH_USER_ID = u.USER_ID
+		left join 
+			t_candidate c 
+		on cp.CANDIDATE_ID = c.CANDIDATE_ID
+		LEFT JOIN 
+		( select * from  t_candidate_interview a where INTERVIEW_DATE =
+		(select max(INTERVIEW_DATE) from t_candidate_interview b 
+			where a.CANDIDATE_ID = b.CANDIDATE_ID)
+			 )inter 
+		on inter.CANDIDATE_ID = cp.CANDIDATE_ID 
+		where 
+			cp.PUSH_STATUS = #{status}
 		ORDER BY PUSH_ID
 	</sql>
 	
@@ -60,9 +81,21 @@
 		where CS_SUBDEPT_ID = #{csSubDeptId} and PUSH_STATUS = #{status}
 	</select>
 	
+	<select id="queryAllCandidateCount" parameterType="java.util.HashMap" resultType="int">
+		select count(1)
+		from t_candidate_push
+		where PUSH_STATUS = #{status}
+	</select>
+	
 	<select id="queryPushedCandidate" parameterType="java.util.HashMap" resultMap="candidatePushMap">
 		select *,inter.INTERVIEW_STATUS inter_status
 		<include refid="candidateWhere"/>
+		limit #{num}, #{pageCondition.pageSize}
+	</select>
+	
+	<select id="queryAllPushedCandidate" parameterType="java.util.HashMap" resultMap="candidatePushMap">
+		select *,inter.INTERVIEW_STATUS inter_status
+		<include refid="candidateWhereAll"/>
 		limit #{num}, #{pageCondition.pageSize}
 	</select>
 	

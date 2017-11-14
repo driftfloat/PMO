@@ -5,6 +5,7 @@ import java.util.List;
 import com.pmo.dashboard.entity.CandidateInterview;
 import com.pmo.dashboard.entity.CandidatePush;
 import com.pmo.dashboard.entity.PageCondition;
+import com.pmo.dashboard.entity.User;
 
 /**
  * RM的候选人的sevice类
@@ -13,7 +14,7 @@ import com.pmo.dashboard.entity.PageCondition;
  */
 public interface RmCandidateService {
 
-	public List<CandidatePush> queryPushedCandidate(String csSubDeptId, String status,PageCondition pageCondition);
+	public List<CandidatePush> queryPushedCandidate(User user, String status,PageCondition pageCondition);
 
 	public void addInterview(CandidateInterview candidateInterview,String pushId);
 	

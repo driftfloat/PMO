@@ -72,7 +72,7 @@ public class RmCandidateController {
 		String status = "0";
 		List<CandidatePush> candidatelist = new ArrayList<CandidatePush>();
 		if(user != null){
-			candidatelist = rmCandidateService.queryPushedCandidate(user.getCsDeptId(),status,pageCondition);
+			candidatelist = rmCandidateService.queryPushedCandidate(user,status,pageCondition);
 		}
 		request.getSession().setAttribute("candidatelist", candidatelist);
 		Map<String, Object> map = new HashMap<String, Object>();
