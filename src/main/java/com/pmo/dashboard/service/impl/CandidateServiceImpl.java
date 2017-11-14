@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
+
 import com.pmo.dashboard.dao.CandidateMapper;
 import com.pmo.dashboard.entity.CandidateInfo;
 import com.pmo.dashboard.entity.CandidatePush;
@@ -481,6 +482,16 @@ public class CandidateServiceImpl implements CandidateService {
 	@Override
 	public CandidateInfo queryCandidateForId(String candidateId) {
 		return candidateMapper.queryCandidateForId(candidateId);
+	}
+
+	@Override
+	public List queryinterviewAllFeedBack(CandidateInfo candidate) {
+		return candidateMapper.queryinterviewAllFeedBack(candidate);
+	}
+
+	@Override
+	public int queryinterviewAllFeedBackCount(CandidateInfo candidate) {
+		return candidateMapper.queryinterviewAllFeedBackCount(candidate);
 	}
 
 }

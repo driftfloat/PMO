@@ -29,8 +29,12 @@ public interface CandidateService
 	boolean updateCandidateStatus(CandidateInfo candidate);
 
 	List<CandidateInfo> queryinterviewFeedBack(CandidateInfo candidate);
+	
+	List<CandidateInfo> queryinterviewAllFeedBack(CandidateInfo candidate);
 
 	int queryinterviewFeedBackCount(CandidateInfo candidate);
+	
+	int queryinterviewAllFeedBackCount(CandidateInfo candidate);
 
 	boolean updateInterviewFeedBack(CandidateInfo candidate);
 	

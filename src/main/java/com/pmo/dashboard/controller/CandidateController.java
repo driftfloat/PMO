@@ -375,12 +375,18 @@ public class CandidateController
 
 		 User user = (User) request.getSession().getAttribute("loginUser");
 		 String userId = user.getUserId();
+		 String userType = user.getUser_type();
 		 if (userId == null) {
 		 return null;
 		 }
 		 candidate.setUserId(userId);
-		
-		int dataCount = candidateService.queryinterviewFeedBackCount(candidate);
+		 
+		 int dataCount=0;
+		 if("0".equals(userType)){
+			 dataCount = candidateService.queryinterviewAllFeedBackCount(candidate);
+		 }else{
+			 dataCount = candidateService.queryinterviewFeedBackCount(candidate);
+		 }
 		page.setDataCount(dataCount + "");
 		page.setPageCount((dataCount - 1) / 10 + 1 + "");
 		page.setPageDataCount(Constants.PAGE_DATA_COUNT + "");
@@ -396,7 +402,12 @@ public class CandidateController
 
 		candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage()) - 1) * Constants.PAGE_DATA_COUNT + "");
 		candidate.setPageDataCount(Constants.PAGE_DATA_COUNT + "");
-		List<CandidateInfo> list = candidateService.queryinterviewFeedBack(candidate);
+		List<CandidateInfo> list = null;
+		if("0".equals(userType)){
+			list = candidateService.queryinterviewAllFeedBack(candidate);
+		 }else{
+			list = candidateService.queryinterviewFeedBack(candidate);
+		 }
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("data", list);
 		result.put("pageInfo", page);

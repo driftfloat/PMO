@@ -57,8 +57,40 @@
 	      <include refid="queryWhere"></include>
 	      limit #{num}, #{interviewer.pageSize} 
 	  </select>
+	  <select id="queryInterviewerListByBu" parameterType="java.util.HashMap" resultMap="interviewerMap">
+	      select e.* ,(SUBSTR(SYSDATE(),1,4)-SUBSTR(GRADUATION_DATE,1,4))  experienceYearas
+	      from t_employee e
+	      JOIN t_cs_dept d on e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID
+	       LEFT JOIN t_user u on u.BU = d.CS_BU_NAME
+	       where u.USER_ID = #{interviewer.employeeId} and u.BU = d.CS_BU_NAME
+	      <include refid="queryWhere"></include>
+	      limit #{num}, #{interviewer.pageSize} 
+	  </select>
+	  <select id="queryInterviewerListByDept" parameterType="java.util.HashMap" resultMap="interviewerMap">
+	      select e.* ,(SUBSTR(SYSDATE(),1,4)-SUBSTR(GRADUATION_DATE,1,4))  experienceYearas
+	      from t_employee e
+	      JOIN t_cs_dept d on e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID
+	      LEFT JOIN t_user u on d.CS_SUBDEPT_ID = u.CSDEPT_ID
+	      where u.USER_ID = #{interviewer.employeeId} and e.CS_SUBDEPT_ID = u.CSDEPT_ID
+	      <include refid="queryWhere"></include>
+	      limit #{num}, #{interviewer.pageSize} 
+	  </select>
 	  <select id="queryInterviewerCount" parameterType="java.util.HashMap" resultType="int">
 	       select count(1) from t_employee
+	       <include refid="queryWhere"></include>
+	  </select>
+	  <select id="queryInterviewerCountByBu" parameterType="java.util.HashMap" resultType="int">
+	       select count(1) from t_employee e
+	       JOIN t_cs_dept d on e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID
+	       LEFT JOIN t_user u on u.BU = d.CS_BU_NAME
+	       where u.USER_ID = #{interviewer.employeeId} and u.BU = d.CS_BU_NAME
+	       <include refid="queryWhere"></include>
+	  </select>
+	  <select id="queryInterviewerCountByDept" parameterType="java.util.HashMap" resultType="int">
+	       select count(1) from t_employee e
+	       JOIN t_cs_dept d on e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID
+	       LEFT JOIN t_user u on d.CS_SUBDEPT_ID = u.CSDEPT_ID
+	       where u.USER_ID = #{interviewer.employeeId} and e.CS_SUBDEPT_ID = u.CSDEPT_ID
 	       <include refid="queryWhere"></include>
 	  </select>
 	  

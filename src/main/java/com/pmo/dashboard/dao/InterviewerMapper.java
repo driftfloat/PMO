@@ -9,7 +9,11 @@ public interface InterviewerMapper
 {
 	
 	public List<Interviewer> queryInterviewerList(Map<String,Object> map);
+	public List<Interviewer> queryInterviewerListByBu(Map<String,Object> map);
+	public List<Interviewer> queryInterviewerListByDept(Map<String,Object> map);
 	public int queryInterviewerCount(Map<String,Object> map);
+	public int queryInterviewerCountByBu(Map<String,Object> map);
+	public int queryInterviewerCountByDept(Map<String,Object> map);
 	public List<Interviewer> queryAllInterviewer(Map<String,Object> map);
 	public boolean interviewerRenDing(Interviewer interviewer);
 	//执行插入
