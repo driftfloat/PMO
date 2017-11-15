@@ -62,6 +62,9 @@
 			t_user u 
 		on cp.PUSH_USER_ID = u.USER_ID
 		left join 
+			t_cs_dept cd 
+		on cp.CS_SUBDEPT_ID = cd.CS_SUBDEPT_ID
+		left join 
 			t_candidate c 
 		on cp.CANDIDATE_ID = c.CANDIDATE_ID
 		LEFT JOIN 
