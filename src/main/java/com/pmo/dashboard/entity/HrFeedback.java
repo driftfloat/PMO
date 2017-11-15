@@ -32,7 +32,14 @@ public class HrFeedback extends PageCondition
 	private String userName;
 	private String createDate;
 	private String updateDate;
+	private User user;
 	private String source;
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	private String role;
 	private String entyDate;
 	private String email;
@@ -55,13 +62,13 @@ public class HrFeedback extends PageCondition
 	private String userId;
     private String hrFeedBack;
     private String FeedbackId;
-    public Date getFeedbacktime() {
+    public String getFeedbacktime() {
 		return feedbacktime;
 	}
-	public void setFeedbacktime(Date feedbacktime) {
+	public void setFeedbacktime(String feedbacktime) {
 		this.feedbacktime = feedbacktime;
 	}
-	private Date feedbacktime;
+	private String feedbacktime;
 	public String getUserId() {
 		return userId;
 	}

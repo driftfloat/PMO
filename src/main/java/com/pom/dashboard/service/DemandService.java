@@ -18,7 +18,7 @@ public interface DemandService {
 	public List<Demand> queryDemandList(Demand demand, PageCondition pageCondition,String csBuName,HttpServletRequest request);
 	public List<Demand> queryAllDemand(Map<String, Object> params);
 	public List<Demand> queryOfferDemandList(CandidatePush candidatePush);
-	public void updateCandidateIdById(String candidateId, String demandId, String pushId);
+	public void updateCandidateIdById(CandidatePush candidateId, String demandId, String pushId);
 	//gkf add
 	public boolean updateDemandOnBoardById(Demand demand);
 	public Demand queryDemandById(String demandId);

@@ -116,7 +116,7 @@ function addDemand(){
 		var hsbcDept=$('#hsbcDept').val();
 		var hsbcSubDept=$('#hsbcSubDept').val();
 		var location=$('#location').val();
-		var reqPublishedDate=$('#reqPublishedDate').val();
+		var reqPublishedDate=$('#reqPublishedDate2').val();
 		var ageing=$('#ageing').val();
 		var profilesNo=$('#profilesNo').val();
 		var interviewedNo=$('#interviewedNo').val();

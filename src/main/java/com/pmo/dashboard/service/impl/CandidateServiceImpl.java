@@ -162,8 +162,10 @@ public class CandidateServiceImpl implements CandidateService {
 					}else if ("2".equals(interviewStatus)){
 						interviewStatus = "面试中";
 					}else if ("3".equals(interviewStatus)){
-						interviewStatus = "面试完成";
+						interviewStatus = "面试通过";
 					}else if ("4".equals(interviewStatus)){
+						interviewStatus = "面试失败";
+					}else if ("5".equals(interviewStatus)){
 						interviewStatus = "已退回";
 					}
 					candidateInfo.setInterviewStatus(interviewStatus);

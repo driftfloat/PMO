@@ -114,15 +114,18 @@ public class DemandServiceImpl implements DemandService{
 	}
 
 	@Override
-	public void updateCandidateIdById(String candidateId, String demandId, String pushId) {
+	public void updateCandidateIdById(CandidatePush candidatePush, String demandId, String pushId) {
+		String candidateId=candidatePush.getCandidateId();
+		String candidateName=candidatePush.getCandidateInfo().getCandidateName();
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("candidateId", candidateId);
 		params.put("demandId", demandId);
 		params.put("pushId", pushId);
+		params.put("candidateName", candidateName);
 		//表示推送表的已发offer的状态
 		params.put("status", "2");
 		//表示候选人表的面试状态
-		params.put("interviewStatus", "5");
+		//params.put("interviewStatus", "5");
 		demandMapper.updateCandidateIdById(params);
 		rmCandidateMapper.updateCandidateStatus(params);
 		candidateMapper.updateInterviewStatusById(params);

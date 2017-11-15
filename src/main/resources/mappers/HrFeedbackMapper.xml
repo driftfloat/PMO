@@ -2,13 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pmo.dashboard.dao.HrFeedbackMapper">
-	<!-- <update id="updateCandidateInfo" parameterType="com.pmo.dashboard.entity.HrFeedback">
-	    update t_candidate_hr_feedback set FEEDBACK = #{hrFeedBack} where CANDIDATE_ID = #{candidateNameId}    
-	</update> -->
+	<resultMap id="hrFeedbackMap" type="com.pmo.dashboard.entity.HrFeedback">
+		<id 	property="candidateId" 		column="CANDIDATE_ID" 		javaType="String" />
+		<result property="feedbackId" 	column="FEEDBACK_ID" 	javaType="String" />
+		<result property="userId" 	column="USER_ID" 		javaType="String" />
+		<result property="hrFeedBack" 	column="FEEDBACK" 		javaType="String" />
+		<result property="feedbacktime" 	column="FEEDBACK_DATE" 				javaType="String" />
+		<result property="userName" 	column="USER_NAME" 				javaType="String" />
+		<!-- <association property="user" javaType="com.pmo.dashboard.entity.User" 
+		resultMap="com.pmo.dashboard.dao.UserMapper.userMap" >
+		    <result column="USER_NAME" property="userName"/>
+		</association> -->
+	</resultMap>
+	
 	<insert id="updateCandidateInfo" parameterType="com.pmo.dashboard.entity.HrFeedback">
 	    insert t_candidate_hr_feedback (FEEDBACK_ID,CANDIDATE_ID,USER_ID,FEEDBACK,FEEDBACK_DATE) values
 	    (#{FeedbackId},#{candidateId},#{userId},#{hrFeedBack},#{feedbacktime})
 	
 	</insert>
+	<select id="hrfeedbackQuery" parameterType="String" resultMap="hrFeedbackMap">
+	 select * from t_candidate_hr_feedback a,t_user b where  a.user_id=b.user_id  and candidate_id=#{candidateId}
+	 order by feedbacktime;
+	</select>
 	
 </mapper>

@@ -112,7 +112,7 @@ function quXiao(employeeId,status)
 
 /*根据条件和当前页面加载查询到的信息*/
 function loadInterviewerList(currPage){
-	var employeeId= $("#employeeid").val();
+	var hsbcStaffId= $("#hsbcStaffId").val();
 	var ehr= $("#ehr").val();
 	var staffName= $("#staffName").val();
 	var lob= $("#lob").val();
@@ -130,7 +130,7 @@ function loadInterviewerList(currPage){
 		async:true,
 		cache:false,
 		type:"post",
-		data:{"employeeId":employeeId,"ehr":ehr,"staffName":staffName,"lob":lob,"staffRegion":location,
+		data:{"hsbcStaffId":hsbcStaffId,"ehr":ehr,"staffName":staffName,"lob":lob,"staffRegion":location,
 			"skill":skill,"role":role,"experienceYearas":experience_years,"status":interviewerStatus,"currPage":currPage},
 		success:function(result){
 			if(result.list.length > 0){
@@ -150,7 +150,7 @@ function loadInterviewerList(currPage){
 					
 				$("<td>"+result.list[i].ehr+"</td>"+
 				"<td>"+result.list[i].lob+"</td>"+
-				"<td>"+result.list[i].employeeId+"</td>"+
+				"<td>"+result.list[i].hsbcStaffId+"</td>"+
 				"<td>"+result.list[i].staffName+"</td>"+
 				"<td>"+result.list[i].skill+"</td>"+
 				"<td>"+result.list[i].staffRegion+"</td>"+
