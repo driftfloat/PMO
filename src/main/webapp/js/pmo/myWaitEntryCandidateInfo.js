@@ -397,9 +397,7 @@ function loadCandidateList(pageState)
 			for (var i = 0; i < result.data.length; i++) {
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
-				$("<td><a href='javascript:void(0);'" +
-						"onclick=viewCandidataInfo('"+result.data[i].candidateId+"')>" +
-						result.data[i].candidateName+"</a></td>"+
+				$("<td>"+ result.data[i].candidateName+"</td>"+
 				"<td>"+ result.data[i].candidateSex+ "</td>"+
 				"<td>"+ result.data[i].candidateAge+ "</td>"+
 				"<td>"+ result.data[i].candidateTel+ "</td>"+

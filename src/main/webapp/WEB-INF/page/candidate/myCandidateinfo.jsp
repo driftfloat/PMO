@@ -65,13 +65,13 @@ var path='<%=path%>';
 							<div id="employeeInfo" class="box-content">
 							    <form id="candidateForm" method="post" class="form-horizontal">
 									<div class="group">
-										<label class="col-sm-2 control-label">NAME</label>
+										<label class="col-sm-2 control-label">Name</label>
 										<div class="col-sm-4">
 											<input type="text" class="form-control" name="candidateName" id="candidateName" />
 										</div>
 									</div>
 									<div class="group">
-										<label class="col-lg-2 control-label">SOURCE</label>
+										<label class="col-lg-2 control-label">Source</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="source" id="source" data-bv-group=".group">
 												<option value="">--Option--</option>
@@ -112,13 +112,13 @@ var path='<%=path%>';
 									</div>
 									<br/><br/><br/>
 									<div class="group">
-										<label class="col-sm-2 control-label">TEL</label>
+										<label class="col-sm-2 control-label">Tel</label>
 										<div class="col-sm-4">
 											<input type="text" class="form-control" name="candidateTel" id="candidateTel" />
 										</div>
 									</div>
 									<div class="group">
-										<label class="col-lg-2 control-label">CANDIDATE STATUS</label>
+										<label class="col-lg-2 control-label">Candidate Status</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="candidateStatus" id="candidateStatus" data-bv-group=".group">
 												<option value="">--Option--</option>
@@ -130,13 +130,13 @@ var path='<%=path%>';
 									</div>
 									<br/><br/><br/>
 									<div class="group">
-										<label class="col-sm-2 control-label">EMAIL</label>
+										<label class="col-sm-2 control-label">Email</label>
 										<div class="col-sm-4">
 											<input type="text" class="form-control" name="email" id="email" />
 										</div>
 									</div>
 									<div class="group">
-										<label class="col-lg-2 control-label">EDUCATION</label>
+										<label class="col-lg-2 control-label">Education</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="education" id="education" data-bv-group=".group">
 												<option value="">--Option--</option>
@@ -150,7 +150,7 @@ var path='<%=path%>';
 									</div>
 									<br/><br/><br/>
 									<div class="group">
-										<label class="col-sm-2 control-label">WORK YEARS</label>
+										<label class="col-sm-2 control-label">Work Years</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="experienceYears" id="experienceYears" data-bv-group=".group">
 												<option value="">--Option--</option>
@@ -162,7 +162,7 @@ var path='<%=path%>';
 										</div>
 									</div>
 									<div class="group">
-										<label class="col-lg-2 control-label">MAJOR TYPE</label>
+										<label class="col-lg-2 control-label">Major Type</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="majorStatus" id="majorStatus" data-bv-group=".group">
 												<option value="">--Option--</option>
@@ -173,7 +173,7 @@ var path='<%=path%>';
 									</div>
 									<br/><br/><br/>
 									<div class="group">
-										<label class="col-sm-2 control-label">SKILL</label>
+										<label class="col-sm-2 control-label">Skill</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="skill" id="skill" data-bv-group=".group">
 												<option value="">--Option--</option>
@@ -181,7 +181,7 @@ var path='<%=path%>';
 										</div>
 									</div>
 									<div class="group">
-										<label class="col-lg-2 control-label">ENGLIST LEVEL</label>
+										<label class="col-lg-2 control-label">English Level</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="englishLevel" id="englishLevel" data-bv-group=".group">
 												<option value="">--Option--</option>
@@ -192,7 +192,7 @@ var path='<%=path%>';
 									</div>
 									<br/><br/><br/>
 									<div class="group">
-										<label class="col-lg-2 control-label">INTERVIEW STATUS</label>
+										<label class="col-lg-2 control-label">Interview Status</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="interviewStatus" id="interviewStatus" data-bv-group=".group">
 												<option value="">--Option--</option>
@@ -204,8 +204,9 @@ var path='<%=path%>';
 											</select>
 										</div>
 									</div>
+									</br></br></br>
 									<div class="form-group">
-									    <div style="text-align:center;width:20%;float:right;margin-right:40px;margin-top:10px;">
+									    <div style="text-align:center;width:50%;;float:left;margin-right:40px;margin-top:10px;">
 									    	<input type="button" value="查&nbsp;&nbsp;询"
 												name="searchCandidateBtn" id="searchCandidateBtn" 
 												class="button btn btn-primary" data-dismiss="modal"
@@ -227,21 +228,21 @@ var path='<%=path%>';
 									<table id="candidateList" class="table table-striped table-bordered">
 										<thead>
 											<tr>
-												<th>NAME</th>
-												<th>SEX</th>
-												<th>AGE</th>
-												<th>TEL</th>
-												<th>EMAIL</th>
-												<th>SOURCE</th>
-												<th>CANDIDATE STATUS</th>
-												<th>EDUCATION</th>
-												<th>WORK YEARS</th>
-												<th>MAJOR TYPE</th>
-												<th>ENGLISH LEVEL</th>
-												<th>SKILL</th>
-												<th>INTERVIEW STATUS</th>
-												<th>SUBDEPT NAME</th>
-												<th>OPERATION</th>
+												<th>Name</th>
+												<th>Sex</th>
+												<th>Age</th>
+												<th>Tel</th>
+												<th>Email</th>
+												<th>Source</th>
+												<th>Candidate Status</th>
+												<th>Education</th>
+												<th>Work Years</th>
+												<th>Major Type</th>
+												<th>English Level</th>
+												<th>Skill</th>
+												<th>Interview Status</th>
+												<th>Subdept Name</th>
+												<th>Operation</th>
 											</tr>
 										</thead>
 										<tbody></tbody>
@@ -358,7 +359,7 @@ var path='<%=path%>';
 					<div id="excelCheckBox" class="box-content">
 					 <form id="pushCandidateForm" method="post" class="form-horizontal">
 						<div class="group">
-							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
+							<label class="col-sm-2 control-label" style="width:30%;">Candidate Name</label>
 							<div class="col-sm-4" style="width:60%;">
 								<input type="text" class="form-control" name="pushCandidateName" id="pushCandidateName" disabled="disabled" />
 								<input type="hidden"  name="pushCandidateId" id="pushCandidateId" />
@@ -366,7 +367,7 @@ var path='<%=path%>';
 						</div>
 						<br/><br/><br/>
 						<div class="group">
-							<label class="col-lg-2 control-label" style="width:30%;">SUBDEPT NAME</label>
+							<label class="col-lg-2 control-label" style="width:30%;">Subdept Name</label>
 							<div class="col-lg-4" style="width:60%;">
 								<select class="form-control" name="csSubdeptName" id="csSubdeptName" data-bv-group=".group">
 									<option value="">--Option--</option>
@@ -407,7 +408,7 @@ var path='<%=path%>';
 					<div id="excelCheckBox" class="box-content">
 					 <form id="statusCandidateForm" method="post" class="form-horizontal">
 						<div class="group">
-							<label class="col-sm-2 control-label" style="width:30%;">CANDIDATE NAME</label>
+							<label class="col-sm-2 control-label" style="width:30%;">Candidate Name</label>
 							<div class="col-sm-4" style="width:60%;">
 								<input type="text" class="form-control" name="updateCandidateStatusName" id="updateCandidateStatusName" disabled="disabled" />
 								<input type="hidden"  name="updateCandidateStatusId" id="updateCandidateStatusId" />
@@ -415,13 +416,13 @@ var path='<%=path%>';
 						</div>
 						<br/><br/><br/>
 						<div class="group">
-							<label class="col-lg-2 control-label" style="width:30%;">CANDIDATE STATUS</label>
+							<label class="col-lg-2 control-label" style="width:30%;">Candidate Status</label>
 							<div class="col-lg-4" style="width:60%;">
 								<select class="form-control" id="myCandidateStatus" name="myCandidateStatus" data-bv-group=".group">
 									<option value="">--Option--</option>
-									<option value="0">招聘中</option>
+									<!-- <option value="0">招聘中</option>
 									<option value="1">offer中</option>
-									<option value="2">已入职</option>
+									<option value="2">已入职</option> -->
 									<option value="3">闲置中</option>
 									<option value="4">暂不关注</option>
 									<option value="5">黑名单</option>
