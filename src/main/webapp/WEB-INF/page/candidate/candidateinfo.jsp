@@ -198,8 +198,9 @@ var path='<%=path%>';
 											<input type="text" class="form-control" name="userName" id="userName" />
 										</div>
 									</div>
+									</br></br></br>
 									<div class="form-group">
-									    <div style="text-align:center;width:20%;float:right;margin-right:40px;margin-top:10px;">
+									    <div style="text-align:center;width:50%;;float:left;margin-right:40px;margin-top:10px;">
 									    	<input type="button" value="查&nbsp;&nbsp;询"
 												name="searchCandidateBtn" id="searchCandidateBtn" 
 												class="button btn btn-primary" data-dismiss="modal"

@@ -310,9 +310,7 @@ function loadCandidateList(pageState)
 			for (var i = 0; i < result.data.length; i++) {
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
-				$("<td><a href='javascript:void(0);'" +
-						"onclick=viewCandidataInfo('"+result.data[i].candidateId+"')>" +
-						result.data[i].candidateName+"</a></td>"+
+				$("<td>"+ result.data[i].candidateName+"</td>"+
 				"<td>"+ result.data[i].candidateSex+ "</td>"+
 				"<td>"+ result.data[i].candidateAge+ "</td>"+
 				"<td>"+ result.data[i].candidateTel+ "</td>"+
@@ -326,7 +324,9 @@ function loadCandidateList(pageState)
 				"<td>"+ result.data[i].skill+ "</td>"+
 				"<td>"+ result.data[i].interviewStatus+ "</td>").appendTo(tr);
 				if(result.data[i].candidateStatus == '招聘中'){
-					if(result.data[i].interviewStatus == '未推送'||result.data[i].interviewStatus == '已退回'){
+
+					if(result.data[i].interviewStatus == '未推送' || result.data[i].interviewStatus == '已退回' || result.data[i].interviewStatus == '5'){
+
 						$("<td></td>"+
 							"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
@@ -339,32 +339,51 @@ function loadCandidateList(pageState)
 								"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
 						"</td>").appendTo(tr);
-					}
-					if(result.data[i].interviewStatus == '已推送'){
+					}else if(result.data[i].interviewStatus == '已推送'){
 						$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
 							"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=backCandidateToDept('"+result.data[i].candidateId+"')>BACK</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' disabled " +
-								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>STATUS</a>" +
 							"<a href='javascript:void(0); ' class='btn btn-info btn-small' " +
 								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
 						"</td>").appendTo(tr);
+					}else{
+						$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
+								"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+									"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+									"onclick=backCandidateToDept('"+result.data[i].candidateId+"')>BACK</a>" +
+								"<a href='javascript:void(0); ' class='btn btn-info btn-small' " +
+									"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+									"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
+							"</td>").appendTo(tr);
 					}
 				}else{
-					$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
-						"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-								"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +					
-								"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>STATUS</a>" +
-							"<a href='javascript:void(0); ' class='btn btn-info btn-small' " +
-								"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
-						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
-					"</td>").appendTo(tr);
+					if(result.data[i].interviewStatus == '未推送' || result.data[i].interviewStatus == '已退回' || result.data[i].interviewStatus == '5'){
+						$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
+								"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+										"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
+									"<a href='javascript:void(0);' class='btn btn-info btn-small' " +					
+										"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>STATUS</a>" +
+									"<a href='javascript:void(0); ' class='btn btn-info btn-small' " +
+										"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+									"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
+							"</td>").appendTo(tr);
+					}else{
+						$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
+								"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+										"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>"+
+									"<a href='javascript:void(0);' class='btn btn-info btn-small' " +					
+										"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FEEDBACK</a>" +
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+									"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
+							"</td>").appendTo(tr);
+					}
 				}
 			}
 			$("#candidateList").append("</tbdoy>");
