@@ -209,7 +209,7 @@ public class RmCandidateController {
 		String csDept = null;
 		
 		//将需求表中交付部的Id转为名称
-		for(int i = 0;i < list.size();i++){
+		/*for(int i = 0;i < list.size();i++){
 		    csDept = list.get(i).getCsSubDept();
 		    for(int j = 0;j < listD.size();j++){
 		        if(csDept.equals(listD.get(j).getCsSubDeptId()) ){
@@ -218,7 +218,7 @@ public class RmCandidateController {
 		            break;
 		        }
 		    }
-		}
+		}*/
 		map.put("list", list);
 		return map;
 	}
@@ -237,7 +237,7 @@ public class RmCandidateController {
 		for (CandidatePush candidatePush : candidatelist) {
 			if(candidatePush.getPushId().equals(pushId)){
 				try {
-					demandService.updateCandidateIdById(candidatePush.getCandidateId(),demandId,candidatePush.getPushId());
+					demandService.updateCandidateIdById(candidatePush,demandId,candidatePush.getPushId());
 					return "1";
 				} catch (Exception e) {
 					return "0";

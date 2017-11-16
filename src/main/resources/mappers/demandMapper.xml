@@ -23,16 +23,16 @@
 		<result property="bgvCleared" column="BGV_CLEARED" javaType="String" />
 		<result property="reason" column="REASON" javaType="String" />
 		<result property="remark" column="REMARK" javaType="String" />
-		<result property="csSubDept" column="CS_SUBDEPT_NAME" javaType="String" />
+		<result property="csSubDept" column="CS_SUBDEPT" javaType="String" />
 		<result property="plannedOnboardDate" column="PLANNED_ONBOARD_DATE" javaType="String" />
 		<result property="onboardDate" column="ONBOARD_DATE" javaType="String" />
 		<result property="doNumber" column="DO_NUMBER" javaType="String" />
 		<result property="hrPriority" column="HR_PRIORITY" javaType="String" />
 		<result property="completionDay" column="COMPLETION_DAY" javaType="String" />
 		<association property="hsbcDept" javaType="com.pmo.dashboard.entity.HSBCDept">
-			<id column="HSBC_SUBDEPT_ID" property="hsbcSubDeptId"/>
-			<id column="HSBC_SUBDEPT_NAME" property="hsbcSubDeptName"/>
-			<id column="HSBC_DEPT_NAME" property="hsbcDeptName"/> 
+			<id column="hsbcSubDeptId" property="HSBC_SUBDEPT_ID"/>
+			<id column="hsbcSubDeptName" property="HSBC_SUBDEPT_NAME"/>
+			<id column="hsbcDeptName" property="HSBC_DEPT_NAME"/>
 		</association>
 	</resultMap>
 	
@@ -77,10 +77,10 @@
 	</select>
 	
 	<select id="queryDemandList" parameterType="java.util.HashMap" resultMap="demandMap">
-		select *,c.HSBC_SUBDEPT_NAME,c.HSBC_DEPT_NAME,b.CS_SUBDEPT_NAME,d.CANDIDATE_NAME
-		from  t_demand a,t_cs_dept b,t_hsbc_dept c
+		select *
+		from  t_demand a,t_cs_dept b 
 		<where>
-		    b.cs_subdept_id=a.cs_subdept and a.hsbc_subdept_id=c.hsbc_subdept_id 
+		    b.cs_subdept_id=a.cs_subdept
 			<if test="demand.skill!=null and demand.skill!=''">
 				and a.SKILL = #{demand.skill}
 			</if>
@@ -178,7 +178,7 @@
 	</select>
 	
 	<update id="updateCandidateIdById" parameterType="java.util.HashMap">
-		update t_demand set CANDIDATE_ID = #{candidateId}, STATUS = 'OfferMade',CANDIDATE_NAME=#{candidateName}
+		update t_demand set CANDIDATE_ID = #{candidateId}, STATUS = 'OfferMade'
 		where DEMAND_ID = #{demandId}
 	</update>
 	
