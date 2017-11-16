@@ -124,9 +124,7 @@ function loadStayinList(pageState)
 			for (var i = 0; i < result.data.length; i++) {
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
-				$("<td><a href='javascript:void(0);'" +
-						"onclick=viewCandidataInfo('"+result.data[i].candidateId+"')>" +
-						 result.data[i].candidateName+ "</td>").appendTo(tr);
+				$("<td>" +result.data[i].candidateName+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].candidateSex+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].candidateAge+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].candidateTel+ "</td>").appendTo(tr);
@@ -138,11 +136,11 @@ function loadStayinList(pageState)
 				$("<td>"+ result.data[i].englishLevel+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].education+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].experienceYears+ "</td>").appendTo(tr);
-				$("<td>"+ result.data[i].demandId+ "</td>").appendTo(tr);
-				$("<td><a href='javascript:void(0);'" +
+				/*$("<td>"+ result.data[i].demandId+ "</td>").appendTo(tr);*/
+				$("<td><a href='javascript:void(0);' class='btn btn-info btn-small'" +
 						"onclick=onboard('"+result.data[i].candidateId+"')>ONBOARD</a>" +
 					     "&nbsp;&nbsp;" +
-					     "<a href='javascript:void(0);'"+
+					     "<a href='javascript:void(0);' class='btn btn-info btn-small'"+
 					     "onclick=queryDemandList('"+result.data[i].candidateId+"','"+result.data[i].demandId+"')>UPDATE</a>" +
 					    /* '"+result[i].demandId+"','"+result[i].candidateId+"'*/
 				"</td>").appendTo(tr);
@@ -176,8 +174,8 @@ function loadStayinList(pageState)
 function queryDemandList(candidateId,demandId){
 	var str = '<table id="demandList" class="table table-bordered table-hover">'+
 	'<thead><tr><th></th><th>RR</<th><th>Job Code</th><th>Tech/Skill</th>'+
-	'<th>Position</th><th>HSBC SubDeptId</th><th>Location</th>'+
-	'<th>Status</th><th>Request</th><th>CandidateId</th><th>确认更改</th></tr></thead></table>';
+	'<th>Position</th><th>Location</th>'+
+	'<th>Status</th><th>Request</th><th>确认更改</th></tr></thead></table>';
 	$("#table_area").append(str);
 	/*delegate() 方法为指定的元素（属于被选元素的子元素）添加一个或多个事件处理程序，并规定当这些事件发生时运行的函数。
 	使用 delegate() 方法的事件处理程序适用于当前或未来的元素（比如由脚本创建的新元素）。*/
@@ -205,11 +203,11 @@ function queryDemandList(candidateId,demandId){
 				var td3 = $("<td>"+result[i].jobCode+"</td>");
 				var td4 = $("<td>"+result[i].skill+"</td>");
 				var td5 = $("<td>"+result[i].position+"</td>");
-				var td6 = $("<td>"+result[i].hsbcSubDeptId+"</td>");
+				/*var td6 = $("<td>"+result[i].hsbcSubDeptId+"</td>");*/
 				var td7 = $("<td>"+result[i].location+"</td>");
 				var td8 = $("<td>"+result[i].status+"</td>");
 				var td9 = $("<td>"+result[i].requestor+"</td>");
-				var td10 = $("<td>"+result[i].candidateId+"</td>");
+				/*var td10 = $("<td>"+result[i].candidateId+"</td>");*/
 				var td11 = $("<td><div class='btn-group btn-group-sm'><a href='javascript:void(0);' class='btn btn-primary' onclick=updateDemand('"+result[i].demandId+"','"+result[i].candidateId+"')>确认</div></td>");
 		
 				td1.appendTo(tr);
@@ -217,11 +215,11 @@ function queryDemandList(candidateId,demandId){
 				td3.appendTo(tr);
 				td4.appendTo(tr);
 				td5.appendTo(tr);
-				td6.appendTo(tr);
+				/*td6.appendTo(tr);*/
 				td7.appendTo(tr);
 				td8.appendTo(tr);
 				td9.appendTo(tr);
-				td10.appendTo(tr);
+				/*td10.appendTo(tr);*/
 				td11.appendTo(tr);
 				$("#demandList").append(tr);
 			}	
@@ -257,7 +255,7 @@ function updateDemand(demandId,candidateId){
 	    success:function(flag){
 		     if(flag){
 		    	 alert("更改成功！");
-		    	 loadStayinList();
+		         location.reload();
 		    	 
 		     }
 		     

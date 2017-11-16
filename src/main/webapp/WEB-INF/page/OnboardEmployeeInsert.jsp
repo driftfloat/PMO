@@ -335,14 +335,14 @@ var path='<%=path%>';
 								</div>
 								
 								<div class="form-group">
-										<div class="group">
+										<%-- <div class="group">
 										<label class="col-lg-2 control-label">Resource Status</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="resourceStatus" data-bv-notempty id="resourceStatus">
 												<option value="${employee.resourceStatus}">${employee.resourceStatus}</option>
 											</select>
 										</div>
-										</div>
+										</div> --%>
 										<div class="group">
 										<label class="col-sm-2 control-label">If terminated,mention LWD</label>
 										<div class="col-md-4">

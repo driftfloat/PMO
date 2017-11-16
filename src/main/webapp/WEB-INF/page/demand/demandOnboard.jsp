@@ -108,7 +108,7 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" name="hsbcDept.hsbcDeptName"
 												id="department" >
-												<option value="${demand.hsbcDept.hsbcDeptName }">${demand.hsbcDept.hsbcDeptName }</option>
+												<option value="${demand.hsbcDeptName }">${demand.hsbcDeptName }</option>
 											</select>
 										</div>
 									</div>
@@ -118,7 +118,7 @@ var path='<%=path%>';
 											<select class="form-control" name="hsbcDept.hsbcSubDeptName"
 												data-bv-notempty data-bv-notempty-message="请选择角色"
 												id="sub_department" data-bv-group=".group">
-												<option value="${demand.hsbcDept.hsbcSubDeptName }">${demand.hsbcDept.hsbcSubDeptName }</option>
+												<option value="${demand.hsbcSubDeptName }">${demand.hsbcSubDeptName }</option>
 											</select>
 										</div>
 									</div>
@@ -160,7 +160,7 @@ var path='<%=path%>';
 										<div class="col-sm-4">
 											<select class="form-control" name="csSubDept"
 												data-bv-notempty id="scSubDeptName" >
-												<option value="${demand.csSubDept }">${demand.csSubDept }</option>
+												<option value="${demand.csDeptName }">${demand.csDeptName }</option>
 											</select>
 										</div>
 									</div>

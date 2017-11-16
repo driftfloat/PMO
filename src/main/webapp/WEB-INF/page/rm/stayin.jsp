@@ -96,13 +96,13 @@ var path='<%=path%>';
 									
 									
 									<div class="group">
-										<label class="col-sm-2 control-label">EMAIL</label>
+										<label class="col-sm-2 control-label">Email</label>
 										<div class="col-sm-4">
 											<input type="text" class="form-control" name="email" id="email" />
 										</div>
 									</div>
 									<div class="group">
-										<label class="col-sm-2 control-label">SKILL</label>
+										<label class="col-sm-2 control-label">Skill</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="skill" data-bv-notempty
 												data-bv-notempty-message="请选择技能" id="skill" data-bv-group=".group">
@@ -112,7 +112,7 @@ var path='<%=path%>';
 									</div>
 		                            <br/><br/><br/>
 							       <div class="group">
-										<label class="col-sm-2 control-label">ROLE</label>
+										<label class="col-sm-2 control-label">Role</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="role" data-bv-notempty
 												data-bv-notempty-message="请选择技能" id="role" data-bv-group=".group">
@@ -142,20 +142,20 @@ var path='<%=path%>';
 										class="table table-striped table-bordered">
 										<thead>
 											<tr>
-												<th>CANDIDATE NAME</th>
-												<th>SEX</th>
-												<th>AGE</th>
-												<th>TEL</th>
-												<th>EMAIL</th>
-												<th>SKILL</th>
-												<th>ROLE</th>
-												<th>COLLEGE</th>
-												<th>MAGER STATUS</th>
-												<th>ENGLISH LEVEL</th>
-												<th>EDUCATION</th>
-												<th>WORK YEARS</th>
-												<th>DEMANDID</th>
-												<th>操作</th>
+												<th>Candidate Name</th>
+												<th>Sex</th>
+												<th>Age</th>
+												<th>Tel</th>
+												<th>Email</th>
+												<th>Skill</th>
+												<th>Role</th>
+												<th>College</th>
+												<th>Major Status</th>
+												<th>English Level</th>
+												<th>Education</th>
+												<th>Work Years</th>
+												<!-- <th>DEMANDID</th>
+ -->												<th>Operate</th>
 											</tr>
 										</thead>
 										

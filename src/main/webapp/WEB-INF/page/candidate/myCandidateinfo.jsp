@@ -479,7 +479,7 @@ var path='<%=path%>';
 						<br/>
 						
 						<div style="overflow: auto;" >
-									<table id="feedbackList" class="table table-striped table-bordered">
+									<table id="feedbackList" class="table table-striped table-bordered" >
 										<thead>
 											
 										</thead>
@@ -487,10 +487,9 @@ var path='<%=path%>';
 									</table>
 									</div>
 						
-						<br/>
 						<div class="group">
 							<label class="col-sm-2 control-label">Feedback:</label>
-							<textarea id="hrFeedBack" class="form-control" style="margin:15px;width: 80%;" rows="5"></textarea>
+							<textarea id="hrFeedBack" class="form-control" style="margin:15px;width: 80%;" rows="6"></textarea>
 						</div>
 						<div class="center">
 							<a class="btn btn-success" href="#"

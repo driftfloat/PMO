@@ -10,9 +10,6 @@ function onboard(index){
 			data:{"hsbcDept.hsbcDeptName":"","hsbcDept.hsbcSubDeptName":""},
 			success:function(result){
 					$("#candidateId").val(index);
-					
-					
-					
 					var url1 = path+'/service/demand/demandOnboard';
 					$("#editForm").attr("action",url1);
 					$("#editForm").submit();

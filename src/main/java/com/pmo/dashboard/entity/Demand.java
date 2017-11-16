@@ -58,6 +58,37 @@ public class Demand
     private String onboardDate;
 
     private String completionDay;
+    
+    private String hsbcSubDeptName;
+    public String getHsbcSubDeptName() {
+		return hsbcSubDeptName;
+	}
+
+	public void setHsbcSubDeptName(String hsbcSubDeptName) {
+		this.hsbcSubDeptName = hsbcSubDeptName;
+	}
+
+	public String getHsbcDeptName() {
+		return hsbcDeptName;
+	}
+
+	public void setHsbcDeptName(String hsbcDeptName) {
+		this.hsbcDeptName = hsbcDeptName;
+	}
+
+	public String getCsDeptName() {
+		return csDeptName;
+	}
+
+	public void setCsDeptName(String csDeptName) {
+		this.csDeptName = csDeptName;
+	}
+
+	private String hsbcDeptName;
+    private String csDeptName;
+    
+    
+    
 	public String getCompletionDay() {
 		return completionDay;
 	}
