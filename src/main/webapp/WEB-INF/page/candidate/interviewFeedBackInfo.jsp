@@ -72,7 +72,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user">&nbsp;CANDIDATE&nbsp;LIST</i>
+									<i class="glyphicon glyphicon-user">&nbsp;面试官反馈</i>
 								</h2>
 							</div>
 							<div id="CandidateInfo" class="box-content" >
@@ -82,23 +82,22 @@ var path='<%=path%>';
 											class="table table-striped table-bordered">
 											<thead>
 												<tr>
-													<th>INTREVIEW DATE</th>
-													<th>NAME</th>
-													<th>SEX</th>
-													<th>AGE</th>
-													<th>TEL</th>
-													<th>EMAIL</th>
-													<th>ROLE</th>
-													<th>WORK YEARS</th>
-													<th>ENGLISH LEVEL</th>
-													<th>SKILL</th>
-													<th>OPERATION</th>
+													<th>Interview Date</th>
+													<th>Name</th>
+													<th>Sex</th>
+													<th>Age</th>
+													<th>Tel</th>
+													<th>Email</th>
+													<th>Role</th>
+													<th>Work Years</th>
+													<th>English Level</th>
+													<th>Skill</th>
+													<th>Operation</th>
 												</tr>
 											</thead>
 											<tbody></tbody>
 										</table>
-									</div>
-									<div>
+										<div>
 										<div style="max-width: 400px; float: left">
 											<ul class="pagination pagination-centered">
 												<li><a href="#" id="fristPage"
@@ -117,6 +116,8 @@ var path='<%=path%>';
 												id="dataCount"></span>条
 										</div>
 									</div>
+									</div>
+									
 								</form>
 						 		<form action="" id="editForm" method="post" target="_blank">
 									<input id="interviewId" name="interviewId" type="hidden" />

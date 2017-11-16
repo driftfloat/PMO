@@ -1,3 +1,60 @@
+/*
+$('#interviewForm').bootstrapValidator({
+	feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+	},
+	fields : {
+		interviewDate : {
+			group : '.group',
+			validators : {
+				notEmpty : {
+					message : '请选择'
+				},
+			}
+		},
+		interviewType : {
+			group : '.group',
+			validators : {
+				notEmpty : {
+					message : '请输入'
+				},
+			}
+		},
+		projectName : {
+			group : '.group',
+			validators : {
+				notEmpty : {
+					message : '请输入'
+				},
+			}
+		},
+		interviewer : {
+			group : '.group',
+			validators : {
+				notEmpty : {
+					message : '请输入'
+				},
+			}
+		}
+	}
+}).on('success.form.bv', function(e) {
+    // Prevent submit form
+    e.preventDefault();
+
+    var $form = $(e.target);
+        validator = $form.data('bootstrapValidator');
+    if(validator){
+    	updateInterviewFeedBack(e.target);
+    }
+    return false;
+}) ;
+
+*/
+
+
+
 $(function(){
 	loadMyCandidate();
 	dateType();
@@ -27,13 +84,13 @@ function loadMyCandidate(currPage){
 					var td2 = $("<td>未安排面试</td>"); 
 				}else if(interviewStatus == '3'){
 						var td2 = $("<td>面试通过</td>");
-					}else if(interviewStatus == '4'){
+				}else if(interviewStatus == '4'){
 						var td2 = $("<td>面试失败</td>");
-					}else if(interviewStatus == '2'){
+				}else if(interviewStatus == '2'){
 						var td2 = $("<td>面试中</td>");
-					}else{
+				}else{
 						var td2 = $("<td></td>");
-					}
+				}
 				
 				if(result.candidatelist[i].candidateInfo.candidateSex == '0'){
 					var td3 = $("<td>女</td>");
@@ -58,7 +115,7 @@ function loadMyCandidate(currPage){
 				var td8 = $("<td>"+result.candidatelist[i].candidateInfo.candidateTel+"</td>");
 				var td9 = $("<td>"+result.candidatelist[i].candidateInfo.email+"</td>");
 				var td11 = $("<td>"+result.candidatelist[i].csDept.csSubDeptName+"</td>");
-				var td12 = $("<td>"+result.candidatelist[i].user.userName+"</td>");
+				var td12 = $("<td>"+result.candidatelist[i].user.nickname+"</td>");
 				var status = result.candidatelist[i].interviewList[0].interviewId; 
 				if(interviewStatus == 1){
 					var td13 = $("<td><a href='javascript:void(0);' id='"+result.candidatelist[i].pushId+"' name='"+result.candidatelist[i].interviewList[0].projectName+"' class='btn btn-info btn-small' onclick='scheduleInterview(this.id)'>New Turn</a>&nbsp;" +

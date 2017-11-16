@@ -76,7 +76,7 @@ vertical-align: middle!important;
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> My Candidate
+									<i class="glyphicon glyphicon-user"></i>&nbsp;面试安排
 								</h2>
 							</div>
 							<div id="demandInfo" class="box-content">
@@ -88,17 +88,17 @@ vertical-align: middle!important;
 										<thead>
 											<tr   style="text-align:center;">
 												<th>Name</th>
-												<th>InterviewStatus</th>
+												<th>Interview Status</th>
 												<th>Gender</th>
 												<th>Age</th>
 												<th>Skill</th>
 												<th>Education</th>
-												<th>ExperienceYears</th>
-												<th>Telephone</th>
+												<th>Works Years</th>
+												<th>Tel</th>
 												<th>Email</th>
-												<th>ChinaSoft_Dept</th>
-												<th>PushedName</th>
-												<th>operation</th>
+												<th>CS Dept</th>
+												<th>HR</th>
+												<th>Operation</th>
 											</tr>
 										</thead>
 										

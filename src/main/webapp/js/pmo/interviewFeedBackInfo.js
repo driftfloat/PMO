@@ -76,8 +76,12 @@ function loadCandidateList(pageState) {
 								.appendTo(tr);
 						$("<td>"+ result.data[i].candidateName + "</td>")
 								.appendTo(tr);
-						$("<td>" + result.data[i].candidateSex + "</td>")
-								.appendTo(tr);
+						if("0" == result.data[i].candidateSex){
+							$("<td>男</td>").appendTo(tr);
+						}else{
+							$("<td>女</td>").appendTo(tr);
+						}
+						
 						$("<td>" + result.data[i].candidateAge + "</td>")
 								.appendTo(tr);
 						$("<td>" + result.data[i].candidateTel + "</td>")
@@ -86,8 +90,12 @@ function loadCandidateList(pageState) {
 						$("<td>" + result.data[i].role + "</td>").appendTo(tr);
 						$("<td>" + result.data[i].experienceYears + "</td>")
 								.appendTo(tr);
-						$("<td>" + result.data[i].englishLevel + "</td>")
-								.appendTo(tr);
+						if("0"==result.data[i].englishLevel){
+							$("<td>工作语言</td>").appendTo(tr);
+						}else{
+							$("<td>非工作语言</td>").appendTo(tr);
+						}
+						
 						$("<td>" + result.data[i].skill + "</td>").appendTo(tr);
 						$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' "
 								+ "onclick=interviewFeedBack('"
@@ -100,7 +108,7 @@ function loadCandidateList(pageState) {
 								+ "onclick=downLoadCandidateResume('"
 								+ result.data[i].candidateId +"','"
 								+result.data[i].resumePath.replace(/\s+/g, "")
-								+"')>RESUME</a></td>").appendTo(tr);
+								+"')>Resume</a></td>").appendTo(tr);
 					}
 					$("#candidateList").append("</tbdoy>");
 					currentPage = parseInt(result.pageInfo.currentPage);
