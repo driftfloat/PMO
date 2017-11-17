@@ -25,7 +25,30 @@ public class Interviewer  extends PageCondition
    //交付部ID
     private String csSubDeptId;
     
+    private String experienceStart;
+    private String experienceEnd;
     
+    ss
+	public String getExperienceStart() {
+		return experienceStart;
+	}
+
+
+	public void setExperienceStart(String experienceStart) {
+		this.experienceStart = experienceStart;
+	}
+
+
+	public String getExperienceEnd() {
+		return experienceEnd;
+	}
+
+
+	public void setExperienceEnd(String experienceEnd) {
+		this.experienceEnd = experienceEnd;
+	}
+
+
 	public String getEmployeeId() {
 		return employeeId;
 	}
