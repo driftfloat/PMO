@@ -133,15 +133,15 @@ function loadCandidateList(pageState)
 				
 				if(result.data[i].candidateStatus == '闲置中'){
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-						"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
+						"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
+							"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>Resume</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=lock('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>LOCK</a>" +
+							"onclick=lock('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>Lock</a>" +
 					"</td>").appendTo(tr);
 				}else{
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>RESUME</a>" +
+							"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>Resume</a>" +
 					"</td>").appendTo(tr);
 				}
 				
@@ -183,7 +183,7 @@ function lock(candidateId,resumePath){
 			if(result)
 			{
 				$("#"+candidateId).children().eq(13).html("<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=downLoadCandidateResume('"+candidateId+"','"+resumePath+"')>RESUME</a>");
+							"onclick=downLoadCandidateResume('"+candidateId+"','"+resumePath+"')>Resume</a>");
 			}else{
 				alert('保存失败');
 			}

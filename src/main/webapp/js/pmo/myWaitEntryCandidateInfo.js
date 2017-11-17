@@ -411,32 +411,32 @@ function loadCandidateList(pageState)
 				"<td>"+ result.data[i].demandStatus+ "</td>").appendTo(tr);
 				if(result.data[i].demandStatus == 'Onboard'){
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
+							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>" +
 					"</td>").appendTo(tr);
 				}else if(result.data[i].candidateStatus == 'offer中'){
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
+							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=entryMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>ENTRY</a>"+
+							"onclick=entryMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>Entry</a>"+
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=abortMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"'," +
-								"'"+result.data[i].candidateStatus+"','"+result.data[i].remark+"')>ABORT</a>" +
+								"'"+result.data[i].candidateStatus+"','"+result.data[i].remark+"')>Abort</a>" +
 					"</td>").appendTo(tr);
 				}else if(result.data[i].demandStatus == 'OfferMade'){
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
+							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=abortMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"'," +
-								"'"+result.data[i].candidateStatus+"','"+result.data[i].remark+"')>ABORT</a>" +
+								"'"+result.data[i].candidateStatus+"','"+result.data[i].remark+"')>Abort</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=delayMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>DELAY</a>" +
+							"onclick=delayMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>Delay</a>" +
 					"</td>").appendTo(tr);
 				}else{
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
-							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
+							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=abortMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"'," +
-								"'"+result.data[i].candidateStatus+"','"+result.data[i].remark+"')>ABORT</a>" +
+								"'"+result.data[i].candidateStatus+"','"+result.data[i].remark+"')>Abort</a>" +
 					"</td>").appendTo(tr);
 				}
 				
