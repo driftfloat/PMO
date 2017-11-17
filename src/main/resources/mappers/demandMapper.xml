@@ -186,7 +186,7 @@
 	</select>
 	
 	<update id="updateCandidateIdById" parameterType="java.util.HashMap">
-		update t_demand set CANDIDATE_ID = #{candidateId}, STATUS = 'OfferMade',CANDIDATE_NAME= #{candidateName}
+		update t_demand set CANDIDATE_ID = #{candidateId},CANDIDATE_NAME = #{candidateName}, STATUS = 'Offering'
 		where DEMAND_ID = #{demandId}
 	</update>
 	
