@@ -49,8 +49,7 @@
 			 )inter 
 		on inter.CANDIDATE_ID = cp.CANDIDATE_ID 
 		where 
-			cp.PUSH_USER_ID = #{userId}
-			and cp.CS_SUBDEPT_ID = #{csSubDeptId}
+			cp.CS_SUBDEPT_ID = #{csSubDeptId}
 			and cp.PUSH_STATUS = #{status}
 		ORDER BY PUSH_ID
 	</sql>
