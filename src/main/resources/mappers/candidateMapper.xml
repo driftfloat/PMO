@@ -236,7 +236,7 @@
         	t_demand d 
         ON a.CANDIDATE_ID = d.CANDIDATE_ID 
         WHERE 
-			 LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','delay','Onboard')
+			 LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','delay','Onboard','Offering')
         	<include refid="candidateWherePart"/>
 		ORDER BY d.STATUS,CANDIDATE_STATUS,INTERVIEW_STATUS,c.CS_SUBDEPT_NAME,MAJOR_STATUS,CANDIDATE_ID 
         LIMIT #{currentPage},#{pageDataCount};
@@ -250,7 +250,7 @@
         	t_demand d 
         ON a.CANDIDATE_ID  = d.CANDIDATE_ID 
         WHERE 
-			LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','delay','Onboard')
+			LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','delay','Onboard','Offering')
         	<include refid="candidateWherePart"/>
         ;
 	</select>
@@ -364,5 +364,9 @@
 	<update id="lockCandidate" parameterType="java.util.HashMap">
 		update t_candidate set CANDIDATE_STATUS = '0',LOCK_PERSION = #{userId}
 		where CANDIDATE_ID = #{candidateId}
+	</update>
+	
+	<update id="updateDemandStatusOfferMade" parameterType="com.pmo.dashboard.entity.CandidateInfo">
+		update t_demand set STATUS = 'OfferMade' WHERE CANDIDATE_ID = #{candidateId} and STATUS in ('Offering','offering');
 	</update>
 </mapper>

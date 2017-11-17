@@ -14,6 +14,6 @@ public interface UserService {
 
 	User login(String userName, String password);
 
-	void updatePwd(String userId, String newPwd);
+	int updatePwd(String userId, String newPwd);
 
 }

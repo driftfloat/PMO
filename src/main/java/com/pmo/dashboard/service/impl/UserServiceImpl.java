@@ -30,9 +30,9 @@ public class UserServiceImpl implements UserService{
 		return userMapper.login(userName,password);
 	}
 	@Override
-	public void updatePwd(String userId, String newPwd) {
+	public int updatePwd(String userId, String newPwd) {
 		// TODO Auto-generated method stub
-		userMapper.updatePwd(userId,newPwd);
+		return userMapper.updatePwd(userId,newPwd);
 	}
 
 }

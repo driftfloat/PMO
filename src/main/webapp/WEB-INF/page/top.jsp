@@ -127,7 +127,7 @@
 							
 						</table> -->
 						<div class="center">
-							<a class="btn btn-success" href="#" onclick="updatePassword()"> <i
+							<a class="btn btn-success" href="#" data-dismiss="modal" onclick="updatePassword()"> <i
 								class="glyphicon glyphicon-ok icon-white" ></i> 确定
 							</a> <a class="btn btn-info" href="#" data-dismiss="modal"> <i
 								class="glyphicon glyphicon-remove icon-white"></i> 取消

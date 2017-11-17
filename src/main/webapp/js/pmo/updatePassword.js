@@ -1,8 +1,7 @@
 
 	$("#editPwd").bind("click",function(){
 	$("#editPassword").modal('show');
-	})
-
+	});
 
 function updatePassword(){
 	var newPwd = $("#newPassword").val();
@@ -17,9 +16,10 @@ function updatePassword(){
 			data : {'newPwd':newPwd},
 			//timeout : 20000,
 			success : function(data) {
-				if(data=="0"){
-					
+				if(data=="1"){
 					alert("修改成功");
+					$("#newPassword").val("");
+					$("#confPassword").val("");
 				}
 			}
 		});

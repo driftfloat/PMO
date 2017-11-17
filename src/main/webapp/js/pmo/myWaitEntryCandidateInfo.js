@@ -1,7 +1,7 @@
 var currentPage = "";//当前页码
 var pageCount = "";//共几页 
 var exportdata;
-var statusMap = {"招聘中":"0","offer中":"1","已入职":"2","闲置中":"3","暂不关注":"4","黑名单":"5","入职他司":"6"};
+var statusMap = {"暂不关注":"4","黑名单":"5"};
 
 $(function(){
 	loadCandidateList();	
@@ -413,7 +413,7 @@ function loadCandidateList(pageState)
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
 					"</td>").appendTo(tr);
-				}else{
+				}else if(result.data[i].candidateStatus == 'offer中'){
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
@@ -421,8 +421,22 @@ function loadCandidateList(pageState)
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=abortMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"'," +
 								"'"+result.data[i].candidateStatus+"','"+result.data[i].remark+"')>ABORT</a>" +
+					"</td>").appendTo(tr);
+				}else if(result.data[i].demandStatus == 'OfferMade'){
+					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
+						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=abortMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"'," +
+								"'"+result.data[i].candidateStatus+"','"+result.data[i].remark+"')>ABORT</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=delayMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>DELAY</a>" +
+					"</td>").appendTo(tr);
+				}else{
+					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>EDIT</a>" +
+						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=abortMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"'," +
+								"'"+result.data[i].candidateStatus+"','"+result.data[i].remark+"')>ABORT</a>" +
 					"</td>").appendTo(tr);
 				}
 				

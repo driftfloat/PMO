@@ -72,4 +72,6 @@ public interface CandidateMapper
 	void updateInterviewStatusById(Map<String, Object> params);
 
 	int lockCandidate(Map<String, Object> params);
+	
+	int updateDemandStatusOfferMade(CandidateInfo candidate);
 }

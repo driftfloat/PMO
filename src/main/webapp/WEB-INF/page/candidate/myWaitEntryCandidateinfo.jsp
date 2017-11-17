@@ -59,7 +59,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user">&nbsp;MY&nbsp;WAIT&nbsp;ENTRY&nbsp;CANDIDATE&nbsp;LIST</i> 
+									<i class="glyphicon glyphicon-user">待入职候选人</i> 
 								</h2>
 							</div>
 							<div id="candidateInfo" class="box-content">
