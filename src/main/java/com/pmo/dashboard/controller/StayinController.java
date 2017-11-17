@@ -22,7 +22,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -30,14 +29,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmo.dashboard.entity.AddDemand;
-import com.pmo.dashboard.entity.CandidateInfo;
-import com.pmo.dashboard.entity.Interviewer;
 import com.pmo.dashboard.entity.PageCondition;
 import com.pmo.dashboard.entity.StayinCandidate;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
-import com.pom.dashboard.service.CandidateService;
 import com.pom.dashboard.service.StayinService;
 
 @Controller
@@ -74,10 +70,10 @@ public class StayinController
      		return null;
      	}
     	 String lockPerson = "";
-    	 if("0".equals(userType)){
+    	 /*if("0".equals(userType)){
     		 lockPerson = "all";
-    	 }else if("3".equals(userType)){
-    		 lockPerson = userId;
+    	 }else */if("3".equals(userType)){
+    		 lockPerson = user.getCsDeptId();
     	 }
     	 candidate.setLockPerson(lockPerson);
 		 int dataCount = StayinService.queryCandidateCount(candidate);

@@ -44,8 +44,11 @@
         left join 
         	t_user u
         on a.LOCK_PERSION = u.USER_ID
-        WHERE 
-        	LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson})
+        WHERE '1' = '1'
+        	<!-- LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) -->
+        	<if test="lockPerson != null and lockPerson != ''">
+			AND d.CS_SUBDEPT = #{lockPerson}
+		    </if>
         	and d.STATUS IN ('OfferMade','Delayed','Offering') and 
 		    <include refid="candidateWherePart"/>
 	</select>
@@ -61,8 +64,11 @@
         left join 
         	t_user u
         on a.LOCK_PERSION = u.USER_ID
-        WHERE 
-        	LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson})
+       WHERE '1' = '1'
+        	<!-- LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) -->
+        	<if test="lockPerson != null and lockPerson != ''">
+			AND d.CS_SUBDEPT = #{lockPerson}
+		    </if>
         	and d.STATUS IN('OfferMade','Delayed','Offering') and
         	<include refid="candidateWherePart"/>
 			;
