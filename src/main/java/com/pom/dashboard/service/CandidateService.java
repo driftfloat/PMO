@@ -60,7 +60,7 @@ public interface CandidateService
 	
 	boolean updateCandidateInterviewStatus(CandidateInfo candidate);
 	
-
+	boolean updateOnboardCandidate(String candidateId);
 	static List<CandidateInfo> queryCandidateNameById(String candidateId) {
 		// TODO Auto-generated method stub
 		return null;

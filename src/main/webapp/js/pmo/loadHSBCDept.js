@@ -63,6 +63,24 @@ function addEmployee(){
 			cache:false,
 			type:"post",
 			success:function(resultFlag){
+				
+				$.ajax({
+					url:path+'/service/candidate/updateOnboardCandidate',
+					dataType:"json",
+					async:true,
+					cache:false,
+					type:"post",
+					success:function(result){
+						if(result){
+							$("html,body").animate({scrollTop:0}, 500);
+							$('#successAlert').html('员工'+staffName+'信息添加成功').show();
+							setTimeout(function () {
+								$('#successAlert').hide();
+							}, 2000);
+						}
+					}
+				})
+				
 				if(resultFlag){
 					$("html,body").animate({scrollTop:0}, 500);
 					$('#successAlert').html('员工'+staffName+'信息添加成功').show();

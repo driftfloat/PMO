@@ -81,6 +81,7 @@
 	        WHERE INTERVIEW_ID = #{interviewId};
 	</update>
 	
+	
 	<select id="queryCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
 	    SELECT 
 	    	a.*,b.NICKNAME 
@@ -212,6 +213,10 @@
 	<update id="updateCandidateStatus" parameterType="com.pmo.dashboard.entity.CandidateInfo">
 	    update t_candidate set CANDIDATE_STATUS = #{candidateStatus},LOCK_PERSION=''  WHERE CANDIDATE_ID = #{candidateId}; 
 	</update>
+	<update id="updateOnboardCandidate" parameterType="String">
+	    update t_candidate set CANDIDATE_STATUS ='2'  WHERE CANDIDATE_ID = #{candidateId}; 
+	</update>
+	
 	<select id="queryMyWaitEntryCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
 		SELECT 
 	    	a.*,c.CS_SUBDEPT_NAME,d.STATUS as demandStatus 

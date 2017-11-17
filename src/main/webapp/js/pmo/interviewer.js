@@ -158,12 +158,12 @@ function loadInterviewerList(currPage){
 				"<td>"+status+"</td>").appendTo(tr);
 				if(status == '否' || status == null){
 					
-					$("<td><a href='javascript:void(0);' class='btn btn-primary' " +
-							"onclick=renDing('"+result.list[i].employeeId+"','"+result.list[i].status+"')>认定</a>" +
+					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=renDing('"+result.list[i].employeeId+"','"+result.list[i].status+"')>Authorize</a>" +
 						"</td>").appendTo(tr);
 				}else{
-					$("<td><a href='javascript:void(0);' class='btn btn-primary' " +
-							"onclick=quXiao('"+result.list[i].employeeId+"','"+result.list[i].status+"')>取消</a>" +
+					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+							"onclick=quXiao('"+result.list[i].employeeId+"','"+result.list[i].status+"')>Cancel</a>" +
 						"</td>").appendTo(tr);
 				}
 				$("#interviewerList").append(tr);

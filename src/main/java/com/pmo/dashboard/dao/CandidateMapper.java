@@ -72,6 +72,10 @@ public interface CandidateMapper
 	void updateInterviewStatusById(Map<String, Object> params);
 
 	int lockCandidate(Map<String, Object> params);
+<<<<<<< Updated upstream
 	
 	int updateDemandStatusOfferMade(CandidateInfo candidate);
+=======
+	boolean updateOnboardCandidate(String candidateId);
+>>>>>>> Stashed changes
 }

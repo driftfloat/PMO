@@ -506,4 +506,12 @@ public class CandidateController
     {
 		return candidateService.abortMyWaitCandidateOk(candidate);
     }
+	@RequestMapping("/updateOnboardCandidate")
+    @ResponseBody
+    public boolean updateOnboardCandidate(HttpServletRequest request)
+    {
+		String candidateId=(String) request.getSession().getAttribute("onboardCandidateId");
+		return candidateService.updateOnboardCandidate(candidateId);
+    }
+	
 }
