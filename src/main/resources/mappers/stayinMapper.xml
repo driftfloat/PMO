@@ -45,7 +45,7 @@
         on a.LOCK_PERSION = u.USER_ID
         WHERE 
         	LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson})
-        	and d.STATUS IN ('OfferMade','Delayed') and 
+        	and d.STATUS IN ('OfferMade','Delayed','Offering') and 
 		    <include refid="candidateWherePart"/>
 	</select>
 	
