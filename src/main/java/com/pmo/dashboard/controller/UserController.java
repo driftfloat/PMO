@@ -110,8 +110,12 @@ public class UserController {
 		User exitUser = (User) session.getAttribute("loginUser");
 		String userId = exitUser.getUserId();
 		//调用service层
-		userService.updatePwd(userId,newPwd);
-		return "0";
+		int num = userService.updatePwd(userId,newPwd);
+		String flg = "";
+		if(num>0){
+			flg = "1";
+		}
+		return flg;
 		
 	}
 	

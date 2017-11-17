@@ -421,7 +421,7 @@ public class CandidateServiceImpl implements CandidateService {
     		return false;
     	}
     	//更改候选人状态
-    	return candidateMapper.updateCandidateEntryInfo(candidate);
+    	return (candidateMapper.updateCandidateEntryInfo(candidate) && candidateMapper.updateDemandStatusOfferMade(candidate)>0);
 	}
 
 	@Override
