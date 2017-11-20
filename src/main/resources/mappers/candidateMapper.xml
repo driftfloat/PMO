@@ -374,4 +374,27 @@
 	<update id="updateDemandStatusOfferMade" parameterType="com.pmo.dashboard.entity.CandidateInfo">
 		update t_demand set STATUS = 'OfferMade' WHERE CANDIDATE_ID = #{candidateId} and STATUS in ('Offering','offering');
 	</update>
+	
+	<select id="queryBlackList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
+	    SELECT 
+	    	* 
+        FROM 
+        	t_candidate
+        WHERE 
+			CANDIDATE_STATUS between '4' and '6' 
+        	<include refid="candidateWherePart"/>
+		ORDER BY CANDIDATE_STATUS,EXPERIENCE_YEARS desc,EDUCATION,MAJOR_STATUS,CANDIDATE_ID 
+        LIMIT #{currentPage},#{pageDataCount};
+	</select>
+	
+	<select id="queryBlackListCount" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="int" >
+	    SELECT 
+	    	count(0) 
+        FROM 
+        	t_candidate 
+        WHERE 
+			CANDIDATE_STATUS between '4' and '6' 
+        	<include refid="candidateWherePart"/>
+			;
+	</select>
 </mapper>

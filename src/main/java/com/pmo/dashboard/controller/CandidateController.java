@@ -514,4 +514,58 @@ public class CandidateController
 		return candidateService.updateOnboardCandidate(candidateId);
     }
 	
+	@RequestMapping("/getBlackList")
+	public String getBlackList() 
+	{
+		return "candidate/blackList";
+	}
+	
+	@RequestMapping("/queryBlackList")
+    @ResponseBody
+    public Object queryBlackList(CandidateInfo candidate,HttpServletRequest request)
+    {
+		User user =  (User)request.getSession().getAttribute("loginUser");
+		String userId = user.getUserId();
+		if(null == userId || "".equals(userId)){
+			return null;
+		}
+		candidate.setUserId(userId);
+    	String pageState = candidate.getPageState();
+    	PageCondition page = new PageCondition();
+
+     	String  expriencesWork = candidate.getExperienceYears();
+    	 if("0".equals(expriencesWork)){
+    		 candidate.setWorkYearsEnd("2");
+    	 }else if("1".equals(expriencesWork)){
+    		 candidate.setWorkYearsStart("3");
+    		 candidate.setWorkYearsEnd("5");
+    	 }else if("2".equals(expriencesWork)){
+    		 candidate.setWorkYearsStart("6");
+    		 candidate.setWorkYearsEnd("10");
+    	 }else if("3".equals(expriencesWork)){
+    		 candidate.setWorkYearsStart("11");
+    	 }
+    	
+		 int dataCount = candidateService.queryBlackListCount(candidate);
+	     page.setDataCount(dataCount+"");
+		 page.setPageCount((dataCount-1)/10 + 1 +"");
+		 page.setPageDataCount(Constants.PAGE_DATA_COUNT+"");
+    	 if("".equals(pageState) || pageState == null ||"frist".equals(pageState)){
+    		 page.setCurrentPage("1");
+         }else if("next".equals(pageState)){
+        	 page.setCurrentPage(Integer.valueOf(candidate.getCurrentPage())+1+"");
+         }else if("previous".equals(pageState)){
+        	 page.setCurrentPage(Integer.valueOf(candidate.getCurrentPage())-1+"");
+         }else if("last".equals(pageState)){
+        	 page.setCurrentPage(page.getPageCount());
+         }
+    	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*Constants.PAGE_DATA_COUNT+"");
+    	candidate.setPageDataCount(Constants.PAGE_DATA_COUNT+"");
+        List<CandidateInfo> list = candidateService.queryBlackList(candidate);
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("data", list);
+        result.put("pageInfo", page);
+        return result;
+    }
+	
 }

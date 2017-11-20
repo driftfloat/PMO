@@ -510,5 +510,15 @@ public class CandidateServiceImpl implements CandidateService {
 		return candidateMapper.updateOnboardCandidate(candidateId);
 	}
 
+	@Override
+	public List queryBlackList(CandidateInfo candidate) {
+		return candidateMapper.queryBlackList(candidate);
+	}
+
+	@Override
+	public int queryBlackListCount(CandidateInfo candidate) {
+		return candidateMapper.queryBlackListCount(candidate);
+	}
+
 
 }
