@@ -65,4 +65,8 @@ public interface CandidateService
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	List<CandidateInfo> queryBlackList(CandidateInfo candidate);
+	
+	int queryBlackListCount(CandidateInfo candidate);
 }

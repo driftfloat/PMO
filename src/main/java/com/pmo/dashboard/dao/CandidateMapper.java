@@ -75,4 +75,8 @@ public interface CandidateMapper
 	
 	int updateDemandStatusOfferMade(CandidateInfo candidate);
 	boolean updateOnboardCandidate(String candidateId);
+	
+	List<CandidateInfo> queryBlackList(CandidateInfo candidate);
+	
+	int queryBlackListCount(CandidateInfo candidate);
 }
