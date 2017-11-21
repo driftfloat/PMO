@@ -511,8 +511,8 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
-	public List queryBlackList(CandidateInfo candidate) {
-		return candidateMapper.queryBlackList(candidate);
+	public List<CandidateInfo> queryBlackList(CandidateInfo candidate) {
+		return transferData(candidateMapper.queryBlackList(candidate));
 	}
 
 	@Override
