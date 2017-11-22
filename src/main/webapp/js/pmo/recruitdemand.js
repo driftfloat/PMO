@@ -41,7 +41,6 @@ function hrPriority(){
 }
 
 
-
 function loadDept(){
 	$.ajax({
 		url:path+'/service/hsbcDept/queryDeptName',
@@ -51,7 +50,7 @@ function loadDept(){
 		type:"post",
 		success:function(list){
 			for(var i = 0;i<list.length;i++){
-				$("#hsbcDept").append("<option value='"+list[i].hsbcDeptName+"'>"+list[i].hsbcDeptName+"</option>");
+				$("#hsbcDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcDeptName+"</option>");
 			}
 		}
 	})
@@ -59,32 +58,34 @@ function loadDept(){
 
 
 $("#hsbcDept").change(function(){
-	$('#recruitdemandForm').data("bootstrapValidator").updateStatus("hsbcSubDept",  "NOT_VALIDATED",  null ); 
-	 
-	var hsbcDeptName = $('#hsbcDept').val();
+	var hsbcSubDeptId = $('#hsbcDept').val();
+	$("#projectName").find("option").remove(); 
+	$("#projectName").append("<option value=''>-- 请选择项目 --</option>");
 	$.ajax({
-		url:path+'/service/demand/loadSubDepartment',
+		url:path+'/service/hsbcDept/querySubDeptName',
 		dataType:"json",
 		async:true,
-		data:{"hsbcDeptName":hsbcDeptName},
+		data:{"hsbcSubDeptId":hsbcSubDeptId},
 		cache:false,
 		type:"post",
 		success:function(list){
 			$("#hsbcSubDept").find("option").remove(); 
+//			if(list.length == 1 && list[0].hsbcSubDeptName == null){
+//				$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
+//			}else{
 			$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
-			for(var i = 0;i<list.length;i++){
-				if(list.length == 1 && list[0].hsbcSubDeptName == null){
-					$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
-				}else{
-					for(var i = 0;i<list.length;i++){
-						$("#hsbcSubDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcSubDeptName+"</option>");
-					}
+			if(list.length == 1 && list[0].hsbcSubDeptName == null){
+				$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
+			}else{
+				for(var i = 0;i<list.length;i++){
+					$("#hsbcSubDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcSubDeptName+"</option>");
 				}
 			}
+			
+			//}
 		}
 	})
 })
-
 function loadCsSubDept(){
 	$.ajax({
 		url:path+'/service/csDept/queryAllCSSubDept',
