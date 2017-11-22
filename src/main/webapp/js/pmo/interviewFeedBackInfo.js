@@ -74,7 +74,8 @@ function loadCandidateList(pageState) {
 						tr.appendTo(tbody);
 						$("<td>" + result.data[i].interviewDate + "</td>")
 								.appendTo(tr);
-						$("<td>"+ result.data[i].candidateName + "</td>")
+						$("<td><a href='javascript:void(0);' " +
+								"onclick=displayPDF('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>"+ result.data[i].candidateName + "</a></td>")
 								.appendTo(tr);
 						if("0" == result.data[i].candidateSex){
 							$("<td>男</td>").appendTo(tr);
@@ -135,6 +136,19 @@ function loadCandidateList(pageState) {
 					}
 				}
 			})
+}
+
+
+//gkf
+function displayPDF(candidateId,resumePath){
+	if(resumePath == null || resumePath == ''){
+		alert("未上传此人简历");
+		return;
+	}
+	var url = path+'/service/display/getPdf?candidateId='+candidateId;
+	$("#editForm").attr("action",url);
+	$("#candidateId").val(candidateId);
+	$("#editForm").submit();
 }
 
 function interviewFeedBack(interviewId, candidateName, candidateId, interviewName, csSubDeptName) {

@@ -41,7 +41,8 @@ function loadCandidateList(pageState) {
 					for (var i = 0; i < result.data.length; i++) {
 						var tr = $("<tr></tr>");
 						tr.appendTo(tbody);
-						$("<td>"+ result.data[i].candidateName + "</td>")
+						$("<td><a href='javascript:void(0);' " +
+				"onclick=displayPDF('"+result.data[i].candidateId+"')>"+ result.data[i].candidateName + "</a></td>")
 								.appendTo(tr);
 						$("<td>" + result.data[i].candidateSex + "</td>")
 								.appendTo(tr);
@@ -86,6 +87,14 @@ function loadCandidateList(pageState) {
 					}
 				}
 			});
+}
+
+//gkf
+function displayPDF(candidateId){
+	var url = path+'/service/display/getPdf?candidateId='+candidateId;
+	$("#editForm").attr("action",url);
+	$("#candidateId").val(candidateId);
+	$("#editForm").submit();
 }
 
  function interviewRecord(candidateId){

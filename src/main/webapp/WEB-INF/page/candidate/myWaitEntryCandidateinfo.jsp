@@ -241,7 +241,7 @@ var path='<%=path%>';
 			</div>
 			<!--/#content.col-md-0-->
 		</div>
-		<form id="editForm" action="">
+		<form id="editForm" action="" method="post" target="_blank">
 			<input type="hidden" id="candidateId" name="candidateId"></input>
 		</form>
 		<hr>

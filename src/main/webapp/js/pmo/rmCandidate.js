@@ -76,7 +76,8 @@ function loadMyCandidate(currPage){
 			for (var i = 0; i < result.candidatelist.length; i++) {
 				//alert(result.candidatelist[i].candidateInfo.candidateId);
 				var tr = $("<tr id='"+result.candidatelist[i].pushId+"'></tr>");
-				var td1 = $("<td>"+result.candidatelist[i].candidateInfo.candidateName+"</td>");
+				var td1 = $("<td><a href='javascript:void(0);' " +
+				"onclick=displayPDF('"+result.candidatelist[i].candidateInfo.candidateId+"')>"+result.candidatelist[i].candidateInfo.candidateName+"</a></td>");
 				var tmp = result.candidatelist[i].interviewList[0].interviewId;  
 				//alert("tmp:"+tmp+",status:"+result.candidatelist[i].candidateInfo.interviewStatus);
 				var interviewStatus = result.candidatelist[i].candidateInfo.interviewStatus;
@@ -184,6 +185,14 @@ function loadMyCandidate(currPage){
 			});
 		}
 	})
+}
+
+//gkf
+function displayPDF(candidateId){
+	var url = path+'/service/display/getPdf?candidateId='+candidateId;
+	$("#resumeForm").attr("action",url);
+	$("#candidateId").val(candidateId);
+	$("#resumeForm").submit();
 }
 
 function dateType(){
