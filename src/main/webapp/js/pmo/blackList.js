@@ -174,7 +174,8 @@ function loadBlackList(pageState)
 			for (var i = 0; i < result.data.length; i++) {
 				var tr = $("<tr id='"+result.data[i].candidateId+"' ></tr>");
 				tr.appendTo(tbody);
-				$("<td>" +result.data[i].candidateName+"</td>" +
+				$("<td><a href='javascript:void(0);' " +
+				"onclick=displayPDF('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>" +result.data[i].candidateName+"</a></td>" +
 				"<td>"+ result.data[i].candidateSex+ "</td>" +
 				"<td>"+ result.data[i].candidateAge+ "</td>" +
 				"<td>"+ result.data[i].candidateTel+ "</td>" +
@@ -214,4 +215,16 @@ function loadBlackList(pageState)
 			}
 		}
 	})
+}
+
+//gkf
+function displayPDF(candidateId,resumePath){
+	if(resumePath == null || resumePath == ''){
+		alert("未上传此候选人简历");
+		return;
+	}
+	var url = path+'/service/display/getPdf?candidateId='+candidateId;
+	$("#editForm").attr("action",url);
+	$("#candidateId").val(candidateId);
+	$("#editForm").submit();
 }

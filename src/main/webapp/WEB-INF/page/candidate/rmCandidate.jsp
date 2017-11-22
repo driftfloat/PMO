@@ -217,6 +217,10 @@ vertical-align: middle!important;
 			</div>
 			<!--/span-->
 		</div>
+		
+		<form id="resumeForm" action="" method="post" target="_blank">
+			<input type="hidden" id="candidateId" name="candidateId" ></input>
+		</form>
 		<div style="display: none" id="table_area" ></div>
 		<c:import url="/service/manage/footer" />
 
