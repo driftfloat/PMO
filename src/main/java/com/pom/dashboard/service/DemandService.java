@@ -21,6 +21,8 @@ public interface DemandService {
 	public void updateCandidateIdById(CandidatePush candidateId, String demandId, String pushId);
 	//gkf add
 	public boolean updateDemandOnBoardById(Demand demand);
+	//gkf
+	public boolean updateBackForCandidate(Demand demand);
 	public Demand queryDemandById(String demandId);
 	public Demand queryDemandByCandidateId(String candidateId);
 }

@@ -56,6 +56,8 @@ public class Demand
     
     //gkf
     private String onboardDate;
+    
+    private String flag;
 
     private String completionDay;
     
@@ -78,6 +80,15 @@ public class Demand
 
 	public String getCsDeptName() {
 		return csDeptName;
+	}
+
+	
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 
 	public void setCsDeptName(String csDeptName) {

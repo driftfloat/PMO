@@ -127,6 +127,41 @@
 		limit #{num}, #{pageCondition.pageSize}
 	</select>
 	
+	<select id="queryDemandListForCandidate" parameterType="java.util.HashMap" resultMap="demandMap">
+		select *
+		from  t_demand a,t_cs_dept b 
+		<where>
+		    a.CANDIDATE_ID!="" and b.cs_subdept_id=a.cs_subdept
+			<if test="demand.skill!=null and demand.skill!=''">
+				and a.SKILL = #{demand.skill}
+			</if>
+			<if test="demand.position!=null and demand.position!=''">
+				and a.position = #{demand.position}
+			</if>
+			<if test="demand.status!=null and demand.status!=''">
+				and a.status = #{demand.status}
+			</if>
+			<if test="demand.rr!=null and demand.rr!=''">
+				and a.rr = #{demand.rr}
+			</if>
+			<if test="csBuName!=null and csBuName!=''">
+				and B.CS_BU_NAME = #{csBuName}
+			</if>
+			 <choose>
+				<when test="demand.csSubDept!=null and demand.csSubDept!=''">
+					and a.CS_SUBDEPT = #{demand.csSubDept}
+				</when>
+			</choose>
+			<if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
+				and HSBC_SUBDEPT_ID in 
+				<foreach item="item" collection="hsbcSubDeptIdList" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+		limit #{num}, #{pageCondition.pageSize}
+	</select>
+	
 	<select id="queryDemandCount" parameterType="java.util.HashMap" resultType="int">
 		select count(1)
 		from  t_demand a,t_cs_dept b 
@@ -150,19 +185,39 @@
 			<if test="demand.csSubDept!=null and demand.csSubDept!=''">
 			    and a.CS_SUBDEPT = #{demand.csSubDept}
 			</if>
-			 <!-- <choose>
-				<when test="demand.csSubDept!=null and demand.csSubDept!=''">
-					and a.CS_SUBDEPT = #{csSubDept}
-				</when>
-				<otherwise> -->
-					<!-- <if test="csBuName!=null and csBuName!=''">
-						and B.CS_BU_NAME=
-						<foreach item="item" collection="csSubDeptList" open="(" separator="," close=")">
-							#{item.csSubDeptName}
-						</foreach>
-					</if> -->
-			<!-- 	</otherwise>
-			</choose> -->
+			<if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
+				and HSBC_SUBDEPT_ID in 
+				<foreach item="item" collection="hsbcSubDeptIdList" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+		
+	</select>
+	
+	<select id="queryDemandCountForCandidate" parameterType="java.util.HashMap" resultType="int">
+		select count(1)
+		from  t_demand a,t_cs_dept b 
+		<where>
+		    a.CANDIDATE_ID!="" and b.cs_subdept_id=a.cs_subdept
+			<if test="demand.skill!=null and demand.skill!=''">
+				and a.SKILL = #{demand.skill}
+			</if>
+			<if test="demand.position!=null and demand.position!=''">
+				and a.position = #{demand.position}
+			</if>
+			<if test="demand.status!=null and demand.status!=''">
+				and a.status = #{demand.status}
+			</if>
+			<if test="demand.rr!=null and demand.rr!=''">
+				and a.rr = #{demand.rr}
+			</if>
+			<if test="csBuName!=null and csBuName!=''">
+				and b.CS_BU_NAME = #{csBuName}
+			</if>
+			<if test="demand.csSubDept!=null and demand.csSubDept!=''">
+			    and a.CS_SUBDEPT = #{demand.csSubDept}
+			</if>
 			<if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
 				and HSBC_SUBDEPT_ID in 
 				<foreach item="item" collection="hsbcSubDeptIdList" open="(" separator="," close=")">
@@ -195,6 +250,12 @@
 		update t_demand set STATUS = 'Onboard', BGV_CLEARED = 'Completed',SOW_SIGNED = 'Fully signed off',
 		PROFILES_NO = #{profilesNo},INTERVIEWED_NO = #{interviewedNo},DO_NUMBER = #{doNumber},COMPLETION_DATE = date_format(now(),'%Y-%m-%d'),
 		UPDATE_DATE= date_format(now(),'%Y-%m-%d'),ONBOARD_DATE = #{onboardDate},PLANNED_ONBOARD_DATE = #{plannedOnboardDate}
+		where CANDIDATE_ID = #{candidateId}
+	</update>
+	
+	<!-- gkf 背调维护 -->
+	<update id="updateBackForCandidate" parameterType="java.util.HashMap">
+		update t_demand set BGV_CLEARED = #{bgvCleared},UPDATE_DATE= date_format(now(),'%Y-%m-%d')
 		where CANDIDATE_ID = #{candidateId}
 	</update>
 </mapper>
