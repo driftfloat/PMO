@@ -1,4 +1,4 @@
-
+var candidateIdArray = [],candidateNameArray = [];
 $(function(){
 	loadSkill();
 	loadPosition();
@@ -253,6 +253,14 @@ function loadDemandList(currPage){
 				td7.appendTo(tr);
 				td8.appendTo(tr);
 				$("#demandList").append(tr);
+				
+				//gkf add 防止页面list刷新所选的checkbox失去焦点
+				for(var index in candidateIdArray){
+					if(candidateId == candidateIdArray[index]){
+						$('#ls' + candidateId + '').attr(
+								"checked", 'true');
+					}
+				}
 			}
 			$("#pageCount").html(result.pageCondition.totalPage);
 			$("#currentPage").html(result.pageCondition.currPage);
@@ -283,7 +291,6 @@ function loadDemandList(currPage){
 					$(this).parent("li").siblings("li").removeClass("disabled");
 				}
 			});
-			
             loadCSSubDept(result);			
 			loadCSBu(result);
 		}
@@ -312,7 +319,6 @@ function exportCondition(){
 }
 
 //gkf 选择填充处理
-var candidateIdArray = [],candidateNameArray = [];
 function checkCand(candidateId,candidateName){
 	if($('#ls'+candidateId+'').is(':checked')){
 		candidateIdArray.push(candidateId);
@@ -353,7 +359,12 @@ function demandDetailUpdate(demandId){
 
 //gkf
 function backgroundOpe(){
+	if($('#candidateName').val()==""){
+		alert("请选择需要维护的人员！");
+		return;
+	}
 	$('#feedBackDialog').modal('show');
+	$('#candidatePeople').val(candidateNameArray);
 }
 
 $('#interviewForm').bootstrapValidator({
@@ -363,6 +374,7 @@ $('#interviewForm').bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh'
 	},
 	fields : {
+		
 		bgvCleared : {
 			group : '.group',
 			validators : {
@@ -383,6 +395,7 @@ $('#interviewForm').bootstrapValidator({
     return false;
 }) ;
 
+//gkf 
 function updateBackForCandidate(e){
 	var candidateIds = $("#candidateId").val();
 	var bgvCleared = $("#bgvCleared").val();
@@ -400,6 +413,11 @@ function updateBackForCandidate(e){
 		success : function(resultFlag) {
 			if (resultFlag) {
 				alert("维护成功！")
+				$('#candidateId').val("");
+				$('#candidateName').val("");
+				$('#candidatePeople').val("");
+				candidateIdArray.splice(0,candidateIdArray.length);
+				candidateNameArray.splice(0,candidateNameArray.length);
 				$('#feedBackDialog').modal('hide');
 				loadDemandList();
 			}

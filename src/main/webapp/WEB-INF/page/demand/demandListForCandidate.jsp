@@ -271,6 +271,13 @@ var path='<%=path%>';
 						<form id="interviewForm">
 							
 							<div class="group">
+								<label class="col-sm-3 control-label">candidateName:</label>
+								<div class="col-sm-8">
+									<input disabled="disabled" type="text"  class="form-control"  id="candidatePeople" name="candidatePeople"/>
+								</div>
+							</div>
+							<br/><br/><br/>
+							<div class="group">
 								<label class="col-sm-3 control-label">BGV Cleared:</label>
 								<div class="col-sm-8">
 									<select id="bgvCleared" name="bgvCleared" class="form-control" data-bv-notempty>
@@ -284,7 +291,6 @@ var path='<%=path%>';
 									</select>
 								</div>
 							</div>
-							
 							<br/><br/><br/>
 							<div class="center">
 								<button type=submit class="btn btn-success"> 
