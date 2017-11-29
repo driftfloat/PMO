@@ -66,6 +66,32 @@ public class DemandController {
 		return "/demand/demandQuery";
 	}
 	
+	//gkf
+	@RequestMapping("/demandList")
+	public String demandListForCandidate(){
+		return "/demand/demandListForCandidate";
+	}
+	
+	/**
+	 * 背调维护 批量修改
+	 * gkf
+	 */
+	@RequestMapping("/updateBackForCandidate")
+	@ResponseBody
+	public  boolean  updateBackForCandidate(String candidateIds,String bgvCleared) {
+		String [] cadidateIdsArr = candidateIds.split(",");
+		Demand demand = new Demand();
+		boolean result = false;
+		for(String candidateId : cadidateIdsArr) {
+			demand.setCandidateId(candidateId);
+			demand.setBgvCleared(bgvCleared);
+			result = demandService.updateBackForCandidate(demand);
+			if(!result) {
+				break;
+			}
+		}
+		return result;
+	}
 	/**
 	 * 加载Department信息
 	 * @return

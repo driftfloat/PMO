@@ -1,5 +1,6 @@
 package com.pmo.dashboard.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,12 +70,23 @@ public class DemandServiceImpl implements DemandService{
 		int num = (pageCondition.getCurrPage() - 1)*pageCondition.getPageSize();
 		params.put("num", num);
 		//查询所有满足条件的需求信息
-		List<Demand> list = demandMapper.queryDemandList(params);
+		List<Demand> list = new ArrayList<Demand>();
+		if(demand.getFlag()!=null&&"1".equals(demand.getFlag())) {
+			list = demandMapper.queryDemandListForCandidate(params);
+		}else {
+			list = demandMapper.queryDemandList(params);
+		}
 		
 		//把查询到的结果存到session中
 		request.getSession().setAttribute("demandList", demandMapper.queryDemandList(params));
 		//设置总页数
-		int queryDemandCount = demandMapper.queryDemandCount(params);
+		int queryDemandCount = 0;
+		if(demand.getFlag()!=null&&"1".equals(demand.getFlag())) {
+			queryDemandCount = demandMapper.queryDemandCountForCandidate(params);
+		}else {
+			queryDemandCount = demandMapper.queryDemandCount(params);
+		}
+		
 		pageCondition.setTotalPage((int) Math.ceil(queryDemandCount*1.0 / pageCondition.getPageSize()));
 		//将部门信息设置到需求信息中
 		for (Demand demands : list) {
@@ -159,6 +171,18 @@ public class DemandServiceImpl implements DemandService{
 	public Demand queryDemandByCandidateId(String candidateId) {
 		
 		return demandMapper.queryDemandBycandidateId(candidateId);
+	}
+
+	@Override
+	public boolean updateBackForCandidate(Demand demand) {
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("candidateId", demand.getCandidateId());
+		params.put("bgvCleared", demand.getBgvCleared());
+		int res = demandMapper.updateBackForCandidate(params);
+		if(res>0) {
+			return true;
+		}
+		return false;
 	}
 	
 }
