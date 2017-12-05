@@ -1,5 +1,7 @@
 package com.pmo.dashboard.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -33,6 +35,11 @@ public class UserServiceImpl implements UserService{
 	public int updatePwd(String userId, String newPwd) {
 		// TODO Auto-generated method stub
 		return userMapper.updatePwd(userId,newPwd);
+	}
+	@Override
+	public List<User> getUserForRM() {
+		
+		return userMapper.getUserForRM();
 	}
 
 }

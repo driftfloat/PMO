@@ -11,9 +11,18 @@ public class EmployeeInfo
     private String csSubDeptName;
     private String lob;
     private String resourceStatus;
+    private String rmUserId;
+    private String nickname;
     
     
-    public String getEmployeeId()
+    
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getEmployeeId()
     {
         return employeeId;
     }
@@ -85,7 +94,15 @@ public class EmployeeInfo
     {
         this.resourceStatus = resourceStatus;
     }
-    public EmployeeInfo()
+    
+    
+    public String getRmUserId() {
+		return rmUserId;
+	}
+	public void setRmUserId(String rmUserId) {
+		this.rmUserId = rmUserId;
+	}
+	public EmployeeInfo()
     {
         super();
         // TODO Auto-generated constructor stub

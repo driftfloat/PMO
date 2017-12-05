@@ -2,6 +2,7 @@ package com.pmo.dashboard.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pmo.dashboard.entity.User;
 import com.pom.dashboard.service.UserService;
+
 
 /**
  * 用户的Controller
@@ -119,8 +121,19 @@ public class UserController {
 		
 	}
 	
-
-	
+	/**
+	 * 获得userType为3 即是 RM的用户信息（全部）
+	 * @author gkf
+	 * @date 2017-12-5
+	 */
+	@RequestMapping("/getUserForRM")
+	@ResponseBody
+	public List<User> getUserForRM() {
+		List<User> userList  = userService.getUserForRM();
+		
+		return userList;
+		
+	}
 }
 
 

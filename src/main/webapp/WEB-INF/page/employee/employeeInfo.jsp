@@ -155,6 +155,15 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
+										<div class="group">
+										<label class="col-lg-2 control-label">RM</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="resourceStatus" data-bv-notempty
+												data-bv-notempty-message="please select  resourceStatus" id="RM" data-bv-group=".group">
+												<option value="">--Option--</option>
+											</select>
+										</div>
+										</div>
 										</br></br></br>
 										
 										<div class="form-group">
@@ -188,6 +197,7 @@ var path='<%=path%>';
 												<th>LN</th>
 												<th>DU</th>
 												<th>Status</th>
+												<th>RM</th>
 												<th>Operate</th>
 											</tr>
 										</thead>

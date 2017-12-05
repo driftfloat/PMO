@@ -10,7 +10,14 @@ public class EmployeePageCondition extends PageCondition
     private String lob;
     private String resourceStatus;
     private String staffName;
-    public String getHsbcStaffId()
+    private String rmUserId;
+    public String getRmUserId() {
+		return rmUserId;
+	}
+	public void setRmUserId(String rmUserId) {
+		this.rmUserId = rmUserId;
+	}
+	public String getHsbcStaffId()
     {
         return hsbcStaffId;
     }
