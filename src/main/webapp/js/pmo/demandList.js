@@ -236,11 +236,11 @@ function loadDemandList(currPage){
 				var td6 = $("<td>"+result.list[i].status+"</td>");
 				var td66 = $("<td>"+result.list[i].bgvCleared+"</td>");
 				var td7 = $("<td>"+result.list[i].csSubDept+"</td>");
-				if(userType=='5' || userType=='6'){
-					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"')>Detail</a></td>");
-				}else{
-					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"')>Detail</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate('"+demandId+"')>Edit</a></td>");
-				}
+//				if(userType=='5' || userType=='6'){
+//					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"')>Detail</a></td>");
+//				}else{
+//					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"')>Detail</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate('"+demandId+"')>Edit</a></td>");
+//				}
 				td0.appendTo(tr);
 				td1.appendTo(tr);
 				tdd.appendTo(tr);
@@ -251,7 +251,7 @@ function loadDemandList(currPage){
 				td6.appendTo(tr);
 				td66.appendTo(tr);
 				td7.appendTo(tr);
-				td8.appendTo(tr);
+//				td8.appendTo(tr);
 				$("#demandList").append(tr);
 				
 				//gkf add 防止页面list刷新所选的checkbox失去焦点
