@@ -167,6 +167,33 @@ function loadCSBu(result){
 	});
 }
 
+//gkf add
+function getUserForRM(result){
+	var bu = result.user.bu;//事业部
+	var du = result.user.csDeptId;//部门
+	$.ajax({
+		url:path+'/service/user/getUserForRM',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(list){
+			$("#RM").empty();
+			$("#RM").append("<option value=''>--Option--</option>");
+			for(var i = 0;i<list.length;i++){
+				if(bu!=null&&du!=null){
+					if(bu==list[i].bu&&du==list[i].csDeptId){
+						$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
+					}
+				}else{
+					$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
+				}
+				
+			}
+		}
+	})
+}
+
 function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 	var csDeptName = csDeptName;
 
@@ -189,6 +216,8 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 	var resourceStatus = $("#resourceStatus").val();
 	
 	var staffName = $("#staffName").val();
+	
+	var rmName= $("#RM").val();
 
 	var pageState = pageState;
 	
@@ -196,7 +225,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 		url:path+"/service/employeeInfo/queryEmployeeList",
 		dataType:"json",
 		async:true,
-		data:{"staffName":staffName,"resourceStatus":resourceStatus,"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob},
+		data:{"staffName":staffName,"resourceStatus":resourceStatus,"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob,"rmUserId":rmName},
 		cache:false,
 		type:"post",
 		success:function(result){
@@ -234,6 +263,9 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 				var td7 = $("<td>"
 						+ result.data[i].resourceStatus
 						+ "</td>");
+				var td71 = $("<td>"
+						+ result.data[i].nickname
+						+ "</td>");
 				//var td7 = $("<td><a class='btn btn-info' href='javascript:void(0);'> <i class='glyphicon glyphicon-edit icon-white'></i> 编辑</a></td>");
 				var td8 = null;
 				if(userType=='5' || userType=='6'){
@@ -249,6 +281,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 				td5.appendTo(tr);
 				td6.appendTo(tr);
 				td7.appendTo(tr);
+				td71.appendTo(tr);
 				td8.appendTo(tr);
 			}
 			$("#employeeList").append("</tbdoy>");
@@ -274,6 +307,8 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 			loadCSSubDept(result);
 			
 			loadCSBu(result);
+			
+			getUserForRM(result);
 		}
 		
 	})

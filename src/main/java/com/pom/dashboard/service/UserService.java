@@ -1,5 +1,7 @@
 package com.pom.dashboard.service;
 
+import java.util.List;
+
 import com.pmo.dashboard.entity.User;
 
 /**
@@ -15,5 +17,7 @@ public interface UserService {
 	User login(String userName, String password);
 
 	int updatePwd(String userId, String newPwd);
+	
+	List<User> getUserForRM();
 
 }

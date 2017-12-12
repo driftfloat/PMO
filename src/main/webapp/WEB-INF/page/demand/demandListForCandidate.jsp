@@ -186,21 +186,27 @@ var path='<%=path%>';
 												data-dismiss="modal"
 												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin: auto;">
 										</div>
+										<div style="text-align: center; width: 50%;float: right">
+														<input type="button" value="背调维护" name="searchBtn"
+															onclick="backgroundOpe()" class="button btn btn-primary"
+															data-dismiss="modal"
+															style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin: auto;">
+										</div>
 									</div>
 									<fieldset style="margin: 10px 0; border: 1px solid #DDDDDD;">
 										<table>
 											<tr>
 												<td><input type="hidden" id="candidateId" /></td>
 												<td style="position: relative;">维护人员:<input
-													style="width: 470px;" id="candidateName" /></td>
-												<td>
+													style="width: 900px;" id="candidateName" /></td>
+												<!-- <td>
 													<div style="text-align: center; width: 50%;float: right">
 														<input type="button" value="背调维护" name="searchBtn"
 															onclick="backgroundOpe()" class="button btn btn-primary"
 															data-dismiss="modal"
 															style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin: auto;">
 													</div>
-												</td>
+												</td> -->
 											</tr>
 										</table>
 									</fieldset>
@@ -219,7 +225,6 @@ var path='<%=path%>';
 													<th>Status</th>
 													<th>BgvCleared</th>
 													<th>CsDpet</th>
-													<th>Operate</th>
 												</tr>
 											</thead>
 

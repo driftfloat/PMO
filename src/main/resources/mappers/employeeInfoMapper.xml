@@ -11,13 +11,17 @@
 		<result property="hsbcStaffId" column="HSBC_STAFF_ID" javaType="String" />
 		<result property="lob" column="LOB" javaType="String" />
 		<result property="resourceStatus" column="RESOURCE_STATUS" javaType="String" />
+		<result property="rmUserId" column="RM_USER_ID" javaType="String" />
+		
 	</resultMap>
 	
 	<select id="queryEmployeeList" parameterType="com.pmo.dashboard.entity.EmployeePageCondition" resultMap="employeeInfoMap" >
-	    SELECT e.EMPLOYEE_ID,e.HSBC_STAFF_ID,e.E_HR,e.LOB,e.STAFF_NAME,e.LN,d.CS_SUBDEPT_NAME,e.RESOURCE_STATUS
+	    SELECT e.EMPLOYEE_ID,e.HSBC_STAFF_ID,e.E_HR,e.LOB,e.STAFF_NAME,e.LN,d.CS_SUBDEPT_NAME,e.RESOURCE_STATUS,e.RM_USER_ID,u.NICKNAME
         FROM t_employee AS e
         LEFT JOIN t_cs_dept AS d
         ON e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID
+        LEFT JOIN T_USER AS u
+        ON e.RM_USER_ID = u.USER_ID
         WHERE 1 = 1
         
 			<if test="hsbcStaffId != null and hsbcStaffId != ''">
@@ -43,6 +47,9 @@
 			</if>
 			<if test="staffName != null and staffName != ''">
 				AND e.STAFF_NAME = #{staffName}
+			</if>
+			<if test="rmUserId != null and rmUserId != ''">
+				AND e.RM_USER_ID = #{rmUserId}
 			</if>
 		
         LIMIT #{currentPage},10;
@@ -80,6 +87,9 @@
 				AND e.STAFF_NAME = #{staffName}
 			</if>
 		
+			<if test="rmUserId != null and rmUserId != ''">
+				AND e.RM_USER_ID = #{rmUserId}
+			</if>
 	</select>
 	
 </mapper>

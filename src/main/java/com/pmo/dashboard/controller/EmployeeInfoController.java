@@ -59,6 +59,8 @@ public class EmployeeInfoController
         
         String staffName = request.getParameter("staffName");
         
+        String rmUserId = request.getParameter("rmUserId");
+        
         User user = (User) request.getSession().getAttribute("loginUser");
         
         
@@ -98,6 +100,7 @@ public class EmployeeInfoController
             employeePageCondition.setCurrentPage(currentPage);
             employeePageCondition.setStaffName(staffName);
             employeePageCondition.setResourceStatus(resourceStatus);
+            employeePageCondition.setRmUserId(rmUserId);
             countPage = employeeInfoService.countEmployeeList(employeePageCondition);
             employeePageCondition.setPageCount(countPage+"");
             request.getSession().setAttribute("employeePageCondition", employeePageCondition);

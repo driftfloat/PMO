@@ -27,4 +27,7 @@
 	
 	</update>
 	
+	<select id="getUserForRM"  resultMap="userMap">
+		select * from t_user where USER_TYPE = "3" 
+	</select>
 </mapper>
