@@ -15,27 +15,6 @@ $(function(){
 	
 })
 
-/*$("#skill").change(function(){
-	$("#exportExcel").attr("disabled", true);
-})
-$("#position").change(function(){
-	$("#exportExcel").attr("disabled", true);
-})
-$("#department").change(function(){
-	$("#exportExcel").attr("disabled", true);
-})
-$("#sub_department").change(function(){
-	$("#exportExcel").attr("disabled", true);
-})
-$("#status").change(function(){
-	$("#exportExcel").attr("disabled", true);
-})
-$("#csBuName").change(function(){
-	$("#exportExcel").attr("disabled", true);
-})
-$("#scSubDeptName").change(function(){
-	$("#exportExcel").attr("disabled", true);
-})*/
 
 /*加载skill本地json信息*/
 function loadSkill(){
@@ -186,14 +165,16 @@ function loadSubDepartment(){
 	
 /*根据条件和当前页加载查询到的信息*/
 function loadDemandList(currPage){
-	var skill= $("#skill").val();
-	var position= $("#position").val();
+	/*var skill= $("#skill").val();*/
+	/*var position= $("#position").val();*/
 	var department= $("#department").val();
 	var sub_department= $("#sub_department").val();
-	var status= $("#status").val();
+	
+	/*var status= $("#status").val();*/
 	var rr= $("#rr").val();
 	var csBuName = $("#csBuName").val();
 	var csSubDept = $("#csSubDept").val();
+	var candName= $("#candName").val();
 	//$("#demandList").empty();
 	$("#demandList  tr:not(:first)").html("");
 	$.ajax({
@@ -202,8 +183,8 @@ function loadDemandList(currPage){
 		async:true,
 		cache:false,
 		type:"post",
-		data:{"csBuName":csBuName,"skill":skill,"position":position,"hsbcDept.hsbcDeptName":department,"hsbcDept.hsbcSubDeptName":sub_department,
-			"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept,"flag":1},
+		data:{"csBuName":csBuName,"hsbcDept.hsbcDeptName":department,"hsbcDept.hsbcSubDeptName":sub_department,
+			"rr":rr,"currPage":currPage,"csSubDept":csSubDept,"flag":1,"candidateName":candName},
 		success:function(result){
 			//alert(result.list.length);
 			var userType = result.user.user_type;
@@ -223,7 +204,7 @@ function loadDemandList(currPage){
 				var tdd = $("<td>"+result.list[i].candidateName+"</td>");
 				var td2 = $("<td>"+result.list[i].skill+"</td>");
 				var td3 = $("<td>"+result.list[i].position+"</td>");
-				if(result.list[i].hsbcDept.hsbcDeptName == null){
+				/*if(result.list[i].hsbcDept.hsbcDeptName == null){
 					var td4 = $("<td></td>");
 				}else{
 					var td4 = $("<td>"+result.list[i].hsbcDept.hsbcDeptName+"</td>");
@@ -232,10 +213,10 @@ function loadDemandList(currPage){
 					var td5 = $("<td></td>");
 				}else{
 					var td5 = $("<td>"+result.list[i].hsbcDept.hsbcSubDeptName+"</td>");
-				}
-				var td6 = $("<td>"+result.list[i].status+"</td>");
-				var td66 = $("<td>"+result.list[i].bgvCleared+"</td>");
-				var td7 = $("<td>"+result.list[i].csSubDept+"</td>");
+				}*/
+				var td4 = $("<td>"+result.list[i].status+"</td>");
+				var td5 = $("<td>"+result.list[i].bgvCleared+"</td>");
+				var td6 = $("<td>"+result.list[i].csSubDept+"</td>");
 //				if(userType=='5' || userType=='6'){
 //					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"')>Detail</a></td>");
 //				}else{
@@ -249,8 +230,6 @@ function loadDemandList(currPage){
 				td4.appendTo(tr);
 				td5.appendTo(tr);
 				td6.appendTo(tr);
-				td66.appendTo(tr);
-				td7.appendTo(tr);
 //				td8.appendTo(tr);
 				$("#demandList").append(tr);
 				
@@ -325,6 +304,7 @@ function checkCand(candidateId,candidateName){
 		candidateNameArray.push(candidateName);
 		$('#candidateId').val(candidateIdArray);
 		$('#candidateName').val(candidateNameArray);
+		$('#backMaintain').css('display','block');
 	}else{
 		for(var i = 0;i < candidateIdArray.length; i++){
 			if(candidateId == candidateIdArray[i]){
@@ -338,6 +318,9 @@ function checkCand(candidateId,candidateName){
 				candidateNameArray.splice(i,1);
 				$('#candidateName').val(candidateNameArray);
 			}
+		}
+		if($('#candidateId').val()==""){
+			$('#backMaintain')[0].style.display='none';
 		}
 	}
 }

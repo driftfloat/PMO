@@ -81,7 +81,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> 需求查询
+									<i class="glyphicon glyphicon-user"></i> 背调批量维护
 								</h2>
 							</div>
 							<div id="demandInfo" class="box-content">
@@ -110,30 +110,7 @@ var path='<%=path%>';
 									<br>
 									<br>
 									<br>
-									<div class="group">
-										<label class="col-lg-2 control-label">Tech/Skill</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="skill" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="skill"
-												data-bv-group=".group">
-												<option value="">--Option--</option>
-											</select>
-										</div>
-									</div>
-									<div class="group">
-										<label class="col-lg-2 control-label">Position</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="position" data-bv-notempty
-												data-bv-notempty-message="请选择角色" id="position"
-												data-bv-group=".group">
-												<option value="">--Option--</option>
-											</select>
-										</div>
-									</div>
-									</br>
-									</br>
-									</br>
-									<div class="group">
+									<div class="group" style="display:none;">
 										<label class="col-lg-2 control-label">Department</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="hsbcDept.hsbcDeptName"
@@ -143,7 +120,7 @@ var path='<%=path%>';
 											</select>
 										</div>
 									</div>
-									<div class="group">
+									<div class="group" style="display:none;">
 										<label class="col-sm-2 control-label">Sub - Department</label>
 										<div class="col-sm-4">
 											<select class="form-control" name="hsbcDept.hsbcSubDeptName"
@@ -152,22 +129,21 @@ var path='<%=path%>';
 												<option value="">--Option--</option>
 											</select>
 										</div>
-									</div>
-									</br>
-									</br>
-									</br>
-
+									</div>  
 									<div id="successAlert" class="alert alert-success"
 										style="display: none;"></div>
 
 									<div class="group">
-										<label class="col-sm-2 control-label">Status</label>
-										<div class="col-sm-4">
+										<label class="col-sm-2 control-label">Name</label>
+										<div class="col-sm-4" style="display:none">
 											<select class="form-control" name="status" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="status"
 												data-bv-group=".group">
 												<option value="">--Option--</option>
 											</select>
+										</div>
+										<div class="col-sm-4">
+											<input type="text" class="form-control" name="candidateName" id="candName" />
 										</div>
 									</div>
 									<div class="group">
@@ -193,23 +169,17 @@ var path='<%=path%>';
 															style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin: auto;">
 										</div>
 									</div>
-									<fieldset style="margin: 10px 0; border: 1px solid #DDDDDD;">
-										<table>
-											<tr>
-												<td><input type="hidden" id="candidateId" /></td>
-												<td style="position: relative;">维护人员:<input
-													style="width: 900px;" id="candidateName" /></td>
-												<!-- <td>
-													<div style="text-align: center; width: 50%;float: right">
-														<input type="button" value="背调维护" name="searchBtn"
-															onclick="backgroundOpe()" class="button btn btn-primary"
-															data-dismiss="modal"
-															style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin: auto;">
+									<div class="form-group" id="backMaintain" style="display:none;">
+										
+												<input type="hidden" id="candidateId" />
+												
+													<div class="group">
+														<label class="col-sm-2 control-label">维护人员</label>
+														<div class="col-sm-8">
+															<textarea class="form-control" id="candidateName" ></textarea>
+														</div>
 													</div>
-												</td> -->
-											</tr>
-										</table>
-									</fieldset>
+									</div>
 									<div style="overflow: auto;">
 										<table id="demandList"
 											class="table table-striped table-bordered">
@@ -220,9 +190,9 @@ var path='<%=path%>';
 													<th>Name</th>
 													<th>Tech/Skill</th>
 													<th>Position</th>
-													<th>Department</th>
-													<th>Sub - Department</th>
-													<th>Status</th>
+													<!-- <th>Department</th>
+													<th>Sub - Department</th>-->
+													<th>Status</th> 
 													<th>BgvCleared</th>
 													<th>CsDpet</th>
 												</tr>
