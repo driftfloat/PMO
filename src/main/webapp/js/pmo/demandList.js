@@ -243,6 +243,7 @@ function loadDemandList(currPage){
 			}
 			$("#pageCount").html(result.pageCondition.totalPage);
 			$("#currentPage").html(result.pageCondition.currPage);
+			
 			$("#fristPage").attr("onclick","loadDemandList(1)");
 			if(result.pageCondition.currPage <= result.pageCondition.totalPage){
 				$("#previousPage").attr("onclick","loadDemandList("+(result.pageCondition.currPage - 1)+")");
