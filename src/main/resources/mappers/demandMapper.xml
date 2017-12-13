@@ -131,23 +131,18 @@
 		select *
 		from  t_demand a,t_cs_dept b 
 		<where>
-		    a.CANDIDATE_ID!="" and b.cs_subdept_id=a.cs_subdept
-			<if test="demand.skill!=null and demand.skill!=''">
-				and a.SKILL = #{demand.skill}
+		    a.CANDIDATE_ID!="" and b.cs_subdept_id=a.cs_subdept and a.STATUS in("Onboard","OfferMade")
+			<if test="demand.candidateName!=null and demand.candidateName!=''">
+				and a.CANDIDATE_NAME = #{demand.candidateName}
 			</if>
-			<if test="demand.position!=null and demand.position!=''">
-				and a.position = #{demand.position}
-			</if>
-			<if test="demand.status!=null and demand.status!=''">
-				and a.status = #{demand.status}
-			</if>
+			
 			<if test="demand.rr!=null and demand.rr!=''">
 				and a.rr = #{demand.rr}
 			</if>
 			<if test="csBuName!=null and csBuName!=''">
 				and B.CS_BU_NAME = #{csBuName}
 			</if>
-			 <choose>
+			<choose>
 				<when test="demand.csSubDept!=null and demand.csSubDept!=''">
 					and a.CS_SUBDEPT = #{demand.csSubDept}
 				</when>
