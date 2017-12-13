@@ -163,12 +163,23 @@ public class CandidateServiceImpl implements CandidateService {
 					}else if ("2".equals(interviewStatus)){
 						interviewStatus = "面试中";
 					}else if ("3".equals(interviewStatus)){
+						interviewStatus = "面试完成";
+					}else if ("4".equals(interviewStatus)){
+						interviewStatus = "已退回";
+					}
+					/*if ("0".equals(interviewStatus)){
+						interviewStatus = "未推送";
+					}else if ("1".equals(interviewStatus)){
+						interviewStatus = "已推送";
+					}else if ("2".equals(interviewStatus)){
+						interviewStatus = "面试中";
+					}else if ("3".equals(interviewStatus)){
 						interviewStatus = "面试通过";
 					}else if ("4".equals(interviewStatus)){
 						interviewStatus = "面试失败";
 					}else if ("5".equals(interviewStatus)){
 						interviewStatus = "已退回";
-					}
+					}*/
 					candidateInfo.setInterviewStatus(interviewStatus);
 					
 					@SuppressWarnings("rawtypes")
@@ -232,26 +243,143 @@ public class CandidateServiceImpl implements CandidateService {
 			// 要插入到的Excel表格的行号，默认从0开始
 			Label labelSL = new Label(0, 0, "SL#", headcell);
 			ws.addCell(labelSL);
-
+			//列计数器
+            int columnCounter=0;
 			for (int k = 0; k < conditionList.size(); k++) {
 				Label label = new Label(k + 1, 0, conditionList.get(k), headcell);
 				ws.addCell(label);
 			}
 
 			for (int i = 1; i - 1 < candidateDatalist.size(); i++) {
-				LinkedHashMap<String, String> map = candidateDatalist.get(i - 1);
-				int j = 0;
-				Label labelSL_i = new Label(j, i, i + "", contentcell);
-				ws.addCell(labelSL_i);
-				for (Map.Entry<String, String> entry : map.entrySet()) {
-					if (entry.getValue() == null) {
-						Label label = new Label(++j, i, "", contentcell);
-						ws.addCell(label);
-					} else {
-						Label label = new Label(++j, i, entry.getValue(), contentcell);
-						ws.addCell(label);
-					}
+				//列计数器重置
+				columnCounter=0;
+				for(int n=0;n<conditionList.size();n++){
+					
+					if(columnCounter==0){
+					    Label labelSL_i = new Label(0, i, i + "", contentcell);
+					    ws.addCell(labelSL_i);
+				    }
+                    if(conditionList.get(n).equals("Name")){
+                	    Label labelSL_i = new Label(n+1, i, candidateDatalist.get(i - 1).get("CANDIDATE_NAME"), contentcell);
+					    ws.addCell(labelSL_i);
+				    }
+                    if(conditionList.get(n).equals("Sex")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("CANDIDATE_SEX"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Age")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("CANDIDATE_AGE"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Tel")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("TEL"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Email")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("EMAIL"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Source")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("SOURCE"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Status")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("CANDIDATE_STATUS"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Education")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("EDUCATION"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Work Years")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("EXPERIENCE_YEARS"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Major Type")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("MAJOR_STATUS"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("English Level")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("ENGLISH_LEVEL"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Skill")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("SKILL"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("College")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("COLLEGE"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Graduate Date")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("GRADUATE_DATE"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Lock HR")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("lockHR"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Create Date")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("CREATE_DATE"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Update Date")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("UPDATE_DATE"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Old Company")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("OLD_COMPANY"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Old Company")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("OLD_COMPANY"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Role")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("ROLE"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Old Company")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("OLD_COMPANY"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Enty Date")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("ENTY_DATE"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Arrival Date")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("ARRIVAL_DATE"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Create User")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("createUser"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                    if(conditionList.get(n).equals("Interview Status")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("INTERVIEW_STATUS"), contentcell);
+					    ws.addCell(labelSL_i);
+                    }
+                
+                    //列计数器递增
+                    //columnCounter++;
+                    if(conditionList.get(n).equals("Remark")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("REMARK"), contentcell);
+                	    ws.addCell(labelSL_i);
+                    }
 				}
+//				LinkedHashMap<String, String> map = candidateDatalist.get(i - 1);
+//				int j = 0;
+//				Label labelSL_i = new Label(j, i, i + "", contentcell);
+//				ws.addCell(labelSL_i);
+//				for (Map.Entry<String, String> entry : map.entrySet()) {
+//					if (entry.getValue() == null) {
+//						Label label = new Label(++j, i, "", contentcell);
+//						ws.addCell(label);
+//					} else {
+//						Label label = new Label(++j, i, entry.getValue(), contentcell);
+//						ws.addCell(label);
+//					}
+//				}
 			}
 
 			// 写进文档
