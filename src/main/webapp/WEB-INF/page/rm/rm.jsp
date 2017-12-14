@@ -211,6 +211,9 @@ var path='<%=path%>';
 												<th>Staff Name</th>
 												<th>Skill</th>
 												<th>Location</th>
+												<%-- Felix, 20171212, MSA Role Begin --%>
+												<th>MSA Role</th>
+												<%-- Felix, 20171212, MSA Role End --%>
 												<th>Experience Years</th>
 												<th>Interviewer Status</th>
 												<th>Operate</th>

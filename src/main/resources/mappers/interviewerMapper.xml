@@ -19,6 +19,9 @@
 	
 	 <sql id="queryWhere">
 	   <where>
+	       <!-- Felix, 20171213, Begin -->
+	       RESOURCE_STATUS != 'Terminated'
+	       <!-- Felix, 20171213, End -->
 	      <if test="interviewer.ehr!=null and interviewer.ehr!=''"> 
 	          and E_HR = #{interviewer.ehr}
 	      </if>
@@ -36,7 +39,17 @@
 	          and SKILL = #{interviewer.skill}
 	      </if>
 	      <if test="interviewer.status!=null and interviewer.status!=''"> 
-	          and INTERVIERW_STATUS = #{interviewer.status}
+	          <!-- Felix, 20171212, Interviewer Status, Begin --> 
+	          <!-- and INTERVIERW_STATUS = #{interviewer.status} -->
+	          <choose>
+	              <when test="interviewer.status==1">
+	                  and INTERVIERW_STATUS = #{interviewer.status}
+	              </when>
+	              <otherwise>
+	                  and INTERVIERW_STATUS != '1'
+	              </otherwise>
+	          </choose>
+	          <!-- Felix, 20171212, Interviewer Status, End -->
 	      </if>
 	      <if test="interviewer.hsbcStaffId!=null and interviewer.hsbcStaffId!=''"> 
 	          and HSBC_STAFF_ID = #{interviewer.hsbcStaffId}

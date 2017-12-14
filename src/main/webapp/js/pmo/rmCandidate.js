@@ -393,7 +393,9 @@ function offerInterview(pushId){
 				var td6 = $("<td>"+result.list[i].location+"</td>");
 				var td8 = $("<td>"+result.list[i].status+"</td>");
 				var td9 = $("<td>"+result.list[i].csSubDept+"</td>");
-				var td10 = $("<td><div class='btn-group btn-group-sm'><a href='javascript:void(0);' class='btn btn-info btn-small' onclick='demandDetail("+result.list[i].demandId+")'>Detail</a></div></td>");
+				// Felix, 20171213, Demand Detail, Begin.
+				var td10 = $("<td><div class='btn-group btn-group-sm'><a href='javascript:void(0);' class='btn btn-info btn-small' onclick='demandDetail(\""+result.list[i].demandId+"\")'>Detail</a></div></td>");
+				// Felix, 20171213, Demand Detail, End.
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
