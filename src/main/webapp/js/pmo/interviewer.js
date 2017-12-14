@@ -136,7 +136,8 @@ function loadInterviewerList(currPage){
 			if(result.list.length > 0){
 				$("#exportExcel").removeAttr("disabled");
 			}else{
-				$("#interviewerList").append("<tr><td colspan='9' style='text-align:center'>暂无数据！</td></tr>");
+				// Felix, 20171212, colspan='9' to colspan='10'
+				$("#interviewerList").append("<tr><td colspan='10' style='text-align:center'>暂无数据！</td></tr>");
 			}
 			//$.each(reslut, function(i,data){
 			for (var i = 0; i < result.list.length; i++) {
@@ -154,6 +155,9 @@ function loadInterviewerList(currPage){
 				"<td>"+result.list[i].staffName+"</td>"+
 				"<td>"+result.list[i].skill+"</td>"+
 				"<td>"+result.list[i].staffRegion+"</td>"+
+				// Felix, 20171212, MSA Role Begin
+				"<td>"+result.list[i].role+"</td>"+
+				// Felix, 20171212, MSA Role End
 				"<td>"+result.list[i].experienceYearas+"</td>"+
 				"<td>"+status+"</td>").appendTo(tr);
 				if(status == '否' || status == null){

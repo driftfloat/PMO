@@ -39,6 +39,9 @@ function loadCandidateList(pageState) {
 					var tbody = $("<tbody>");
 					tbody.appendTo($("#candidateList"));
 					for (var i = 0; i < result.data.length; i++) {
+						// Felix, 20171212, Begin
+						var experienceYears = result.data[i].experienceYears == null? '' : result.data[i].experienceYears;
+						// Felix, 20171212, End
 						var tr = $("<tr></tr>");
 						tr.appendTo(tbody);
 						$("<td><a href='javascript:void(0);' " +
@@ -52,8 +55,9 @@ function loadCandidateList(pageState) {
 								.appendTo(tr);
 						$("<td>" + result.data[i].email + "</td>").appendTo(tr);
 						$("<td>" + result.data[i].role + "</td>").appendTo(tr);
-						$("<td>" + result.data[i].experienceYears + "</td>")
-								.appendTo(tr);
+						// Felix, 20171212, Begin
+						$("<td>" + experienceYears + "</td>").appendTo(tr);
+						// Felix, 20171212, End
 						$("<td>" + result.data[i].englishLevel + "</td>")
 								.appendTo(tr);
 						$("<td>" + result.data[i].skill + "</td>").appendTo(tr);
