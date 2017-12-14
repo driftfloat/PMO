@@ -10,7 +10,7 @@ $(function(){
 	
 })
 
-function loadResourceStatus(){
+function loadResourceStatus(result){
 	var url = path+'/json/resourceStatus.json'
 	$.getJSON(url,  function(data) {
 		   $("#resourceStatus").empty();
@@ -18,6 +18,7 @@ function loadResourceStatus(){
 	       $.each(data, function(i, item) {
 	    	   $("#resourceStatus").append("<option>"+item.name+"</option>");
 	       })
+	       $('#resourceStatus').val(result.pageInfo.resourceStatus);
 	});
 }
 
@@ -139,6 +140,8 @@ function loadCSSubDept(result){
 			if(userType=='2' || userType=='3' || userType=='4'){
 				$('#csSubDept').val(result.csSubDeptName);
 				$("#csSubDept").attr("disabled","disabled");
+			}else{
+				$('#csSubDept').val(result.pageInfo.csSubDeptName);
 			}
 		}
 	})
@@ -163,6 +166,8 @@ function loadCSBu(result){
 	       if(userType=='1' || userType=='2' || userType=='3' || userType=='4'){
 				$('#csBu').val(result.user.bu);
 				$("#csBu").attr("disabled","disabled");
+			}else{
+				$('#csBu').val(result.pageInfo.csbuName);
 			}
 	});
 }
@@ -188,6 +193,7 @@ function getUserForRM(result){
 				}else{
 					$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
 				}
+				$('#RM').val(result.pageInfo.rmUserId);	
 				
 			}
 		}
@@ -302,7 +308,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 			
 			
 			
-			loadResourceStatus();
+			loadResourceStatus(result);
 			
 			loadCSSubDept(result);
 			

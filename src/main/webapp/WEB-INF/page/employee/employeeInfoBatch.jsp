@@ -55,8 +55,7 @@
 <link rel="shortcut icon" href="<%=path%>/img/favicon.ico">
 </head>
 <script>
-var path='<%=path%>
-	';
+var path='<%=path%>';
 </script>
 <body>
 	<!-- topbar starts -->
@@ -147,15 +146,17 @@ var path='<%=path%>
 												<option value="">--Option--</option>
 											</select>
 										</div>
-									</div>
+									</div>									
+									</br></br></br>
+									
 									<div class="form-group">
-										<div style="text-align: center; width: 25%; float: right">
+										<div style="text-align: center; width: 50%; float: right">
 											<input type="button" value="Transfer" name="transfer"
 												id="transfer" href="#" class="button btn btn-primary"
 												data-dismiss="modal"
 												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin: auto;">
 										</div>
-										<div style="text-align: center; width: 25%; float: right">
+										<div style="text-align: center; width: 50%; float: left">
 											<input type="button" value="查&nbsp;&nbsp;询" name="searchBtn"
 												id="searchBtn" href="#" class="button btn btn-primary"
 												data-dismiss="modal"
