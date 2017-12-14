@@ -61,6 +61,18 @@
 		<if test="csbuName != null and csbuName != ''">
 				AND CS_BU_NAME = #{csbuName}
 		</if>
+		<if test="resourceStatus != null and resourceStatus != ''">
+			AND RESOURCE_STATUS = #{resourceStatus}
+		</if>
+		<if test="staffName != null and staffName != ''">
+			AND STAFF_NAME = #{staffName}
+		</if>
+		<if test="rmUserId != null and rmUserId != ''">
+			AND RM_USER_ID = #{rmUserId}
+		</if>
+		<if test="hsbcStaffId != null and hsbcStaffId != ''">
+			AND HSBC_STAFF_ID = #{hsbcStaffId}
+		</if>
 		)
 	</select>
 	

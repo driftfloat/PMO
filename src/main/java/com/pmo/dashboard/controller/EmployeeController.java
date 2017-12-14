@@ -338,6 +338,13 @@ public class EmployeeController {
             
                // 创建可写入的Excel工作簿
                
+               //创建 Constants.PATH文件夹
+               File folder = new File( Constants.PATH);
+               if(!folder.exists()){
+            	   folder.mkdirs();
+               }
+               
+               //创建  file
                File file=new File(fileName);
                if (!file.exists()) {
                    file.createNewFile();
