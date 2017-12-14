@@ -53,8 +53,78 @@
 	
 
     <update id="upd" parameterType="com.pmo.dashboard.entity.Resume">
-	update t_candidate set candidate_name =#{candidateName},RESUME_PATH=#{resume_path},CANDIDATE_AGE=#{age},CANDIDATE_SEX=#{gender},TEL=#{tel},EDUCATION=#{education}, COLLEGE=#{college},MAJOR_STATUS=#{major},EXPERIENCE_YEARS=#{experience_years},SKILL=#{skill},GRADUATE_DATE=#{graduate_date},ENGLISH_LEVEL=#{English_level},CANDIDATE_STATUS=#{candidate_status},CREATE_DATE=#{create_date},SOURCE=#{source},ROLE=#{role},ENTY_DATE=#{entry_date},EMAIL=#{email},EXPECTED_SALARY=#{expected_salary},REAL_SALARY=#{real_salary},OLD_COMPANY=#{old_company},REMARK=#{remark},INTERVIEW_STATUS=#{interview_status}
-
+	update t_candidate
+    <set >  
+      <if test="candidateName != null" >  
+        candidate_name = #{candidateName},  
+      </if>
+      <if test="resume_path != null" >  
+        RESUME_PATH = #{resume_path},  
+      </if>
+      <if test="age != null" >  
+        CANDIDATE_AGE = #{age},  
+      </if>
+      <if test="gender != null" >  
+        CANDIDATE_SEX = #{gender},  
+      </if>
+      <if test="tel != null" >  
+        TEL = #{tel},  
+      </if>
+      <if test="education != null" >  
+        EDUCATION = #{education},  
+      </if>
+      <if test="college != null" >  
+        COLLEGE = #{college},  
+      </if>
+      <if test="major != null" >  
+        MAJOR_STATUS = #{major},  
+      </if>
+      <if test="experience_years != null" >  
+        EXPERIENCE_YEARS = #{experience_years},  
+      </if>
+      <if test="skill != null" >  
+        SKILL = #{skill},  
+      </if>
+      <if test="graduate_date != null" >  
+        GRADUATE_DATE = #{graduate_date},  
+      </if>
+      <if test="English_level != null" >  
+        ENGLISH_LEVEL = #{English_level},  
+      </if>
+      <if test="candidate_status != null" >  
+        CANDIDATE_STATUS = #{candidate_status},  
+      </if>
+      <if test="create_date != null" >  
+        CREATE_DATE = #{create_date},  
+      </if>
+      <if test="source != null" >  
+        SOURCE = #{source},  
+      </if>
+      <if test="role != null" >  
+        ROLE = #{role},  
+      </if>
+      <if test="entry_date != null" >  
+        ENTY_DATE = #{entry_date},  
+      </if>
+      <if test="email != null" >  
+        EMAIL = #{email},  
+      </if>
+      <if test="expected_salary != null" >  
+        EXPECTED_SALARY = #{expected_salary},  
+      </if>
+      <if test="real_salary != null" >  
+        REAL_SALARY = #{real_salary},  
+      </if>
+      <if test="old_company != null" >  
+        OLD_COMPANY = #{old_company},  
+      </if>
+      <if test="remark != null" >  
+        REMARK = #{remark},  
+      </if>
+      <if test="interview_status != null" >  
+        INTERVIEW_STATUS = #{interview_status},  
+      </if>  
+    </set>  
 	where CANDIDATE_ID=#{id}
 </update>
 
