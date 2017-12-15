@@ -37,7 +37,15 @@ public class StayinCandidate extends PageCondition
     private String demandId;
 	private String pageState;
     private String demandStatus;
+    private int num;
 	
+    
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getDemandStatus() {
 		return demandStatus;
 	}

@@ -89,8 +89,11 @@ public class StayinController
          }else if("last".equals(pageState)){
         	 page.setCurrentPage(page.getPageCount());
          }
+    	
     	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*Constants.PAGE_DATA_COUNT+"");
     	candidate.setPageDataCount(Constants.PAGE_DATA_COUNT+"");
+    	int num = (Integer.valueOf(page.getCurrentPage())-1)*Constants.PAGE_DATA_COUNT;
+    	candidate.setNum(num);
         List<StayinCandidate> list = StayinService.queryStayinList(candidate);
         //gkf 加入session
         request.getSession().setAttribute("candidateList", list);

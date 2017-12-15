@@ -162,18 +162,32 @@ function loadStayinList(pageState)
 			$("#currentPage").html(currentPage);
 			$("#pageDataCount").html(pageDataCount);
 			$("#dataCount").html(dataCount);
-			$("#nextPage").attr("onclick","loadCandidateList('next')");
-			$("#previousPage").attr("onclick","loadCandidateList('previous')");
-			$("#lastPage").attr("onclick","loadCandidateList('last')");
-			$("#fristPage").attr("onclick","loadCandidateList('frist')");
+			$("#nextPage").attr("onclick","loadStayinList('next')");
+			$("#previousPage").attr("onclick","loadStayinList('previous')");
+			$("#lastPage").attr("onclick","loadStayinList('last')");
+			$("#fristPage").attr("onclick","loadStayinList('frist')");
 			if(currentPage == pageCount){
 				$("#nextPage").removeAttr("onclick");
+				$("#nextPage").parent("li").addClass("disabled");
 				$("#lastPage").removeAttr("onclick");
+				$("#lastPage").parent("li").addClass("disabled");
+				$("#previousPage").parent("li").removeClass("disabled");
+				$("#fristPage").parent("li").removeClass("disabled");
 			}
 			if(currentPage == 1){
 				$("#previousPage").removeAttr("onclick");
+				$("#previousPage").parent("li").addClass("disabled");
 				$("#fristPage").removeAttr("onclick");
+				$("#fristPage").parent("li").addClass("disabled");
+				$("#nextPage").parent("li").removeClass("disabled");
+				$("#lastPage").parent("li").removeClass("disabled");
 			}
+			
+			$("ul.pagination-centered li a").each(function(){
+				if(1 < currentPage && currentPage < pageCount){
+					$(this).parent("li").siblings("li").removeClass("disabled");
+				}
+			});
 		}
 	})
 }
