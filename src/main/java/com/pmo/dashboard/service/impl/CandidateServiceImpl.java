@@ -243,6 +243,7 @@ public class CandidateServiceImpl implements CandidateService {
 			// 要插入到的Excel表格的行号，默认从0开始
 			Label labelSL = new Label(0, 0, "SL#", headcell);
 			ws.addCell(labelSL);
+			
 			//列计数器
             int columnCounter=0;
 			for (int k = 0; k < conditionList.size(); k++) {
@@ -331,16 +332,16 @@ public class CandidateServiceImpl implements CandidateService {
                 	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("OLD_COMPANY"), contentcell);
 					    ws.addCell(labelSL_i);
                     }
-                    if(conditionList.get(n).equals("Old Company")){
-                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("OLD_COMPANY"), contentcell);
+                    if(conditionList.get(n).equals("Expected Salary")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("EXPECTED_SALARY"), contentcell);
 					    ws.addCell(labelSL_i);
                     }
                     if(conditionList.get(n).equals("Role")){
                 	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("ROLE"), contentcell);
 					    ws.addCell(labelSL_i);
                     }
-                    if(conditionList.get(n).equals("Old Company")){
-                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("OLD_COMPANY"), contentcell);
+                    if(conditionList.get(n).equals("Real Salary")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("REAL_SALARY"), contentcell);
 					    ws.addCell(labelSL_i);
                     }
                     if(conditionList.get(n).equals("Enty Date")){
