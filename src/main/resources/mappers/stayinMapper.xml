@@ -51,6 +51,7 @@
 		    </if>
         	and d.STATUS IN ('OfferMade','Delayed','Offering') and 
 		    <include refid="candidateWherePart"/>
+		 limit #{num}, 10
 	</select>
 	
 	<select id="queryCandidateCount" parameterType="com.pmo.dashboard.entity.StayinCandidate" resultType="int" >

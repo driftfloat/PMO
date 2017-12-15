@@ -89,7 +89,7 @@ var path='<%=path%>';
 									<div class="group">
 										<label class="col-sm-2 control-label">Tel</label>
 										<div class="col-sm-4">
-											<input type="text" class="form-control" name="tel" id="tel" />
+											<input type="text" class="form-control" name="candidateTel" id="tel" />
 										</div>
 									</div>
 									<br/><br/><br/>
@@ -166,10 +166,10 @@ var path='<%=path%>';
 									<div>
 										<div style="max-width:400px;float:left">
 											<ul class="pagination pagination-centered">
-												<li><a href="#" id="fristPage" onclick="loadCandidateList('frist')">首页</a></li>
-												<li><a href="#" id="previousPage" onclick="loadCandidateList('previous')">上一页</a></li>
-												<li><a href="#" id="nextPage" onclick="loadCandidateList('next')">下一页</a></li>
-												<li><a href="#" id="lastPage" onclick="loadCandidateList('last')">末页</a></li>
+												<li><a href="#" id="fristPage" >首页</a></li>
+												<li><a href="#" id="previousPage" >上一页</a></li>
+												<li><a href="#" id="nextPage" >下一页</a></li>
+												<li><a href="#" id="lastPage" >末页</a></li>
 											</ul>
 										</div>
 										<div style="max-width:400px;float:right;margin-top:30px;">
