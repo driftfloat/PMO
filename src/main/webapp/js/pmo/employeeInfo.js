@@ -124,6 +124,7 @@ function exportCondition(){
 
 function loadCSSubDept(result){
 	var userType = result.user.user_type;
+	var csSubDeptNames = result.csSubDeptNames;
 	$.ajax({
 		url:path+'/service/csDept/queryAllCSSubDeptName',
 		dataType:"json",
@@ -138,10 +139,19 @@ function loadCSSubDept(result){
 			}
 			
 			if(userType=='2' || userType=='3' || userType=='4'){
-				$('#csSubDept').val(result.csSubDeptName);
-				$("#csSubDept").attr("disabled","disabled");
+				if(csSubDeptNames.length==1){
+					$('#csSubDept').val(result.csSubDeptNames[0]);
+					$("#csSubDept").attr("disabled","disabled");
+				}else if(csSubDeptNames.length>1){
+					$("#csSubDept").empty();
+					for(var i = 0;i<csSubDeptNames.length;i++){
+						$("#csSubDept").append("<option>"+csSubDeptNames[i]+"</option>");
+						$('#csSubDept').val(result.pageInfo.csSubDeptName);
+					}
+				}
 			}else{
 				$('#csSubDept').val(result.pageInfo.csSubDeptName);
+				
 			}
 		}
 	})
@@ -175,7 +185,7 @@ function loadCSBu(result){
 //gkf add
 function getUserForRM(result){
 	var bu = result.user.bu;//事业部
-	var du = result.user.csDeptId;//部门
+	var dus = result.user.csDeptId.split(",");//部门
 	$.ajax({
 		url:path+'/service/user/getUserForRM',
 		dataType:"json",
@@ -184,18 +194,20 @@ function getUserForRM(result){
 		type:"post",
 		success:function(list){
 			$("#RM").empty();
-			$("#RM").append("<option value=''>--Option--</option>");
+			$("#RM").append("<option value=''>--Option--</option>");			
 			for(var i = 0;i<list.length;i++){
-				if(bu!=null&&du!=null){
-					if(bu==list[i].bu&&du==list[i].csDeptId){
-						$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
+				if(bu!=null&&dus!=null){
+					for(var j = 0;j < dus.length;j++){
+						if(bu==list[i].bu&&dus[j]==list[i].csDeptId){
+							$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
+						}
 					}
 				}else{
 					$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
 				}
-				$('#RM').val(result.pageInfo.rmUserId);	
-				
-			}
+			}		
+			$('#RM').val(result.pageInfo.rmUserId);				
+
 		}
 	})
 }

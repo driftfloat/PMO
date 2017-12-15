@@ -17,6 +17,15 @@
 	    SELECT * FROM t_cs_dept WHERE CS_SUBDEPT_ID = #{csSubDeptId}
 	</select>
 	
+	
+	<select id="queryCSDeptByIds" resultMap="csDeptMap">
+	    SELECT * FROM t_cs_dept WHERE CS_SUBDEPT_ID IN
+	    <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+			 #{item}
+		</foreach>
+	</select>
+	
+	
 	<select id="queryAllCSSubDeptName" resultMap="csDeptMap">
 	    SELECT DISTINCT CS_SUBDEPT_NAME,CS_SUBDEPT_ID FROM t_cs_dept
 	</select>
