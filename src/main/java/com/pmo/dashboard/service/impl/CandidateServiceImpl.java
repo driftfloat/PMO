@@ -331,16 +331,16 @@ public class CandidateServiceImpl implements CandidateService {
                 	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("OLD_COMPANY"), contentcell);
 					    ws.addCell(labelSL_i);
                     }
-                    if(conditionList.get(n).equals("Old Company")){
-                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("OLD_COMPANY"), contentcell);
+                    if(conditionList.get(n).equals("Expected Salary")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("EXPECTED_SALARY"), contentcell);
 					    ws.addCell(labelSL_i);
                     }
                     if(conditionList.get(n).equals("Role")){
                 	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("ROLE"), contentcell);
 					    ws.addCell(labelSL_i);
                     }
-                    if(conditionList.get(n).equals("Old Company")){
-                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("OLD_COMPANY"), contentcell);
+                    if(conditionList.get(n).equals("Real Salary")){
+                	    Label labelSL_i = new Label(n+1,i, candidateDatalist.get(i - 1).get("REAL_SALARY"), contentcell);
 					    ws.addCell(labelSL_i);
                     }
                     if(conditionList.get(n).equals("Enty Date")){

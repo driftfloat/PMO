@@ -313,8 +313,8 @@ var path='<%=path%>';
 									<label><input type="checkbox" checked="checked" name="b.NICKNAME as lockHR" value="Lock HR"/>Lock HR&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="CREATE_DATE" value="Create Date"/>Create Date&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="UPDATE_DATE" value="Update Date"/>Update Date&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="EXPECTED_SALARY" value="Old Company"/>Expected Salary&nbsp;&nbsp;</label>
-									<label><input type="checkbox" checked="checked" name="REAL_SALARY" value="Old Company"/>Real Salary&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="EXPECTED_SALARY" value="Expected Salary"/>Expected Salary&nbsp;&nbsp;</label>
+									<label><input type="checkbox" checked="checked" name="REAL_SALARY" value="Real Salary"/>Real Salary&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="ROLE" value="Role"/>Role&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="OLD_COMPANY" value="Old Company"/>Old Company&nbsp;&nbsp;</label>
 									<label><input type="checkbox" checked="checked" name="ENTY_DATE" value="Enty Date"/>Enty Date&nbsp;&nbsp;</label>
