@@ -243,6 +243,7 @@ public class CandidateServiceImpl implements CandidateService {
 			// 要插入到的Excel表格的行号，默认从0开始
 			Label labelSL = new Label(0, 0, "SL#", headcell);
 			ws.addCell(labelSL);
+			
 			//列计数器
             int columnCounter=0;
 			for (int k = 0; k < conditionList.size(); k++) {
