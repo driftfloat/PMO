@@ -18,36 +18,45 @@ public class EmployeeModifyController {
 	@RequestMapping("/propertiesModify")
     @ResponseBody
     public boolean updateProperties(HttpServletRequest request,TransferDept transferDept){   
+    	boolean result = true;
     	String staffIds=transferDept.getStaffIds();
     	String[] staffs=staffIds.split(",");
     	for(int i=0;i<staffs.length;i++){
     		transferDept.setLob(staffs[i]);
-    		return employeeModifyService.modifyProperties(transferDept);
+    		if(!employeeModifyService.modifyProperties(transferDept)){
+    			result = false;
+    		}
     	}
-        return false;
+        return result;
     }
     @SuppressWarnings("unused")
 	@RequestMapping("/rolesModify")
     @ResponseBody
-    public boolean updateRoles(HttpServletRequest request,TransferDept transferDept){   
+    public boolean updateRoles(HttpServletRequest request,TransferDept transferDept){ 
+    	boolean result = true;
     	String staffIds=transferDept.getStaffIds();
     	String[] staffs=staffIds.split(",");
     	for(int i=0;i<staffs.length;i++){
     		transferDept.setLob(staffs[i]);
-    		return employeeModifyService.modifyRoles(transferDept);
+    		if(!employeeModifyService.modifyRoles(transferDept)){
+    			result = false;
+    		}
     	}
-        return false;
+        return result;
     }
     @SuppressWarnings("unused")
 	@RequestMapping("/deptModify")
     @ResponseBody
     public boolean updateDept(HttpServletRequest request,TransferDept transferDept){   
+    	boolean result = true;
     	String staffIds=transferDept.getStaffIds();
     	String[] staffs=staffIds.split(",");
     	for(int i=0;i<staffs.length;i++){
     		transferDept.setLob(staffs[i]);
-    		return employeeModifyService.modifyDept(transferDept);
+    		if(!employeeModifyService.modifyDept(transferDept)){
+    			result = false;
+    		}
     	}
-        return false;
+        return result;
 }
 }

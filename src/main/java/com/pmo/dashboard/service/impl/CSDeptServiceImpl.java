@@ -45,4 +45,10 @@ public class CSDeptServiceImpl implements CSDeptService
         return list;
     }
 
+	@Override
+	public List<CSDept> queryCSDeptByIds(String[] csSubDeptIds) {
+		List<CSDept> csDepts = csDeptMapper.queryCSDeptByIds(csSubDeptIds);
+		return csDepts;
+	}
+
 }

@@ -1,6 +1,8 @@
 package com.pmo.dashboard.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.EmployeeInfo;
 import com.pmo.dashboard.entity.EmployeePageCondition;
 import com.pmo.dashboard.entity.User;
@@ -64,9 +67,19 @@ public class EmployeeInfoController
         User user = (User) request.getSession().getAttribute("loginUser");
         
         
+        List<String>  csSubDeptNames = new ArrayList<String>();   
+        
+    	List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsDeptId().split(","));
+    	
+    	if(cSDepts != null && !cSDepts.isEmpty()){        
+    		for (CSDept csDept : cSDepts) {
+        		csSubDeptNames.add(csDept.getCsSubDeptName());
+			}
+    	}        
+        
         
         String userType = user.getUser_type();
-        
+       
        
         if(("".equals(csSubDeptName) || csSubDeptName == null) &&
                 ("".equals(csBuName) || csBuName == null)){
@@ -76,7 +89,7 @@ public class EmployeeInfoController
             }
             
             if("2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
-                csSubDeptName = csDeptService.queryCSDeptById(user.getCsDeptId()).getCsSubDeptName();
+            	csSubDeptName = cSDepts.get(0).getCsSubDeptName();            	
             }
             
         }
@@ -133,6 +146,7 @@ public class EmployeeInfoController
 	    result.put("user", user);
         result.put("data", list);
         result.put("pageInfo", request.getSession().getAttribute("employeePageCondition"));
+        result.put("csSubDeptNames", csSubDeptNames);
         return result;
     }
     
