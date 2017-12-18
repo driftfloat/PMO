@@ -5,7 +5,17 @@ public class Demand
 
     private String demandId;
     
-    private String rr;
+    private String engagementType;
+    
+    public String getEngagementType() {
+		return engagementType;
+	}
+
+	public void setEngagementType(String engagementType) {
+		this.engagementType = engagementType;
+	}
+
+	private String rr;
     
     private String jobCode;
     

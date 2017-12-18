@@ -38,8 +38,8 @@
 	</resultMap>
 	
 	<insert id="addDemand" parameterType="com.pmo.dashboard.entity.AddDemand">
-	    insert into t_demand (DEMAND_ID,RR,JOB_CODE,SKILL,REQUESTOR,POSITION,HSBC_SUBDEPT_ID,LOCATION,REQ_PUBLISHED_DATE,AGEING,PROFILES_NO,INTERVIEWED_NO,`STATUS`,CANDIDATE_NAME,PROPOSED_JOINING_DATE,SOW_SIGNED,REASON,REMARK,CS_SUBDEPT,PLANNED_ONBOARD_DATE,DO_NUMBER,HR_PRIORITY,CREATE_DATE,UPDATE_DATE,COMPLETION_DATE,ONBOARD_DATE,BGV_CLEARED)
-	    values (#{demandId},#{rr},#{jobCode},#{skill},#{requestor},#{position},#{hsbcSubDept},#{location},#{reqPublishedDate},#{ageing},#{profilesNo},#{interviewedNo},#{status},#{staffName},#{proposedJoiningDate},#{sowSigned},#{reason},#{remark},#{csSubDept},#{plannedOnboardDate},#{doNumber},#{hrPriority},#{creatDate},#{updateDate},#{completionDate},#{onboardDate},#{bgvCleared})
+	    insert into t_demand (DEMAND_ID,ENGAGEMENT_TYPE,RR,JOB_CODE,SKILL,REQUESTOR,POSITION,HSBC_SUBDEPT_ID,LOCATION,REQ_PUBLISHED_DATE,AGEING,PROFILES_NO,INTERVIEWED_NO,`STATUS`,CANDIDATE_NAME,PROPOSED_JOINING_DATE,SOW_SIGNED,REASON,REMARK,CS_SUBDEPT,PLANNED_ONBOARD_DATE,DO_NUMBER,HR_PRIORITY,CREATE_DATE,UPDATE_DATE,COMPLETION_DATE,ONBOARD_DATE,BGV_CLEARED)
+	    values (#{demandId},#{engagementType},#{rr},#{jobCode},#{skill},#{requestor},#{position},#{hsbcSubDept},#{location},#{reqPublishedDate},#{ageing},#{profilesNo},#{interviewedNo},#{status},#{staffName},#{proposedJoiningDate},#{sowSigned},#{reason},#{remark},#{csSubDept},#{plannedOnboardDate},#{doNumber},#{hrPriority},#{creatDate},#{updateDate},#{completionDate},#{onboardDate},#{bgvCleared})
 	</insert>
 		<!-- 查询需求 -->
 	<select id="queryDemand"  parameterType="String"   resultMap="demandMap">

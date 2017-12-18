@@ -3,12 +3,13 @@ $(function(){
 	loadSkill();
 	//loadPosition();
 	loadLocation();
-	loadStatus();
+	//loadStatus();
 	//loadHrPriority();
 	dateType();
 	dateType1();
 	loadCsSubDept();
 	loadEngagementType();
+	loadpage();
 })
 
 /*function addDemand(){
@@ -236,14 +237,6 @@ function loadLocation(){
 	});
 }
 
-function loadStatus(){
-	var url = path+'/json/status.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#status").append("<option>"+item.name+"</option>");
-	       })
-	});
-}
 
 function loadHrPriority(){
 	var url = path+'/json/hrPriority.json'
@@ -299,3 +292,136 @@ $("#sub_add").on("click",function(e){
 	$("small.help-block").css("display","none");
 });
 
+function loadpage(){
+	var status=$('#status').val();
+	if(status=='Open'){
+			/*$("#status").append("<option >Frozen</option>");
+			$("#status").append("<option >Cancel</option>");*/
+		var url = path+'/json/statusopen.json'
+		$.getJSON(url,  function(data) {
+		       $.each(data, function(i, item) {
+		    	   $("#status").append("<option>"+item.name+"</option>");
+		       })
+		});
+			}
+	
+	if(status=='Frozen'){
+		   /* $("#status").append("<option >Open</option>");
+		    $("#status").append("<option >Cancel</option>");*/
+		var url = path+'/json/statusfrozen.json'
+		$.getJSON(url,  function(data) {
+		       $.each(data, function(i, item) {
+		    	   $("#status").append("<option>"+item.name+"</option>");
+		       })
+		});
+		
+	}
+    if(status=='OfferMade'){
+    	   /* $("#status").append("<option >Frozen</option>");
+	        $("#status").append("<option >Cancel</option>");
+	        $("#status").append("<option >Abort</option>");
+	        $("#status").append("<option >Delayed</option>");*/
+    	var url = path+'/json/statusoffermade.json'
+		$.getJSON(url,  function(data) {
+		       $.each(data, function(i, item) {
+		    	   $("#status").append("<option>"+item.name+"</option>");
+		       })
+		});
+	        $('#atype').show();
+	        $('#btype').show();
+	        $('#staffnameEdit').show();
+	        $('#joiningEdit').show();
+	        $('#bgvEdit').show();
+	        $('#donumberEdit').show();
+	        $("#status").bind("click",function(){
+	      		 var result=$("#status").find("option:selected").val();
+	      		 if(result=='Abort'){
+	      			$('#ctype').show();
+	                $('#reasonAbort').show();
+	                $('#reasonDelayed').hide();
+	      		 }else if(result=='Delayed'){
+	      			$('#ctype').show();
+	                $('#reasonDelayed').show();
+	                $('#reasonAbort').hide();
+	      		 }else{
+	      			$('#ctype').hide();
+	                $('#reasonAbort').hide();
+	      		 }
+	      		 
+	  });   
+	}
+    if(status=='Onboard'){
+    	   /* $("#status").append("<option >Onboard</option>");*/
+    	/*var url = path+'/json/statusonboard.json'
+		$.getJSON(url,  function(data) {
+		       $.each(data, function(i, item) {
+		    	   $("#status").append("<option>"+item.name+"</option>");
+		       })
+		});*/
+    	    $("#status").disabled='true';
+    	    $('#atype').show();
+	        $('#btype').show();
+	        $('#staffnameEdit').show();
+	        $('#joiningEdit').show();
+	        $('#bgvEdit').show();
+	        $('#donumberEdit').show();
+	        
+	}
+    if(status=='Delayed'){
+    	
+    	
+    		var url = path+'/json/statusdelayed.json'
+    		$.getJSON(url,  function(data) {
+    		       $.each(data, function(i, item) {
+    		    	   $("#status").append("<option>"+item.name+"</option>");
+    		       })
+    		});
+    	
+    	/*$("#status").append("<option >Frozen</option>");
+        $("#status").append("<option >Cancel</option>");
+        $("#status").append("<option >Abort</option>");
+        $("#status").append("<option >Onboard</option>");*/
+        $('#ctype').show();
+        $('#reasonDelayed').show();
+        $("#status").bind("click",function(){
+     		 var result=$("#status").find("option:selected").val();
+     		 if(result=='Abort'){
+               $('#reasonAbort').show();
+     		 }else{
+               $('#reasonAbort').hide();
+     		 }
+     		 
+ });   
+        
+}
+    if(status=='offerring'){
+    	var url = path+'/json/statusoffering.json'
+		$.getJSON(url,  function(data) {
+		       $.each(data, function(i, item) {
+		    	   $("#status").append("<option>"+item.name+"</option>");
+		       })
+		});
+    	  /* $("#status").append("<option >Frozen</option>");
+           $("#status").append("<option >Cancel</option>");
+           $("#status").append("<option >Abort</option>");
+           $("#status").append("<option >Delayed</option>");*/
+           $('#atype').show();
+           $('#staffnameEdit').show();
+           $("#status").bind("click",function(){
+	      		 var result=$("#status").find("option:selected").val();
+	      		 if(result=='Abort'){
+	      			$('#ctype').show();
+	                $('#reasonAbort').show();
+	                $('#reasonDelayed').hide();
+	      		 }else if(result=='Delayed'){
+	      			$('#ctype').show();
+	                $('#reasonDelayed').show();
+	                $('#reasonAbort').hide();
+	      		 }else{
+	      			$('#ctype').hide();
+	                $('#reasonAbort').hide();
+	      		 }
+	      		 
+	  });   
+    }
+}

@@ -1,8 +1,10 @@
 [
         {"name":"Open"},
         {"name":"Cancel"},
-        {"name":"Onboard"},
+        {"name":"offerring"},
         {"name":"OfferMade"},
+        {"name":"Onboard"},
+        {"name":"Delayed"},
         {"name":"Frozen"},
         {"name":"Abort"}
 ]
