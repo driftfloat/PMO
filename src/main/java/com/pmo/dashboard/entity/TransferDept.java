@@ -11,7 +11,7 @@ public class TransferDept {
 	private String sowExpiredDate;
 	private String engagementType;
 	private String msaRole;
-	
+	private String nickName;
 	public String getLob() {
 		return lob;
 	}
@@ -102,6 +102,15 @@ public class TransferDept {
 	public void setHsbcManager(String hsbcManager) {
 		this.hsbcManager = hsbcManager;
 	}
+	
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+
 	private String skill;
 	private String staffRegion;
 	private String billRate;

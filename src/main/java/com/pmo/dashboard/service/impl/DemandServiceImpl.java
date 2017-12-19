@@ -75,10 +75,10 @@ public class DemandServiceImpl implements DemandService{
 			list = demandMapper.queryDemandListForCandidate(params);
 		}else {
 			list = demandMapper.queryDemandList(params);
+			//把查询到的结果存到session中
+			request.getSession().setAttribute("demandList", demandMapper.queryDemandList(params));
 		}
 		
-		//把查询到的结果存到session中
-		request.getSession().setAttribute("demandList", demandMapper.queryDemandList(params));
 		//设置总页数
 		int queryDemandCount = 0;
 		if(demand.getFlag()!=null&&"1".equals(demand.getFlag())) {

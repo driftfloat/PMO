@@ -29,4 +29,10 @@ public class EmployeeModifyServiceImp implements EmployeeModifyService {
 		return modifyEmployeeMapper.modifyDept(transferDept);
 	}
 
+	@Override
+	public boolean modifyRM(TransferDept transferDept) {
+		
+		return modifyEmployeeMapper.modifyRM(transferDept);
+	}
+
 }

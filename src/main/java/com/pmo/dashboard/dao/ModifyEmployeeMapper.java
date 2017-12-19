@@ -8,4 +8,5 @@ public interface ModifyEmployeeMapper {
      boolean modifyproperties(TransferDept transferDept);
      boolean modifyRoles(TransferDept transferDept);
      boolean modifyDept(TransferDept transferDept);
+     boolean modifyRM(TransferDept transferDept);
 }
