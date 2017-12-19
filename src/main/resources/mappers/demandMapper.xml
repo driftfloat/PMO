@@ -190,12 +190,11 @@
 		</where>
 		
 	</select>
-	
 	<select id="queryDemandCountForCandidate" parameterType="java.util.HashMap" resultType="int">
 		select count(1)
 		from  t_demand a,t_cs_dept b 
 		<where>
-		    a.CANDIDATE_ID!="" and b.cs_subdept_id=a.cs_subdept
+		    a.CANDIDATE_ID!="" and b.cs_subdept_id=a.cs_subdept and a.STATUS in("Onboard","OfferMade")
 			<if test="demand.skill!=null and demand.skill!=''">
 				and a.SKILL = #{demand.skill}
 			</if>

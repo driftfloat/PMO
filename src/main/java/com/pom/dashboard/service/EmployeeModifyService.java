@@ -12,4 +12,5 @@ public interface EmployeeModifyService {
     boolean modifyProperties(TransferDept transferDept);
     boolean modifyRoles(TransferDept transferDept);
     boolean modifyDept(TransferDept transferDept);
+    boolean modifyRM(TransferDept transferDept);
 }

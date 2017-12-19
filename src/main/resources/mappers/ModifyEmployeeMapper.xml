@@ -24,4 +24,10 @@
 	            HSBC_MANAGER=#{hsbcManager}
 	         where lob=#{lob}
 	</update>
+	
+	<update id="modifyRM" parameterType="com.pmo.dashboard.entity.TransferDept">
+	  update t_employee 
+	        set RM_USER_ID=#{nickName}
+	         where lob=#{lob}
+	</update>
 </mapper>

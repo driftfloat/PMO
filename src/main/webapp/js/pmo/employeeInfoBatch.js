@@ -104,6 +104,7 @@ function exportCondition(){
 
 function loadCSSubDept(result){
 	var userType = result.user.user_type;
+	var csSubDeptNames = result.csSubDeptNames;
 	$.ajax({
 		url:path+'/service/csDept/queryAllCSSubDeptName',
 		dataType:"json",
@@ -118,8 +119,16 @@ function loadCSSubDept(result){
 			}
 			
 			if(userType=='2' || userType=='3' || userType=='4'){
-				$('#csSubDept').val(result.csSubDeptName);
-				$("#csSubDept").attr("disabled","disabled");
+				if(csSubDeptNames.length==1){
+					$('#csSubDept').val(result.csSubDeptNames[0]);
+					$("#csSubDept").attr("disabled","disabled");
+				}else if(csSubDeptNames.length>1){
+					$("#csSubDept").empty();
+					for(var i = 0;i<csSubDeptNames.length;i++){
+						$("#csSubDept").append("<option>"+csSubDeptNames[i]+"</option>");
+						$('#csSubDept').val(result.pageInfo.csSubDeptName);
+					}
+				}
 			}else{
 				$('#csSubDept').val(result.pageInfo.csSubDeptName);
 			}
@@ -174,6 +183,8 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 	var resourceStatus = $("#resourceStatus").val();
 	
 	var staffName = $("#staffName").val();
+	
+	var rmName= $("#RM").val();
 
 	var pageState = pageState;
 	
@@ -181,7 +192,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 		url:path+"/service/employeeInfo/queryEmployeeList",
 		dataType:"json",
 		async:true,
-		data:{"staffName":staffName,"resourceStatus":resourceStatus,"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob},
+		data:{"staffName":staffName,"resourceStatus":resourceStatus,"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob,"rmUserId":rmName},
 		cache:false,
 		type:"post",
 		success:function(result){
@@ -221,6 +232,9 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 				var td8 = $("<td>"
 						+ result.data[i].resourceStatus
 						+ "</td>");
+				var td81 = $("<td>"
+						+ result.data[i].nickname
+						+ "</td>");
 				//var td7 = $("<td><a class='btn btn-info' href='javascript:void(0);'> <i class='glyphicon glyphicon-edit icon-white'></i> 编辑</a></td>");
 				var td9 = null;
 				
@@ -233,6 +247,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 				td6.appendTo(tr);
 				td7.appendTo(tr);
 				td8.appendTo(tr);
+				td81.appendTo(tr);
 				td9.appendTo(tr);
 			}
 			$("#employeeList").append("</tbdoy>");
@@ -256,8 +271,56 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 			loadCSSubDept(result);
 			
 			loadCSBu(result);
+			
+			getUserForRM(result);
 		}
 		
+	})
+}
+
+
+//gkf add
+function getUserForRM(result){
+	var bu = result.user.bu;//事业部
+	var dus = result.user.csDeptId.split(",");//部门
+	$.ajax({
+		url:path+'/service/user/getUserForRM',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(list){
+			$("#RM").empty();
+			$("#RM").append("<option value=''>--Option--</option>");			
+			for(var i = 0;i<list.length;i++){
+				if(bu!=null&&dus!=null){
+					for(var j = 0;j < dus.length;j++){
+						if(bu==list[i].bu&&dus[j]==list[i].csDeptId){
+							$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
+						}
+					}
+				}else{
+					$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
+				}
+			}		
+			$('#RM').val(result.pageInfo.rmUserId);
+			
+			$("#rmName").empty();
+			$("#rmName").append("<option value=''>--Option--</option>");			
+			for(var i = 0;i<list.length;i++){
+				if(bu!=null&&dus!=null){
+					for(var j = 0;j < dus.length;j++){
+						if(bu==list[i].bu&&dus[j]==list[i].csDeptId){
+							$("#rmName").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
+						}
+					}
+				}else{
+					$("#rmName").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
+				}
+			}		
+			$('#rmName').val(result.pageInfo.rmUserId);	
+
+		}
 	})
 }
 
@@ -411,18 +474,27 @@ $("#modifyName").bind("click",function(){
 		 $("#projectProperties").hide();
 		 $("#humanRole").hide();
 		 $("#departmentModify").hide();
+		 $("#nickName").hide();
 	 }else if(result==1){
 		 $("#projectProperties").show();
 		 $("#humanRole").hide();
 		 $("#departmentModify").hide();
+		 $("#nickName").hide();
 	 }else if(result==2){
 		 $("#projectProperties").hide();
 		 $("#humanRole").show();
 		 $("#departmentModify").hide();
+		 $("#nickName").hide();
 	 }else if(result==3){
 		 $("#projectProperties").hide();
 		 $("#humanRole").hide();
+		 $("#nickName").hide();
 		 $("#departmentModify").show();
+	 }else if(result = 4){
+		 $("#projectProperties").hide();
+		 $("#humanRole").hide();
+		 $("#departmentModify").hide();
+		 $("#nickName").show();
 	 }
 	 
 })
@@ -459,6 +531,8 @@ $("#transSubmit").on("click", function(){
 		 updateRoles();
 	 }else if(result==3){
 		 updateDept();
+	 }else{
+		 updateRM();
 	 }
 	 
 	});
@@ -537,6 +611,29 @@ function updateDept(){
 		}
 	})
 }
+
+//gkf add
+function updateRM(){
+	var nickName = $("#rmName").find("option:selected").val();
+	var staffIds=$("#staffIds").val();
+	$.ajax({
+		url:path+'/service/employee/updateRM',
+		dataType:'json',
+		async:true,
+		data:{"staffIds":staffIds,"nickName":nickName},
+		cache:false,
+		type:"post",
+		success:function(result){
+			if(result){
+				alert("员工信息批量修改成功。");
+				$('#modifyMadal').modal('hide');
+				loadEmployeeList();
+			}else{
+				alert("员工信息批量修改失败。");
+			}
+		}
+	});
+};
 function changeData(){
 	var staffRegion = $('#staffRegion').val();
 	var role = $('#role').val();

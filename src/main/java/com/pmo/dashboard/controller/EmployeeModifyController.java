@@ -58,5 +58,20 @@ public class EmployeeModifyController {
     		}
     	}
         return result;
-}
+    }
+    
+    @RequestMapping("/updateRM")
+    @ResponseBody
+    public boolean updateRM(HttpServletRequest request,TransferDept transferDept) {
+    	boolean result = true;
+    	String staffIds=transferDept.getStaffIds();
+    	String[] staffs=staffIds.split(",");
+    	for(int i=0;i<staffs.length;i++){
+    		transferDept.setLob(staffs[i]);
+    		if(!employeeModifyService.modifyRM(transferDept)){
+    			result = false;
+    		}
+    	}
+    	return result;
+    }
 }
