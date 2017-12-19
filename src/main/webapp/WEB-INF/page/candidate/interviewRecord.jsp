@@ -86,12 +86,12 @@ var path='<%=path%>';
 						<div class="box-inner" style="min-height:500px;">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user">&nbsp;面试记录</i> 
+									<i class="glyphicon glyphicon-user"></i> Interview Records
 								</h2>
 							</div>
 							<div id="dataRecord" class="box-content" style="display:none">
 								<h5>
-									无面试记录
+									No interview record
 								</h5>
 							</div>
 							<div>

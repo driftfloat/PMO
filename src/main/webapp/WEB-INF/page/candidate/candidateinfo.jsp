@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
 <meta charset="utf-8">
-<title>CandidateList</title>
+<title>PMO</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description"
 	content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
@@ -59,7 +59,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user">候选人列表</i> 
+									<i class="glyphicon glyphicon-user"></i> Candidate List
 								</h2>
 							</div>
 							<div id="candidateInfo" class="box-content">
@@ -201,13 +201,13 @@ var path='<%=path%>';
 									</br></br></br>
 									<div class="form-group">
 									    <div style="text-align:center;width:50%;;float:left;margin-right:40px;margin-top:10px;">
-									    	<input type="button" value="查&nbsp;&nbsp;询"
+									    	<input type="button" value="Search"
 												name="searchCandidateBtn" id="searchCandidateBtn" 
 												class="button btn btn-primary" data-dismiss="modal"
 												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto;cursor:pointer;">
 									    </div>
 									    <div style="text-align:center;width:20%;float:right;margin-right: 60px;margin-top:10px;">
-									    	<input type="reset" value="导出Excel" disabled="disabled"
+									    	<input type="reset" value="Export" disabled="disabled"
 												name="exportCandidateExcel" id="exportCandidateExcel"
 												class="button btn btn-primary" data-dismiss="modal"
 												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto;cursor:pointer;">
@@ -244,10 +244,10 @@ var path='<%=path%>';
 									<div style="height:70px">
 										<div style="max-width:400px;float:left">
 											<ul class="pagination pagination-centered">
-												<li><a href="#" id="fristPage" onclick="loadCandidateList('frist')">首页</a></li>
-												<li><a href="#" id="previousPage" onclick="loadCandidateList('previous')">上一页</a></li>
-												<li><a href="#" id="nextPage" onclick="loadCandidateList('next')">下一页</a></li>
-												<li><a href="#" id="lastPage" onclick="loadCandidateList('last')">末页</a></li>
+												<li><a href="#" id="fristPage" onclick="loadCandidateList('frist')">First</a></li>
+												<li><a href="#" id="previousPage" onclick="loadCandidateList('previous')">Last</a></li>
+												<li><a href="#" id="nextPage" onclick="loadCandidateList('next')">Next</a></li>
+												<li><a href="#" id="lastPage" onclick="loadCandidateList('last')">End</a></li>
 											</ul>
 										</div>
 										<div style="max-width:400px;float:right;margin-top:30px;">
@@ -322,10 +322,10 @@ var path='<%=path%>';
 						</table>
 						<div class="center">
 							<a class="btn btn-success" href="#" onClick="exportCondition()"> 
-								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
+								<i class="glyphicon glyphicon-ok icon-white" ></i> Confirm
 							</a> 
 							<a class="btn btn-info" href="#" data-dismiss="modal"> 
-								<i class="glyphicon glyphicon-remove icon-white"></i> 取消
+								<i class="glyphicon glyphicon-remove icon-white"></i> Cancel
 							</a>
 						</div>
 					</div>

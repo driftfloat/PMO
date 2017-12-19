@@ -81,7 +81,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> 面试官信息
+									<i class="glyphicon glyphicon-user"></i> Interview Information
 								</h2>
 							</div>
 							<div id="register" class="box-content" style="overflow: auto;">
@@ -183,7 +183,7 @@ var path='<%=path%>';
 								<br/><br/>
 								<div class="form-group">
 									    <div style="text-align:center;width:90%;float:left">
-									    <input type="button" value="查&nbsp;&nbsp;询"
+									    <input type="button" value="Search"
 										name="searchBtn" id="searchBtn" href="#"
 										class="button btn btn-primary" data-dismiss="modal"
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">

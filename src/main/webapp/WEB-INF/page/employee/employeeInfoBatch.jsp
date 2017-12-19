@@ -73,7 +73,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> 员工信息批量维护
+									<i class="glyphicon glyphicon-user"></i> Batch Maintenance
 								</h2>
 							</div>
 							<div id="employeeInfo" class="box-content">
@@ -166,7 +166,7 @@ var path='<%=path%>';
 												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin: auto;">
 										</div>
 										<div style="text-align: center; width: 50%; float: left">
-											<input type="button" value="查&nbsp;&nbsp;询" name="searchBtn"
+											<input type="button" value="Search" name="searchBtn"
 												id="searchBtn" href="#" class="button btn btn-primary"
 												data-dismiss="modal"
 												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin: auto;">
@@ -205,13 +205,13 @@ var path='<%=path%>';
 									<div>
 										<ul class="pagination pagination-centered">
 											<li><a href="#" id="fristPage"
-												onclick="loadEmployeeList('frist')">首页</a></li>
+												onclick="loadEmployeeList('frist')">First</a></li>
 											<li><a href="#" id="previousPage"
-												onclick="loadEmployeeList('previous')">上一页</a></li>
+												onclick="loadEmployeeList('previous')">Last</a></li>
 											<li><a href="#" id="nextPage"
-												onclick="loadEmployeeList('next')">下一页</a></li>
+												onclick="loadEmployeeList('next')">Next</a></li>
 											<li><a href="#" id="lastPage"
-												onclick="loadEmployeeList('last')">末页</a></li>
+												onclick="loadEmployeeList('last')">End</a></li>
 										</ul>
 										<br> 共<span id="pageCount"></span>页 第<span
 											id="currentPage"></span>页
@@ -233,7 +233,7 @@ var path='<%=path%>';
 				<div class="modal-content">
 					<div class="box-header well" data-original-title="">
 						<h2>
-							<i class="glyphicon glyphicon-user"></i> 列表项
+							<i class="glyphicon glyphicon-user"></i> Item List
 						</h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
@@ -319,11 +319,11 @@ var path='<%=path%>';
 							</tbody>
 						</table>
 						<div class="center">
-							<a class="btn btn-success" href="#" onClick="selectAll()"> 全选
+							<a class="btn btn-success" href="#" onClick="selectAll()"> Select All
 							</a> <a class="btn btn-success" href="#" onClick="exportCondition()">
-								<i class="glyphicon glyphicon-ok icon-white"></i> 确定
+								<i class="glyphicon glyphicon-ok icon-white"></i> Confirm
 							</a> <a class="btn btn-info" href="#" data-dismiss="modal"> <i
-								class="glyphicon glyphicon-remove icon-white"></i> 取消
+								class="glyphicon glyphicon-remove icon-white"></i> Cancel
 							</a>
 						</div>
 					</div>
@@ -497,10 +497,10 @@ var path='<%=path%>';
 							<br /> <br /> <br/>
 							<div class="center">
 								<a class="btn btn-success" href="#" id="transSubmit"> <i
-									class="glyphicon glyphicon-ok icon-white"></i> 确定
+									class="glyphicon glyphicon-ok icon-white"></i> Confirm
 								</a> &nbsp;&nbsp;&nbsp; <a class="btn btn-info" href="#"
 									data-dismiss="modal"> <i
-									class="glyphicon glyphicon-remove icon-white"></i> 取消
+									class="glyphicon glyphicon-remove icon-white"></i> Cancel
 								</a>
 							</div>
 						</form>

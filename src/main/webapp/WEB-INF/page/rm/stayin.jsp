@@ -74,7 +74,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user">RM查看待入职员工</i> 
+									<i class="glyphicon glyphicon-user"></i> To Be Onboard
 								</h2>
 							</div>
 							<div id="addDemand" class="box-content">
@@ -122,7 +122,7 @@ var path='<%=path%>';
 									</div>
 									<div class="form-group">
 									    <div style="text-align:center;width:50%;float:left;">
-									    	<input type="button" value="查&nbsp;&nbsp;询"
+									    	<input type="button" value="Search"
 												name="searchStayinBtn" id="searchStayinBtn" 
 												class="button btn btn-primary" data-dismiss="modal"
 												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto;cursor:pointer;">
@@ -166,10 +166,10 @@ var path='<%=path%>';
 									<div>
 										<div style="max-width:400px;float:left">
 											<ul class="pagination pagination-centered">
-												<li><a href="#" id="fristPage" >首页</a></li>
-												<li><a href="#" id="previousPage" >上一页</a></li>
-												<li><a href="#" id="nextPage" >下一页</a></li>
-												<li><a href="#" id="lastPage" >末页</a></li>
+												<li><a href="#" id="fristPage" >First</a></li>
+												<li><a href="#" id="previousPage" >Last</a></li>
+												<li><a href="#" id="nextPage" >Next</a></li>
+												<li><a href="#" id="lastPage" >End</a></li>
 											</ul>
 										</div>
 										<div style="max-width:400px;float:right;margin-top:30px;">

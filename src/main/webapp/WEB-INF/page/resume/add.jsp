@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
 <meta charset="utf-8">
-<title>面试者信息录入</title>
+<title>PMO</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description"
 	content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
@@ -305,13 +305,13 @@ var path='<%=path%>';
 								
 								<div class="form-group">
 									    <div style="text-align:center;width:50%;float:left"">
-									    <input type="submit" value="添&nbsp;&nbsp;加"
+									    <input type="submit" value="Add"
 										class="button btn btn-primary" data-dismiss="modal"
 										
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
 									    </div>
 									    <div style="text-align:center;width:50%;float:right">
-									    <input type="reset" value="重&nbsp;&nbsp;置"
+									    <input type="reset" value="Reset"
 										name="subscribe" id="sub_add" href="#"
 										class="button btn btn-primary" data-dismiss="modal"
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">

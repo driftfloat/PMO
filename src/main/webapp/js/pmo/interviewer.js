@@ -176,9 +176,9 @@ function loadInterviewerList(currPage){
 			$("#pageCount").html(result.pageCondition.totalPage);
 			$("#currentPage").html(result.pageCondition.currPage);
 			//request.setAttribute("totalPage",result.pageCondition.totalPage);
-			var html='<li><a href="javascript:void(0);" id="fristPage">首页</a></li><li><a href="javascript:void(0);" id="previousPage" >上一页</a></li>';
+			var html='<li><a href="javascript:void(0);" id="fristPage">First</a></li><li><a href="javascript:void(0);" id="previousPage" >Last</a></li>';
 	
-			html += '<li><a href="javascript:void(0);" id="nextPage" >下一页</a></li><li><a href="javascript:void(0);" id="lastPage" >末页</a></li>';
+			html += '<li><a href="javascript:void(0);" id="nextPage" >Next</a></li><li><a href="javascript:void(0);" id="lastPage" >End</a></li>';
 			/*if(result.pageCondition.totalPage>page){
 				html += '跳至<input style="height:39px;width:39px" type="text" id="toPage">页</input><li style="float:right"><a href="javascript:void(0);" id="sure" >确定</a></li>';
 			}*/

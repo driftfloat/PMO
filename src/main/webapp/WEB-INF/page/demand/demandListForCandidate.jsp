@@ -81,7 +81,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> 背调批量维护
+									<i class="glyphicon glyphicon-user"></i> Background Check Maintenance
 								</h2>
 							</div>
 							<div id="demandInfo" class="box-content">
@@ -157,13 +157,13 @@ var path='<%=path%>';
 									</br>
 									<div class="form-group">
 										<div style="text-align: center; width: 50%; float: left">
-											<input type="button" value="查&nbsp;&nbsp;询" name="searchBtn"
+											<input type="button" value="Search" name="searchBtn"
 												id="searchBtn" class="button btn btn-primary"
 												data-dismiss="modal"
 												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin: auto;">
 										</div>
 										<div style="text-align: center; width: 50%;float: right">
-														<input type="button" value="背调维护" name="searchBtn"
+														<input type="button" value="Update" name="searchBtn"
 															onclick="backgroundOpe()" class="button btn btn-primary"
 															data-dismiss="modal"
 															style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin: auto;">
@@ -174,7 +174,7 @@ var path='<%=path%>';
 												<input type="hidden" id="candidateId" />
 												
 													<div class="group">
-														<label class="col-sm-2 control-label">维护人员</label>
+														<label class="col-sm-2 control-label">Candidate</label>
 														<div class="col-sm-8">
 															<textarea class="form-control" id="candidateName" ></textarea>
 														</div>
@@ -202,10 +202,10 @@ var path='<%=path%>';
 									</div>
 									<div class="pagination">
 										<ul class="pagination pagination-centered">
-											<li><a href="#" id="fristPage">首页</a></li>
-											<li><a href="#" id="previousPage">上一页</a></li>
-											<li><a href="#" id="nextPage">下一页</a></li>
-											<li><a href="#" id="lastPage">末页</a></li>
+											<li><a href="#" id="fristPage">First</a></li>
+											<li><a href="#" id="previousPage">Last</a></li>
+											<li><a href="#" id="nextPage">Next</a></li>
+											<li><a href="#" id="lastPage">End</a></li>
 										</ul>
 										<br> 共<span id="pageCount"></span>页 第<span
 											id="currentPage"></span>页
@@ -231,7 +231,7 @@ var path='<%=path%>';
 				<div class="modal-content">
 					<div class="box-header well" data-original-title="">
 						<h2>
-							<i class="glyphicon glyphicon-user"></i> 背调维护
+							<i class="glyphicon glyphicon-user"></i> Background Check
 						</h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-round btn-default  btn-minimize ">
@@ -246,7 +246,7 @@ var path='<%=path%>';
 						<form id="interviewForm">
 							
 							<div class="group">
-								<label class="col-sm-3 control-label">candidateName:</label>
+								<label class="col-sm-3 control-label">Candidate Name:</label>
 								<div class="col-sm-8">
 									<input disabled="disabled" type="text"  class="form-control"  id="candidatePeople" name="candidatePeople"/>
 								</div>

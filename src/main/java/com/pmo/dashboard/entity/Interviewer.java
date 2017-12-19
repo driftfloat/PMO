@@ -28,6 +28,7 @@ public class Interviewer  extends PageCondition
     private String experienceStart;
     private String experienceEnd;
     
+    
 	public String getExperienceStart() {
 		return experienceStart;
 	}

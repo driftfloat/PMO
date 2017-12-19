@@ -72,7 +72,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user">&nbsp;面试记录</i>
+									<i class="glyphicon glyphicon-user"></i> Interview Record
 								</h2>
 							</div>
 							
@@ -94,7 +94,7 @@ var path='<%=path%>';
 							
 							<div class="form-group">
 								<div style="text-align:center;width:100%;">
-								<input type="button" value="查&nbsp;&nbsp;询"
+								<input type="button" value="Search"
 								name="searchBtn" id="searchBtn" href="#"
 								class="button btn btn-primary" data-dismiss="modal"
 								style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
@@ -124,10 +124,10 @@ var path='<%=path%>';
 										<div>
 										<div style="max-width: 400px; float: left">
 											<ul class="pagination pagination-centered">
-												<li><a href="#" id="fristPage" onclick="loadCandidateList('frist')">首页</a></li>
-												<li><a href="#" id="previousPage" onclick="loadCandidateList('previous')">上一页</a></li>
-												<li><a href="#" id="nextPage" onclick="loadCandidateList('next')">下一页</a></li>
-												<li><a href="#" id="lastPage" onclick="loadCandidateList('last')">末页</a></li>
+												<li><a href="#" id="fristPage" onclick="loadCandidateList('frist')">First</a></li>
+												<li><a href="#" id="previousPage" onclick="loadCandidateList('previous')">Last</a></li>
+												<li><a href="#" id="nextPage" onclick="loadCandidateList('next')">Next</a></li>
+												<li><a href="#" id="lastPage" onclick="loadCandidateList('last')">End</a></li>
 											</ul>
 										</div>
 										<div style="max-width: 400px; float: right; margin-top: 30px;">
@@ -159,7 +159,7 @@ var path='<%=path%>';
 				<div class="modal-content">
 					<div class="box-header well" data-original-title="">
 						<h2>
-							<i class="glyphicon glyphicon-user"></i> 面试官反馈
+							<i class="glyphicon glyphicon-user"></i> Interview Record
 						</h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-round btn-default  btn-minimize ">
@@ -215,10 +215,10 @@ var path='<%=path%>';
 							</div>
 							<div class="center">
 								<button type=submit class="btn btn-success"> 
-									<i class="glyphicon glyphicon-ok icon-white"></i> 确定
+									<i class="glyphicon glyphicon-ok icon-white"></i> Confirm
 								</button> 
 								<button class="btn btn-info" data-dismiss="modal"> 
-									<i class="glyphicon glyphicon-remove icon-white"></i> 取消
+									<i class="glyphicon glyphicon-remove icon-white"></i> Cancel
 								</button>
 							</div>
 						</form>

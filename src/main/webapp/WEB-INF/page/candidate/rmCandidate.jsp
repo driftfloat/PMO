@@ -76,7 +76,7 @@ vertical-align: middle!important;
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i>&nbsp;面试安排
+									<i class="glyphicon glyphicon-user"></i> Interview Arrangement
 								</h2>
 							</div>
 							<div id="demandInfo" class="box-content">
@@ -106,10 +106,10 @@ vertical-align: middle!important;
 									</div>
 									<div class="pagination">
 										<ul class="pagination pagination-centered">
-											<li><a href="#" id="fristPage">首页</a></li>
-											<li><a href="#" id="previousPage" >上一页</a></li>
-											<li><a href="#" id="nextPage" >下一页</a></li>
-											<li><a href="#" id="lastPage" >末页</a></li>
+											<li><a href="#" id="fristPage">First</a></li>
+											<li><a href="#" id="previousPage" >Last</a></li>
+											<li><a href="#" id="nextPage" >Next</a></li>
+											<li><a href="#" id="lastPage" >End</a></li>
 										</ul>
 										<br>
 										共<span id="pageCount"></span>页   第<span id="currentPage"></span>页
@@ -144,7 +144,7 @@ vertical-align: middle!important;
 				<div class="modal-content">
 					<div class="box-header well" data-original-title="">
 						<h2>
-							<i class="glyphicon glyphicon-user"></i> 列表项
+							<i class="glyphicon glyphicon-user"></i> Item List
 						</h2>
 
 						<div class="box-icon">
@@ -206,9 +206,9 @@ vertical-align: middle!important;
 						<div class="center">
 							<!-- <a class="btn btn-success" href="#" id="addInterviewer"><i  class="glyphicon glyphicon-ok icon-white" ></i> 确定
 							</a>  -->
-							<button type="submit" id="addInterviewer" class="btn btn-primary btn-primary-new">确定</button>
+							<button type="submit" id="addInterviewer" class="btn btn-primary btn-primary-new">Confirm</button>
 							<a class="btn btn-info" href="#" data-dismiss="modal"> <i
-								class="glyphicon glyphicon-remove icon-white"></i> 取消
+								class="glyphicon glyphicon-remove icon-white"></i> Cancel
 							</a>
 						</div>
 						</form>
