@@ -3,7 +3,6 @@ $(function(){
 	loadSkillEdit();
 	loadPositionEdit();
 	loadDemandStatusEdit();
-	
 	loadDepartmentEdit();
 	//loadSubDepartmentEdit();
 	
@@ -47,11 +46,14 @@ function loadHrPriorityEdit(){
 	    	   $("#hrPriorityEdit").append("<option>"+item.name+"</option>");
 	       });
 	       //add by jama 回显HrPriority的值
-			var responseValue = $("#hrPriorityEdit").val();
+			var responseValue = $("#hrPriorityInput").val();
 			var all_options = document.getElementById("hrPriorityEdit").options;
 		    for (i=1; i<all_options.length; i++){
 			   if (all_options[i].value == responseValue){
 				   document.getElementById("hrPriorityEdit").options[i].selected = true;
+				   if(userType!=0){
+					   $("#hrPriorityEdit").attr("disabled","disabled");
+				   }
 				   break;
 			   }  
 		    }
@@ -66,7 +68,7 @@ function loadLocationEdit(){
 	    	   $("#locationEdit").append("<option>"+item.name+"</option>");
 	       });
 	       //add by jama 回显location的值
-			var responseValue = $("#locationEdit").val();
+			var responseValue = $("#locationInput").val();
 			var all_options = document.getElementById("locationEdit").options;
 		    for (i=1; i<all_options.length; i++){
 			   if (all_options[i].value == responseValue){
@@ -85,7 +87,7 @@ function loadSkillEdit(){
 			 $("#skillEdit").append("<option value='"+item.name+"'>"+item.name+"</option>");
 		});
 		//add by jama 回显skill的值
-		var responseValue = $("#skillEdit").val();
+		var responseValue = $("#skillInput").val();
 		var all_options = document.getElementById("skillEdit").options;
 	    for (i=1; i<all_options.length; i++){
 		   if (all_options[i].value == responseValue){
@@ -103,7 +105,7 @@ function loadPositionEdit(){
 			$("#positionEdit").append("<option value='"+item.name+"'>"+item.name+"</option>");
 		});
 		//add by jama 回显position的值
-		var responseValue = $("#positionEdit").val();
+		var responseValue = $("#positionInput").val();
 		var all_options = document.getElementById("positionEdit").options;
 	    for (i=1; i<all_options.length; i++){
 		   if (all_options[i].value == responseValue){
@@ -116,24 +118,24 @@ function loadPositionEdit(){
 /*加载status本地json信息*/
 function loadDemandStatusEdit(){
 	var url = path+'/json/demandStatus.json';
-	//$("#statusEdit").empty();
 	$.getJSON(url, function(data){
 		$.each(data, function(i, item){
-			$("#statusEdit").append("<option value='"+item.name+"'>"+item.name+"</option>");
+			$("#status").append("<option value='"+item.name+"'>"+item.name+"</option>");
 		});
 		
-		var responseValue = $("#statusEdit").val();
-		var all_options = document.getElementById("statusEdit").options;
+		var responseValue = $("#statusInput").val();
+		var all_options = document.getElementById("status").options;
 	    for (i=1; i<all_options.length; i++){
 		   if (all_options[i].value == responseValue){
-			   document.getElementById("statusEdit").options[i].selected = true;
+			   document.getElementById("status").options[i].selected = true;
 			   break;
 		   }  
 	    }
 	});
 	//add by jama 设置状态回显值
-	
 }
+
+
 /*加载业务部*/
 function loadCsBuName(){
 	var url = path+'/json/csBuName.json';
@@ -167,6 +169,9 @@ function loadCsBuName(){
 
 /*add by jama 加载交付部，不依赖于事业部*/
 function loadScSubDeptNameEdit(){
+	var responseValue = $("#csSubDeptEdit").val();
+	$("#csSubDeptEdit").empty();
+	$("#csSubDeptEdit").append("<option value=''>-- Option --</option>");
 	$.ajax({
 		url:path+'/service/demand/loadAllScSubDeptName',
 		dataType:"json",
@@ -178,7 +183,6 @@ function loadScSubDeptNameEdit(){
 				$("#csSubDeptEdit").append("<option value='"+item.csSubDeptId+"'>"+item.csSubDeptName+"</option>");
 			});
 			//add by jama 设置业务部回显值
-			var responseValue = $("#csSubDeptEdit").val();
 			var all_options = document.getElementById("csSubDeptEdit").options;
 		    for (i=1; i<all_options.length; i++){
 			   if (all_options[i].value == responseValue){
@@ -203,7 +207,7 @@ function loadDepartmentEdit(){
 				$("#hsbcDeptEdit").append("<option value='"+item.hsbcDeptName+"'>"+item.hsbcDeptName+"</option>")
 			});
 			//add by jama 设置部门回显值
-			var responseValue = $("#hsbcDeptEdit").val();
+			var responseValue = $("#hsbcDeptInput").val();
 			var resSubDeptValue = $("#hsbcSubDeptEdit").val();//子部门的返回值
 			var all_options = document.getElementById("hsbcDeptEdit").options;
 		    for (i=1; i<all_options.length; i++){
@@ -218,12 +222,7 @@ function loadDepartmentEdit(){
 		}
 	})
 }
-/*根据department加载subdepartment的ajax*/
-/*function loadSubDepartmentEdit(){
-	$("#hsbcDeptEdit").change(function(){
-		genSubDept4Dept(resSubDeptValue);
-	});
-}*/
+
 $("#hsbcDeptEdit").change(function(){
 	var hsbcDeptName = $('#hsbcDeptEdit').val();
 	$.ajax({
@@ -234,16 +233,9 @@ $("#hsbcDeptEdit").change(function(){
 		cache:false,
 		type:"post",
 		success:function(list){
-			/*$("#hsbcSubDeptEdit").find("option").remove(); 
-			$("#hsbcSubDeptEdit").append("<option value=''>-- Option --</option>");
-			for(var i = 0;i<list.length;i++){
-				$("#hsbcSubDeptEdit").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcSubDeptName+"</option>");
-			}*/
+			
 			// ---gkf modify---
 			$("#hsbcSubDeptEdit").find("option").remove(); 
-//			if(list.length == 1 && list[0].hsbcSubDeptName == null){
-//				$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
-//			}else{
 			$("#hsbcSubDeptEdit").append("<option value=''>-- Option --</option>");
 			if(list.length == 1 && list[0].hsbcSubDeptName == null){
 				$("#hsbcSubDeptEdit").append("<option value='"+$('#hsbcDeptEdit').find("option:selected").val()+"'>"+$('#hsbcDeptEdit').find("option:selected").text()+"</option>");
@@ -492,37 +484,23 @@ function updateDemand(){
 		var hsbcDept=$('#hsbcDeptEdit').val();
 		var hsbcSubDept=$('#hsbcSubDeptEdit').val();
 		var location=$('#locationEdit').val();
-		//var reqPublishedDate=$('#reqPublishedDateEdit').val();  
 		var reqPublishedDate=$('#reqPublishedDate2Edit').val();
 		var ageing=$('#ageingEdit').val();
 		var profilesNo=$('#profilesNoEdit').val();
 		var interviewedNo=$('#interviewedNoEdit').val();
-		var status=$('#statusEdit').val();
+		var status=$('#status').val();
 		var proposedJoiningDate=$('#proposedJoiningDateEdit').val();
 		var bgvCleared=$('#bgvClearedEdit').val();
-		//var dcCleared=$('#dcCleared').val();
 		var sowSigned=$('#sowSignedEdit').val();
-		//var onboarded=$('#onboarded').val();
-		//var abort=$('#abort').val();
-		//var delayed=$('#delayed').val();
 		var reason=$('#reasonEdit').val();
-		//var nextAction=$('#nextAction').val();
-		//var status2=$('#status2').val();
+		
 		var remark=$('#reasonEdit').val();
 		var csSubDept=$('#csSubDeptEdit').val();
 		var plannedOnboardDate=$('#plannedOnboardDateEdit').val();
 		var doNumber=$('#doNumberEdit').val();
 		var hrPriority=$('#hrPriorityEdit').val();
 		var staffName=$('#candidateNameEdit').val();
-		//var reqReceivedDate=$('#reqReceivedDate').val();
-		//var ageingReceived=$('#ageingReceived').val();
-		//var demandPriority=$('#demandPriority').val();
-		//var creatDate=$('#creatDate').val();
-		//var updateDate=$('#updateDate').val();
-		//var recruitmentCycle=$('#recruitmentCycle').val();
-		//var completionDay=$('#completionDay').val();
-		//var completionDate=$('#completionDate').val();
-		//var onboardDate=$('#onboardDate').val();
+		
 		$.ajax({
 			url:path+'/service/demand/updateDemand',
 			dataType:"json",

@@ -242,7 +242,7 @@
 	
 	<!-- gkf onBoard  -->
 	<update id="updateDemandOnBoardById" parameterType="java.util.HashMap">
-		update t_demand set STATUS = 'Onboard', BGV_CLEARED = 'Completed',SOW_SIGNED = 'Fully signed off',ENGAGEMENTTYPE = #{engagementType},
+		update t_demand set STATUS = 'Onboard', BGV_CLEARED = 'Completed',SOW_SIGNED = 'Fully signed off',ENGAGEMENT_TYPE = #{engagementType},
 		PROFILES_NO = #{profilesNo},INTERVIEWED_NO = #{interviewedNo},DO_NUMBER = #{doNumber},COMPLETION_DATE = date_format(now(),'%Y-%m-%d'),
 		UPDATE_DATE= date_format(now(),'%Y-%m-%d'),ONBOARD_DATE = #{onboardDate},PLANNED_ONBOARD_DATE = #{plannedOnboardDate}
 		where CANDIDATE_ID = #{candidateId}
