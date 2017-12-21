@@ -1,61 +1,63 @@
-$(function(){
-	
+$(function() {
+
 	loadEmployeeInfo();
 	dateType();
 });
 
-
-function dateType(){
+function dateType() {
 	$('.form_datetime').datetimepicker({
-		weekStart: 1,
-		minView:'month',
-		todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-		language:'zh-CN',
-		format: 'yyyy-mm-dd',
-		pickerPosition: 'bottom-left',
-		showMeridian: 1
+		weekStart : 1,
+		minView : 'month',
+		todayBtn : 1,
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		forceParse : 0,
+		language : 'zh-CN',
+		format : 'yyyy-mm-dd',
+		pickerPosition : 'bottom-left',
+		showMeridian : 1
 	});
 }
 
-function changeData(){
+function changeData() {
 	var staffRegion = $('#staffRegion').val();
 	var role = $('#role').val();
 	var skill = $('#skill').val();
-	if('' == staffRegion || staffRegion== null){
+	if ('' == staffRegion || staffRegion == null) {
 		return;
 	}
-	if('' == role || role== null){
+	if ('' == role || role == null) {
 		return;
 	}
-	if('' == skill || skill== null){
+	if ('' == skill || skill == null) {
 		return;
 	}
-	
+
 	$.ajax({
-		url:path+'/service/interview/getBillRate',
-		dataType:"json",
-		async:true,
-		data:{"staffRegion":staffRegion,"role":role,"skill":skill},
-		cache:false,
-		type:"post",
-		success:function(data){
-			if(data != null){
+		url : path + '/service/interview/getBillRate',
+		dataType : "json",
+		async : true,
+		data : {
+			"staffRegion" : staffRegion,
+			"role" : role,
+			"skill" : skill
+		},
+		cache : false,
+		type : "post",
+		success : function(data) {
+			if (data != null) {
 				$('#billRate').val(data);
 			}
 		}
 	})
 }
 
-
-
-function updateEmployee(){
-	var bootstrapValidator = $("#updateEmployeeForm").data('bootstrapValidator');
-	   bootstrapValidator.validate();
-	if(bootstrapValidator.isValid()){
+function updateEmployee() {
+	var bootstrapValidator = $("#updateEmployeeForm")
+			.data('bootstrapValidator');
+	bootstrapValidator.validate();
+	if (bootstrapValidator.isValid()) {
 		var employeeId = $('#employeeId').val();
 		var eHr = $('#eHr').val();
 		var lob = $('#lob').val();
@@ -83,46 +85,77 @@ function updateEmployee(){
 		var resourceStatus = $('#resourceStatus').val();
 		var terminatedDate = $('#terminatedDate1').val();
 		var terminationReason = $('#terminationReason').val();
-		$.ajax({
-			url:path+'/service/employee/updateEmployee',
-			dataType:"json",
-			data:{"employeeId":employeeId,"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason},
-			async:true,
-			cache:false,
-			type:"post",
-			success:function(resultFlag){
-				if(resultFlag){
-					$("html,body").animate({scrollTop:0}, 500);
-					$('#successAlert').html('员工'+staffName+'信息修改成功').show();
-					setTimeout(function () {
-						$('#successAlert').hide();
-					}, 2000);
-				}
-				if(!resultFlag){
-					alert('1');
-				}
-			}
-		})
-	}else{
+		$
+				.ajax({
+					url : path + '/service/employee/updateEmployee',
+					dataType : "json",
+					data : {
+						"employeeId" : employeeId,
+						"eHr" : eHr,
+						"lob" : lob,
+						"hsbcStaffId" : hsbcStaffId,
+						"staffName" : staffName,
+						"LN" : LN,
+						"staffRegion" : staffRegion,
+						"staffLocation" : staffLocation,
+						"locationType" : locationType,
+						"onshoreOrOffshore" : onshoreOrOffshore,
+						"csSubDept" : csSubDept,
+						"hsbcSubDept" : hsbcSubDept,
+						"projectName" : projectName,
+						"projectManager" : projectManager,
+						"sow" : sow,
+						"sowExpiredDate" : sowExpiredDate,
+						"staffCategory" : staffCategory,
+						"engagementType" : engagementType,
+						"hsbcDOJ" : hsbcDOJ,
+						"graduationDate" : graduationDate,
+						"role" : role,
+						"skill" : skill,
+						"billingCurrency" : billingCurrency,
+						"billRate" : billRate,
+						"resourceStatus" : resourceStatus,
+						"terminatedDate" : terminatedDate,
+						"terminationReason" : terminationReason
+					},
+					async : true,
+					cache : false,
+					type : "post",
+					success : function(resultFlag) {
+						if (resultFlag) {
+							$("html,body").animate({
+								scrollTop : 0
+							}, 500);
+							$('#successAlert')
+									.html('员工' + staffName + '信息修改成功').show();
+							setTimeout(function() {
+								$('#successAlert').hide();
+							}, 2000);
+						}
+						if (!resultFlag) {
+							alert('1');
+						}
+					}
+				})
+	} else {
 		return;
 	}
 }
 
-
-
-function loadEmployeeInfo(){
+function loadEmployeeInfo() {
 	var employeeId = $('#employeeId').val();
-	
+
 	$.ajax({
-		url:path+'/service/employee/queryEmployeeById',
-		dataType:"json",
-		data:{"employeeId":employeeId},
-		async:true,
-		cache:false,
-		type:"post",
-		success:function(employee){
-			
-			
+		url : path + '/service/employee/queryEmployeeById',
+		dataType : "json",
+		data : {
+			"employeeId" : employeeId
+		},
+		async : true,
+		cache : false,
+		type : "post",
+		success : function(employee) {
+
 			loadStaffCategory(employee);
 			loadEngagementType(employee);
 			loadRole(employee);
@@ -136,7 +169,7 @@ function loadEmployeeInfo(){
 			loadOnshoreOrOffshore(employee);
 			loadPersonHsbcDept(employee);
 			loadTerminationReason(employee);
-			
+
 			$('#hsbcStaffId').val(employee.hsbcStaffId);
 			$('#lob').val(employee.lob);
 			$('#hsbcProjectName').val(employee.projectName);
@@ -150,283 +183,341 @@ function loadEmployeeInfo(){
 			$('#billRate').val(employee.billRate);
 			$('#terminatedDate1').val(employee.terminatedDate);
 			$('#eHr').val(employee.eHr);
-			
+
 		}
 	})
 }
 
-
-
-function dateType(){
+function dateType() {
 	$('.form_datetime').datetimepicker({
-		weekStart: 1,
-		minView:'month',
-		todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-		language:'zh-CN',
-		format: 'yyyy-mm-dd',
-		pickerPosition: 'bottom-left',
-		showMeridian: 1
+		weekStart : 1,
+		minView : 'month',
+		todayBtn : 1,
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		forceParse : 0,
+		language : 'zh-CN',
+		format : 'yyyy-mm-dd',
+		pickerPosition : 'bottom-left',
+		showMeridian : 1
 	});
 }
 
-
-function loadOnshoreOrOffshore(employee){
-	var url = path+'/json/onshoreOrOffshore.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#onshoreOrOffshore").append("<option>"+item.name+"</option>");
-	       })
-	       $('#onshoreOrOffshore').val(employee.onshoreOrOffshore);
-	});
-}
-
-
-function loadLocationType(employee){
-	var url = path+'/json/locationType.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#locationType").append("<option>"+item.name+"</option>");
-	       })
-	       $('#locationType').val(employee.locationType);
-	});
-}
-
-
-function loadStaffLocation(employee){
-	var url = path+'/json/staffLocation.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#staffLocation").append("<option>"+item.name+"</option>");
-	       })
-	       $('#staffLocation').val(employee.staffLocation);
-	});
-}
-
-
-
-function loadStaffRegion(employee){
-	var url = path+'/json/staffRegion.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#staffRegion").append("<option>"+item.name+"</option>");
-	       })
-	       $('#staffRegion').val(employee.staffRegion);
-	});
-}
-
-
-function loadResourceStatus(employee){
-	var url = path+'/json/resourceStatus.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#resourceStatus").append("<option>"+item.name+"</option>");
-	       })
-	       $('#resourceStatus').val(employee.resourceStatus);
-	});
-}
-
-
-function loadBillingCurrency(employee){
-	var url = path+'/json/billingCurrency.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#billingCurrency").append("<option>"+item.name+"</option>");
-	       })
-	       $('#billingCurrency').val(employee.billingCurrency);
-	});
-}
-
-function loadBillingEntity(){
-	var url = path+'/json/billingEntity.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#billingEntity").append("<option>"+item.name+"</option>");
-	       })
-	});
-}
-
-function loadSkill(employee){
-	var url = path+'/json/skill.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#skill").append("<option>"+item.name+"</option>");
-	       })
-	       $('#skill').val(employee.skill);
-	});
-}
-
-function loadSource(){
-	var url = path+'/json/source.json'
-	$.getJSON(url,  function(data) {
+function loadOnshoreOrOffshore(employee) {
+	var url = path + '/json/onshoreOrOffshore.json'
+	$.getJSON(url, function(data) {
 		$.each(data, function(i, item) {
-			$("#source").append("<option>"+item.name+"</option>");
+			$("#onshoreOrOffshore")
+					.append("<option>" + item.name + "</option>");
+		})
+		$('#onshoreOrOffshore').val(employee.onshoreOrOffshore);
+	});
+}
+
+function loadLocationType(employee) {
+	var url = path + '/json/locationType.json'
+	$.getJSON(url, function(data) {
+		$.each(data, function(i, item) {
+			$("#locationType").append("<option>" + item.name + "</option>");
+		})
+		$('#locationType').val(employee.locationType);
+	});
+}
+
+function loadStaffLocation(employee) {
+	var url = path + '/json/staffLocation.json'
+	$.getJSON(url, function(data) {
+		$.each(data, function(i, item) {
+			$("#staffLocation").append("<option>" + item.name + "</option>");
+		})
+		$('#staffLocation').val(employee.staffLocation);
+	});
+}
+
+function loadStaffRegion(employee) {
+	var url = path + '/json/staffRegion.json'
+	$.getJSON(url, function(data) {
+		$.each(data, function(i, item) {
+			$("#staffRegion").append("<option>" + item.name + "</option>");
+		})
+		$('#staffRegion').val(employee.staffRegion);
+	});
+}
+
+function loadResourceStatus(employee) {
+	var url = path + '/json/resourceStatus.json'
+	$.getJSON(url, function(data) {
+		$.each(data, function(i, item) {
+			$("#resourceStatus").append("<option>" + item.name + "</option>");
+		})
+		$('#resourceStatus').val(employee.resourceStatus);
+		if ($('#resourceStatus').val() == "Active") {
+			$("#terminatedDateDiv").hide();
+			$("#terminationReasonDiv").hide();
+		} else if ($('#resourceStatus').val() == "Released") {
+			$("#terminatedDateDiv").show();
+			$("#terminationReasonDiv").hide();
+		} else {
+			$("#terminatedDateDiv").hide();
+			$("#terminationReasonDiv").show();
+		}
+	});
+
+}
+
+$("#resourceStatus").bind("click", function() {
+	if ($('#resourceStatus').val() == "Active") {
+		$("#terminatedDateDiv").hide();
+		$("#terminationReasonDiv").hide();
+	} else if ($('#resourceStatus').val() == "Released") {
+		$("#terminatedDateDiv").show();
+		$("#terminationReasonDiv").hide();
+	} else {
+		$("#terminatedDateDiv").show();
+		$("#terminationReasonDiv").show();
+	}
+});
+
+function loadBillingCurrency(employee) {
+	var url = path + '/json/billingCurrency.json'
+	$.getJSON(url, function(data) {
+		$.each(data, function(i, item) {
+			$("#billingCurrency").append("<option>" + item.name + "</option>");
+		})
+		$('#billingCurrency').val(employee.billingCurrency);
+	});
+}
+
+function loadBillingEntity() {
+	var url = path + '/json/billingEntity.json'
+	$.getJSON(url, function(data) {
+		$.each(data, function(i, item) {
+			$("#billingEntity").append("<option>" + item.name + "</option>");
 		})
 	});
 }
 
-
-function loadRole(employee){
-	var url = path+'/json/role.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#role").append("<option>"+item.name+"</option>");
-	       })
-	       $('#role').val(employee.role);
+function loadSkill(employee) {
+	var url = path + '/json/skill.json'
+	$.getJSON(url, function(data) {
+		$.each(data, function(i, item) {
+			$("#skill").append("<option>" + item.name + "</option>");
+		})
+		$('#skill').val(employee.skill);
 	});
 }
 
-
-function loadStaffCategory(employee){
-	var url = path+'/json/staffCategory.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#staffCategory").append("<option>"+item.name+"</option>");
-	       })
-	       $('#staffCategory').val(employee.staffCategory);
-	});
-	}
-
-
-function loadEngagementType(employee){
-	var url = path+'/json/engagementType.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#engagementType").append("<option>"+item.name+"</option>");
-	       })
-	       $('#engagementType').val(employee.engagementType);
+function loadSource() {
+	var url = path + '/json/source.json'
+	$.getJSON(url, function(data) {
+		$.each(data, function(i, item) {
+			$("#source").append("<option>" + item.name + "</option>");
+		})
 	});
 }
 
+function loadRole(employee) {
+	var url = path + '/json/role.json'
+	$.getJSON(url, function(data) {
+		$.each(data, function(i, item) {
+			$("#role").append("<option>" + item.name + "</option>");
+		})
+		$('#role').val(employee.role);
+	});
+}
 
-function loadCSDept(employee){
+function loadStaffCategory(employee) {
+	var url = path + '/json/staffCategory.json'
+	$.getJSON(url, function(data) {
+		$.each(data, function(i, item) {
+			$("#staffCategory").append("<option>" + item.name + "</option>");
+		})
+		$('#staffCategory').val(employee.staffCategory);
+	});
+}
+
+function loadEngagementType(employee) {
+	var url = path + '/json/engagementType.json'
+	$.getJSON(url, function(data) {
+		$.each(data, function(i, item) {
+			$("#engagementType").append("<option>" + item.name + "</option>");
+		})
+		$('#engagementType').val(employee.engagementType);
+	});
+}
+
+function loadCSDept(employee) {
+
 	$.ajax({
-		url:path+'/service/csDept/queryAllCSSubDept',
-		dataType:"json",
-		async:true,
-		cache:false,
-		type:"post",
-		success:function(list){
-			for(var i = 0;i<list.length;i++){
-				$("#csSubDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csSubDeptName+"</option>");
+		url : path + '/service/csDept/queryAllCSSubDept',
+		dataType : "json",
+		async : true,
+		cache : false,
+		type : "post",
+		success : function(result) {
+			var userType = result.user.user_type;
+
+			var csSubs = result.csSubDepts;
+
+			for (var i = 0; i < result.data.length; i++) {
+				$("#csSubDept").append(
+						"<option value='" + result.data[i].csSubDeptId + "'>"
+								+ result.data[i].csSubDeptName + "</option>");
 			}
 			$('#csSubDept').val(employee.csSubDept);
+			if(userType!=0){
+				$("#csSubDept").attr("disabled","disabled");
+			}
+		}
+	})
+
+	// $.ajax({
+	// url:path+'/service/csDept/queryAllCSSubDept',
+	// dataType:"json",
+	// async:true,
+	// cache:false,
+	// type:"post",
+	// success:function(list){
+	// for(var i = 0;i<list.length;i++){
+	// $("#csSubDept").append("<option
+	// value='"+list[i].csSubDeptId+"'>"+list[i].csSubDeptName+"</option>");
+	// }
+	// $('#csSubDept').val(employee.csSubDept);
+	// }
+	// })
+}
+
+function loadPersonHsbcDept(employee) {
+	var hsbcSubDeptId = employee.hsbcSubDept;
+	$.ajax({
+		url : path + '/service/hsbcDept/queryDeptById',
+		dataType : "json",
+		async : true,
+		cache : false,
+		data : {
+			"hsbcSubDeptId" : hsbcSubDeptId
+		},
+		type : "post",
+		success : function(hsbcDept) {
+
+			loadDept(employee, hsbcDept);
 		}
 	})
 }
 
-
-
-function loadPersonHsbcDept(employee){
-	var hsbcSubDeptId = employee.hsbcSubDept;
+function loadDept(employee, hsbcDept) {
 	$.ajax({
-		url:path+'/service/hsbcDept/queryDeptById',
-		dataType:"json",
-		async:true,
-		cache:false,
-		data:{"hsbcSubDeptId":hsbcSubDeptId},
-		type:"post",
-		success:function(hsbcDept){
-			
-			loadDept(employee,hsbcDept);
-		} 
-	})
-}
+		url : path + '/service/hsbcDept/queryDeptName',
+		dataType : "json",
+		async : true,
+		cache : false,
+		type : "post",
+		success : function(list) {
 
-
-
-
-function loadDept(employee,hsbcDept){
-	$.ajax({
-		url:path+'/service/hsbcDept/queryDeptName',
-		dataType:"json",
-		async:true,
-		cache:false,
-		type:"post",
-		success:function(list){
-			
 			var hsbcDeptName = hsbcDept.hsbcDeptName;
-			
-			for(var i = 0;i<list.length;i++){
-						
-				$("#hsbcDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcDeptName+"</option>");
-				if(list[i].hsbcDeptName == hsbcDeptName){
+
+			for (var i = 0; i < list.length; i++) {
+
+				$("#hsbcDept").append(
+						"<option value='" + list[i].hsbcSubDeptId + "'>"
+								+ list[i].hsbcDeptName + "</option>");
+				if (list[i].hsbcDeptName == hsbcDeptName) {
 					$("#hsbcDept").val(list[i].hsbcSubDeptId);
 				}
 			}
-			
-			//$('#hsbcDept').val(employee.hsbcSubDept);
-			
+
+			// $('#hsbcDept').val(employee.hsbcSubDept);
+
 			loadHSBCSubDept(employee);
 		}
 	})
 }
 
-
-function loadHSBCSubDept(employee){
+function loadHSBCSubDept(employee) {
 	var hsbcSubDeptId = employee.hsbcSubDept;
 	$.ajax({
-		url:path+'/service/hsbcDept/querySubDeptName',
-		dataType:"json",
-		async:true,
-		data:{"hsbcSubDeptId":hsbcSubDeptId},
-		cache:false,
-		type:"post",
-		success:function(list){
-			if(list.length == 1 && list[0].hsbcSubDeptName == null){
-				$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
-			}else{
-				$("#hsbcSubDept").find("option").remove(); 
-				$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
-				for(var i = 0;i<list.length;i++){
-					$("#hsbcSubDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcSubDeptName+"</option>");
+		url : path + '/service/hsbcDept/querySubDeptName',
+		dataType : "json",
+		async : true,
+		data : {
+			"hsbcSubDeptId" : hsbcSubDeptId
+		},
+		cache : false,
+		type : "post",
+		success : function(list) {
+			if (list.length == 1 && list[0].hsbcSubDeptName == null) {
+				$("#hsbcSubDept").append(
+						"<option value='"
+								+ $('#hsbcDept').find("option:selected").val()
+								+ "'>"
+								+ $('#hsbcDept').find("option:selected").text()
+								+ "</option>");
+			} else {
+				$("#hsbcSubDept").find("option").remove();
+				$("#hsbcSubDept").append(
+						"<option value=''>-- Option --</option>");
+				for (var i = 0; i < list.length; i++) {
+					$("#hsbcSubDept").append(
+							"<option value='" + list[i].hsbcSubDeptId + "'>"
+									+ list[i].hsbcSubDeptName + "</option>");
 				}
 			}
-			if(hsbcSubDeptId != null && hsbcSubDeptId != ''){
+			if (hsbcSubDeptId != null && hsbcSubDeptId != '') {
 				$("#hsbcSubDept").val(employee.hsbcSubDept)
 			}
 		}
 	})
 }
 
-function loadTerminationReason(employee){
-	var url = path+'/json/terminatedReason.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#terminationReason").append("<option value='"+item.key+"'>"+item.name+"</option>");
-	    	   if(item.key == employee.terminationReason){
-	    		   $('#terminationReason').val(item.key);
-	    	   }
-	       })
+function loadTerminationReason(employee) {
+	var url = path + '/json/terminatedReason.json'
+	$.getJSON(url, function(data) {
+		$.each(data, function(i, item) {
+			$("#terminationReason").append(
+					"<option value='" + item.key + "'>" + item.name
+							+ "</option>");
+			if (item.key == employee.terminationReason) {
+				$('#terminationReason').val(item.key);
+			}
+		})
 	});
 }
 
-
-
-$("#hsbcDept").change(function(){
-	var hsbcSubDeptId = $("#hsbcDept").val();
-	$.ajax({
-		url:path+'/service/hsbcDept/querySubDeptName',
-		dataType:"json",
-		async:true,
-		data:{"hsbcSubDeptId":hsbcSubDeptId},
-		cache:false,
-		type:"post",
-		success:function(list){
-			$("#hsbcSubDept").find("option").remove(); 
-			if(list.length == 1 && list[0].hsbcSubDeptName == null){
-				$("#hsbcSubDept").append("<option value='"+$('#hsbcDept').find("option:selected").val()+"'>"+$('#hsbcDept').find("option:selected").text()+"</option>");
-			}else{
-				$("#hsbcSubDept").find("option").remove(); 
-				$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
-				for(var i = 0;i<list.length;i++){
-					$("#hsbcSubDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcSubDeptName+"</option>");
+$("#hsbcDept").change(
+		function() {
+			var hsbcSubDeptId = $("#hsbcDept").val();
+			$.ajax({
+				url : path + '/service/hsbcDept/querySubDeptName',
+				dataType : "json",
+				async : true,
+				data : {
+					"hsbcSubDeptId" : hsbcSubDeptId
+				},
+				cache : false,
+				type : "post",
+				success : function(list) {
+					$("#hsbcSubDept").find("option").remove();
+					if (list.length == 1 && list[0].hsbcSubDeptName == null) {
+						$("#hsbcSubDept").append(
+								"<option value='"
+										+ $('#hsbcDept')
+												.find("option:selected").val()
+										+ "'>"
+										+ $('#hsbcDept')
+												.find("option:selected").text()
+										+ "</option>");
+					} else {
+						$("#hsbcSubDept").find("option").remove();
+						$("#hsbcSubDept").append(
+								"<option value=''>-- Option --</option>");
+						for (var i = 0; i < list.length; i++) {
+							$("#hsbcSubDept").append(
+									"<option value='" + list[i].hsbcSubDeptId
+											+ "'>" + list[i].hsbcSubDeptName
+											+ "</option>");
+						}
+					}
 				}
-			}
-		}
-	})
-})
-
+			})
+		})

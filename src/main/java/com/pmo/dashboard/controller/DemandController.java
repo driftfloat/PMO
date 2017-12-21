@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -149,6 +150,9 @@ public class DemandController {
 		}
 		//String csBuName = request.getParameter("csBuName");
 		  User user = (User) request.getSession().getAttribute("loginUser");
+		  
+	        
+		 
 	      String userType = user.getUser_type();
 		 if(("".equals(demand.getCsSubDept()) || demand.getCsSubDept() == null) &&
 	                ("".equals(csBuName) || csBuName == null)){
@@ -157,16 +161,11 @@ public class DemandController {
 	                csBuName = user.getBu();
 	            }
 	            
-	            if("2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
-	            	demand.setCsSubDept(csDeptService.queryCSDeptById(user.getCsDeptId()).getCsSubDeptId());
-	            }
-	            
 	        }
 		List<Demand> list = demandService.queryDemandList(demand,pageCondition,csBuName,request);
 		
 		Map<String,Object> result = new HashMap<String,Object>();
 		result.put("list", list);
-		result.put("csSubDept", demand.getCsSubDept());
 	    result.put("user", user);
 		result.put("pageCondition", pageCondition);
 		return result;

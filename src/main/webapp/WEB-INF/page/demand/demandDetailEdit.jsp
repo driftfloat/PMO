@@ -98,11 +98,10 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-sm-2 control-label">Engagement Type</label>
 											<div class="col-sm-4">
-												<select class="form-control" name="engagementType"
-													data-bv-notempty
+												<select class="form-control" name="engagementType"data-bv-notempty
 													data-bv-notempty-message="Please Select Your Engagement Type"
 													id="engagementType" data-bv-group=".group">
-                                                    <option value="${demand.engagementType }">${demand.engagementType}</option>
+                                                    <option value="${demand.engagementType }"></option>
 												</select>
 											</div>
 										</div>

@@ -350,7 +350,7 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
-										<div class="group">
+										<div class="group" style="display:none" id="terminatedDateDiv">
 										<label class="col-sm-2 control-label">If terminated,mention LWD</label>
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
@@ -375,7 +375,7 @@ var path='<%=path%>';
 											</div>
 										</div> -->
 										
-										<div class="group">
+										<div class="group" style="display:none" id="terminationReasonDiv">
 										<label class="col-lg-2 control-label">Reason for Termination</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="terminationReason" 

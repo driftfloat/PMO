@@ -4,6 +4,8 @@ var csSubDeptName0 = "";
 	
 var csBuName0 = "";
 
+var lobArray=[];
+var staffNameArray =[];
 $(function(){
 	loadCusDeptInfo();
 	loadEmployeeList();
@@ -249,6 +251,14 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 				td8.appendTo(tr);
 				td81.appendTo(tr);
 				td9.appendTo(tr);
+				
+				//gkf add 防止页面list刷新所选的checkbox失去焦点
+				for(var index in lobArray){
+					if(result.data[i].lob == lobArray[index]){
+						$('#ls' + lob + '').attr(
+								"checked", 'true');
+					}
+				}
 			}
 			$("#employeeList").append("</tbdoy>");
 			//alert(window.location.href);
@@ -443,8 +453,7 @@ $('#searchBtn').bind("click", function(){
 
 
 
-var lobArray=[];
-var staffNameArray =[];
+
 function checkedEmployee(lob,staffName){
 	if($('#ls'+lob+'').is(':checked')){
 		lobArray.push(lob);

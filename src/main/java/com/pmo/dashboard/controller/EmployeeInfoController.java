@@ -66,7 +66,7 @@ public class EmployeeInfoController
         
         User user = (User) request.getSession().getAttribute("loginUser");
         
-        
+        //woyonde 
         List<String>  csSubDeptNames = new ArrayList<String>();   
         
     	List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsDeptId().split(","));
