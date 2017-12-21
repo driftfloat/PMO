@@ -121,24 +121,32 @@ function loadScSubDeptName(){
 	})
 }
 
-function loadCSSubDept(result){
-	var userType = result.user.user_type;
+function loadCSSubDept(){
 	$.ajax({
 		url:path+'/service/csDept/queryAllCSSubDept',
 		dataType:"json",
 		async:true,
 		cache:false,
 		type:"post",
-		success:function(list){
-			$("#csSubDept").empty();
-			$("#csSubDept").append("<option value=''>--Option--</option>");
-			for(var i = 0;i<list.length;i++){
-				$("#csSubDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csSubDeptName+"</option>");
-			}
+		success:function(result){
+			var userType = result.user.user_type;
 			
-			if(userType=='2' || userType=='3' || userType=='4'){
-				$('#csSubDept').val(result.csSubDept);
-				$("#csSubDept").attr("disabled","disabled");
+			var csSubs = result.csSubDepts;
+			if(userType=='0'){
+				for(var i = 0;i<result.data.length;i++){
+					$("#csSubDept").append("<option value='"+result.data[i].csSubDeptId+"'>"+result.data[i].csSubDeptName+"</option>");
+				}
+			}else{
+				if(csSubs.length==1){
+					$("#csSubDept").append("<option value='"+csSubs[0].csSubDeptId+"'>"+csSubs[0].csSubDeptName+"</option>");
+					$('#csSubDept').val(csSubs[0].csSubDeptId);
+					$("#csSubDept").attr("disabled","disabled");
+				}else if(csSubs.length>1){
+					$("#csSubDept").empty();
+					for(var i = 0;i<csSubs.length;i++){
+						$("#csSubDept").append("<option value='"+csSubs[i].csSubDeptId+"'>"+csSubs[i].csSubDeptName+"</option>");
+					}
+				}
 			}
 		}
 	})
@@ -291,7 +299,7 @@ function loadDemandList(currPage){
 				}
 			});
 			
-            loadCSSubDept(result);			
+            loadCSSubDept();			
 			loadCSBu(result);
 		}
 	})

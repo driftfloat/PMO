@@ -292,9 +292,25 @@ function loadCSDept(){
 		async:true,
 		cache:false,
 		type:"post",
-		success:function(list){
-			for(var i = 0;i<list.length;i++){
-				$("#csSubDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csSubDeptName+"</option>");
+		success:function(result){
+			var userType = result.user.user_type;
+			
+			var csSubs = result.csSubDepts;
+			if(userType=='0'){
+				for(var i = 0;i<result.data.length;i++){
+					$("#csSubDept").append("<option value='"+result.data[i].csSubDeptId+"'>"+result.data[i].csSubDeptName+"</option>");
+				}
+			}else{
+				if(csSubs.length==1){
+					$("#csSubDept").append("<option value='"+csSubs[0].csSubDeptId+"'>"+csSubs[0].csSubDeptName+"</option>");
+					$('#csSubDept').val(csSubs[0].csSubDeptId);
+					$("#csSubDept").attr("disabled","disabled");
+				}else if(csSubs.length>1){
+					$("#csSubDept").empty();
+					for(var i = 0;i<csSubs.length;i++){
+						$("#csSubDept").append("<option value='"+csSubs[i].csSubDeptId+"'>"+csSubs[i].csSubDeptName+"</option>");
+					}
+				}
 			}
 		}
 	})
