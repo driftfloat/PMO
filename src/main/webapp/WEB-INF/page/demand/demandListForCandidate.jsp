@@ -258,10 +258,10 @@ var path='<%=path%>';
 									<select id="bgvCleared" name="bgvCleared" class="form-control" data-bv-notempty>
 										<option value="">-- Option--</option>
 										<option value="Green">Green</option>
-										<option value="blue">blue</option>
-										<option value="yellow">yellow</option>
-										<option value="red">red</option>
-										<option value="other">other</option>
+										<option value="Blue">Blue</option>
+										<option value="Yellow">Yellow</option>
+										<option value="Red">Red</option>
+										<option value="Other">Other</option>
 										<option value="Initiated">Initiated</option>
 									</select>
 								</div>

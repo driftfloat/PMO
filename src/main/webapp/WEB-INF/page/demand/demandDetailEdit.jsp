@@ -1,9 +1,11 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"
+<%@ page language="java" import="java.util.*,com.pmo.dashboard.entity.User" pageEncoding="utf-8"
 	contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 	String path = request.getContextPath();
+	User user = (User) request.getSession().getAttribute("loginUser");
+	String userType = user.getUser_type();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,6 +66,7 @@
 </head>
 <script>
 var path='<%=path%>';
+var userType='<%=userType%>'
 </script>
 <body>
 	<!-- topbar starts -->
@@ -101,17 +104,19 @@ var path='<%=path%>';
 												<select class="form-control" name="engagementType"data-bv-notempty
 													data-bv-notempty-message="Please Select Your Engagement Type"
 													id="engagementType" data-bv-group=".group">
-                                                    <option value="${demand.engagementType }"></option>
+                                                    <option value="${demand.engagementType}">${demand.engagementType}</option>
 												</select>
 											</div>
 										</div>
 										<div class="group">
 											<label class="col-sm-2 control-label">Status</label>
 											<div class="col-lg-4">
+												<input type="text" style="display:none" value="${demand.status}" 
+													id="statusInput" />
 												<select class="form-control" name="status" data-bv-notempty
 													data-bv-notempty-message="Please Select Your Status"
 													id="status" data-bv-group=".group">
-                                                    <option value="${demand.status }">${demand.status }</option>
+                                                    <option value="">--Option--</option>
 												</select>
 											</div>
 										</div>
@@ -137,18 +142,22 @@ var path='<%=path%>';
 								         <div class="group">
 											<label class="col-lg-2 control-label">Skill</label>
 											<div class="col-lg-4">
+												<input type="text" style="display:none" value="${demand.skill}" 
+													id="skillInput" />
 												<select class="form-control" name="skillEdit" data-bv-notempty
 													data-bv-notempty-message="Pleaser Select Your Skill " id="skillEdit" data-bv-group=".group">
-													<option value="${demand.skill }"></option>
+													<option value="">--Option--</option>
 												</select>
 											</div>
 										</div>
 										<div class="group">
 											<label class="col-lg-2 control-label">Position</label>
 											<div class="col-lg-4">
+												<input type="text" style="display:none" value="${demand.position}" 
+													id="positionInput" />
 												<select class="form-control" name="positionEdit" data-bv-notempty
 													data-bv-notempty-message="Please Select Your Position" id="positionEdit" data-bv-group=".group">
-													<option value="${demand.position }"></option>								
+													<option value="">--Option--</option>								
 												</select>
 											</div>
 										</div>
@@ -157,9 +166,11 @@ var path='<%=path%>';
 								       <div class="group">
 											<label class="col-lg-2 control-label">Location</label>
 											<div class="col-lg-4">
+												<input type="text" style="display:none" value="${demand.location}" 
+													id="locationInput" />
 												<select class="form-control" name="locationEdit" data-bv-notempty
 													data-bv-notempty-message="Please Select Your Location" id="locationEdit" data-bv-group=".group">
-													<option value="${demand.location }"></option>								
+													<option value="">--Option--</option>								
 												</select>
 											</div>
 										</div>
@@ -183,9 +194,11 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-lg-2 control-label">HR Priority</label>
 											<div class="col-lg-4">
+												<input type="text" style="display:none" value="${demand.hrPriority}" 
+													id="hrPriorityInput" />
 												<select class="form-control" name="hrPriorityEdit" data-bv-notempty
 													data-bv-notempty-message="Please Select Your HrPriority" id="hrPriorityEdit" data-bv-group=".group">
-													<option value="${demand.hrPriority }"></option>
+													<option value="">--Option--</option>
 												</select>
 											</div>
 										</div>
@@ -242,9 +255,11 @@ var path='<%=path%>';
 								       <div class="group">
 										<label class="col-lg-2 control-label">HSBC Department</label>
 										<div class="col-lg-4">
+											<input type="text" style="display:none" value="${demand.hsbcDept.hsbcDeptName}" 
+													id="hsbcDeptInput" />
 											<select class="form-control" name="hsbcDeptEdit" data-bv-notempty
 												data-bv-notempty-message="Please Select Your HsbcDept" id="hsbcDeptEdit" data-bv-group=".group">
-												<option value="${demand.hsbcDept.hsbcDeptName }"></option>
+												<option value="">-- Option --</option>
 											</select>
 										</div>
 										</div>
