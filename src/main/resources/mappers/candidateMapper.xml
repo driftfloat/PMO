@@ -372,7 +372,7 @@
 	</update>
 	
 	<update id="updateDemandStatusOfferMade" parameterType="com.pmo.dashboard.entity.CandidateInfo">
-		update t_demand set STATUS = 'OfferMade' WHERE CANDIDATE_ID = #{candidateId} and STATUS in ('Offering','offering');
+		update t_demand set STATUS = 'OfferMade' , BGV_CLEARED = 'Initiated' WHERE CANDIDATE_ID = #{candidateId} and STATUS in ('Offering','offering');
 	</update>
 	
 	<select id="queryBlackList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
