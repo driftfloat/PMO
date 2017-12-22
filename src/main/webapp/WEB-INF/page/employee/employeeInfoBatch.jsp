@@ -174,7 +174,7 @@ var path='<%=path%>';
 										</br> </br>
 										<div class="group" style="text-align: center; display: none;"
 											id="transferBox">
-											<label class="col-sm-2 control-label">TransferInfo</label>
+											<label class="col-sm-2 control-label">Employee</label>
 											<div class="col-sm-4">
 												<textarea name="transBox" cols="80" rows="4" id="transBox" disabled="disabled"></textarea>
 											</div>
@@ -362,7 +362,7 @@ var path='<%=path%>';
 						    <br /> <br /> <br />
 							<div class="group">
 								<label class="col-lg-2 control-label" >Modify
-									class</label>
+									Type</label>
 								<div class="col-lg-8" >
 									<select class="form-control" name="modifyName" id="modifyName"
 										data-bv-group=".group">
