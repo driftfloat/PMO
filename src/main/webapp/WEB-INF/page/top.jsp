@@ -67,22 +67,22 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html"> <img alt="Charisma Logo" src="<%=path %>/img/title_logo.png" class="hidden-xs"/>
+            <a class="navbar-brand" href="<%=path %>/service/user/welcome.html"> <img alt="Charisma Logo" src="<%=path %>/img/title_logo.png" class="hidden-xs"/>
                 <span>PMO</span></a>
             <!-- user dropdown starts -->
             <div class="btn-group pull-right">
-            	<span style="float: left;margin-right: 20px;font-size: 1.2em;" >你好：${ sessionScope.loginUser.nickname}</span>
+            	<span style="float: left;margin-right: 20px;font-size: 1.2em;" >Hi , ${ sessionScope.loginUser.nickname}</span>
                 <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> ${sessionScope.employee.getName()}</span>
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
 <!--                 <li><a href="#">个人信息</a></li>-->
-					 <li><a id="editPwd" href="#">密码修改</a></li>
+					 <li><a id="editPwd" href="#">Change Password</a></li>
                   	<li class="divider"></li>
                  	 <%-- <li><a href="<%=path %>/UserController?method=loginOut" rel="stylesheet">注销</a></li> --%>
                   <%--  <li><a href="${pageContext.request.contextPath}/LoginOutController">注销</a></li> --%>
-                   <li><a href="<%=path %>/service/logOut/logOut.html">注销</a></li>
+                   <li><a href="<%=path %>/service/logOut/logOut.html">Sign Out</a></li>
                     
                 </ul>
             </div>
@@ -104,7 +104,7 @@
 				<div class="modal-content">
 					<div class="box-header well" data-original-title="">
 						<h2>
-							<i class="glyphicon glyphicon-user"></i> 修改密码
+							<i class="glyphicon glyphicon-user"></i> Change Password
 						</h2>
 
 						<div class="box-icon">
@@ -119,18 +119,29 @@
                 <!-- Welcome to SpiderNet -->
             		</div>
 					<div id="excelCheckBox" class="box-content">
-						新&nbsp;密&nbsp;码&nbsp;：<input type="password" id="newPassword"/><br/><br/><br/>
-						确认密码：<input type="password" id="confPassword"/>
-						<!-- <table id="excelBox"
-							class="table table-striped table-bordered">
-							
-							
-						</table> -->
+						<!-- New Password:<input type="password" id="newPassword"/><br/><br/><br/>
+						Confirm Password:<input type="password" id="confPassword"/> -->
+						
+							<div class="group">
+								<label class="col-sm-2 control-label">New Password</label>
+									<div class="col-sm-8">
+										<input type="password" class="form-control" name="hsbcProjectName"
+											id="newPassword"/>
+									</div>
+							</div><br><br><br>
+						    <div class="group">
+								<label class="col-sm-2 control-label">Confirm Password</label>
+									<div class="col-sm-8">
+										<input type="password" class="form-control" name="hsbcProjectManager"
+											id="confPassword"/>
+									</div>
+							</div><br><br><br>
+						
 						<div class="center">
 							<a class="btn btn-success" href="#" data-dismiss="modal" onclick="updatePassword()"> <i
-								class="glyphicon glyphicon-ok icon-white" ></i> 确定
+								class="glyphicon glyphicon-ok icon-white" ></i> Confirm
 							</a> <a class="btn btn-info" href="#" data-dismiss="modal"> <i
-								class="glyphicon glyphicon-remove icon-white"></i> 取消
+								class="glyphicon glyphicon-remove icon-white"></i> Cancel
 							</a>
 						</div>
 					</div>

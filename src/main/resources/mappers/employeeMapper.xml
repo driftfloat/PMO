@@ -85,7 +85,7 @@
 	</select>
 
 	<select id="selectByEhr" parameterType="String" resultMap="employeeMap">
-		select * from t_employee e  where e.E_HR=#{eHr}
+		select * from t_employee e  where e.E_HR=#{eHr} and RESOURCE_STATUS in ('Active','Released')
 	</select>
 	<select id="selectByLob" parameterType="String" resultMap="employeeMap">
 		select * from t_employee e  where e.LOB=#{lob}

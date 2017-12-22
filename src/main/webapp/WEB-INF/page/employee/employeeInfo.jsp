@@ -120,7 +120,7 @@ var path='<%=path%>';
 											</div>
 										</div>
 										<div class="group">
-											<label class="col-sm-2 control-label">HSBC Staff ID</label>
+											<label class="col-sm-2 control-label">Staff ID</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="hsbcStaffId"
 													id="hsbcStaffId" />
@@ -138,7 +138,7 @@ var path='<%=path%>';
 											</div>
 										</div>
 										<div class="group">
-											<label class="col-sm-2 control-label">Staff Name</label>
+											<label class="col-sm-2 control-label">Name</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="staffName"
 													id="staffName" />
@@ -215,8 +215,12 @@ var path='<%=path%>';
 											<li><a href="#" id="nextPage" onclick="loadEmployeeList('next')">Next</a></li>
 											<li><a href="#" id="lastPage" onclick="loadEmployeeList('last')">End</a></li>
 										</ul>
-										<br>
-										共<span id="pageCount"></span>页   第<span id="currentPage"></span>页
+										<div style="max-width:400px;float:right;margin-top:30px;">
+										<!-- 每页<span id="pageDataCount"></span>条&nbsp;&nbsp;第<span id="currentPage"></span>页&nbsp;/&nbsp;共<span id="pageCount"></span>页&nbsp;&nbsp;共<span id="dataCount"></span>条 -->
+										<b><span id="currentPage"></span> / <span id="pageCount"></span></b>
+										</div>
+										<!-- <br>
+										共<span id="pageCount"></span>页   第<span id="currentPage"></span>页 -->
 									</div>
 									
 								</form>

@@ -61,7 +61,7 @@
 <link rel="shortcut icon" href="<%=path %>/img/favicon.ico">
 <style type="text/css">
 .ch-container{
-	background:url(/img/bg.jpg);background: url(/Pmo/img/bg2.jpg) center;
+	background:url(/img/bg.jpg);background: url(/Pmo/img/bg3.jpg) center;
     background-size: cover;
     margin-top:-15px;
 }

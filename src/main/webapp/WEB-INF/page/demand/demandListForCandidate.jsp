@@ -200,15 +200,16 @@ var path='<%=path%>';
 
 										</table>
 									</div>
-									<div class="pagination">
+									<div>
 										<ul class="pagination pagination-centered">
 											<li><a href="#" id="fristPage">First</a></li>
 											<li><a href="#" id="previousPage">Last</a></li>
 											<li><a href="#" id="nextPage">Next</a></li>
 											<li><a href="#" id="lastPage">End</a></li>
 										</ul>
-										<br> 共<span id="pageCount"></span>页 第<span
-											id="currentPage"></span>页
+										<div style="max-width:400px;float:right;margin-top:30px;">
+										<b><span id="currentPage"></span> / <span id="pageCount"></span></b>
+										</div>
 									</div>
 
 								</form>
@@ -269,10 +270,10 @@ var path='<%=path%>';
 							<br/><br/><br/>
 							<div class="center">
 								<button type=submit class="btn btn-success"> 
-									<i class="glyphicon glyphicon-ok icon-white"></i> 确定
+									<i class="glyphicon glyphicon-ok icon-white"></i> Confirm
 								</button> 
 								<button class="btn btn-info" data-dismiss="modal"> 
-									<i class="glyphicon glyphicon-remove icon-white"></i> 取消
+									<i class="glyphicon glyphicon-remove icon-white"></i> Cancel
 								</button>
 							</div>
 						</form>

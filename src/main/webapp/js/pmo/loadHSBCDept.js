@@ -73,7 +73,7 @@ function addEmployee(){
 					success:function(result){
 						if(result){
 							$("html,body").animate({scrollTop:0}, 500);
-							$('#successAlert').html('员工'+staffName+'信息添加成功').show();
+							$('#successAlert').html('Employee:'+staffName+' information added succesffully').show();
 							setTimeout(function () {
 								$('#successAlert').hide();
 							}, 2000);
@@ -83,7 +83,7 @@ function addEmployee(){
 				
 				if(resultFlag){
 					$("html,body").animate({scrollTop:0}, 500);
-					$('#successAlert').html('员工'+staffName+'信息添加成功').show();
+					$('#successAlert').html('Employee:'+staffName+' information added succesffully').show();
 					setTimeout(function () {
 						$('#successAlert').hide();
 					}, 2000);

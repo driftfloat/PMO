@@ -85,59 +85,27 @@ function updateEmployee() {
 		var resourceStatus = $('#resourceStatus').val();
 		var terminatedDate = $('#terminatedDate1').val();
 		var terminationReason = $('#terminationReason').val();
-		$
-				.ajax({
-					url : path + '/service/employee/updateEmployee',
-					dataType : "json",
-					data : {
-						"employeeId" : employeeId,
-						"eHr" : eHr,
-						"lob" : lob,
-						"hsbcStaffId" : hsbcStaffId,
-						"staffName" : staffName,
-						"LN" : LN,
-						"staffRegion" : staffRegion,
-						"staffLocation" : staffLocation,
-						"locationType" : locationType,
-						"onshoreOrOffshore" : onshoreOrOffshore,
-						"csSubDept" : csSubDept,
-						"hsbcSubDept" : hsbcSubDept,
-						"projectName" : projectName,
-						"projectManager" : projectManager,
-						"sow" : sow,
-						"sowExpiredDate" : sowExpiredDate,
-						"staffCategory" : staffCategory,
-						"engagementType" : engagementType,
-						"hsbcDOJ" : hsbcDOJ,
-						"graduationDate" : graduationDate,
-						"role" : role,
-						"skill" : skill,
-						"billingCurrency" : billingCurrency,
-						"billRate" : billRate,
-						"resourceStatus" : resourceStatus,
-						"terminatedDate" : terminatedDate,
-						"terminationReason" : terminationReason
-					},
-					async : true,
-					cache : false,
-					type : "post",
-					success : function(resultFlag) {
-						if (resultFlag) {
-							$("html,body").animate({
-								scrollTop : 0
-							}, 500);
-							$('#successAlert')
-									.html('员工' + staffName + '信息修改成功').show();
-							setTimeout(function() {
-								$('#successAlert').hide();
-							}, 2000);
-						}
-						if (!resultFlag) {
-							alert('1');
-						}
-					}
-				})
-	} else {
+		$.ajax({
+			url:path+'/service/employee/updateEmployee',
+			dataType:"json",
+			data:{"employeeId":employeeId,"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason},
+			async:true,
+			cache:false,
+			type:"post",
+			success:function(resultFlag){
+				if(resultFlag){
+					$("html,body").animate({scrollTop:0}, 500);
+					$('#successAlert').html('Staff:'+staffName+' information edited succesffully').show();
+					setTimeout(function () {
+						$('#successAlert').hide();
+					}, 2000);
+				}
+				if(!resultFlag){
+					alert('1');
+				}
+			}
+		})
+	}else{
 		return;
 	}
 }

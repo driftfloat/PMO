@@ -82,7 +82,7 @@
 		                    <div class="input-group input-group-lg">
 		                      	<span  class="input-group-addon input-area-span"><i class="glyphicon glyphicon-user green-1"></i></span>
 
-								<input type="text" id="userName" name="userName" class="form-control input-area" placeholder="用户名">
+								<input type="text" id="userName" name="userName" class="form-control input-area" placeholder="Username">
 		                    </div>
 		                
 	                    
@@ -93,7 +93,7 @@
 		                    <div class="input-group input-group-lg">
 		                        <span  class="input-group-addon input-area-span"><i class="glyphicon glyphicon-user green-1"></i></span>
 
-		                        <input type="password" id="password" name="password" class="form-control input-area" placeholder="密码">
+		                        <input type="password" id="password" name="password" class="form-control input-area" placeholder="Password">
 		                    </div>
 	                   
 	                    
@@ -106,7 +106,7 @@
 						
                     <p class="center col-md-5 p-style">
                     	<!-- <input type="submit" class="btn btn-primary btn-primary-new" value="登录"/> -->
-                        <button type="submit" id="submitBtn" class="btn btn-primary btn-primary-new">登录</button>
+                        <button type="submit" id="submitBtn" value="Sign In" class="btn btn-primary btn-primary-new"><b>Sign In</b></button>
                     </p>
                 </fieldset>
             </form>

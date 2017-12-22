@@ -81,7 +81,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> Interview Information
+									<i class="glyphicon glyphicon-user"></i> Interviewer
 								</h2>
 							</div>
 							<div id="register" class="box-content" style="overflow: auto;">
@@ -224,7 +224,7 @@ var path='<%=path%>';
 									    </tbody>
 									</table>
 									</div>
-									<div class="pagination">
+									<div>
 										<ul class="pagination pagination-centered">
 											<%-- <li><a href="#" id="fristPage" onclick="loadDemandList(1)">首页</a></li>
 											<li><a href="#" id="previousPage" >&laquo;</a></li>
@@ -234,8 +234,9 @@ var path='<%=path%>';
 											<li><a href="#" id="nextPage" >&raquo;</a></li>
 											<li><a href="#" id="lastPage" >末页</a></li> --%>
 										</ul>
-										<br>
-										共<span id="pageCount"></span>页   第<span id="currentPage"></span>页
+										<div style="max-width:400px;float:right;margin-top:30px;">
+										<b><span id="currentPage"></span> / <span id="pageCount"></span></b>
+										</div>
 									</div>
 							</form>
 							<form action="" id="detailForm" method="post" target="_blank">

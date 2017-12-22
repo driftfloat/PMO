@@ -414,7 +414,7 @@ function loadCandidateList(pageState)
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>" +
 					"</td>").appendTo(tr);
-				}else if(result.data[i].candidateStatus == 'offer中'){
+				}else if(result.data[i].demandStatus == 'Offering'){
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +

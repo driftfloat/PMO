@@ -80,7 +80,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> 员工信息修改
+									<i class="glyphicon glyphicon-user"></i> Employee Information
 								</h2>
 							</div>
 							<div id="register" class="box-content" style="overflow: auto;">

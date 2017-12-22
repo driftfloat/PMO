@@ -196,7 +196,7 @@ function queryDemandList(candidateId,demandId){
 	var str = '<table id="demandList" class="table table-bordered table-hover">'+
 	'<thead><tr><th></th><th>RR</<th><th>Job Code</th><th>Tech/Skill</th>'+
 	'<th>Position</th><th>Location</th>'+
-	'<th>Status</th><th>Request</th><th>确认更改</th></tr></thead></table>';
+	'<th>Status</th><th>Request</th><th>Option</th></tr></thead></table>';
 	$("#table_area").append(str);
 	/*delegate() 方法为指定的元素（属于被选元素的子元素）添加一个或多个事件处理程序，并规定当这些事件发生时运行的函数。
 	使用 delegate() 方法的事件处理程序适用于当前或未来的元素（比如由脚本创建的新元素）。*/
@@ -229,7 +229,7 @@ function queryDemandList(candidateId,demandId){
 				var td8 = $("<td>"+result[i].status+"</td>");
 				var td9 = $("<td>"+result[i].requestor+"</td>");
 				/*var td10 = $("<td>"+result[i].candidateId+"</td>");*/
-				var td11 = $("<td><div class='btn-group btn-group-sm'><a href='javascript:void(0);' class='btn btn-primary' onclick=updateDemand('"+result[i].demandId+"','"+result[i].candidateId+"')>确认</div></td>");
+				var td11 = $("<td><div class='btn-group btn-group-sm'><a href='javascript:void(0);' class='btn btn-primary' onclick=updateDemand('"+result[i].demandId+"','"+result[i].candidateId+"')>Confirm</div></td>");
 		
 				td1.appendTo(tr);
 				td2.appendTo(tr);
@@ -252,7 +252,7 @@ function queryDemandList(candidateId,demandId){
 				message:demandTable,
 				size:BootstrapDialog.SIZE_WIDE,
 				buttons:[{
-					label:'取消',
+					label:'Cancel',
 					action:function(dialog){
 						
 						

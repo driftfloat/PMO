@@ -110,10 +110,8 @@ var path='<%=path%>';
 													onclick="loadCandidateList('last')">End</a></li>
 											</ul>
 										</div>
-										<div style="max-width: 400px; float: right; margin-top: 30px;">
-											每页<span id="pageDataCount"></span>条&nbsp;&nbsp;第<span
-												id="currentPage"></span>页&nbsp;/&nbsp;共<span id="pageCount"></span>页&nbsp;&nbsp;共<span
-												id="dataCount"></span>条
+										<div style="max-width:400px;float:right;margin-top:30px;">
+										<b><span id="currentPage"></span> / <span id="pageCount"></span></b>
 										</div>
 									</div>
 									</div>
@@ -195,10 +193,10 @@ var path='<%=path%>';
 							</div>
 							<div class="center">
 								<button type=submit class="btn btn-success"> 
-									<i class="glyphicon glyphicon-ok icon-white"></i> 确定
+									<i class="glyphicon glyphicon-ok icon-white"></i> Confirm
 								</button> 
 								<button class="btn btn-info" data-dismiss="modal"> 
-									<i class="glyphicon glyphicon-remove icon-white"></i> 取消
+									<i class="glyphicon glyphicon-remove icon-white"></i> Cancel
 								</button>
 							</div>
 							<div >

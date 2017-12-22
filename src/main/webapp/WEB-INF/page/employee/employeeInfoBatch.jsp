@@ -160,7 +160,7 @@ var path='<%=path%>';
 									
 									<div class="form-group">
 										<div style="text-align: center; width: 50%; float: right">
-											<input type="button" value="Transfer" name="transfer"
+											<input type="button" value="Modify" name="transfer"
 												id="transfer" href="#" class="button btn btn-primary"
 												data-dismiss="modal"
 												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin: auto;">
@@ -213,8 +213,10 @@ var path='<%=path%>';
 											<li><a href="#" id="lastPage"
 												onclick="loadEmployeeList('last')">End</a></li>
 										</ul>
-										<br> 共<span id="pageCount"></span>页 第<span
-											id="currentPage"></span>页
+										<div style="max-width:400px;float:right;margin-top:30px;">
+										<!-- 每页<span id="pageDataCount"></span>条&nbsp;&nbsp;第<span id="currentPage"></span>页&nbsp;/&nbsp;共<span id="pageCount"></span>页&nbsp;&nbsp;共<span id="dataCount"></span>条 -->
+										<b><span id="currentPage"></span> / <span id="pageCount"></span></b>
+										</div>
 									</div>
 								</form>
 								<form action="" id="editForm" method="post" target="_blank">

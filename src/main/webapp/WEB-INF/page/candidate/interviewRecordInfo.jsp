@@ -130,10 +130,8 @@ var path='<%=path%>';
 												<li><a href="#" id="lastPage" onclick="loadCandidateList('last')">End</a></li>
 											</ul>
 										</div>
-										<div style="max-width: 400px; float: right; margin-top: 30px;">
-											每页<span id="pageDataCount"></span>条&nbsp;&nbsp;第<span
-												id="currentPage"></span>页&nbsp;/&nbsp;共<span id="pageCount"></span>页&nbsp;&nbsp;共<span
-												id="dataCount"></span>条
+										<div style="max-width:400px;float:right;margin-top:30px;">
+										<b><span id="currentPage"></span> / <span id="pageCount"></span></b>
 										</div>
 									    </div>
 									</div>

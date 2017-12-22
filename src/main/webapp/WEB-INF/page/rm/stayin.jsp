@@ -74,7 +74,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> To Be Onboard
+									<i class="glyphicon glyphicon-user"></i> Onboard
 								</h2>
 							</div>
 							<div id="addDemand" class="box-content">
@@ -173,7 +173,7 @@ var path='<%=path%>';
 											</ul>
 										</div>
 										<div style="max-width:400px;float:right;margin-top:30px;">
-										每页<span id="pageDataCount"></span>条&nbsp;&nbsp;第<span id="currentPage"></span>页&nbsp;/&nbsp;共<span id="pageCount"></span>页&nbsp;&nbsp;共<span id="dataCount"></span>条
+										<b><span id="currentPage"></span> / <span id="pageCount"></span></b>
 										</div>
 									</div>
 									</div>

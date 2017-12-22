@@ -100,34 +100,34 @@ var path='<%=path%>';
 							<ul class="nav nav-pills">
 							  <li id='tab' role="presentation" class=""  style="display:none">
 								  <a>
-								  	<h5>&nbsp;第<span id="sp"></span>轮面试</h5>
+								  	<h5>&nbsp;Round <span id="sp"></span> </h5>
 								  </a>
 							  </li>
 							</ul>
 							<div id="interviewInfoList" class="box-content" style="display:none">
 						    	<div class="control-label" style="">
-									<h5>&nbsp;交付部：<span id="csSubDeptName"></span></h5>
-									<h5>&nbsp;项目：<span id="projectName"></span></h5>
+									<h5>&nbsp;Department&nbsp;:&nbsp;<span id="csSubDeptName"></span></h5>
+									<h5>&nbsp;Project&nbsp;:&nbsp;<span id="projectName"></span></h5>
 								</div>
 								<div id="interviewInfo" style="margin-left: 2%;">
 									<hr>
 									<div class="control-label">
-										<h5>第<span id="th"></span>次面试</h5>
+										<h5>Interview <span id="th"></span></h5>
 									</div>
 									<div class="control-label">
-										<label>面试官:  <span id="candidateName"></span></label>
+										<label>Interviewer:  <span id="candidateName"></span></label>
 									</div>
 									<div class="control-label">
-										<label>面试类型:  <span id="interviewType"></span></label>
+										<label>Interview Type:  <span id="interviewType"></span></label>
 									</div>
 									<div class="control-label">
-										<label>面试时间:  <span id="interviewDate"></span></label>
+										<label>Interview Date:  <span id="interviewDate"></span></label>
 									</div>
 									<div class="control-label">
-										<label>面试结果: <span id="interviewStatus"></span></label>
+										<label>Interview Result: <span id="interviewStatus"></span></label>
 									</div>
 									<div class="control-label">
-										<label>反馈: <span id="interviewFeedBack"></span></label>
+										<label>Feedback: <span id="interviewFeedBack"></span></label>
 									</div>
 								</div>
 							</div>

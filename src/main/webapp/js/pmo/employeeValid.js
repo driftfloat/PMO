@@ -11,16 +11,16 @@ $(document).ready(function() {
         	eHr: {
 				validators: {
                     notEmpty: {
-                        message: 'Please enter your E_HR'
+                        message: 'Please enter your E-HR'
                     },
                     regexp: {
                         regexp: /^E\d{9}$/,
-                        message: '只能是E开头的9位数字'
+                        message: 'Please enter the E-HR（E and 9 digits）'
                     },
                     remote:{
                     	type:"post",
                     	url: path+'/service/employee/checkEhr',
-                        message:"eHr already exists"
+                        message:"E-HR already exists"
                     }
 
                  }
@@ -29,7 +29,7 @@ $(document).ready(function() {
             lob: {
                 validators: {
                     notEmpty: {
-                        message: 'Please enter your lob'
+                        message: 'Please enter lob'
                     },
                     numeric: {
                     	message:'Please enter number'
@@ -37,7 +37,7 @@ $(document).ready(function() {
                     remote:{
                     	type:"post",
                     	url: path+'/service/employee/checkLob',
-                        message:"lob already exists"
+                        message:"LOB already exists"
                     }
                 }
             },
@@ -113,7 +113,7 @@ $(document).ready(function() {
             hsbcDOJ1: {
                 validators: {
                     notEmpty: {
-                        message: 'Please select hsbcDOJ1'
+                        message: 'Please select hsbcDOJ'
                     },
                     date : {  
                         format : 'YYYY-MM-DD',  
@@ -152,7 +152,7 @@ $(document).ready(function() {
                         message: 'Please Choose your billRate'
                     },
                     numeric:{
-                    	message:'please enter number'
+                    	message:'Please enter number'
                     }
 
                 }
@@ -173,11 +173,11 @@ $(document).ready(function() {
         	eHr: {
 				validators: {
                     notEmpty: {
-                        message: 'Please enter your E_HR'
+                        message: 'Please enter your E-HR'
                     },
                     regexp: {
                         regexp: /^E\d{9}$/,
-                        message: '只能是E开头的9位数字'
+                        message: 'Please enter the E-HR（E and 9 digits）'
                     },
                     /*remote:{
                     	type:"post",

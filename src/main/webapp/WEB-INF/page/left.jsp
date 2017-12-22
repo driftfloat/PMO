@@ -18,15 +18,15 @@
                     <div class="nav-sm nav nav-stacked">
                     </div>
                     <ul class="nav nav-pills nav-stacked main-menu">
-                        <li class="nav-header">功能模块</li>
+                        <li class="nav-header">Functional Module</li>
                         <c:forEach var="userAuthority" items="${list}" >	
                            	<c:if test="${userAuthority.menuParentId==null}">			   
 						    <li class="accordion">
-                            <a href="#"><i class="glyphicon glyphicon-tasks"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;${userAuthority.menuName}</span></a>
+                            <a href="#"><i class="glyphicon glyphicon-tasks"></i><span>&nbsp;&nbsp;${userAuthority.menuName}</span></a>
                             <ul class="nav nav-pills nav-stacked">                              
                                  <c:forEach var="userAuthority0" items="${list}" >
                                   <c:if test="${userAuthority0.menuParentId==userAuthority.menuId}">
-									    <li><a class="ajax-link" href="<%=path %>${userAuthority0.menuUrl}"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;${userAuthority0.menuName}</span></a></li>
+									    <li><a class="ajax-link" href="<%=path %>${userAuthority0.menuUrl}"><i class="glyphicon glyphicon-home"></i><span>&nbsp;&nbsp;${userAuthority0.menuName}</span></a></li>
 								  </c:if>
                                  </c:forEach>
                             </ul>

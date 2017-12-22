@@ -11,7 +11,7 @@ $(document).ready(function() {
         	userName: {
 				validators: {
                     notEmpty: {
-                        message: '请输入您的用户名'
+                        message: 'Please enter username.'
                     },
 
                    /* regexp: {
@@ -21,7 +21,7 @@ $(document).ready(function() {
                     stringLength: {
                         min: 1,
                         max: 20,
-                        message: '请输入长度在1到20位之间的用户名'
+                        message: 'Please enter the username within 20 characters.'
                     },
                     /* remote: {
                         url: path+'/service/user/checkUser',
@@ -35,12 +35,12 @@ $(document).ready(function() {
             password: {
                 validators: {
                     notEmpty: {
-                        message: '请输入密码'
+                        message: 'Please enter password.'
                     },
                     stringLength: {
                         min: 1,
                         max: 15,
-                        message: '请输入长度在1到15位密码'
+                        message: 'Please enter the username within 15 characters.'
                     },
                 }
             }
@@ -80,7 +80,7 @@ function login(e){
 					}
 					else {
 						//$("#loginAlert").attr("display")
-						$("#loginAlert").html('用户名密码错误').show();
+						$("#loginAlert").html('Incorrect username or password.').show();
 						$("#loginAlert").css({color:"red"});
 					}
 				}

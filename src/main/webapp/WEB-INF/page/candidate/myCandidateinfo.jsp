@@ -258,7 +258,7 @@ var path='<%=path%>';
 											</ul>
 										</div>
 										<div style="max-width:400px;float:right;margin-top:30px;">
-										每页<span id="pageDataCount"></span>条&nbsp;&nbsp;第<span id="currentPage"></span>页&nbsp;/&nbsp;共<span id="pageCount"></span>页&nbsp;&nbsp;共<span id="dataCount"></span>条
+										<b><span id="currentPage"></span> / <span id="pageCount"></span></b>
 										</div>
 									</div>
 								</form>
@@ -346,7 +346,7 @@ var path='<%=path%>';
 				<div class="modal-content">
 					<div class="box-header well" data-original-title="">
 						<h2>
-							<i class="glyphicon glyphicon-user"></i> 推送候选人
+							<i class="glyphicon glyphicon-user"></i> Push Candiate
 						</h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
@@ -395,7 +395,7 @@ var path='<%=path%>';
 				<div class="modal-content">
 					<div class="box-header well" data-original-title="">
 						<h2>
-							<i class="glyphicon glyphicon-user"></i> 更新候选人状态
+							<i class="glyphicon glyphicon-user"></i> Candidate Status
 						</h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
@@ -433,10 +433,10 @@ var path='<%=path%>';
 						<br/><br/><br/>
 						<div class="center">
 							<a class="btn btn-success" href="#" id="statusSubmit" > 
-								<i class="glyphicon glyphicon-ok icon-white" ></i> 确定
+								<i class="glyphicon glyphicon-ok icon-white" ></i> Confirm
 							</a> &nbsp;&nbsp;&nbsp;
 							<a class="btn btn-info" href="#" data-dismiss="modal"> 
-								<i class="glyphicon glyphicon-remove icon-white"></i> 取消
+								<i class="glyphicon glyphicon-remove icon-white"></i> Cancel
 							</a>
 						</div>
 						
@@ -452,7 +452,7 @@ var path='<%=path%>';
 				<div class="modal-content">
 					<div class="box-header well" data-original-title="">
 						<h2>
-							<i class="glyphicon glyphicon-user"></i> HR反馈
+							<i class="glyphicon glyphicon-user"></i> HR Feedback
 						</h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-round btn-default  btn-minimize ">
@@ -494,10 +494,10 @@ var path='<%=path%>';
 						<div class="center">
 							<a class="btn btn-success" href="#"
 								onClick="updateHRFeedBack()"> 
-								<i class="glyphicon glyphicon-ok icon-white"></i> 确定
+								<i class="glyphicon glyphicon-ok icon-white"></i> Confirm
 							</a> 
 							<a class="btn btn-info" href="#" data-dismiss="modal"> 
-								<i class="glyphicon glyphicon-remove icon-white"></i> 取消
+								<i class="glyphicon glyphicon-remove icon-white"></i> Cancel
 							</a>
 						</div>
 					</div>

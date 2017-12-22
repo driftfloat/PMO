@@ -419,7 +419,7 @@ function offerInterview(pushId){
         message: demandTable,
         size: BootstrapDialog.SIZE_WIDE,
         buttons: [{
-            label: '确认',
+            label: 'Confirm',
             action: function(dialog) {
             	var demandId = $("input[name=checkAll]:checked").val();
             	$.ajax({
@@ -443,7 +443,7 @@ function offerInterview(pushId){
             	dialog.close();
             }
         }, {
-            label: '取消',
+            label: 'Cancel',
             action: function(dialog) {
                 dialog.close();
             }

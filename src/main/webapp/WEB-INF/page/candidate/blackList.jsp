@@ -235,14 +235,14 @@ var path='<%=path%>';
 									<div style="height:70px">
 										<div style="max-width:400px;float:left">
 											<ul class="pagination pagination-centered">
-												<li><a href="#" id="fristPage" onclick="loadBlackList('frist')">首页</a></li>
-												<li><a href="#" id="previousPage" onclick="loadBlackList('previous')">上一页</a></li>
-												<li><a href="#" id="nextPage" onclick="loadBlackList('next')">下一页</a></li>
-												<li><a href="#" id="lastPage" onclick="loadBlackList('last')">末页</a></li>
+												<li><a href="#" id="fristPage" onclick="loadBlackList('frist')">First</a></li>
+												<li><a href="#" id="previousPage" onclick="loadBlackList('previous')">Last</a></li>
+												<li><a href="#" id="nextPage" onclick="loadBlackList('next')">Next</a></li>
+												<li><a href="#" id="lastPage" onclick="loadBlackList('last')">End</a></li>
 											</ul>
 										</div>
 										<div style="max-width:400px;float:right;margin-top:30px;">
-										每页<span id="pageDataCount"></span>条&nbsp;&nbsp;第<span id="currentPage"></span>页&nbsp;/&nbsp;共<span id="pageCount"></span>页&nbsp;&nbsp;共<span id="dataCount"></span>条
+										<b><span id="currentPage"></span> / <span id="pageCount"></span></b>
 										</div>
 									</div>
 								</form>

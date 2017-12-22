@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
 <meta charset="utf-8">
-<title>修改候选人信息</title>
+<title>PMO</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description"
 	content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">

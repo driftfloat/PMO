@@ -511,7 +511,7 @@ $("#modifyName").bind("click",function(){
 //批量异动部门
 $('#transfer').bind("click", function(){
 	if(lobArray.length==0){
-		alert("请先选择需要批量修改的员工。");
+		alert("Please choose employees.");
 	}else{
 		$('#modifyMadal').modal('show');
 		$('#staffNames').val(staffNameArray);
@@ -560,10 +560,10 @@ function updateProperties(){
 		type:"post",
 		success:function(result){
 			if(result){
-				alert("员工信息批量修改成功。")
+				alert("Information modified succesffully.")
 				
 			}else{
-				alert("员工信息批量修改失败。")
+				alert("Information modified unsuccesffully.")
 			}
 			
 		}
@@ -586,10 +586,10 @@ function updateRoles(){
 		type:"post",
 		success:function(result){
 			if(result){
-				alert("员工信息批量修改成功。")
+				alert("Information modified succesffully.")
 				
 			}else{
-				alert("员工信息批量修改失败。")
+				alert("Information modified unsuccesffully.")
 			}
 			
 		}
@@ -611,10 +611,10 @@ function updateDept(){
 		type:"post",
 		success:function(result){
 			if(result){
-				alert("员工信息批量修改成功。")
+				alert("Information modified succesffully.")
 				
 			}else{
-				alert("员工信息批量修改失败。")
+				alert("Information modified unsuccesffully.")
 			}
 			
 		}
@@ -634,11 +634,11 @@ function updateRM(){
 		type:"post",
 		success:function(result){
 			if(result){
-				alert("员工信息批量修改成功。");
+				alert("Information modified succesffully.");
 				$('#modifyMadal').modal('hide');
 				loadEmployeeList();
 			}else{
-				alert("员工信息批量修改失败。");
+				alert("Information modified unsuccesffully.");
 			}
 		}
 	});
