@@ -4,6 +4,7 @@ public class TransferDept {
    
 	private String staffIds;
 	private String[] staffs;
+	private String employeeId;
 	private String lob;
 	private String projectName;
 	private String sowNum;
@@ -12,6 +13,13 @@ public class TransferDept {
 	private String engagementType;
 	private String msaRole;
 	private String nickName;
+	
+	public String getEmployeeId() {
+		return employeeId;
+	}
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
+	}
 	public String getLob() {
 		return lob;
 	}

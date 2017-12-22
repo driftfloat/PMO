@@ -22,7 +22,7 @@ public class EmployeeModifyController {
     	String staffIds=transferDept.getStaffIds();
     	String[] staffs=staffIds.split(",");
     	for(int i=0;i<staffs.length;i++){
-    		transferDept.setLob(staffs[i]);
+    		transferDept.setEmployeeId(staffs[i]);
     		if(!employeeModifyService.modifyProperties(transferDept)){
     			result = false;
     		}
@@ -37,7 +37,7 @@ public class EmployeeModifyController {
     	String staffIds=transferDept.getStaffIds();
     	String[] staffs=staffIds.split(",");
     	for(int i=0;i<staffs.length;i++){
-    		transferDept.setLob(staffs[i]);
+    		transferDept.setEmployeeId(staffs[i]);
     		if(!employeeModifyService.modifyRoles(transferDept)){
     			result = false;
     		}
@@ -52,7 +52,7 @@ public class EmployeeModifyController {
     	String staffIds=transferDept.getStaffIds();
     	String[] staffs=staffIds.split(",");
     	for(int i=0;i<staffs.length;i++){
-    		transferDept.setLob(staffs[i]);
+    		transferDept.setEmployeeId(staffs[i]);
     		if(!employeeModifyService.modifyDept(transferDept)){
     			result = false;
     		}
@@ -67,7 +67,7 @@ public class EmployeeModifyController {
     	String staffIds=transferDept.getStaffIds();
     	String[] staffs=staffIds.split(",");
     	for(int i=0;i<staffs.length;i++){
-    		transferDept.setLob(staffs[i]);
+    		transferDept.setEmployeeId(staffs[i]);
     		if(!employeeModifyService.modifyRM(transferDept)){
     			result = false;
     		}

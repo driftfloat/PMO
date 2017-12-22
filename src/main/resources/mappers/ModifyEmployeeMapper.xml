@@ -8,7 +8,7 @@
 	             SOW=#{sowNum},
 	             SOW_EXPIRED_DATE=#{sowExpiredDate},
 	             ENGAGEMENT_TYPE=#{engagementType}
-	    where lob=#{lob}
+	    where EMPLOYEE_ID=#{employeeId}
 	</update>
 	<update id="modifyRoles" parameterType="com.pmo.dashboard.entity.TransferDept">
 	  update t_employee
@@ -16,18 +16,18 @@
 	            SKILL=#{skill},
 	            STAFF_REGION=#{staffRegion},
 	            BILL_RATE=#{billRate}
-	        where lob=#{lob}
+	        where EMPLOYEE_ID=#{employeeId}
 	</update>
 	<update id="modifyDept" parameterType="com.pmo.dashboard.entity.TransferDept">
 	  update t_employee 
 	        set HSBC_SUBDEPT_ID=#{hsbcSubDept},
 	            HSBC_MANAGER=#{hsbcManager}
-	         where lob=#{lob}
+	          where EMPLOYEE_ID=#{employeeId}
 	</update>
 	
 	<update id="modifyRM" parameterType="com.pmo.dashboard.entity.TransferDept">
 	  update t_employee 
 	        set RM_USER_ID=#{nickName}
-	         where lob=#{lob}
+	         where EMPLOYEE_ID=#{employeeId}
 	</update>
 </mapper>

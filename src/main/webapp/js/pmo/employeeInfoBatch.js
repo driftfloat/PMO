@@ -210,9 +210,10 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 			for (var i = 0; i < result.data.length; i++) {
 				var staffName=result.data[i].staffName;
 				var lob=result.data[i].lob;
+				var employeeId=result.data[i].employeeId;
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
-				var td1 = $("<td><input id='ls"+ lob + "' type='checkbox' onclick=checkedEmployee('"+lob+"','"+staffName+"') ></td>");
+				var td1 = $("<td><input id='ls"+ employeeId + "' type='checkbox' onclick=checkedEmployee('"+lob+"','"+staffName+"','"+employeeId+"') ></td>");
 				var td2 = $("<td>"
 						+ result.data[i].hsbcStaffId
 						+ "</td>");
@@ -241,6 +242,26 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 				var td9 = null;
 				
 				td9 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>Detail</a></td>");
+			
+				if((result.data[i].hsbcStaffId)==null){
+					var td2 = $("<td></td>");
+				}
+				if((result.data[i].eHr)==null){
+					var td3 = $("<td></td>");
+				}
+				if((result.data[i].lob)==null){
+					var td4 = $("<td></td>");
+				}
+				if((result.data[i].csSubDeptName)==null){
+					var td7 = $("<td></td>");
+				}
+				if((result.data[i].resourceStatus)==null){
+					var td8 = $("<td></td>");
+				}
+				if((result.data[i].nickname)==null){
+					var td81 = $("<td></td>");
+				}
+				
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
@@ -454,9 +475,9 @@ $('#searchBtn').bind("click", function(){
 
 
 
-function checkedEmployee(lob,staffName){
-	if($('#ls'+lob+'').is(':checked')){
-		lobArray.push(lob);
+function checkedEmployee(lob,staffName,employeeId){
+	if($('#ls'+employeeId+'').is(':checked')){
+		lobArray.push(employeeId);
 		staffNameArray.push(staffName+":"+lob);
 		$('#transferBox').show();
 		$('#transBox').val(staffNameArray+";");
