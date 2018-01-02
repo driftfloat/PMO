@@ -117,8 +117,42 @@ function loadScSubDeptName(){
 		})
 	})
 }
+function loadCSSubDept(result){
+	var userType = result.user.user_type;
+	var csSubDeptNames = result.csSubDeptNames;
+	$.ajax({
+		url:path+'/service/csDept/queryAllCSSubDeptName',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(list){
+			$("#csSubDept").empty();
+			$("#csSubDept").append("<option value=''>--Option--</option>");
+			for(var i = 0;i<list.length;i++){
+				$("#csSubDept").append("<option>"+list[i].csSubDeptName+"</option>");
+			}
+			
+			if(userType=='2' || userType=='3' || userType=='4'){
+				if(csSubDeptNames.length==1){
+					$('#csSubDept').val(result.csSubDeptNames[0]);
+					$("#csSubDept").attr("disabled","disabled");
+				}else if(csSubDeptNames.length>1){
+					$("#csSubDept").empty();
+					for(var i = 0;i<csSubDeptNames.length;i++){
+						$("#csSubDept").append("<option>"+csSubDeptNames[i]+"</option>");
+						$('#csSubDept').val(result.pageInfo.csSubDeptName);
+					}
+				}
+			}else{
+				$('#csSubDept').val(result.pageInfo.csSubDeptName);
+				
+			}
+		}
+	})
+}
 
-function loadCSSubDept(){
+/*function loadCSSubDept(){
 	$.ajax({
 		url:path+'/service/csDept/queryAllCSSubDept',
 		dataType:"json",
@@ -147,7 +181,7 @@ function loadCSSubDept(){
 			}
 		}
 	})
-}
+}*/
 /*异步加载Department信息*/
 /*function loadDepartment(){
 	$.ajax({
@@ -281,7 +315,7 @@ function loadDemandList(currPage){
 				}
 			});
 			
-            loadCSSubDept();			
+            loadCSSubDept(result);			
 			loadCSBu(result);
 		}
 	})

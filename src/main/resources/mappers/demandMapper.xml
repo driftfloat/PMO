@@ -89,7 +89,7 @@
 		select *
 		from  t_demand a,t_cs_dept b 
 		<where>
-		    b.cs_subdept_id=a.cs_subdept
+		    b.cs_subdept_id=a.cs_subdept <!-- and(( 1 = 1  -->
 			<if test="demand.skill!=null and demand.skill!=''">
 				and a.SKILL = #{demand.skill}
 			</if>
@@ -104,6 +104,9 @@
 			</if>
 			<if test="csBuName!=null and csBuName!=''">
 				and B.CS_BU_NAME = #{csBuName}
+			</if>
+			<if test="demand.csDeptName!=null and demand.csDeptName!=''">
+				and B.CS_SUBDEPT_NAME = #{demand.csDeptName}
 			</if>
 			 <choose>
 				<when test="demand.csSubDept!=null and demand.csSubDept!=''">
@@ -125,6 +128,7 @@
 				</foreach>
 			</if> -->
 		</where>
+		<!-- ) OR a.status = 'Open') -->
 		limit #{num}, #{pageCondition.pageSize}
 	</select>
 	
@@ -162,7 +166,7 @@
 		select count(1)
 		from  t_demand a,t_cs_dept b 
 		<where>
-		    b.cs_subdept_id=a.cs_subdept
+		    b.cs_subdept_id=a.cs_subdept <!-- and (( 1 = 1  -->
 			<if test="demand.skill!=null and demand.skill!=''">
 				and a.SKILL = #{demand.skill}
 			</if>
@@ -181,6 +185,9 @@
 			<if test="demand.csSubDept!=null and demand.csSubDept!=''">
 			    and a.CS_SUBDEPT = #{demand.csSubDept}
 			</if>
+			<if test="demand.csDeptName!=null and demand.csDeptName!=''">
+				and B.CS_SUBDEPT_NAME = #{demand.csDeptName}
+			</if>
 			<!-- <if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
 				and HSBC_SUBDEPT_ID in 
 				<foreach item="item" collection="hsbcSubDeptIdList" open="(" separator="," close=")">
@@ -188,7 +195,7 @@
 				</foreach>
 			</if> -->
 		</where>
-		
+		<!-- ) OR a.status = 'Open') -->
 	</select>
 	<select id="queryDemandCountForCandidate" parameterType="java.util.HashMap" resultType="int">
 		select count(1)

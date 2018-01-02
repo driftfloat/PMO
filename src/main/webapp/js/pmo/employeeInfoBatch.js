@@ -191,7 +191,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 	var pageState = pageState;
 	
 	$.ajax({
-		url:path+"/service/employeeInfo/queryEmployeeList",
+		url:path+"/service/employeeInfo/queryBatchEmployeeList",
 		dataType:"json",
 		async:true,
 		data:{"staffName":staffName,"resourceStatus":resourceStatus,"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob,"rmUserId":rmName},
@@ -304,11 +304,22 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 			loadCSBu(result);
 			
 			getUserForRM(result);
+			
+			rmAuthority(result);
 		}
 		
 	})
 }
 
+//RM修改权限
+function rmAuthority(result){
+	
+	var userType = result.user.user_type;
+	if(userType == '3'){
+		 $("#modifyName option[value='4']").remove();
+	}
+	
+}
 
 //gkf add
 function getUserForRM(result){

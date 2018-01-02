@@ -17,7 +17,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.xalan.transformer.TransformState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -152,13 +151,28 @@ public class DemandController {
 		  User user = (User) request.getSession().getAttribute("loginUser");
 		  
 	        
-		 
-	      String userType = user.getUser_type();
+		//woyonde 
+	    List<String>  csSubDeptNames = new ArrayList<String>();   
+	        
+	    List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsDeptId().split(","));
+	        
+	    if(cSDepts != null && !cSDepts.isEmpty()){        
+	       for (CSDept csDept : cSDepts) {
+	            csSubDeptNames.add(csDept.getCsSubDeptName());
+	       }
+	    }
+		  
+		  
+	     String userType = user.getUser_type();
 		 if(("".equals(demand.getCsSubDept()) || demand.getCsSubDept() == null) &&
 	                ("".equals(csBuName) || csBuName == null)){
 	            
 	            if("1".equals(userType)|| "2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
 	                csBuName = user.getBu();
+	            }
+	            
+	            if("2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
+	                demand.setCsDeptName(cSDepts.get(0).getCsSubDeptName());              
 	            }
 	            
 	        }
@@ -168,6 +182,7 @@ public class DemandController {
 		result.put("list", list);
 	    result.put("user", user);
 		result.put("pageCondition", pageCondition);
+		result.put("csSubDeptNames", csSubDeptNames);
 		return result;
 	}
 	

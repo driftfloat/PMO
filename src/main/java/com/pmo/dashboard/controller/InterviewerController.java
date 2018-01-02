@@ -14,12 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmo.dashboard.entity.Interviewer;
-import com.pmo.dashboard.entity.PageCondition;
 import com.pmo.dashboard.entity.User;
 import com.pom.dashboard.service.InterviewerService;
 
@@ -66,6 +64,13 @@ public class InterviewerController
     	interviewer.setEmployeeId(user.getUserId());
     	List<Interviewer> list = interviewerService.queryInterviewerList(interviewer);
     	for(int i=0;i<list.size();i++){
+    	    
+    	    //处理null ""
+    	    if(list.get(i).getExperienceYearas()==null){
+    	        list.get(i).setExperienceYearas("");
+    	        continue;
+    	    }
+    	    
     		//获取毕业时间
     		String graduate_date=list.get(i).getExperienceYearas();
     		//将毕业时间转换成毫秒

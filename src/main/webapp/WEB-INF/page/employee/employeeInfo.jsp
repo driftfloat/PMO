@@ -87,7 +87,7 @@ var path='<%=path%>';
 							    
 							    <form id="employeeForm" method="post" class="form-horizontal">
 									
-									
+									<input id="userId" name="userId" type="hidden" value="${loginUser.userId}"/>
 										<div class="group">
 										<label class="col-lg-2 control-label">BU</label>
 										<div class="col-lg-4">
