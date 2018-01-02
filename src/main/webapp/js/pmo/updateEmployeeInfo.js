@@ -227,7 +227,7 @@ function loadResourceStatus(employee) {
 			$("#terminatedDateDiv").show();
 			$("#terminationReasonDiv").hide();
 		} else {
-			$("#terminatedDateDiv").hide();
+			$("#terminatedDateDiv").show();
 			$("#terminationReasonDiv").show();
 		}
 	});
