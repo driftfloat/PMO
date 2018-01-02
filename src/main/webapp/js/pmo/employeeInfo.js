@@ -25,16 +25,19 @@ function loadResourceStatus(result){
 
 $("#csDept").change(function(){
 	$("#exportExcel").attr("disabled", true);
+	
 })
 
 
 $("#csSubDept").change(function(){
 	$("#exportExcel").attr("disabled", true);
+	loadUserForRM();
 })
 
 
 $("#csBu").change(function(){
 	$("#exportExcel").attr("disabled", true);
+	loadUserForRM();
 })
 
 
@@ -119,9 +122,7 @@ function exportCondition(){
 }
 
 
-
-
-
+var allCSSubDeptName;
 function loadCSSubDept(result){
 	var userType = result.user.user_type;
 	var csSubDeptNames = result.csSubDeptNames;
@@ -132,6 +133,7 @@ function loadCSSubDept(result){
 		cache:false,
 		type:"post",
 		success:function(list){
+			allCSSubDeptName= list;
 			$("#csSubDept").empty();
 			$("#csSubDept").append("<option value=''>--Option--</option>");
 			for(var i = 0;i<list.length;i++){
@@ -165,6 +167,7 @@ function editEmployeeInfo(employeeId){
 }
 
 function loadCSBu(result){
+	var csBuNames = result.csBuNames;
 	var userType = result.user.user_type;
 	var url = path+'/json/csBuName.json'
 	$.getJSON(url,  function(data) {
@@ -174,8 +177,16 @@ function loadCSBu(result){
 	    	   $("#csBu").append("<option>"+item.name+"</option>");
 	       })
 	       if(userType=='1' || userType=='2' || userType=='3' || userType=='4'){
-				$('#csBu').val(result.user.bu);
-				$("#csBu").attr("disabled","disabled");
+	    	   if(csBuNames.length==1){   		   
+	    		   $('#csBu').val(result.user.bu);
+	    		   $("#csBu").attr("disabled","disabled");
+	    	   }else if(csBuNames.length>1){
+	    		   $("#csBu").empty();
+	    		   for(var i = 0;i<csBuNames.length;i++){
+						$("#csBu").append("<option>"+csBuNames[i]+"</option>");
+						$('#csBu').val(result.pageInfo.csbuName);
+					}
+	    	   }
 			}else{
 				$('#csBu').val(result.pageInfo.csbuName);
 			}
@@ -185,7 +196,8 @@ function loadCSBu(result){
 //gkf add
 function getUserForRM(result){
 	var bu = result.user.bu;//事业部
-	var dus = result.user.csDeptId.split(",");//部门
+	var du= result.user.csDeptId;//部门
+	
 	$.ajax({
 		url:path+'/service/user/getUserForRM',
 		dataType:"json",
@@ -196,12 +208,11 @@ function getUserForRM(result){
 			$("#RM").empty();
 			$("#RM").append("<option value=''>--Option--</option>");			
 			for(var i = 0;i<list.length;i++){
-				if(bu!=null&&dus!=null){
-					for(var j = 0;j < dus.length;j++){
-						if(bu==list[i].bu&&dus[j]==list[i].csDeptId){
-							$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
-						}
+				if(bu!=null&& bu !="" && du!=null &&  du!=""){
+					if(bu.indexOf(list[i].bu)!=-1 && du.indexOf(list[i].csDeptId)!=-1){
+						$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
 					}
+					
 				}else{
 					$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
 				}
@@ -211,6 +222,47 @@ function getUserForRM(result){
 		}
 	})
 }
+
+function changeCSDeptToId(du){
+	var list = allCSSubDeptName;
+	var csDeptName;
+	for(var i=0;i<list.length;i++){
+		if(list[i].csSubDeptName==du){
+			csDeptName = list[i].csSubDeptId;
+			break;
+		}
+	}
+	return csDeptName;
+}
+
+function loadUserForRM(){
+	var bu =$("#csBu").val();//事业部
+	var du= $("#csSubDept").val();//部门
+	csDeptName = changeCSDeptToId(du);
+	$.ajax({
+		url:path+'/service/user/getUserForRM',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(list){
+			$("#RM").empty();
+			$("#RM").append("<option value=''>--Option--</option>");			
+			for(var i = 0;i<list.length;i++){
+				if(bu!=null&& bu !="" && du!=null &&  du!=""){
+					if(bu.indexOf(list[i].bu)!=-1 && csDeptName.indexOf(list[i].csDeptId)!=-1){
+						$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
+					}
+					
+				}else{
+					$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
+				}
+			}				
+		}
+	})
+}
+
+
 
 function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 	var csDeptName = csDeptName;
