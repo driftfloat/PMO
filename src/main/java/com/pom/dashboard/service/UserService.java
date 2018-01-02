@@ -19,5 +19,7 @@ public interface UserService {
 	int updatePwd(String userId, String newPwd);
 	
 	List<User> getUserForRM();
+	
+	boolean addUser(User user);
 
 }
