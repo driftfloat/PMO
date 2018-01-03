@@ -345,7 +345,7 @@ function demandDetailUpdate(demandId){
 //gkf
 function backgroundOpe(){
 	if($('#candidateName').val()==""){
-		alert("请选择需要维护的人员！");
+		alert("Please choose candidate names.");
 		return;
 	}
 	$('#feedBackDialog').modal('show');
@@ -364,7 +364,7 @@ $('#interviewForm').bootstrapValidator({
 			group : '.group',
 			validators : {
 				notEmpty : {
-					message : '请选择'
+					message : 'please select.'
 				},
 			}
 		},
@@ -397,7 +397,7 @@ function updateBackForCandidate(e){
 		type : "post",
 		success : function(resultFlag) {
 			if (resultFlag) {
-				alert("维护成功！")
+				alert("Information modified succesffully.")
 				$('#candidateId').val("");
 				$('#candidateName').val("");
 				$('#candidatePeople').val("");
