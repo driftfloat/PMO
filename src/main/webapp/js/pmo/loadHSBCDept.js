@@ -8,6 +8,7 @@ $(function(){
 	loadBillingCurrency();
   //loadResourceStatus();
 	loadCSDept();
+	loadCsBuName();
 	loadStaffRegion();
 	loadStaffLocation();
 	loadLocationType();
@@ -212,6 +213,17 @@ function loadStaffRegion(){
 	       $.each(data, function(i, item) {
 	    	   $("#staffRegion").append("<option>"+item.name+"</option>");
 	    	   regionMap.set(item.name,item.key);
+	       })
+	});
+}
+
+var csBuNameMap = new Map();
+function loadCsBuName(){
+	var url = path+'/json/csBuName.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#bu").append("<option>"+item.name+"</option>");
+	    	   csBuNameMap.set(item.name,item.key);
 	       })
 	});
 }

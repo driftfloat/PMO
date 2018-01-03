@@ -97,5 +97,16 @@ public class User {
         this.bu = bu;
     }
 	
-	
+    public User(String userId, String userName, String nickname,
+            String password, String user_type, String bu, String csDeptId)
+    {
+        super();
+        this.userId = userId;
+        this.userName = userName;
+        this.nickname = nickname;
+        this.password = password;
+        this.user_type = user_type;
+        this.bu = bu;
+        this.csDeptId = csDeptId;
+    }
 }

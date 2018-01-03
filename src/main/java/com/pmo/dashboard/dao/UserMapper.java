@@ -21,5 +21,7 @@ public interface UserMapper {
 	int updatePwd(@Param("userId")String userId, @Param("newPwd")String newPwd);
 	
 	List<User> getUserForRM();
+	
+	int addUser(User user);
 
 }
