@@ -41,5 +41,12 @@ public class UserServiceImpl implements UserService{
 		
 		return userMapper.getUserForRM();
 	}
+	@Override
+	public boolean addUser(User user) {
+		if(userMapper.addUser(user)>0){
+			return true;
+		}
+		return false;
+	}
 
 }

@@ -4,10 +4,12 @@ $(function(){
 	loadEngagementType();
 	loadRole();
 	loadSkill();
+	loadGbGf();
 	loadBillingEntity();
 	loadBillingCurrency();
   //loadResourceStatus();
 	loadCSDept();
+	loadCsBuNewName();
 	loadStaffRegion();
 	loadStaffLocation();
 	loadLocationType();
@@ -15,7 +17,7 @@ $(function(){
 	dateType();
 	dateType0();
 	dateType1();
-  //dateType2();
+	dateType2();
 	
 })
 
@@ -54,11 +56,19 @@ function addEmployee(){
 		var billRate = $('#billRate').val();
 		var terminationReason = $('#terminationReason').val();
 		
+		var email = $('#email').val();
+		var gbGf = $('#gbGf').val();
+		var entryDate = $('#entryDate1').val();
 
 		$.ajax({
 			url:path+'/service/employee/addEmployee',
 			dataType:"json",
-			data:{"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":'Active',"terminatedDate":''},
+			data:{"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,
+				"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,
+				"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,
+				"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,
+				"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":'Active',"terminatedDate":'',
+				"email":email,"gbGf":gbGf,"entryDate":entryDate},
 			async:true,
 			cache:false,
 			type:"post",
@@ -157,23 +167,23 @@ function dateType1(){
 	});
 }
 
-//function dateType2(){
-//	$('.form_datetime2').datetimepicker({
-//		weekStart: 1,
-//		minView:'month',
-//		todayBtn:  1,
-//		autoclose: 1,
-//		todayHighlight: 1,
-//		startView: 2,
-//		forceParse: 0,
-//		language:'zh-CN',
-//		format: 'yyyy-mm-dd',
-//		pickerPosition: 'bottom-left',
-//		showMeridian: 1
-//	}).on('changeDate', function(ev){		 
-//		 $('#registerEmployeeForm').bootstrapValidator('revalidateField', 'terminatedDate1'); 
-//	});
-//}
+function dateType2(){
+	$('.form_datetime2').datetimepicker({
+		weekStart: 1,
+		minView:'month',
+		todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+		language:'zh-CN',
+		format: 'yyyy-mm-dd',
+		pickerPosition: 'bottom-left',
+		showMeridian: 1
+	}).on('changeDate', function(ev){		 
+		 $('#registerEmployeeForm').bootstrapValidator('revalidateField', 'entryDate1'); 
+	});
+}
 
 function loadOnshoreOrOffshore(){
 	var url = path+'/json/onshoreOrOffshore.json'
@@ -216,6 +226,17 @@ function loadStaffRegion(){
 	});
 }
 
+var csBuNewNameMap = new Map();
+function loadCsBuNewName(){
+	var url = path+'/json/csBuNewName.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#bu").append("<option>"+item.name+"</option>");
+	    	   csBuNewNameMap.set(item.name,item.key);
+	       })
+	});
+}
+
 
 function loadResourceStatus(){
 	var url = path+'/json/resourceStatus.json'
@@ -254,6 +275,14 @@ function loadSkill(){
 	});
 }
 
+function loadGbGf(){
+	var url = path + '/json/gbGf.json';
+	$.getJSON(url, function(data){
+		$.each(data, function(i, item){
+			$("#gbGf").append("<option>"+item.name+"</option>");
+		})
+	});
+}
 
 function loadRole(){
 	var url = path+'/json/role.json'
@@ -293,7 +322,7 @@ function loadCSDept(){
 		cache:false,
 		type:"post",
 		success:function(result){
-			var userType = result.user.user_type;
+			var userType = result.user.userType;
 			
 			var csSubs = result.csSubDepts;
 			if(userType=='0'){

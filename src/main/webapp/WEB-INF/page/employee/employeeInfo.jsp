@@ -287,7 +287,7 @@ var path='<%=path%>';
 									<label><input type="checkbox" name="MSA Role"/>MSA Role&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Skills/Technology"/>Skills/Technology&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Billing Currency"/>Billing Currency&nbsp;&nbsp;</label>
-									<c:if test="${!(sessionScope.loginUser.user_type eq '5') || (sessionScope.loginUser.user_type eq '6')}">
+									<c:if test="${!(sessionScope.loginUser.userType eq '5') || (sessionScope.loginUser.userType eq '6')}">
 									<label><input type="checkbox" name="Bill Rate"/>Bill Rate&nbsp;&nbsp;</label>
 									</c:if>
 									<label><input type="checkbox" name="Resource Status (Active/Terminated)"/>Resource Status (Active/Terminated)&nbsp;&nbsp;</label>

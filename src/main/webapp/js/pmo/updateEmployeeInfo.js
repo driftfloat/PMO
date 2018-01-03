@@ -85,10 +85,14 @@ function updateEmployee() {
 		var resourceStatus = $('#resourceStatus').val();
 		var terminatedDate = $('#terminatedDate1').val();
 		var terminationReason = $('#terminationReason').val();
+		var email =  $('#email').val();
+		var entryDate = $('#entryDate1').val();
+		var gbGf = $('#gbGf').val();
 		$.ajax({
 			url:path+'/service/employee/updateEmployee',
 			dataType:"json",
-			data:{"employeeId":employeeId,"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason},
+			data:{"employeeId":employeeId,"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason,
+				"email":email,"entryDate":entryDate,"gbGf":gbGf},
 			async:true,
 			cache:false,
 			type:"post",
@@ -137,7 +141,7 @@ function loadEmployeeInfo() {
 			loadOnshoreOrOffshore(employee);
 			loadPersonHsbcDept(employee);
 			loadTerminationReason(employee);
-
+			loadGbGf(employee);
 			$('#hsbcStaffId').val(employee.hsbcStaffId);
 			$('#lob').val(employee.lob);
 			$('#hsbcProjectName').val(employee.projectName);
@@ -151,7 +155,8 @@ function loadEmployeeInfo() {
 			$('#billRate').val(employee.billRate);
 			$('#terminatedDate1').val(employee.terminatedDate);
 			$('#eHr').val(employee.eHr);
-
+			$('#email').val(employee.email);
+			$('#entryDate1').val(employee.entryDate);
 		}
 	})
 }
@@ -226,6 +231,9 @@ function loadResourceStatus(employee) {
 		} else if ($('#resourceStatus').val() == "Released") {
 			$("#terminatedDateDiv").show();
 			$("#terminationReasonDiv").hide();
+		}else if ($('#resourceStatus').val() == "Transfer") {
+			$("#terminatedDateDiv").show();
+			$("#terminationReasonDiv").hide();
 		} else {
 			$("#terminatedDateDiv").show();
 			$("#terminationReasonDiv").show();
@@ -241,7 +249,10 @@ $("#resourceStatus").bind("click", function() {
 	} else if ($('#resourceStatus').val() == "Released") {
 		$("#terminatedDateDiv").show();
 		$("#terminationReasonDiv").hide();
-	} else {
+	} else if ($('#resourceStatus').val() == "Transfer") {
+		$("#terminatedDateDiv").show();
+		$("#terminationReasonDiv").hide();
+	}  else {
 		$("#terminatedDateDiv").show();
 		$("#terminationReasonDiv").show();
 	}
@@ -294,7 +305,15 @@ function loadRole(employee) {
 		$('#role').val(employee.role);
 	});
 }
-
+function loadGbGf(employee){
+	var url = path + '/json/gbGf.json';
+	$.getJSON(url, function(data){
+		$.each(data, function(i, item){
+			$("#gbGf").append("<option>"+item.name+"</option>");
+		})
+		$('#gbGf').val(employee.gbGf);
+	});
+}
 function loadStaffCategory(employee) {
 	var url = path + '/json/staffCategory.json'
 	$.getJSON(url, function(data) {
@@ -324,7 +343,7 @@ function loadCSDept(employee) {
 		cache : false,
 		type : "post",
 		success : function(result) {
-			var userType = result.user.user_type;
+			var userType = result.user.userType;
 
 			var csSubs = result.csSubDepts;
 

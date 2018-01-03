@@ -5,7 +5,7 @@
 <%
 	String path = request.getContextPath();
 	User user = (User) request.getSession().getAttribute("loginUser");
-	String userType = user.getUser_type();
+	String userType = user.getUserType();
 %>
 <!DOCTYPE html>
 <html lang="en">

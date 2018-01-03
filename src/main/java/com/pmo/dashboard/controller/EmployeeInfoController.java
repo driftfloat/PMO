@@ -67,23 +67,24 @@ public class EmployeeInfoController
         
         List<String>  csSubDeptNames = new ArrayList<String>();   
         
-    	List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsDeptId().split(","));
+    	List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsdeptId().split(","));
     	
     	if(cSDepts != null && !cSDepts.isEmpty()){        
     		for (CSDept csDept : cSDepts) {
         		csSubDeptNames.add(csDept.getCsSubDeptName());
 			}
-    	}   
-    	
+    	}        
+        
+        
+        String userType = user.getUserType();
+
+      	
     	String[] csBuNames = null;
     	if(user.getBu()!=null&&user.getBu()!=""){
     		csBuNames = user.getBu().split(",");
     	}
 
-        String userType = user.getUser_type();
         
-        String csSubDeptId = null;
-       
        
         if(("".equals(csSubDeptName) || csSubDeptName == null) &&
                 ("".equals(csBuName) || csBuName == null)){
@@ -93,26 +94,12 @@ public class EmployeeInfoController
             }
             
             if("2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
-            	csSubDeptName = cSDepts.get(0).getCsSubDeptName();    
-            	csSubDeptId = cSDepts.get(0).getCsSubDeptId();
+            	csSubDeptName = cSDepts.get(0).getCsSubDeptName();            	
             }
             
         }
         
-        //change csSubDeptName to csSubDeptId for other uses except user type is  2,3,4
-		if (!"2".equals(userType) && !"3".equals(userType) && !"4".equals(userType)) {
-			//get all csDepts
-			List<CSDept> allCsDepts = csDeptService.queryAllCSDept();
-			if (csSubDeptName != null && csSubDeptName != "") {
-				for (CSDept csDept : allCsDepts) {
-					if(csSubDeptName.equals(csDept.getCsSubDeptName())){
-						csSubDeptId = csDept.getCsSubDeptId();
-						break;						
-					}
-				}
-
-			}
-		}      
+        
         
         int countPage = 0;
         
@@ -161,7 +148,6 @@ public class EmployeeInfoController
         Map<String,Object> result = new HashMap<String,Object>();
         
         result.put("csSubDeptName", csSubDeptName);
-        result.put("csSubDeptId", csSubDeptId);
 	    result.put("user", user);
         result.put("data", list);
         result.put("pageInfo", request.getSession().getAttribute("employeePageCondition"));
@@ -201,7 +187,7 @@ public class EmployeeInfoController
         //woyonde 
         List<String>  csSubDeptNames = new ArrayList<String>();   
         
-        List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsDeptId().split(","));
+        List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsdeptId().split(","));
         
         if(cSDepts != null && !cSDepts.isEmpty()){        
             for (CSDept csDept : cSDepts) {
@@ -210,7 +196,7 @@ public class EmployeeInfoController
         }        
         
         
-        String userType = user.getUser_type();
+        String userType = user.getUserType();
        
        
         if(("".equals(csSubDeptName) || csSubDeptName == null) &&

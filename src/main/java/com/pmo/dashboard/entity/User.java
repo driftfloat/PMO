@@ -21,7 +21,7 @@ public class User {
 	private String password;
 	
 	//用户类型
-	private String user_type;
+	private String userType;
 	
 	//所属部门
 	private CSDept csDept;
@@ -29,7 +29,7 @@ public class User {
 	//事业部
 	private String bu;
 	
-	private String csDeptId;
+	private String csdeptId;
 
 	public CSDept getCsDept() {
 		return csDept;
@@ -71,23 +71,15 @@ public class User {
 		this.password = password;
 	}
 
-	public String getUser_type() {
-		return user_type;
+    public String getCsdeptId() {
+		return csdeptId;
 	}
 
-	public void setUser_type(String user_type) {
-		this.user_type = user_type;
+	public void setCsdeptId(String csdeptId) {
+		this.csdeptId = csdeptId;
 	}
 
-	public String getCsDeptId() {
-		return csDeptId;
-	}
-
-	public void setCsDeptId(String csDeptId) {
-		this.csDeptId = csDeptId;
-	}
-
-    public String getBu()
+	public String getBu()
     {
         return bu;
     }
@@ -96,6 +88,25 @@ public class User {
     {
         this.bu = bu;
     }
-	
-	
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	public User(String userId, String userName, String nickname,
+            String password, String userType, String bu, String csDeptId)
+    {
+        super();
+        this.userId = userId;
+        this.userName = userName;
+        this.nickname = nickname;
+        this.password = password;
+        this.userType = userType;
+        this.bu = bu;
+        this.csdeptId = csDeptId;
+    }
 }

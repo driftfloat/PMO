@@ -37,8 +37,8 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 	@Override
 	public List<CandidatePush> queryPushedCandidate(User user, String status,PageCondition pageCondition) {
 		Map<String, Object> params = new HashMap<String,Object>();
-		String csSubDeptId = user.getCsDeptId();
-		String userType = user.getUser_type();
+		String csSubDeptId = user.getCsdeptId();
+		String userType = user.getUserType();
 		String userId = user.getUserId();
 		params.put("userId", userId);
 		params.put("csSubDeptId", csSubDeptId);

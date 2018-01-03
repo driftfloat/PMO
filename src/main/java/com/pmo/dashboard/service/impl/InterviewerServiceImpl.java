@@ -51,7 +51,7 @@ public class InterviewerServiceImpl implements InterviewerService
 		User user = this.selectUser(employeeId);
 		String userType = null;
 		if(user!=null){
-			userType = user.getUser_type();
+			userType = user.getUserType();
 			//userType = "1";
 		}
 		//设置总页数

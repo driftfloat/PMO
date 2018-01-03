@@ -47,7 +47,7 @@ public class LoginController
             final HttpServletResponse response)
     {
     	User u=(User)session.getAttribute("loginUser");
-    	List<UserAuthority> list= userAuthorityService.queryUserAuthority(u.getUser_type());    	
+    	List<UserAuthority> list= userAuthorityService.queryUserAuthority(u.getUserType());    	
     	ModelAndView v =new ModelAndView();    	
     	v.setViewName("left");
     	v.addObject("list", list);

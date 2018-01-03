@@ -7,8 +7,8 @@
 		<result property="userName" column="USER_NAME" javaType="String" />
 		<result property="nickname" column="NICKNAME" javaType="String" />
 		<result property="password" column="PASSWORD" javaType="String" />
-		<result property="user_type" column="USER_TYPE" javaType="String" />
-		<result property="csDeptId" column="CSDEPT_ID" javaType="String" />
+		<result property="userType" column="USER_TYPE" javaType="String" />
+		<result property="csdeptId" column="CSDEPT_ID" javaType="String" />
 		<result property="bu" column="BU" javaType="String" />
 	</resultMap>
 	
@@ -30,4 +30,56 @@
 	<select id="getUserForRM"  resultMap="userMap">
 		select * from t_user where USER_TYPE = "3" 
 	</select>
+	
+	<insert id="addUser" parameterType="com.pmo.dashboard.entity.User" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="nickname != null" >
+        NICKNAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="userType != null" >
+        USER_TYPE,
+      </if>
+      <if test="csdeptId != null" >
+        CSDEPT_ID,
+      </if>
+      <if test="bu != null" >
+        BU,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="csdeptId != null" >
+        #{csdeptId,jdbcType=VARCHAR},
+      </if>
+      <if test="bu != null" >
+        #{bu,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  
 </mapper>
