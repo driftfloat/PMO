@@ -36,12 +36,14 @@ function loadEmployeeInfo(){
 			$('#billRate').val(employee.billRate);
 			$('#resourceStatus').val(employee.resourceStatus);
 			$('#terminatedDate1').val(employee.terminatedDate);
-			// $('#terminationReason').val(employee.terminationReason);
 			$('#eHr').val(employee.eHr);
 			$('#csSubDept').val(employee.csSubDept)
 			loadHSBCSubDept(employee.hsbcSubDept);
 			loadTerminationReason(employee);
 			loadCSDept(employee);
+			$('#email').val(employee.email);
+			$('#entryDate1').val(employee.entryDate);
+			$('#gbGf').val(employee.gbGf);
 		}
 	})
 }

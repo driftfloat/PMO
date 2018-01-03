@@ -94,14 +94,14 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-sm-2 control-label">E-HR</label>
 											<div class="col-sm-4">
-												<input type="text" readonly="true" class="form-control" name="eHr"
+												<input type="text" readonly class="form-control" name="eHr"
 													id="eHr" />
 											</div>
 										</div>
 										<div class="group">
 											<label class="col-sm-2 control-label">LOB</label>
 											<div class="col-sm-4">
-												<input type="text" readonly="true" class="form-control" name="lob"
+												<input type="text" readonly class="form-control" name="lob"
 													id="lob" />
 											</div>
 										</div>
@@ -114,14 +114,14 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-sm-2 control-label">HSBC Staff ID</label>
 											<div class="col-sm-4">
-												<input type="text" readonly="true" class="form-control" name="hsbcStaffId"
+												<input type="text" readonly class="form-control" name="hsbcStaffId"
 													id="hsbcStaffId" />
 											</div>
 										</div>
 										<div class="group">
 											<label class="col-sm-2 control-label">Staff Name</label>
 											<div class="col-sm-4">
-												<input type="text" readonly="true" class="form-control" name="staffName"
+												<input type="text" readonly class="form-control" name="staffName"
 													id="staffName" />
 											</div>
 										</div>
@@ -131,14 +131,14 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-sm-2 control-label">LN</label>
 											<div class="col-sm-4">
-												<input type="text" readonly="true" class="form-control" name="LN"
+												<input type="text" readonly class="form-control" name="LN"
 													id="LN" />
 											</div>
 										</div>
 										<div class="group">
 										<label class="col-lg-2 control-label">Staff Region</label>
 										<div class="col-lg-4">
-											<input type="text" readonly="true" class="form-control" name="staffRegion"
+											<input type="text" readonly class="form-control" name="staffRegion"
 												id="staffRegion" />
 											</div>
 										</div>
@@ -148,14 +148,14 @@ var path='<%=path%>';
 										<div class="group">
 										<label class="col-lg-2 control-label">Staff Location</label>
 										<div class="col-lg-4">
-											<input type="text" readonly="true" class="form-control" name="staffLocation"
+											<input type="text" readonly class="form-control" name="staffLocation"
 													id="staffLocation" />
 										</div>
 										</div>
 										<div class="group">
 										<label class="col-lg-2 control-label">Location Type</label>
 										<div class="col-lg-4">
-											<input type="text" readonly="true" class="form-control" name="locationType"
+											<input type="text" readonly class="form-control" name="locationType"
 													id="locationType" />
 										</div>
 										</div>
@@ -165,14 +165,14 @@ var path='<%=path%>';
 										<div class="group">
 										<label class="col-lg-2 control-label">Onshore or Offshore</label>
 										<div class="col-lg-4">
-											<input type="text" readonly="true" class="form-control" name="onshoreOrOffshore"
+											<input type="text" readonly class="form-control" name="onshoreOrOffshore"
 													id="onshoreOrOffshore" />
 										</div>
 										</div>
 										<div class="group">
 										<label class="col-lg-2 control-label">CS Dept</label>
 										<div class="col-lg-4">
-											<input type="text" readonly="true" class="form-control" name="csSubDept"
+											<input type="text" readonly class="form-control" name="csSubDept"
 													id="csSubDept" />
 										</div>
 										</div>
@@ -183,14 +183,14 @@ var path='<%=path%>';
 								        <div class="group">
 										<label class="col-lg-2 control-label">HSBC Dept</label>
 										<div class="col-lg-4">
-											<input type="text" readonly="true" class="form-control" name="hsbcDept"
+											<input type="text" readonly class="form-control" name="hsbcDept"
 													id="hsbcDept" />
 										</div>
 										</div>
 										<div class="group">
 										<label class="col-lg-2 control-label">HSBC Sub Dept</label>
 										<div class="col-lg-4">
-											<input type="text" readonly="true" class="form-control" name="hsbcSubDept"
+											<input type="text" readonly class="form-control" name="hsbcSubDept"
 													id="hsbcSubDept" />
 										</div>
 										</div>
@@ -200,14 +200,14 @@ var path='<%=path%>';
 									<div class="group">
 										<label class="col-lg-2 control-label">HSBC Project Name</label>
 										<div class="col-lg-4">
-											<input type="text" readonly="true" class="form-control" name="hsbcProjectName"
+											<input type="text" readonly class="form-control" name="hsbcProjectName"
 												id="hsbcProjectName" />
 										</div>
 									</div>
 									<div class="group">
 										<label class="col-lg-2 control-label">HSBC Project Manager</label>
 										<div class="col-lg-4">
-											<input type="text" readonly="true" class="form-control" name="hsbcProjectManager"
+											<input type="text" readonly class="form-control" name="hsbcProjectManager"
 												id="hsbcProjectManager" />
 										</div>
 									</div>
@@ -217,14 +217,14 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-lg-2 control-label">SOW#</label>
 											<div class="col-lg-4">
-												<input type="text" readonly="true" class="form-control" name="sow"
+												<input type="text" readonly class="form-control" name="sow"
 													id="sow" />
 											</div>
 										</div>
 										<div class="group">
 											<label class="col-lg-2 control-label">SOW# Expired Date</label>
 											<div class="col-lg-4">
-												<input type="text" readonly="true" class="form-control" name="sowExpiredDate1"
+												<input type="text" readonly class="form-control" name="sowExpiredDate1"
 													id="sowExpiredDate1" />
 											</div>
 										</div>
@@ -234,14 +234,14 @@ var path='<%=path%>';
 										<div class="group">
 										<label class="col-lg-2 control-label">Staff Category</label>
 										<div class="col-lg-4">
-											<input type="text" readonly="true" class="form-control" name="staffCategory"
+											<input type="text" readonly class="form-control" name="staffCategory"
 													id="staffCategory" />
 										</div>
 										</div>
 										<div class="group">
 										<label class="col-lg-2 control-label">Engagement Type</label>
 										<div class="col-lg-4">
-											<input type="text" readonly="true" class="form-control" name="engagementType"
+											<input type="text" readonly class="form-control" name="engagementType"
 													id="engagementType" />
 										</div>
 										</div>
@@ -251,14 +251,14 @@ var path='<%=path%>';
 									<div class="group">
 										<label class="col-lg-2 control-label">HSBC DOJ</label>
 										<div class="col-lg-4">
-										<input type="text" readonly="true" class="form-control" name="hsbcDOJ1"
+										<input type="text" readonly class="form-control" name="hsbcDOJ1"
 											id="hsbcDOJ1" />
 										</div>
 									</div>
 									<div class="group">
 										<label class="col-lg-2 control-label">Graduation Date</label>
 										<div class="col-lg-4">
-											<input type="text" readonly="true" class="form-control" name="graduationDate1"
+											<input type="text" readonly class="form-control" name="graduationDate1"
 											id="graduationDate1" />
 										</div>
 									</div>
@@ -268,14 +268,14 @@ var path='<%=path%>';
 										<div class="group">
 										<label class="col-lg-2 control-label">MSA Role</label>
 										<div class="col-lg-4">
-											<input type="text" readonly="true" class="form-control" name="role"
+											<input type="text" readonly class="form-control" name="role"
 													id="role" />
 										</div>
 										</div>
 										<div class="group">
 										<label class="col-lg-2 control-label">Skills/Technology</label>
 										<div class="col-lg-4">
-											 <input type="text" readonly="true" class="form-control" name="skill"
+											 <input type="text" readonly class="form-control" name="skill"
 													id="skill" />
 										</div>
 										</div>
@@ -285,14 +285,14 @@ var path='<%=path%>';
 										<div class="group">
 										<label class="col-lg-2 control-label">Billing Currency</label>
 										<div class="col-lg-4">
-											 <input type="text" readonly="true" class="form-control" name="billingCurrency"
+											 <input type="text" readonly class="form-control" name="billingCurrency"
 													id="billingCurrency" />
 										</div>
 										</div>
 										<div class="group">
 											<label class="col-sm-2 control-label">Bill Rate</label>
 											<div class="col-sm-4">
-												<input type="text" readonly="true" class="form-control" name="billRate"
+												<input type="text" readonly class="form-control" name="billRate"
 													id="billRate" />
 											</div>
 										</div>
@@ -302,14 +302,14 @@ var path='<%=path%>';
 										<div class="group">
 										<label class="col-lg-2 control-label">Resource Status</label>
 										<div class="col-lg-4">
-											 <input type="text" readonly="true" class="form-control" name="resourceStatus"
+											 <input type="text" readonly class="form-control" name="resourceStatus"
 													id="resourceStatus" />
 										</div>
 										</div>
 										<div class="group">
-										<label class="col-sm-2 control-label">If terminated,mention LWD</label>
+										<label class="col-sm-2 control-label">LWD</label>
 										<div class="col-lg-4">
-											 <input type="text" readonly="true" class="form-control" name="terminatedDate1"
+											 <input type="text" readonly class="form-control" name="terminatedDate1"
 													id="terminatedDate1" />
 										</div>
 									    </div>
@@ -320,11 +320,36 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-sm-2 control-label">Reason for Termination</label>
 											<div class="col-sm-4">
-												<input type="text" readonly="true" class="form-control" name="terminationReason"
+												<input type="text" readonly class="form-control" name="terminationReason"
 													id="terminationReason" />
 											</div>
 										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">Email</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="email" readonly
+													id="email" data-bv-group=".group"/>
+											</div>
+										</div>
 								</div>
+								<br/><br/>
+								<div class="form-group">
+										<div class="group">
+											<label class="col-lg-2 control-label">GB_GF</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="gbGf" readonly
+													 id="gbGf" data-bv-group=".group"/>
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">EntryDate</label>
+											<div class="col-sm-4">
+													<input class="form-control" type="text" readonly data-bv-group=".group"
+														id="entryDate1" name="entryDate1"/> 
+											</div>
+										</div>
+								</div>
+								
 								</form>
 							</div>
 						</div>

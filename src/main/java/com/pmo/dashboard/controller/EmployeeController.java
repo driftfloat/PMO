@@ -170,6 +170,10 @@ public class EmployeeController {
         String terminatedDate = request.getParameter("terminatedDate");
         String terminationReason = request.getParameter("terminationReason");
         
+        String email = request.getParameter("email");
+        String gbGf = request.getParameter("gbGf");
+        String entryDate = request.getParameter("entryDate");
+        
         Employee employee = new Employee(employeeId,eHr,lob,
                 hsbcStaffId, staffName, LN, staffRegion,
                 staffLocation, locationType, onshoreOrOffshore,
@@ -178,7 +182,7 @@ public class EmployeeController {
                 staffCategory, engagementType, hsbcDOJ,
                 graduationDate, role, skill,
                 billingCurrency, billRate, resourceStatus,
-                terminatedDate, terminationReason);
+                terminatedDate, terminationReason,email,gbGf,entryDate);
         
         boolean resultFlag = employeeService.addEmployee(employee);
         
@@ -219,6 +223,10 @@ public class EmployeeController {
         String terminatedDate = request.getParameter("terminatedDate");
         String terminationReason = request.getParameter("terminationReason");
         
+        String email = request.getParameter("email");
+        String gbGf = request.getParameter("gbGf");
+        String entryDate = request.getParameter("entryDate");
+        
         Employee employee = new Employee(employeeId,eHr,lob,
                 hsbcStaffId, staffName, LN, staffRegion,
                 staffLocation, locationType, onshoreOrOffshore,
@@ -227,7 +235,7 @@ public class EmployeeController {
                 staffCategory, engagementType, hsbcDOJ,
                 graduationDate, role, skill,
                 billingCurrency, billRate, resourceStatus,
-                terminatedDate, terminationReason);
+                terminatedDate, terminationReason,email,gbGf,entryDate);
         
         boolean resultFlag = employeeService.updateEmployee(employee);
         

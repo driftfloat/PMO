@@ -31,7 +31,31 @@ public class Employee
     private String terminatedDate;
     private String terminationReason;
     private String interviewStatus;
-    public String getEmployeeId()
+    
+    private  String email ;
+    private String gbGf;
+    private String entryDate;
+    
+    
+    public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getGbGf() {
+		return gbGf;
+	}
+	public void setGbGf(String gbGf) {
+		this.gbGf = gbGf;
+	}
+	public String getEntryDate() {
+		return entryDate;
+	}
+	public void setEntryDate(String entryDate) {
+		this.entryDate = entryDate;
+	}
+	public String getEmployeeId()
     {
         return employeeId;
     }
@@ -269,7 +293,7 @@ public class Employee
             String staffCategory, String engagementType, String hsbcDOJ,
             String graduationDate, String role, String skill,
             String billingCurrency, String billRate, String resourceStatus,
-            String terminatedDate, String terminationReason)
+            String terminatedDate, String terminationReason,String email, String gbGf,String entryDate)
     {
         super();
         this.employeeId = employeeId;
@@ -299,6 +323,9 @@ public class Employee
         this.resourceStatus = resourceStatus;
         this.terminatedDate = terminatedDate;
         this.terminationReason = terminationReason;
+        this.email = email;
+        this.gbGf = gbGf;
+        this.entryDate = entryDate;
     }
     
     
