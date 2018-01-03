@@ -49,6 +49,8 @@
 <link href='<%=path%>/css/bootstrap-datetimepicker.css' rel='stylesheet'>
 <link href='<%=path%>/css/bootstrap-datetimepicker.min.css' rel='stylesheet'>
 <link href='<%=path%>/css/style.css' rel='stylesheet'>
+<link href='<%=path%>/css/bootstrap-select.css' rel='stylesheet'>
+<link href='<%=path%>/css/bootstrap-select.min.css' rel='stylesheet'>
 
 <!-- jQuery -->
 <script src="<%=path %>/bower_components/jquery/jquery.min.js"></script>
@@ -108,21 +110,18 @@ var path='<%=path%>';
 								<div class="form-group">
 								
 										<div class="group">
-											<label class="col-sm-2 control-label">BU</label>
-											<div class="col-sm-4">
-											  <select class="form-control" name="bu" data-bv-notempty
+											<label class="col-lg-2 control-label">BU</label>
+											<div class="col-lg-4">
+											  <select class="selectpicker" multiple data-live-search="true" name="bu" data-bv-notempty
 												data-bv-notempty-message="Please Select your BU" id="bu" data-bv-group=".group">
-												<option value="">--Option--</option>
 											  </select>
 											</div>
 										</div>
 										<div class="group">
-											<label class="col-sm-2 control-label">DU</label>
-											<div class="col-sm-4">
-											  <select class="form-control" name="du" data-bv-notempty
-												data-bv-notempty-message="Please Select your DU" id="du" data-bv-group=".group">
-												<option value="">--Option--</option>
-												<option value="1">HUB交付部</option>
+											<label class="col-lg-2 control-label">DU</label>
+											<div class="col-lg-4">
+											  <select class="selectpicker" multiple name="du" data-bv-notempty
+												data-bv-notempty-message="Please Select your DU" id="csSubDept" data-bv-group=".group">
 											  </select>
 											</div>
 										</div>
@@ -132,8 +131,10 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-sm-2 control-label">Type</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="type"
-													id="type" data-bv-group=".group"/>
+											   <select class="form-control" name="type" data-bv-notempty
+												data-bv-notempty-message="Please Select  staffRegion" id="type" data-bv-group=".group">
+												<option value="">--Option--</option>
+											   </select>
 											</div>
 										</div>
 										<div class="group"></div>
@@ -175,6 +176,8 @@ var path='<%=path%>';
 	<!--/.fluid-container-->
 
 	<!-- external javascript -->
+	
+    
 
 	<script
 		src="<%=path %>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -215,6 +218,8 @@ var path='<%=path%>';
 	<script src="<%=path %>/js/jquery.history.js"></script>
 	<!-- application script for Charisma demo -->
 	<script src="<%=path %>/js/charisma.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/bootstrap-select.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/bootstrap-select.min.js"></script>
 
 	<script type="text/javascript" src="<%=path %>/js/pmo/loadHSBCDept.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/pmo/userRelevant.js"></script>

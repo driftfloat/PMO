@@ -74,14 +74,16 @@ public class UserRelevantController {
         String bu = request.getParameter("bu");
         String du = request.getParameter("du");
         
-       
-        
-        User user = new User(userId,eHr,name,"123", type, bu, du);
         boolean resultFlag = false;
-        try{
-            resultFlag = userService.addUser(user);
-        }catch(Exception e){
-        	e.printStackTrace();
+        //字段校验
+        if(checkField(eHr,name,type,bu,du)){
+        	User user = new User(userId,eHr,name,"123", type, bu.substring(0, bu.length()-1), du.substring(0, du.length()-1));
+            try{
+                resultFlag = userService.addUser(user);
+            }catch(Exception e){
+            	e.printStackTrace();
+            }
+            return resultFlag;
         }
         return resultFlag;
     }
@@ -110,6 +112,31 @@ public class UserRelevantController {
             e.printStackTrace();
         }
         return resultString;
+	}
+	
+	/**
+	 * 保存用户时字段校验
+	 * @author Devin
+	 * @param field
+	 * @return
+	 */
+	private boolean checkField(String eHr,String name,String type,String bu,String du){
+		if(eHr == null || "".equals(eHr)){
+			return false;
+		}
+		if(name == null || "".equals(name)){
+			return false;
+		}
+		if(type == null || "".equals(type)){
+			return false;
+		}
+		if(bu == null || "".equals(bu)){
+			return false;
+		}
+		if(du == null || "".equals(du)){
+			return false;
+		}
+		return true;
 	}
 
 }
