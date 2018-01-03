@@ -337,7 +337,40 @@ var path='<%=path%>';
 											</div>
 										</div>
 								</div>
-								
+								<div class="form-group">
+										<div class="group">
+											<label class="col-sm-2 control-label">Email</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="email"
+													id="email" data-bv-group=".group"/>
+											</div>
+										</div>
+										<div class="group">
+										<label class="col-lg-2 control-label">GB_GF</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="gbGf" data-bv-notempty
+												data-bv-notempty-message="please select  GB_GF" id="gbGf" data-bv-group=".group">
+											<option value="">--Option--</option>
+											</select>
+										</div>
+										</div>
+								</div>
+								<div class="form-group">
+									<div class="group">
+										<label class="col-sm-2 control-label">EntryDate</label>
+										<div class="col-md-4">
+											<div class="input-group date form_datetime2 col-sm-12"
+												data-link-field="dt_set_order_time_input">
+												<input class="form-control" type="text" readonly data-bv-group=".group"
+													id="entryDate1" name="entryDate1"> <span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
+													id="entryDate2" name="entryDate2" />
+											</div>
+										</div>
+									</div>
+									
+								</div>
 								<!-- <div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Resource Status</label>

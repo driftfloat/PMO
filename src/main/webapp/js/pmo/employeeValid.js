@@ -134,18 +134,6 @@ $(document).ready(function() {
 
                 }
             },
-            /*terminatedDate1: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please select Date'
-                    },
-                    date : {  
-                        format : 'YYYY-MM-DD',  
-                        message : 'Time format is incorrect'  
-                    }
-
-                }
-            },*/
             billRate: {
                 validators: {
                     notEmpty: {
@@ -156,7 +144,29 @@ $(document).ready(function() {
                     }
 
                 }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please input your email'
+                    },
+                    emailAddress:{
+                    	message:'Email address is incorrect'
+                    }
+                }
+            },
+            entryDate1: {
+            	validators: {
+                notEmpty: {
+                    message: 'Please select EntryDate'
+                },
+                date : {  
+                    format : 'YYYY-MM-DD',  
+                    message : 'Time format is incorrect'  
+                }
+
             }
+        },
            
         }
     });
@@ -269,6 +279,16 @@ $(document).ready(function() {
                     	message:'please enter number'
                     }
 
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please input your email'
+                    },
+                    emailAddress:{
+                    	message:'Email address is incorrect'
+                    }
                 }
             }
            
