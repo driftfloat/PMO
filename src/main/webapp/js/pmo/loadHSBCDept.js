@@ -9,6 +9,7 @@ $(function(){
   //loadResourceStatus();
 	loadCSDept();
 	loadCsBuNewName();
+	loadUserType();
 	loadStaffRegion();
 	loadStaffLocation();
 	loadLocationType();
@@ -219,11 +220,41 @@ function loadStaffRegion(){
 
 var csBuNewNameMap = new Map();
 function loadCsBuNewName(){
-	var url = path+'/json/csBuNewName.json'
+	/*var url = path+'/json/csBuNewName.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
 	    	   $("#bu").append("<option>"+item.name+"</option>");
 	    	   csBuNewNameMap.set(item.name,item.key);
+	       })
+	       $('.selectpicker').selectpicker({
+		        'selectedText': 'cat'
+		    });
+	});*/
+	$.ajax({
+		url:path+'/service/bu/queryBu',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(listB){
+			//buMultiselect = listB;
+			for(var i = 0;i<listB.length;i++){
+				$("#bu").append("<option value='"+listB[i].buId+"'>"+listB[i].buName+"</option>");
+			}
+			$('.selectpicker').selectpicker({
+		        'selectedText': 'cat'
+		    });
+		}
+	})
+}
+
+var userTypeMap = new Map();
+function loadUserType(){
+	var url = path+'/json/userType.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#type").append("<option value='"+item.key+"'>"+item.name+"</option>");
+	    	   userTypeMap.set(item.name,item.key);
 	       })
 	});
 }
@@ -305,7 +336,7 @@ function loadCSDept(){
 		cache:false,
 		type:"post",
 		success:function(result){
-			var userType = result.user.user_type;
+			var userType = result.user.userType;
 			
 			var csSubs = result.csSubDepts;
 			if(userType=='0'){
