@@ -275,8 +275,8 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 				
 				//gkf add 防止页面list刷新所选的checkbox失去焦点
 				for(var index in lobArray){
-					if(result.data[i].lob == lobArray[index]){
-						$('#ls' + lob + '').attr(
+					if(result.data[i].employeeId == lobArray[index]){
+						$('#ls' + employeeId + '').attr(
 								"checked", 'true');
 					}
 				}
@@ -494,7 +494,7 @@ function checkedEmployee(lob,staffName,employeeId){
 		$('#transBox').val(staffNameArray+";");
 	}else{
 		for(var i = 0;i < lobArray.length; i++){
-			if(lob == lobArray[i]){
+			if(employeeId == lobArray[i]){
 				lobArray.splice(i,1);
 				if(lobArray.length==0){
 					$('#transferBox').hide();
@@ -566,17 +566,69 @@ function loadCusDeptInfo(){
 }
 $("#transSubmit").on("click", function(){
 	var result=$("#modifyName").find("option:selected").val();
-	 if(result==1){
-		 updateProperties();
-	 }else if(result==2){
-		 updateRoles();
-	 }else if(result==3){
-		 updateDept();
-	 }else{
-		 updateRM();
-	 }
-	 
-	});
+	if(result==0){
+		alert("please choose modify type.");
+		return;
+	}
+	if(result==1){
+		if($("#projectName").val()==""){
+			alert("please input projectName.");
+			return;
+		}
+		if($("#sowName").val()==""){
+			alert("please input SOW#.");
+			return;
+		}
+		if($("#sowExpiredDate1").val()==""){
+			alert("please input date.");
+			return;
+		}
+		if($("#engagementType").val()==""){
+			alert("please choose engagementType.");
+			return;
+		}
+		updateProperties();
+	}else if(result==2){
+		if($("#role").val()==""){
+			alert("please choose MSA Role.");
+			return;
+		}
+		if($("#skill").val()==""){
+			alert("please choose skill.");
+			return;
+		}
+		if($("#staffRegion").val()==""){
+			alert("please choose staffRegion.");
+			return;
+		}
+		if($("#billRate").val()==""){
+			alert("please input billRate.");
+			return;
+		}
+		updateRoles();
+	}else if(result==3){
+		if($("#hsbcDept").val()==""){
+			alert("please choose hsbcDept.");
+			return;
+		}
+		
+		if($("#hsbcSubDept").val()==""){
+			alert("please choose hsbcSubDept.");
+			return;
+		}
+		if($("#hsbcManager").val()==""){
+			alert("please input hsbcManager.");
+			return;
+		}
+		updateDept();
+	}else{
+		if($("#rmName").val()==""){
+			alert("please choose RM.");
+			return;
+		}
+		updateRM();
+	}
+});
 function updateProperties(){
 	var staffIds=$("#staffIds").val();
 	var projectName = $("#projectName").val();
@@ -592,7 +644,15 @@ function updateProperties(){
 		type:"post",
 		success:function(result){
 			if(result){
-				alert("Information modified succesffully.")
+				alert("Information modified succesffully.");
+				$("#modifyName").val("0");
+				$("#projectProperties").hide();
+				$("#projectName").val("");
+				$("#sowName").val("");
+				$("#sowExpiredDate1").val("");
+				$("#engagementType").val("");
+//				$('#modifyMadal').modal('hide');
+				loadEmployeeList();
 				
 			}else{
 				alert("Information modified unsuccesffully.")
@@ -618,8 +678,15 @@ function updateRoles(){
 		type:"post",
 		success:function(result){
 			if(result){
-				alert("Information modified succesffully.")
-				
+				alert("Information modified succesffully.");
+//				$('#modifyMadal').modal('hide');
+				$("#modifyName").val("0");
+				$("#humanRole").hide();
+				$("#role").val("");
+				$("#skill").val("");
+				$("#staffRegion").val("");
+				$("#billRate").val("");
+				loadEmployeeList();
 			}else{
 				alert("Information modified unsuccesffully.")
 			}
@@ -643,8 +710,15 @@ function updateDept(){
 		type:"post",
 		success:function(result){
 			if(result){
-				alert("Information modified succesffully.")
-				
+				alert("Information modified succesffully.");
+//				$('#modifyMadal').modal('hide');
+				$("#modifyName").val("0");
+				$("#departmentModify").hide();
+				$("#hsbcDept").val("");
+				$("#hsbcSubDept").val("");
+				$("#hsbcManager").val("");
+
+				loadEmployeeList();
 			}else{
 				alert("Information modified unsuccesffully.")
 			}
@@ -668,6 +742,9 @@ function updateRM(){
 			if(result){
 				alert("Information modified succesffully.");
 				$('#modifyMadal').modal('hide');
+				$("#nickName").hide();
+				$("#modifyName").val("0");
+				$("#rmName").val("");
 				loadEmployeeList();
 			}else{
 				alert("Information modified unsuccesffully.");
