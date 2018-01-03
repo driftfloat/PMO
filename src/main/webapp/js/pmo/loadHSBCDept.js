@@ -4,6 +4,7 @@ $(function(){
 	loadEngagementType();
 	loadRole();
 	loadSkill();
+	loadGbGf();
 	loadBillingEntity();
 	loadBillingCurrency();
   //loadResourceStatus();
