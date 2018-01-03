@@ -124,7 +124,7 @@ function exportCondition(){
 
 var allCSSubDeptName;
 function loadCSSubDept(result){
-	var userType = result.user.user_type;
+	var userType = result.user.userType;
 	var csSubDeptNames = result.csSubDeptNames;
 	$.ajax({
 		url:path+'/service/csDept/queryAllCSSubDeptName',
@@ -168,7 +168,7 @@ function editEmployeeInfo(employeeId){
 
 function loadCSBu(result){
 	var csBuNames = result.csBuNames;
-	var userType = result.user.user_type;
+	var userType = result.user.userType;
 	var url = path+'/json/csBuName.json'
 	$.getJSON(url,  function(data) {
 		   $("#csBu").empty();
@@ -307,7 +307,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 			if(result.data.length > 0 ){
 				$("#exportExcel").removeAttr("disabled");
 			}
-			var userType = result.user.user_type;
+			var userType = result.user.userType;
 			for (var i = 0; i < result.data.length; i++) {
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);

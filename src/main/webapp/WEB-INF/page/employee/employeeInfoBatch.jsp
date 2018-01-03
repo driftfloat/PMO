@@ -298,7 +298,7 @@ var path='<%=path%>';
 									<label><input type="checkbox" name="Billing Currency" />Billing
 										Currency&nbsp;&nbsp;</label>
 									<c:if
-										test="${!(sessionScope.loginUser.user_type eq '5') || (sessionScope.loginUser.user_type eq '6')}">
+										test="${!(sessionScope.loginUser.userType eq '5') || (sessionScope.loginUser.userType eq '6')}">
 										<label><input type="checkbox" name="Bill Rate" />Bill
 											Rate&nbsp;&nbsp;</label>
 									</c:if>

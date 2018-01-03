@@ -81,7 +81,7 @@ function loadCsBuName(){
 	})
 }
 function loadCSBu(result){
-	var userType = result.user.user_type;
+	var userType = result.user.userType;
 	var url = path+'/json/csBuName.json'
 	$.getJSON(url,  function(data) {
 		$("#csBuName").empty();
@@ -118,7 +118,7 @@ function loadScSubDeptName(){
 	})
 }
 function loadCSSubDept(result){
-	var userType = result.user.user_type;
+	var userType = result.user.userType;
 	var csSubDeptNames = result.csSubDeptNames;
 	$.ajax({
 		url:path+'/service/csDept/queryAllCSSubDeptName',
@@ -160,7 +160,7 @@ function loadCSSubDept(result){
 		cache:false,
 		type:"post",
 		success:function(result){
-			var userType = result.user.user_type;
+			var userType = result.user.userType;
 			
 			var csSubs = result.csSubDepts;
 			if(userType=='0'){
@@ -245,7 +245,7 @@ function loadDemandList(currPage){
 			"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept},
 		success:function(result){
 			//alert(result.list.length);
-			var userType = result.user.user_type;
+			var userType = result.user.userType;
 			if(result.list.length > 0){
 				$("#exportExcel").removeAttr("disabled");
 			}else{

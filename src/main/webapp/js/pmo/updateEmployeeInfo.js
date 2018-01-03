@@ -324,7 +324,7 @@ function loadCSDept(employee) {
 		cache : false,
 		type : "post",
 		success : function(result) {
-			var userType = result.user.user_type;
+			var userType = result.user.userType;
 
 			var csSubs = result.csSubDepts;
 

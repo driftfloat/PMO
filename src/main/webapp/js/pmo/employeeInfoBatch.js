@@ -105,7 +105,7 @@ function exportCondition(){
 
 
 function loadCSSubDept(result){
-	var userType = result.user.user_type;
+	var userType = result.user.userType;
 	var csSubDeptNames = result.csSubDeptNames;
 	$.ajax({
 		url:path+'/service/csDept/queryAllCSSubDeptName',
@@ -146,7 +146,7 @@ function editEmployeeInfo(employeeId){
 }
 
 function loadCSBu(result){
-	var userType = result.user.user_type;
+	var userType = result.user.userType;
 	var url = path+'/json/csBuName.json'
 	$.getJSON(url,  function(data) {
 		   $("#csBu").empty();
@@ -206,7 +206,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 			if(result.data.length > 0 ){
 				$("#exportExcel").removeAttr("disabled");
 			}
-			var userType = result.user.user_type;
+			var userType = result.user.userType;
 			for (var i = 0; i < result.data.length; i++) {
 				var staffName=result.data[i].staffName;
 				var lob=result.data[i].lob;
@@ -314,7 +314,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 //RM修改权限
 function rmAuthority(result){
 	
-	var userType = result.user.user_type;
+	var userType = result.user.userType;
 	if(userType == '3'){
 		 $("#modifyName option[value='4']").remove();
 	}

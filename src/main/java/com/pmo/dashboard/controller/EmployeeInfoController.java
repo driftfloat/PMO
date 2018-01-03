@@ -78,9 +78,8 @@ public class EmployeeInfoController
         
         String userType = user.getUserType();
 
-    	}   
-    	
-    	String[] csBuNames =null;
+      	
+    	String[] csBuNames = null;
     	if(user.getBu()!=null&&user.getBu()!=""){
     		csBuNames = user.getBu().split(",");
     	}
