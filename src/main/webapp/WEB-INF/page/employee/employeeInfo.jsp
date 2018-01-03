@@ -291,10 +291,10 @@ var path='<%=path%>';
 									<label><input type="checkbox" name="Bill Rate"/>Bill Rate&nbsp;&nbsp;</label>
 									</c:if>
 									<label><input type="checkbox" name="Resource Status (Active/Terminated)"/>Resource Status (Active/Terminated)&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="If terminated mention LWD"/>If terminated mention LWD&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="If terminated mention LWD"/>LWD&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Reason for Termination"/>Reason for Termination&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="E-HR"/>E-HR&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="AM"/>AM&nbsp;&nbsp;</label>
+									<!-- <label><input type="checkbox" name="AM"/>AM&nbsp;&nbsp;</label> -->
 									<label><input type="checkbox" name="CS Dept"/>CS Dept&nbsp;&nbsp;</label>
 								</tr>
 							</thead>
