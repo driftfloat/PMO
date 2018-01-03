@@ -83,7 +83,7 @@ function addUser(){
 			success:function(resultFlag){
 				if(resultFlag){
 					$("html,body").animate({scrollTop:0}, 500);
-					$('#successAlert').html('user:'+name+' information added succesffully').show();
+					$('#successAlert').html('user:'+eHr+' information added succesffully').show();
 					setTimeout(function () {
 						$('#successAlert').hide();
 					}, 2000);

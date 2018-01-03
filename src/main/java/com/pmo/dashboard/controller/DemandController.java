@@ -154,7 +154,7 @@ public class DemandController {
 		//woyonde 
 	    List<String>  csSubDeptNames = new ArrayList<String>();   
 	        
-	    List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsDeptId().split(","));
+	    List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsdeptId().split(","));
 	        
 	    if(cSDepts != null && !cSDepts.isEmpty()){        
 	       for (CSDept csDept : cSDepts) {
@@ -163,7 +163,7 @@ public class DemandController {
 	    }
 		  
 		  
-	     String userType = user.getUser_type();
+	     String userType = user.getUserType();
 		 if(("".equals(demand.getCsSubDept()) || demand.getCsSubDept() == null) &&
 	                ("".equals(csBuName) || csBuName == null)){
 	            

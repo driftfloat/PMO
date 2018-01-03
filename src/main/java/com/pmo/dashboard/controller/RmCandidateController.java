@@ -85,7 +85,7 @@ public class RmCandidateController {
 	@ResponseBody
 	public Object loadInterviewer(HttpServletRequest request){
 		User user = (User)request.getSession().getAttribute("loginUser");
-		List<Employee> list = employeeService.queryEmployeeByCsSubDeptId(user.getCsDeptId());
+		List<Employee> list = employeeService.queryEmployeeByCsSubDeptId(user.getCsdeptId());
 		return list;
 	}
 	

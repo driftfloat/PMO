@@ -277,7 +277,7 @@ public class CandidateController
     	{
     		return null;
     	}
-    	String userType = user.getUser_type();
+    	String userType = user.getUserType();
     	if("0".equals(userType)){
     		lockPerson="all";
     	}else if("5".equals(userType) || "7".equals(userType)){
@@ -386,7 +386,7 @@ public class CandidateController
 
 		 User user = (User) request.getSession().getAttribute("loginUser");
 		 String userId = user.getUserId();
-		 String userType = user.getUser_type();
+		 String userType = user.getUserType();
 		 if (userId == null) {
 		 return null;
 		 }
@@ -440,7 +440,7 @@ public class CandidateController
     	{
     		return null;
     	}
-    	String userType = user.getUser_type();
+    	String userType = user.getUserType();
     	if("0".equals(userType)){
     		lockPerson="all";
     	}else if("5".equals(userType) || "7".equals(userType)){

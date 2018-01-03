@@ -52,7 +52,7 @@ public class CSDeptController {
 
 		List<CSDept> list = csDeptService.queryAllCSDept();
 
-		List<CSDept> cSDepts = csDeptService.queryCSDeptByIds(user.getCsDeptId().split(","));
+		List<CSDept> cSDepts = csDeptService.queryCSDeptByIds(user.getCsdeptId().split(","));
 
 		result.put("user", user);
 		result.put("data", list);

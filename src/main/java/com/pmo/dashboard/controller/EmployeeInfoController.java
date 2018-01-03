@@ -68,7 +68,7 @@ public class EmployeeInfoController
         //woyonde 
         List<String>  csSubDeptNames = new ArrayList<String>();   
         
-    	List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsDeptId().split(","));
+    	List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsdeptId().split(","));
     	
     	if(cSDepts != null && !cSDepts.isEmpty()){        
     		for (CSDept csDept : cSDepts) {
@@ -77,7 +77,7 @@ public class EmployeeInfoController
     	}        
         
         
-        String userType = user.getUser_type();
+        String userType = user.getUserType();
        
        
         if(("".equals(csSubDeptName) || csSubDeptName == null) &&
@@ -180,7 +180,7 @@ public class EmployeeInfoController
         //woyonde 
         List<String>  csSubDeptNames = new ArrayList<String>();   
         
-        List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsDeptId().split(","));
+        List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsdeptId().split(","));
         
         if(cSDepts != null && !cSDepts.isEmpty()){        
             for (CSDept csDept : cSDepts) {
@@ -189,7 +189,7 @@ public class EmployeeInfoController
         }        
         
         
-        String userType = user.getUser_type();
+        String userType = user.getUserType();
        
        
         if(("".equals(csSubDeptName) || csSubDeptName == null) &&
