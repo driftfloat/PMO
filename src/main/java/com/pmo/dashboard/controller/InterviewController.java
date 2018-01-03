@@ -105,7 +105,7 @@ public class InterviewController {
 	@ResponseBody
 	public Employee queryEmployeeDetailById(String employeeId,HttpServletRequest request) {
 		 User user = (User) request.getSession().getAttribute("loginUser");
-		 String userType = user.getUser_type();
+		 String userType = user.getUserType();
 
 		Employee employee = interviewService.queryEmployeeById(employeeId);
 		 if("5".equals(userType)||"6".equals(userType)){

@@ -63,7 +63,7 @@ public class StayinController
     	 PageCondition page = new PageCondition();
 
     	 User user =  (User)request.getSession().getAttribute("loginUser");
-    	 String userType = user.getUser_type();
+    	 String userType = user.getUserType();
     	 String userId = user.getUserId();
     	 if(null == userId || "".equals(userId))
      	{
@@ -73,7 +73,7 @@ public class StayinController
     	 /*if("0".equals(userType)){
     		 lockPerson = "all";
     	 }else */if("3".equals(userType)){
-    		 lockPerson = user.getCsDeptId();
+    		 lockPerson = user.getCsdeptId();
     	 }
     	 candidate.setLockPerson(lockPerson);
 		 int dataCount = StayinService.queryCandidateCount(candidate);

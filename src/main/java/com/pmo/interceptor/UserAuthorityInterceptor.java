@@ -34,7 +34,7 @@ public class UserAuthorityInterceptor implements HandlerInterceptor {
 		if(menus==null) {
 			menus=userAuthorityService.queryMenus();
 			session.setAttribute("menus",menus);
-			userMenus=userAuthorityService.queryUserAuthority(user.getUser_type());
+			userMenus=userAuthorityService.queryUserAuthority(user.getUserType());
 			session.setAttribute("userMenus",userMenus);
 		}		
 		

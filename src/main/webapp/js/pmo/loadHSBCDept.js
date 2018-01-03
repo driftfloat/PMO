@@ -8,7 +8,7 @@ $(function(){
 	loadBillingCurrency();
   //loadResourceStatus();
 	loadCSDept();
-	loadCsBuName();
+	loadCsBuNewName();
 	loadStaffRegion();
 	loadStaffLocation();
 	loadLocationType();
@@ -217,13 +217,13 @@ function loadStaffRegion(){
 	});
 }
 
-var csBuNameMap = new Map();
-function loadCsBuName(){
-	var url = path+'/json/csBuName.json'
+var csBuNewNameMap = new Map();
+function loadCsBuNewName(){
+	var url = path+'/json/csBuNewName.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
 	    	   $("#bu").append("<option>"+item.name+"</option>");
-	    	   csBuNameMap.set(item.name,item.key);
+	    	   csBuNewNameMap.set(item.name,item.key);
 	       })
 	});
 }

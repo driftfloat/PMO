@@ -48,7 +48,7 @@ public class UserRelevantController {
 	 * @return
 	 */
 	@RequestMapping("/addUserPage")
-    public String index(final HttpServletRequest request,
+    public String addUserPage(final HttpServletRequest request,
             final HttpServletResponse response,Model model)
     {
         return "user/addUser";
@@ -74,13 +74,15 @@ public class UserRelevantController {
         String bu = request.getParameter("bu");
         String du = request.getParameter("du");
         
-        User user = new User(userId,eHr,name,
-                "123", type, bu, du);
+       
         
-        boolean resultFlag = userService.addUser(user);
-        
-        System.out.println("添加用户========================"+eHr+name+type+bu+du+resultFlag);
-        
+        User user = new User(userId,eHr,name,"123", type, bu, du);
+        boolean resultFlag = false;
+        try{
+            resultFlag = userService.addUser(user);
+        }catch(Exception e){
+        	e.printStackTrace();
+        }
         return resultFlag;
     }
 	
