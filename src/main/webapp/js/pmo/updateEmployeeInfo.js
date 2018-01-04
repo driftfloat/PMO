@@ -377,20 +377,26 @@ function loadCSDept(employee) {
 
 function loadPersonHsbcDept(employee) {
 	var hsbcSubDeptId = employee.hsbcSubDept;
-	$.ajax({
-		url : path + '/service/hsbcDept/queryDeptById',
-		dataType : "json",
-		async : true,
-		cache : false,
-		data : {
-			"hsbcSubDeptId" : hsbcSubDeptId
-		},
-		type : "post",
-		success : function(hsbcDept) {
+	if(hsbcSubDeptId==""||hsbcSubDeptId==null){
+		loadDept(employee, hsbcDept);
+	}else{
+		$.ajax({
+			url : path + '/service/hsbcDept/queryDeptById',
+			dataType : "json",
+			async : true,
+			cache : false,
+			data : {
+				"hsbcSubDeptId" : hsbcSubDeptId
+			},
+			type : "post",
+			success : function(hsbcDept) {
 
-			loadDept(employee, hsbcDept);
-		}
-	})
+				loadDept(employee, hsbcDept);
+			}
+		})
+	}
+	
+	
 }
 
 function loadDept(employee, hsbcDept) {
@@ -413,8 +419,6 @@ function loadDept(employee, hsbcDept) {
 					$("#hsbcDept").val(list[i].hsbcSubDeptId);
 				}
 			}
-
-			// $('#hsbcDept').val(employee.hsbcSubDept);
 
 			loadHSBCSubDept(employee);
 		}

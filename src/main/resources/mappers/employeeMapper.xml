@@ -46,7 +46,7 @@
 	</insert>
 	
 	<select id="queryEmployeeById" parameterType="String" resultMap="employeeMap">
-	    SELECT * FROM t_employee WHERE EMPLOYEE_ID = #{employeeId};
+	    SELECT e.*,c.CS_SUBDEPT_NAME as csSubDeptName FROM t_employee e left join  t_cs_dept c on e.CS_SUBDEPT_ID= c.CS_SUBDEPT_ID WHERE EMPLOYEE_ID = #{employeeId};
 	</select>
 	
 	<select id="queryEmployeeList" parameterType="com.pmo.dashboard.entity.EmployeePageCondition" resultMap="employeeMap">
