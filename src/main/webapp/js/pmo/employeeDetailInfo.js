@@ -37,7 +37,7 @@ function loadEmployeeInfo(){
 			$('#resourceStatus').val(employee.resourceStatus);
 			$('#terminatedDate1').val(employee.terminatedDate);
 			$('#eHr').val(employee.eHr);
-			$('#csSubDept').val(employee.csSubDept)
+			$('#csSubDept').val(employee.csSubDeptName);
 			loadHSBCSubDept(employee.hsbcSubDept);
 			loadTerminationReason(employee);
 			loadCSDept(employee);

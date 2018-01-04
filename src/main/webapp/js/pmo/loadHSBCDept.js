@@ -372,6 +372,10 @@ function loadCSDept(){
 					for(var i = 0;i<csSubs.length;i++){
 						$("#csSubDept").append("<option value='"+csSubs[i].csSubDeptId+"'>"+csSubs[i].csSubDeptName+"</option>");
 					}
+				}else{
+					for(var i = 0;i<result.data.length;i++){
+						$("#csSubDept").append("<option value='"+result.data[i].csSubDeptId+"'>"+result.data[i].csSubDeptName+"</option>");
+					}
 				}
 			}
 		}

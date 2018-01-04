@@ -318,12 +318,22 @@ var path='<%=path%>';
 								<br/><br/>
 								<div class="form-group">
 										<div class="group">
+											<label class="col-lg-2 control-label">HSBC DOJ</label>
+											<div class="col-lg-4">
+											<input type="text" readonly class="form-control" name="hsbcDOJ1"
+												id="hsbcDOJ1" />
+											</div>
+										</div>
+										<div class="group">
 										<label class="col-lg-2 control-label">Resource Status</label>
 										<div class="col-lg-4">
 											 <input type="text" readonly class="form-control" name="resourceStatus"
 													id="resourceStatus" />
 										</div>
 										</div>
+								</div>
+								<br/><br/>
+								<div class="form-group">
 										<div class="group">
 										<label class="col-sm-2 control-label">LWD</label>
 										<div class="col-lg-4">
@@ -331,9 +341,7 @@ var path='<%=path%>';
 													id="terminatedDate1" />
 										</div>
 									    </div>
-								</div>
-								<br/><br/>
-								<div class="form-group">
+									    
 										<div class="group">
 											<label class="col-sm-2 control-label">Reason for Termination</label>
 											<div class="col-sm-4">
@@ -341,13 +349,8 @@ var path='<%=path%>';
 													id="terminationReason" />
 											</div>
 										</div>
-										<div class="group">
-											<label class="col-lg-2 control-label">HSBC DOJ</label>
-											<div class="col-lg-4">
-											<input type="text" readonly class="form-control" name="hsbcDOJ1"
-												id="hsbcDOJ1" />
-											</div>
-									</div>
+										
+										
 								</div>
 								
 								</form>

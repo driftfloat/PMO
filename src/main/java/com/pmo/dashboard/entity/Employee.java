@@ -36,9 +36,16 @@ public class Employee
     private String gbGf;
     private String entryDate;
     private String rmUserId;
+    private String csSubDeptName;
     
     
-    public String getRmUserId() {
+	public String getCsSubDeptName() {
+		return csSubDeptName;
+	}
+	public void setCsSubDeptName(String csSubDeptName) {
+		this.csSubDeptName = csSubDeptName;
+	}
+	public String getRmUserId() {
 		return rmUserId;
 	}
 	public void setRmUserId(String rmUserId) {
