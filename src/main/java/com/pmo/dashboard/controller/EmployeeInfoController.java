@@ -192,7 +192,6 @@ public class EmployeeInfoController
         
         User user = (User) request.getSession().getAttribute("loginUser");
         
-        //woyonde 
         List<String>  csSubDeptNames = new ArrayList<String>();   
         
         List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsdeptId().split(","));
@@ -205,13 +204,19 @@ public class EmployeeInfoController
         
         
         String userType = user.getUserType();
+        
+        String[] csBuNames = null;
+    	if(user.getBu()!=null&&user.getBu()!=""){
+    		csBuNames = user.getBu().split(",");
+    	}
        
-       
+    	String csSubDeptId = null;
+    	
         if(("".equals(csSubDeptName) || csSubDeptName == null) &&
                 ("".equals(csBuName) || csBuName == null)){
             
             if("1".equals(userType)|| "2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
-                csBuName = user.getBu();
+            	csBuName = csBuNames[0];
             }
             
             if("2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
@@ -275,11 +280,24 @@ public class EmployeeInfoController
         List<EmployeeInfo> list = employeeInfoService.queryEmployeeList(employeePageCondition);
         Map<String,Object> result = new HashMap<String,Object>();
         
+        // change csSubDeptName to csSubDeptId
+     	List<CSDept> allCsDepts = csDeptService.queryAllCSDept();
+     	if (employeePageCondition.getCsSubDeptName() != null && employeePageCondition.getCsSubDeptName() != "") {
+     		for (CSDept csDept : allCsDepts) {
+     			if (employeePageCondition.getCsSubDeptName().equals(csDept.getCsSubDeptName())) {
+     				csSubDeptId = csDept.getCsSubDeptId();
+     				break;
+     			}
+     		}
+     	}
+        
         result.put("csSubDeptName", csSubDeptName);
+        result.put("csSubDeptId", csSubDeptId);
         result.put("user", user);
         result.put("data", list);
         result.put("pageInfo", request.getSession().getAttribute("employeePageCondition"));
         result.put("csSubDeptNames", csSubDeptNames);
+        result.put("csBuNames", csBuNames);
         return result;
     }
     
