@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	loadCSDept();
+	loadDu();
 	$('#addUserForm').bootstrapValidator({
 		message: 'This value is not valid',
 
@@ -108,7 +108,7 @@ function addUser(){
 }
 
 
-function loadCSDept(){
+function loadDu(){
 	$.ajax({
 		url:path+'/service/csDept/queryAllCSSubDept',
 		dataType:"json",
@@ -135,6 +135,9 @@ function loadCSDept(){
 					}
 				}
 			}
+			$('.selectpicker').selectpicker({
+		        'selectedText': 'cat'
+		    });
 		}
 	})
 }

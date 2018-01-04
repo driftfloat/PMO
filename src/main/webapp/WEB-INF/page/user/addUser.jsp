@@ -121,7 +121,7 @@ var path='<%=path%>';
 											<label class="col-lg-2 control-label">DU</label>
 											<div class="col-lg-4">
 											  <select class="selectpicker" multiple name="du" data-bv-notempty
-												data-bv-notempty-message="Please Select your DU" id="csSubDept" data-bv-group=".group">
+												data-bv-notempty-message="Please Select your DU" id="du" data-bv-group=".group">
 											  </select>
 											</div>
 										</div>
