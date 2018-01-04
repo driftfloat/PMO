@@ -73,7 +73,7 @@ function addUser(){
 		var eHr = $("#eHr").val();
 		var name = $("#name").val();
 		var bu = $("#bu").val();
-		var du = $("#csSubDept").val();
+		var du = $("#du").val();
 		var type = $("#type").val();
 		var temp_bu="";
 		var temp_du="";
@@ -138,6 +138,7 @@ function loadDu(){
 			$('.selectpicker').selectpicker({
 		        'selectedText': 'cat'
 		    });
+			$('.selectpicker').selectpicker('refresh');
 		}
 	})
 }
