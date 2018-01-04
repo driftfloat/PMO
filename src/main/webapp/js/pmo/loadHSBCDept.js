@@ -19,7 +19,7 @@ $(function(){
 	dateType0();
 	dateType1();
 	dateType2();
-	
+	loadUserForRM();
 })
 
 	$("#staffRegion").change(function(){
@@ -463,6 +463,33 @@ $("#hsbcSubDept").change(function(){
 		}
 	})
 })
+
+function loadUserForRM(){
+	var bu =$("#csBu").val();//事业部
+	var du= $("#csSubDept").val();//部门
+//	csDeptName = changeCSDeptToId(du);
+	$.ajax({
+		url:path+'/service/user/getUserForRM',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(list){
+			$("#RM").empty();
+			$("#RM").append("<option value=''>--Option--</option>");			
+			for(var i = 0;i<list.length;i++){
+				if(bu!=null&& bu !="" && du!=null &&  du!=""){
+					if(bu.indexOf(list[i].bu)!=-1 && csDeptName.indexOf(list[i].csDeptId)!=-1){
+						$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
+					}
+					
+				}else{
+					$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
+				}
+			}				
+		}
+	})
+}
 
 function changeData(){
 	var staffRegion = $('#staffRegion').val();
