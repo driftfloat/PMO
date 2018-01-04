@@ -75,16 +75,14 @@ public class EmployeeInfoController
 			}
     	}        
         
-        
         String userType = user.getUserType();
-
       	
     	String[] csBuNames = null;
     	if(user.getBu()!=null&&user.getBu()!=""){
     		csBuNames = user.getBu().split(",");
     	}
 
-        
+        String csSubDeptId = null;
        
         if(("".equals(csSubDeptName) || csSubDeptName == null) &&
                 ("".equals(csBuName) || csBuName == null)){
@@ -94,12 +92,10 @@ public class EmployeeInfoController
             }
             
             if("2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
-            	csSubDeptName = cSDepts.get(0).getCsSubDeptName();            	
+            	csSubDeptName = cSDepts.get(0).getCsSubDeptName();               	             
             }
             
-        }
-        
-        
+        }	
         
         int countPage = 0;
         
@@ -147,7 +143,19 @@ public class EmployeeInfoController
         List<EmployeeInfo> list = employeeInfoService.queryEmployeeList(employeePageCondition);
         Map<String,Object> result = new HashMap<String,Object>();
         
-        result.put("csSubDeptName", csSubDeptName);
+       // change csSubDeptName to csSubDeptId
+     	List<CSDept> allCsDepts = csDeptService.queryAllCSDept();
+     	if (employeePageCondition.getCsSubDeptName() != null && employeePageCondition.getCsSubDeptName() != "") {
+     		for (CSDept csDept : allCsDepts) {
+     			if (employeePageCondition.getCsSubDeptName().equals(csDept.getCsSubDeptName())) {
+     				csSubDeptId = csDept.getCsSubDeptId();
+     				break;
+     			}
+     		}
+     	}
+     	
+     	result.put("csSubDeptName", csSubDeptName);
+        result.put("csSubDeptId", csSubDeptId);
 	    result.put("user", user);
         result.put("data", list);
         result.put("pageInfo", request.getSession().getAttribute("employeePageCondition"));
