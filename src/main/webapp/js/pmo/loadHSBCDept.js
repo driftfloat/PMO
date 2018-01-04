@@ -253,6 +253,7 @@ function loadCsBuNewName(){
 			$('.selectpicker').selectpicker({
 		        'selectedText': 'cat'
 		    });
+			$('.selectpicker').selectpicker('refresh');
 		}
 	})
 }
