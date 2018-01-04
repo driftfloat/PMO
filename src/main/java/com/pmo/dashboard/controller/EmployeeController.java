@@ -173,7 +173,7 @@ public class EmployeeController {
         String email = request.getParameter("email");
         String gbGf = request.getParameter("gbGf");
         String entryDate = request.getParameter("entryDate");
-        
+        String rmUserId = request.getParameter("rmUserId");
         Employee employee = new Employee(employeeId,eHr,lob,
                 hsbcStaffId, staffName, LN, staffRegion,
                 staffLocation, locationType, onshoreOrOffshore,
@@ -182,7 +182,7 @@ public class EmployeeController {
                 staffCategory, engagementType, hsbcDOJ,
                 graduationDate, role, skill,
                 billingCurrency, billRate, resourceStatus,
-                terminatedDate, terminationReason,email,gbGf,entryDate);
+                terminatedDate, terminationReason,email,gbGf,entryDate,rmUserId);
         
         boolean resultFlag = employeeService.addEmployee(employee);
         
@@ -226,7 +226,7 @@ public class EmployeeController {
         String email = request.getParameter("email");
         String gbGf = request.getParameter("gbGf");
         String entryDate = request.getParameter("entryDate");
-        
+        String rmUserId = request.getParameter("rmUserId");
         Employee employee = new Employee(employeeId,eHr,lob,
                 hsbcStaffId, staffName, LN, staffRegion,
                 staffLocation, locationType, onshoreOrOffshore,
@@ -235,7 +235,7 @@ public class EmployeeController {
                 staffCategory, engagementType, hsbcDOJ,
                 graduationDate, role, skill,
                 billingCurrency, billRate, resourceStatus,
-                terminatedDate, terminationReason,email,gbGf,entryDate);
+                terminatedDate, terminationReason,email,gbGf,entryDate,rmUserId);
         
         boolean resultFlag = employeeService.updateEmployee(employee);
         
