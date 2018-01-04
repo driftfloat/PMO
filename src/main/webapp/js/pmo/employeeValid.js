@@ -147,9 +147,7 @@ $(document).ready(function() {
             },
             email: {
                 validators: {
-                    notEmpty: {
-                        message: 'Please input your email'
-                    },
+                    
                     emailAddress:{
                     	message:'Email address is incorrect'
                     }
@@ -283,9 +281,6 @@ $(document).ready(function() {
             },
             email: {
                 validators: {
-                    notEmpty: {
-                        message: 'Please input your email'
-                    },
                     emailAddress:{
                     	message:'Email address is incorrect'
                     }
