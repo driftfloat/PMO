@@ -225,30 +225,29 @@ var path='<%=path%>';
 											</div>
 										</div>
 								</div>
-							
 								<div class="form-group">
 										<div class="group">
 											<label class="col-sm-2 control-label">SOW#</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="sow"
-													id="sow" />
+													id="sow" data-bv-group=".group"/>
 											</div>
 										</div>
 										<div class="group">
-										<label class="col-sm-2 control-label">SOW# Expired Date</label>
+										<label class="col-sm-2 control-label ">SOW# Expired Date</label>
 										<div class="col-md-4">
-											<div class="input-group date form_datetime col-sm-12"
+											<div class="input-group date form_datetime1 col-sm-12"
 												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" disabled="disabled"
+												<input class="form-control" type="text" readonly data-bv-group=".group"
 													id="sowExpiredDate1" name="sowExpiredDate1"> <span
 													class="input-group-addon"><span
-													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
+													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
 													id="sowExpiredDate2" name="sowExpiredDate2" />
 											</div>
 										</div>
 									    </div>
+										
 								</div>
-							
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Staff Category</label>
@@ -276,7 +275,7 @@ var path='<%=path%>';
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" disabled="disabled"
+												<input class="form-control" type="text" readonly
 													id="graduationDate1" name="graduationDate1"> <span
 													class="input-group-addon"><span
 													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
@@ -289,7 +288,7 @@ var path='<%=path%>';
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" disabled="disabled" data-bv-group=".group"
+												<input class="form-control" type="text" readonly data-bv-group=".group"
 													id="entryDate1" name="entryDate1"> <span
 													class="input-group-addon"><span
 													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
@@ -363,7 +362,7 @@ var path='<%=path%>';
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" disabled="disabled"
+												<input class="form-control" type="text" readonly
 													id="hsbcDOJ1" name="hsbcDOJ1"> <span
 													class="input-group-addon"><span
 													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
@@ -387,7 +386,7 @@ var path='<%=path%>';
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" disabled="disabled"
+												<input class="form-control" type="text" readonly
 													id="terminatedDate1" name="terminatedDate1"> <span
 													class="input-group-addon"><span
 													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
