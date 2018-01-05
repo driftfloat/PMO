@@ -265,13 +265,14 @@ var path='<%=path%>';
 							<thead>
 								<tr>
 									<label><input type="checkbox" name="HSBC Staff ID"/>HSBC Staff ID&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="LOB"/>LOB&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Staff Name"/>Staff Name&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="LN"/>LN&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="E-Mail"/>E-Mail&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Staff Region"/>Staff Region&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Staff Location (country)"/>Staff Location (country)&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Location Type (HSBCOffice/ODC)"/>Location Type (HSBCOffice/ODC)&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Onshore or Offshore"/>Onshore or Offshore&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="GB/GF"/>GB/GF&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="HSBC Dept">HSBC Dept&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="HSBC Sub Dept"/>HSBC Sub Dept&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="HSBC Manager"/>HSBC Manager&nbsp;&nbsp;</label>
@@ -286,6 +287,7 @@ var path='<%=path%>';
 									<label><input type="checkbox" name="Total Experience in Months"/>Total Experience in Months&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="MSA Role"/>MSA Role&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Skills/Technology"/>Skills/Technology&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Entry Date"/>Entry Date&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Billing Currency"/>Billing Currency&nbsp;&nbsp;</label>
 									<c:if test="${!(sessionScope.loginUser.userType eq '5') || (sessionScope.loginUser.userType eq '6')}">
 									<label><input type="checkbox" name="Bill Rate"/>Bill Rate&nbsp;&nbsp;</label>
@@ -294,6 +296,8 @@ var path='<%=path%>';
 									<label><input type="checkbox" name="If terminated mention LWD"/>LWD&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Reason for Termination"/>Reason for Termination&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="E-HR"/>E-HR&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="LOB"/>LOB&nbsp;&nbsp;</label>	
+									<label><input type="checkbox" name="RM"/>RM&nbsp;&nbsp;</label>								
 									<!-- <label><input type="checkbox" name="AM"/>AM&nbsp;&nbsp;</label> -->
 									<label><input type="checkbox" name="CS Dept"/>CS Dept&nbsp;&nbsp;</label>
 								</tr>
