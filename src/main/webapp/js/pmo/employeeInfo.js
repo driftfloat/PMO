@@ -90,8 +90,7 @@ $('#exportExcel').bind("click", function(){
 });
 
 function selectAll(){
-
-	$("input[type='checkbox']").attr("checked",'true');
+	$("input[type='checkbox']").prop("checked",'true');
 }
 
 function exportCondition(){

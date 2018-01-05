@@ -117,8 +117,9 @@ function exportCondition(){
 
 
 var allCSSubDept;
+var userType;
 function loadCSSubDept(result){
-	var userType = result.user.userType;
+	userType = result.user.userType;
 	var csSubDeptNames = result.csSubDeptNames;
 	$.ajax({
 		url:path+'/service/csDept/queryAllCSSubDeptName',
@@ -345,7 +346,7 @@ function rmAuthority(result){
 }
 
 
-function loadUserForRM(bu,du,rmUserId){	
+function loadUserForRM(bu,du,pageRMUserId){	
 	$.ajax({
 		url:path+'/service/user/getUserForRM',
 		dataType:"json",
@@ -400,9 +401,15 @@ function loadUserForRM(bu,du,rmUserId){
 			
 			for(var i = 0;i < newRMList.length;i++){
 				$("#RM").append("<option value='"+newRMList[i].userId+"'>"+newRMList[i].nickname+"</option>")
+			}				
+			$('#RM').val(pageRMUserId);	
+			
+			var currentUserType = userType;
+			
+			// RM 只能显示和修改自己管理的员工
+			if(currentUserType == '3'){	
+				$("#RM").attr("disabled","disabled");
 			}
-				
-			$('#RM').val(rmUserId);		
 			
 			//load RM list for rmName
 			$("#rmName").empty();
@@ -411,7 +418,7 @@ function loadUserForRM(bu,du,rmUserId){
 				$("#rmName").append("<option value='"+newRMList[i].userId+"'>"+newRMList[i].nickname+"</option>")
 			}
 			
-			$('#rmName').val(rmUserId);	
+			$('#rmName').val(pageRMUserId);				
 		}
 	})
 }
