@@ -337,11 +337,13 @@ function loadCSDept(){
 					$("#csSubDept").append("<option value='"+csSubs[0].csSubDeptId+"'>"+csSubs[0].csSubDeptName+"</option>");
 					$('#csSubDept').val(csSubs[0].csSubDeptId);
 					$("#csSubDept").attr("disabled","disabled");
+					loadUserForRM($('#csSubDept').val());
 				}else if(csSubs.length>1){
 					$("#csSubDept").empty();
 					for(var i = 0;i<csSubs.length;i++){
 						$("#csSubDept").append("<option value='"+csSubs[i].csSubDeptId+"'>"+csSubs[i].csSubDeptName+"</option>");
 					}
+					loadUserForRM($('#csSubDept').val());
 				}else{
 					for(var i = 0;i<result.data.length;i++){
 						$("#csSubDept").append("<option value='"+result.data[i].csSubDeptId+"'>"+result.data[i].csSubDeptName+"</option>");
@@ -351,8 +353,52 @@ function loadCSDept(){
 		}
 	})
 }
+$("#csSubDept").change(function(){
+	var du =$("#csSubDept").val();
+	loadUserForRM(du);
+})
 
+function loadUserForRM(du){	
+	$.ajax({
+		url:path+'/service/user/getUserForRM',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(list){
+			$("#RM").empty();
+			$("#RM").append("<option value=''>--Option--</option>");	
+			var RMList = new Array();
+			if (du != null && du != "") {
+				for (var i = 0; i < list.length; i++) {
+					var csDeptIds = list[i].csdeptId.split(",");
+					for (var j = 0; j < csDeptIds.length; j++) {
+						if (du == csDeptIds[j]) {
+							RMList.push(list[i]);
+						}
+					}
+				}
+			}else{
+				for(var i = 0;i<list.length;i++){
+					RMList.push(list[i]);
+				}
 
+			}
+			//remove duplicates
+			var newRMList = new Array();
+			for(var i = 0;i < RMList.length;i++){				
+				if(newRMList.indexOf(RMList[i])==-1){
+					newRMList.push(RMList[i]);
+				}
+			}
+			
+			for(var i = 0;i < newRMList.length;i++){
+				$("#RM").append("<option value='"+newRMList[i].userId+"'>"+newRMList[i].nickname+"</option>")
+			}
+			
+		}
+	})
+}
 $("#csDept").change(function(){
 	var csSubDeptId = $('#csDept').val();
 	$("#csSubDept").find("option").remove(); 
@@ -439,33 +485,6 @@ $("#hsbcSubDept").change(function(){
 		}
 	})
 })
-
-function loadUserForRM(){
-	var bu =$("#csBu").val();//事业部
-	var du= $("#csSubDept").val();//部门
-//	csDeptName = changeCSDeptToId(du);
-	$.ajax({
-		url:path+'/service/user/getUserForRM',
-		dataType:"json",
-		async:true,
-		cache:false,
-		type:"post",
-		success:function(list){
-			$("#RM").empty();
-			$("#RM").append("<option value=''>--Option--</option>");			
-			for(var i = 0;i<list.length;i++){
-				if(bu!=null&& bu !="" && du!=null &&  du!=""){
-					if(bu.indexOf(list[i].bu)!=-1 && csDeptName.indexOf(list[i].csDeptId)!=-1){
-						$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
-					}
-					
-				}else{
-					$("#RM").append("<option value='"+list[i].userId+"'>"+list[i].nickname+"</option>");
-				}
-			}				
-		}
-	})
-}
 
 function changeData(){
 	var staffRegion = $('#staffRegion').val();
