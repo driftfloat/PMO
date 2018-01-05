@@ -86,7 +86,7 @@ var path='<%=path%>';
 									<i class="glyphicon glyphicon-user"></i> Add User
 								</h2>
 							</div>
-							<div id="add" class="box-content" style="overflow: auto;">
+							<div id="add" class="box-content" style="overflow: auto;height: 900px;">
 							<form id="addUserForm" method="post">
 							    
 							    <div id="successAlert" class="alert alert-success" style="display: none;"></div>

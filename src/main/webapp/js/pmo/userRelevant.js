@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	loadDu();
+	loadBu();
 	$('#addUserForm').bootstrapValidator({
 		message: 'This value is not valid',
 
@@ -141,5 +142,20 @@ function loadDu(){
 			$('.selectpicker').selectpicker('refresh');
 		}
 	})
+}
+
+var csBuMap = new Map();
+function loadBu(){
+	var url = path+'/json/csBuNewName.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#bu").append("<option value='"+item.key+"'>"+item.name+"</option>");
+	    	   csBuMap.set(item.name,item.key);
+	       })
+	       $('.selectpicker').selectpicker({
+		        'selectedText': 'cat'
+		   });
+		   $('.selectpicker').selectpicker('refresh');
+	});
 }
 
