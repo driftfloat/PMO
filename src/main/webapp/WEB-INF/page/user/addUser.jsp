@@ -132,7 +132,7 @@ var path='<%=path%>';
 											<label class="col-sm-2 control-label">Type</label>
 											<div class="col-sm-4">
 											   <select class="form-control" name="type" data-bv-notempty
-												data-bv-notempty-message="Please Select  staffRegion" id="type" data-bv-group=".group">
+												data-bv-notempty-message="Please Select your type" id="type" data-bv-group=".group">
 												<option value="">--Option--</option>
 											   </select>
 											</div>
