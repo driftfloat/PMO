@@ -149,7 +149,7 @@ function loadBu(){
 	var url = path+'/json/csBuNewName.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
-	    	   $("#bu").append("<option value='"+item.key+"'>"+item.name+"</option>");
+	    	   $("#bu").append("<option>"+item.name+"</option>");
 	    	   csBuMap.set(item.name,item.key);
 	       })
 	       $('.selectpicker').selectpicker({
