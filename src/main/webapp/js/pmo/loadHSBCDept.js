@@ -514,3 +514,16 @@ function changeData(){
 		}
 	})
 }
+function displayTM(){
+    window.location.href = path+"/service/employee/getTMemployee.html?status=1";
+}
+function displayTD(){
+	window.location.href = path+"/service/employee/getTMemployee.html?status=2";
+}
+function displayFP(){
+	window.location.href = path+"/service/employee/getTMemployee.html?status=3";
+}
+function displaySupport(){
+	window.location.href = path+"/service/employee/getTMemployee.html?status=4";
+	
+}

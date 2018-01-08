@@ -108,7 +108,7 @@ public class EmployeeController {
 			return "OnboardEmployeeInsert";
     	}
     	
-        return "index";
+        return "indexa";
     }
     
     @RequestMapping("/employeeInfo")
@@ -653,6 +653,27 @@ public class EmployeeController {
         return null;
     }
     
+
+
+/**
+ * 校验员工id是否存在
+ * @param hsbcStaffId
+ * @return
+ */
+@RequestMapping("/getTMemployee")
+public String getTMemployee(final HttpServletRequest request,
+        final HttpServletResponse response,String status){
+	
+	if("1".equals(status)){
+		return "index2";
+	}else if("2".equals(status)){
+		return "index2";
+	}else if("3".equals(status)){
+		return "index4";
+	}else if("4".equals(status)){
+		return "index3";
+	}
+	return "index2";
 }
 
-
+}
