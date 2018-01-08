@@ -107,24 +107,6 @@ var path='<%=path%>';
 										
 								</div>
 								
-								 <div class="form-group">
-										<div class="group">
-											<label class="col-sm-2 control-label">Chinasofti E-Mail</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="chinasoftiEmail"
-													id="chinasoftiEmail" data-bv-group=".group"/>
-											</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">Mobile</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="mobile"
-													id="mobile" data-bv-group=".group"/>
-											</div>
-										</div>
-										
-								</div>
-								
 								<div class="form-group">
 								
 										<div class="group">
@@ -204,7 +186,7 @@ var path='<%=path%>';
 										</div>
 										</div> -->
 										<div class="group">
-										<label class="col-lg-2 control-label">CS Department</label>
+										<label class="col-lg-2 control-label">CS Dept</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="csSubDept" data-bv-notempty
 												data-bv-notempty-message="Please Select  csDept" id="csSubDept" data-bv-group=".group">
@@ -310,7 +292,7 @@ var path='<%=path%>';
 								
 								<div class="form-group">
 										<div class="group">
-										<label class="col-lg-2 control-label">Role</label>
+										<label class="col-lg-2 control-label">MSA Role</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="role" data-bv-notempty
 												data-bv-notempty-message="please select  msaRole" id="role" data-bv-group=".group" onchange="changeData()">
@@ -328,10 +310,14 @@ var path='<%=path%>';
 										</div>
 										</div>
 								</div>
-								
-								
-								
 								<div class="form-group">
+										<div class="group">
+											<label class="col-sm-2 control-label">Chinasofti E-Mail</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="chinasoftiEmail"
+													id="chinasoftiEmail" data-bv-group=".group"/>
+											</div>
+										</div>
 										<div class="group">
 										<label class="col-lg-2 control-label">Resource Status</label>
 										<div class="col-lg-4">
@@ -341,6 +327,11 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
+										
+								</div>
+								
+								
+								<div class="form-group">
 										<div class="group">
 										<label class="col-sm-2 control-label">If terminated,mention LWD</label>
 										<div class="col-md-4">
@@ -354,17 +345,15 @@ var path='<%=path%>';
 											</div>
 										</div>
 									    </div>
-								</div> 
-								<div class="form-group">
-										<div class="group">
+									    <div class="group">
 										<label class="col-lg-2 control-label">Reason for Termination</label>
 										<div class="col-lg-4">
 											<input type="text" class="form-control" name="hsbcProjectManager"
 													id="hsbcProjectManager" data-bv-group=".group"/>
 										</div>
 										</div>
-										
 								</div> 
+								
 								
 								
 								<div class="form-group">
