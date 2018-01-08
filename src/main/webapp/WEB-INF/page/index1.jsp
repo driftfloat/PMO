@@ -264,7 +264,7 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" name="engagementType" data-bv-notempty
 												data-bv-notempty-message="please select  engagementType" id="engagementType" data-bv-group=".group">
-												<option value="">--Option--</option>
+												<option >--Option--</option>
 											</select>
 										</div>
 										</div>

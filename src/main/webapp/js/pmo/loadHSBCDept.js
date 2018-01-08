@@ -514,16 +514,26 @@ function changeData(){
 		}
 	})
 }
-function displayTM(){
+$("#getTm").click(function(){
+	 window.location.href = path+"/service/employee/getTMemployee.html?status=1";
+} );
+/*function displayTM(){
     window.location.href = path+"/service/employee/getTMemployee.html?status=1";
-}
-function displayTD(){
+}*/
+/*function displayTD(){
 	window.location.href = path+"/service/employee/getTMemployee.html?status=2";
-}
-function displayFP(){
+}*/
+$("#getFp").click(function(){
 	window.location.href = path+"/service/employee/getTMemployee.html?status=3";
-}
-function displaySupport(){
+});
+/*function displayFP(){
+	window.location.href = path+"/service/employee/getTMemployee.html?status=3";
+}*/
+$("#getSupport").click(function(){
+	window.location.href = path+"/service/employee/getTMemployee.html?status=4";
+});
+
+/*function displaySupport(){
 	window.location.href = path+"/service/employee/getTMemployee.html?status=4";
 	
-}
+}*/
