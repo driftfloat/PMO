@@ -5,6 +5,7 @@ $(function(){
 	loadCsSubDept();
 	loadworkYears();
 	loadInterviewerList();
+	loadDu();
 })
 
 $("#skill").change(function(){
@@ -16,6 +17,38 @@ $("#location").change(function(){
 $("#interviewerStatus").change(function(){
 	$("#exportExcel").attr("disabled", true);
 })
+
+function loadDu(){
+	$.ajax({
+		url:path+'/service/csDept/queryAllCSSubDept',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			var userType = result.user.userType;
+			
+			var csSubs = result.csSubDepts;
+			if(userType=='0'){
+				for(var i = 0;i<result.data.length;i++){
+					$("#du").append("<option value='"+result.data[i].csSubDeptId+"'>"+result.data[i].csSubDeptName+"</option>");
+				}
+			}else{
+				if(csSubs.length==1){
+					$("#du").append("<option value='"+csSubs[0].csSubDeptId+"'>"+csSubs[0].csSubDeptName+"</option>");
+					$('#du').val(csSubs[0].csSubDeptId);
+					$("#du").attr("disabled","disabled");
+				}else if(csSubs.length>1){
+					$("#du").empty();
+					for(var i = 0;i<csSubs.length;i++){
+						$("#du").append("<option value='"+csSubs[i].csSubDeptId+"'>"+csSubs[i].csSubDeptName+"</option>");
+					}
+				}
+			}
+		}
+	})
+}
+
 function loadCsSubDept(){
 	var url = path+'/json/cssubdept.json'
 	$.getJSON(url,  function(data) {
@@ -121,6 +154,7 @@ function loadInterviewerList(currPage){
 	var role = $("#role").val();
 	var experience_years = $("#experience_years").val();
     var interviewerStatus = $("#interviewerStatus").val();
+    var du= $("#du").val();
 	
 	//$("#demandList").empty();
 	$("#interviewerList  tr:not(:first)").html("");
@@ -131,7 +165,7 @@ function loadInterviewerList(currPage){
 		cache:false,
 		type:"post",
 		data:{"hsbcStaffId":hsbcStaffId,"ehr":ehr,"staffName":staffName,"lob":lob,"staffRegion":location,
-			"skill":skill,"role":role,"experienceYearas":experience_years,"status":interviewerStatus,"currPage":currPage},
+			"skill":skill,"role":role,"experienceYearas":experience_years,"status":interviewerStatus,"csSubDeptId":du,"currPage":currPage},
 		success:function(result){
 			if(result.list.length > 0){
 				$("#exportExcel").removeAttr("disabled");
