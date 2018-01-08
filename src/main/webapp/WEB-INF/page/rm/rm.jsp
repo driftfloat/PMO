@@ -179,6 +179,14 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
+										<div class="group">
+										<label class="col-lg-2 control-label">DU</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="du" id="du" data-bv-group=".group">
+												<option value="">--Option--</option>
+											</select>
+										</div>
+										</div>
 								</div>
 								<br/><br/>
 								<div class="form-group">
