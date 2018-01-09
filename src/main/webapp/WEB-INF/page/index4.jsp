@@ -155,20 +155,7 @@ var path='<%=path%>';
 								
 								
 								<div class="form-group">
-									<div class="group">
-										<label class="col-sm-2 control-label">Date of Joining</label>
-										<div class="col-md-4">
-											<div class="input-group date form_datetime0 col-sm-12"
-												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" readonly data-bv-group=".group"
-													id="graduationDate1" name="graduationDate1"> <span
-													class="input-group-addon"><span
-													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
-													id="graduationDate2" name="graduationDate2" />
-											</div>
-										</div>
-									</div>
-									<div class="group">
+								<div class="group">
 										<label class="col-sm-2 control-label">Graduation Date</label>
 										<div class="col-md-4">
 											<div class="input-group date form_datetime0 col-sm-12"
@@ -181,6 +168,20 @@ var path='<%=path%>';
 											</div>
 										</div>
 									</div>
+									<div class="group">
+										<label class="col-sm-2 control-label">Date of Joining</label>
+										<div class="col-md-4">
+											<div class="input-group date form_datetime0 col-sm-12"
+												data-link-field="dt_set_order_time_input">
+												<input class="form-control" type="text" readonly data-bv-group=".group"
+													id="entryDate1" name="entryDate1"> <span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
+													id="entryDate1" name="entryDate1" />
+											</div>
+										</div>
+									</div>
+									
 								</div>
 								
 								<div class="form-group">
@@ -208,10 +209,10 @@ var path='<%=path%>';
 								
 								<div class="form-group">
 										<div class="group">
-											<label class="col-sm-2 control-label">Chinasofti E-Mail</label>
+											<label class="col-sm-2 control-label">Email</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="chinasoftiEmail"
-													id="chinasoftiEmail" data-bv-group=".group"/>
+												<input type="text" class="form-control" name="email"
+													id="email" data-bv-group=".group"/>
 											</div>
 										</div>
 										<div class="group">
@@ -227,7 +228,7 @@ var path='<%=path%>';
 								</div>
 								
 								
-								<div class="form-group">
+								<!-- <div class="form-group">
 										<div class="group">
 										<label class="col-sm-2 control-label">If terminated,mention LWD</label>
 										<div class="col-md-4">
@@ -248,7 +249,7 @@ var path='<%=path%>';
 													id="hsbcProjectManager" data-bv-group=".group"/>
 										</div>
 										</div>
-								</div> 
+								</div>  -->
 								
 								<div class="form-group">
 									    <div style="text-align:center;width:50%;float:left">

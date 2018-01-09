@@ -147,10 +147,13 @@ $(document).ready(function() {
             },
             email: {
                 validators: {
-                    
-                    emailAddress:{
-                    	message:'Email address is incorrect'
-                    }
+                	 regexp: {
+                          regexp:/^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/,
+                          message: 'Please enter correct Email'
+                      },
+                      notEmpty: {
+                          message: 'Please Choose  Email'
+                      },
                 }
             },
             entryDate1: {
