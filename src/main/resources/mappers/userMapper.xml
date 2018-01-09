@@ -81,5 +81,15 @@
     </trim>
   </insert>
   
+  <!-- Felix, Begin -->
+	<select id="queryUserById" parameterType="String" resultMap="userMap">
+		select * from t_user where USER_ID = #{userId};
+	</select>
+	
+	<update id="updateUser" parameterType="com.pmo.dashboard.entity.User">
+		update t_user set USER_NAME = #{userName},NICKNAME = #{nickname},USER_TYPE = #{user_type},BU = #{bu},CSDEPT_ID = #{csDeptId} WHERE USER_ID = #{userId}
+	</update>
+	<!-- Felix, End -->
+  
   
 </mapper>
