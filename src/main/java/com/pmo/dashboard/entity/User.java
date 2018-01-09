@@ -30,6 +30,18 @@ public class User {
 	private String bu;
 	
 	private String csdeptId;
+	
+	// Felix, 180105, Begin
+	private String du;
+	// Felix, 180105, End
+	
+	public String getDu() {
+		return du;
+	}
+
+	public void setDu(String du) {
+		this.du = du;
+	}
 
 	public CSDept getCsDept() {
 		return csDept;
@@ -130,6 +142,15 @@ public class User {
         super();
         // TODO Auto-generated constructor stub
     }
-	
+
+	public User(String userId, String userName, String nickname, String userType, String bu, String csdeptId) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.nickname = nickname;
+		this.userType = userType;
+		this.bu = bu;
+		this.csdeptId = csdeptId;
+	}
 	
 }

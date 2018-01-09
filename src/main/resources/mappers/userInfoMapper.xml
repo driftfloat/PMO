@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmo.dashboard.dao.UserInfoMapper">
+	<resultMap id="userInfoMap" type="com.pmo.dashboard.entity.User">
+		<id property="userId" column="USER_ID" javaType="String" />
+		<result property="userName" column="USER_NAME" javaType="String" />
+		<result property="nickname" column="NICKNAME" javaType="String" />
+		<result property="userType" column="USER_TYPE" javaType="String" />
+		<result property="du" column="CS_SUBDEPT_NAME" javaType="String" />
+		<result property="bu" column="BU" javaType="String" />
+	</resultMap>
+	
+	<select id="queryUserList" parameterType="com.pmo.dashboard.entity.UserPageCondition" resultMap="userInfoMap" >
+	    SELECT u.USER_ID, u.USER_NAME, u.NICKNAME, u.USER_TYPE, u.BU, d.CS_SUBDEPT_NAME
+		FROM t_user AS u
+		LEFT JOIN t_cs_dept d
+		ON u.CSDEPT_ID = d.CS_SUBDEPT_ID
+        WHERE 1 = 1
+        
+			<if test="eHr != null and eHr != ''">
+				AND u.USER_NAME = #{eHr}
+			</if>
+			<if test="userName != null and userName != ''">
+				AND u.NICKNAME = #{userName}
+			</if>
+			<if test="userType != null and userType != ''">
+				AND u.USER_TYPE = #{userType}
+			</if>
+			<if test="du != null and du != ''">
+				AND d.CS_SUBDEPT_NAME = #{du}
+			</if>
+			<if test="bu != null and bu != ''">
+				AND u.BU = #{bu}
+			</if>
+		LIMIT #{currentPage},10;
+	</select>
+	
+	<select id="countUserList" parameterType="com.pmo.dashboard.entity.UserPageCondition" resultType="int" >
+	    SELECT count(0)
+		FROM t_user AS u
+		LEFT JOIN t_cs_dept d
+		ON u.CSDEPT_ID = d.CS_SUBDEPT_ID
+        WHERE 1 = 1
+        
+			<if test="eHr != null and eHr != ''">
+				AND u.USER_NAME = #{eHr}
+			</if>
+			<if test="userName != null and userName != ''">
+				AND u.NICKNAME = #{userName}
+			</if>
+			<if test="userType != null and userType != ''">
+				AND u.USER_TYPE = #{userType}
+			</if>
+			<if test="du != null and du != ''">
+				AND d.CS_SUBDEPT_NAME = #{du}
+			</if>
+			<if test="bu != null and bu != ''">
+				AND u.BU = #{bu}
+			</if>
+		
+	</select>
+	
+</mapper>

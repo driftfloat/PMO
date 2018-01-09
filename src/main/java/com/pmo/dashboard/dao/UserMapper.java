@@ -23,5 +23,11 @@ public interface UserMapper {
 	List<User> getUserForRM();
 	
 	int addUser(User user);
+	
+	// Felix, 180105, Begin
+	int updateUser(User user);
+		
+	User queryUserById(String userId);
+	// Felix, 180105, End
 
 }
