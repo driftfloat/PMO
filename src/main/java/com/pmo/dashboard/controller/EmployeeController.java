@@ -394,12 +394,14 @@ public class EmployeeController {
 					for (CSDept csD : allCSDept) {
 						if (csD.getCsSubDeptId().equals(listE.get(i - 1).getCsSubDept())) {
 							csDept = csD;
+							break;
 						}
 					}
 	
 					for (HSBCDept hsbcD : allHSBCDept) {
 						if (hsbcD.getHsbcSubDeptId().equals(listE.get(i - 1).getHsbcSubDept())) {
 							hsbcDept = hsbcD;
+							break;
 						}
 					}
                    
@@ -597,6 +599,7 @@ public class EmployeeController {
 						for (User user : allRM) {
 							if (user.getUserId().equalsIgnoreCase(listE.get(i - 1).getRmUserId())) {
 								RMName = user.getNickname();
+								break;
 							}
 						}
                        Label label= new Label(++j, i, RMName);

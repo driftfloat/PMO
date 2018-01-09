@@ -63,6 +63,8 @@ public class EmployeeInfoController
         
         String rmUserId = request.getParameter("rmUserId");
         
+        String engagementType = request.getParameter("engagementType");
+        
         User user = (User) request.getSession().getAttribute("loginUser");
         
         List<String>  csSubDeptNames = new ArrayList<String>();   
@@ -115,6 +117,7 @@ public class EmployeeInfoController
             employeePageCondition.setStaffName(staffName);
             employeePageCondition.setResourceStatus(resourceStatus);
             employeePageCondition.setRmUserId(rmUserId);
+            employeePageCondition.setEngagementType(engagementType);
             countPage = employeeInfoService.countEmployeeList(employeePageCondition);
             employeePageCondition.setPageCount(countPage+"");
             request.getSession().setAttribute("employeePageCondition", employeePageCondition);
@@ -190,6 +193,8 @@ public class EmployeeInfoController
         
         String rmUserId = request.getParameter("rmUserId");
         
+        String engagementType = request.getParameter("engagementType");
+        
         User user = (User) request.getSession().getAttribute("loginUser");
         
         List<String>  csSubDeptNames = new ArrayList<String>();   
@@ -249,6 +254,7 @@ public class EmployeeInfoController
             employeePageCondition.setCurrentPage(currentPage);
             employeePageCondition.setStaffName(staffName);
             employeePageCondition.setResourceStatus(resourceStatus);
+            employeePageCondition.setEngagementType(engagementType);
             if(!"3".equals(userType)){
                 employeePageCondition.setRmUserId(rmUserId);
             }

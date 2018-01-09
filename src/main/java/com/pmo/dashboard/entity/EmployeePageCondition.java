@@ -11,7 +11,16 @@ public class EmployeePageCondition extends PageCondition
     private String resourceStatus;
     private String staffName;
     private String rmUserId;
-    public String getRmUserId() {
+    private String engagementType;
+    
+    
+    public String getEngagementType() {
+		return engagementType;
+	}
+	public void setEngagementType(String engagementType) {
+		this.engagementType = engagementType;
+	}
+	public String getRmUserId() {
 		return rmUserId;
 	}
 	public void setRmUserId(String rmUserId) {

@@ -10,7 +10,6 @@ $(function(){
 	loadCusDeptInfo();
 	loadEmployeeList();
 	dateType1();
-	loadEngagementType();
 	loadRole();
 	loadSkill();
 	loadStaffRegion();
@@ -187,7 +186,7 @@ function loadCSBu(result){
 	});
 }
 
-function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
+function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagementType){
 	var csDeptName = csDeptName;
 
 	csDeptName0 = csDeptName;
@@ -199,6 +198,8 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 	var csBuName = csBuName;
 	
 	csBuName0 = csBuName;
+	
+	var engagementType = engagementType;
 	
 	var hsbcStaffId = $("#hsbcStaffId").val();
 	
@@ -218,7 +219,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 		url:path+"/service/employeeInfo/queryBatchEmployeeList",
 		dataType:"json",
 		async:true,
-		data:{"staffName":staffName,"resourceStatus":resourceStatus,"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob,"rmUserId":rmName},
+		data:{"staffName":staffName,"resourceStatus":resourceStatus,"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob,"rmUserId":rmName,"engagementType":engagementType},
 		cache:false,
 		type:"post",
 		success:function(result){
@@ -239,7 +240,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 				tr.appendTo(tbody);
 				var td1 = $("<td><input id='ls"+ employeeId + "' type='checkbox' onclick=checkedEmployee('"+lob+"','"+staffName+"','"+employeeId+"') ></td>");
 				var td2 = $("<td>"
-						+ result.data[i].hsbcStaffId
+						+ result.data[i].staffName
 						+ "</td>");
 				var td3 = $("<td>"
 						+ result.data[i].eHr
@@ -248,14 +249,14 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 						+ result.data[i].lob
 						+ "</td>");
 				var td5 = $("<td>"
-						+ result.data[i].staffName
+						+ result.data[i].hsbcStaffId
 						+ "</td>");
 				var td6 = $("<td>"
-						+ result.data[i].ln
-						+ "</td>");
-				var td7 = $("<td>"
 						+ result.data[i].csSubDeptName
 						+ "</td>");
+				var td7 = $("<td><center>"
+						+ result.data[i].engagementType
+						+ "</center></td>");
 				var td8 = $("<td>"
 						+ result.data[i].resourceStatus
 						+ "</td>");
@@ -268,7 +269,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 				td9 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>Detail</a></td>");
 			
 				if((result.data[i].hsbcStaffId)==null){
-					var td2 = $("<td></td>");
+					var td5 = $("<td></td>");
 				}
 				if((result.data[i].eHr)==null){
 					var td3 = $("<td></td>");
@@ -277,7 +278,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 					var td4 = $("<td></td>");
 				}
 				if((result.data[i].csSubDeptName)==null){
-					var td7 = $("<td></td>");
+					var td6 = $("<td></td>");
 				}
 				if((result.data[i].resourceStatus)==null){
 					var td8 = $("<td></td>");
@@ -326,6 +327,8 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 			loadCSSubDept(result);
 			
 			loadCSBu(result);
+			
+			loadEngagementType(result)
 			
 			loadUserForRM(result.pageInfo.csbuName,result.csSubDeptId,result.pageInfo.rmUserId);
 			
@@ -454,12 +457,15 @@ function dateType1(){
 		
 	});
 }
-function loadEngagementType(){
+function loadEngagementType(result){
 	var url = path+'/json/engagementType.json'
 	$.getJSON(url,  function(data) {
+		   $("#engagementType").empty();
+		   $("#engagementType").append("<option value=''>--Option--</option>");
 	       $.each(data, function(i, item) {
 	    	   $("#engagementType").append("<option>"+item.name+"</option>");
 	       })
+	       $('#engagementType').val(result.pageInfo.engagementType);
 	});
 }
 function loadRole(){
@@ -549,7 +555,13 @@ $('#searchBtn').bind("click", function(){
 		csSubDeptName = "";
 	}
 	
-	loadEmployeeList("",csDeptName,csSubDeptName,csBuName);
+	var engagementType = $("#engagementType").find("option:selected").text();
+	
+	if(engagementType.indexOf('Option')!=-1){
+		engagementType = "";
+	}
+	
+	loadEmployeeList("",csDeptName,csSubDeptName,csBuName,engagementType);
 });
 
 

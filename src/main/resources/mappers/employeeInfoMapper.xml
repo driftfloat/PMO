@@ -12,11 +12,12 @@
 		<result property="lob" column="LOB" javaType="String" />
 		<result property="resourceStatus" column="RESOURCE_STATUS" javaType="String" />
 		<result property="rmUserId" column="RM_USER_ID" javaType="String" />
+		<result property="engagementType" column="ENGAGEMENT_TYPE" javaType="String" />
 		
 	</resultMap>
 	
 	<select id="queryEmployeeList" parameterType="com.pmo.dashboard.entity.EmployeePageCondition" resultMap="employeeInfoMap" >
-	    SELECT e.EMPLOYEE_ID,e.HSBC_STAFF_ID,e.E_HR,e.LOB,e.STAFF_NAME,e.LN,d.CS_SUBDEPT_NAME,e.RESOURCE_STATUS,e.RM_USER_ID,u.NICKNAME
+	    SELECT e.EMPLOYEE_ID,e.HSBC_STAFF_ID,e.E_HR,e.LOB,e.STAFF_NAME,e.LN,d.CS_SUBDEPT_NAME,e.RESOURCE_STATUS,e.RM_USER_ID,u.NICKNAME,e.ENGAGEMENT_TYPE
         FROM t_employee AS e
         LEFT JOIN t_cs_dept AS d
         ON e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID
@@ -51,6 +52,10 @@
 			<if test="rmUserId != null and rmUserId != ''">
 				AND e.RM_USER_ID = #{rmUserId}
 			</if>
+			<if test="engagementType != null and engagementType != ''">
+				AND e.ENGAGEMENT_TYPE = #{engagementType}
+			</if>
+			
 		
         LIMIT #{currentPage},10;
 	</select>
@@ -89,6 +94,9 @@
 		
 			<if test="rmUserId != null and rmUserId != ''">
 				AND e.RM_USER_ID = #{rmUserId}
+			</if>
+			<if test="engagementType != null and engagementType != ''">
+				AND e.ENGAGEMENT_TYPE = #{engagementType}
 			</if>
 	</select>
 	

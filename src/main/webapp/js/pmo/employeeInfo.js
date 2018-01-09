@@ -10,6 +10,18 @@ $(function(){
 	
 })
 
+function loadEngagementType(result){
+	var url = path+'/json/engagementType.json'
+	$.getJSON(url,  function(data) {
+		   $("#engagementType").empty();
+		   $("#engagementType").append("<option value=''>--Option--</option>");
+	       $.each(data, function(i, item) {
+	    	   $("#engagementType").append("<option>"+item.name+"</option>");
+	       })
+	       $('#engagementType').val(result.pageInfo.engagementType);
+	});
+}
+
 function loadResourceStatus(result){
 	var url = path+'/json/resourceStatus.json'
 	$.getJSON(url,  function(data) {
@@ -80,7 +92,13 @@ $('#searchBtn').bind("click", function(){
 		csSubDeptName = "";
 	}
 	
-	loadEmployeeList("",csDeptName,csSubDeptName,csBuName);
+	var engagementType = $("#engagementType").find("option:selected").text();
+	
+	if(engagementType.indexOf('Option')!=-1){
+		engagementType = "";
+	}
+	
+	loadEmployeeList("",csDeptName,csSubDeptName,csBuName,engagementType);
 });
 
 $('#exportExcel').bind("click", function(){
@@ -274,7 +292,7 @@ function changeCSDeptToId(du){
 
 
 
-function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
+function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagementType){
 	var csDeptName = csDeptName;
 
 	csDeptName0 = csDeptName;
@@ -286,6 +304,8 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 	var csBuName = csBuName;
 	
 	csBuName0 = csBuName;
+	
+	var engagementType = engagementType;
 	
 	var hsbcStaffId = $("#hsbcStaffId").val();
 	
@@ -305,7 +325,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 		url:path+"/service/employeeInfo/queryEmployeeList",
 		dataType:"json",
 		async:true,
-		data:{"staffName":staffName,"resourceStatus":resourceStatus,"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob,"rmUserId":rmName},
+		data:{"staffName":staffName,"resourceStatus":resourceStatus,"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob,"rmUserId":rmName,"engagementType":engagementType},
 		cache:false,
 		type:"post",
 		success:function(result){
@@ -321,9 +341,9 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 			for (var i = 0; i < result.data.length; i++) {
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
-
-				var td1 = $("<td id='tx1'>"
-						+ result.data[i].hsbcStaffId
+				
+				var td1 = $("<td>"
+						+ result.data[i].staffName
 						+ "</td>");
 				var td2 = $("<td>"
 						+ result.data[i].eHr
@@ -331,15 +351,15 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 				var td3 = $("<td>"
 						+ result.data[i].lob
 						+ "</td>");
-				var td4 = $("<td>"
-						+ result.data[i].staffName
+				var td4 = $("<td id='tx1'>"
+						+ result.data[i].hsbcStaffId
 						+ "</td>");
 				var td5 = $("<td>"
-						+ result.data[i].ln
-						+ "</td>");
-				var td6 = $("<td>"
 						+ result.data[i].csSubDeptName
 						+ "</td>");
+				var td6 = $("<td><center>"
+						+ result.data[i].engagementType
+						+ "</center></td>");
 				var td7 = $("<td>"
 						+ result.data[i].resourceStatus
 						+ "</td>");
@@ -362,16 +382,16 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"')>Edit</a></td>");
 				}
 				if((result.data[i].hsbcStaffId)==null){
-					var td2 = $("<td></td>");
-				}
-				if((result.data[i].eHr)==null){
-					var td3 = $("<td></td>");
-				}
-				if((result.data[i].lob)==null){
 					var td4 = $("<td></td>");
 				}
+				if((result.data[i].eHr)==null){
+					var td2 = $("<td></td>");
+				}
+				if((result.data[i].lob)==null){
+					var td3 = $("<td></td>");
+				}
 				if((result.data[i].csSubDeptName)==null){
-					var td6 = $("<td></td>");
+					var td5 = $("<td></td>");
 				}
 				if((result.data[i].resourceStatus)==null){
 					var td7 = $("<td></td>");
@@ -413,7 +433,11 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 			
 			loadCSBu(result);
 			
+			loadEngagementType(result);
+			
 			loadUserForRM(result.pageInfo.csbuName,result.csSubDeptId,result.pageInfo.rmUserId);
+			
+			
 		}
 		
 	})
