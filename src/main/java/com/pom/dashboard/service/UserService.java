@@ -21,5 +21,10 @@ public interface UserService {
 	List<User> getUserForRM();
 	
 	boolean addUser(User user);
-
+	
+	// Felix, 180105, Begin
+	boolean updateUser(User user);
+		
+	User queryUserById(String userId);
+	// Felix, 180105, End
 }

@@ -1,12 +1,10 @@
 package com.pmo.dashboard.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -134,6 +132,56 @@ public class UserController {
 		return userList;
 		
 	}
+	
+	// Felix, 180103, Begin
+		@RequestMapping("/userInfo")
+	    public String employeeInfo(final HttpServletRequest request,
+	            final HttpServletResponse response){
+	        return "user/userInfo";
+	    }
+		
+		@RequestMapping("/updateUserInfo")
+	    public String updateEmployeeInfo(final HttpServletRequest request,
+	            final HttpServletResponse response)
+	    {
+	        String userId = request.getParameter("userId");
+	        request.setAttribute("userId", userId);
+	        return "user/updateUserInfo";
+	    }
+		
+		@RequestMapping("/updateUser")
+	    @ResponseBody
+	    public boolean updateUser(final HttpServletRequest request,
+	            final HttpServletResponse response)
+	    {
+			String userId = request.getParameter("userId");
+	        String eHr = request.getParameter("eHr");
+	        String userName = request.getParameter("userName");
+	        String userType = request.getParameter("userType");
+	        String bu = request.getParameter("bu");
+	        String csDeptId = request.getParameter("du");
+	        
+	        User user = new User(userId, eHr, userName,  userType, bu, csDeptId);
+	        
+	     
+	        
+	        boolean resultFlag = userService.updateUser(user);
+	        
+	        return resultFlag;
+	    }
+		
+		@RequestMapping("/queryUserById")
+	    @ResponseBody
+	    public Object queryUserById(final HttpServletRequest request,
+	            final HttpServletResponse response)
+	    {
+	        String userId = request.getParameter("userId");
+	        
+	        User user = userService.queryUserById(userId);
+	        
+	        return user;
+	    }
+		// Felix, 180103, End
 }
 
 
