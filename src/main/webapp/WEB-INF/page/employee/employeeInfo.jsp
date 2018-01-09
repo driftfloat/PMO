@@ -156,6 +156,17 @@ var path='<%=path%>';
 										</div>
 										</div>
 										<div class="group">
+										<label class="col-lg-2 control-label">EngagementType</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="engagementType" data-bv-notempty
+												id="engagementType" data-bv-group=".group">
+												<option value="">--Option--</option>
+											</select>
+										</div>
+										</div>
+										</br></br></br>
+										
+										<div class="group">
 										<label class="col-lg-2 control-label">RM</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="nickName" data-bv-notempty
@@ -190,12 +201,12 @@ var path='<%=path%>';
 										class="table table-striped table-bordered">
 										<thead>
 											<tr>
-												<th>StaffId</th>
+												<th>StaffName</th>												
 												<th>ER</th>
 												<th>LOB</th>
-												<th>StaffName</th>
-												<th>LN</th>
+												<th>StaffId</th>
 												<th>DU</th>
+												<th>EngagementType</th>
 												<th>Status</th>
 												<th>RM</th>
 												<th>Operate</th>

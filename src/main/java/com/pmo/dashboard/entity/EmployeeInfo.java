@@ -13,9 +13,17 @@ public class EmployeeInfo
     private String resourceStatus;
     private String rmUserId;
     private String nickname;
+    private String engagementType;
     
     
     
+    
+	public String getEngagementType() {
+		return engagementType;
+	}
+	public void setEngagementType(String engagementType) {
+		this.engagementType = engagementType;
+	}
 	public String getNickname() {
 		return nickname;
 	}
