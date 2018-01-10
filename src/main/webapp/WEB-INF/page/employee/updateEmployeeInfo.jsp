@@ -370,7 +370,6 @@ var path='<%=path%>';
 											</div>
 										</div>
 									</div>
-									<!-- 
 									<div class="group">
 										<label class="col-lg-2 control-label">Resource Status</label>
 										<div class="col-lg-4">
@@ -379,9 +378,9 @@ var path='<%=path%>';
 												<option value="">--Option--</option>
 											</select>
 										</div>
-									</div> -->
+									</div> 
 								</div>
-								<!--<div class="form-group">
+								<div class="form-group">
 										<div class="group" style="display:none" id="terminatedDateDiv">
 										<label class="col-sm-2 control-label">LWD</label>
 										<div class="col-md-4">
@@ -405,7 +404,7 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
-								</div>  -->
+								</div>  
 								<div class="form-group">
 									    <div style="text-align:center;width:100%;">
 									    <input type="button" value="Update"

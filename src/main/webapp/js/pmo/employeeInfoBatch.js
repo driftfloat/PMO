@@ -295,8 +295,8 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 						+ "</td>");
 				//var td7 = $("<td><a class='btn btn-info' href='javascript:void(0);'> <i class='glyphicon glyphicon-edit icon-white'></i> 编辑</a></td>");
 				var td9 = null;
-				
-				td9 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>Detail</a></td>");
+				var engagementType = result.data[i].engagementType.replace(/\s+/g,"");
+				td9 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a></td>");
 			
 				if((result.data[i].hsbcStaffId)==null){
 					var td5 = $("<td></td>");
@@ -509,8 +509,14 @@ function loadRole(){
 }
 
 
-function employeeDetail(employeeId){
-	$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html");
+function employeeDetail(employeeId,engagementType){
+	if(engagementType=="Time&Material"||engagementType=="TeamDelivery"){
+		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=1");
+	}else if(engagementType=="FixedPrice"){
+		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=2");
+	}else if(engagementType=="Support"){
+		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=3");
+	}
 	$("#employeeId").val(employeeId);
 	$("#editForm").submit();
 }
