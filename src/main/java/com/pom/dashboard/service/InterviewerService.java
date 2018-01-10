@@ -7,7 +7,7 @@ import com.pmo.dashboard.entity.User;
 
 public interface InterviewerService
 {
-	public List<Interviewer> queryInterviewerList(Interviewer interviewer); 
+	public List<Interviewer> queryInterviewerList(Interviewer interviewer,User user); 
 	public List<Interviewer> queryAllInterviewer(Map<String, Object> map);
 	
 	public boolean interviewerRenDing(Interviewer interviewer);
