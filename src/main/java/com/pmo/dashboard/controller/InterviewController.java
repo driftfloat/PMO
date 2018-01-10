@@ -95,10 +95,17 @@ public class InterviewController {
 	}
 
 	@RequestMapping("/employeeDetailInfo")
-	public String employeeDetailInfo(HttpServletRequest request, HttpServletResponse response) {
+	public String employeeDetailInfo(HttpServletRequest request, HttpServletResponse response,String type) {
 		String employeeId = request.getParameter("employeeId");
 		request.setAttribute("employeeId", employeeId);
-		return "employee/employeeDetailInfo";
+		if("1".equals(type)) {
+			return "employee/employeeDetailInfo";
+		}else if("2".equals(type)) {
+			return "employee/employeeDetailInfo2";
+		}else {
+			return "employee/employeeDetailInfo3";
+		}
+		
 	}
 
 	@RequestMapping("/queryEmployeeById")

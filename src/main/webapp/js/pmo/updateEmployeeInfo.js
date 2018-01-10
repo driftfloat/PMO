@@ -123,7 +123,6 @@ function loadEmployeeInfo() {
 			loadStaffLocation(employee);
 			loadLocationType(employee);
 			loadOnshoreOrOffshore(employee);
-			loadPersonHsbcDept(employee);
 			loadTerminationReason(employee);
 			loadGbGf(employee);
 			$('#hsbcStaffId').val(employee.hsbcStaffId);
@@ -141,6 +140,7 @@ function loadEmployeeInfo() {
 			$('#eHr').val(employee.eHr);
 			$('#email').val(employee.email);
 			$('#entryDate1').val(employee.entryDate);
+			loadPersonHsbcDept(employee);
 		}
 	})
 }
@@ -349,26 +349,12 @@ function loadCSDept(employee) {
 		}
 	})
 
-	// $.ajax({
-	// url:path+'/service/csDept/queryAllCSSubDept',
-	// dataType:"json",
-	// async:true,
-	// cache:false,
-	// type:"post",
-	// success:function(list){
-	// for(var i = 0;i<list.length;i++){
-	// $("#csSubDept").append("<option
-	// value='"+list[i].csSubDeptId+"'>"+list[i].csSubDeptName+"</option>");
-	// }
-	// $('#csSubDept').val(employee.csSubDept);
-	// }
-	// })
 }
 
 function loadPersonHsbcDept(employee) {
 	var hsbcSubDeptId = employee.hsbcSubDept;
 	if(hsbcSubDeptId==""||hsbcSubDeptId==null){
-		loadDept(employee, hsbcDept);
+		loadDept(employee);
 	}else{
 		$.ajax({
 			url : path + '/service/hsbcDept/queryDeptById',
@@ -397,7 +383,7 @@ function loadDept(employee, hsbcDept) {
 		cache : false,
 		type : "post",
 		success : function(list) {
-
+			
 			var hsbcDeptName = hsbcDept.hsbcDeptName;
 
 			for (var i = 0; i < list.length; i++) {
@@ -414,7 +400,26 @@ function loadDept(employee, hsbcDept) {
 		}
 	})
 }
+function loadDept(employee) {
+	$.ajax({
+		url : path + '/service/hsbcDept/queryDeptName',
+		dataType : "json",
+		async : true,
+		cache : false,
+		type : "post",
+		success : function(list) {
+			
+			for (var i = 0; i < list.length; i++) {
 
+				$("#hsbcDept").append(
+						"<option value='" + list[i].hsbcSubDeptId + "'>"
+								+ list[i].hsbcDeptName + "</option>");
+			}
+
+			loadHSBCSubDept(employee);
+		}
+	})
+}
 function loadHSBCSubDept(employee) {
 	var hsbcSubDeptId = employee.hsbcSubDept;
 	$.ajax({

@@ -213,10 +213,9 @@ function loadCSSubDept(result){
 
 function editEmployeeInfo(employeeId,engagementType){
 	
-	
-	if(engagementType=="T&M"||engagementType=="TeamDelivery"){
+	if(engagementType=="Time&Material"||engagementType=="TeamDelivery"){
 		$("#editForm").attr("action",path+"/service/employee/updateEmployeeInfo.html?type=1");
-	}else if(engagementType=="FixedCost"){
+	}else if(engagementType=="FixedPrice"){
 		$("#editForm").attr("action",path+"/service/employee/updateEmployeeInfo.html?type=2");
 	}else if(engagementType=="Support"){
 		$("#editForm").attr("action",path+"/service/employee/updateEmployeeInfo.html?type=3");
@@ -411,16 +410,16 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 				var td8 = null;
 				var engagementType = result.data[i].engagementType.replace(/\s+/g,"");
 				if(userType=='5' || userType=='6'){
-					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>Detail</a></td>");
+					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a></td>");
 				}else if(userType=='3'){
 					if($("#userId").val()==result.data[i].rmUserId || result.data[i].rmUserId=='' || result.data[i].rmUserId==null){
-						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>Detail</a>" +
+						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
 								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a></td>");
 					}else{
-						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>Detail</a></td>");
+						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a></td>");
 					}
 				}else{
-					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>Detail</a>" +
+					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a></td>");
 				}
 				if((result.data[i].hsbcStaffId)==null){
@@ -484,8 +483,15 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 	})
 }
 
-function employeeDetail(employeeId){
-	$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html");
+function employeeDetail(employeeId,engagementType){
+	if(engagementType=="Time&Material"||engagementType=="TeamDelivery"){
+		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=1");
+	}else if(engagementType=="FixedPrice"){
+		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=2");
+	}else if(engagementType=="Support"){
+		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=3");
+	}
+	
 	$("#employeeId").val(employeeId);
 	$("#editForm").submit();
 }
