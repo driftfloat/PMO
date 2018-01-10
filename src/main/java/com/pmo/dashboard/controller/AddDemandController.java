@@ -30,10 +30,22 @@ public class AddDemandController {
     public String recruitdemand(final HttpServletRequest request,
             final HttpServletResponse response)
     {
-        return "/demand/recruitdemand";
+        return "/demand/recruitType";
     }
  
-    
+    @RequestMapping("/recruitType")
+    public String recruitType(final HttpServletRequest request,
+            final HttpServletResponse response,String status)
+    {
+    	if("1".equals(status)){
+    		 return "/demand/recruitdemand1";
+    	}else if("2".equals(status)){
+    		 return "/demand/recruitdemand2";
+    	}else if("3".equals(status)){
+    		 return "/demand/recruitdemand3";
+    	}
+        return "/demand/recruitType";
+    }
     @RequestMapping("/addDemand")
     @ResponseBody
     public boolean addDemand(AddDemand demand)

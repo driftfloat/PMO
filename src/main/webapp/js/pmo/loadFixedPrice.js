@@ -18,7 +18,6 @@ $(function(){
 	dateType1();
 	dateType2();
 	loadUserForRM();
-	loadFixedPrice();
 })
 
 	$("#staffRegion").change(function(){

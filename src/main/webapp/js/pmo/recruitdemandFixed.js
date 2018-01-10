@@ -8,7 +8,6 @@ $(function(){
 	dateType();
 	dateType1();
 	loadCsSubDept();
-	loadEngagementType();
 })
 
 /*function addDemand(){
@@ -56,8 +55,8 @@ function loadDept(){
 		}
 	})
 }
-function loadEngagementType(){
-	var url = path+'/json/engagementType.json'
+function loadEngagementFixedPrice(){
+	var url = path+'/json/engagementType1.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
 	    	   $("#engagementType").append("<option>"+item.name+"</option>");
