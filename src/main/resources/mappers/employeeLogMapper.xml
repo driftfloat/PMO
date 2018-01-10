@@ -13,7 +13,7 @@
     <result column="UPDATE_DATE" property="updateDate" jdbcType="VARCHAR" />
     <result column="OPERATION_PERSON" property="operationPerson" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="xmalldb.model.dd" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="com.pmo.dashboard.entity.EmployeeLog" extends="BaseResultMap" >
     <result column="CHANGE_INFORMATION" property="changeInformation" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Blob_Column_List" >
