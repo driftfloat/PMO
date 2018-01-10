@@ -12,9 +12,15 @@ public class EmployeePageCondition extends PageCondition
     private String staffName;
     private String rmUserId;
     private String engagementType;
-    
-    
-    public String getEngagementType() {
+    private int pageRecordsNum;  
+	
+	public int getPageRecordsNum() {
+		return pageRecordsNum;
+	}
+	public void setPageRecordsNum(int pageRecordsNum) {
+		this.pageRecordsNum = pageRecordsNum;
+	}
+	public String getEngagementType() {
 		return engagementType;
 	}
 	public void setEngagementType(String engagementType) {

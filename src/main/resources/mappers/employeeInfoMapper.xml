@@ -57,7 +57,7 @@
 			</if>
 			
 		
-        LIMIT #{currentPage},10;
+        LIMIT #{currentPage},#{pageRecordsNum};
 	</select>
 	
 	<select id="countEmployeeList" parameterType="com.pmo.dashboard.entity.EmployeePageCondition" resultType="int" >
