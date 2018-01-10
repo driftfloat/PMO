@@ -38,33 +38,39 @@ function loadCandidateList(pageState) {
 					$("#candidateList tbody").remove();
 					var tbody = $("<tbody>");
 					tbody.appendTo($("#candidateList"));
-					for (var i = 0; i < result.data.length; i++) {
-						// Felix, 20171212, Begin
-						var experienceYears = result.data[i].experienceYears == null? '' : result.data[i].experienceYears;
-						// Felix, 20171212, End
-						var tr = $("<tr></tr>");
-						tr.appendTo(tbody);
-						$("<td><a href='javascript:void(0);' " +
-				"onclick=displayPDF('"+result.data[i].candidateId+"')>"+ result.data[i].candidateName + "</a></td>")
-								.appendTo(tr);
-						$("<td>" + result.data[i].candidateSex + "</td>")
-								.appendTo(tr);
-						$("<td>" + result.data[i].candidateAge + "</td>")
-								.appendTo(tr);
-						$("<td>" + result.data[i].candidateTel + "</td>")
-								.appendTo(tr);
-						$("<td>" + result.data[i].email + "</td>").appendTo(tr);
-						$("<td>" + result.data[i].role + "</td>").appendTo(tr);
-						// Felix, 20171212, Begin
-						$("<td>" + experienceYears + "</td>").appendTo(tr);
-						// Felix, 20171212, End
-						$("<td>" + result.data[i].englishLevel + "</td>")
-								.appendTo(tr);
-						$("<td>" + result.data[i].skill + "</td>").appendTo(tr);
-						$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' "
-								+"onclick=interviewRecord('"
-								+result.data[i].candidateId
-								+"')>InterviewRecord</a></td>").appendTo(tr);
+					// Felix, 180110, Begin.
+					if(result.data.length == 0){
+						$("#candidateList").append("<tr><td colspan='10' style='text-align:center'>No Record!</td></tr>");
+					}else{
+					// Felix, 180110, End.
+						for (var i = 0; i < result.data.length; i++) {
+							// Felix, 20171212, Begin
+							var experienceYears = result.data[i].experienceYears == null? '' : result.data[i].experienceYears;
+							// Felix, 20171212, End
+							var tr = $("<tr></tr>");
+							tr.appendTo(tbody);
+							$("<td><a href='javascript:void(0);' " +
+					"onclick=displayPDF('"+result.data[i].candidateId+"')>"+ result.data[i].candidateName + "</a></td>")
+									.appendTo(tr);
+							$("<td>" + result.data[i].candidateSex + "</td>")
+									.appendTo(tr);
+							$("<td>" + result.data[i].candidateAge + "</td>")
+									.appendTo(tr);
+							$("<td>" + result.data[i].candidateTel + "</td>")
+									.appendTo(tr);
+							$("<td>" + result.data[i].email + "</td>").appendTo(tr);
+							$("<td>" + result.data[i].role + "</td>").appendTo(tr);
+							// Felix, 20171212, Begin
+							$("<td>" + experienceYears + "</td>").appendTo(tr);
+							// Felix, 20171212, End
+							$("<td>" + result.data[i].englishLevel + "</td>")
+									.appendTo(tr);
+							$("<td>" + result.data[i].skill + "</td>").appendTo(tr);
+							$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' "
+									+"onclick=interviewRecord('"
+									+result.data[i].candidateId
+									+"')>InterviewRecord</a></td>").appendTo(tr);
+						}
 					}
 					$("#candidateList").append("</tbdoy>");
 					currentPage = parseInt(result.pageInfo.currentPage);
