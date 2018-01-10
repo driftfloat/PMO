@@ -453,7 +453,7 @@ var path='<%=path%>';
 	<!-- application script for Charisma demo -->
 	<script src="<%=path %>/js/charisma.js"></script>
 
-	<script type="text/javascript" src="<%=path %>/js/pmo/loadHSBCDept.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/loadFixedPrice.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/pmo/employeeValid.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
