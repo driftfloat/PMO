@@ -29,8 +29,16 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService
     @Override
     public int countEmployeeList(EmployeePageCondition employeePageCondition)
     {
-        int pageNumber = employeeInfoMapper.countEmployeeList(employeePageCondition)/employeePageCondition.getPageRecordsNum() + Constants.ONE;
-        return pageNumber;
+		int countAll = employeeInfoMapper.countEmployeeList(employeePageCondition);
+		int pageRecordsNum = employeePageCondition.getPageRecordsNum();
+		int pageNumber = 0;
+
+		if (countAll % pageRecordsNum == 0) {
+			pageNumber = countAll / pageRecordsNum;
+		} else {
+			pageNumber = countAll / pageRecordsNum + 1;
+		}
+		return pageNumber;
     }
 
 }

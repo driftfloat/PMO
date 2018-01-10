@@ -76,18 +76,18 @@ public class EmployeeInfoController
         
         List<String>  csSubDeptNames = new ArrayList<String>();   
         
-    	List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsdeptId().split(","));
-    	
-    	if(cSDepts != null && !cSDepts.isEmpty()){        
-    		for (CSDept csDept : cSDepts) {
+        List<CSDept> cSDepts = null;
+        
+        if(user.getCsdeptId() != null && user.getCsdeptId() != ""){
+        	cSDepts= csDeptService.queryCSDeptByIds(user.getCsdeptId().split(","));
+        	for (CSDept csDept : cSDepts) {
         		csSubDeptNames.add(csDept.getCsSubDeptName());
 			}
-    	}        
-        
+        }
         String userType = user.getUserType();
       	
     	String[] csBuNames = null;
-    	if(user.getBu()!=null&&user.getBu()!=""){
+		if (user.getBu() != null && user.getBu() != "") {
     		csBuNames = user.getBu().split(",");
     	}
 
@@ -214,21 +214,21 @@ public class EmployeeInfoController
         
         List<String>  csSubDeptNames = new ArrayList<String>();   
         
-        List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsdeptId().split(","));
+        List<CSDept> cSDepts = null;
         
-        if(cSDepts != null && !cSDepts.isEmpty()){        
-            for (CSDept csDept : cSDepts) {
+        if(user.getCsdeptId() != null && user.getCsdeptId() != ""){
+        	cSDepts= csDeptService.queryCSDeptByIds(user.getCsdeptId().split(","));
+        	for (CSDept csDept : cSDepts) {
                 csSubDeptNames.add(csDept.getCsSubDeptName());
             }
-        }        
-        
+        }
         
         String userType = user.getUserType();
         
         String[] csBuNames = null;
-    	if(user.getBu()!=null&&user.getBu()!=""){
-    		csBuNames = user.getBu().split(",");
-    	}
+		if (user.getBu() != null && user.getBu() != "") {
+			csBuNames = user.getBu().split(",");
+		}
        
     	String csSubDeptId = null;
     	
