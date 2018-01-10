@@ -120,11 +120,18 @@ public class EmployeeController {
     
     @RequestMapping("/updateEmployeeInfo")
     public String updateEmployeeInfo(final HttpServletRequest request,
-            final HttpServletResponse response)
+            final HttpServletResponse response,String type)
     {
         String employeeId = request.getParameter("employeeId");
         request.setAttribute("employeeId", employeeId);
-        return "employee/updateEmployeeInfo";
+        
+        if("1".equals(type)) {
+        	return "employee/updateEmployeeInfo";
+    	}else if("2".equals(type)) {
+    		return "employee/updateEmployeeInfo2";
+    	}else {
+    		return "employee/updateEmployeeInfo3";
+    	}
     }
     
     

@@ -111,13 +111,13 @@ var path='<%=path%>';
 							    
 								<div class="form-group">
 								
-										<div class="group">
+										<!-- <div class="group">
 											<label class="col-sm-2 control-label">HSBC Staff ID</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="hsbcStaffId"
 													id="hsbcStaffId" />
 											</div>
-										</div>
+										</div> -->
 										<div class="group">
 											<label class="col-sm-2 control-label">Staff Name</label>
 											<div class="col-sm-4">
@@ -125,45 +125,17 @@ var path='<%=path%>';
 													id="staffName" />
 											</div>
 										</div>
+										<div class="group">
+										<label class="col-lg-2 control-label">Staff Region</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="staffRegion" data-bv-notempty
+												data-bv-notempty-message="please select  staffRegion" id="staffRegion" data-bv-group=".group" onchange="changeData()">
+												<option value="">--Option--</option>
+											</select>
+										</div>
+										</div>
 								</div>
 								
-								<div class="form-group">
-										<div class="group">
-											<label class="col-sm-2 control-label">LN</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="LN"
-													id="LN" />
-											</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">Email</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="email"
-													id="email" data-bv-group=".group"/>
-											</div>
-										</div>
-								</div>
-							
-								<div class="form-group">
-										<div class="group">
-										<label class="col-lg-2 control-label">Staff Location</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="staffLocation" data-bv-notempty
-												data-bv-notempty-message="please select  staffLocation" id="staffLocation" data-bv-group=".group">
-												<option value="">--Option--</option>
-											</select>
-										</div>
-										</div>
-										<div class="group">
-										<label class="col-lg-2 control-label">Location Type</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="locationType" data-bv-notempty
-												data-bv-notempty-message="please select  locationType" id="locationType" data-bv-group=".group">
-												<option value="">--Option--</option>
-											</select>
-										</div>
-										</div>
-								</div>
 								
 								<div class="form-group">
 										<div class="group">
@@ -171,89 +143,6 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" name="csSubDept" data-bv-notempty
 												data-bv-notempty-message="please select csDept" id="csSubDept" data-bv-group=".group">
-												<option value="">--Option--</option>
-											</select>
-										</div>
-										</div>
-										
-										<div class="group">
-										<label class="col-lg-2 control-label">GB/GF</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="gbGf" data-bv-notempty
-												data-bv-notempty-message="please select  GB_GF" id="gbGf" data-bv-group=".group">
-											<option value="">--Option--</option>
-											</select>
-										</div>
-										</div>
-								</div>
-								
-								
-								<div class="form-group">
-								        <div class="group">
-										<label class="col-lg-2 control-label">HSBC Dept</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="hsbcDept" data-bv-notempty
-												data-bv-notempty-message="please select HSBCDept" id="hsbcDept" data-bv-group=".group">
-												<option value="">--Option--</option>
-											</select>
-										</div>
-										</div>
-										<div class="group">
-										<label class="col-lg-2 control-label">HSBC Sub Dept</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="hsbcSubDept" data-bv-notempty
-												data-bv-notempty-message="please select HSBCSubDept" id="hsbcSubDept" data-bv-group=".group">
-												<option value="">--Option--</option>
-											</select>
-										</div>
-										</div>
-								</div>
-							
-								<div class="form-group">
-										<div class="group">
-											<label class="col-sm-2 control-label">HSBC Project Name</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="hsbcProjectName"
-													id="hsbcProjectName" />
-											</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">HSBC Project Manager</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="hsbcProjectManager"
-													id="hsbcProjectManager" />
-											</div>
-										</div>
-								</div>
-								<div class="form-group">
-										<div class="group">
-											<label class="col-sm-2 control-label">SOW#</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="sow"
-													id="sow" data-bv-group=".group"/>
-											</div>
-										</div>
-										<div class="group">
-										<label class="col-sm-2 control-label ">SOW# Expired Date</label>
-										<div class="col-md-4">
-											<div class="input-group date form_datetime1 col-sm-12"
-												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" readonly data-bv-group=".group"
-													id="sowExpiredDate1" name="sowExpiredDate1"> <span
-													class="input-group-addon"><span
-													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
-													id="sowExpiredDate2" name="sowExpiredDate2" />
-											</div>
-										</div>
-									    </div>
-										
-								</div>
-								<div class="form-group">
-										<div class="group">
-										<label class="col-lg-2 control-label">Staff Category</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="staffCategory" data-bv-notempty
-												data-bv-notempty-message="please select StaffCatefory" id="staffCategory" data-bv-group=".group">
 												<option value="">--Option--</option>
 											</select>
 										</div>
@@ -284,7 +173,7 @@ var path='<%=path%>';
 										</div>
 									</div>
 									<div class="group">
-										<label class="col-sm-2 control-label">EntryDate</label>
+										<label class="col-sm-2 control-label">Date of Joining</label>
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
@@ -297,26 +186,7 @@ var path='<%=path%>';
 										</div>
 									</div>
 								</div>
-								<div class="form-group">
-										<div class="group">
-										<label class="col-lg-2 control-label">Staff Region</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="staffRegion" data-bv-notempty
-												data-bv-notempty-message="please select  staffRegion" id="staffRegion" data-bv-group=".group" onchange="changeData()">
-												<option value="">--Option--</option>
-											</select>
-										</div>
-										</div>
-										<div class="group">
-										<label class="col-lg-2 control-label">Onshore or Offshore</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="onshoreOrOffshore" data-bv-notempty
-												data-bv-notempty-message="please select value" id="onshoreOrOffshore" data-bv-group=".group">
-												<option value="">--Option--</option>
-											</select>
-										</div>
-										</div>
-								</div>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">MSA Role</label>
@@ -337,40 +207,15 @@ var path='<%=path%>';
 										</div>
 										</div>
 								</div>
-					
-								<div class="form-group">
-										<div class="group">
-										<label class="col-lg-2 control-label">Billing Currency</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="billingCurrency" data-bv-notempty
-												data-bv-notempty-message="please select BillingCurrency" id="billingCurrency" data-bv-group=".group">
-												<option value="">--Option--</option>
-											</select>
-										</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">Bill Rate</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="billRate"
-													id="billRate" />
-											</div>
-										</div>
-								</div>
+								
 								<div class="form-group">
 									<div class="group">
-										<label class="col-sm-2 control-label">HSBC DOJ</label>
-										<div class="col-md-4">
-											<div class="input-group date form_datetime col-sm-12"
-												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" readonly
-													id="hsbcDOJ1" name="hsbcDOJ1"> <span
-													class="input-group-addon"><span
-													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
-													id="hsbcDOJ2" name="hsbcDOJ2" />
+											<label class="col-sm-2 control-label">Email</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="email"
+													id="email" data-bv-group=".group"/>
 											</div>
 										</div>
-									</div>
-									<!-- 
 									<div class="group">
 										<label class="col-lg-2 control-label">Resource Status</label>
 										<div class="col-lg-4">
@@ -379,10 +224,11 @@ var path='<%=path%>';
 												<option value="">--Option--</option>
 											</select>
 										</div>
-									</div> -->
+									</div>
+									
 								</div>
-								<!--<div class="form-group">
-										<div class="group" style="display:none" id="terminatedDateDiv">
+								<div class="form-group">
+									    <div class="group" style="display:none" id="terminatedDateDiv">
 										<label class="col-sm-2 control-label">LWD</label>
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
@@ -395,7 +241,6 @@ var path='<%=path%>';
 											</div>
 										</div>
 									    </div>
-									    
 									    <div class="group" style="display:none" id="terminationReasonDiv">
 										<label class="col-lg-2 control-label">Reason for Termination</label>
 										<div class="col-lg-4">
@@ -405,7 +250,7 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
-								</div>  -->
+								</div>
 								<div class="form-group">
 									    <div style="text-align:center;width:100%;">
 									    <input type="button" value="Update"
