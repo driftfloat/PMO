@@ -63,8 +63,15 @@ public class EmployeeInfoController
         
         String rmUserId = request.getParameter("rmUserId");
         
-        String engagementType = request.getParameter("engagementType");
-        
+		String engagementType = request.getParameter("engagementType");
+		
+		int pageRecordsNum = Constants.TEN;
+		
+		if (request.getParameter("pageRecordsNum") != null) {
+
+			pageRecordsNum = Integer.parseInt(request.getParameter("pageRecordsNum"));
+		}
+
         User user = (User) request.getSession().getAttribute("loginUser");
         
         List<String>  csSubDeptNames = new ArrayList<String>();   
@@ -118,6 +125,7 @@ public class EmployeeInfoController
             employeePageCondition.setResourceStatus(resourceStatus);
             employeePageCondition.setRmUserId(rmUserId);
             employeePageCondition.setEngagementType(engagementType);
+            employeePageCondition.setPageRecordsNum(pageRecordsNum);
             countPage = employeeInfoService.countEmployeeList(employeePageCondition);
             employeePageCondition.setPageCount(countPage+"");
             request.getSession().setAttribute("employeePageCondition", employeePageCondition);
@@ -128,17 +136,17 @@ public class EmployeeInfoController
             request.getSession().setAttribute("employeePageCondition", employeePageCondition);
         }else if("next".equals(pageState)){
             employeePageCondition = (EmployeePageCondition) request.getSession().getAttribute("employeePageCondition");
-            currentPage = Integer.parseInt(employeePageCondition.getCurrentPage()) + Constants.TEN +"";
+            currentPage = Integer.parseInt(employeePageCondition.getCurrentPage()) + employeePageCondition.getPageRecordsNum()+"";
             employeePageCondition.setCurrentPage(currentPage);
             request.getSession().setAttribute("employeePageCondition", employeePageCondition);
         }else if("previous".equals(pageState)){
             employeePageCondition = (EmployeePageCondition) request.getSession().getAttribute("employeePageCondition");
-            currentPage = Integer.parseInt(employeePageCondition.getCurrentPage()) - Constants.TEN +"";
+            currentPage = Integer.parseInt(employeePageCondition.getCurrentPage()) - employeePageCondition.getPageRecordsNum() +"";
             employeePageCondition.setCurrentPage(currentPage);
             request.getSession().setAttribute("employeePageCondition", employeePageCondition);
         }else if("last".equals(pageState)){
             employeePageCondition = (EmployeePageCondition) request.getSession().getAttribute("employeePageCondition");
-            currentPage = (Integer.parseInt(employeePageCondition.getPageCount()) - Constants.ONE) * Constants.TEN +"";
+            currentPage = (Integer.parseInt(employeePageCondition.getPageCount()) - Constants.ONE) * employeePageCondition.getPageRecordsNum() +"";
             employeePageCondition.setCurrentPage(currentPage);
             request.getSession().setAttribute("employeePageCondition", employeePageCondition);
         }
@@ -194,6 +202,13 @@ public class EmployeeInfoController
         String rmUserId = request.getParameter("rmUserId");
         
         String engagementType = request.getParameter("engagementType");
+        
+        int pageRecordsNum = Constants.TEN;
+		
+		if (request.getParameter("pageRecordsNum") != null) {
+
+			pageRecordsNum = Integer.parseInt(request.getParameter("pageRecordsNum"));
+		}
         
         User user = (User) request.getSession().getAttribute("loginUser");
         
@@ -255,6 +270,7 @@ public class EmployeeInfoController
             employeePageCondition.setStaffName(staffName);
             employeePageCondition.setResourceStatus(resourceStatus);
             employeePageCondition.setEngagementType(engagementType);
+            employeePageCondition.setPageRecordsNum(pageRecordsNum);
             if(!"3".equals(userType)){
                 employeePageCondition.setRmUserId(rmUserId);
             }
@@ -268,17 +284,17 @@ public class EmployeeInfoController
             request.getSession().setAttribute("employeePageCondition", employeePageCondition);
         }else if("next".equals(pageState)){
             employeePageCondition = (EmployeePageCondition) request.getSession().getAttribute("employeePageCondition");
-            currentPage = Integer.parseInt(employeePageCondition.getCurrentPage()) + Constants.TEN +"";
+            currentPage = Integer.parseInt(employeePageCondition.getCurrentPage()) + employeePageCondition.getPageRecordsNum() +"";
             employeePageCondition.setCurrentPage(currentPage);
             request.getSession().setAttribute("employeePageCondition", employeePageCondition);
         }else if("previous".equals(pageState)){
             employeePageCondition = (EmployeePageCondition) request.getSession().getAttribute("employeePageCondition");
-            currentPage = Integer.parseInt(employeePageCondition.getCurrentPage()) - Constants.TEN +"";
+            currentPage = Integer.parseInt(employeePageCondition.getCurrentPage()) - employeePageCondition.getPageRecordsNum() +"";
             employeePageCondition.setCurrentPage(currentPage);
             request.getSession().setAttribute("employeePageCondition", employeePageCondition);
         }else if("last".equals(pageState)){
             employeePageCondition = (EmployeePageCondition) request.getSession().getAttribute("employeePageCondition");
-            currentPage = (Integer.parseInt(employeePageCondition.getPageCount()) - Constants.ONE) * Constants.TEN +"";
+            currentPage = (Integer.parseInt(employeePageCondition.getPageCount()) - Constants.ONE) * employeePageCondition.getPageRecordsNum() +"";
             employeePageCondition.setCurrentPage(currentPage);
             request.getSession().setAttribute("employeePageCondition", employeePageCondition);
         }

@@ -4,9 +4,39 @@ var csSubDeptName0 = "";
 	
 var csBuName0 = "";
 
+
 $(function(){
 	
 	loadEmployeeList();
+	
+})
+
+$("#pageRecordsNum").change(function(){
+	var csDeptName = $("#csDept").find("option:selected").text();
+
+	if(csDeptName.indexOf('Option')!=-1){
+		csDeptName = "";
+	}
+	
+	var csBuName = $("#csBu").find("option:selected").text();
+
+	if(csBuName.indexOf('Option')!=-1){
+		csBuName = "";
+	}
+	
+	var csSubDeptName = $("#csSubDept").find("option:selected").text();
+	
+	if(csSubDeptName.indexOf('Option')!=-1){
+		csSubDeptName = "";
+	}
+	
+	var engagementType = $("#engagementType").find("option:selected").text();
+	
+	if(engagementType.indexOf('Option')!=-1){
+		engagementType = "";
+	}
+	
+	loadEmployeeList("",csDeptName,csSubDeptName,csBuName,engagementType);
 	
 })
 
@@ -301,6 +331,7 @@ function changeCSDeptToId(du){
 
 
 function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagementType){
+	
 	var csDeptName = csDeptName;
 
 	csDeptName0 = csDeptName;
@@ -329,11 +360,13 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 
 	var pageState = pageState;
 	
+	var  pageRecordsNum = $("#pageRecordsNum").find("option:selected").text();
+	
 	$.ajax({
 		url:path+"/service/employeeInfo/queryEmployeeList",
 		dataType:"json",
 		async:true,
-		data:{"staffName":staffName,"resourceStatus":resourceStatus,"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob,"rmUserId":rmName,"engagementType":engagementType},
+		data:{"staffName":staffName,"resourceStatus":resourceStatus,"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob,"rmUserId":rmName,"engagementType":engagementType,"pageRecordsNum":pageRecordsNum},
 		cache:false,
 		type:"post",
 		success:function(result){
@@ -421,7 +454,8 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 			$("#employeeList").append("</tbdoy>");
 			//alert(window.location.href);
 			var pageNum = parseInt(result.pageInfo.currentPage);
-			pageNum = pageNum / 10 + 1;
+			var pageRecordsNum = parseInt(result.pageInfo.pageRecordsNum);
+			pageNum = pageNum / pageRecordsNum + 1;
 			var totalPage = parseInt(result.pageInfo.pageCount);
 			$("#pageCount").html(totalPage);
 			$("#currentPage").html(pageNum);
@@ -433,8 +467,6 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 			if(pageNum == 1){
 				$("#previousPage").removeAttr("onclick");
 			}
-			
-			
 			
 			loadResourceStatus(result);
 			
