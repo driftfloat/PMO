@@ -211,8 +211,16 @@ function loadCSSubDept(result){
 }
 
 
-function editEmployeeInfo(employeeId){
-	$("#editForm").attr("action",path+"/service/employee/updateEmployeeInfo.html");
+function editEmployeeInfo(employeeId,engagementType){
+	
+	
+	if(engagementType=="T&M"||engagementType=="TeamDelivery"){
+		$("#editForm").attr("action",path+"/service/employee/updateEmployeeInfo.html?type=1");
+	}else if(engagementType=="FixedCost"){
+		$("#editForm").attr("action",path+"/service/employee/updateEmployeeInfo.html?type=2");
+	}else if(engagementType=="Support"){
+		$("#editForm").attr("action",path+"/service/employee/updateEmployeeInfo.html?type=3");
+	}
 	$("#employeeId").val(employeeId);
 	$("#editForm").submit();
 }
@@ -401,18 +409,19 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 						+ "</td>");
 				//var td7 = $("<td><a class='btn btn-info' href='javascript:void(0);'> <i class='glyphicon glyphicon-edit icon-white'></i> 编辑</a></td>");
 				var td8 = null;
+				var engagementType = result.data[i].engagementType.replace(/\s+/g,"");
 				if(userType=='5' || userType=='6'){
 					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>Detail</a></td>");
 				}else if(userType=='3'){
 					if($("#userId").val()==result.data[i].rmUserId || result.data[i].rmUserId=='' || result.data[i].rmUserId==null){
 						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>Detail</a>" +
-								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"')>Edit</a></td>");
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a></td>");
 					}else{
 						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>Detail</a></td>");
 					}
 				}else{
 					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"')>Detail</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"')>Edit</a></td>");
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a></td>");
 				}
 				if((result.data[i].hsbcStaffId)==null){
 					var td4 = $("<td></td>");

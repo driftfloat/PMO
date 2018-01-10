@@ -175,7 +175,16 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
-										
+										<div class="group">
+										<label class="col-lg-2 control-label">Staff Region</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="staffRegion" data-bv-notempty
+												data-bv-notempty-message="please select  staffRegion" id="staffRegion" data-bv-group=".group" onchange="changeData()">
+												<option value="">--Option--</option>
+											</select>
+										</div>
+										</div>
+										<!--
 										<div class="group">
 										<label class="col-lg-2 control-label">GB/GF</label>
 										<div class="col-lg-4">
@@ -184,10 +193,10 @@ var path='<%=path%>';
 											<option value="">--Option--</option>
 											</select>
 										</div>
-										</div>
+										</div>  -->
 								</div>
 								
-								
+								<!-- 
 								<div class="form-group">
 								        <div class="group">
 										<label class="col-lg-2 control-label">HSBC Dept</label>
@@ -208,7 +217,7 @@ var path='<%=path%>';
 										</div>
 										</div>
 								</div>
-							
+							 -->
 								<div class="form-group">
 										<div class="group">
 											<label class="col-sm-2 control-label">HSBC Project Name</label>
@@ -227,14 +236,14 @@ var path='<%=path%>';
 								</div>
 								<div class="form-group">
 										<div class="group">
-											<label class="col-sm-2 control-label">SOW#</label>
+											<label class="col-sm-2 control-label">Contract Reference</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="sow"
 													id="sow" data-bv-group=".group"/>
 											</div>
 										</div>
 										<div class="group">
-										<label class="col-sm-2 control-label ">SOW# Expired Date</label>
+										<label class="col-sm-2 control-label ">Contract Expired Date</label>
 										<div class="col-md-4">
 											<div class="input-group date form_datetime1 col-sm-12"
 												data-link-field="dt_set_order_time_input">
@@ -284,7 +293,7 @@ var path='<%=path%>';
 										</div>
 									</div>
 									<div class="group">
-										<label class="col-sm-2 control-label">EntryDate</label>
+										<label class="col-sm-2 control-label">Date of Joining</label>
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
@@ -297,7 +306,7 @@ var path='<%=path%>';
 										</div>
 									</div>
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Staff Region</label>
 										<div class="col-lg-4">
@@ -307,6 +316,7 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
+										
 										<div class="group">
 										<label class="col-lg-2 control-label">Onshore or Offshore</label>
 										<div class="col-lg-4">
@@ -315,8 +325,9 @@ var path='<%=path%>';
 												<option value="">--Option--</option>
 											</select>
 										</div>
-										</div>
-								</div>
+										</div> 
+								</div>-->
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">MSA Role</label>
@@ -337,7 +348,7 @@ var path='<%=path%>';
 										</div>
 										</div>
 								</div>
-					
+								<!--  
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Billing Currency</label>
@@ -355,9 +366,9 @@ var path='<%=path%>';
 													id="billRate" />
 											</div>
 										</div>
-								</div>
+								</div>-->
 								<div class="form-group">
-									<div class="group">
+									<!-- <div class="group">
 										<label class="col-sm-2 control-label">HSBC DOJ</label>
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
@@ -369,8 +380,7 @@ var path='<%=path%>';
 													id="hsbcDOJ2" name="hsbcDOJ2" />
 											</div>
 										</div>
-									</div>
-									<!-- 
+									</div> -->
 									<div class="group">
 										<label class="col-lg-2 control-label">Resource Status</label>
 										<div class="col-lg-4">
@@ -379,10 +389,8 @@ var path='<%=path%>';
 												<option value="">--Option--</option>
 											</select>
 										</div>
-									</div> -->
-								</div>
-								<!--<div class="form-group">
-										<div class="group" style="display:none" id="terminatedDateDiv">
+									</div>
+									<div class="group" style="display:none" id="terminatedDateDiv">
 										<label class="col-sm-2 control-label">LWD</label>
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
@@ -395,6 +403,8 @@ var path='<%=path%>';
 											</div>
 										</div>
 									    </div>
+								</div>
+								<div class="form-group">
 									    
 									    <div class="group" style="display:none" id="terminationReasonDiv">
 										<label class="col-lg-2 control-label">Reason for Termination</label>
@@ -405,7 +415,7 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
-								</div>  -->
+								</div>
 								<div class="form-group">
 									    <div style="text-align:center;width:100%;">
 									    <input type="button" value="Update"
