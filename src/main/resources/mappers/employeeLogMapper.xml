@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pmo.dashboard.dao.EmployeeLogMapper" >
+  <resultMap id="BaseResultMap" type="com.pmo.dashboard.entity.EmployeeLog" >
+    <result column="LOG_ID" property="logId" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR" />
+    <result column="CS_SUBDEPT_ID_NEW" property="csSubdeptIdNew" jdbcType="VARCHAR" />
+    <result column="CS_SUBDEPT_ID_ORIGINAL" property="csSubdeptIdOriginal" jdbcType="VARCHAR" />
+    <result column="ROLE_NEW" property="roleNew" jdbcType="VARCHAR" />
+    <result column="ROLE_ORIGINAL" property="roleOriginal" jdbcType="VARCHAR" />
+    <result column="STATUS_NEW" property="statusNew" jdbcType="VARCHAR" />
+    <result column="STATUS_ORIGINAL" property="statusOriginal" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="VARCHAR" />
+    <result column="OPERATION_PERSON" property="operationPerson" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="xmalldb.model.dd" extends="BaseResultMap" >
+    <result column="CHANGE_INFORMATION" property="changeInformation" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    CHANGE_INFORMATION
+  </sql>
+  
+  <insert id="add" parameterType="com.pmo.dashboard.entity.EmployeeLog" >
+    insert into t_employee_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        LOG_ID,
+      </if>
+      <if test="employeeId != null" >
+        EMPLOYEE_ID,
+      </if>
+      <if test="csSubdeptIdNew != null" >
+        CS_SUBDEPT_ID_NEW,
+      </if>
+      <if test="csSubdeptIdOriginal != null" >
+        CS_SUBDEPT_ID_ORIGINAL,
+      </if>
+      <if test="roleNew != null" >
+        ROLE_NEW,
+      </if>
+      <if test="roleOriginal != null" >
+        ROLE_ORIGINAL,
+      </if>
+      <if test="statusNew != null" >
+        STATUS_NEW,
+      </if>
+      <if test="statusOriginal != null" >
+        STATUS_ORIGINAL,
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE,
+      </if>
+      <if test="operationPerson != null" >
+        OPERATION_PERSON,
+      </if>
+      <if test="changeInformation != null" >
+        CHANGE_INFORMATION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="csSubdeptIdNew != null" >
+        #{csSubdeptIdNew,jdbcType=VARCHAR},
+      </if>
+      <if test="csSubdeptIdOriginal != null" >
+        #{csSubdeptIdOriginal,jdbcType=VARCHAR},
+      </if>
+      <if test="roleNew != null" >
+        #{roleNew,jdbcType=VARCHAR},
+      </if>
+      <if test="roleOriginal != null" >
+        #{roleOriginal,jdbcType=VARCHAR},
+      </if>
+      <if test="statusNew != null" >
+        #{statusNew,jdbcType=VARCHAR},
+      </if>
+      <if test="statusOriginal != null" >
+        #{statusOriginal,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="operationPerson != null" >
+        #{operationPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="changeInformation != null" >
+        #{changeInformation,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
