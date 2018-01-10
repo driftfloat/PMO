@@ -226,9 +226,18 @@ var path='<%=path%>';
 											<li><a href="#" id="nextPage" onclick="loadEmployeeList('next')">Next</a></li>
 											<li><a href="#" id="lastPage" onclick="loadEmployeeList('last')">End</a></li>
 										</ul>
-										<div style="max-width:400px;float:right;margin-top:30px;">
-										<!-- 每页<span id="pageDataCount"></span>条&nbsp;&nbsp;第<span id="currentPage"></span>页&nbsp;/&nbsp;共<span id="pageCount"></span>页&nbsp;&nbsp;共<span id="dataCount"></span>条 -->
-										<b><span id="currentPage"></span> / <span id="pageCount"></span></b>
+										
+										<div style="max-width: 400px; float: right; margin-top: 30px;">
+											<!-- 每页<span id="pageDataCount"></span>条&nbsp;&nbsp;第<span id="currentPage"></span>页&nbsp;/&nbsp;共<span id="pageCount"></span>页&nbsp;&nbsp;共<span id="dataCount"></span>条 -->
+											<b><span id="currentPage"></span> / <span id="pageCount"></span>
+												<select class="pagination pagination-centered"	name="pageRecordsNum" data-bv-notempty
+													data-bv-notempty-message="please select  pageRecordsNum"
+													id="pageRecordsNum" data-bv-group=".group">
+													<option value="10">10</option>
+													<option value="20">20</option>
+													<option value="50">50</option>
+												</select> 
+											</b>
 										</div>
 										<!-- <br>
 										共<span id="pageCount"></span>页   第<span id="currentPage"></span>页 -->

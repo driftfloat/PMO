@@ -226,7 +226,15 @@ var path='<%=path%>';
 										</ul>
 										<div style="max-width:400px;float:right;margin-top:30px;">
 										<!-- 每页<span id="pageDataCount"></span>条&nbsp;&nbsp;第<span id="currentPage"></span>页&nbsp;/&nbsp;共<span id="pageCount"></span>页&nbsp;&nbsp;共<span id="dataCount"></span>条 -->
-										<b><span id="currentPage"></span> / <span id="pageCount"></span></b>
+											<b><span id="currentPage"></span> / <span id="pageCount"></span>
+												<select class="pagination pagination-centered"	name="pageRecordsNum" data-bv-notempty
+														data-bv-notempty-message="please select  pageRecordsNum"
+														id="pageRecordsNum" data-bv-group=".group">
+														<option value="10">10</option>
+														<option value="20">20</option>
+														<option value="50">50</option>
+												</select> 
+											</b>
 										</div>
 									</div>
 								</form>
