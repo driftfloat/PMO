@@ -37,7 +37,7 @@ public class InterviewerServiceImpl implements InterviewerService
 
     //查询根据条件的面试官信息
 	@Override
-	public List<Interviewer> queryInterviewerList(Interviewer interviewer)
+	public List<Interviewer> queryInterviewerList(Interviewer interviewer,User user)
 	{
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -47,8 +47,8 @@ public class InterviewerServiceImpl implements InterviewerService
 		map.put("num", num);
 		
 		List<Interviewer> list = null;
-		String employeeId = interviewer.getEmployeeId();
-		User user = this.selectUser(employeeId);
+		//String employeeId = interviewer.getEmployeeId();
+		//User user = this.selectUser(employeeId);
 		String userType = null;
 		if(user!=null){
 			userType = user.getUserType();

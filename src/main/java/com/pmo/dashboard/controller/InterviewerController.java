@@ -62,7 +62,7 @@ public class InterviewerController
 		}
     	User user = (User)request.getSession().getAttribute("loginUser");
     	interviewer.setEmployeeId(user.getUserId());
-    	List<Interviewer> list = interviewerService.queryInterviewerList(interviewer);
+    	List<Interviewer> list = interviewerService.queryInterviewerList(interviewer,user);
     	for(int i=0;i<list.size();i++){
     	    
     	    //处理null ""
