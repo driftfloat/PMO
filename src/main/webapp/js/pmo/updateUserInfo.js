@@ -1,12 +1,12 @@
 $(function(){
 	
-	loadEmployeeInfo();
+	loadUserInfo();
 });
 
 
 
-function updateEmployee(){
-	var bootstrapValidator = $("#updateEmployeeForm").data('bootstrapValidator');
+function updateUser(){
+	var bootstrapValidator = $("#updateUserForm").data('bootstrapValidator');
 	   bootstrapValidator.validate();
 	if(bootstrapValidator.isValid()){
 		var userId = $('#userId').val();
@@ -42,7 +42,7 @@ function updateEmployee(){
 
 
 
-function loadEmployeeInfo(){
+function loadUserInfo(){
 	var userId = $('#userId').val();
 	
 	$.ajax({
@@ -104,13 +104,11 @@ function loadCSBu(user){
 }
 
 
-var userTypeMap = new Map();
 function loadUserType(user){
 	var url = path+'/json/userType.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
 	    	   $("#userType").append("<option value='"+item.key+"'>"+item.name+"</option>");
-	    	   userTypeMap.set(item.name,item.key);
 	       })
 	       $('#userType').val(user.userType);
 	});
