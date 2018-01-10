@@ -83,9 +83,9 @@ var path='<%=path%>';
 									<i class="glyphicon glyphicon-user"></i> 用户信息维护
 								</h2>
 							</div>
-							<div id="employeeInfo" class="box-content">
+							<div id="userInfo" class="box-content">
 							    
-							    <form id="employeeForm" method="post" class="form-horizontal">
+							    <form id="userForm" method="post" class="form-horizontal">
 									
 									
 										<div class="group">
@@ -173,10 +173,10 @@ var path='<%=path%>';
 									</div>
 									<div>
 										<ul class="pagination pagination-centered">
-											<li><a href="#" id="fristPage" onclick="loadEmployeeList('frist')">首页</a></li>
-											<li><a href="#" id="previousPage" onclick="loadEmployeeList('previous')">上一页</a></li>
-											<li><a href="#" id="nextPage" onclick="loadEmployeeList('next')">下一页</a></li>
-											<li><a href="#" id="lastPage" onclick="loadEmployeeList('last')">末页</a></li>
+											<li><a href="#" id="fristPage" onclick="loadUserList('frist')">首页</a></li>
+											<li><a href="#" id="previousPage" onclick="loadUserList('previous')">上一页</a></li>
+											<li><a href="#" id="nextPage" onclick="loadUserList('next')">下一页</a></li>
+											<li><a href="#" id="lastPage" onclick="loadUserList('last')">末页</a></li>
 										</ul>
 										<br>
 										共<span id="pageCount"></span>页   第<span id="currentPage"></span>页

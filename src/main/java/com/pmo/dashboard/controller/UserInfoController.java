@@ -78,7 +78,6 @@ public class UserInfoController {
         }
 		Map<String,Object> result = new HashMap<String,Object>();
 		List<User> list = userInfoService.queryUserList(userPageCondition);
-		result.put("userType", userType);
 		result.put("data", list);
 		result.put("pageInfo", request.getSession().getAttribute("userPageCondition"));
 		return result;

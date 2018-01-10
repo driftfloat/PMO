@@ -1,51 +1,22 @@
-var csDeptName0 = "";
-
-var csSubDeptName0 = "";
-	
-var csBuName0 = "";
 var userTypeMap = new Map();
-var userTypeMap0 = new Map();
-function loadUserType(result){
+
+function loadUserTypeMap(){
 	var url = path+'/json/userType.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
-	    	   $("#userType").append("<option value='"+item.key+"'>"+item.name+"</option>");
-	    	   userTypeMap.set(item.name,item.key);
-	    	   userTypeMap0.set(item.key,item.name);
+	    	   userTypeMap.set(item.key,item.name);
 	       })
-	       $('#userType').val(result.pageInfo.userType);
 	});
 }
 
+
 $(function(){
-	loadUserType();
-	loadEmployeeList();
+	loadUserTypeMap();
+	loadUserList();
 	
 })
 
-
-/*function loadCSDept(){
-	$.ajax({
-		url:path+'/service/csDept/queryCSDeptName',
-		dataType:"json",
-		async:true,
-		cache:false,
-		type:"post",
-		success:function(list){
-			for(var i = 0;i<list.length;i++){
-				$("#csDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csDeptName+"</option>");
-			}
-		}
-	})
-}*/
-
-
 $('#searchBtn').bind("click", function(){
-	var csDeptName = $("#csDept").find("option:selected").text();
-
-	if(csDeptName.indexOf('Option')!=-1){
-		csDeptName = "";
-	}
 	
 	var csBuName = $("#csBu").find("option:selected").text();
 
@@ -59,12 +30,11 @@ $('#searchBtn').bind("click", function(){
 		csSubDeptName = "";
 	}
 	
-	loadEmployeeList("",csDeptName,csSubDeptName,csBuName);
+	loadUserList("",csSubDeptName,csBuName);
 });
 
 
 function loadCSSubDept(result){
-	var userType = result.userType;
 	$.ajax({
 		url:path+'/service/csDept/queryAllCSSubDeptName',
 		dataType:"json",
@@ -83,14 +53,7 @@ function loadCSSubDept(result){
 }
 
 
-function editEmployeeInfo(userId){
-	$("#editForm").attr("action",path+"/service/user/updateUserInfo.html");
-	$("#userId").val(userId);
-	$("#editForm").submit();
-}
-
 function loadCSBu(result){
-	var userType = result.userType;
 	var url = path+'/json/csBuName.json'
 	$.getJSON(url,  function(data) {
 		   $("#csBu").empty();
@@ -102,22 +65,18 @@ function loadCSBu(result){
 	});
 }
 
+function loadUserType(result){
+	var url = path+'/json/userType.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#userType").append("<option value='"+item.key+"'>"+item.name+"</option>");
+	       })
+	       $('#userType').val(result.pageInfo.userType);
+	});
+}
 
 
-function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
-	var csDeptName = csDeptName;
-
-	csDeptName0 = csDeptName;
-	
-	var csSubDeptName = csSubDeptName;
-	
-	csSubDeptName0 = csSubDeptName;
-	
-	var csBuName = csBuName;
-	
-	csBuName0 = csBuName;
-	
-	
+function loadUserList(pageState,csSubDeptName,csBuName){
 	var eHr = $("#eHr").val();
 	
 	var userType = $("#userType").val();
@@ -151,17 +110,16 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 						+ result.data[i].nickname
 						+ "</td>");
 				var td3 = $("<td>"
-						+ userTypeMap0.get(result.data[i].userType)
+						+ userTypeMap.get(result.data[i].userType)
 						+ "</td>");
 				var td4 = $("<td>"
-						+ result.data[i].bu
+						+ (result.data[i].bu == null? '' : result.data[i].bu)
 						+ "</td>");
 				var td5 = $("<td>"
-						+ result.data[i].du
+						+ (result.data[i].du == null? '' : result.data[i].du)
 						+ "</td>");
-				//var td7 = $("<td><a class='btn btn-info' href='javascript:void(0);'> <i class='glyphicon glyphicon-edit icon-white'></i> 编辑</a></td>");
 				var td6 = null;
-				td6 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].userId+"')>Edit</a></td>");
+				td6 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editUserInfo('"+result.data[i].userId+"')>Edit</a></td>");
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
@@ -170,14 +128,13 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 				td6.appendTo(tr);
 			}
 			$("#userList").append("</tbdoy>");
-			//alert(window.location.href);
 			var pageNum = parseInt(result.pageInfo.currentPage);
 			pageNum = pageNum / 10 + 1;
 			var totalPage = parseInt(result.pageInfo.pageCount);
 			$("#pageCount").html(totalPage);
 			$("#currentPage").html(pageNum);
-			$("#nextPage").attr("onclick","loadEmployeeList('next')");
-			$("#previousPage").attr("onclick","loadEmployeeList('previous')");
+			$("#nextPage").attr("onclick","loadUserList('next')");
+			$("#previousPage").attr("onclick","loadUserList('previous')");
 			if(pageNum == totalPage){
 				$("#nextPage").removeAttr("onclick");
 			}
@@ -188,8 +145,13 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName){
 			loadCSSubDept(result);
 			
 			loadCSBu(result);
-			
 		}
 		
 	})
+}
+
+function editUserInfo(userId){
+	$("#editForm").attr("action",path+"/service/user/updateUserInfo.html");
+	$("#userId").val(userId);
+	$("#editForm").submit();
 }

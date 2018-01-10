@@ -1,5 +1,5 @@
 $(document).ready(function() {    
-    $('#updateEmployeeForm').bootstrapValidator({
+    $('#updateUserForm').bootstrapValidator({
 		message: 'This value is not valid',
 
         feedbackIcons: {
