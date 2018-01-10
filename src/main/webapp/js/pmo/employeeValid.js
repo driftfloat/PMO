@@ -43,9 +43,6 @@ $(document).ready(function() {
             },
             hsbcStaffId: {
                 validators: {
-                    notEmpty: {
-                        message: 'Please enter your hsbcStaffId'
-                    },
                     numeric: {
                     	message:'Please enter number'
                     },
@@ -66,10 +63,10 @@ $(document).ready(function() {
             },
             LN: {
                 validators: {
-                    notEmpty: {
-                        message: 'Please select your LN'
-                    }
-
+                	regexp:{
+            			regexp:/^([A-Za-z]+\s?)*[A-Za-z]$/,
+            			message:'please enter english.'
+            		}
                 }
             },
 
@@ -208,9 +205,6 @@ $(document).ready(function() {
             },
             hsbcStaffId: {
                 validators: {
-                    notEmpty: {
-                        message: 'Please enter your hsbcStaffId'
-                    },
                     numeric: {
                     	message:'Please enter number'
                     },
@@ -227,10 +221,10 @@ $(document).ready(function() {
             },
             LN: {
                 validators: {
-                    notEmpty: {
-                        message: 'Please select your LN'
-                    }
-
+            		regexp:{
+            			regexp:/^([A-Za-z]+\s?)*[A-Za-z]$/,
+            			message:'please enter english.'
+            		}
                 }
             },
             
