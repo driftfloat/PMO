@@ -12,6 +12,7 @@
     <result column="STATUS_ORIGINAL" property="statusOriginal" jdbcType="VARCHAR" />
     <result column="UPDATE_DATE" property="updateDate" jdbcType="VARCHAR" />
     <result column="OPERATION_PERSON" property="operationPerson" jdbcType="VARCHAR" />
+    <result column="LOG_TYPE" property="logType" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.pmo.dashboard.entity.EmployeeLog" extends="BaseResultMap" >
     <result column="CHANGE_INFORMATION" property="changeInformation" jdbcType="LONGVARCHAR" />
@@ -20,7 +21,7 @@
     CHANGE_INFORMATION
   </sql>
   
-  <insert id="add" parameterType="com.pmo.dashboard.entity.EmployeeLog" >
+  <insert id="save" parameterType="com.pmo.dashboard.entity.EmployeeLog" >
     insert into t_employee_log
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="logId != null" >
@@ -56,6 +57,9 @@
       <if test="changeInformation != null" >
         CHANGE_INFORMATION,
       </if>
+      <if test="logType != null" >
+        LOG_TYPE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="logId != null" >
@@ -90,6 +94,9 @@
       </if>
       <if test="changeInformation != null" >
         #{changeInformation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="logType != null" >
+        #{logType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
