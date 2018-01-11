@@ -64,8 +64,7 @@
 
 </head>
 <script>
-var path='<%=path%>
-	';
+var path='<%=path%>';
 </script>
 <body>
 	<!-- topbar starts -->
