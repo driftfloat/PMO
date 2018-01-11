@@ -124,6 +124,7 @@ function loadEmployeeInfo() {
 			loadLocationType(employee);
 			loadOnshoreOrOffshore(employee);
 			loadTerminationReason(employee);
+			loadPersonHsbcDept(employee);
 			loadGbGf(employee);
 			$('#hsbcStaffId').val(employee.hsbcStaffId);
 			$('#lob').val(employee.lob);
@@ -140,7 +141,6 @@ function loadEmployeeInfo() {
 			$('#eHr').val(employee.eHr);
 			$('#email').val(employee.email);
 			$('#entryDate1').val(employee.entryDate);
-			loadPersonHsbcDept(employee);
 		}
 	})
 }
@@ -354,7 +354,7 @@ function loadCSDept(employee) {
 function loadPersonHsbcDept(employee) {
 	var hsbcSubDeptId = employee.hsbcSubDept;
 	if(hsbcSubDeptId==""||hsbcSubDeptId==null){
-		loadDept(employee);
+		loadFirstDept(employee);
 	}else{
 		$.ajax({
 			url : path + '/service/hsbcDept/queryDeptById',
@@ -373,6 +373,27 @@ function loadPersonHsbcDept(employee) {
 	}
 	
 	
+}
+
+function loadFirstDept(employee) {
+	$.ajax({
+		url : path + '/service/hsbcDept/queryDeptName',
+		dataType : "json",
+		async : true,
+		cache : false,
+		type : "post",
+		success : function(list) {
+			
+			for (var i = 0; i < list.length; i++) {
+
+				$("#hsbcDept").append(
+						"<option value='" + list[i].hsbcSubDeptId + "'>"
+								+ list[i].hsbcDeptName + "</option>");
+			}
+
+			loadHSBCSubDept(employee);
+		}
+	})
 }
 
 function loadDept(employee, hsbcDept) {
@@ -400,26 +421,7 @@ function loadDept(employee, hsbcDept) {
 		}
 	})
 }
-function loadDept(employee) {
-	$.ajax({
-		url : path + '/service/hsbcDept/queryDeptName',
-		dataType : "json",
-		async : true,
-		cache : false,
-		type : "post",
-		success : function(list) {
-			
-			for (var i = 0; i < list.length; i++) {
 
-				$("#hsbcDept").append(
-						"<option value='" + list[i].hsbcSubDeptId + "'>"
-								+ list[i].hsbcDeptName + "</option>");
-			}
-
-			loadHSBCSubDept(employee);
-		}
-	})
-}
 function loadHSBCSubDept(employee) {
 	var hsbcSubDeptId = employee.hsbcSubDept;
 	$.ajax({
