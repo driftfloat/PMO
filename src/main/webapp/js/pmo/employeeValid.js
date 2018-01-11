@@ -34,6 +34,10 @@ $(document).ready(function() {
                     numeric: {
                     	message:'Please enter number'
                     },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
                     remote:{
                     	type:"post",
                     	url: path+'/service/employee/checkLob',
@@ -50,14 +54,22 @@ $(document).ready(function() {
                     	type:"post",
                     	url: path+'/service/employee/checkHSBCStaffID',
                         message:"hsbcStaffId already exists"
-                    }
+                    },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
                 }
             },
             staffName: {
                 validators: {
                     notEmpty: {
                         message: 'Please enter your staffName'
-                    }
+                    },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
 
                 }
             },
@@ -66,7 +78,11 @@ $(document).ready(function() {
                 	regexp:{
             			regexp:/^([A-Za-z]+\s?)*[A-Za-z]$/,
             			message:'please enter english.'
-            		}
+            		},
+            		stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
                 }
             },
 
@@ -74,7 +90,11 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Please enter your hsbcProjectName'
-                    }
+                    },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
 
                 }
             },
@@ -83,7 +103,11 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Please select your hsbcProjectManager'
-                    }
+                    },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
 
                 }
             },
@@ -91,7 +115,11 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Please select your sow'
-                    }
+                    },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
 
                 }
             },
@@ -138,7 +166,11 @@ $(document).ready(function() {
                     },
                     numeric:{
                     	message:'Please enter number'
-                    }
+                    },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
 
                 }
             },
@@ -148,9 +180,11 @@ $(document).ready(function() {
                           regexp:/^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/,
                           message: 'Please enter correct Email'
                       },
-                      notEmpty: {
-                          message: 'Please Choose  Email'
+                      stringLength: {
+                          max: 32,
+                          message: 'Exceeded the maxLength'
                       },
+                      
                 }
             },
             entryDate1: {
@@ -200,13 +234,20 @@ $(document).ready(function() {
                     numeric: {
                     	message:'Please enter number'
                     },
-                   
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
                 }
             },
             hsbcStaffId: {
                 validators: {
                     numeric: {
                     	message:'Please enter number'
+                    },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
                     },
                    
                 }
@@ -215,7 +256,11 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Please enter your staffName'
-                    }
+                    },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
 
                 }
             },
@@ -224,7 +269,11 @@ $(document).ready(function() {
             		regexp:{
             			regexp:/^([A-Za-z]+\s?)*[A-Za-z]$/,
             			message:'please enter english.'
-            		}
+            		},
+            		stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
                 }
             },
             
@@ -232,8 +281,12 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Please enter your hsbcProjectName'
-                    }
-
+                    },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
+            		
                 }
             },
         
@@ -241,7 +294,11 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Please select your hsbcProjectManager'
-                    }
+                    },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
 
                 }
             },
@@ -249,7 +306,11 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Please select your sow'
-                    }
+                    },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
 
                 }
             },
@@ -260,7 +321,11 @@ $(document).ready(function() {
                     },
                     numeric:{
                     	message:'please enter number'
-                    }
+                    },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
 
                 }
             },
@@ -268,7 +333,11 @@ $(document).ready(function() {
                 validators: {
                     emailAddress:{
                     	message:'Email address is incorrect'
-                    }
+                    },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
                 }
             },
             sowExpiredDate1: {

@@ -370,7 +370,7 @@ var path='<%=path%>';
 									<div class="group">
 											<label class="col-sm-2 control-label">RM</label>
 											<div class="col-sm-4">
-												<select class="form-control" name="nickName" data-bv-notempty
+												<select class="form-control" name="nickName" 
 													 id="RM" data-bv-group=".group">
 												<option value="">--Option--</option>
 											</select>
