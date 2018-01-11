@@ -47,7 +47,7 @@
 				AND e.RESOURCE_STATUS = #{resourceStatus}
 			</if>
 			<if test="staffName != null and staffName != ''">
-				AND e.STAFF_NAME = #{staffName}
+				AND e.STAFF_NAME LIKE '%${staffName}%' 
 			</if>
 			<if test="rmUserId != null and rmUserId != ''">
 				AND e.RM_USER_ID = #{rmUserId}
