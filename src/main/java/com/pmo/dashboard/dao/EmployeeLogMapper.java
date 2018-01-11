@@ -1,10 +1,5 @@
 package com.pmo.dashboard.dao;
 
-import com.pmo.dashboard.entity.EmployeeLog;
-
-public interface EmployeeLogMapper {
+public interface EmployeeLogMapper extends BaseLogMapper<Object, Long>{
 	
-	
-	
-    int add(EmployeeLog log);
 }

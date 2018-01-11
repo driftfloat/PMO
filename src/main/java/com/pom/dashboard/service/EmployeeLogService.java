@@ -1,14 +1,11 @@
 package com.pom.dashboard.service;
 
-import com.pmo.dashboard.entity.EmployeeLog;
-
 /**
  * 员工日志
  * @author Devin
  *
  */
-public interface EmployeeLogService {
+public interface EmployeeLogService extends BaseLogService{
 	
-	boolean add(EmployeeLog log);
 
 }

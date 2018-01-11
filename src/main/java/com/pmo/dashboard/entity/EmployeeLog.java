@@ -3,28 +3,18 @@ package com.pmo.dashboard.entity;
 public class EmployeeLog {
 	
 	
-	
-    private String logId;
-
-    private String employeeId;
-
-    private String csSubdeptIdNew;
-
-    private String csSubdeptIdOriginal;
-
-    private String roleNew;
-
-    private String roleOriginal;
-
-    private String statusNew;
-
-    private String statusOriginal;
-
-    private String updateDate;
-
-    private String operationPerson;
-
-    private String changeInformation;
+    private String logId;//日志ID
+    private String employeeId;//员工ID
+    private String csSubdeptIdNew;//新交付部
+    private String csSubdeptIdOriginal;//原交付部
+    private String roleNew;//新角色
+    private String roleOriginal;//原角色
+    private String statusNew;//新状态
+    private String statusOriginal;//原状态
+    private String updateDate;//更新时间
+    private String operationPerson;//用户ID(userid)
+    private String changeInformation;//修改具体字段拼接信息
+    private String logType;//日志类型(0:add,1:update)
 
     public String getLogId() {
         return logId;
@@ -112,5 +102,13 @@ public class EmployeeLog {
 
     public void setChangeInformation(String changeInformation) {
         this.changeInformation = changeInformation == null ? null : changeInformation.trim();
+    }
+    
+    public String getLogType() {
+        return logType;
+    }
+
+    public void setLogType(String logType) {
+        this.logType = logType == null ? null : logType.trim();
     }
 }
