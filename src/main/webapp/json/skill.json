@@ -24,5 +24,10 @@
         {"name":"Transition"},
         {"name":"vb"},
         {"name":"Vision Plus"},
-        {"name":"Windows phone"}
+        {"name":"Windows phone"},
+        {"name":"HR"},
+        {"name":"Mainframe"},
+        {"name":"AS400"},
+        {"name":"Management"},
+        {"name":"QA"}
 ]
