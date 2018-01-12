@@ -191,7 +191,7 @@ function loadCSSubDept(result){
 				$("#csSubDept").append("<option>"+list[i].csSubDeptName+"</option>");
 			}
 			
-			if(userType=='2' || userType=='3' || userType=='4'){
+			if(userType=='3' || userType=='4' || userType=='5'){
 				if(csSubDeptNames.length==1){
 					$('#csSubDept').val(result.csSubDeptNames[0]);
 					$("#csSubDept").attr("disabled","disabled");
@@ -234,7 +234,7 @@ function loadCSBu(result){
 	       $.each(data, function(i, item) {
 	    	   $("#csBu").append("<option>"+item.name+"</option>");
 	       })
-	       if(userType=='1' || userType=='2' || userType=='3' || userType=='4'){
+	       if(userType=='1' || userType=='2' || userType=='3' || userType=='4'||userType=='5'){
 	    	   if(csBuNames.length==1){   		   
 	    		   $('#csBu').val(result.user.bu);
 	    		   $("#csBu").attr("disabled","disabled");
@@ -409,10 +409,17 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 				//var td7 = $("<td><a class='btn btn-info' href='javascript:void(0);'> <i class='glyphicon glyphicon-edit icon-white'></i> 编辑</a></td>");
 				var td8 = null;
 				var engagementType = result.data[i].engagementType.replace(/\s+/g,"");
-				if(userType=='5' || userType=='6'){
+				if(userType=='2' || userType=='4'|| userType=='6'|| userType=='7'|| userType=='8'|| userType=='9'|| userType=='10'|| userType=='15'){
 					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a></td>");
-				}else if(userType=='3'){
+				}else if(userType=='5'){
 					if($("#userId").val()==result.data[i].rmUserId || result.data[i].rmUserId=='' || result.data[i].rmUserId==null){
+						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a></td>");
+					}else{
+						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a></td>");
+					}
+				}else if(userType=='11'||userType=='12'||userType=='13'||userType=='14'){
+					if(result.csdeptNameForEdit == result.data[i].csSubDeptName || result.user.bu== result.data[i].csSubDeptName){
 						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
 								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a></td>");
 					}else{
