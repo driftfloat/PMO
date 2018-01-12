@@ -78,6 +78,9 @@
 		<if test="hsbcStaffId != null and hsbcStaffId != ''">
 			AND HSBC_STAFF_ID = #{hsbcStaffId}
 		</if>
+		<if test="engagementType !=null and engagementType !=''">
+			AND ENGAGEMENT_TYPE = #{engagementType}
+		</if>
 		)
 	</select>
 	
