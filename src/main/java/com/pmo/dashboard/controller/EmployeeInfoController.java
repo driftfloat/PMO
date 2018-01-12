@@ -96,11 +96,11 @@ public class EmployeeInfoController
         if(("".equals(csSubDeptName) || csSubDeptName == null) &&
                 ("".equals(csBuName) || csBuName == null)){
             
-            if("1".equals(userType)|| "2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
+            if("1".equals(userType)|| "2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)||"5".equals(userType)){
                 csBuName = csBuNames[0];
             }
             
-            if("2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
+            if("3".equals(userType)|| "4".equals(userType)|| "5".equals(userType)){
             	csSubDeptName = cSDepts.get(0).getCsSubDeptName();               	             
             }
             
@@ -165,8 +165,22 @@ public class EmployeeInfoController
      		}
      	}
      	
+     	String csdeptNameForEdit = null;
+     	if("11".equals(userType)||"12".equals(userType)||"13".equals(userType)||"14".equals(userType)){
+     		String  csdeptId = user.getCsdeptId();
+			if (csdeptId != null && csdeptId != "" && allCsDepts != null) {
+					for (CSDept csDept : allCsDepts) {
+						if(csDept.getCsSubDeptId().equals(csdeptId)){
+							csdeptNameForEdit =csDept.getCsSubDeptName();
+						}
+						
+					}
+			}
+     		
+     	}
      	result.put("csSubDeptName", csSubDeptName);
         result.put("csSubDeptId", csSubDeptId);
+        result.put("csdeptNameForEdit", csdeptNameForEdit);
 	    result.put("user", user);
         result.put("data", list);
         result.put("pageInfo", request.getSession().getAttribute("employeePageCondition"));
@@ -235,11 +249,11 @@ public class EmployeeInfoController
         if(("".equals(csSubDeptName) || csSubDeptName == null) &&
                 ("".equals(csBuName) || csBuName == null)){
             
-            if("1".equals(userType)|| "2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
+            if("3".equals(userType)|| "5".equals(userType)|| "11".equals(userType)|| "12".equals(userType)|| "13".equals(userType)||"14".equals(userType)){
             	csBuName = csBuNames[0];
             }
             
-            if("2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
+            if("3".equals(userType)|| "5".equals(userType)|| "11".equals(userType)|| "12".equals(userType)|| "13".equals(userType)||"14".equals(userType)){
                 csSubDeptName = cSDepts.get(0).getCsSubDeptName();              
             }
             
@@ -254,7 +268,7 @@ public class EmployeeInfoController
         EmployeePageCondition employeePageCondition = new EmployeePageCondition();
         
         //RM登录只能查看到自己管理的员工
-        if("3".equals(userType)){
+        if("5".equals(userType)){
             employeePageCondition.setRmUserId(user.getUserId());
         }
         
@@ -271,7 +285,7 @@ public class EmployeeInfoController
             employeePageCondition.setResourceStatus(resourceStatus);
             employeePageCondition.setEngagementType(engagementType);
             employeePageCondition.setPageRecordsNum(pageRecordsNum);
-            if(!"3".equals(userType)){
+            if(!"5".equals(userType)){
                 employeePageCondition.setRmUserId(rmUserId);
             }
             countPage = employeeInfoService.countEmployeeList(employeePageCondition);
