@@ -422,24 +422,31 @@ public class EmployeeController {
                List<HSBCDept> allHSBCDept = hsbcDeptService.queryHSBCDeptName();
                List<User> allRM = userService.getUserForRM();
                
-               CSDept csDept = new CSDept();
-               HSBCDept hsbcDept = new HSBCDept();
+               CSDept csDept = null;
+               HSBCDept hsbcDept = null;
                
                for (int i = 1; i - 1 < listE.size(); i++) {
-				
+				if(listE.get(i - 1).getCsSubDept()!=null){
 					for (CSDept csD : allCSDept) {
 						if (csD.getCsSubDeptId().equals(listE.get(i - 1).getCsSubDept())) {
 							csDept = csD;
 							break;
 						}
 					}
+				}else{
+					csDept =null;
+				}
 	
+				if(listE.get(i - 1).getHsbcSubDept()!=null){
 					for (HSBCDept hsbcD : allHSBCDept) {
 						if (hsbcD.getHsbcSubDeptId().equals(listE.get(i - 1).getHsbcSubDept())) {
 							hsbcDept = hsbcD;
 							break;
 						}
 					}
+				}else {
+					hsbcDept = null;
+				}
                    
                    int j = 0;
                    

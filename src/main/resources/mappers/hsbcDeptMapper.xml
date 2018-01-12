@@ -9,7 +9,7 @@
 	</resultMap>
 	
 	<select id="queryHSBCDeptName" resultMap="hsbcDeptMap">
-	    SELECT * FROM t_hsbc_dept GROUP BY HSBC_DEPT_NAME ORDER BY HSBC_DEPT_NAME ASC  
+	    SELECT * FROM t_hsbc_dept ORDER BY HSBC_DEPT_NAME ASC  
 	</select>
 	
 	<select id="queryHSBCDubDeptNameById" parameterType="String" resultMap="hsbcDeptMap">
