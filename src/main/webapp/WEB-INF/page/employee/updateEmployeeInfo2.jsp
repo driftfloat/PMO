@@ -284,10 +284,10 @@ var path='<%=path%>';
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" readonly
+												<input class="form-control" type="text" readonly data-bv-group=".group"
 													id="graduationDate1" name="graduationDate1"> <span
 													class="input-group-addon"><span
-													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
+													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
 													id="graduationDate2" name="graduationDate2" />
 											</div>
 										</div>

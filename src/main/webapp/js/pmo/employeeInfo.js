@@ -151,7 +151,10 @@ function exportCondition(){
 			condition += lb.eq(i).attr("name")+",";
 		}
 	}
-
+	if(condition==""||condition==null){
+		alert("Please select checkbox.");
+		return;
+	}
 	$.ajax({
 		url:path+'/service/employeeInfo/setEmpConditon',
 		dataType:"json",
@@ -168,10 +171,12 @@ function exportCondition(){
 
 		}
 	})
-	
-	
 }
 
+function exportCancel(){
+	$('#myModal').modal('hide');
+	$("[type='checkbox']").removeAttr("checked");
+}
 
 var allCSSubDept;
 function loadCSSubDept(result){

@@ -330,8 +330,8 @@ var path='<%=path%>';
 							</a> 
 							<a class="btn btn-success" href="#" onClick="exportCondition()"> <i
 								class="glyphicon glyphicon-ok icon-white" ></i> Confirm
-							</a> <a class="btn btn-info" href="#" data-dismiss="modal"> <i
-								class="glyphicon glyphicon-remove icon-white"></i> Cancel
+							</a> <a class="btn btn-info" href="#" onClick="exportCancel()"> <i 
+							class="glyphicon glyphicon-remove icon-white"></i> Cancel
 							</a>
 						</div>
 					</div>
