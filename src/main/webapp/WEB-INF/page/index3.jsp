@@ -165,14 +165,14 @@ var path='<%=path%>';
 								</div>
 								<div class="form-group">
 										<div class="group">
-											<label class="col-sm-2 control-label">HSBC Project Name</label>
+											<label class="col-sm-2 control-label">Project Name</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="hsbcProjectName"
 													id="hsbcProjectName" data-bv-group=".group"/>
 											</div>
 										</div>
 										<div class="group">
-											<label class="col-sm-2 control-label">HSBC Project Manager</label>
+											<label class="col-sm-2 control-label">Project Manager</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="hsbcProjectManager"
 													id="hsbcProjectManager" data-bv-group=".group"/>
