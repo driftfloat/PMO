@@ -35,6 +35,7 @@
 		<result property="gbGf" column="GB_GF" javaType="String" />
 		<result property="entryDate" column="ENTRY_DATE" javaType="String" />
 		<result property="rmUserId" column="RM_USER_ID" javaType="String" />
+		<result property="engagementType" column="ENGAGEMENT_TYPE" javaType="String" />
 	</resultMap>
 	
 	
@@ -78,7 +79,7 @@
 		<if test="hsbcStaffId != null and hsbcStaffId != ''">
 			AND HSBC_STAFF_ID = #{hsbcStaffId}
 		</if>
-		<if test="engagementType !=null and engagementType !=''">
+		<if test="engagementType != null and engagementType != ''">
 			AND ENGAGEMENT_TYPE = #{engagementType}
 		</if>
 		)
