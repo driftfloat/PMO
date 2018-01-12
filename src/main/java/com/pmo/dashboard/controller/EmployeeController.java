@@ -203,14 +203,17 @@ public class EmployeeController {
         
         boolean resultFlag = employeeService.addEmployee(employee);
         
-        try{
+        /**
+         * 添加日志
+         */
+        /*try{
         	User user = (User)request.getSession().getAttribute("loginUser");
         	EmployeeLog log = getEmployeeLog(employee,user,"0");
     		@SuppressWarnings({ "unused", "unchecked" })
 			boolean flag = employeeLogService.save(log);
         }catch(Exception e){
         	e.printStackTrace();
-        }
+        }*/
         
         return resultFlag;
     }
@@ -263,14 +266,17 @@ public class EmployeeController {
                 billingCurrency, billRate, resourceStatus,
                 terminatedDate, terminationReason,email,gbGf,entryDate,rmUserId);
         
-        try{
+        /**
+         * 添加日志
+         */
+        /*try{
         	User user = (User)request.getSession().getAttribute("loginUser");
         	EmployeeLog log = getEmployeeLog(employee,user,"1");
     		@SuppressWarnings({ "unused", "unchecked" })
 			boolean flag = employeeLogService.save(log);
         }catch(Exception e){
         	e.printStackTrace();
-        }
+        }*/
         
         boolean resultFlag = employeeService.updateEmployee(employee);
         
