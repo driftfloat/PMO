@@ -162,7 +162,7 @@ function loadCSSubDept(result){
 				$("#csSubDept").append("<option>"+list[i].csSubDeptName+"</option>");
 			}
 			
-			if(userType=='2' || userType=='3' || userType=='4'){
+			if(userType=='3' || userType=='5' || userType=='11' || userType=='12'|| userType=='13' || userType=='14'){
 				if(csSubDeptNames.length==1){
 					$('#csSubDept').val(result.csSubDeptNames[0]);
 					$("#csSubDept").attr("disabled","disabled");
@@ -197,7 +197,7 @@ function loadCSBu(result){
 	       $.each(data, function(i, item) {
 	    	   $("#csBu").append("<option>"+item.name+"</option>");
 	       })
-	       if(userType=='1' || userType=='2' || userType=='3' || userType=='4'){
+	       if(userType=='3' || userType=='5' || userType=='11' || userType=='12'|| userType=='13' || userType=='14'){
 	    	   if(csBuNames.length==1){   		   
 	    		   $('#csBu').val(result.user.bu);
 	    		   $("#csBu").attr("disabled","disabled");
@@ -373,7 +373,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 function rmAuthority(result){
 	
 	var userType = result.user.userType;
-	if(userType == '3'){
+	if(userType == '5'){
 		 $("#modifyName option[value='4']").remove();
 	}
 	
@@ -441,7 +441,7 @@ function loadUserForRM(bu,du,pageRMUserId){
 			var currentUserType = userType;
 			
 			// RM 只能显示和修改自己管理的员工
-			if(currentUserType == '3'){	
+			if(currentUserType == '5'){	
 				$("#RM").attr("disabled","disabled");
 			}
 			

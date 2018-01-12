@@ -309,7 +309,7 @@ var path='<%=path%>';
 									<label><input type="checkbox" name="Skills/Technology"/>Skills/Technology&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Entry Date"/>Entry Date&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Billing Currency"/>Billing Currency&nbsp;&nbsp;</label>
-									<c:if test="${!(sessionScope.loginUser.userType eq '5') || (sessionScope.loginUser.userType eq '6')}">
+									<c:if test="${(sessionScope.loginUser.userType eq '0') || (sessionScope.loginUser.userType eq '1')|| (sessionScope.loginUser.userType eq '2')|| (sessionScope.loginUser.userType eq '3')|| (sessionScope.loginUser.userType eq '4')|| (sessionScope.loginUser.userType eq '5')|| (sessionScope.loginUser.userType eq '9')|| (sessionScope.loginUser.userType eq '13')|| (sessionScope.loginUser.userType eq '14')|| (sessionScope.loginUser.userType eq '15')}">
 									<label><input type="checkbox" name="Bill Rate"/>Bill Rate&nbsp;&nbsp;</label>
 									</c:if>
 									<label><input type="checkbox" name="Resource Status (Active/Terminated)"/>Resource Status (Active/Terminated)&nbsp;&nbsp;</label>

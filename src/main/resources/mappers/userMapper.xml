@@ -28,7 +28,7 @@
 	</update>
 	
 	<select id="getUserForRM"  resultMap="userMap">
-		select * from t_user where USER_TYPE = "3" 
+		select * from t_user where USER_TYPE = "5" 
 	</select>
 	
 	<insert id="addUser" parameterType="com.pmo.dashboard.entity.User" >
