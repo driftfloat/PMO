@@ -6,7 +6,7 @@ $(function(){
 })
 
 function loadEmployeeLogList(pageState){
-	alert("分页参数"+pageState);
+	//alert("分页参数"+pageState);
 	
 	var pageState = pageState;
 	var employeeId = $('#employeeId').val();
