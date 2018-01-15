@@ -100,4 +100,23 @@
       </if>
     </trim>
   </insert>
+  
+  
+  <select id="countEmployeeLogList" parameterType="com.pmo.dashboard.entity.EmployeeLogPageCondition" resultType="int" >
+	    SELECT count(*)
+        FROM t_employee_log 
+        WHERE 1 = 1
+		<if test="employeeID != null and employeeID != ''">
+			AND EMPLOYEE_ID = #{employeeID}
+		</if>
+			
+  </select>
+  
+  <select id="queryEmployeeLogList" parameterType="com.pmo.dashboard.entity.EmployeeLogPageCondition" resultMap="ResultMapWithBLOBs">
+	    SELECT * FROM t_employee_log WHERE 1 = 1
+	    <if test="employeeID != null and employeeID != ''">
+			AND EMPLOYEE_ID = #{employeeID}
+		</if>
+		order by UPDATE_DATE desc
+  </select>
 </mapper>

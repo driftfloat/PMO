@@ -15,8 +15,38 @@ public class EmployeeLog {
     private String operationPerson;//用户ID(userid)
     private String changeInformation;//修改具体字段拼接信息
     private String logType;//日志类型(0:add,1:update)
+    
+    //表外字段
+    private String operationPersonName;
+    private String csSubdeptIdNewName;
+    private String csSubdeptIdOriginalName;
+    
 
-    public String getLogId() {
+    public String getCsSubdeptIdNewName() {
+		return csSubdeptIdNewName;
+	}
+
+	public void setCsSubdeptIdNewName(String csSubdeptIdNewName) {
+		this.csSubdeptIdNewName = csSubdeptIdNewName;
+	}
+
+	public String getCsSubdeptIdOriginalName() {
+		return csSubdeptIdOriginalName;
+	}
+
+	public void setCsSubdeptIdOriginalName(String csSubdeptIdOriginalName) {
+		this.csSubdeptIdOriginalName = csSubdeptIdOriginalName;
+	}
+
+	public String getOperationPersonName() {
+		return operationPersonName;
+	}
+
+	public void setOperationPersonName(String operationPersonName) {
+		this.operationPersonName = operationPersonName;
+	}
+
+	public String getLogId() {
         return logId;
     }
 

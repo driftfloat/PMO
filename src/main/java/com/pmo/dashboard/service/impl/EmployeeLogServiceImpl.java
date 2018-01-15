@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import com.pmo.dashboard.dao.EmployeeLogMapper;
+import com.pmo.dashboard.entity.EmployeeLog;
+import com.pmo.dashboard.entity.EmployeeLogPageCondition;
 import com.pom.dashboard.service.EmployeeLogService;
 
 @Service
@@ -15,7 +17,6 @@ public class EmployeeLogServiceImpl implements EmployeeLogService{
 	@Resource
 	private EmployeeLogMapper employeeLogMapper;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean save(Object entity) {
 		if(employeeLogMapper.save(entity)>0){
@@ -24,7 +25,6 @@ public class EmployeeLogServiceImpl implements EmployeeLogService{
 		return false;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean update(Object entity) {
 		if(employeeLogMapper.update(entity)>0){
@@ -50,6 +50,30 @@ public class EmployeeLogServiceImpl implements EmployeeLogService{
 	public List listAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<EmployeeLog> getLogByEmployeeID(String id) {
+		return employeeLogMapper.getLogByEmployeeID(id);
+	}
+
+	@Override
+	public int countEmployeeLogList(EmployeeLogPageCondition employeeLogPageCondition) {
+		int countAll = employeeLogMapper.countEmployeeLogList(employeeLogPageCondition);
+		int pageRecordsNum = employeeLogPageCondition.getPageRecordsNum();
+		int pageNumber = 0;
+
+		if (countAll % pageRecordsNum == 0) {
+			pageNumber = countAll / pageRecordsNum;
+		} else {
+			pageNumber = countAll / pageRecordsNum + 1;
+		}
+		return pageNumber;
+	}
+
+	@Override
+	public List<EmployeeLog> queryEmployeeLogList(EmployeeLogPageCondition employeeLogPageCondition) {
+		return employeeLogMapper.queryEmployeeLogList(employeeLogPageCondition);
 	}
 
 
