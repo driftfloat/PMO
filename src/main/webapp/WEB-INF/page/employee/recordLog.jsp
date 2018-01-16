@@ -143,7 +143,6 @@ var path='<%=path%>';
 												<th>DU</th>
 												<th>EngagementType</th>
 												<th>Status</th>
-												<th>RM</th>
 												<th>Operate</th>
 											</tr>
 										</thead>

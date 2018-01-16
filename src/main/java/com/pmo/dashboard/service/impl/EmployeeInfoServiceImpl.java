@@ -42,4 +42,24 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService
 		return pageNumber;
     }
 
+	@Override
+	public List<EmployeeInfo> queryList(EmployeePageCondition employeePageCondition) {
+		 List<EmployeeInfo> list =  employeeInfoMapper.queryList(employeePageCondition);
+	     return list;
+	}
+
+	@Override
+	public int countList(EmployeePageCondition employeePageCondition) {
+		int countAll = employeeInfoMapper.countList(employeePageCondition);
+		int pageRecordsNum = employeePageCondition.getPageRecordsNum();
+		int pageNumber = 0;
+
+		if (countAll % pageRecordsNum == 0) {
+			pageNumber = countAll / pageRecordsNum;
+		} else {
+			pageNumber = countAll / pageRecordsNum + 1;
+		}
+		return pageNumber;
+	}
+
 }

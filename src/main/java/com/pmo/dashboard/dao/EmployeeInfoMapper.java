@@ -9,4 +9,7 @@ public interface EmployeeInfoMapper
 {
     List<EmployeeInfo> queryEmployeeList(EmployeePageCondition employeePageCondition);
     int countEmployeeList(EmployeePageCondition employeePageCondition);
+    
+    List<EmployeeInfo> queryList(EmployeePageCondition employeePageCondition);
+    int countList(EmployeePageCondition employeePageCondition);
 }

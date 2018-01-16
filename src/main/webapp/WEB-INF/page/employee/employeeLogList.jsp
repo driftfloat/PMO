@@ -126,13 +126,9 @@ var path='<%=path%>';
 										class="table table-striped table-bordered">
 										<thead>
 											<tr>
-												<th>EmployeeID</th>
-												<th>CsSubdeptIdNew</th>
-												<th>CsSubdeptIdOriginal</th>
-												<th>UpdateDate</th>
+												<!-- <th>UpdateDate</th>
 												<th>OperationPerson</th>
-												<th>LogType</th>
-												<th>Operate</th>												
+												<th>LogType</th> -->											
 											</tr>
 										</thead>
 										
