@@ -11,7 +11,7 @@ $(document).ready(function() {
         	eHr: {
 				validators: {
                     notEmpty: {
-                        message: 'Please enter your E-HR'
+                        message: 'Please enter E-HR'
                     },
                     regexp: {
                         regexp: /^E\d{9}$/,
@@ -64,7 +64,7 @@ $(document).ready(function() {
             staffName: {
                 validators: {
                     notEmpty: {
-                        message: 'Please enter your staffName'
+                        message: 'Please enter staffName'
                     },
                     stringLength: {
                         max: 32,
@@ -76,7 +76,7 @@ $(document).ready(function() {
             LN: {
                 validators: {
                 	regexp:{
-            			regexp:/^([A-Za-z]+\s?)*[A-Za-z]$/,
+            			regexp:/^[0-9a-zA-Z\s?]+$/,
             			message:'please enter english.'
             		},
             		stringLength: {
@@ -89,7 +89,7 @@ $(document).ready(function() {
             hsbcProjectName: {
                 validators: {
                     notEmpty: {
-                        message: 'Please enter your hsbcProjectName'
+                        message: 'Please enter  hsbcProjectName'
                     },
                     stringLength: {
                         max: 32,
@@ -102,7 +102,7 @@ $(document).ready(function() {
             hsbcProjectManager: {
                 validators: {
                     notEmpty: {
-                        message: 'Please select your hsbcProjectManager'
+                        message: 'Please select  hsbcProjectManager'
                     },
                     stringLength: {
                         max: 32,
@@ -114,7 +114,7 @@ $(document).ready(function() {
             sow: {
                 validators: {
                     notEmpty: {
-                        message: 'Please select your sow'
+                        message: 'Please select  sow'
                     },
                     stringLength: {
                         max: 32,
@@ -162,7 +162,7 @@ $(document).ready(function() {
             billRate: {
                 validators: {
                     notEmpty: {
-                        message: 'Please Choose your billRate'
+                        message: 'Please Choose  billRate'
                     },
                     numeric:{
                     	message:'Please enter number'
@@ -171,7 +171,10 @@ $(document).ready(function() {
                         max: 32,
                         message: 'Exceeded the maxLength'
                     },
-
+                    regexp:{
+            			regexp:/^([1-9]\d*(\.\d*[1-9])?)|(0\.\d*[1-9])$/,
+            			message:'billRate is not zero.'
+            		},
                 }
             },
             email: {
@@ -215,7 +218,7 @@ $(document).ready(function() {
         	eHr: {
 				validators: {
                     notEmpty: {
-                        message: 'Please enter your E-HR'
+                        message: 'Please enter  E-HR'
                     },
                     regexp: {
                         regexp: /^E\d{9}$/,
@@ -229,7 +232,7 @@ $(document).ready(function() {
             lob: {
                 validators: {
                     notEmpty: {
-                        message: 'Please enter your lob'
+                        message: 'Please enter  lob'
                     },
                     numeric: {
                     	message:'Please enter number'
@@ -255,7 +258,7 @@ $(document).ready(function() {
             staffName: {
                 validators: {
                     notEmpty: {
-                        message: 'Please enter your staffName'
+                        message: 'Please enter staffName'
                     },
                     stringLength: {
                         max: 32,
@@ -267,7 +270,7 @@ $(document).ready(function() {
             LN: {
                 validators: {
             		regexp:{
-            			regexp:/^([A-Za-z]+\s?)*[A-Za-z]$/,
+            			regexp:/^[0-9a-zA-Z\s?]+$/,
             			message:'please enter english.'
             		},
             		stringLength: {
@@ -280,7 +283,7 @@ $(document).ready(function() {
             hsbcProjectName: {
                 validators: {
                     notEmpty: {
-                        message: 'Please enter your hsbcProjectName'
+                        message: 'Please enter hsbcProjectName'
                     },
                     stringLength: {
                         max: 32,
@@ -293,7 +296,7 @@ $(document).ready(function() {
             hsbcProjectManager: {
                 validators: {
                     notEmpty: {
-                        message: 'Please select your hsbcProjectManager'
+                        message: 'Please select hsbcProjectManager'
                     },
                     stringLength: {
                         max: 32,
@@ -305,7 +308,7 @@ $(document).ready(function() {
             sow: {
                 validators: {
                     notEmpty: {
-                        message: 'Please select your sow'
+                        message: 'Please select sow'
                     },
                     stringLength: {
                         max: 32,
@@ -317,7 +320,7 @@ $(document).ready(function() {
             billRate: {
                 validators: {
                     notEmpty: {
-                        message: 'Please Choose your billRate'
+                        message: 'Please Choose billRate'
                     },
                     numeric:{
                     	message:'please enter number'
@@ -326,11 +329,18 @@ $(document).ready(function() {
                         max: 32,
                         message: 'Exceeded the maxLength'
                     },
+                    regexp:{
+            			regexp:/^([1-9]\d*(\.\d*[1-9])?)|(0\.\d*[1-9])$/,
+            			message:'billRate is not zero.'
+            		},
 
                 }
             },
             email: {
                 validators: {
+                	notEmpty: {
+                		message: 'Please enter email'
+                	},
                     emailAddress:{
                     	message:'Email address is incorrect'
                     },
