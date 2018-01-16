@@ -10,6 +10,7 @@ import com.pmo.dashboard.entity.EmployeeLogPageCondition;
  * @author Devin
  *
  */
+@SuppressWarnings("rawtypes")
 public interface EmployeeLogService extends BaseLogService{
 	
 	

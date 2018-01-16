@@ -62,6 +62,15 @@ public class RecordLogController {
 		return "employee/employeeLogList";
     }
 	
+	@RequestMapping("/employeeLogDetail")
+    public String employeeLogDetail(final HttpServletRequest request,
+            final HttpServletResponse response)
+    {
+		String employeeLogId = request.getParameter("employeeLogId");
+		request.setAttribute("employeeLogId", employeeLogId);
+		return "employee/employeeLogDetail";
+    }
+	
 	@RequestMapping("/queryEmployeeLogByID")
     @ResponseBody
     public Object queryEmployeeLogByID(final HttpServletRequest request,
@@ -74,36 +83,36 @@ public class RecordLogController {
 		if (request.getParameter("pageRecordsNum") != null) {
 			pageRecordsNum = Integer.parseInt(request.getParameter("pageRecordsNum"));
 		}
-        User user = (User) request.getSession().getAttribute("loginUser");
+        @SuppressWarnings("unused")
+		User user = (User) request.getSession().getAttribute("loginUser");
         int countPage = 0;
         String currentPage = null;
         EmployeeLogPageCondition employeeLogPageCondition = new EmployeeLogPageCondition();
         if("".equals(pageState) || pageState == null){
-        	System.out.println("分页参数========================");
-        	System.out.println("分页参数========================"+pageState);
             currentPage = "0";
             employeeLogPageCondition.setEmployeeID(employeeID);
             employeeLogPageCondition.setPageRecordsNum(pageRecordsNum);
+            employeeLogPageCondition.setCurrentPage(currentPage);
             countPage = employeeLogService.countEmployeeLogList(employeeLogPageCondition);
             employeeLogPageCondition.setPageCount(countPage+"");
             request.getSession().setAttribute("employeeLogPageCondition", employeeLogPageCondition);
         }else if("frist".equals(pageState)){
             currentPage = "0";
-            employeeLogPageCondition = (EmployeeLogPageCondition) request.getSession().getAttribute("employeePageCondition");
+            employeeLogPageCondition = (EmployeeLogPageCondition) request.getSession().getAttribute("employeeLogPageCondition");
             employeeLogPageCondition.setCurrentPage(currentPage);
             request.getSession().setAttribute("employeeLogPageCondition", employeeLogPageCondition);
         }else if("next".equals(pageState)){
-        	employeeLogPageCondition = (EmployeeLogPageCondition) request.getSession().getAttribute("employeePageCondition");
+        	employeeLogPageCondition = (EmployeeLogPageCondition) request.getSession().getAttribute("employeeLogPageCondition");
             currentPage = Integer.parseInt(employeeLogPageCondition.getCurrentPage()) + employeeLogPageCondition.getPageRecordsNum()+"";
             employeeLogPageCondition.setCurrentPage(currentPage);
             request.getSession().setAttribute("employeeLogPageCondition", employeeLogPageCondition);
         }else if("previous".equals(pageState)){
-        	employeeLogPageCondition = (EmployeeLogPageCondition) request.getSession().getAttribute("employeePageCondition");
+        	employeeLogPageCondition = (EmployeeLogPageCondition) request.getSession().getAttribute("employeeLogPageCondition");
             currentPage = Integer.parseInt(employeeLogPageCondition.getCurrentPage()) - employeeLogPageCondition.getPageRecordsNum() +"";
             employeeLogPageCondition.setCurrentPage(currentPage);
             request.getSession().setAttribute("employeeLogPageCondition", employeeLogPageCondition);
         }else if("last".equals(pageState)){
-        	employeeLogPageCondition = (EmployeeLogPageCondition) request.getSession().getAttribute("employeePageCondition");
+        	employeeLogPageCondition = (EmployeeLogPageCondition) request.getSession().getAttribute("employeeLogPageCondition");
             currentPage = (Integer.parseInt(employeeLogPageCondition.getPageCount()) - Constants.ONE) * employeeLogPageCondition.getPageRecordsNum() +"";
             employeeLogPageCondition.setCurrentPage(currentPage);
             request.getSession().setAttribute("employeeLogPageCondition", employeeLogPageCondition);
@@ -122,10 +131,23 @@ public class RecordLogController {
         Map<String,Object> result = new HashMap<String,Object>();
     
         result.put("data", list);
-        result.put("pageInfo", request.getSession().getAttribute("employeePageCondition"));
+        result.put("pageInfo", request.getSession().getAttribute("employeeLogPageCondition"));
         result.put("employee",employee);
         
         return result;
     }
+	
+	@RequestMapping("/queryEmployeeLogById")
+	@ResponseBody
+	public EmployeeLog queryEmployeeLogById(String employeeLogId,HttpServletRequest request) {
+		EmployeeLog log = (EmployeeLog) employeeLogService.getById(employeeLogId);
+		User u = userService.queryUserById(log.getOperationPerson());
+    	CSDept duNew = csDeptService.queryCSDeptById(log.getCsSubdeptIdNew());
+    	CSDept duOld = csDeptService.queryCSDeptById(log.getCsSubdeptIdOriginal());
+    	log.setOperationPersonName(u.getUserName());
+    	log.setCsSubdeptIdNewName(duNew.getCsBuName());
+    	log.setCsSubdeptIdOriginalName(duOld.getCsBuName());
+		return log;
+	}
 
 }

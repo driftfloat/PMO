@@ -118,5 +118,14 @@
 			AND EMPLOYEE_ID = #{employeeID}
 		</if>
 		order by UPDATE_DATE desc
+		LIMIT #{currentPage},#{pageRecordsNum}
   </select>
+  
+  <select id="getById" parameterType="com.pmo.dashboard.entity.EmployeeLog" resultMap="ResultMapWithBLOBs">
+	    SELECT * FROM t_employee_log WHERE 1 = 1
+	    <if test="logId != null and logId != ''">
+			AND LOG_ID = #{logId}
+		</if>
+  </select>
+  
 </mapper>

@@ -6,11 +6,9 @@ $(function(){
 })
 
 function loadEmployeeLogList(pageState){
-	//alert("分页参数"+pageState);
 	
 	var pageState = pageState;
 	var employeeId = $('#employeeId').val();
-	//alert(employeeId);
 	var pageRecordsNum = $("#pageRecordsNum").find("option:selected").text();
 	
 	$.ajax({
@@ -35,33 +33,33 @@ function loadEmployeeLogList(pageState){
 				tr.appendTo(tbody);
 		
 				var td1 = $("<td>"
+						+ result.data[i].employeeId
+						+ "</td>");
+				
+				var td2 = $("<td>"
 						+ result.data[i].csSubdeptIdNewName
 						+ "</td>");
-				var td2 = $("<td>"
+				var td3 = $("<td>"
 						+ result.data[i].csSubdeptIdOriginalName
 						+ "</td>");
-				var td3 = $("<td>"
-						+ result.data[i].roleNew
-						+ "</td>");
 				var td4 = $("<td>"
-						+ result.data[i].roleOriginal
-						+ "</td>");
-				var td5 = $("<td>"
 						+ result.data[i].updateDate
 						+ "</td>");
-				var td6 = $("<td>"
+				var td5 = $("<td>"
 						+ result.data[i].operationPersonName
 						+ "</td>");
 				if(result.data[i].logType=="1"){
-					var td7 = $("<td>"
+					var td6 = $("<td>"
 							+ "Update"
 							+ "</td>");
 				}
 				if(result.data[i].logType=="0"){
-					var td7 = $("<td>"
+					var td6 = $("<td>"
 							+ "Add"
 							+ "</td>");
 				}
+				td7 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeLogDetail('"+result.data[i].logId+"')>Detail</a></td>");
+				
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
@@ -89,5 +87,11 @@ function loadEmployeeLogList(pageState){
 		}
 		
 	})
+}
+
+function employeeLogDetail(logID){
+	$("#viewLogDetailForm").attr("action",path+"/service/employee/employeeLogDetail.html");
+	$("#employeeLogId").val(logID);
+	$("#viewLogDetailForm").submit();
 }
 

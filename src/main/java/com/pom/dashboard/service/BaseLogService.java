@@ -33,7 +33,7 @@ public interface BaseLogService<T, ID extends Serializable>{
      * @param id
      * @return
      */
-    public T getById(Long id);  
+    public T getById(String logId);  
   
     /**
      * 获取所有

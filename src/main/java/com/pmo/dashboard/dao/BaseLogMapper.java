@@ -3,6 +3,8 @@ package com.pmo.dashboard.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface BaseLogMapper<T, ID extends Serializable>{
 	
 	/**
@@ -33,7 +35,7 @@ public interface BaseLogMapper<T, ID extends Serializable>{
      * @param id
      * @return
      */
-    public T getById(Long id);  
+    public T getById(@Param("logId") String logId);  
   
     /**
      * 获取所有
