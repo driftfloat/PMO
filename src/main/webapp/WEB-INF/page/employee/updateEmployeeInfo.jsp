@@ -192,7 +192,8 @@ var path='<%=path%>';
 								        <div class="group">
 										<label class="col-lg-2 control-label">HSBC Dept</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="hsbcDept"  id="hsbcDept" data-bv-group=".group">
+											<select class="form-control" name="hsbcDept"  id="hsbcDept" data-bv-notempty
+												data-bv-notempty-message="please select  HSBCDept" data-bv-group=".group">
 												<option value="">--Option--</option>
 											</select>
 										</div>
@@ -200,7 +201,8 @@ var path='<%=path%>';
 										<div class="group">
 										<label class="col-lg-2 control-label">HSBC Sub Dept</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="hsbcSubDept"  id="hsbcSubDept" data-bv-group=".group">
+											<select class="form-control" name="hsbcSubDept"  id="hsbcSubDept" data-bv-notempty
+												data-bv-notempty-message="please select  HSBSubDept" data-bv-group=".group">
 												<option value="">--Option--</option>
 											</select>
 										</div>
@@ -234,7 +236,7 @@ var path='<%=path%>';
 										<div class="group">
 										<label class="col-sm-2 control-label ">SOW# Expired Date</label>
 										<div class="col-md-4">
-											<div class="input-group date form_datetime1 col-sm-12"
+											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
 												<input class="form-control" type="text" readonly data-bv-group=".group"
 													id="sowExpiredDate1" name="sowExpiredDate1"> <span
@@ -349,7 +351,7 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-sm-2 control-label">Bill Rate</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="billRate"
+												<input type="text" class="form-control" name="billRate" data-bv-group=".group"
 													id="billRate" />
 											</div>
 										</div>
