@@ -17,7 +17,7 @@ function loadEmployeeList(pageState){
 	var pageRecordsNum = $("#pageRecordsNum").find("option:selected").text();
 	
 	$.ajax({
-		url:path+"/service/employeeInfo/queryEmployeeList",
+		url:path+"/service/employeeInfo/queryList",
 		dataType:"json",
 		async:true,
 		data:{"staffName":staffName,"pageState":pageState,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob,"pageRecordsNum":pageRecordsNum},
@@ -58,9 +58,9 @@ function loadEmployeeList(pageState){
 				var td7 = $("<td>"
 						+ result.data[i].resourceStatus
 						+ "</td>");
-				var td71 = $("<td>"
+				/*var td71 = $("<td>"
 						+ result.data[i].nickname
-						+ "</td>");
+						+ "</td>");*/
 				//var td7 = $("<td><a class='btn btn-info' href='javascript:void(0);'> <i class='glyphicon glyphicon-edit icon-white'></i> 编辑</a></td>");
 				var td8 = null;
 				var engagementType = result.data[i].engagementType.replace(/\s+/g,"");
@@ -92,9 +92,9 @@ function loadEmployeeList(pageState){
 				if((result.data[i].resourceStatus)==null){
 					var td7 = $("<td></td>");
 				}
-				if((result.data[i].nickname)==null){
+				/*if((result.data[i].nickname)==null){
 					var td71 = $("<td></td>");
-				}
+				}*/
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
@@ -102,7 +102,7 @@ function loadEmployeeList(pageState){
 				td5.appendTo(tr);
 				td6.appendTo(tr);
 				td7.appendTo(tr);
-				td71.appendTo(tr);
+				//td71.appendTo(tr);
 				td8.appendTo(tr);
 			}
 			$("#employeeList").append("</tbdoy>");

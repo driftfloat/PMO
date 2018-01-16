@@ -29,44 +29,45 @@ function loadEmployeeLogList(pageState){
 			var tbody = $("<tbody>");
 			tbody.appendTo($("#employeeLogList"));
 			for (var i = 0; i < result.data.length; i++) {
-				var tr = $("<tr></tr>");
+				var tr = $("<table class='table table-striped table-bordered' border='1' width='100%'>" +
+						"<tr>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>时间</td>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].updateDate+"</td>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>修改人</td>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].operationPersonName+"</td>"+
+						"</tr>"+
+						"<tr>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>原交付部</td>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].csSubdeptIdOriginalName+"</td>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>原状态</td>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].statusOriginal+"</td>"+
+						"</tr>"+
+						"<tr>"+
+						"<td style='font-size: 14px;color: #555555;' colspan='4'>"+result.data[i].changeInformation+"</td>"+
+						"</tr>"+
+						"</table>");
 				tr.appendTo(tbody);
-		
-				var td1 = $("<td>"
-						+ result.data[i].employeeId
-						+ "</td>");
-				
-				var td2 = $("<td>"
-						+ result.data[i].csSubdeptIdNewName
-						+ "</td>");
-				var td3 = $("<td>"
-						+ result.data[i].csSubdeptIdOriginalName
-						+ "</td>");
-				var td4 = $("<td>"
+				/*var td1 = $("<td>"
 						+ result.data[i].updateDate
 						+ "</td>");
-				var td5 = $("<td>"
+				var td2 = $("<td>"
 						+ result.data[i].operationPersonName
 						+ "</td>");
 				if(result.data[i].logType=="1"){
-					var td6 = $("<td>"
+					var td3 = $("<td>"
 							+ "Update"
 							+ "</td>");
 				}
 				if(result.data[i].logType=="0"){
-					var td6 = $("<td>"
+					var td3 = $("<td>"
 							+ "Add"
 							+ "</td>");
 				}
-				td7 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeLogDetail('"+result.data[i].logId+"')>Detail</a></td>");
+				//td7 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeLogDetail('"+result.data[i].logId+"')>Detail</a></td>");
 				
 				td1.appendTo(tr);
 				td2.appendTo(tr);
-				td3.appendTo(tr);
-				td4.appendTo(tr);
-				td5.appendTo(tr);
-				td6.appendTo(tr);
-				td7.appendTo(tr);
+				td3.appendTo(tr);*/
 			}
 			$("#employeeLogList").append("</tbdoy>");
 			var pageNum = parseInt(result.pageInfo.currentPage);
