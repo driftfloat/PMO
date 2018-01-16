@@ -80,94 +80,120 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> EmployeeLogList
+									<i class="glyphicon glyphicon-user"></i> EmployeeLog Detail
 								</h2>
 							</div>
-							<div id="employeeInfo" class="box-content">
+							<div id="register" class="box-content" style="overflow: auto;">
+							<form id="registerEmployeeForm" method="post">
+							    <div class="form-group">
+									    <input type="hidden" name="employeeLogId" id="employeeLogId" value="${employeeLogId}"/>
+								</div>
+								<div id="successAlert" class="alert alert-success" style="display: none;"></div>	
+							    <br/>
+								<div class="form-group">
+										<div class="group">
+											<label class="col-sm-2 control-label">employeeId</label>
+											<div class="col-sm-4">
+												<input type="text" readonly class="form-control" name="employeeId"
+													id="employeeId" />
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">csSubdeptNewName</label>
+											<div class="col-sm-4">
+												<input type="text" readonly class="form-control" name="csSubdeptIdNewName"
+													id="csSubdeptIdNewName" />
+											</div>
+										</div>
+										
+								</div>
+								<br/><br/>
 							    
-							    <form id="employeeForm" method="post" class="form-horizontal">
-							        <input id="employeeId" name="employeeId" type="hidden" value="${employeeId}"/>
-									<div class="group">
-											<label class="col-sm-2 control-label">LOB</label>
+								<div class="form-group">
+								
+										<div class="group">
+											<label class="col-sm-2 control-label">csSubdeptOriginalName</label>
 											<div class="col-sm-4">
-												<input disabled="disabled" type="text" class="form-control" name="lob"
-													id="lob" />
+												<input type="text" readonly class="form-control" name="csSubdeptIdOriginalName"
+													id="csSubdeptIdOriginalName" />
 											</div>
 										</div>
 										<div class="group">
-											<label class="col-sm-2 control-label">Staff ID</label>
+											<label class="col-sm-2 control-label">roleNew</label>
 											<div class="col-sm-4">
-												<input disabled="disabled" type="text" class="form-control" name="hsbcStaffId"
-													id="hsbcStaffId" />
+												<input type="text" readonly class="form-control" name="roleNew"
+													id="roleNew" />
 											</div>
 										</div>
-										</br></br></br>
-										
-								        <div id="successAlert" class="alert alert-success" style="display: none;"></div>
-										
+								</div>
+								<br/><br/>
+								<div class="form-group">
 										<div class="group">
-											<label class="col-sm-2 control-label">E-HR</label>
+											<label class="col-sm-2 control-label">roleOriginal</label>
 											<div class="col-sm-4">
-												<input disabled="disabled" type="text" class="form-control" name="eHr"
-													id="eHr" />
+												<input type="text" readonly class="form-control" name="roleOriginal"
+													id="roleOriginal" />
 											</div>
 										</div>
 										<div class="group">
-											<label class="col-sm-2 control-label">Name</label>
+											<label class="col-sm-2 control-label">statusNew</label>
 											<div class="col-sm-4">
-												<input disabled="disabled" type="text" class="form-control" name="staffName"
-													id="staffName" />
+												<input type="text" class="form-control" name="statusNew" readonly
+													id="statusNew" data-bv-group=".group"/>
 											</div>
 										</div>
-										</br></br></br>
-									
-									<div style="overflow: auto;">
-									<table id="employeeLogList"
-										class="table table-striped table-bordered">
-										<thead>
-											<tr>
-												<th>EmployeeID</th>
-												<th>CsSubdeptIdNew</th>
-												<th>CsSubdeptIdOriginal</th>
-												<th>UpdateDate</th>
-												<th>OperationPerson</th>
-												<th>LogType</th>
-												<th>Operate</th>												
-											</tr>
-										</thead>
-										
-										<tbody>
-
-
-									    </tbody>
-									</table>
-									</div>
-									<div>
-										<ul class="pagination pagination-centered">
-											<li><a href="#" id="fristPage" onclick="loadEmployeeLogList('frist')">First</a></li>
-											<li><a href="#" id="previousPage" onclick="loadEmployeeLogList('previous')">Last</a></li>
-											<li><a href="#" id="nextPage" onclick="loadEmployeeLogList('next')">Next</a></li>
-											<li><a href="#" id="lastPage" onclick="loadEmployeeLogList('last')">End</a></li>
-										</ul>
-										
-										<div style="max-width: 400px; float: right; margin-top: 30px;">
-											<!-- 每页<span id="pageDataCount"></span>条&nbsp;&nbsp;第<span id="currentPage"></span>页&nbsp;/&nbsp;共<span id="pageCount"></span>页&nbsp;&nbsp;共<span id="dataCount"></span>条 -->
-											<b><span id="currentPage"></span> / <span id="pageCount"></span>
-												<select class="pagination pagination-centered"	name="pageRecordsNum" data-bv-notempty
-													data-bv-notempty-message="please select  pageRecordsNum"
-													id="pageRecordsNum" data-bv-group=".group">
-													<option value="10">10</option>
-													<option value="20">20</option>
-													<option value="50">50</option>
-												</select> 
-											</b>
+								</div>
+								<br/><br/>
+								<div class="form-group">
+										<div class="group">
+										<label class="col-lg-2 control-label">statusOriginal</label>
+										<div class="col-lg-4">
+											<input type="text" readonly class="form-control" name="statusOriginal"
+													id="statusOriginal" />
 										</div>
-										<!-- <br>
-										共<span id="pageCount"></span>页   第<span id="currentPage"></span>页 -->
-									</div>
-								</form>
-								<form action="" id="viewLogDetailForm" method="post" target="_blank">
-									<input id="employeeLogId" name="employeeLogId" type="hidden" />
+										</div>
+										<div class="group">
+										<label class="col-lg-2 control-label">updateDate</label>
+										<div class="col-lg-4">
+											<input type="text" readonly class="form-control" name="updateDate"
+													id="updateDate" />
+										</div>
+										</div>
+								</div>
+								<br/><br/>
+								<div class="form-group">
+										<div class="group">
+										<label class="col-lg-2 control-label">operationPerson</label>
+											<div class="col-lg-4">
+												<input type="text" readonly class="form-control" name="operationPersonName"
+														id="operationPersonName" />
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-lg-2 control-label">logType</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="logType" readonly
+													 id="logType" data-bv-group=".group"/>
+											</div>
+										</div>
+								</div>
+								
+								<br/><br/>
+								<div class="form-group">
+								        <div class="group">
+										<label class="col-lg-2 control-label">changeInformation</label>
+										<div class="col-lg-4">
+											<textarea rows="12" class="form-control" name="changeInformation"
+													id="changeInformation" readonly></textarea>
+										</div>
+										</div>
+										<div class="group">
+										<div class="col-lg-4">
+											
+										</div>
+										</div>
+								</div>
+								<br/><br/>
 								</form>
 							</div>
 						</div>
@@ -178,6 +204,11 @@ var path='<%=path%>';
 			</div>
 			<!--/#content.col-md-0-->
 		</div>
+
+		<hr>
+
+		 
+		
 
 		<c:import url="/service/manage/footer" />
 
@@ -226,7 +257,7 @@ var path='<%=path%>';
 	<!-- application script for Charisma demo -->
 	<script src="<%=path %>/js/charisma.js"></script>
 
-	<script type="text/javascript" src="<%=path %>/js/pmo/employeeLogList.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/employeeLogDetail.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>

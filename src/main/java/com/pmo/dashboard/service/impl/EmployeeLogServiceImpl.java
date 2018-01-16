@@ -40,9 +40,8 @@ public class EmployeeLogServiceImpl implements EmployeeLogService{
 	}
 
 	@Override
-	public Object getById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Object getById(String logId) {
+		return employeeLogMapper.getById(logId);
 	}
 
 	@SuppressWarnings("rawtypes")
