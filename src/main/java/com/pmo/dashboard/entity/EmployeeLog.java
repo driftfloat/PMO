@@ -23,7 +23,7 @@ public class EmployeeLog {
     
 
     public String getCsSubdeptIdNewName() {
-		return csSubdeptIdNewName;
+		return csSubdeptIdNewName!=null?csSubdeptIdNewName:"";
 	}
 
 	public void setCsSubdeptIdNewName(String csSubdeptIdNewName) {
@@ -31,7 +31,7 @@ public class EmployeeLog {
 	}
 
 	public String getCsSubdeptIdOriginalName() {
-		return csSubdeptIdOriginalName;
+		return csSubdeptIdOriginalName!=null?csSubdeptIdOriginalName:"";
 	}
 
 	public void setCsSubdeptIdOriginalName(String csSubdeptIdOriginalName) {
@@ -95,7 +95,7 @@ public class EmployeeLog {
     }
 
     public String getStatusNew() {
-        return statusNew;
+        return statusNew!=null?statusNew:"";
     }
 
     public void setStatusNew(String statusNew) {
@@ -103,7 +103,7 @@ public class EmployeeLog {
     }
 
     public String getStatusOriginal() {
-        return statusOriginal;
+        return statusOriginal!=null?statusOriginal:"";
     }
 
     public void setStatusOriginal(String statusOriginal) {
@@ -127,7 +127,7 @@ public class EmployeeLog {
     }
 
     public String getChangeInformation() {
-        return changeInformation;
+        return changeInformation!=null?changeInformation:"";
     }
 
     public void setChangeInformation(String changeInformation) {
