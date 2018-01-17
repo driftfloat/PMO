@@ -650,13 +650,24 @@ public class EmployeeController {
                    }
                    
                    if(conditionList.contains("AM")){
-                       Label label= new Label(++j, i, csDept.getAm());
-                       ws.addCell(label);
+                	   if(csDept!=null) {
+                		   Label label= new Label(++j, i, csDept.getAm());
+                           ws.addCell(label);
+                	   }else {
+                		   Label label= new Label(++j, i, "");
+                           ws.addCell(label);
+                	   }
+                       
                    }
                    
                    if(conditionList.contains("CS Dept")){
-                       Label label= new Label(++j, i, csDept.getCsSubDeptName());
-                       ws.addCell(label);
+                	   if(csDept!=null) {
+                		   Label label= new Label(++j, i, csDept.getCsSubDeptName());
+                           ws.addCell(label); 
+                	   }else {
+                		   Label label= new Label(++j, i, "");
+                           ws.addCell(label); 
+                	   }
                    }
                    
                }
