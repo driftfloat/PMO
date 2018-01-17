@@ -31,15 +31,15 @@ function loadEmployeeLogList(pageState){
 			for (var i = 0; i < result.data.length; i++) {
 				var tr = $("<table class='table table-striped table-bordered' border='1' width='100%'>" +
 						"<tr>"+
-						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>时间</td>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>Date</td>"+
 						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].updateDate+"</td>"+
-						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>修改人</td>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>OperatePerson</td>"+
 						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].operationPersonName+"</td>"+
 						"</tr>"+
 						"<tr>"+
-						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>原交付部</td>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>ORIGINALDU</td>"+
 						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].csSubdeptIdOriginalName+"</td>"+
-						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>原状态</td>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>ORIGINALStatus</td>"+
 						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].statusOriginal+"</td>"+
 						"</tr>"+
 						"<tr>"+
