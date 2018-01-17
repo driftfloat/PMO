@@ -224,6 +224,8 @@ function editEmployeeInfo(employeeId,engagementType){
 		$("#editForm").attr("action",path+"/service/employee/updateEmployeeInfo.html?type=2");
 	}else if(engagementType=="Support"){
 		$("#editForm").attr("action",path+"/service/employee/updateEmployeeInfo.html?type=3");
+	}else{
+		$("#editForm").attr("action",path+"/service/employee/updateEmployeeInfo.html?type=1");
 	}
 	$("#employeeId").val(employeeId);
 	$("#editForm").submit();
@@ -502,6 +504,8 @@ function employeeDetail(employeeId,engagementType){
 		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=2");
 	}else if(engagementType=="Support"){
 		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=3");
+	}else{
+		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=1");
 	}
 	
 	$("#employeeId").val(employeeId);

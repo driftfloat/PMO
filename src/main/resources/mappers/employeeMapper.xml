@@ -51,7 +51,7 @@
 	</select>
 	
 	<select id="queryEmployeeList" parameterType="com.pmo.dashboard.entity.EmployeePageCondition" resultMap="employeeMap">
-	    SELECT * FROM t_employee WHERE 1 = 1 AND CS_SUBDEPT_ID IN (SELECT CS_SUBDEPT_ID FROM t_cs_dept WHERE 1 = 1
+	    SELECT * FROM t_employee e left join t_cs_dept c on e.CS_SUBDEPT_ID = c.CS_SUBDEPT_ID WHERE 1 = 1 
 	    <if test="csDeptName != null and csDeptName != ''">
 				AND cs_dept_name = #{csDeptName}
 		</if>
@@ -82,7 +82,7 @@
 		<if test="engagementType != null and engagementType != ''">
 			AND ENGAGEMENT_TYPE = #{engagementType}
 		</if>
-		)
+		
 	</select>
 	
 	<update id="updateEmployee" parameterType="com.pmo.dashboard.entity.Employee">
