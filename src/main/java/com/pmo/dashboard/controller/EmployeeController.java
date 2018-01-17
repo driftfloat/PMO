@@ -206,14 +206,14 @@ public class EmployeeController {
         /**
          * 添加日志
          */
-        try{
+        /*try{
         	User user = (User)request.getSession().getAttribute("loginUser");
         	EmployeeLog log = getEmployeeLog(employee,user,"0");
     		@SuppressWarnings({ "unused", "unchecked" })
 			boolean flag = employeeLogService.save(log);
         }catch(Exception e){
         	e.printStackTrace();
-        }
+        }*/
         
         return resultFlag;
     }
@@ -269,14 +269,14 @@ public class EmployeeController {
         /**
          * 添加日志
          */
-        try{
+        /*try{
         	User user = (User)request.getSession().getAttribute("loginUser");
         	EmployeeLog log = getEmployeeLog(employee,user,"1");
     		@SuppressWarnings({ "unused", "unchecked" })
 			boolean flag = employeeLogService.save(log);
         }catch(Exception e){
         	e.printStackTrace();
-        }
+        }*/
         
         boolean resultFlag = employeeService.updateEmployee(employee);
         
@@ -720,227 +720,263 @@ public String getTMemployee(final HttpServletRequest request,
     	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");
     	String time = simpleDateFormat.format(new Date());
     	EmployeeLog log = new EmployeeLog();
-    	StringBuffer changeInfo = checkFieldChange(em,employee);
-    	StringBuffer addInfo = addInfo(employee);
-    	if(!em.getCsSubDept().equals(employee.getCsSubDept())){
-    		log.setCsSubdeptIdNew(employee.getCsSubDept());
-        	log.setCsSubdeptIdOriginal(em.getCsSubDept());
-    	}
-        if(!em.getRole().equals(employee.getRole())){
-        	log.setRoleNew(employee.getRole());
-        	log.setRoleOriginal(em.getRole());
-    	}
-        if(!em.getResourceStatus().equals(employee.getResourceStatus())){
-        	log.setStatusNew(employee.getResourceStatus());
-        	log.setStatusOriginal(em.getResourceStatus());
-    	}
+    	StringBuffer changeInfo = null;
+    	StringBuffer addInfo = null;
     	if(type.equals("0")){
-    		log.setChangeInformation(addInfo.toString());
+    		addInfo = addInfo(employee);
     	}
         if(type.equals("1")){
-        	log.setChangeInformation(changeInfo.toString());
+        	changeInfo = checkFieldChange(em,employee);
     	}
-    	log.setEmployeeId(employee.getEmployeeId());
-    	log.setLogId(Utils.getUUID());
-    	log.setLogType("1");
-    	log.setOperationPerson(user.getUserId());
-    	log.setUpdateDate(time);
-    	
+    	if(em!=null && employee !=null){
+    		if(!em.getCsSubDept().equals(employee.getCsSubDept())){
+        		log.setCsSubdeptIdNew(employee.getCsSubDept());
+            	log.setCsSubdeptIdOriginal(em.getCsSubDept());
+        	}
+            if(!em.getRole().equals(employee.getRole())){
+            	log.setRoleNew(employee.getRole());
+            	log.setRoleOriginal(em.getRole());
+        	}
+            if(!em.getResourceStatus().equals(employee.getResourceStatus())){
+            	log.setStatusNew(employee.getResourceStatus());
+            	log.setStatusOriginal(em.getResourceStatus());
+        	}
+        	if(type.equals("0")){
+        		log.setChangeInformation(addInfo.toString());
+        	}
+            if(type.equals("1")){
+            	log.setChangeInformation(changeInfo.toString());
+        	}
+        	log.setEmployeeId(employee.getEmployeeId());
+        	log.setLogId(Utils.getUUID());
+        	if(type.equals("0")){
+        		log.setLogType("0");
+        	}
+            if(type.equals("1")){
+            	log.setLogType("1");
+        	}
+        	log.setOperationPerson(user.getUserId());
+        	log.setUpdateDate(time);
+    	}
     	return log;
     }
     private StringBuffer checkFieldChange(Employee before,Employee after){
     	StringBuffer changeInfo = new StringBuffer();
-    	//E-HR
-        if(!before.geteHr().equals(after.geteHr())){
-        	changeInfo.append("eHr由["+before.geteHr()+"]变更为["+after.geteHr()+"];");
+    	if(before!=null && after!=null){
+    		//E-HR
+            if(before.geteHr()!=null && !before.geteHr().equals(after.geteHr())){
+            	changeInfo.append("eHr由["+before.geteHr()+"]变更为["+after.geteHr()+"];");
+        	}
+        	//LOB
+            if(before.getLob()!=null && !before.getLob().equals(after.getLob())){
+            	changeInfo.append("lob由["+before.getLob()+"]变更为["+after.getLob()+"];");
+        	}
+        	//HSBC Staff ID
+            if(before.getHsbcStaffId()!=null && !before.getHsbcStaffId().equals(after.getHsbcStaffId())){
+            	changeInfo.append("hsbcStaffId由["+before.getHsbcStaffId()+"]变更为["+after.getHsbcStaffId()+"];");
+        	}
+        	//Staff Name
+            if(before.getStaffName()!=null && !before.getStaffName().equals(after.getStaffName())){
+            	changeInfo.append("staffName由["+before.getStaffName()+"]变更为["+after.getStaffName()+"];");
+        	}
+        	//LN
+            if(before.getLn()!=null && !before.getLn().equals(after.getLn())){
+            	changeInfo.append("ln由["+before.getLn()+"]变更为["+after.getLn()+"];");
+        	}
+        	//Email
+            if(before.getEmail()!=null && !before.getEmail().equals(after.getEmail())){
+            	changeInfo.append("email由["+before.getEmail()+"]变更为["+after.getEmail()+"];");
+        	}
+        	//Staff location
+            if(before.getStaffLocation()!=null && !before.getStaffLocation().equals(after.getStaffLocation())){
+            	changeInfo.append("staffLocation由["+before.getStaffLocation()+"]变更为["+after.getStaffLocation()+"];");
+        	}
+        	//Location Type
+            if(before.getLocationType()!=null && !before.getLocationType().equals(after.getLocationType())){
+            	changeInfo.append("locationType由["+before.getLocationType()+"]变更为["+after.getLocationType()+"];");
+        	}
+        	//CS Dept
+            if(before.getCsSubDept()!=null && !before.getCsSubDept().equals(after.getCsSubDept())){
+            	CSDept old = csDeptService.queryCSDeptById(before.getCsSubDept());
+            	CSDept news = csDeptService.queryCSDeptById(after.getCsSubDept());
+            	String oldname="";
+            	String newsname="";
+            	if(old!=null){
+            		oldname=old.getCsSubDeptName();
+            	}
+            	if(news!=null){
+            		newsname=news.getCsSubDeptName();
+            	}
+            	changeInfo.append("csSubDept由["+oldname+"]变更为["+newsname+"];");
+        	}
+            
+        	//GBGF
+            if(before.getGbGf()!=null && !before.getGbGf().equals(after.getGbGf())){
+            	changeInfo.append("gbGf由["+before.getGbGf()+"]变更为["+after.getGbGf()+"];");
+        	}
+        	//HSBC Sub Dept
+            if(before.getHsbcSubDept()!=null && !before.getHsbcSubDept().equals(after.getHsbcSubDept())){
+            	HSBCDept old = hsbcDeptService.queryHSBCSubDeptById(before.getHsbcSubDept());
+            	HSBCDept news = hsbcDeptService.queryHSBCSubDeptById(after.getHsbcSubDept());
+            	String oldname="";
+            	String newsname="";
+            	if(old!=null){
+            		oldname=old.getHsbcSubDeptName();
+            	}
+            	if(news!=null){
+            		newsname=news.getHsbcSubDeptName();
+            	}
+            	changeInfo.append("hsbcSubDept由["+oldname+"]变更为["+newsname+"];");
+        	}
+        	//HSBC Project Name
+            if(before.getProjectName()!=null && !before.getProjectName().equals(after.getProjectName())){
+            	changeInfo.append("projectName由["+before.getProjectName()+"]变更为["+after.getProjectName()+"];");
+        	}
+        	//HSBC Project Manager
+            if(before.getProjectManager()!=null && !before.getProjectManager().equals(after.getProjectManager())){
+            	changeInfo.append("projectManager由["+before.getProjectManager()+"]变更为["+after.getProjectManager()+"];");
+        	}
+        	//SOW#
+            if(before.getSow()!=null && !before.getSow().equals(after.getSow())){
+            	changeInfo.append("sow由["+before.getSow()+"]变更为["+after.getSow()+"];");
+        	}
+        	//SOW# Expired Date
+            if(before.getSowExpiredDate()!=null && !before.getSowExpiredDate().equals(after.getSowExpiredDate())){
+            	changeInfo.append("sowExpiredDate由["+before.getSowExpiredDate()+"]变更为["+after.getSowExpiredDate()+"];");
+        	}
+        	//Staff Category
+            if(before.getStaffCategory()!=null && !before.getStaffCategory().equals(after.getStaffCategory())){
+            	changeInfo.append("staffCategory由["+before.getStaffCategory()+"]变更为["+after.getStaffCategory()+"];");
+        	}
+        	//Engagement Type
+            if(before.getEngagementType()!=null && !before.getEngagementType().equals(after.getEngagementType())){
+            	changeInfo.append("engagementType由["+before.getEngagementType()+"]变更为["+after.getEngagementType()+"];");
+        	}
+        	//Graduation Date
+            if(before.getGraduationDate()!=null && !before.getGraduationDate().equals(after.getGraduationDate())){
+            	changeInfo.append("graduationDate由["+before.getGraduationDate()+"]变更为["+after.getGraduationDate()+"];");
+        	}
+        	//EntryDate
+            if(before.getEntryDate()!=null && !before.getEntryDate().equals(after.getEntryDate())){
+            	changeInfo.append("entryDate由["+before.getEntryDate()+"]变更为["+after.getEntryDate()+"];");
+        	}
+        	//Staff Region
+            if(before.getStaffRegion()!=null && !before.getStaffRegion().equals(after.getStaffRegion())){
+            	changeInfo.append("staffRegion由["+before.getStaffRegion()+"]变更为["+after.getStaffRegion()+"];");
+        	}
+        	//Onshore or Offshore
+            if(before.getOnshoreOrOffshore()!=null && !before.getOnshoreOrOffshore().equals(after.getOnshoreOrOffshore())){
+            	changeInfo.append("onshoreOrOffshore由["+before.getOnshoreOrOffshore()+"]变更为["+after.getOnshoreOrOffshore()+"];");
+        	}
+        	//MSA Role
+            if(before.getRole()!=null && !before.getRole().equals(after.getRole())){
+            	changeInfo.append("role由["+before.getRole()+"]变更为["+after.getRole()+"];");
+        	}
+        	//Skills/Technology
+            if(before.getSkill()!=null && !before.getSkill().equals(after.getSkill())){
+            	changeInfo.append("skill由["+before.getSkill()+"]变更为["+after.getSkill()+"];");
+        	}
+        	//Billing Currency
+            if(before.getBillingCurrency()!=null && !before.getBillingCurrency().equals(after.getBillingCurrency())){
+            	changeInfo.append("billingCurrency由["+before.getBillingCurrency()+"]变更为["+after.getBillingCurrency()+"];");
+        	}
+        	//Bill Rate
+            if(before.getBillRate()!=null && !before.getBillRate().equals(after.getBillRate())){
+            	changeInfo.append("billRate由["+before.getBillRate()+"]变更为["+after.getBillRate()+"];");
+        	}
+        	//HSBC DOJ
+            if(before.getHsbcDOJ()!=null && !before.getHsbcDOJ().equals(after.getHsbcDOJ())){
+            	changeInfo.append("hsbcDOJ由["+before.getHsbcDOJ()+"]变更为["+after.getHsbcDOJ()+"];");
+        	}
+        	//Resource Status
+            if(before.getResourceStatus()!=null && !before.getResourceStatus().equals(after.getResourceStatus())){
+            	changeInfo.append("resourceStatus由["+before.getResourceStatus()+"]变更为["+after.getResourceStatus()+"];");
+        	}
+        	//LWD
+            if(before.getTerminatedDate()!=null && !before.getTerminatedDate().equals(after.getTerminatedDate())){
+            	changeInfo.append("terminatedDate由["+before.getTerminatedDate()+"]变更为["+after.getTerminatedDate()+"];");
+        	}
+        	//Reason for Termination
+            if(before.getTerminationReason()!=null && !before.getTerminationReason().equals(after.getTerminationReason())){
+            	changeInfo.append("terminationReason由["+before.getTerminationReason()+"]变更为["+after.getTerminationReason()+"];");
+        	}
+            //interviewStatus
+            if(before.getInterviewStatus()!=null && !before.getInterviewStatus().equals(after.getInterviewStatus())){
+            	changeInfo.append("interviewStatus由["+before.getInterviewStatus()+"]变更为["+after.getInterviewStatus()+"];");
+            }
     	}
-    	//LOB
-        if(!before.getLob().equals(after.getLob())){
-        	changeInfo.append("lob由["+before.getLob()+"]变更为["+after.getLob()+"];");
-    	}
-    	//HSBC Staff ID
-        if(!before.getHsbcStaffId().equals(after.getHsbcStaffId())){
-        	changeInfo.append("hsbcStaffId由["+before.getHsbcStaffId()+"]变更为["+after.getHsbcStaffId()+"];");
-    	}
-    	//Staff Name
-        if(!before.getStaffName().equals(after.getStaffName())){
-        	changeInfo.append("staffName由["+before.getStaffName()+"]变更为["+after.getStaffName()+"];");
-    	}
-    	//LN
-        if(!before.getLn().equals(after.getLn())){
-        	changeInfo.append("ln由["+before.getLn()+"]变更为["+after.getLn()+"];");
-    	}
-    	//Email
-        if(!before.getEmail().equals(after.getEmail())){
-        	changeInfo.append("email由["+before.getEmail()+"]变更为["+after.getEmail()+"];");
-    	}
-    	//Staff location
-        if(!before.getStaffLocation().equals(after.getStaffLocation())){
-        	changeInfo.append("staffLocation由["+before.getStaffLocation()+"]变更为["+after.getStaffLocation()+"];");
-    	}
-    	//Location Type
-        if(!before.getLocationType().equals(after.getLocationType())){
-        	changeInfo.append("locationType由["+before.getLocationType()+"]变更为["+after.getLocationType()+"];");
-    	}
-    	//CS Dept
-        if(!before.getCsSubDept().equals(after.getCsSubDept())){
-        	changeInfo.append("csSubDept由["+before.getCsSubDept()+"]变更为["+after.getCsSubDept()+"];");
-    	}
-        
-    	//GBGF
-        if(!before.getGbGf().equals(after.getGbGf())){
-        	changeInfo.append("gbGf由["+before.getGbGf()+"]变更为["+after.getGbGf()+"];");
-    	}
-    	//HSBC Dept
-//        if(!before.get.equals(after.getHsbcSubDept())){
-//    		
-//    	}
-    	//HSBC Sub Dept
-        if(!before.getHsbcSubDept().equals(after.getHsbcSubDept())){
-        	changeInfo.append("hsbcSubDept由["+before.getHsbcSubDept()+"]变更为["+after.getHsbcSubDept()+"];");
-    	}
-    	//HSBC Project Name
-        if(!before.getProjectName().equals(after.getProjectName())){
-        	changeInfo.append("projectName由["+before.getProjectName()+"]变更为["+after.getProjectName()+"];");
-    	}
-    	//HSBC Project Manager
-        if(!before.getProjectManager().equals(after.getProjectManager())){
-        	changeInfo.append("projectManager由["+before.getProjectManager()+"]变更为["+after.getProjectManager()+"];");
-    	}
-    	//SOW#
-        if(!before.getSow().equals(after.getSow())){
-        	changeInfo.append("sow由["+before.getSow()+"]变更为["+after.getSow()+"];");
-    	}
-    	//SOW# Expired Date
-        if(!before.getSowExpiredDate().equals(after.getSowExpiredDate())){
-        	changeInfo.append("sowExpiredDate由["+before.getSowExpiredDate()+"]变更为["+after.getSowExpiredDate()+"];");
-    	}
-    	//Staff Category
-        if(!before.getStaffCategory().equals(after.getStaffCategory())){
-        	changeInfo.append("staffCategory由["+before.getStaffCategory()+"]变更为["+after.getStaffCategory()+"];");
-    	}
-    	//Engagement Type
-        if(!before.getEngagementType().equals(after.getEngagementType())){
-        	changeInfo.append("engagementType由["+before.getEngagementType()+"]变更为["+after.getEngagementType()+"];");
-    	}
-    	//Graduation Date
-        if(!before.getGraduationDate().equals(after.getGraduationDate())){
-        	changeInfo.append("graduationDate由["+before.getGraduationDate()+"]变更为["+after.getGraduationDate()+"];");
-    	}
-    	//EntryDate
-        if(!before.getEntryDate().equals(after.getEntryDate())){
-        	changeInfo.append("entryDate由["+before.getEntryDate()+"]变更为["+after.getEntryDate()+"];");
-    	}
-    	//Staff Region
-        if(!before.getStaffRegion().equals(after.getStaffRegion())){
-        	changeInfo.append("staffRegion由["+before.getStaffRegion()+"]变更为["+after.getStaffRegion()+"];");
-    	}
-    	//Onshore or Offshore
-        if(!before.getOnshoreOrOffshore().equals(after.getOnshoreOrOffshore())){
-        	changeInfo.append("onshoreOrOffshore由["+before.getOnshoreOrOffshore()+"]变更为["+after.getOnshoreOrOffshore()+"];");
-    	}
-    	//MSA Role
-        if(!before.getRole().equals(after.getRole())){
-        	changeInfo.append("role由["+before.getRole()+"]变更为["+after.getRole()+"];");
-    	}
-    	//Skills/Technology
-        if(!before.getSkill().equals(after.getSkill())){
-        	changeInfo.append("skill由["+before.getSkill()+"]变更为["+after.getSkill()+"];");
-    	}
-    	//Billing Currency
-        if(!before.getBillingCurrency().equals(after.getBillingCurrency())){
-        	changeInfo.append("billingCurrency由["+before.getBillingCurrency()+"]变更为["+after.getBillingCurrency()+"];");
-    	}
-    	//Bill Rate
-        if(!before.getBillRate().equals(after.getBillRate())){
-        	changeInfo.append("billRate由["+before.getBillRate()+"]变更为["+after.getBillRate()+"];");
-    	}
-    	//HSBC DOJ
-        if(!before.getHsbcDOJ().equals(after.getHsbcDOJ())){
-        	changeInfo.append("hsbcDOJ由["+before.getHsbcDOJ()+"]变更为["+after.getHsbcDOJ()+"];");
-    	}
-    	//Resource Status
-        if(!before.getResourceStatus().equals(after.getResourceStatus())){
-        	changeInfo.append("resourceStatus由["+before.getResourceStatus()+"]变更为["+after.getResourceStatus()+"];");
-    	}
-    	//LWD
-        if(!before.getTerminatedDate().equals(after.getTerminatedDate())){
-        	changeInfo.append("terminatedDate由["+before.getTerminatedDate()+"]变更为["+after.getTerminatedDate()+"];");
-    	}
-    	//Reason for Termination
-        if(!before.getTerminationReason().equals(after.getTerminationReason())){
-        	changeInfo.append("terminationReason由["+before.getTerminationReason()+"]变更为["+after.getTerminationReason()+"];");
-    	}
-    	
     	return changeInfo;
     }
     
     
     private StringBuffer addInfo(Employee employee){
     	StringBuffer changeInfo = new StringBuffer();
-    	//E-HR
-        changeInfo.append("eHr["+employee.geteHr()+"];");
-    	//LOB
-        changeInfo.append("lob["+employee.getLob()+"];");
-    	//HSBC Staff ID
-        changeInfo.append("hsbcStaffId["+employee.getHsbcStaffId()+"];");
-    	//Staff Name
-        changeInfo.append("staffName["+employee.getStaffName()+"];");
-    	//LN
-        changeInfo.append("ln["+employee.getLn()+"];");
-    	//Email
-        changeInfo.append("email["+employee.getEmail()+"];");
-    	//Staff location
-        changeInfo.append("staffLocation["+employee.getStaffLocation()+"];");
-    	//Location Type
-        changeInfo.append("locationType["+employee.getLocationType()+"];");
-    	//CS Dept
-        changeInfo.append("csSubDept["+employee.getCsSubDept()+"];");
-    	//GBGF
-        changeInfo.append("gbGf["+employee.getGbGf()+"];");
-    	//HSBC Dept
-//        if(!before.get.equals(after.getHsbcSubDept())){
-//    		
-//    	}
-    	//HSBC Sub Dept
-        changeInfo.append("hsbcSubDept["+employee.getHsbcSubDept()+"];");
-    	//HSBC Project Name
-        changeInfo.append("projectName["+employee.getProjectName()+"];");
-    	//HSBC Project Manager
-        changeInfo.append("projectManager["+employee.getProjectManager()+"];");
-    	//SOW#
-        changeInfo.append("sow["+employee.getSow()+"];");
-    	//SOW# Expired Date
-        changeInfo.append("sowExpiredDate["+employee.getSowExpiredDate()+"];");
-    	//Staff Category
-        changeInfo.append("staffCategory["+employee.getStaffCategory()+"];");
-    	//Engagement Type
-        changeInfo.append("engagementType["+employee.getEngagementType()+"];");
-    	//Graduation Date
-        changeInfo.append("graduationDate["+employee.getGraduationDate()+"];");
-    	//EntryDate
-        changeInfo.append("entryDate["+employee.getEntryDate()+"];");
-    	//Staff Region
-        changeInfo.append("staffRegion["+employee.getStaffRegion()+"];");
-    	//Onshore or Offshore
-        changeInfo.append("onshoreOrOffshore["+employee.getOnshoreOrOffshore()+"];");
-    	//MSA Role
-        changeInfo.append("role["+employee.getRole()+"];");
-    	//Skills/Technology
-        changeInfo.append("skill["+employee.getSkill()+"];");
-    	//Billing Currency
-        changeInfo.append("billingCurrency["+employee.getBillingCurrency()+"];");
-    	//Bill Rate
-        changeInfo.append("billRate["+employee.getBillRate()+"];");
-    	//HSBC DOJ
-        changeInfo.append("hsbcDOJ["+employee.getHsbcDOJ()+"];");
-    	//Resource Status
-        changeInfo.append("resourceStatus["+employee.getResourceStatus()+"];");
-    	//LWD
-        changeInfo.append("terminatedDate["+employee.getTerminatedDate()+"];");
-    	//Reason for Termination
-        changeInfo.append("terminationReason["+employee.getTerminationReason()+"];");
-    	
+    	if(employee!=null){
+    		//E-HR
+            changeInfo.append("eHr["+employee.geteHr()+"];");
+        	//LOB
+            changeInfo.append("lob["+employee.getLob()+"];");
+        	//HSBC Staff ID
+            changeInfo.append("hsbcStaffId["+employee.getHsbcStaffId()+"];");
+        	//Staff Name
+            changeInfo.append("staffName["+employee.getStaffName()+"];");
+        	//LN
+            changeInfo.append("ln["+employee.getLn()+"];");
+        	//Email
+            changeInfo.append("email["+employee.getEmail()+"];");
+        	//Staff location
+            changeInfo.append("staffLocation["+employee.getStaffLocation()+"];");
+        	//Location Type
+            changeInfo.append("locationType["+employee.getLocationType()+"];");
+        	//CS Dept
+            changeInfo.append("csSubDept["+employee.getCsSubDept()+"];");
+        	//GBGF
+            changeInfo.append("gbGf["+employee.getGbGf()+"];");
+        	//HSBC Dept
+//            if(!before.get.equals(after.getHsbcSubDept())){
+//        		
+//        	}
+        	//HSBC Sub Dept
+            changeInfo.append("hsbcSubDept["+employee.getHsbcSubDept()+"];");
+        	//HSBC Project Name
+            changeInfo.append("projectName["+employee.getProjectName()+"];");
+        	//HSBC Project Manager
+            changeInfo.append("projectManager["+employee.getProjectManager()+"];");
+        	//SOW#
+            changeInfo.append("sow["+employee.getSow()+"];");
+        	//SOW# Expired Date
+            changeInfo.append("sowExpiredDate["+employee.getSowExpiredDate()+"];");
+        	//Staff Category
+            changeInfo.append("staffCategory["+employee.getStaffCategory()+"];");
+        	//Engagement Type
+            changeInfo.append("engagementType["+employee.getEngagementType()+"];");
+        	//Graduation Date
+            changeInfo.append("graduationDate["+employee.getGraduationDate()+"];");
+        	//EntryDate
+            changeInfo.append("entryDate["+employee.getEntryDate()+"];");
+        	//Staff Region
+            changeInfo.append("staffRegion["+employee.getStaffRegion()+"];");
+        	//Onshore or Offshore
+            changeInfo.append("onshoreOrOffshore["+employee.getOnshoreOrOffshore()+"];");
+        	//MSA Role
+            changeInfo.append("role["+employee.getRole()+"];");
+        	//Skills/Technology
+            changeInfo.append("skill["+employee.getSkill()+"];");
+        	//Billing Currency
+            changeInfo.append("billingCurrency["+employee.getBillingCurrency()+"];");
+        	//Bill Rate
+            changeInfo.append("billRate["+employee.getBillRate()+"];");
+        	//HSBC DOJ
+            changeInfo.append("hsbcDOJ["+employee.getHsbcDOJ()+"];");
+        	//Resource Status
+            changeInfo.append("resourceStatus["+employee.getResourceStatus()+"];");
+        	//LWD
+            changeInfo.append("terminatedDate["+employee.getTerminatedDate()+"];");
+        	//Reason for Termination
+            changeInfo.append("terminationReason["+employee.getTerminationReason()+"];");
+            //interviewStatus
+            changeInfo.append("interviewStatus["+employee.getInterviewStatus()+"];");
+    	}
     	return changeInfo;
     }
     

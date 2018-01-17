@@ -120,12 +120,28 @@ public class RecordLogController {
         
         List<EmployeeLog> list = employeeLogService.queryEmployeeLogList(employeeLogPageCondition);
         for(int i=0;i<list.size();i++){
-        	User u = userService.queryUserById(list.get(i).getOperationPerson());
-        	CSDept duNew = csDeptService.queryCSDeptById(list.get(i).getCsSubdeptIdNew());
-        	CSDept duOld = csDeptService.queryCSDeptById(list.get(i).getCsSubdeptIdOriginal());
-        	list.get(i).setOperationPersonName(u.getUserName());
-        	list.get(i).setCsSubdeptIdNewName(duNew.getCsBuName());
-        	list.get(i).setCsSubdeptIdOriginalName(duOld.getCsBuName());
+        	User u=null;
+        	CSDept duNew=null;
+        	CSDept duOld=null;
+        	if(list.get(i).getOperationPerson()!=null && !"".equals(list.get(i).getOperationPerson())){
+        		u = userService.queryUserById(list.get(i).getOperationPerson());
+        	}
+            if(list.get(i).getCsSubdeptIdNew()!=null && !"".equals(list.get(i).getCsSubdeptIdNew())){
+            	duNew = csDeptService.queryCSDeptById(list.get(i).getCsSubdeptIdNew());
+        	}
+            if(list.get(i).getCsSubdeptIdOriginal()!=null && !"".equals(list.get(i).getCsSubdeptIdOriginal())){
+            	duOld = csDeptService.queryCSDeptById(list.get(i).getCsSubdeptIdOriginal());
+        	}
+            
+            if(u!=null){
+            	list.get(i).setOperationPersonName(u.getUserName());
+            }
+            if(duNew!=null){
+            	list.get(i).setCsSubdeptIdNewName(duNew.getCsBuName());
+            }
+            if(duOld!=null){
+            	list.get(i).setCsSubdeptIdOriginalName(duOld.getCsBuName());
+            }
         }
         
         Map<String,Object> result = new HashMap<String,Object>();
@@ -141,12 +157,28 @@ public class RecordLogController {
 	@ResponseBody
 	public EmployeeLog queryEmployeeLogById(String employeeLogId,HttpServletRequest request) {
 		EmployeeLog log = (EmployeeLog) employeeLogService.getById(employeeLogId);
-		User u = userService.queryUserById(log.getOperationPerson());
-    	CSDept duNew = csDeptService.queryCSDeptById(log.getCsSubdeptIdNew());
-    	CSDept duOld = csDeptService.queryCSDeptById(log.getCsSubdeptIdOriginal());
-    	log.setOperationPersonName(u.getUserName());
-    	log.setCsSubdeptIdNewName(duNew.getCsBuName());
-    	log.setCsSubdeptIdOriginalName(duOld.getCsBuName());
+		User u=null;
+		CSDept duNew=null;
+		CSDept duOld=null;
+		if(log.getOperationPerson()!=null && !"".equals(log.getOperationPerson())){
+			u = userService.queryUserById(log.getOperationPerson());
+		}
+        if(log.getCsSubdeptIdNew()!=null && !"".equals(log.getCsSubdeptIdNew())){
+        	duNew = csDeptService.queryCSDeptById(log.getCsSubdeptIdNew());
+		}
+        if(log.getCsSubdeptIdOriginal()!=null && !"".equals(log.getCsSubdeptIdOriginal())){
+        	duOld = csDeptService.queryCSDeptById(log.getCsSubdeptIdOriginal());
+		}
+        
+        if(u!=null){
+        	log.setOperationPersonName(u.getUserName());
+        }
+        if(duNew!=null){
+        	log.setCsSubdeptIdNewName(duNew.getCsBuName());
+        }
+        if(duOld!=null){
+        	log.setCsSubdeptIdOriginalName(duOld.getCsBuName());
+        }
 		return log;
 	}
 
