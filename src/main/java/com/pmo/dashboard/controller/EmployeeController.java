@@ -206,14 +206,14 @@ public class EmployeeController {
         /**
          * 添加日志
          */
-        /*try{
+        try{
         	User user = (User)request.getSession().getAttribute("loginUser");
         	EmployeeLog log = getEmployeeLog(employee,user,"0");
     		@SuppressWarnings({ "unused", "unchecked" })
 			boolean flag = employeeLogService.save(log);
         }catch(Exception e){
         	e.printStackTrace();
-        }*/
+        }
         
         return resultFlag;
     }
@@ -269,14 +269,14 @@ public class EmployeeController {
         /**
          * 添加日志
          */
-        /*try{
+        try{
         	User user = (User)request.getSession().getAttribute("loginUser");
         	EmployeeLog log = getEmployeeLog(employee,user,"1");
     		@SuppressWarnings({ "unused", "unchecked" })
 			boolean flag = employeeLogService.save(log);
         }catch(Exception e){
         	e.printStackTrace();
-        }*/
+        }
         
         boolean resultFlag = employeeService.updateEmployee(employee);
         
@@ -816,8 +816,8 @@ public String getTMemployee(final HttpServletRequest request,
         	}
         	//HSBC Sub Dept
             if(before.getHsbcSubDept()!=null && !before.getHsbcSubDept().equals(after.getHsbcSubDept())){
-            	HSBCDept old = hsbcDeptService.queryHSBCSubDeptById(before.getHsbcSubDept());
-            	HSBCDept news = hsbcDeptService.queryHSBCSubDeptById(after.getHsbcSubDept());
+            	HSBCDept old = hsbcDeptService.queryDemandHSBCSubDeptById(before.getHsbcSubDept());
+            	HSBCDept news = hsbcDeptService.queryDemandHSBCSubDeptById(after.getHsbcSubDept());
             	String oldname="";
             	String newsname="";
             	if(old!=null){
@@ -901,9 +901,9 @@ public String getTMemployee(final HttpServletRequest request,
             	changeInfo.append("terminationReason由["+before.getTerminationReason()+"]变更为["+after.getTerminationReason()+"];");
         	}
             //interviewStatus
-            if(before.getInterviewStatus()!=null && !before.getInterviewStatus().equals(after.getInterviewStatus())){
-            	changeInfo.append("interviewStatus由["+before.getInterviewStatus()+"]变更为["+after.getInterviewStatus()+"];");
-            }
+//            if(before.getInterviewStatus()!=null && !before.getInterviewStatus().equals(after.getInterviewStatus())){
+//            	changeInfo.append("interviewStatus由["+before.getInterviewStatus()+"]变更为["+after.getInterviewStatus()+"];");
+//            }
     	}
     	return changeInfo;
     }
@@ -929,15 +929,27 @@ public String getTMemployee(final HttpServletRequest request,
         	//Location Type
             changeInfo.append("locationType["+employee.getLocationType()+"];");
         	//CS Dept
-            changeInfo.append("csSubDept["+employee.getCsSubDept()+"];");
+            CSDept csdept = null;
+            if(employee.getCsSubDept()!=null && !"".equals(employee.getCsSubDept())){
+            	csdept = csDeptService.queryCSDeptById(employee.getCsSubDept());
+            }
+            String csdeptname=null;
+        	if(csdept!=null){
+        		csdeptname=csdept.getCsSubDeptName();
+        	}
+        	changeInfo.append("csSubDept["+csdeptname+"];");
         	//GBGF
             changeInfo.append("gbGf["+employee.getGbGf()+"];");
-        	//HSBC Dept
-//            if(!before.get.equals(after.getHsbcSubDept())){
-//        		
-//        	}
         	//HSBC Sub Dept
-            changeInfo.append("hsbcSubDept["+employee.getHsbcSubDept()+"];");
+            HSBCDept hsbcdept = null;
+        	if(employee.getHsbcSubDept()!=null && !"".equals(employee.getHsbcSubDept())){
+        		hsbcdept = hsbcDeptService.queryDemandHSBCSubDeptById(employee.getHsbcSubDept());
+        	}
+            String hsbcdeptname="";
+        	if(hsbcdept!=null){
+        		hsbcdeptname=hsbcdept.getHsbcSubDeptName();
+        	}
+            changeInfo.append("hsbcSubDept["+hsbcdeptname+"];");
         	//HSBC Project Name
             changeInfo.append("projectName["+employee.getProjectName()+"];");
         	//HSBC Project Manager
@@ -975,7 +987,7 @@ public String getTMemployee(final HttpServletRequest request,
         	//Reason for Termination
             changeInfo.append("terminationReason["+employee.getTerminationReason()+"];");
             //interviewStatus
-            changeInfo.append("interviewStatus["+employee.getInterviewStatus()+"];");
+            //changeInfo.append("interviewStatus["+employee.getInterviewStatus()+"];");
     	}
     	return changeInfo;
     }
