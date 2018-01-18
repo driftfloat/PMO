@@ -971,21 +971,37 @@ public String getTMemployee(final HttpServletRequest request,
     	StringBuffer changeInfo = new StringBuffer();
     	if(employee!=null){
     		//E-HR
-            changeInfo.append("eHr["+employee.geteHr()+"];----");
+    		if(employee.geteHr()!=null && !"".equals(employee.geteHr())){
+    			changeInfo.append("eHr["+employee.geteHr()+"];----");
+    		}
         	//LOB
-            changeInfo.append("lob["+employee.getLob()+"];----");
+    		if(employee.getLob()!=null && !"".equals(employee.getLob())){
+    			changeInfo.append("lob["+employee.getLob()+"];----");
+    		}
         	//HSBC Staff ID
-            changeInfo.append("hsbcStaffId["+employee.getHsbcStaffId()+"];----");
+    		if(employee.getHsbcStaffId()!=null && !"".equals(employee.getHsbcStaffId())){
+    			changeInfo.append("hsbcStaffId["+employee.getHsbcStaffId()+"];----");
+    		}
         	//Staff Name
-            changeInfo.append("staffName["+employee.getStaffName()+"];----");
+    		if(employee.getStaffName()!=null && !"".equals(employee.getStaffName())){
+    			changeInfo.append("staffName["+employee.getStaffName()+"];----");
+    		}
         	//LN
-            changeInfo.append("ln["+employee.getLn()+"];----");
+    		if(employee.getLn()!=null && !"".equals(employee.getLn())){
+    			changeInfo.append("ln["+employee.getLn()+"];----");
+    		}
         	//Email
-            changeInfo.append("email["+employee.getEmail()+"];----");
+    		if(employee.getEmail()!=null && !"".equals(employee.getEmail())){
+    			changeInfo.append("email["+employee.getEmail()+"];----");
+    		}
         	//Staff location
-            changeInfo.append("staffLocation["+employee.getStaffLocation()+"];----");
+    		if(employee.getStaffLocation()!=null && !"".equals(employee.getStaffLocation())){
+    			changeInfo.append("staffLocation["+employee.getStaffLocation()+"];----");
+    		}
         	//Location Type
-            changeInfo.append("locationType["+employee.getLocationType()+"];----");
+    		if(employee.getLocationType()!=null && !"".equals(employee.getLocationType())){
+    			changeInfo.append("locationType["+employee.getLocationType()+"];----");
+    		}
         	//CS Dept
             CSDept csdept = null;
             if(employee.getCsSubDept()!=null && !"".equals(employee.getCsSubDept())){
@@ -995,9 +1011,13 @@ public String getTMemployee(final HttpServletRequest request,
         	if(csdept!=null){
         		csdeptname=csdept.getCsSubDeptName();
         	}
-        	changeInfo.append("csSubDept["+csdeptname+"];----");
+        	if(csdeptname!=null && !"".equals(csdeptname)){
+        		changeInfo.append("csSubDept["+csdeptname+"];----");
+        	}
         	//GBGF
-            changeInfo.append("gbGf["+employee.getGbGf()+"];----");
+        	if(employee.getGbGf()!=null && !"".equals(employee.getGbGf())){
+        		changeInfo.append("gbGf["+employee.getGbGf()+"];----");
+        	}
         	//HSBC Sub Dept
             HSBCDept hsbcdept = null;
         	if(employee.getHsbcSubDept()!=null && !"".equals(employee.getHsbcSubDept())){
@@ -1007,43 +1027,81 @@ public String getTMemployee(final HttpServletRequest request,
         	if(hsbcdept!=null){
         		hsbcdeptname=hsbcdept.getHsbcSubDeptName();
         	}
-            changeInfo.append("hsbcSubDept["+hsbcdeptname+"];----");
+        	if(hsbcdeptname!=null && !"".equals(hsbcdeptname)){
+        		changeInfo.append("hsbcSubDept["+hsbcdeptname+"];----");
+        	}
         	//HSBC Project Name
-            changeInfo.append("projectName["+employee.getProjectName()+"];----");
+        	if(employee.getProjectName()!=null && !"".equals(employee.getProjectName())){
+        		changeInfo.append("projectName["+employee.getProjectName()+"];----");
+        	}
         	//HSBC Project Manager
-            changeInfo.append("projectManager["+employee.getProjectManager()+"];----");
+        	if(employee.getProjectManager()!=null && !"".equals(employee.getProjectManager())){
+        		changeInfo.append("projectManager["+employee.getProjectManager()+"];----");
+        	}
         	//SOW#
-            changeInfo.append("sow["+employee.getSow()+"];----");
+        	if(employee.getSow()!=null && !"".equals(employee.getSow())){
+        		changeInfo.append("sow["+employee.getSow()+"];----");
+        	}
         	//SOW# Expired Date
-            changeInfo.append("sowExpiredDate["+employee.getSowExpiredDate()+"];----");
+        	if(employee.getSowExpiredDate()!=null && !"".equals(employee.getSowExpiredDate())){
+        		changeInfo.append("sowExpiredDate["+employee.getSowExpiredDate()+"];----");
+        	}
         	//Staff Category
-            changeInfo.append("staffCategory["+employee.getStaffCategory()+"];----");
+        	if(employee.getStaffCategory()!=null && !"".equals(employee.getStaffCategory())){
+        		changeInfo.append("staffCategory["+employee.getStaffCategory()+"];----");
+        	}
         	//Engagement Type
-            changeInfo.append("engagementType["+employee.getEngagementType()+"];----");
+        	if(employee.getEngagementType()!=null && !"".equals(employee.getEngagementType())){
+        		changeInfo.append("engagementType["+employee.getEngagementType()+"];----");
+        	}
         	//Graduation Date
-            changeInfo.append("graduationDate["+employee.getGraduationDate()+"];----");
+        	if(employee.getGraduationDate()!=null && !"".equals(employee.getGraduationDate())){
+        		changeInfo.append("graduationDate["+employee.getGraduationDate()+"];----");
+        	}
         	//EntryDate
-            changeInfo.append("entryDate["+employee.getEntryDate()+"];----");
+        	if(employee.getEntryDate()!=null && !"".equals(employee.getEntryDate())){
+        		changeInfo.append("entryDate["+employee.getEntryDate()+"];----");
+        	}
         	//Staff Region
-            changeInfo.append("staffRegion["+employee.getStaffRegion()+"];----");
+        	if(employee.getStaffRegion()!=null && !"".equals(employee.getStaffRegion())){
+        		changeInfo.append("staffRegion["+employee.getStaffRegion()+"];----");
+        	}
         	//Onshore or Offshore
-            changeInfo.append("onshoreOrOffshore["+employee.getOnshoreOrOffshore()+"];----");
+        	if(employee.getOnshoreOrOffshore()!=null && !"".equals(employee.getOnshoreOrOffshore())){
+        		changeInfo.append("onshoreOrOffshore["+employee.getOnshoreOrOffshore()+"];----");
+        	}
         	//MSA Role
-            changeInfo.append("role["+employee.getRole()+"];----");
+        	if(employee.getRole()!=null && !"".equals(employee.getRole())){
+        		changeInfo.append("role["+employee.getRole()+"];----");
+        	}
         	//Skills/Technology
-            changeInfo.append("skill["+employee.getSkill()+"];----");
+        	if(employee.getSkill()!=null && !"".equals(employee.getSkill())){
+        		changeInfo.append("skill["+employee.getSkill()+"];----");
+        	}
         	//Billing Currency
-            changeInfo.append("billingCurrency["+employee.getBillingCurrency()+"];----");
+        	if(employee.getBillingCurrency()!=null && !"".equals(employee.getBillingCurrency())){
+        		changeInfo.append("billingCurrency["+employee.getBillingCurrency()+"];----");
+        	}
         	//Bill Rate
-            changeInfo.append("billRate["+employee.getBillRate()+"];----");
+        	if(employee.getBillRate()!=null && !"".equals(employee.getBillRate())){
+        		changeInfo.append("billRate["+employee.getBillRate()+"];----");
+        	}
         	//HSBC DOJ
-            changeInfo.append("hsbcDOJ["+employee.getHsbcDOJ()+"];----");
+        	if(employee.getHsbcDOJ()!=null && !"".equals(employee.getHsbcDOJ())){
+        		changeInfo.append("hsbcDOJ["+employee.getHsbcDOJ()+"];----");
+        	}
         	//Resource Status
-            changeInfo.append("resourceStatus["+employee.getResourceStatus()+"];----");
+        	if(employee.getResourceStatus()!=null && !"".equals(employee.getResourceStatus())){
+        		changeInfo.append("resourceStatus["+employee.getResourceStatus()+"];----");
+        	}
         	//LWD
-            changeInfo.append("terminatedDate["+employee.getTerminatedDate()+"];----");
+        	if(employee.getTerminatedDate()!=null && !"".equals(employee.getTerminatedDate())){
+        		changeInfo.append("terminatedDate["+employee.getTerminatedDate()+"];----");
+        	}
         	//Reason for Termination
-            changeInfo.append("terminationReason["+employee.getTerminationReason()+"];----");
+        	if(employee.getTerminationReason()!=null && !"".equals(employee.getTerminationReason())){
+        		changeInfo.append("terminationReason["+employee.getTerminationReason()+"];----");
+        	}
             //interviewStatus
             //changeInfo.append("interviewStatus["+employee.getInterviewStatus()+"];");
     	}
