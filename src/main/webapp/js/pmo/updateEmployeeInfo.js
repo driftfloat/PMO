@@ -463,10 +463,10 @@ function loadTerminationReason(employee) {
 	$.getJSON(url, function(data) {
 		$.each(data, function(i, item) {
 			$("#terminationReason").append(
-					"<option value='" + item.key + "'>" + item.name
+					"<option value='" + item.name + "'>" + item.name
 							+ "</option>");
-			if (item.key == employee.terminationReason) {
-				$('#terminationReason').val(item.key);
+			if (item.name == employee.terminationReason) {
+				$('#terminationReason').val(item.name);
 			}
 		})
 	});

@@ -95,14 +95,14 @@ var path='<%=path%>';
 											<label class="col-sm-2 control-label">E-HR</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="eHr"
-													id="eHr" />
+													id="eHr" data-bv-group=".group"/>
 											</div>
 										</div>
 										<div class="group">
 											<label class="col-sm-2 control-label">LOB</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="lob"
-													id="lob" />
+													id="lob" data-bv-group=".group"/>
 											</div>
 										</div>
 										
@@ -115,14 +115,14 @@ var path='<%=path%>';
 											<label class="col-sm-2 control-label">HSBC Staff ID</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="hsbcStaffId"
-													id="hsbcStaffId" />
+													id="hsbcStaffId" data-bv-group=".group"/>
 											</div>
 										</div>
 										<div class="group">
 											<label class="col-sm-2 control-label">Staff Name</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="staffName"
-													id="staffName" />
+													id="staffName" data-bv-group=".group"/>
 											</div>
 										</div>
 								</div>
@@ -131,8 +131,8 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-sm-2 control-label">LN</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="LN"
-													id="LN" />
+												<input type="text" class="form-control" name="LN" 
+													id="LN" data-bv-group=".group"/>
 											</div>
 										</div>
 										<div class="group">
@@ -214,14 +214,14 @@ var path='<%=path%>';
 											<label class="col-sm-2 control-label">HSBC Project Name</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="hsbcProjectName"
-													id="hsbcProjectName" />
+													id="hsbcProjectName" data-bv-group=".group"/>
 											</div>
 										</div>
 										<div class="group">
 											<label class="col-sm-2 control-label">HSBC Project Manager</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="hsbcProjectManager"
-													id="hsbcProjectManager" />
+													id="hsbcProjectManager" data-bv-group=".group"/>
 											</div>
 										</div>
 								</div>
@@ -363,7 +363,7 @@ var path='<%=path%>';
 											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
 												<input class="form-control" type="text" readonly
-													id="hsbcDOJ1" name="hsbcDOJ1"> <span
+													id="hsbcDOJ1" name="hsbcDOJ1" data-bv-group=".group"> <span
 													class="input-group-addon"><span
 													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
 													id="hsbcDOJ2" name="hsbcDOJ2" />
