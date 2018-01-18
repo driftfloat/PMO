@@ -131,7 +131,7 @@ public class EmployeeLog {
     }
 
     public void setChangeInformation(String changeInformation) {
-        this.changeInformation = changeInformation == null ? null : changeInformation.trim();
+        this.changeInformation = changeInformation == null ? null : changeInformation;
     }
     
     public String getLogType() {

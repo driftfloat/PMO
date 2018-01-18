@@ -37,10 +37,10 @@ function loadEmployeeLogList(pageState){
 						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].operationPersonName+"</td>"+
 						"</tr>"+
 						"<tr>"+
-						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>ORIGINALDU</td>"+
-						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].csSubdeptIdOriginalName+"</td>"+
-						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>ORIGINALStatus</td>"+
-						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].statusOriginal+"</td>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>NewDU</td>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].csSubdeptIdNewName+"</td>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>NewStatus</td>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].statusNew+"</td>"+
 						"</tr>"+
 						"<tr>"+
 						"<td style='font-size: 14px;color: #555555;' colspan='4'>"+result.data[i].changeInformation+"</td>"+
