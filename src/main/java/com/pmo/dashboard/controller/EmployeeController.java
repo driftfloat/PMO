@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -422,19 +423,30 @@ public class EmployeeController {
                List<HSBCDept> allHSBCDept = hsbcDeptService.queryHSBCDeptName();
                List<User> allRM = userService.getUserForRM();
                
-               CSDept csDept = null;
+               CSDept csDept = new CSDept();
                HSBCDept hsbcDept = null;
-               
-               for (int i = 1; i - 1 < listE.size(); i++) {
-				if(listE.get(i - 1).getCsSubDept()!=null){
-					for (CSDept csD : allCSDept) {
-						if (csD.getCsSubDeptId().equals(listE.get(i - 1).getCsSubDept())) {
-							csDept = csD;
-							break;
-						}
+               List<String> subDeptIdColl = new ArrayList<String>();
+               String  listEtoCsSubDept = "";
+               for (CSDept csD : allCSDept) {
+					if(csD.getCsSubDeptId()!=null||!"".equals(csD.getCsSubDeptId())) {
+						subDeptIdColl.add(csD.getCsSubDeptId());
 					}
-				}else{
-					csDept =null;
+               }
+               for (int i = 1; i - 1 < listE.size(); i++) {
+            	 listEtoCsSubDept = listE.get(i - 1).getCsSubDept();
+				if(listEtoCsSubDept!=null||!"".equals(listEtoCsSubDept)){
+					for (CSDept csD : allCSDept) {
+						if(!subDeptIdColl.contains(listEtoCsSubDept)) {
+							csDept.setCsSubDeptName(listEtoCsSubDept);
+							break;
+						}else {
+							if(csD.getCsSubDeptId().equals(listEtoCsSubDept)) {
+								csDept = csD;
+								break;
+							}
+						}
+						
+					}
 				}
 	
 				if(listE.get(i - 1).getHsbcSubDept()!=null){
@@ -703,7 +715,6 @@ public class EmployeeController {
               file.delete();
              
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } 
         

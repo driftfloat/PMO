@@ -488,7 +488,7 @@ var path='<%=path%>';
 	<script src="<%=path %>/js/charisma.js"></script>
 
 	<script type="text/javascript" src="<%=path %>/js/pmo/loadHSBCDept.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/pmo/employeeValid.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/employeeValid2.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>
