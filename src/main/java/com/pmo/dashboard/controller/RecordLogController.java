@@ -134,7 +134,7 @@ public class RecordLogController {
         	}
             
             if(u!=null){
-            	list.get(i).setOperationPersonName(u.getUserName());
+            	list.get(i).setOperationPersonName(u.getNickname());
             }
             if(duNew!=null){
             	list.get(i).setCsSubdeptIdNewName(duNew.getCsBuName());
