@@ -194,7 +194,7 @@ function loadCSBu(result){
 
 $('#searchBtn').bind("click", function(){
 	var csBuName = $("#csBu").find("option:selected").text();
-    alert(csBuName);
+    //alert(csBuName);
 	if(csBuName.indexOf('Option')!=-1){
 		csBuName = "";
 	}
