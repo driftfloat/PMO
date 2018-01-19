@@ -158,6 +158,13 @@
 			<if test="csbuName != null and csbuName != ''">
 				AND z1.CS_BU_NAME = #{csbuName}
 			</if>
+			<if test="csbuNames != null and csbuNames != ''">
+				AND z1.CS_BU_NAME in
+				<foreach collection="csbuNames" item="item" index="index" 
+                   open="(" separator="," close=")">
+                   #{item}
+                </foreach>
+			</if>
 			<if test="csSubDeptName != null and csSubDeptName != ''">
 				AND z1.CS_SUBDEPT_NAME = #{csSubDeptName}
 			</if>
@@ -216,6 +223,13 @@
 			</if>
 			<if test="csbuName != null and csbuName != ''">
 				AND z1.CS_BU_NAME = #{csbuName}
+			</if>
+			<if test="csbuNames != null and csbuNames != ''">
+				AND z1.CS_BU_NAME in
+				<foreach collection="csbuNames" item="item" index="index" 
+                   open="(" separator="," close=")">
+                   #{item}
+                </foreach>
 			</if>
 			<if test="csSubDeptName != null and csSubDeptName != ''">
 				AND z1.CS_SUBDEPT_NAME = #{csSubDeptName}
