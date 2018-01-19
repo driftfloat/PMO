@@ -78,5 +78,9 @@ public class EmployeeServiceImpl implements EmployeeService
 		return employeeMapper.selectByHSBCStaffID(staffId);
 	}
 	
+	@Override
+	public List<Employee> getAllInterviewer() {
+		return employeeMapper.getAllInterviewer();
+	}
 	
 }

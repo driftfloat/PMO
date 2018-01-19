@@ -10,10 +10,8 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.pmo.dashboard.dao.InterviewerMapper;
-import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.Interviewer;
 import com.pmo.dashboard.entity.User;
-import com.pmo.dashboard.util.Constants;
 import com.pom.dashboard.service.InterviewerService;
 
 @Service

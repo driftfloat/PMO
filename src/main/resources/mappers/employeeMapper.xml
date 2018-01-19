@@ -106,4 +106,7 @@
 	<select id="getBillRate" parameterType="com.pmo.dashboard.entity.Employee" resultType="java.lang.String">
 	   SELECT BillRate FROM t_rate WHERE Locations = #{staffRegion} AND Role = #{role} AND Technology LIKE CONCAT('%',#{skill},'%')
 	</select>
+	<select id="getAllInterviewer"  resultMap="employeeMap">
+		select * from t_employee where INTERVIERW_STATUS = "1" 
+	</select>
 </mapper>

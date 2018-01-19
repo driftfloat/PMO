@@ -15,4 +15,6 @@ public interface EmployeeService
     public List<Employee> selectByEhr(String eHr);
     public List<Employee> selectByLob(String lob);
     public List<Employee> selectByHSBCStaffID(String staffId);
+	public List<Employee> getAllInterviewer();
+
 }

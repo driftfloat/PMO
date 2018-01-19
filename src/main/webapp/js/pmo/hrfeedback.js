@@ -112,8 +112,10 @@ function confirmInterviewDate(){
 		cache:false,
 		type:"post",
 		success:function(result){
-			if(result =='false'){
+			if (result == false) {
 				alert("确认失败.");
+			} else if (result == true) {
+				$("#reconfirm").hide();
 			}
 			$('#hrInterviewConfirmbox').modal('hide');
 		}

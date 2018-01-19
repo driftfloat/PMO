@@ -420,7 +420,7 @@ public class EmployeeController {
                }
                
                List<CSDept> allCSDept = csDeptService.queryAllCSDept();               
-               List<HSBCDept> allHSBCDept = hsbcDeptService.queryHSBCDeptName();
+               List<HSBCDept> allHSBCDept = hsbcDeptService.queryAllHSBCDept();
                List<User> allRM = userService.getUserForRM();
                
                CSDept csDept = new CSDept();
