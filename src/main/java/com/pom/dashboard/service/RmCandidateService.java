@@ -21,4 +21,8 @@ public interface RmCandidateService {
 	public void addNextInterview(CandidateInterview candidateInterview,String pushId);
 	
 	public void interviewBack(String pushId);
+	public CandidateInterview getIntervieInfo(String candidateId);
+	public boolean updateInterview(CandidateInterview candidateInterview);
+	public CandidateInterview getConfirminfo(String candidateId);
+	
 }

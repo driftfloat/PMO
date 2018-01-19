@@ -246,4 +246,38 @@ public class RmCandidateController {
 		}
 		return "0";
 	}
+	
+	/**
+	 * 获取上次面试安排信息
+	 * @param candidateId
+	 * @return
+	 */
+	@RequestMapping("/getIntervieInfo")
+	@ResponseBody
+	public CandidateInterview getIntervieInfo(String candidateId){
+		CandidateInterview candidateInterview=rmCandidateService.getIntervieInfo(candidateId);
+		return candidateInterview;
+		
+	}
+	
+	
+	/**
+	 * 重新安排面试信息更新
+	 * @param candidateInterview
+	 * @return
+	 */
+	@RequestMapping("/updateInterview")
+	@ResponseBody
+	public boolean updateInterview(CandidateInterview candidateInterview){
+		boolean result=rmCandidateService.updateInterview(candidateInterview);
+		return result;
+		
+	}
+	@RequestMapping("/getConfirminfo")
+	@ResponseBody
+	public CandidateInterview getConfirminfo(String candidateId){
+		CandidateInterview result=rmCandidateService.getConfirminfo(candidateId);
+		return result;
+		
+	}
 }

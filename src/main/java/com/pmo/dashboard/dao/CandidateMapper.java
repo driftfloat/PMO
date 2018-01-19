@@ -70,7 +70,8 @@ public interface CandidateMapper
 	List<CandidateInfo> getCandidateList(CandidateInfo candidate);
 	
 	void updateInterviewStatusById(Map<String, Object> params);
-
+	
+    boolean modifyInterviewStatusById(Map<String, Object> params);
 	int lockCandidate(Map<String, Object> params);
 	
 	int updateDemandStatusOfferMade(CandidateInfo candidate);

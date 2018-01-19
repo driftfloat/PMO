@@ -82,8 +82,9 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 		Map<String, Object> params = new HashMap<String,Object>();
 		String candidateId = candidateInterview.getCandidateId();
 		params.put("candidateId", candidateId);
-		//候选人表interviewStatus=2 表示面试中
-		params.put("interviewStatus", "2");
+		//候选人表interviewStatus=6表示确认面试
+		params.put("interviewStatus", "6");
+		//confirmStatus
 		candidateMapper.updateInterviewStatusById(params);
 	}
 
@@ -107,7 +108,6 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 		candidateMapper.updateInterviewStatusById(params);
 	}
 
-	@Override
 	public void interviewBack(String pushId) {
 		//1表示已完成
 		String status = "1";
@@ -115,6 +115,29 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 		params.put("status", status);
 		params.put("pushId", pushId);
 		rmCandidateMapper.updateCandidateStatus(params);
+	}
+
+	public CandidateInterview getIntervieInfo(String candidateId) {
+		CandidateInterview candidateInterview=interviewMapper.getIntervieInfo(candidateId);
+		return candidateInterview;
+	}
+
+	public boolean updateInterview(CandidateInterview candidateInterview) {
+		boolean result =interviewMapper.updateInterview(candidateInterview);
+		Map<String, Object> params = new HashMap<String,Object>();
+		String candidateId = candidateInterview.getCandidateId();
+		params.put("candidateId", candidateId);
+		//候选人表interviewStatus=6表示确认面试
+		params.put("interviewStatus", "6");
+		boolean flag = candidateMapper.modifyInterviewStatusById(params);
+		
+		return result&&flag;
+	}
+
+	@Override
+	public CandidateInterview getConfirminfo(String candidateId) {
+		CandidateInterview candidateInterview=interviewMapper.getConfirminfo(candidateId);
+		return candidateInterview;
 	}
 
 }

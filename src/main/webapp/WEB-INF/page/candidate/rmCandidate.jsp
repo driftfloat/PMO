@@ -219,6 +219,56 @@ vertical-align: middle!important;
 			<!--/span-->
 		</div>
 		
+		
+		
+		
+		
+		
+		
+	
+		
+		
+	<div class="modal fade" id="confirmBox" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="box-header well" data-original-title="">
+						<h2>
+							<i class="glyphicon glyphicon-user"></i>Confirm Information
+						</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-round btn-default  btn-minimize ">
+								<i class="glyphicon glyphicon-chevron-up"></i>
+							</a> 
+							<a class="btn btn-round btn-default" href="#" data-dismiss="modal">
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</div>
+					</div>
+					<div class="box-content">
+						<form id="interviewForm">
+							<!-- <input type="hidden" name="interviewId" id="interviewId" /> -->
+							<div class="group">
+								<label class="col-sm-2 control-label">Candidate Name:</label>
+								<div class="col-sm-6">
+									<input type="text" readonly="true" class="form-control" name="candidateName" id="candidateName" />
+								</div>
+							</div>
+							<br/><br/><br/>
+							<div class="group">
+								<label class="col-sm-2 control-label">Confirm Information:</label>
+								<div class="col-sm-10">
+									<textarea id="confirmInfo" class="form-control" style="width: 80%;" rows="4"></textarea>
+								</div>
+							</div>
+							</br></br></br></br></br></br></br>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
 		<form id="resumeForm" action="" method="post" target="_blank">
 			<input type="hidden" id="candidateId" name="candidateId" ></input>
 		</form>

@@ -373,7 +373,10 @@
 		update t_candidate set INTERVIEW_STATUS = #{interviewStatus},CANDIDATE_STATUS = '1'
 		where CANDIDATE_ID = #{candidateId}
 	</update>
-	
+	<update id="modifyInterviewStatusById" parameterType="java.util.HashMap">
+		update t_candidate set INTERVIEW_STATUS = #{interviewStatus},CANDIDATE_STATUS = '1'
+		where CANDIDATE_ID = #{candidateId}
+	</update>
 	<update id="lockCandidate" parameterType="java.util.HashMap">
 		update t_candidate set CANDIDATE_STATUS = '0',LOCK_PERSION = #{userId}
 		where CANDIDATE_ID = #{candidateId}

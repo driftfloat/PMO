@@ -3,6 +3,7 @@ package com.pmo.dashboard.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.pmo.dashboard.entity.CandidateInterview;
 import com.pmo.dashboard.entity.CandidatePush;
 
 /**
@@ -18,4 +19,5 @@ public interface RmCandidateMapper {
 	public int queryAllCandidateCount(Map<String, Object> params);
 	public void updateCandidateStatus(Map<String, Object> params);
 	//public void updateInterviewId(Map<String, Object> params1);
+	
 }
