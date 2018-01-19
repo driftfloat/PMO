@@ -12,8 +12,18 @@ public class EmployeePageCondition extends PageCondition
     private String staffName;
     private String rmUserId;
     private String engagementType;
-    private int pageRecordsNum;  
+    private int pageRecordsNum;
+    
+    private String[] csSubDept;
+    
+    
 	
+	public String[] getCsSubDept() {
+		return csSubDept;
+	}
+	public void setCsSubDept(String[] csSubDept) {
+		this.csSubDept = csSubDept;
+	}
 	public int getPageRecordsNum() {
 		return pageRecordsNum;
 	}

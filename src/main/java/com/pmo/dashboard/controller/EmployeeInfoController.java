@@ -272,6 +272,7 @@ public class EmployeeInfoController
             employeePageCondition.setRmUserId(user.getUserId());
         }
         
+        
         if("".equals(pageState) || pageState == null){
             currentPage = "0";
             employeePageCondition.setHsbcStaffId(hsbcStaffId);
@@ -417,7 +418,6 @@ public class EmployeeInfoController
        
         if(("".equals(csSubDeptName) || csSubDeptName == null) &&
                 ("".equals(csBuName) || csBuName == null)){
-            
             if("1".equals(userType)|| "2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
                 csBuName = csBuNames[0];
             }
@@ -433,7 +433,24 @@ public class EmployeeInfoController
         String currentPage = null;
         
         EmployeePageCondition employeePageCondition = new EmployeePageCondition();
-        
+        //RM登录只能查看自己交付部
+        if("5".equals(userType)){
+        	if(user.getCsdeptId()!=null && !"".equals(user.getCsdeptId())){
+        		employeePageCondition.setCsSubDept(user.getCsdeptId().split(","));
+        	}
+        }
+        //事业部只能查看事业部的
+        if("1".equals(userType) || "2".equals(userType)){
+        	if(user.getCsdeptId()!=null && !"".equals(user.getCsdeptId())){
+        		employeePageCondition.setCsSubDept(user.getCsdeptId().split(","));
+        	}
+        }
+        //交付部只能查看交付部的
+        if("3".equals(userType) || "4".equals(userType) || "5".equals(userType)){
+        	if(user.getCsdeptId()!=null && !"".equals(user.getCsdeptId())){
+        		employeePageCondition.setCsSubDept(user.getCsdeptId().split(","));
+        	}
+        }
         if("".equals(pageState) || pageState == null){
             currentPage = "0";
             employeePageCondition.setHsbcStaffId(hsbcStaffId);
@@ -445,10 +462,18 @@ public class EmployeeInfoController
             employeePageCondition.setCurrentPage(currentPage);
             employeePageCondition.setStaffName(staffName);
             employeePageCondition.setResourceStatus(resourceStatus);
-            employeePageCondition.setRmUserId(rmUserId);
+            if(employeePageCondition.getRmUserId()==null || "".equals(employeePageCondition.getRmUserId())){
+            	employeePageCondition.setRmUserId(rmUserId);
+            }
             employeePageCondition.setEngagementType(engagementType);
             employeePageCondition.setPageRecordsNum(pageRecordsNum);
-            countPage = employeeInfoService.countList(employeePageCondition);
+            
+            try{
+            	countPage = employeeInfoService.countList(employeePageCondition);
+            }catch(Exception e){
+            	e.printStackTrace();
+            }
+            
             employeePageCondition.setPageCount(countPage+"");
             request.getSession().setAttribute("employeePageCondition", employeePageCondition);
         }else if("frist".equals(pageState)){
@@ -473,7 +498,13 @@ public class EmployeeInfoController
             request.getSession().setAttribute("employeePageCondition", employeePageCondition);
         }
         
-        List<EmployeeInfo> list = employeeInfoService.queryList(employeePageCondition);
+        List<EmployeeInfo> list =null;
+        try{
+        	list = employeeInfoService.queryList(employeePageCondition);
+        }catch(Exception e){
+        	e.printStackTrace();
+        }
+        
         Map<String,Object> result = new HashMap<String,Object>();
         
        // change csSubDeptName to csSubDeptId

@@ -19,11 +19,5 @@ public class EmployeeLogPageCondition extends PageCondition{
 	public void setPageRecordsNum(int pageRecordsNum) {
 		this.pageRecordsNum = pageRecordsNum;
 	}  
-
-//	public EmployeeLogPageCondition(String employeeLogID)
-//    {
-//        super();
-//        this.employeeID = employeeLogID;
-//    }
     
 }

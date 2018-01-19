@@ -83,8 +83,8 @@ public class RecordLogController {
 		if (request.getParameter("pageRecordsNum") != null) {
 			pageRecordsNum = Integer.parseInt(request.getParameter("pageRecordsNum"));
 		}
-        @SuppressWarnings("unused")
 		User user = (User) request.getSession().getAttribute("loginUser");
+        String userType = user.getUserType();
         int countPage = 0;
         String currentPage = null;
         EmployeeLogPageCondition employeeLogPageCondition = new EmployeeLogPageCondition();
@@ -117,8 +117,13 @@ public class RecordLogController {
             employeeLogPageCondition.setCurrentPage(currentPage);
             request.getSession().setAttribute("employeeLogPageCondition", employeeLogPageCondition);
         }
+        List<EmployeeLog> list=null; 
+        try{
+        	list = employeeLogService.queryEmployeeLogList(employeeLogPageCondition);
+        }catch(Exception e){
+        	e.printStackTrace();
+        }
         
-        List<EmployeeLog> list = employeeLogService.queryEmployeeLogList(employeeLogPageCondition);
         for(int i=0;i<list.size();i++){
         	User u=null;
         	CSDept duNew=null;
@@ -145,7 +150,6 @@ public class RecordLogController {
         }
         
         Map<String,Object> result = new HashMap<String,Object>();
-    
         result.put("data", list);
         result.put("pageInfo", request.getSession().getAttribute("employeeLogPageCondition"));
         result.put("employee",employee);
