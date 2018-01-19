@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.pmo.dashboard.entity.CandidateInfo;
+import com.pmo.dashboard.entity.CandidateInterview;
 import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.HSBCDept;
 
@@ -22,5 +23,7 @@ public interface InterviewService {
 	Employee queryEmployeeById(String employeeId);
 
 	HSBCDept queryHSBCSubDeptById(String hsbcSubDeptId);
+
+	CandidateInterview getNewInterviewRecord(String candidateId, String csSubdeptName);
 
 }

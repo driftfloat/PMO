@@ -1,5 +1,6 @@
 package com.pmo.dashboard.service.impl;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -13,9 +14,12 @@ import org.springframework.stereotype.Service;
 import com.pmo.dashboard.dao.CandidateMapper;
 import com.pmo.dashboard.dao.EmployeeMapper;
 import com.pmo.dashboard.dao.HSBCDeptMapper;
+import com.pmo.dashboard.dao.InterviewMapper;
 import com.pmo.dashboard.entity.CandidateInfo;
+import com.pmo.dashboard.entity.CandidateInterview;
 import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.HSBCDept;
+import com.pom.dashboard.service.CSDeptService;
 import com.pom.dashboard.service.InterviewService;
 
 @Service
@@ -29,6 +33,13 @@ public class InterviewServiceImpl implements InterviewService {
 	
     @Resource
     private HSBCDeptMapper hsbcDeptMapper;
+    
+    @Resource
+    private CSDeptService CSDeptService;
+    
+    @Resource
+    private InterviewMapper interviewMapper;
+
 
 	@Override
 	public Map<String, List<CandidateInfo>> getInterviewRecordByCandId(String candidateId) {
@@ -116,6 +127,16 @@ public class InterviewServiceImpl implements InterviewService {
 	@Override
 	public HSBCDept queryHSBCSubDeptById(String hsbcSubDeptId) {
 		return hsbcDeptMapper.queryDemandHSBCSubDeptById(hsbcSubDeptId);
+	}
+
+	@Override
+	public CandidateInterview getNewInterviewRecord(String candidateId, String csSubdeptName) {
+		String csSubDeptId = CSDeptService.changeCsSubDeptNameToId(csSubdeptName);
+		Map<String, Object> params = new HashMap<>();
+		params.put("candidateId", candidateId);
+		params.put("csSubDeptId", csSubDeptId);
+		CandidateInterview  candidateInfo= interviewMapper.queryNewInterviewByCandidateId(params);
+		return candidateInfo;
 	}
 
 }

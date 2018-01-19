@@ -13,6 +13,7 @@
 		<result property="fatherInterviewId" column="FATHER_INTERVIEW_ID" javaType="String" />
 		<result property="interviewSerial" column="INTERVIEW_SERIAL" javaType="String" />
 		<result property="projectName" column="PROJECT_NAME" javaType="String" />
+		<result property="mark" column="MARK" javaType="String" />
 	</resultMap>
 	
 	<insert id="addInterview" parameterType="com.pmo.dashboard.entity.CandidateInterview">
