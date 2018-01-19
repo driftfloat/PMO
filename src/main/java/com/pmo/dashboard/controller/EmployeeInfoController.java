@@ -416,7 +416,7 @@ public class EmployeeInfoController
 
         String csSubDeptId = null;
        
-        if(("".equals(csSubDeptName) || csSubDeptName == null) &&
+        /*if(("".equals(csSubDeptName) || csSubDeptName == null) &&
                 ("".equals(csBuName) || csBuName == null)){
             if("1".equals(userType)|| "2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
                 csBuName = csBuNames[0];
@@ -426,7 +426,7 @@ public class EmployeeInfoController
             	csSubDeptName = cSDepts.get(0).getCsSubDeptName();               	             
             }
             
-        }	
+        }*/	
         
         int countPage = 0;
         
@@ -436,19 +436,25 @@ public class EmployeeInfoController
         //RM登录只能查看自己交付部
         if("5".equals(userType)){
         	if(user.getCsdeptId()!=null && !"".equals(user.getCsdeptId())){
-        		employeePageCondition.setCsSubDept(user.getCsdeptId().split(","));
+        		if(csSubDeptName==null || "".equals(csSubDeptName)){
+        			employeePageCondition.setCsSubDept(user.getCsdeptId().split(","));
+        		}
         	}
         }
         //事业部只能查看事业部的
         if("1".equals(userType) || "2".equals(userType)){
-        	if(user.getCsdeptId()!=null && !"".equals(user.getCsdeptId())){
-        		employeePageCondition.setCsSubDept(user.getCsdeptId().split(","));
+        	if(user.getBu()!=null && !"".equals(user.getBu())){
+        		if(csBuName==null || "".equals(csBuName)){
+        			employeePageCondition.setCsbuNames(user.getBu().split(","));
+        		}
         	}
         }
         //交付部只能查看交付部的
         if("3".equals(userType) || "4".equals(userType) || "5".equals(userType)){
         	if(user.getCsdeptId()!=null && !"".equals(user.getCsdeptId())){
-        		employeePageCondition.setCsSubDept(user.getCsdeptId().split(","));
+        		if(csSubDeptName==null || "".equals(csSubDeptName)){
+        			employeePageCondition.setCsSubDept(user.getCsdeptId().split(","));
+        		}
         	}
         }
         if("".equals(pageState) || pageState == null){

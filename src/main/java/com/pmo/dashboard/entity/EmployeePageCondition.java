@@ -15,9 +15,16 @@ public class EmployeePageCondition extends PageCondition
     private int pageRecordsNum;
     
     private String[] csSubDept;
+    private String[] csbuNames;
     
     
-	
+    
+	public String[] getCsbuNames() {
+		return csbuNames;
+	}
+	public void setCsbuNames(String[] csbuNames) {
+		this.csbuNames = csbuNames;
+	}
 	public String[] getCsSubDept() {
 		return csSubDept;
 	}

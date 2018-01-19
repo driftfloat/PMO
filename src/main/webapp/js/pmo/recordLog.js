@@ -156,6 +156,7 @@ function loadDu(){
 					$("#csSubDept").attr("disabled","disabled");
 				}else if(csSubs.length>1){
 					$("#csSubDept").empty();
+					$("#csSubDept").append("<option value=''>--Option--</option>");
 					for(var i = 0;i<csSubs.length;i++){
 						$("#csSubDept").append("<option value='"+csSubs[i].csSubDeptId+"'>"+csSubs[i].csSubDeptName+"</option>");
 					}
@@ -181,6 +182,7 @@ function loadCSBu(result){
 	    		   $("#csBu").attr("disabled","disabled");
 	    	   }else if(csBuNames.length>1){
 	    		   $("#csBu").empty();
+	    		   $("#csBu").append("<option value=''>--Option--</option>");
 	    		   for(var i = 0;i<csBuNames.length;i++){
 						$("#csBu").append("<option>"+csBuNames[i]+"</option>");
 						$('#csBu').val(result.pageInfo.csbuName);
