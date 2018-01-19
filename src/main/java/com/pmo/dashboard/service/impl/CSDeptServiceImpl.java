@@ -51,4 +51,18 @@ public class CSDeptServiceImpl implements CSDeptService
 		return csDepts;
 	}
 
+	@Override
+	public String changeCsSubDeptNameToId(String csSubdeptName) {
+		List<CSDept> allCSDept = queryAllCSDept();
+		String csSubdeptId = null;
+		for (CSDept csDept : allCSDept) {
+			if(csDept.getCsSubDeptName().equals(csSubdeptName)){
+				csSubdeptId = csDept.getCsSubDeptId();
+				break;
+			}
+		}
+		return csSubdeptId;
+	}
+
+
 }

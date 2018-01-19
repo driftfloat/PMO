@@ -363,7 +363,20 @@ function loadCandidateList(pageState)
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 								"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>Resume</a>" +
 						"</td>").appendTo(tr);
-					}else{
+					}else if(result.data[i].interviewStatus == '面试确认'){
+						$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
+								"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+									"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>"+
+								 "<a href='javascript:void(0); ' class='btn btn-info btn-small' " +
+									"onclick=interviewConfirm('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].csSubdeptName+"')>Reconfirm</a>" +
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+									"onclick=backCandidateToDept('"+result.data[i].candidateId+"')>Back</a>" +
+								"<a href='javascript:void(0); ' class='btn btn-info btn-small' " +
+									"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FeedBack</a>" +
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+									"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>Resume</a>" +
+							"</td>").appendTo(tr);
+						}else{
 						$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
 								"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
 									"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>"+
@@ -380,6 +393,19 @@ function loadCandidateList(pageState)
 						$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
 								"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
 										"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>"+
+									"<a href='javascript:void(0);' class='btn btn-info btn-small' " +					
+										"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>Status</a>" +
+									"<a href='javascript:void(0); ' class='btn btn-info btn-small' " +
+										"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FeedBack</a>" +
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
+									"onclick=downLoadCandidateResume('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>Resume</a>" +
+							"</td>").appendTo(tr);
+					}else if(result.data[i].interviewStatus == '面试确认'){
+						$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
+								"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
+										"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>"+
+								    "<a href='javascript:void(0); ' class='btn btn-info btn-small' " +
+										"onclick=interviewConfirm('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].csSubdeptName+"')>Reconfirm</a>" +
 									"<a href='javascript:void(0);' class='btn btn-info btn-small' " +					
 										"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>Status</a>" +
 									"<a href='javascript:void(0); ' class='btn btn-info btn-small' " +

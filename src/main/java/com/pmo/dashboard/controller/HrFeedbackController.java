@@ -11,9 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pmo.dashboard.entity.CandidateInfo;
+import com.pmo.dashboard.entity.CandidateInterview;
 import com.pmo.dashboard.entity.HrFeedback;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Utils;
+import com.pom.dashboard.service.CandidateService;
 import com.pom.dashboard.service.HrFeedbackService;
 
 @Controller
@@ -23,6 +26,7 @@ public class HrFeedbackController
     @Resource
     private HrFeedbackService hrFeedbackservice;
     
+    @Resource CandidateService candidateService;
     
     @RequestMapping("/hrFinalFeedBack")
     @ResponseBody
@@ -50,5 +54,31 @@ public class HrFeedbackController
     	List<HrFeedback> list=hrFeedbackservice.hrfeedbackQuery(candidateId);
     	
     	return hrFeedbackservice.hrfeedbackQuery(candidateId);
+    }
+    
+    @RequestMapping("/confirmInterviewDate")
+    @ResponseBody
+    public Boolean confirmInterviewDate(final HttpServletRequest request){
+		String confirmDateType = request.getParameter("confirmDateType");
+		String mark = request.getParameter("newDate");
+		String interviewId = request.getParameter("interviewId");
+		String candidateId = request.getParameter("candidateId");
+		CandidateInfo candidateInfo = candidateService.queryCandidateForId(candidateId);
+		CandidateInterview candidateInterview = candidateService.queryCandidateInterviewById(interviewId);
+		if (candidateInfo != null && candidateInfo.getInterviewStatus().equals("6")) {
+			if (confirmDateType.equals("确认") ) {
+				candidateInfo.setInterviewStatus("2");
+				candidateInterview.setMark("");
+			} else if (confirmDateType.equals("取消")){
+				candidateInfo.setInterviewStatus("7");
+				candidateInterview.setMark(mark);
+			}
+		}
+		
+		boolean updateMark = candidateService.updateCandidateInterviewMark(candidateInterview);
+
+		boolean updateStatus = candidateService.updateCandidateInterviewStatus(candidateInfo);
+		
+		return updateMark && updateStatus;
     }
 }

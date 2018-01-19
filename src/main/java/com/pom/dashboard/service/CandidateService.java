@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.pmo.dashboard.entity.CandidateInfo;
+import com.pmo.dashboard.entity.CandidateInterview;
 import com.pmo.dashboard.entity.CandidatePush;
 
 public interface CandidateService
@@ -69,4 +70,9 @@ public interface CandidateService
 	List<CandidateInfo> queryBlackList(CandidateInfo candidate);
 	
 	int queryBlackListCount(CandidateInfo candidate);
+	
+	CandidateInterview queryCandidateInterviewById(String interviewId);
+	
+	boolean updateCandidateInterviewMark(CandidateInterview candidateInterview);
+
 }

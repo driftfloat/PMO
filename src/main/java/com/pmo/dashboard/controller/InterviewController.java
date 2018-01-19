@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmo.dashboard.entity.CandidateInfo;
+import com.pmo.dashboard.entity.CandidateInterview;
 import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.HSBCDept;
 import com.pmo.dashboard.entity.PageCondition;
@@ -128,5 +129,14 @@ public class InterviewController {
 
 		HSBCDept hSBCDept = interviewService.queryHSBCSubDeptById(hsbcSubDeptId);
 		return hSBCDept;
+	}
+	
+	@RequestMapping("/getNewInterviewRecord")
+	@ResponseBody
+	public CandidateInterview getNewInterviewRecord(HttpServletRequest request, HttpServletResponse response) {
+		String candidateId = request.getParameter("candidateId");
+		String csSubdeptName = request.getParameter("csSubdeptName");
+		CandidateInterview candidateInterview = interviewService.getNewInterviewRecord(candidateId, csSubdeptName);
+		return candidateInterview;
 	}
 }

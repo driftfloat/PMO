@@ -14,8 +14,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.pmo.dashboard.dao.CandidateInterviewMapper;
 import com.pmo.dashboard.dao.CandidateMapper;
 import com.pmo.dashboard.entity.CandidateInfo;
+import com.pmo.dashboard.entity.CandidateInterview;
 import com.pmo.dashboard.entity.CandidatePush;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Utils;
@@ -38,6 +40,9 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Resource
 	private CandidateMapper candidateMapper;
+	
+	@Resource 
+	private CandidateInterviewMapper candidateInterviewMapper;
 
 	@Override
 	public List<CandidateInfo> queryCandidateList(CandidateInfo candidate) {
@@ -156,7 +161,7 @@ public class CandidateServiceImpl implements CandidateService {
 					candidateInfo.setEducation(education);
 					
 					String interviewStatus = candidateInfo.getInterviewStatus();
-					if ("0".equals(interviewStatus)){
+					/*if ("0".equals(interviewStatus)){
 						interviewStatus = "未推送";
 					}else if ("1".equals(interviewStatus)){
 						interviewStatus = "已推送";
@@ -166,8 +171,8 @@ public class CandidateServiceImpl implements CandidateService {
 						interviewStatus = "面试完成";
 					}else if ("4".equals(interviewStatus)){
 						interviewStatus = "已退回";
-					}
-					/*if ("0".equals(interviewStatus)){
+					}*/
+					if ("0".equals(interviewStatus)){
 						interviewStatus = "未推送";
 					}else if ("1".equals(interviewStatus)){
 						interviewStatus = "已推送";
@@ -179,7 +184,11 @@ public class CandidateServiceImpl implements CandidateService {
 						interviewStatus = "面试失败";
 					}else if ("5".equals(interviewStatus)){
 						interviewStatus = "已退回";
-					}*/
+					}else if ("6".equals(interviewStatus)){
+						interviewStatus = "面试确认";
+					}else if ("7".equals(interviewStatus)){
+						interviewStatus = "重安排面试";
+					}
 					candidateInfo.setInterviewStatus(interviewStatus);
 					
 					@SuppressWarnings("rawtypes")
@@ -647,6 +656,17 @@ public class CandidateServiceImpl implements CandidateService {
 	@Override
 	public int queryBlackListCount(CandidateInfo candidate) {
 		return candidateMapper.queryBlackListCount(candidate);
+	}
+
+	@Override
+	public CandidateInterview queryCandidateInterviewById(String interviewId) {
+		return candidateInterviewMapper.queryCandidateInterviewById(interviewId);
+	}
+
+	@Override
+	public boolean updateCandidateInterviewMark(CandidateInterview candidateInterview) {
+		
+		return candidateInterviewMapper.updateCandidateInterviewMark(candidateInterview);
 	}
 
 

@@ -11,4 +11,5 @@ public interface CSDeptService
     List<CSDept> queryAllCSSubDeptName();
     List<CSDept> queryCSSubDeptNameByCsBuName(String csBuName);
     List<CSDept>  queryCSDeptByIds(String[] csSubDeptIds);
+	String changeCsSubDeptNameToId(String csSubdeptName);
 }

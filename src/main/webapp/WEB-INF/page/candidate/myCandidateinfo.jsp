@@ -504,6 +504,71 @@ var path='<%=path%>';
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="hrInterviewConfirmbox" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="box-header well" data-original-title="">
+						<h2>
+							<i class="glyphicon glyphicon-user"></i> HR Interview Confirm
+						</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-round btn-default  btn-minimize ">
+								<i class="glyphicon glyphicon-chevron-up"></i>
+							</a> 
+							<a class="btn btn-round btn-default" href="#" data-dismiss="modal">
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</div>
+					</div>
+					<div class="box-content">
+						<input type="hidden" name="hrConfirmCandidateId" id="hrConfirmCandidateId"
+							 />
+					   <input type="hidden" name="hrConfirmInterviewId" id="hrConfirmInterviewId"
+							 />
+						<div class="group">
+							<label class="col-sm-2 control-label " style="width:30%;">Candidate Name:</label>
+							<div class="col-sm-4" style="width:60%;">
+								<input type="text" class="form-control"  name="hrConfirmCandidateNameId" id="hrConfirmCandidateNameId" />
+							</div>
+						</div>
+						<br/><br/><br/>
+						<div class="group">
+							<label class="col-sm-2 control-label" style="width:30%;">Interview Date:</label>
+							<div class="col-sm-4" style="width:60%;">
+								<input type="text" class="form-control"  name="interviewDate" id="interviewDate" />
+							</div>
+						</div>
+						<br/><br/><br/>
+						
+						<div class="group">
+							<label class="col-sm-2 control-label" style="width:30%;">Interview Confirm:</label>
+							<div class="col-sm-4" style="width:60%;">
+								<select class="form-control"  id="confirmDate" name="confirmDate" data-bv-group=".group">
+									<option value="confirm">确认</option>
+									<option value="change">取消</option> -->
+								</select>
+							</div>
+						</div>
+						<br/><br/><br/>
+						
+						<div class="group" style="display: none" id = "newInterviewDate">
+							<label class="col-sm-2 control-label" style="width:30%;">New Interview Date:</label>
+							<textarea id="newDate" class="form-control" style="margin:15px;width:60%;" rows="6"></textarea>
+						</div>
+						<div class="center">
+							<a class="btn btn-success" href="#"
+								onClick="confirmInterviewDate()"> 
+								<i class="glyphicon glyphicon-ok icon-white"></i> Confirm
+							</a> 
+							<a class="btn btn-info" href="#" data-dismiss="modal"> 
+								<i class="glyphicon glyphicon-remove icon-white"></i> Cancel
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<c:import url="/service/manage/footer" />
 	</div>	
 	<!--/.fluid-container-->
