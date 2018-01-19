@@ -105,11 +105,13 @@
 	    SELECT 
 	    DISTINCT
         z1.EMPLOYEE_ID,
+        z1.CS_SUBDEPT_ID,
         z1.HSBC_STAFF_ID,
         z1.E_HR,z1.LOB,
         z1.STAFF_NAME,
         z1.LN,
         z1.CS_SUBDEPT_NAME,
+        z1.CS_BU_NAME,
         z1.RESOURCE_STATUS,
         z1.RM_USER_ID,
         z1.NICKNAME,
@@ -117,11 +119,13 @@
         from(
         SELECT 
         e.EMPLOYEE_ID,
+        e.CS_SUBDEPT_ID,
         e.HSBC_STAFF_ID,
         e.E_HR,e.LOB,
         e.STAFF_NAME,
         e.LN,
         d.CS_SUBDEPT_NAME,
+        d.CS_BU_NAME,
         e.RESOURCE_STATUS,
         e.RM_USER_ID,
         u.NICKNAME,
@@ -148,6 +152,23 @@
 			<if test="staffName != null and staffName != ''">
 				AND z1.STAFF_NAME LIKE '%${staffName}%' 
 			</if>
+			<if test="rmUserId != null and rmUserId != ''">
+				AND z1.RM_USER_ID = #{rmUserId}
+			</if>
+			<if test="csbuName != null and csbuName != ''">
+				AND z1.CS_BU_NAME = #{csbuName}
+			</if>
+			<if test="csSubDeptName != null and csSubDeptName != ''">
+				AND z1.CS_SUBDEPT_NAME = #{csSubDeptName}
+			</if>
+			<if test="csSubDept != null and csSubDept != ''">
+			    AND z1.CS_SUBDEPT_ID in
+				<foreach collection="csSubDept" item="item" index="index" 
+                   open="(" separator="," close=")">
+                   #{item}
+                </foreach>
+			</if>
+			
         LIMIT #{currentPage},#{pageRecordsNum};
 	</select>
 	
@@ -157,11 +178,13 @@
         from(
         SELECT 
         e.EMPLOYEE_ID,
+        e.CS_SUBDEPT_ID,
         e.HSBC_STAFF_ID,
         e.E_HR,e.LOB,
         e.STAFF_NAME,
         e.LN,
         d.CS_SUBDEPT_NAME,
+        d.CS_BU_NAME,
         e.RESOURCE_STATUS,
         e.RM_USER_ID,
         u.NICKNAME,
@@ -187,6 +210,22 @@
 			</if>
 			<if test="staffName != null and staffName != ''">
 				AND z1.STAFF_NAME LIKE '%${staffName}%' 
+			</if>
+			<if test="rmUserId != null and rmUserId != ''">
+				AND z1.RM_USER_ID = #{rmUserId}
+			</if>
+			<if test="csbuName != null and csbuName != ''">
+				AND z1.CS_BU_NAME = #{csbuName}
+			</if>
+			<if test="csSubDeptName != null and csSubDeptName != ''">
+				AND z1.CS_SUBDEPT_NAME = #{csSubDeptName}
+			</if>
+			<if test="csSubDept != null and csSubDept != ''">
+			    AND z1.CS_SUBDEPT_ID in
+				<foreach collection="csSubDept" item="item" index="index" 
+                   open="(" separator="," close=")">
+                   #{item}
+                </foreach>
 			</if>
 	</select>
 	

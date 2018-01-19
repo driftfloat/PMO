@@ -89,6 +89,25 @@ var path='<%=path%>';
 									
 									<input id="userId" name="userId" type="hidden" value="${loginUser.userId}"/>
 										<div class="group">
+										<label class="col-lg-2 control-label">BU</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="csBu" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="csBu" data-bv-group=".group">
+												<option value="">-- Option--</option>
+											</select>
+										</div>
+										</div>
+										<div class="group">
+										<label class="col-lg-2 control-label">DU</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="csSubDept" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="csSubDept" data-bv-group=".group">
+												<option value="">-- Option--</option>
+											</select>
+										</div>
+										</div>
+										</br></br></br>
+										<div class="group">
 											<label class="col-sm-2 control-label">LOB</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="lob"

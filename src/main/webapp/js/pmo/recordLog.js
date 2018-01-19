@@ -1,11 +1,11 @@
 
 $(function(){
-	
+	loadDu();
 	loadEmployeeList();
 	
 })
 
-function loadEmployeeList(pageState){
+function loadEmployeeList(pageState,csSubDeptName,csBuName){
 
 	var lob = $("#lob").val();
 	var hsbcStaffId = $("#hsbcStaffId").val();
@@ -20,7 +20,7 @@ function loadEmployeeList(pageState){
 		url:path+"/service/employeeInfo/queryList",
 		dataType:"json",
 		async:true,
-		data:{"staffName":staffName,"pageState":pageState,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob,"pageRecordsNum":pageRecordsNum},
+		data:{"csBuName":csBuName,"csSubDeptName":csSubDeptName,"staffName":staffName,"pageState":pageState,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob,"pageRecordsNum":pageRecordsNum},
 		cache:false,
 		type:"post",
 		success:function(result){
@@ -121,6 +121,7 @@ function loadEmployeeList(pageState){
 			if(pageNum == 1){
 				$("#previousPage").removeAttr("onclick");
 			}
+			loadCSBu(result);
 			
 		}
 		
@@ -133,8 +134,78 @@ function viewLogList(employeeId){
 	$("#viewLogForm").submit();
 }
 
+function loadDu(){
+	$.ajax({
+		url:path+'/service/csDept/queryAllCSSubDept',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			var userType = result.user.userType;
+			
+			var csSubs = result.csSubDepts;
+			if(userType=='0'){
+				for(var i = 0;i<result.data.length;i++){
+					$("#csSubDept").append("<option value='"+result.data[i].csSubDeptId+"'>"+result.data[i].csSubDeptName+"</option>");
+				}
+			}else{
+				if(csSubs.length==1){
+					$("#csSubDept").append("<option value='"+csSubs[0].csSubDeptId+"'>"+csSubs[0].csSubDeptName+"</option>");
+					$('#csSubDept').val(csSubs[0].csSubDeptId);
+					$("#csSubDept").attr("disabled","disabled");
+				}else if(csSubs.length>1){
+					$("#csSubDept").empty();
+					for(var i = 0;i<csSubs.length;i++){
+						$("#csSubDept").append("<option value='"+csSubs[i].csSubDeptId+"'>"+csSubs[i].csSubDeptName+"</option>");
+					}
+				}
+			}
+		}
+	})
+}
+
+function loadCSBu(result){
+	var csBuNames = result.csBuNames;
+	var userType = result.user.userType;
+	var url = path+'/json/csBuName.json'
+	$.getJSON(url,  function(data) {
+		   $("#csBu").empty();
+		   $("#csBu").append("<option value=''>--Option--</option>");
+	       $.each(data, function(i, item) {
+	    	   $("#csBu").append("<option>"+item.name+"</option>");
+	       })
+	       if(userType=='1' || userType=='2' || userType=='3' || userType=='4'||userType=='5'){
+	    	   if(csBuNames.length==1){   		   
+	    		   $('#csBu').val(result.user.bu);
+	    		   $("#csBu").attr("disabled","disabled");
+	    	   }else if(csBuNames.length>1){
+	    		   $("#csBu").empty();
+	    		   for(var i = 0;i<csBuNames.length;i++){
+						$("#csBu").append("<option>"+csBuNames[i]+"</option>");
+						$('#csBu').val(result.pageInfo.csbuName);
+					}
+	    	   }
+			}else{
+				$('#csBu').val(result.pageInfo.csbuName);
+			}
+	});
+}
+
 $('#searchBtn').bind("click", function(){
-	loadEmployeeList("");
+	var csBuName = $("#csBu").find("option:selected").text();
+    //alert(csBuName);
+	if(csBuName.indexOf('Option')!=-1){
+		csBuName = "";
+	}
+	
+	var csSubDeptName = $("#csSubDept").find("option:selected").text();
+	
+	if(csSubDeptName.indexOf('Option')!=-1){
+		csSubDeptName = "";
+	}
+	
+	loadEmployeeList("",csSubDeptName,csBuName);
 });
 
 
