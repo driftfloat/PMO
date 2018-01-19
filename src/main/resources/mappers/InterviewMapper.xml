@@ -48,4 +48,15 @@
 			where a.CANDIDATE_ID = b.CANDIDATE_ID )
 			
 	</select>
+	
+	<select id="queryNewInterviewByCandidateId" parameterType="java.util.HashMap" resultMap="interviewMap">
+		select *  
+		from  t_candidate_interview a
+		where 
+			CANDIDATE_ID = #{candidateId}
+			and INTERVIEW_DATE = 
+			(select max(INTERVIEW_DATE) from t_candidate_interview b  
+			where a.CANDIDATE_ID = b.CANDIDATE_ID and b.CSSUBDEPT = #{csSubDeptId}) 
+	</select>
+	
 </mapper>

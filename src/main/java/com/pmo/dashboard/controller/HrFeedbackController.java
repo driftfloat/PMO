@@ -26,7 +26,8 @@ public class HrFeedbackController
     @Resource
     private HrFeedbackService hrFeedbackservice;
     
-    @Resource CandidateService candidateService;
+    @Resource 
+    private CandidateService candidateService;
     
     @RequestMapping("/hrFinalFeedBack")
     @ResponseBody
