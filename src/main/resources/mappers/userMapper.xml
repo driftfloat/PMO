@@ -10,6 +10,7 @@
 		<result property="userType" column="USER_TYPE" javaType="String" />
 		<result property="csdeptId" column="CSDEPT_ID" javaType="String" />
 		<result property="bu" column="BU" javaType="String" />
+		<result property="loginStatus" column="LOGIN_STATUS" jdbcType="VARCHAR" />
 	</resultMap>
 	
 	
@@ -55,6 +56,9 @@
       <if test="bu != null" >
         BU,
       </if>
+      <if test="loginStatus != null" >
+        LOGIN_STATUS,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -78,6 +82,9 @@
       <if test="bu != null" >
         #{bu,jdbcType=VARCHAR},
       </if>
+      <if test="loginStatus != null" >
+        #{loginStatus,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   
@@ -90,6 +97,36 @@
 		update t_user set USER_NAME = #{userName},NICKNAME = #{nickname},USER_TYPE = #{userType},BU = #{bu},CSDEPT_ID = #{csdeptId} WHERE USER_ID = #{userId}
 	</update>
 	<!-- Felix, End -->
-  
+   
+     <update id="update" parameterType="com.pmo.dashboard.entity.User" >
+     update t_user
+     <set>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        NICKNAME = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        USER_TYPE = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="csdeptId != null" >
+        CSDEPT_ID = #{csdeptId,jdbcType=VARCHAR},
+      </if>
+      <if test="bu != null" >
+        BU = #{bu,jdbcType=VARCHAR},
+      </if>
+      <if test="loginStatus != null" >
+        LOGIN_STATUS = #{loginStatus,jdbcType=VARCHAR},
+      </if>
+     </set>
+     where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
   
 </mapper>

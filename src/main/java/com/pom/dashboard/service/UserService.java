@@ -27,4 +27,6 @@ public interface UserService {
 		
 	User queryUserById(String userId);
 	// Felix, 180105, End
+	
+	boolean update(User user);
 }
