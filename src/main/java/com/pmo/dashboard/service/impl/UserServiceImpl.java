@@ -62,5 +62,12 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return userMapper.queryUserById(userId);
 	}
+	@Override
+	public boolean update(User user) {
+		if(userMapper.update(user)>0){
+            return true;
+        }
+        return false;
+	}
 
 }

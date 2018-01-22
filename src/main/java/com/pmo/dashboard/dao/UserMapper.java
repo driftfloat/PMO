@@ -29,5 +29,7 @@ public interface UserMapper {
 		
 	User queryUserById(String userId);
 	// Felix, 180105, End
+	
+	int update(User user);
 
 }

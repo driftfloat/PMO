@@ -78,9 +78,12 @@ function login(e){
 					if (data=="0") {
 						 window.location.href = path+"/service/user/welcome.html";
 					}
-					else {
+					else if(data=="1"){
 						//$("#loginAlert").attr("display")
 						$("#loginAlert").html('Incorrect username or password.').show();
+						$("#loginAlert").css({color:"red"});
+					}else if(data=="2"){
+						$("#loginAlert").html('Incorrect userstatus.').show();
 						$("#loginAlert").css({color:"red"});
 					}
 				}

@@ -73,8 +73,14 @@ public class UserController {
 	@ResponseBody
 	public String login(String userName,String password,HttpSession session,Model model){
 		User user = userService.login(userName,password);
-		
 		if(user!=null){
+			try{
+				if(!"0".equals(user.getLoginStatus())){
+					return "2";
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 			//登录成功 ，将user放入session，跳转到首页
 			session.setAttribute("loginUser", user);
 			return "0";

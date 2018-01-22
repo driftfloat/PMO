@@ -35,6 +35,19 @@ public class User {
 	private String du;
 	// Felix, 180105, End
 	
+	//用户状态(0:可登录,1:不可登录)
+	private String loginStatus;
+	
+	
+	
+	public String getLoginStatus() {
+		return loginStatus;
+	}
+
+	public void setLoginStatus(String loginStatus) {
+		this.loginStatus = loginStatus;
+	}
+
 	public String getDu() {
 		return du;
 	}

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.pmo.dashboard.entity.Interviewer;
 import com.pmo.dashboard.entity.User;
 import com.pom.dashboard.service.InterviewerService;
+import com.pom.dashboard.service.UserService;
 
 @Controller
 @RequestMapping(value="/interviewer")
@@ -30,6 +31,9 @@ public class InterviewerController
     
     @Resource
     private InterviewerService interviewerService;
+    
+    @Resource
+    private UserService userService;
    
     @RequestMapping("/rm")
     public String getCandidate(final HttpServletRequest request,
@@ -110,31 +114,35 @@ public class InterviewerController
     	String status = request.getParameter("status");
     	
     	Interviewer interviewer = new Interviewer();
-    	
-    	
     	interviewer.setEmployeeId(employeeId);
-    	
     	boolean resultFlag = false;
     	
     	if("1".equals(status)){
     		interviewer.setStatus("0");
     		resultFlag = interviewerService.update(interviewer);
+    		User u = new User();
+    		u.setUserId(employeeId);
+    		u.setLoginStatus("1");//不可登录
+    		userService.update(u);
     		return resultFlag;
     	}else{
     		interviewer.setStatus("1");
     		boolean flag1 =  interviewerService.update(interviewer);
-    		
     		Interviewer interviewers = interviewerService.selectInterviewer(employeeId);
-    		interviewers.setEmployeeId(employeeId);
     		boolean flag2=true;
     		User user = interviewerService.selectUser(employeeId);
+    		
     		if("".equals(user)||user==null){
-    		 flag2 = interviewerService.insertInterviewerToUser(interviewers);
+    		 User u = new User();
+    		 u.setUserId(employeeId);
+    		 u.setUserName(interviewers.getEhr());
+    		 u.setNickname(interviewers.getStaffName());
+    		 u.setPassword("123");
+    		 u.setUserType("10");
+    		 u.setCsdeptId(interviewers.getCsSubDeptId());
+    		 u.setLoginStatus("0");//可登录
+    		 flag2 = userService.addUser(u);
     		}
-    		
-    		
-    		
-    		
     		boolean flag = flag1 & flag2;
     		return flag;
     	}
