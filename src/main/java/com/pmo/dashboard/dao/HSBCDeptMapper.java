@@ -15,4 +15,5 @@ public interface HSBCDeptMapper
     public HSBCDept queryDemandHSBCSubDeptById(String hsbcSubDeptId);
     public List<String> queryHSBCSubDeptId(Demand demand);
     public String queryHsbcSubDeptId(Map<String, Object> params);
+	List<HSBCDept> queryAllHSBCDept();
 }

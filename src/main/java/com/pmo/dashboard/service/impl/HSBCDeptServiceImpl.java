@@ -60,4 +60,10 @@ public class HSBCDeptServiceImpl implements HSBCDeptService
         HSBCDept hsbcDept = hsbcDeptMapper.queryDemandHSBCSubDeptById(hsbcSubDeptId);
         return hsbcDept;
     }
+
+	@Override
+	public List<HSBCDept> queryAllHSBCDept() {
+		List<HSBCDept> list = hsbcDeptMapper.queryAllHSBCDept();
+		return list;
+	}
 }

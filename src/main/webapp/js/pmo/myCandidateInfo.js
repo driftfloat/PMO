@@ -367,7 +367,7 @@ function loadCandidateList(pageState)
 						$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
 								"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
 									"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>"+
-								 "<a href='javascript:void(0); ' class='btn btn-info btn-small' " +
+								 "<a href='javascript:void(0); ' class='btn btn-info btn-small' id = 'reconfirm'" +
 									"onclick=interviewConfirm('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].csSubdeptName+"')>Reconfirm</a>" +
 								"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 									"onclick=backCandidateToDept('"+result.data[i].candidateId+"')>Back</a>" +
@@ -404,7 +404,7 @@ function loadCandidateList(pageState)
 						$("<td>"+ result.data[i].csSubdeptName+ "</td>"+
 								"<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
 										"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>"+
-								    "<a href='javascript:void(0); ' class='btn btn-info btn-small' " +
+								    "<a href='javascript:void(0); ' class='btn btn-info btn-small' id = 'reconfirm' " +
 										"onclick=interviewConfirm('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].csSubdeptName+"')>Reconfirm</a>" +
 									"<a href='javascript:void(0);' class='btn btn-info btn-small' " +					
 										"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>Status</a>" +

@@ -85,7 +85,16 @@ public class RmCandidateController {
 	@ResponseBody
 	public Object loadInterviewer(HttpServletRequest request){
 		User user = (User)request.getSession().getAttribute("loginUser");
+		/*
 		List<Employee> list = employeeService.queryEmployeeByCsSubDeptId(user.getCsdeptId());
+		*/
+		List<Employee> list  = new ArrayList<>();
+		String user_type = user.getUserType();
+		if(user.getUserType().equals("0")){
+			 list = employeeService.getAllInterviewer();
+		}else if(user_type.equals("5")||user_type.equals("12")||user_type.equals("14")){
+			list = employeeService.queryEmployeeByCsSubDeptId(user.getCsdeptId());
+		}
 		return list;
 	}
 	
