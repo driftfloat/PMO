@@ -80,6 +80,8 @@ function loadCsBuName(){
 		})
 	})
 }
+
+/*
 function loadCSBu(result){
 	var userType = result.user.userType;
 	var url = path+'/json/csBuName.json'
@@ -92,6 +94,33 @@ function loadCSBu(result){
 	       if(userType=='1' || userType=='2' || userType=='3' || userType=='4'){
 				$('#csBuName').val(result.user.bu);
 				$("#csBuName").attr("disabled","disabled");
+			}
+	});
+}*/
+
+function loadCSBu(result){
+	var csBuNames = result.csBuNames;
+	var userType = result.user.userType;
+	var url = path+'/json/csBuName.json'
+	$.getJSON(url,  function(data) {
+		   $("#csBuName").empty();
+		   $("#csBuName").append("<option value=''>--Option--</option>");
+	       $.each(data, function(i, item) {
+	    	   $("#csBuName").append("<option>"+item.name+"</option>");
+	       })
+	       if(userType=='1' || userType=='2' || userType=='3' || userType=='4'||userType=='5'|| userType=='11'||userType=='12'){
+	    	   if(csBuNames.length==1){   		   
+	    		   $('#csBuName').val(result.user.bu);
+	    		   $("#csBuName").attr("disabled","disabled");
+	    	   }else if(csBuNames.length>1){
+	    		   $("#csBuName").empty();
+	    		   for(var i = 0;i<csBuNames.length;i++){
+						$("#csBuName").append("<option>"+csBuNames[i]+"</option>");
+						$('#csBuName').val(result.csBuName);
+					}
+	    	   }
+			}else{
+				$('#csBuName').val(result.csBuName);
 			}
 	});
 }
@@ -133,7 +162,7 @@ function loadCSSubDept(result){
 				$("#csSubDept").append("<option>"+list[i].csSubDeptName+"</option>");
 			}
 			
-			if(userType=='2' || userType=='3' || userType=='4'){
+			if(userType=='3' || userType=='4' || userType=='5'|| userType=='11'||userType=='12'){
 				if(csSubDeptNames.length==1){
 					$('#csSubDept').val(result.csSubDeptNames[0]);
 					$("#csSubDept").attr("disabled","disabled");
@@ -141,11 +170,11 @@ function loadCSSubDept(result){
 					$("#csSubDept").empty();
 					for(var i = 0;i<csSubDeptNames.length;i++){
 						$("#csSubDept").append("<option>"+csSubDeptNames[i]+"</option>");
-						$('#csSubDept').val(result.pageInfo.csSubDeptName);
+						$('#csSubDept').val(result.csSubDeptName);
 					}
 				}
 			}else{
-				$('#csSubDept').val(result.pageInfo.csSubDeptName);
+				$('#csSubDept').val(result.csSubDeptName);
 				
 			}
 		}
@@ -264,8 +293,15 @@ function loadDemandList(currPage){
 				var td7 = $("<td>"+result.list[i].csSubDept+"</td>");
 				var demandId = result.list[i].demandId;
 				var statusa  = result.list[i].status;
-				if(userType=='5' || userType=='6'){
+				if(userType=='2' || userType=='4' || userType=='6' || userType=='7'  || userType=='9' || userType=='15'){
 					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a></td>");
+				}else if(userType=='13' || userType=='14'){
+					if(result.list[i].csSubDept == result.user.bu){
+						var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate('"+demandId+"','"+statusa+"')>Edit</a></td>");
+					}else{
+						var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a></td>");
+					}
+					
 				}else if(status=='Cancel'||status=='Abort'){
 					
 					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a></td>");
@@ -315,8 +351,8 @@ function loadDemandList(currPage){
 				}
 			});
 			
-            loadCSSubDept(result);			
 			loadCSBu(result);
+            loadCSSubDept(result);			
 		}
 	})
 	

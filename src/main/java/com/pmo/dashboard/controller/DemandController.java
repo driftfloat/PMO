@@ -151,8 +151,8 @@ public class DemandController {
 		  User user = (User) request.getSession().getAttribute("loginUser");
 		  
 	        
-		//woyonde 
 	    List<String>  csSubDeptNames = new ArrayList<String>();   
+	    String csSubDeptName = demand.getCsSubDept();
 	        
 	    List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsdeptId().split(","));
 	        
@@ -164,25 +164,39 @@ public class DemandController {
 		  
 		  
 	     String userType = user.getUserType();
+	     
+	     String[] csBuNames = null;
+			if (user.getBu() != null && user.getBu() != "") {
+	    		csBuNames = user.getBu().split(",");
+	    	}
+	     
 		 if(("".equals(demand.getCsSubDept()) || demand.getCsSubDept() == null) &&
 	                ("".equals(csBuName) || csBuName == null)){
 	            
-	            if("1".equals(userType)|| "2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
-	                csBuName = user.getBu();
+	            if("1".equals(userType)|| "2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)||"5".equals(userType)||"11".equals(userType)||"12".equals(userType)){
+	                csBuName = csBuNames[0];
 	            }
 	            
-	            if("2".equals(userType)|| "3".equals(userType)|| "4".equals(userType)){
-	                demand.setCsDeptName(cSDepts.get(0).getCsSubDeptName());              
+	            if("3".equals(userType)|| "4".equals(userType)|| "5".equals(userType)||"11".equals(userType)||"12".equals(userType)){
+	            	csSubDeptName = cSDepts.get(0).getCsSubDeptName(); 
 	            }
 	            
 	        }
+		 
+		String  csSubdeptId=  csDeptService.changeCsSubDeptNameToId(csSubDeptName);
+		demand.setCsSubDept(csSubdeptId);
+		
 		List<Demand> list = demandService.queryDemandList(demand,pageCondition,csBuName,request);
 		
 		Map<String,Object> result = new HashMap<String,Object>();
+		
+		result.put("csBuName", csBuName);
+		result.put("csSubDeptName", csSubDeptName);
 		result.put("list", list);
 	    result.put("user", user);
 		result.put("pageCondition", pageCondition);
 		result.put("csSubDeptNames", csSubDeptNames);
+        result.put("csBuNames", csBuNames);
 		return result;
 	}
 	
