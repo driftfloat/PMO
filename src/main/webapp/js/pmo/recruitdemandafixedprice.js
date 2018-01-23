@@ -333,10 +333,11 @@ function loadpage(){
 		});
 	        $('#atype').show();
 	        $('#btype').show();
+	        $('#ctype').show();
 	        $('#staffnameEdit').show();
 	        $('#joiningEdit').show();
 	        $('#bgvEdit').show();
-	        $('#donumberEdit').show();
+	        $('#contract').show();
 	        $("#status").bind("click",function(){
 	      		 var result=$("#status").find("option:selected").val();
 	      		 if(result=='Abort'){
@@ -365,10 +366,11 @@ function loadpage(){
     	    $("#status").disabled='true';
     	    $('#atype').show();
 	        $('#btype').show();
+	        $('#ctype').show();
 	        $('#staffnameEdit').show();
 	        $('#joiningEdit').show();
 	        $('#bgvEdit').show();
-	        $('#donumberEdit').show();
+	        $('#contract').show();
 	        
 	}
     if(status=='Delayed'){

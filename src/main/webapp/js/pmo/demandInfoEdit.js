@@ -2,7 +2,7 @@
 $(function(){
 	loadSkillEdit();
 	loadPositionEdit();
-	loadDemandStatusEdit();
+	/*loadDemandStatusEdit();*/
 	loadDepartmentEdit();
 	//loadSubDepartmentEdit();
 	
@@ -116,7 +116,7 @@ function loadPositionEdit(){
 	})
 }
 /*加载status本地json信息*/
-function loadDemandStatusEdit(){
+/*function loadDemandStatusEdit(){
 	var url = path+'/json/demandStatus.json';
 	$.getJSON(url, function(data){
 		$.each(data, function(i, item){
@@ -133,7 +133,7 @@ function loadDemandStatusEdit(){
 	    }
 	});
 	//add by jama 设置状态回显值
-}
+}*/
 
 
 /*加载业务部*/

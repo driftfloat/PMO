@@ -293,7 +293,12 @@ function loadDemandList(currPage){
 				var td7 = $("<td>"+result.list[i].csSubDept+"</td>");
 				var demandId = result.list[i].demandId;
 				var statusa  = result.list[i].status;
+
 				if(userType=='2' || userType=='4' || userType=='6' || userType=='7'  || userType=='9' || userType=='15'){
+
+				var engagementType =result.list[i].engagementType;
+				if(userType=='5' || userType=='6'){
+
 					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a></td>");
 				}else if(userType=='13' || userType=='14'){
 					if(result.list[i].csSubDept == result.user.bu){
@@ -307,7 +312,7 @@ function loadDemandList(currPage){
 					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a></td>");
 
 				}else{
-					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate('"+demandId+"','"+statusa+"')>Edit</a></td>");
+					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail('"+demandId+"','"+statusa+"')>Detail</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Edit</a></td>");
 
 				}
 				td1.appendTo(tr);
@@ -387,10 +392,19 @@ function demandDetail(demandId,statusa){
 }
 
 //add by jama
-function demandDetailUpdate(demandId,statusa){
+function demandDetailUpdate(demandId,statusa,engagementType){
+	
 	$("#demandId").val(demandId);
 	$('#statusa').val(statusa);
-	var url = path+'/service/demand/demandDetailUpdate';
+	if(engagementType=="FixedPrice"){
+		var url = path+'/service/demand/demandDetailUpdate?engagementType=1';
+	}else if(engagementType=="Support"){
+		var url = path+'/service/demand/demandDetailUpdate?engagementType=2';
+	}else{
+		var url = path+'/service/demand/demandDetailUpdate?engagementType=3';
+	}
+	
+	
 	$("#detailForm").attr("action",url);
 	$("#detailForm").submit();
 }
