@@ -123,7 +123,7 @@ public class User {
 	}
 
 	public User(String userId, String userName, String nickname,
-            String password, String userType, String bu, String csDeptId)
+            String password, String userType, String bu, String csDeptId,String loginStatus)
     {
         super();
         this.userId = userId;
@@ -133,6 +133,7 @@ public class User {
         this.userType = userType;
         this.bu = bu;
         this.csdeptId = csDeptId;
+        this.loginStatus = loginStatus;
     }
 
     public User(String userId, String userName, String nickname,

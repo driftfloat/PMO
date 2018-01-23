@@ -292,12 +292,14 @@ function displayPDF(candidateId,resumePath){
 function loadCandidateList(pageState)
 {
 	var candidate = new FormData(document.getElementById("candidateForm"));
+	var pageRecordsNum = $("#pageRecordsNum").find("option:selected").text();
 	if(null != pageState)
 	{
 		candidate.append("pageState",pageState);
 	}
 	candidate.append("currentPage",currentPage);
 	candidate.append("pageCount",pageCount);
+	candidate.append("pageRecNum",pageRecordsNum);
 	$.ajax({
 		url:path+"/service/candidate/queryMyCandidateList",
 		dataType:"json",
@@ -449,3 +451,7 @@ function loadCandidateList(pageState)
 		}
 	})
 }
+
+$("#pageRecordsNum").change(function(){
+	loadCandidateList();
+})

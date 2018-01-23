@@ -12,7 +12,17 @@ public class PageCondition
     private String pageDataCount;
     private String dataCount;
     
-    public String getCurrentPage()
+    private Integer pageRecNum;
+    
+    
+    
+	public Integer getPageRecNum() {
+		return pageRecNum;
+	}
+	public void setPageRecNum(Integer pageRecNum) {
+		this.pageRecNum = pageRecNum;
+	}
+	public String getCurrentPage()
     {
         return currentPage;
     }
