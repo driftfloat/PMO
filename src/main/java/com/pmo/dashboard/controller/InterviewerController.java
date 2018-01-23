@@ -131,9 +131,9 @@ public class InterviewerController
     		Interviewer interviewers = interviewerService.selectInterviewer(employeeId);
     		boolean flag2=true;
     		User user = interviewerService.selectUser(employeeId);
-    		
+    		User u  = null;
     		if("".equals(user)||user==null){
-    		 User u = new User();
+    		 u = new User();
     		 u.setUserId(employeeId);
     		 u.setUserName(interviewers.getEhr());
     		 u.setNickname(interviewers.getStaffName());
@@ -142,6 +142,11 @@ public class InterviewerController
     		 u.setCsdeptId(interviewers.getCsSubDeptId());
     		 u.setLoginStatus("0");//可登录
     		 flag2 = userService.addUser(u);
+    		}else{
+    		 u = new User();
+    		 u.setLoginStatus("0");//可登录
+    		 u.setUserId(employeeId);
+    		 userService.update(u);
     		}
     		boolean flag = flag1 & flag2;
     		return flag;
