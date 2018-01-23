@@ -228,7 +228,15 @@ var path='<%=path%>';
 											</ul>
 										</div>
 										<div style="max-width:400px;float:right;margin-top:30px;">
-										<b><span id="currentPage"></span> / <span id="pageCount"></span></b>
+										<b><span id="currentPage"></span> / <span id="pageCount"></span>
+										<select class="pagination pagination-centered"	name="pageRecNum" data-bv-notempty
+													data-bv-notempty-message="please select  pageRecordsNum"
+													id="pageRecordsNum" data-bv-group=".group">
+													<option value="10">10</option>
+													<option value="20">20</option>
+													<option value="50">50</option>
+												</select>
+										</b>
 										</div>
 									</div>
 								</form>

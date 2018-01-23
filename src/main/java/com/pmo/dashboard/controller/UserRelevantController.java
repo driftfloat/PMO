@@ -77,7 +77,7 @@ public class UserRelevantController {
         boolean resultFlag = false;
         //字段校验
         if(checkField(eHr,name,type,bu,du)){
-        	User user = new User(userId,eHr,name,"123", type, bu.substring(0, bu.length()-1), du.substring(0, du.length()-1));
+        	User user = new User(userId,eHr,name,"123", type, bu.substring(0, bu.length()-1), du.substring(0, du.length()-1),"0");
             try{
                 resultFlag = userService.addUser(user);
             }catch(Exception e){

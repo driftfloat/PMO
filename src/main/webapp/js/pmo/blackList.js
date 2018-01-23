@@ -144,12 +144,14 @@ function updateStatus(){
 function loadBlackList(pageState)
 {
 	var candidate = new FormData(document.getElementById("blackListForm"));
+	var pageRecordsNum = $("#pageRecordsNum").find("option:selected").text();
 	if(null != pageState)
 	{
 		candidate.append("pageState",pageState);
 	}
 	candidate.append("currentPage",currentPage);
 	candidate.append("pageCount",pageCount);
+	candidate.append("pageRecNum",pageRecordsNum);
 	$.ajax({
 		url:path+"/service/candidate/queryBlackList",
 		dataType:"json",
@@ -228,3 +230,7 @@ function displayPDF(candidateId,resumePath){
 	$("#candidateId").val(candidateId);
 	$("#editForm").submit();
 }
+
+$("#pageRecordsNum").change(function(){
+	loadBlackList();
+})
