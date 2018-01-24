@@ -145,6 +145,7 @@ function quXiao(employeeId,status)
 
 /*根据条件和当前页面加载查询到的信息*/
 function loadInterviewerList(currPage){
+	var pageRecordsNum = $("#pageRecordsNum").find("option:selected").text();
 	var hsbcStaffId= $("#hsbcStaffId").val();
 	var ehr= $("#ehr").val();
 	var staffName= $("#staffName").val();
@@ -165,7 +166,7 @@ function loadInterviewerList(currPage){
 		cache:false,
 		type:"post",
 		data:{"hsbcStaffId":hsbcStaffId,"ehr":ehr,"staffName":staffName,"lob":lob,"staffRegion":location,
-			"skill":skill,"role":role,"experienceYearas":experience_years,"status":interviewerStatus,"csSubDeptId":du,"currPage":currPage},
+			"skill":skill,"role":role,"experienceYearas":experience_years,"status":interviewerStatus,"csSubDeptId":du,"currPage":currPage,"pageRecNum":pageRecordsNum},
 		success:function(result){
 			if(result.list.length > 0){
 				$("#exportExcel").removeAttr("disabled");
@@ -253,7 +254,9 @@ function loadInterviewerList(currPage){
 	
 }
 
-
+$("#pageRecordsNum").change(function(){
+	loadInterviewerList();
+})
 
 
 

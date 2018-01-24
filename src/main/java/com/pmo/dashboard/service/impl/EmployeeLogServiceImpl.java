@@ -57,9 +57,9 @@ public class EmployeeLogServiceImpl implements EmployeeLogService{
 	}
 
 	@Override
-	public int countEmployeeLogList(EmployeeLogPageCondition employeeLogPageCondition) {
-		int countAll = employeeLogMapper.countEmployeeLogList(employeeLogPageCondition);
-		int pageRecordsNum = employeeLogPageCondition.getPageRecordsNum();
+	public int countEmployeeLogList(EmployeeLogPageCondition employeeLog) {
+		int countAll = employeeLogMapper.countEmployeeLogList(employeeLog);
+		int pageRecordsNum = employeeLog.getPageRecordsNum();
 		int pageNumber = 0;
 
 		if (countAll % pageRecordsNum == 0) {
@@ -71,8 +71,8 @@ public class EmployeeLogServiceImpl implements EmployeeLogService{
 	}
 
 	@Override
-	public List<EmployeeLog> queryEmployeeLogList(EmployeeLogPageCondition employeeLogPageCondition) {
-		return employeeLogMapper.queryEmployeeLogList(employeeLogPageCondition);
+	public List<EmployeeLog> queryEmployeeLogList(EmployeeLogPageCondition employeeLog) {
+		return employeeLogMapper.queryEmployeeLogList(employeeLog);
 	}
 
 

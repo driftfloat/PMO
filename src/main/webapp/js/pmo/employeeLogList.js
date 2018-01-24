@@ -9,13 +9,16 @@ function loadEmployeeLogList(pageState){
 	
 	var pageState = pageState;
 	var employeeId = $('#employeeId').val();
+	var projectStatus = $('#projectStatus').val();
+	var contractStatus = $('#contractStatus').val();
+	var levelStatus = $('#levelStatus').val();
 	var pageRecordsNum = $("#pageRecordsNum").find("option:selected").text();
 	
 	$.ajax({
 		url:path+"/service/employee/queryEmployeeLogByID",
 		dataType:"json",
 		async:true,
-		data:{"employeeID":employeeId,"pageState":pageState,"pageRecordsNum":pageRecordsNum},
+		data:{"levelStatus":levelStatus,"contractStatus":contractStatus,"projectStatus":projectStatus,"employeeId":employeeId,"pageState":pageState,"pageRecordsNum":pageRecordsNum},
 		cache:false,
 		type:"post",
 		success:function(result){
@@ -95,4 +98,8 @@ function employeeLogDetail(logID){
 	$("#employeeLogId").val(logID);
 	$("#viewLogDetailForm").submit();
 }
+
+$('#searchBtn').bind("click", function(){
+	loadEmployeeLogList("");
+});
 

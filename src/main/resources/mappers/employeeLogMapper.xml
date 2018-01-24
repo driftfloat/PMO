@@ -13,6 +13,9 @@
     <result column="UPDATE_DATE" property="updateDate" jdbcType="VARCHAR" />
     <result column="OPERATION_PERSON" property="operationPerson" jdbcType="VARCHAR" />
     <result column="LOG_TYPE" property="logType" jdbcType="VARCHAR" />
+    <result column="PROJECT_STATUS" property="projectStatus" jdbcType="VARCHAR" />
+    <result column="CONTRACT_STATUS" property="contractStatus" jdbcType="VARCHAR" />
+    <result column="LEVEL_STATUS" property="levelStatus" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.pmo.dashboard.entity.EmployeeLog" extends="BaseResultMap" >
     <result column="CHANGE_INFORMATION" property="changeInformation" jdbcType="LONGVARCHAR" />
@@ -60,6 +63,15 @@
       <if test="logType != null" >
         LOG_TYPE,
       </if>
+      <if test="projectStatus != null" >
+        PROJECT_STATUS,
+      </if>
+      <if test="contractStatus != null" >
+        CONTRACT_STATUS,
+      </if>
+      <if test="levelStatus != null" >
+        LEVEL_STATUS,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="logId != null" >
@@ -98,25 +110,101 @@
       <if test="logType != null" >
         #{logType,jdbcType=VARCHAR},
       </if>
+      <if test="projectStatus != null" >
+        #{projectStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="contractStatus != null" >
+        #{contractStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="levelStatus != null" >
+        #{levelStatus,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
+  
+  <update id="update" parameterType="com.pmo.dashboard.entity.EmployeeLog" >
+    update t_employee_log
+    <set >
+      <if test="employeeId != null" >
+        EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="csSubdeptIdNew != null" >
+        CS_SUBDEPT_ID_NEW = #{csSubdeptIdNew,jdbcType=VARCHAR},
+      </if>
+      <if test="csSubdeptIdOriginal != null" >
+        CS_SUBDEPT_ID_ORIGINAL = #{csSubdeptIdOriginal,jdbcType=VARCHAR},
+      </if>
+      <if test="roleNew != null" >
+        ROLE_NEW = #{roleNew,jdbcType=VARCHAR},
+      </if>
+      <if test="roleOriginal != null" >
+        ROLE_ORIGINAL = #{roleOriginal,jdbcType=VARCHAR},
+      </if>
+      <if test="statusNew != null" >
+        STATUS_NEW = #{statusNew,jdbcType=VARCHAR},
+      </if>
+      <if test="statusOriginal != null" >
+        STATUS_ORIGINAL = #{statusOriginal,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operationPerson != null" >
+        OPERATION_PERSON = #{operationPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null" >
+        LOG_TYPE = #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectStatus != null" >
+        PROJECT_STATUS = #{projectStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="contractStatus != null" >
+        CONTRACT_STATUS = #{contractStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="levelStatus != null" >
+        LEVEL_STATUS = #{levelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="changeInformation != null" >
+        CHANGE_INFORMATION = #{changeInformation,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </update>
   
   
   <select id="countEmployeeLogList" parameterType="com.pmo.dashboard.entity.EmployeeLogPageCondition" resultType="int" >
 	    SELECT count(*)
         FROM t_employee_log 
         WHERE 1 = 1
-		<if test="employeeID != null and employeeID != ''">
-			AND EMPLOYEE_ID = #{employeeID}
+		<if test="employeeId != null and employeeId != ''">
+			AND EMPLOYEE_ID = #{employeeId}
 		</if>
+		<if test="projectStatus != null and projectStatus != ''" >
+            AND PROJECT_STATUS = #{projectStatus}
+        </if>
+        <if test="contractStatus != null and contractStatus != ''" >
+            AND CONTRACT_STATUS = #{contractStatus}
+        </if>
+        <if test="levelStatus != null and levelStatus != ''" >
+            AND LEVEL_STATUS = #{levelStatus}
+        </if>
 			
   </select>
   
   <select id="queryEmployeeLogList" parameterType="com.pmo.dashboard.entity.EmployeeLogPageCondition" resultMap="ResultMapWithBLOBs">
 	    SELECT * FROM t_employee_log WHERE 1 = 1
-	    <if test="employeeID != null and employeeID != ''">
-			AND EMPLOYEE_ID = #{employeeID}
+	    <if test="employeeId != null and employeeId != ''">
+			AND EMPLOYEE_ID = #{employeeId}
 		</if>
+		<if test="projectStatus != null and projectStatus != ''" >
+            AND PROJECT_STATUS = #{projectStatus}
+        </if>
+        <if test="contractStatus != null and contractStatus != ''" >
+            AND CONTRACT_STATUS = #{contractStatus}
+        </if>
+        <if test="levelStatus != null and levelStatus != ''" >
+            AND LEVEL_STATUS = #{levelStatus}
+        </if>
 		order by UPDATE_DATE desc
 		LIMIT #{currentPage},#{pageRecordsNum}
   </select>

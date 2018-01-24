@@ -15,8 +15,8 @@ public interface EmployeeLogService extends BaseLogService{
 	
 	
 	List<EmployeeLog> getLogByEmployeeID(String id);
-	int countEmployeeLogList(EmployeeLogPageCondition employeeLogPageCondition);
-	List<EmployeeLog> queryEmployeeLogList(EmployeeLogPageCondition employeeLogPageCondition);
+	int countEmployeeLogList(EmployeeLogPageCondition employeeLog);
+	List<EmployeeLog> queryEmployeeLogList(EmployeeLogPageCondition employeeLog);
 	
 
 }
