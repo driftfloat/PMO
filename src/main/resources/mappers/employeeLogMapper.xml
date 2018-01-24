@@ -216,4 +216,27 @@
 		</if>
   </select>
   
+  <select id="queryEmpLogByDUNew" parameterType="com.pmo.dashboard.entity.EmployeeGraphParam" resultMap="BaseResultMap">
+  	SELECT * FROM t_employee_log WHERE UPDATE_DATE BETWEEN #{startDate} AND #{endDate} 
+	<choose>
+  		<when test="du != null and du != ''">
+  			and CS_SUBDEPT_ID_NEW = #{du}
+  		</when>
+  		<otherwise>
+  			<choose>
+  				<when test="bu != null and bu != ''">
+  					and CS_SUBDEPT_ID_NEW in
+  					<foreach collection="duList" item="subDeptId" index="index" open="(" close=")" separator=",">
+  						#{subDeptId}
+  					</foreach>
+  				</when>
+  			</choose>
+  		</otherwise>
+  	</choose>  		
+   ORDER BY UPDATE_DATE
+  </select>
+  <select id="queryEmpLogByDUOrg" parameterType="String" resultMap="BaseResultMap">
+  	SELECT * FROM t_employee_log WHERE CS_SUBDEPT_ID_ORIGINAL = #{du} AND UPDATE_DATE BETWEEN #{startDate} AND #{endDate} ORDER BY UPDATE_DATE
+  </select>
+  
 </mapper>

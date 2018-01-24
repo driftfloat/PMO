@@ -13,11 +13,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -30,6 +33,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.Demand;
 import com.pmo.dashboard.entity.Employee;
+import com.pmo.dashboard.entity.EmployeeGraphParam;
 import com.pmo.dashboard.entity.EmployeeLog;
 import com.pmo.dashboard.entity.EmployeePageCondition;
 import com.pmo.dashboard.entity.HSBCDept;
@@ -1130,5 +1134,206 @@ public String getTMemployee(final HttpServletRequest request,
     	}
     	return changeInfo;
     }
+    
+    /**
+     * Felix, 180116, Begin.
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("/employeeGraph")
+    public String employeeGraph(final HttpServletRequest request,
+            final HttpServletResponse response)
+    {
+        return "employee/employeeGraph";
+    }
+
+    @RequestMapping("/employeeStatisticalGraph")
+    @ResponseBody
+    public Map<String, Map<Object, Object>> statisticalEmployee(final HttpServletRequest request,
+            final HttpServletResponse response){
+    	String startDate = request.getParameter("startDate");
+    	String endDate = request.getParameter("endDate");
+    	String bu = request.getParameter("csBUName");
+    	String du = request.getParameter("csSubDept");
+    	List<EmployeeLog> empLogList = new ArrayList<EmployeeLog>();
+    	List<Integer> subDUIdList = null;
+    	if(StringUtils.isEmpty(du) && StringUtils.isNotEmpty(bu)){
+    		subDUIdList = new ArrayList<Integer>();
+    		List<CSDept> csSubDeptList = csDeptService.queryCSSubDeptNameByCsBuName(bu);
+    		for(CSDept csDept : csSubDeptList){
+    			Integer duId = Integer.parseInt(csDept.getCsSubDeptId());
+    			subDUIdList.add(duId);
+    		}
+    	}
+    	EmployeeGraphParam graphParam = new EmployeeGraphParam();
+    	graphParam.setStartDate(startDate);
+    	graphParam.setEndDate(endDate);
+    	graphParam.setBu(bu);
+    	graphParam.setDu(du);
+    	graphParam.setDuList(subDUIdList);
+    	empLogList = employeeLogService.queryEmpLogByDUNew(graphParam); 
+    	
+    	Map<String, String> releaseMap01 = new HashMap<String, String>();
+    	Map<String, String> levelMap01 = new HashMap<String, String>();
+    	Map<String, String> terminatedMap01 = new HashMap<String, String>();
+    	List<String> intoDUList01 = new ArrayList<String>();
+    	
+    	Map<String, Map<Object, Object>> resultMap = new HashMap<String, Map<Object, Object>>();
+    	Map<Object, Object> releaseMap = new HashMap<Object, Object>();
+    	Map<Object, Object> levelMap = new HashMap<Object, Object>();
+    	Map<Object, Object> terminatedMap = new HashMap<Object, Object>();
+    	Map<Object, Object> intoDUMap = new HashMap<Object, Object>();
+    	Map<Object, Object> outDUMap = countOutDU(startDate, endDate, du);
+    	Set<String> set = new TreeSet<String>();
+    	Map<Object, Object> xDataMap = new HashMap<Object, Object>();
+    	if(null != outDUMap){
+    		TreeSet<String> ymOutDUSet = (TreeSet<String>)outDUMap.get("ymOutDUSet");
+    		set.addAll(ymOutDUSet);
+    	}
+    	if(null == empLogList || empLogList.isEmpty()){
+    		resultMap.put("outDUMap", outDUMap);
+    		xDataMap.put("xDataSet", set);
+    		resultMap.put("ymDataMap", xDataMap);
+    		return resultMap;
+    	}
+    	
+    	// month change
+    	int tempMonth = Integer.parseInt(empLogList.get(0).getUpdateDate().substring(5, 7));
+    	int xFlag = 1;
+    	for(int i=0; i<empLogList.size(); i++){
+    		EmployeeLog empLog = empLogList.get(i);
+    		String empId = empLog.getEmployeeId();
+    		String updateDate = empLog.getUpdateDate();
+    		int updateMonth = Integer.parseInt(updateDate.substring(5, 7));
+    		if(i == 0){
+    			set.add(updateDate.substring(0, 7));
+    		}
+    		if(updateMonth != tempMonth){
+    			releaseMap.put(xFlag, releaseMap01.size());
+    			releaseMap01.clear();
+    			levelMap.put(xFlag, levelMap01.size());
+    			levelMap01.clear();
+    			terminatedMap.put(xFlag, terminatedMap01.size());
+    			terminatedMap01.clear();
+    			intoDUMap.put(xFlag, intoDUList01.size());
+    			intoDUList01.clear();
+    			tempMonth = updateMonth;
+    			xFlag++;
+    			set.add(empLog.getUpdateDate().substring(0, 7));
+    		}
+    		String statusNew = empLog.getStatusNew();
+    		String statusOrg = empLog.getStatusOriginal();
+    		String roleNew = empLog.getRoleNew();
+    		String roleOrg = empLog.getRoleOriginal();
+    		String duNew = empLog.getCsSubdeptIdNew();
+    		String duOrg = empLog.getCsSubdeptIdOriginal();
+    		
+    		// Release
+    		if(!StringUtils.equals(statusNew, statusOrg) && "Release".equals(statusNew)){
+    			if(releaseMap01.containsKey(empId)){
+    				String firstStatusOrg = releaseMap01.get(empId);
+    				if(StringUtils.equals(statusNew, firstStatusOrg)){
+    					releaseMap01.remove(empId);
+    				}
+    			}else{
+    				releaseMap01.put(empId, statusOrg);
+    			}
+    		}
+    		
+    		// Level
+    		if(!StringUtils.equals(roleNew, roleOrg)){
+    			if(levelMap01.containsKey(empId)){
+    				String firstRoleOrg = levelMap01.get(empId);
+    				if(StringUtils.equals(roleNew, firstRoleOrg)){
+    					levelMap01.remove(empId);
+    				}
+    			}else{
+    				levelMap01.put(empId, roleOrg);
+    			}
+    		}
+    		
+    		// Terminated
+    		if(!StringUtils.equals(statusNew, statusOrg) && "Terminated".equals(statusNew)){
+    			if(terminatedMap01.containsKey(empId)){
+    				String firstStatusOrg = terminatedMap01.get(empId);
+    				if(StringUtils.equals(statusNew, firstStatusOrg)){
+    					terminatedMap01.remove(empId);
+    				}
+    			}else{
+    				terminatedMap01.put(empId, statusOrg);
+    			}
+    		}
+    		
+    		// into
+    		if(StringUtils.isNotEmpty(du) && !StringUtils.equals(duNew, duOrg) && !intoDUList01.contains(empId)){
+    			intoDUList01.add(empId);
+    		}
+    		
+    		if(i == empLogList.size()-1){
+    			releaseMap.put(xFlag, releaseMap01.size());
+    			levelMap.put(xFlag, levelMap01.size());
+    			terminatedMap.put(xFlag, terminatedMap01.size());
+    			intoDUMap.put(xFlag, intoDUList01.size());
+    			set.add(empLog.getUpdateDate().substring(0, 7));
+    		}
+    	}
+    	
+    	
+    	xDataMap.put("xDataSet", set);
+    	if(StringUtils.isEmpty(du)){
+    		resultMap.put("intoDUMap", null);
+    		resultMap.put("outDUMap", null);
+    	}else{
+    		resultMap.put("intoDUMap", intoDUMap);
+    		resultMap.put("outDUMap", outDUMap);
+    	}
+    	resultMap.put("release", releaseMap);
+    	resultMap.put("level", levelMap);
+    	resultMap.put("terminated", terminatedMap);
+    	resultMap.put("ymDataMap", xDataMap);
+    	return resultMap;
+    }
+
+    private Map<Object, Object> countOutDU(String startDate, String endDate, String du){
+    	Map<Object, Object> outDUMap = new HashMap<Object, Object>();
+    	List<EmployeeLog> outDUempLogList = employeeLogService.queryEmpLogByDUOrg(startDate, endDate, du);
+    	if(null == outDUempLogList || outDUempLogList.isEmpty() || StringUtils.isEmpty(du)){
+    		return null;
+    	}
+    	int tempMonth = Integer.parseInt(outDUempLogList.get(0).getUpdateDate().substring(5, 7));
+    	List<String> outDUList01 = new ArrayList<String>();
+    	int xFlag = 1;
+    	Set<String> ymSet = new TreeSet<String>(); 
+    	for(int i=0; i<outDUempLogList.size(); i++){
+    		EmployeeLog empLog = outDUempLogList.get(i);
+    		String duNew = empLog.getCsSubdeptIdNew();
+    		String duOrg = empLog.getCsSubdeptIdOriginal();
+    		String empId = empLog.getEmployeeId();
+    		String updateDate = empLog.getUpdateDate();
+    		int updateMonth = Integer.parseInt(updateDate.substring(5, 7));
+    		if(i == 0){
+    			ymSet.add(updateDate.substring(0, 7));
+    		}
+    		if(updateMonth != tempMonth){
+    			String xym = empLog.getUpdateDate().substring(0, 7);
+    			ymSet.add(xym);
+    			outDUMap.put(xFlag, outDUList01.size());
+    			outDUList01.clear();
+    			tempMonth = updateMonth;
+    			xFlag++;
+    		}
+    		if(!StringUtils.equals(duNew, duOrg) && !outDUList01.contains(empId)){
+    			outDUList01.add(empId);
+    		}
+    		if(i == outDUempLogList.size()-1){
+    			ymSet.add(empLog.getUpdateDate().substring(0, 7));
+    			outDUMap.put(xFlag, outDUList01.size());
+    			outDUMap.put("ymOutDUSet", ymSet);
+    		}
+    	}
+    	return outDUMap;
+    }
+    // Felix, 180116, End.
     
 }

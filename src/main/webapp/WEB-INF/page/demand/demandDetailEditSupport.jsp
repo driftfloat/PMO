@@ -121,7 +121,7 @@ var userType='<%=userType%>'
 											</div>
 										</div>
 									</div>
-								<div class="form-group">
+								<%-- <div class="form-group">
 										<div class="group">
 											<label class="col-sm-2 control-label">RR</label>
 											<div class="col-sm-4">
@@ -136,7 +136,7 @@ var userType='<%=userType%>'
 													id="jobCodeEdit" />
 											</div>
 										</div>
-								</div>
+								</div> --%>
 								
 								<div class="form-group">
 								         <div class="group">
@@ -210,7 +210,7 @@ var userType='<%=userType%>'
 											</div>
 									    </div>
 								</div>
-								<div class="form-group">
+								<%-- <div class="form-group">
 								         <div class="group">
 											<label class="col-sm-2 control-label">No. of Profiles Sent to HSBC</label>
 											<div class="col-sm-4">
@@ -225,8 +225,8 @@ var userType='<%=userType%>'
 													id="interviewedNoEdit"/>
 											</div>
 										</div>
-								</div>
-								<div class="form-group">
+								</div> --%>
+								<%-- <div class="form-group">
 								        <div class="group">
 											<label class="col-sm-2 control-label">Req published Date</label>
 											<div class="col-md-4">
@@ -250,8 +250,8 @@ var userType='<%=userType%>'
 											</div>
 										</div>
 								
-								</div>
-								<div class="form-group">
+								</div> --%>
+								<%-- <div class="form-group">
 								       <div class="group">
 										<label class="col-lg-2 control-label">HSBC Department</label>
 										<div class="col-lg-4">
@@ -272,9 +272,9 @@ var userType='<%=userType%>'
 											</select>
 										</div>
 										</div>
-								</div>
+								</div> --%>
 								<div class="form-group">
-								         <div class="group">
+								         <div class="group" id="requestor" style='display:none'>
 											<label class="col-lg-2 control-label">HSBC Requestor</label>
 											<div class="col-lg-4">
 													<input type="text" class="form-control" name="requestorEdit" value="${demand.requestor }"
@@ -290,9 +290,6 @@ var userType='<%=userType%>'
 									        	</select>
 											</div>
 										</div>
-								
-								</div>
-								<div class="form-group" id="atype" style='display:none'>
 										<div class="group" id="staffnameEdit" style='display:none'>
 											<label class="col-sm-2 control-label">Staff Name</label>
 											<div class="col-sm-4">
@@ -300,6 +297,9 @@ var userType='<%=userType%>'
 													id="candidateNameEdit"/>
 											</div>
 										</div>
+								
+								</div>
+								<div class="form-group" id="atype" style='display:none'>
 									    <div class="group" id="joiningEdit" style='display:none'>
 											<label class="col-sm-2 control-label">Proposed Date of Joining</label>
 											<div class="col-sm-4">
@@ -308,7 +308,7 @@ var userType='<%=userType%>'
 											</div>
 										</div>
 								</div>
-								<div class="form-group" id="btype"style='display:none'>
+								<%-- <div class="form-group" id="btype"style='display:none'>
 								        <div class="group" id="bgvEdit" style='display:none'>
 											<label class="col-sm-2 control-label">BGV Cleared</label>
 											<div class="col-sm-4">
@@ -323,7 +323,7 @@ var userType='<%=userType%>'
 													id="doNumberEdit"/>
 											</div>
 										</div>
-								</div>
+								</div> --%>
 								<div class="form-group"id="ctype" style='display:none'>
 								       <div class="group" id="reasonAbort" style='display:none'>
 											<label class="col-sm-2 control-label">Reason for Abort</label>
@@ -419,12 +419,12 @@ var userType='<%=userType%>'
 	<script src="<%=path %>/js/charisma.js"></script>
 
     <%-- <script type="text/javascript" src="<%=path %>/js/pmo/loadHSBCDept.js"></script>  --%>
-	<script type="text/javascript" src="<%=path %>/js/pmo/recruitdemanda.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/recruitdemandasupport.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/pmo/demandvalid.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/pmo/demandInfoEdit.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/demandInfoEditsupport.js"></script>
 
 </body>
 </html>
