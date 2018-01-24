@@ -2,6 +2,7 @@ package com.pmo.dashboard.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -67,6 +68,9 @@ public class InterviewerController
     	User user = (User)request.getSession().getAttribute("loginUser");
     	interviewer.setEmployeeId(user.getUserId());
     	List<Interviewer> list = interviewerService.queryInterviewerList(interviewer,user);
+    	if(null == list){
+    		list = new ArrayList<Interviewer>();
+    	}
     	for(int i=0;i<list.size();i++){
     	    
     	    //处理null ""
