@@ -77,6 +77,24 @@ public class RecordLogController {
             final HttpServletResponse response,EmployeeLogPageCondition employeeLog) throws JsonProcessingException
     {
         String pageState = employeeLog.getPageState();
+        System.out.println("变更类型======================"+employeeLog.getChType());
+        if(employeeLog.getChType()!=null && !"".equals(employeeLog.getChType())){
+        	if(employeeLog.getChType().equals("0")){
+            	employeeLog.setProjectStatus("0");
+            }
+            if(employeeLog.getChType().equals("1")){
+            	employeeLog.setContractStatus("0");
+            }
+            if(employeeLog.getChType().equals("2")){
+            	employeeLog.setLevelStatus("0");
+            }
+            if(employeeLog.getChType().equals("3")){
+            	employeeLog.setNewdept("3");
+            }
+            if(employeeLog.getChType().equals("4")){
+            	employeeLog.setNewstatus("4");
+            }
+        }
         
         Employee employee = employeeService.queryEmployeeById(employeeLog.getEmployeeId());
 		int pageRecordsNum = Constants.TEN;

@@ -121,35 +121,18 @@ var path='<%=path%>';
 										</div>
 										</br></br></br>
 										<div class="group">
-										    <label class="col-sm-2 control-label">ProjectStatus</label>
-										    <div class="col-sm-4">
-											  <select class="form-control" name="projectStatus" id="projectStatus">
+										<label class="col-lg-2 control-label">ChangeType</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="chType" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="chType" data-bv-group=".group">
 												<option value="">-- Option--</option>
-												<option value="0">有变更</option>
-												<option value="">无变更</option>
-											  </select>
-										    </div>
+												<option value="0">项目有变更</option>
+												<option value="1">合同有变更</option>
+												<option value="2">级别有变更</option>
+												<option value="3">交付部有变更</option>
+												<option value="4">状态有变更</option>
+											</select>
 										</div>
-										<div class="group">
-										     <label class="col-sm-2 control-label">ContractStatus</label>
-										     <div class="col-sm-4">
-											  <select class="form-control" name="contractStatus" id="contractStatus">
-												<option value="">-- Option--</option>
-												<option value="0">有变更</option>
-												<option value="">无变更</option>
-											  </select>
-										     </div>
-										</div>
-										</br></br></br>
-										<div class="group">
-										     <label class="col-sm-2 control-label">LevelStatus</label>
-										     <div class="col-sm-4">
-											  <select class="form-control" name="levelStatus" id="levelStatus">
-												<option value="">-- Option--</option>
-												<option value="0">有变更</option>
-												<option value="">无变更</option>
-											  </select>
-										     </div>
 										</div>
 										</br></br></br>
 										<div class="form-group">
