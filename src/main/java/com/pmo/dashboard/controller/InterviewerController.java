@@ -119,15 +119,21 @@ public class InterviewerController
     	
     	Interviewer interviewer = new Interviewer();
     	interviewer.setEmployeeId(employeeId);
+    	User u= null;
     	boolean resultFlag = false;
     	
     	if("1".equals(status)){
     		interviewer.setStatus("0");
     		resultFlag = interviewerService.update(interviewer);
-    		User u = new User();
+    		User user = interviewerService.selectUser(employeeId);
+    		u = new User();
     		u.setUserId(employeeId);
     		u.setLoginStatus("1");//不可登录
-    		userService.update(u);
+    		if("".equals(user)||user==null){
+    			if(user.getUserType().equals("10")){
+    				userService.update(u);
+    			}
+    		}
     		return resultFlag;
     	}else{
     		interviewer.setStatus("1");
@@ -135,7 +141,6 @@ public class InterviewerController
     		Interviewer interviewers = interviewerService.selectInterviewer(employeeId);
     		boolean flag2=true;
     		User user = interviewerService.selectUser(employeeId);
-    		User u  = null;
     		if("".equals(user)||user==null){
     		 u = new User();
     		 u.setUserId(employeeId);

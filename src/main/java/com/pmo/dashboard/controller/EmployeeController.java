@@ -753,13 +753,13 @@ public String getTMemployee(final HttpServletRequest request,
     	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");
     	String time = simpleDateFormat.format(new Date());
     	EmployeeLog log = new EmployeeLog();
-    	StringBuffer changeInfo = null;
+    	StringBuffer[] finalchangeInfo = null;
     	StringBuffer addInfo = null;
     	if(type.equals("0")){
     		addInfo = addInfo(employee);
     	}
         if(type.equals("1")){
-        	changeInfo = checkFieldChange(em,employee);
+        	finalchangeInfo = checkFieldChange(em,employee);
     	}
     	if(em!=null && employee !=null){
     		if(!em.getCsSubDept().equals(employee.getCsSubDept())){
@@ -778,7 +778,7 @@ public String getTMemployee(final HttpServletRequest request,
         		log.setChangeInformation(addInfo.toString());
         	}
             if(type.equals("1")){
-            	log.setChangeInformation(changeInfo.toString());
+            	log.setChangeInformation(finalchangeInfo[0].toString());
         	}
         	log.setEmployeeId(employee.getEmployeeId());
         	log.setLogId(Utils.getUUID());
@@ -788,13 +788,22 @@ public String getTMemployee(final HttpServletRequest request,
             if(type.equals("1")){
             	log.setLogType("1");
         	}
+            if(finalchangeInfo!=null){
+            	log.setProjectStatus(finalchangeInfo[1].toString());
+            	log.setContractStatus(finalchangeInfo[2].toString());
+            	log.setLevelStatus(finalchangeInfo[3].toString());
+            }
         	log.setOperationPerson(user.getUserId());
         	log.setUpdateDate(time);
     	}
     	return log;
     }
-    private StringBuffer checkFieldChange(Employee before,Employee after){
+    private StringBuffer[] checkFieldChange(Employee before,Employee after){
+    	StringBuffer[] finalchangeInfo = new StringBuffer[4];
     	StringBuffer changeInfo = new StringBuffer();
+    	String projectStatus = "";
+    	String contractStatus = "";
+    	String levelStatus = "";
     	if(before!=null && after!=null){
     		//E-HR
             if(before.geteHr()!=null && !before.geteHr().equals(after.geteHr())){
@@ -856,6 +865,7 @@ public String getTMemployee(final HttpServletRequest request,
             if(before.getGbGf()!=null && !before.getGbGf().equals(after.getGbGf())){
             	changeInfo.append("GbGf由["+before.getGbGf()+"]变更为["+after.getGbGf()+"];   ");
             	changeInfo.append("----");
+            	projectStatus="0";
             }
         	//HSBC Sub Dept
             if(before.getHsbcSubDept()!=null && !before.getHsbcSubDept().equals(after.getHsbcSubDept())){
@@ -871,26 +881,31 @@ public String getTMemployee(final HttpServletRequest request,
             	}
             	changeInfo.append("HsbcSubDept由["+oldname+"]变更为["+newsname+"];   ");
             	changeInfo.append("----");
+            	projectStatus="0";
             }
         	//HSBC Project Name
             if(before.getProjectName()!=null && !before.getProjectName().equals(after.getProjectName())){
             	changeInfo.append("ProjectName由["+before.getProjectName()+"]变更为["+after.getProjectName()+"];   ");
             	changeInfo.append("----");
+            	projectStatus="0";
             }
         	//HSBC Project Manager
             if(before.getProjectManager()!=null && !before.getProjectManager().equals(after.getProjectManager())){
             	changeInfo.append("ProjectManager由["+before.getProjectManager()+"]变更为["+after.getProjectManager()+"];   ");
             	changeInfo.append("----");
+            	projectStatus="0";
             }
         	//SOW#
             if(before.getSow()!=null && !before.getSow().equals(after.getSow())){
             	changeInfo.append("Sow由["+before.getSow()+"]变更为["+after.getSow()+"];   ");
             	changeInfo.append("----");
+            	contractStatus="0";
             }
         	//SOW# Expired Date
             if(before.getSowExpiredDate()!=null && !before.getSowExpiredDate().equals(after.getSowExpiredDate())){
             	changeInfo.append("SowExpiredDate由["+before.getSowExpiredDate()+"]变更为["+after.getSowExpiredDate()+"];   ");
             	changeInfo.append("----");
+            	contractStatus="0";
             }
         	//Staff Category
             if(before.getStaffCategory()!=null && !before.getStaffCategory().equals(after.getStaffCategory())){
@@ -926,11 +941,13 @@ public String getTMemployee(final HttpServletRequest request,
             if(before.getRole()!=null && !before.getRole().equals(after.getRole())){
             	changeInfo.append("Role由["+before.getRole()+"]变更为["+after.getRole()+"];   ");
             	changeInfo.append("----");
+            	levelStatus="0";
             }
         	//Skills/Technology
             if(before.getSkill()!=null && !before.getSkill().equals(after.getSkill())){
             	changeInfo.append("Skill由["+before.getSkill()+"]变更为["+after.getSkill()+"];   ");
             	changeInfo.append("----");
+            	levelStatus="0";
             }
         	//Billing Currency
             if(before.getBillingCurrency()!=null && !before.getBillingCurrency().equals(after.getBillingCurrency())){
@@ -941,6 +958,7 @@ public String getTMemployee(final HttpServletRequest request,
             if(before.getBillRate()!=null && !before.getBillRate().equals(after.getBillRate())){
             	changeInfo.append("BillRate由["+before.getBillRate()+"]变更为["+after.getBillRate()+"];   ");
             	changeInfo.append("----");
+            	levelStatus="0";
             }
         	//HSBC DOJ
             if(before.getHsbcDOJ()!=null && !before.getHsbcDOJ().equals(after.getHsbcDOJ())){
@@ -967,7 +985,12 @@ public String getTMemployee(final HttpServletRequest request,
 //            	changeInfo.append("interviewStatus由["+before.getInterviewStatus()+"]变更为["+after.getInterviewStatus()+"];");
 //            }
     	}
-    	return changeInfo;
+    	finalchangeInfo[0]=changeInfo;
+    	finalchangeInfo[1]=new StringBuffer(projectStatus);
+    	finalchangeInfo[2]=new StringBuffer(contractStatus);
+    	finalchangeInfo[3]=new StringBuffer(levelStatus);
+    	
+    	return finalchangeInfo;
     }
     
     

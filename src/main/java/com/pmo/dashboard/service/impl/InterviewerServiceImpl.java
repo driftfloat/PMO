@@ -40,9 +40,17 @@ public class InterviewerServiceImpl implements InterviewerService
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("interviewer", interviewer);
+		int num;
 		//计算当前页起始号
-		int num = (interviewer.getCurrPage() - 1)*interviewer.getPageSize();
-		map.put("num", num);
+		if(interviewer.getPageRecNum()!=null){
+			System.out.println("页数======================"+interviewer.getCurrPage());
+			num = (interviewer.getCurrPage() - 1)*interviewer.getPageRecNum();
+			map.put("num", num);
+		}else{
+			num = (interviewer.getCurrPage() - 1)*interviewer.getPageSize();
+			map.put("num", num);
+		}
+		
 		
 		List<Interviewer> list = null;
 		//String employeeId = interviewer.getEmployeeId();
@@ -64,7 +72,11 @@ public class InterviewerServiceImpl implements InterviewerService
 			list = interviewerMapper.queryInterviewerList(map);
 			queryInterviewerCount = interviewerMapper.queryInterviewerCount(map);
 		}
-		interviewer.setTotalPage((int) Math.ceil(queryInterviewerCount*1.0 / interviewer.getPageSize()));
+		if(interviewer.getPageRecNum()!=null){
+			interviewer.setTotalPage((int) Math.ceil(queryInterviewerCount*1.0 / interviewer.getPageRecNum()));
+		}else{
+			interviewer.setTotalPage((int) Math.ceil(queryInterviewerCount*1.0 / interviewer.getPageSize()));
+		}
 		return list;
 	}
 

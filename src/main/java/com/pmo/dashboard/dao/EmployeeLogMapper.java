@@ -8,14 +8,15 @@ import com.pmo.dashboard.entity.EmployeeGraphParam;
 import com.pmo.dashboard.entity.EmployeeLog;
 import com.pmo.dashboard.entity.EmployeeLogPageCondition;
 
+
 public interface EmployeeLogMapper extends BaseLogMapper<Object, Long>{
 	
 	
 	List<EmployeeLog> getLogByEmployeeID(String id);
 	
-	int countEmployeeLogList(EmployeeLogPageCondition employeeLogPageCondition);
+	int countEmployeeLogList(EmployeeLogPageCondition employeeLog);
 	
-	List<EmployeeLog> queryEmployeeLogList(EmployeeLogPageCondition employeeLogPageCondition);
+	List<EmployeeLog> queryEmployeeLogList(EmployeeLogPageCondition employeeLog);
 	
 	// Felix, 180118, Begin.
     List<EmployeeLog> queryEmpLogByDUNew(EmployeeGraphParam employeeGraphParam);

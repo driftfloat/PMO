@@ -120,7 +120,46 @@ var path='<%=path%>';
 											</div>
 										</div>
 										</br></br></br>
-									
+										<div class="group">
+										    <label class="col-sm-2 control-label">ProjectStatus</label>
+										    <div class="col-sm-4">
+											  <select class="form-control" name="projectStatus" id="projectStatus">
+												<option value="">-- Option--</option>
+												<option value="0">有变更</option>
+												<option value="">无变更</option>
+											  </select>
+										    </div>
+										</div>
+										<div class="group">
+										     <label class="col-sm-2 control-label">ContractStatus</label>
+										     <div class="col-sm-4">
+											  <select class="form-control" name="contractStatus" id="contractStatus">
+												<option value="">-- Option--</option>
+												<option value="0">有变更</option>
+												<option value="">无变更</option>
+											  </select>
+										     </div>
+										</div>
+										</br></br></br>
+										<div class="group">
+										     <label class="col-sm-2 control-label">LevelStatus</label>
+										     <div class="col-sm-4">
+											  <select class="form-control" name="levelStatus" id="levelStatus">
+												<option value="">-- Option--</option>
+												<option value="0">有变更</option>
+												<option value="">无变更</option>
+											  </select>
+										     </div>
+										</div>
+										</br></br></br>
+										<div class="form-group">
+									      <div style="text-align:center;width:50%;float:left">
+									      <input type="button" value="Search"
+										    name="searchBtn" id="searchBtn" href="#"
+										    class="button btn btn-primary" data-dismiss="modal"
+										    style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
+									      </div>
+								        </div>
 									<div style="overflow: auto;">
 									<table id="employeeLogList"
 										class="table table-striped table-bordered">

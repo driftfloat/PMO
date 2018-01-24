@@ -1,6 +1,6 @@
 package com.pmo.dashboard.entity;
 
-public class EmployeeLog {
+public class EmployeeLog extends EmployeeLogPageCondition{
 	
 	
     private String logId;//日志ID
@@ -15,6 +15,9 @@ public class EmployeeLog {
     private String operationPerson;//用户ID(userid)
     private String changeInformation;//修改具体字段拼接信息
     private String logType;//日志类型(0:add,1:update)
+    private String projectStatus;//项目状态(0:有更改)
+    private String contractStatus;//合同状态(0:有更改)
+    private String levelStatus;//级别状态(0:有更改)
     
     //表外字段
     private String operationPersonName;
@@ -22,7 +25,32 @@ public class EmployeeLog {
     private String csSubdeptIdOriginalName;
     
 
-    public String getCsSubdeptIdNewName() {
+    
+    public String getProjectStatus() {
+		return projectStatus;
+	}
+
+	public void setProjectStatus(String projectStatus) {
+		this.projectStatus = projectStatus;
+	}
+
+	public String getContractStatus() {
+		return contractStatus;
+	}
+
+	public void setContractStatus(String contractStatus) {
+		this.contractStatus = contractStatus;
+	}
+
+	public String getLevelStatus() {
+		return levelStatus;
+	}
+
+	public void setLevelStatus(String levelStatus) {
+		this.levelStatus = levelStatus;
+	}
+
+	public String getCsSubdeptIdNewName() {
 		return csSubdeptIdNewName!=null?csSubdeptIdNewName:"";
 	}
 

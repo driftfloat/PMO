@@ -16,13 +16,15 @@ public interface EmployeeLogService extends BaseLogService{
 	
 	
 	List<EmployeeLog> getLogByEmployeeID(String id);
-	int countEmployeeLogList(EmployeeLogPageCondition employeeLogPageCondition);
-	List<EmployeeLog> queryEmployeeLogList(EmployeeLogPageCondition employeeLogPageCondition);
+
+	int countEmployeeLogList(EmployeeLogPageCondition employeeLog);
+	List<EmployeeLog> queryEmployeeLogList(EmployeeLogPageCondition employeeLog);
+	
 	// Felix, 180118, Begin.
 	List<EmployeeLog> queryEmpLogByDUNew(EmployeeGraphParam graphParam);
 		
 	List<EmployeeLog> queryEmpLogByDUOrg(String startDate, String endDate, String du);
 	// Felix, 180118, End.
-	
+
 
 }
