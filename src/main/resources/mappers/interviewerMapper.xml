@@ -18,10 +18,6 @@
 	</resultMap>
 	
 	 <sql id="queryWhere">
-	   <where>
-	       <!-- Felix, 20171213, Begin -->
-	       RESOURCE_STATUS != 'Terminated'
-	       <!-- Felix, 20171213, End -->
 	      <if test="interviewer.ehr!=null and interviewer.ehr!=''"> 
 	          and E_HR = #{interviewer.ehr}
 	      </if>
@@ -58,7 +54,7 @@
 	          and LOB = #{interviewer.lob}
 	      </if>
 	      <if test="interviewer.csSubDeptId!=null and interviewer.csSubDeptId!=''"> 
-	          and CS_SUBDEPT_ID = #{interviewer.csSubDeptId}
+	          and e.CS_SUBDEPT_ID = #{interviewer.csSubDeptId}
 	      </if>
 	      <if test="interviewer.experienceStart != null and interviewer.experienceStart != ''">
 			AND (SUBSTR(SYSDATE(),1,4)-SUBSTR(GRADUATION_DATE,1,4)) >= ${interviewer.experienceStart}
@@ -66,12 +62,11 @@
 		<if test="interviewer.experienceEnd != null and interviewer.experienceEnd != ''">
 			AND (SUBSTR(SYSDATE(),1,4)-SUBSTR(GRADUATION_DATE,1,4)) <![CDATA[<=]]> ${interviewer.experienceEnd}
 		</if>
-	   </where>
 	 </sql>
 	 
 	
 	  <select id="queryInterviewerList" parameterType="java.util.HashMap" resultMap="interviewerMap">
-	      select *  from t_employee
+	      select *  from t_employee e where RESOURCE_STATUS != 'Terminated' 
 	      <include refid="queryWhere"></include>
 	      limit #{num}, #{interviewer.pageSize} 
 	  </select>
@@ -80,7 +75,8 @@
 	      from t_employee e
 	      JOIN t_cs_dept d on e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID
 	       LEFT JOIN t_user u on u.BU = d.CS_BU_NAME
-	       where u.USER_ID = #{interviewer.employeeId} and u.BU = d.CS_BU_NAME
+	       where u.USER_ID = #{interviewer.employeeId} and u.BU = d.CS_BU_NAME 
+	       and RESOURCE_STATUS != 'Terminated' 
 	      <include refid="queryWhere"></include>
 	      limit #{num}, #{interviewer.pageSize} 
 	  </select>
@@ -89,26 +85,29 @@
 	      from t_employee e
 	      JOIN t_cs_dept d on e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID
 	      LEFT JOIN t_user u on d.CS_SUBDEPT_ID = u.CSDEPT_ID
-	      where u.USER_ID = #{interviewer.employeeId} and e.CS_SUBDEPT_ID = u.CSDEPT_ID
+	      where u.USER_ID = #{interviewer.employeeId} and e.CS_SUBDEPT_ID = u.CSDEPT_ID 
+	      and RESOURCE_STATUS != 'Terminated' 
 	      <include refid="queryWhere"></include>
 	      limit #{num}, #{interviewer.pageSize} 
 	  </select>
 	  <select id="queryInterviewerCount" parameterType="java.util.HashMap" resultType="int">
-	       select count(1) from t_employee
+	       select count(1) from t_employee e where RESOURCE_STATUS != 'Terminated' 
 	       <include refid="queryWhere"></include>
 	  </select>
 	  <select id="queryInterviewerCountByBu" parameterType="java.util.HashMap" resultType="int">
 	       select count(1) from t_employee e
 	       JOIN t_cs_dept d on e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID
 	       LEFT JOIN t_user u on u.BU = d.CS_BU_NAME
-	       where u.USER_ID = #{interviewer.employeeId} and u.BU = d.CS_BU_NAME
+	       where u.USER_ID = #{interviewer.employeeId} and u.BU = d.CS_BU_NAME 
+	       and RESOURCE_STATUS != 'Terminated' 
 	       <include refid="queryWhere"></include>
 	  </select>
 	  <select id="queryInterviewerCountByDept" parameterType="java.util.HashMap" resultType="int">
 	       select count(1) from t_employee e
 	       JOIN t_cs_dept d on e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID
 	       LEFT JOIN t_user u on d.CS_SUBDEPT_ID = u.CSDEPT_ID
-	       where u.USER_ID = #{interviewer.employeeId} and e.CS_SUBDEPT_ID = u.CSDEPT_ID
+	       where u.USER_ID = #{interviewer.employeeId} and e.CS_SUBDEPT_ID = u.CSDEPT_ID 
+	       and RESOURCE_STATUS != 'Terminated' 
 	       <include refid="queryWhere"></include>
 	  </select>
 	  

@@ -65,7 +65,9 @@ public class InterviewerServiceImpl implements InterviewerService
 		if("1".equals(userType)){
 			list = interviewerMapper.queryInterviewerListByBu(map);
 			queryInterviewerCount = interviewerMapper.queryInterviewerCountByBu(map);
-		}else if("2".equals(userType) || "3".equals(userType)){
+		}else if("3".equals(userType) || "5".equals(userType) ||
+				"11".equals(userType) || "12".equals(userType) ||
+				"13".equals(userType) || "14".equals(userType)){
 			list = interviewerMapper.queryInterviewerListByDept(map);
 			queryInterviewerCount = interviewerMapper.queryInterviewerCountByDept(map);
 		}else if("0".equals(userType)){
