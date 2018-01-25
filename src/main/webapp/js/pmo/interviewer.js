@@ -183,10 +183,10 @@ function loadInterviewerList(currPage){
 				}else{
 					status='否';
 				}
-					
+				var staff_Id = result.list[i].hsbcStaffId == null? '' : result.list[i].hsbcStaffId;	
 				$("<td>"+result.list[i].ehr+"</td>"+
 				"<td>"+result.list[i].lob+"</td>"+
-				"<td>"+result.list[i].hsbcStaffId+"</td>"+
+				"<td>"+staff_Id+"</td>"+
 				"<td>"+result.list[i].staffName+"</td>"+
 				"<td>"+result.list[i].skill+"</td>"+
 				"<td>"+result.list[i].staffRegion+"</td>"+
