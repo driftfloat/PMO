@@ -1,24 +1,21 @@
 
 $(function(){
-	
+	//loadChangeType();
 	loadEmployeeLogList();
-	
 })
 
 function loadEmployeeLogList(pageState){
 	
 	var pageState = pageState;
 	var employeeId = $('#employeeId').val();
-	var projectStatus = $('#projectStatus').val();
-	var contractStatus = $('#contractStatus').val();
-	var levelStatus = $('#levelStatus').val();
+	var chType = $('#chType').val();
 	var pageRecordsNum = $("#pageRecordsNum").find("option:selected").text();
 	
 	$.ajax({
 		url:path+"/service/employee/queryEmployeeLogByID",
 		dataType:"json",
 		async:true,
-		data:{"levelStatus":levelStatus,"contractStatus":contractStatus,"projectStatus":projectStatus,"employeeId":employeeId,"pageState":pageState,"pageRecordsNum":pageRecordsNum},
+		data:{"chType":chType,"employeeId":employeeId,"pageState":pageState,"pageRecordsNum":pageRecordsNum},
 		cache:false,
 		type:"post",
 		success:function(result){
@@ -97,6 +94,17 @@ function employeeLogDetail(logID){
 	$("#viewLogDetailForm").attr("action",path+"/service/employee/employeeLogDetail.html");
 	$("#employeeLogId").val(logID);
 	$("#viewLogDetailForm").submit();
+}
+
+//var csChangeTypeMap = new Map();
+function loadChangeType(){
+	var url = path+'/json/changeType.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#chType").append("<option value='"+item.key+"'>"+item.name+"</option>");
+	    	   //csChangeTypeMap.set(item.name,item.key);
+	       })
+	});
 }
 
 $('#searchBtn').bind("click", function(){

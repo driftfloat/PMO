@@ -6,12 +6,35 @@ public class EmployeeLogPageCondition extends PageCondition{
 	private String projectStatus;//项目状态(0:有更改)
     private String contractStatus;//合同状态(0:有更改)
     private String levelStatus;//级别状态(0:有更改)
+    private String newdept;
+    private String newstatus;
     private String employeeId;//员工ID
     private Integer pageRecordsNum;
     private String pageState;
     
+    private String chType;//更改类型
+    
     
 	
+	
+	public String getNewdept() {
+		return newdept;
+	}
+	public void setNewdept(String newdept) {
+		this.newdept = newdept;
+	}
+	public String getNewstatus() {
+		return newstatus;
+	}
+	public void setNewstatus(String newstatus) {
+		this.newstatus = newstatus;
+	}
+	public String getChType() {
+		return chType;
+	}
+	public void setChType(String chType) {
+		this.chType = chType;
+	}
 	public String getProjectStatus() {
 		return projectStatus;
 	}
