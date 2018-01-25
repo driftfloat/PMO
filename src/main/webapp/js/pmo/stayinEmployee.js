@@ -16,6 +16,10 @@ $('#exportCandidateExcel').bind("click", function(){
 	exportdata = new FormData(document.getElementById("stayinForm"));
 	$('#myStayinListModal').modal('show');	
 });
+
+$("#pageRecordsNum").change(function(){
+	loadStayinList();
+})
 //导出条件
 function exportCondition(){
 	var lb = $("label input");
@@ -94,12 +98,14 @@ function loadRole(){
 function loadStayinList(pageState)
 {
 	var candidate = new FormData(document.getElementById("stayinForm"));
+	var  pageSize =parseInt($("#pageRecordsNum").find("option:selected").text());
 	if(null != pageState)
 	{
 		candidate.append("pageState",pageState);
 	}
 	candidate.append("currentPage",currentPage);
 	candidate.append("pageCount",pageCount);
+	candidate.append("pageSize",pageSize);
 	$.ajax({
 		url:path+"/service/stayin/queryStayinList",
 		dataType:"json",

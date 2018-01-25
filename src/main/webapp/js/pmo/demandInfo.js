@@ -20,6 +20,10 @@ $("#skill").change(function(){
 $("#position").change(function(){
 	$("#exportExcel").attr("disabled", true);
 })
+
+$("#pageRecordsNum").change(function(){
+	loadDemandList();
+})
 /*$("#department").change(function(){
 	$("#exportExcel").attr("disabled", true);
 })
@@ -256,6 +260,7 @@ function loadCSSubDept(result){
 function loadDemandList(currPage){
 	var skill= $("#skill").val();
 	var position= $("#position").val();
+	var  pageRecordsNum = $("#pageRecordsNum").find("option:selected").text();
 	/*var department= $("#department").val();
 	var sub_department= $("#sub_department").val();*/
 	var status= $("#status").val();
@@ -271,7 +276,7 @@ function loadDemandList(currPage){
 		cache:false,
 		type:"post",
 		data:{"csBuName":csBuName,"skill":skill,"position":position,
-			"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept},
+			"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept,"pageRecordsNum":pageRecordsNum},
 		success:function(result){
 			//alert(result.list.length);
 			var userType = result.user.userType;

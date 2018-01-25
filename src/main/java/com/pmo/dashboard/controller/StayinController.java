@@ -77,9 +77,11 @@ public class StayinController
     	 }
     	 candidate.setLockPerson(lockPerson);
 		 int dataCount = StayinService.queryCandidateCount(candidate);
+		 Integer pageSize = candidate.getPageSize();
+		 
 	     page.setDataCount(dataCount+"");
-		 page.setPageCount((dataCount-1)/10 + 1 +"");
-		 page.setPageDataCount(Constants.PAGE_DATA_COUNT+"");
+		 page.setPageCount((dataCount-1)/pageSize + 1 +"");
+		 page.setPageDataCount(pageSize+"");
     	 if("".equals(pageState) || pageState == null ||"frist".equals(pageState)){
     		 page.setCurrentPage("1");
          }else if("next".equals(pageState)){
@@ -90,9 +92,10 @@ public class StayinController
         	 page.setCurrentPage(page.getPageCount());
          }
     	
-    	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*Constants.PAGE_DATA_COUNT+"");
-    	candidate.setPageDataCount(Constants.PAGE_DATA_COUNT+"");
-    	int num = (Integer.valueOf(page.getCurrentPage())-1)*Constants.PAGE_DATA_COUNT;
+    	 
+    	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*pageSize+"");
+    	candidate.setPageDataCount(pageSize+"");
+    	int num = (Integer.valueOf(page.getCurrentPage())-1)*pageSize;
     	candidate.setNum(num);
         List<StayinCandidate> list = StayinService.queryStayinList(candidate);
         //gkf 加入session

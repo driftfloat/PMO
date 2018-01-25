@@ -186,6 +186,16 @@ public class DemandController {
 		String  csSubdeptId=  csDeptService.changeCsSubDeptNameToId(csSubDeptName);
 		demand.setCsSubDept(csSubdeptId);
 		
+		Integer pageSize = 10;
+		
+		if(request.getParameter("pageRecordsNum")!=null){
+		
+ 		 pageSize = Integer.parseInt(request.getParameter("pageRecordsNum"));
+ 		 
+		}
+		
+		pageCondition.setPageSize(pageSize);
+		
 		List<Demand> list = demandService.queryDemandList(demand,pageCondition,csBuName,request);
 		
 		Map<String,Object> result = new HashMap<String,Object>();
