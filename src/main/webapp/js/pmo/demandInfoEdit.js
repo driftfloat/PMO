@@ -484,7 +484,7 @@ function updateDemand(){
 		var hsbcDept=$('#hsbcDeptEdit').val();
 		var hsbcSubDept=$('#hsbcSubDeptEdit').val();
 		var location=$('#locationEdit').val();
-		var reqPublishedDate=$('#reqPublishedDate2Edit').val();
+		var reqPublishedDate=$('#reqPublishedDate1Edit').val();
 		var ageing=$('#ageingEdit').val();
 		var profilesNo=$('#profilesNoEdit').val();
 		var interviewedNo=$('#interviewedNoEdit').val();
@@ -494,9 +494,9 @@ function updateDemand(){
 		var sowSigned=$('#sowSignedEdit').val();
 		var reason=$('#reasonEdit').val();
 		
-		var remark=$('#reasonEdit').val();
+		var remark=$('#remarkEdit').val();
 		var csSubDept=$('#csSubDeptEdit').val();
-		var plannedOnboardDate=$('#plannedOnboardDateEdit').val();
+		var plannedOnboardDate=$('#plannedOnboardDate1').val();
 		var doNumber=$('#doNumberEdit').val();
 		var hrPriority=$('#hrPriorityEdit').val();
 		var staffName=$('#candidateNameEdit').val();
@@ -528,8 +528,4 @@ function updateDemand(){
 			}
 		})
 	}
-	/*}else{
-		//Do something for invalid
-		alert('请填写正确的信息');
-	}*/
 }

@@ -38,8 +38,21 @@ public class StayinCandidate extends PageCondition
 	private String pageState;
     private String demandStatus;
     private int num;
-	
+	private String engagementType;
+	private String csSubDept;
     
+	public String getCsSubDept() {
+		return csSubDept;
+	}
+	public void setCsSubDept(String csSubDept) {
+		this.csSubDept = csSubDept;
+	}
+	public String getEngagementType() {
+		return engagementType;
+	}
+	public void setEngagementType(String engagementType) {
+		this.engagementType = engagementType;
+	}
 	public int getNum() {
 		return num;
 	}

@@ -8,7 +8,7 @@ $(function(){
 	dateType();
 	dateType1();
 	loadCsSubDept();
-	loadEngagementType();
+//	loadEngagementType();
 	loadpage();
 })
 
@@ -57,14 +57,14 @@ function loadDept(){
 		}
 	})
 }
-function loadEngagementType(){
-	var url = path+'/json/engagementType.json'
-	$.getJSON(url,  function(data) {
-	       $.each(data, function(i, item) {
-	    	   $("#engagementType").append("<option>"+item.name+"</option>");
-	       })
-	});
-}
+//function loadEngagementType(){
+//	var url = path+'/json/engagementType.json'
+//	$.getJSON(url,  function(data) {
+//	       $.each(data, function(i, item) {
+//	    	   $("#engagementType").append("<option>"+item.name+"</option>");
+//	       })
+//	});
+//}
 
 $("#hsbcDept").change(function(){
 	var hsbcSubDeptId = $('#hsbcDept').val();
@@ -297,7 +297,7 @@ $("#status").onchange(){
 	
 }*/
 function loadpage(){
-	var status=$("#status").find("option:selected").val();
+	var status=$("#status").val();
 	if(status=='Open'){
 			/*$("#status").append("<option >Frozen</option>");
 			$("#status").append("<option >Cancel</option>");*/
