@@ -48,11 +48,13 @@ $('#interviewForm').bootstrapValidator({
 
 function loadCandidateList(pageState) {
 	var candidate = new FormData(document.getElementById("candidateForm"));
+	var pageRecordsNum = $("#pageRecordsNum").find("option:selected").text();
 	if (null != pageState) {
 		candidate.append("pageState", pageState);
 	}
 	candidate.append("currentPage", currentPage);
 	candidate.append("pageCount", pageCount);
+	candidate.append("pageRecNum",pageRecordsNum);
 	$.ajax({
 				url : path + "/service/candidate/queryInterviewFeedBack",
 				dataType : "json",
@@ -206,7 +208,9 @@ function updateInterviewFeedBack(e) {
 	})
 }
 
-
+$("#pageRecordsNum").change(function(){
+	loadCandidateList();
+})
 //if($("#GRADUATE_DATE1").length != 0){
 //	  $('#candidateForm').data("bootstrapValidator").revalidateField($("#GRADUATE_DATE1"));
 //}

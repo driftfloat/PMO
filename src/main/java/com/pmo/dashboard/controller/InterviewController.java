@@ -43,7 +43,11 @@ public class InterviewController {
 		int dataCount = interviewService.getCandidateListCount(candidate);
 		page.setDataCount(dataCount + "");
 		page.setPageCount((dataCount - 1) / 10 + 1 + "");
-		page.setPageDataCount(Constants.PAGE_DATA_COUNT + "");
+		if(candidate.getPageRecNum()!=null){
+			page.setPageDataCount(candidate.getPageRecNum() + "");
+		}else{
+			page.setPageDataCount(Constants.PAGE_DATA_COUNT + "");
+		}
 		if ("".equals(pageState) || pageState == null || "frist".equals(pageState)) {
 			page.setCurrentPage("1");
 		} else if ("next".equals(pageState)) {
@@ -53,9 +57,13 @@ public class InterviewController {
 		} else if ("last".equals(pageState)) {
 			page.setCurrentPage(page.getPageCount());
 		}
-
-		candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage()) - 1) * Constants.PAGE_DATA_COUNT + "");
-		candidate.setPageDataCount(Constants.PAGE_DATA_COUNT + "");
+        if(candidate.getPageRecNum()!=null){
+        	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage()) - 1) * candidate.getPageRecNum() + "");
+    		candidate.setPageDataCount(candidate.getPageRecNum() + "");
+        }else{
+        	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage()) - 1) * Constants.PAGE_DATA_COUNT + "");
+    		candidate.setPageDataCount(Constants.PAGE_DATA_COUNT + "");
+        }
 		List<CandidateInfo> list = interviewService.getCandidateList(candidate);
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("data", list);

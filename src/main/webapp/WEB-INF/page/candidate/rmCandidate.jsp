@@ -80,6 +80,30 @@ vertical-align: middle!important;
 								</h2>
 							</div>
 							<div id="demandInfo" class="box-content">
+							<div id="CandidateInfo" class="box-content" >
+								<form id="candidateForm" method="post" class="form-horizontal">
+							<div class="group">
+								<label class="col-sm-2 control-label">Candidate Name</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" name="candidateNames" id="candidateNames" />
+									</div>
+							</div>
+							<div class="group">
+								<label class="col-sm-2 control-label">Tel</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" name="tel" id="tel" />
+									</div>
+							</div>
+							</br></br></br>
+							
+							<div class="form-group">
+								<div style="text-align:center;width:100%;">
+								<input type="button" value="Search"
+								name="searchBtn" id="searchBtn" href="#"
+								class="button btn btn-primary" data-dismiss="modal"
+								style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
+								 </div>
+							</div>
 							    
 							    <form id="demandForm" method="post" class="form-horizontal">
 									<div style="overflow: auto;">
@@ -112,7 +136,15 @@ vertical-align: middle!important;
 											<li><a href="#" id="lastPage" >End</a></li>
 										</ul>
 										<div style="max-width:400px;float:right;margin-top:30px;">
-										<b><span id="currentPage"></span> / <span id="pageCount"></span></b>
+										<b><span id="currentPage"></span> / <span id="pageCount"></span>
+										<select class="pagination pagination-centered"	name="pageRecNum" data-bv-notempty
+													data-bv-notempty-message="please select  pageRecordsNum"
+													id="pageRecordsNum" data-bv-group=".group">
+													<option value="10">10</option>
+													<option value="20">20</option>
+													<option value="50">50</option>
+												</select>
+										</b>
 										</div>
 									</div>
 									

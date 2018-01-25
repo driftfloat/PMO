@@ -60,13 +60,18 @@ $(function() {
 
 function loadMyCandidate(currPage) {
 	$("#rmCandidateList  tr:not(:first)").html("");
-	$
-			.ajax({
+	var pageRecordsNum = $("#pageRecordsNum").find("option:selected").text();
+	var candidateNames = $("#candidateNames").val();
+	var tel = $("#tel").val();
+	$.ajax({
 				url : path + '/service/rmCandidate/getMyCandidate',
 				dateType : 'json',
 				type : 'post',
 				data : {
-					"currPage" : currPage
+					"currPage" : currPage,
+					"pageRecNum":pageRecordsNum,
+					"name":candidateNames,
+					"tel":tel
 				},
 				success : function(result) {
 					if (result.candidatelist.length <= 0) {
@@ -767,3 +772,11 @@ function demandDetail(demandId) {
 	$("#detailForm").attr("action", url);
 	$("#detailForm").submit();
 }
+
+$("#pageRecordsNum").change(function(){
+	loadMyCandidate();
+});
+
+$("#searchBtn").click(function(){
+	loadMyCandidate();
+});
