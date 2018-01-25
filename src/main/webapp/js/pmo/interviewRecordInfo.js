@@ -6,6 +6,7 @@ $(function() {
 
 function loadCandidateList(pageState) {
 	var candidate = new FormData(document.getElementById("candidateForm"));
+	var pageRecordsNum = $("#pageRecordsNum").find("option:selected").text();
 	if (null != pageState) {
 		candidate.append("pageState", pageState);
 	}
@@ -21,6 +22,7 @@ function loadCandidateList(pageState) {
 	candidate.append("candidateName",candidateName);
 	
 	candidate.append("candidateTel",candidateTel);
+	candidate.append("pageRecNum",pageRecordsNum);
 	
 	$.ajax({
 				url : path + "/service/interview/getCandidateList",
@@ -118,7 +120,9 @@ function displayPDF(candidateId){
 	 loadCandidateList("");
  });
  
- 
+ $("#pageRecordsNum").change(function(){
+	 loadCandidateList("");
+ });
 //if($("#GRADUATE_DATE1").length != 0){
 //	  $('#candidateForm').data("bootstrapValidator").revalidateField($("#GRADUATE_DATE1"));
 //}

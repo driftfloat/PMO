@@ -44,8 +44,16 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 		params.put("csSubDeptId", csSubDeptId);
 		params.put("status", status);
 		params.put("pageCondition", pageCondition);
+		params.put("name", pageCondition.getName());
+		params.put("tel", pageCondition.getTel());
 		//计算查询起始行号
-		int num = (pageCondition.getCurrPage() - 1)*pageCondition.getPageSize();
+		int num = 0;
+		if(pageCondition.getPageRecNum()!=null){
+			num = (pageCondition.getCurrPage() - 1)*pageCondition.getPageRecNum();
+			pageCondition.setPageSize(pageCondition.getPageRecNum());
+		}else{
+			num = (pageCondition.getCurrPage() - 1)*pageCondition.getPageSize();
+		}
 		params.put("num", num);
 		//查找面试表中登录rm的部门下的最近一次面试的数据关联到推送表
 		List<CandidatePush> candidateList = null;

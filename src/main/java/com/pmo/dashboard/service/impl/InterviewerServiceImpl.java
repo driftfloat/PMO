@@ -46,6 +46,7 @@ public class InterviewerServiceImpl implements InterviewerService
 			System.out.println("页数======================"+interviewer.getCurrPage());
 			num = (interviewer.getCurrPage() - 1)*interviewer.getPageRecNum();
 			map.put("num", num);
+			interviewer.setPageSize(interviewer.getPageRecNum());
 		}else{
 			num = (interviewer.getCurrPage() - 1)*interviewer.getPageSize();
 			map.put("num", num);

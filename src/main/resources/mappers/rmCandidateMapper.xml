@@ -51,6 +51,12 @@
 		where 
 			cp.CS_SUBDEPT_ID = #{csSubDeptId}
 			and cp.PUSH_STATUS = #{status}
+			<if test="name != null and name !=''" >
+              and c.CANDIDATE_NAME=#{name}
+            </if>
+            <if test="tel != null and tel !=''" >
+              and c.TEL=#{tel}
+            </if>
 		ORDER BY PUSH_ID
 	</sql>
 	
@@ -74,6 +80,12 @@
 		on inter.CANDIDATE_ID = cp.CANDIDATE_ID 
 		where 
 			cp.PUSH_STATUS = #{status}
+			<if test="name != null and name !=''" >
+              and c.CANDIDATE_NAME=#{name}
+            </if>
+            <if test="tel != null and tel !=''" >
+              and c.TEL=#{tel}
+            </if>
 		ORDER BY PUSH_ID
 	</sql>
 	
