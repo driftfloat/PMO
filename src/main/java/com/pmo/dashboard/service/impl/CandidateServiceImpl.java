@@ -669,5 +669,11 @@ public class CandidateServiceImpl implements CandidateService {
 		return candidateInterviewMapper.updateCandidateInterviewMark(candidateInterview);
 	}
 
+	@Override
+	public boolean updateConfirmStatus(CandidateInterview candidateInterview) {
+		
+		 return candidateInterviewMapper.updateConfirmStatus(candidateInterview);
+	}
+
 
 }

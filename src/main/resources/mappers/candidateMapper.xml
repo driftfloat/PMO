@@ -42,6 +42,7 @@
 		<result property="interviewSerrial" 		column="INTERVIEW_SERIAL" 		javaType="String" />
 		<result property="projectName" 		column="PROJECT_NAME" 		javaType="String" />
 		<result property="interviewType" 		column="INTERVIEW_TYPE" 		javaType="String" />
+		<result property="confirmStatus" 		column="CONFIRM_STATUS" 		javaType="String" />
 	</resultMap>
 	<resultMap id="candidatePushMap" type="com.pmo.dashboard.entity.CandidatePush">
 		<id 	property="pushId" 		column="PUSH_ID" 		javaType="String" />
@@ -61,6 +62,7 @@
 			LEFT JOIN t_candidate b on ci.CANDIDATE_ID = b.CANDIDATE_ID
 			LEFT JOIN t_cs_dept dept on dept.CS_SUBDEPT_ID = ci.CSSUBDEPT
 	        WHERE USER_ID = #{userId} and (ci.FEEDBACK='' or ci.FEEDBACK is null)
+	        and ci.CONFIRM_STATUS = "1"
 			ORDER BY ci.INTERVIEW_DATE
 	        LIMIT #{currentPage},#{pageDataCount};
 	</select>
@@ -72,6 +74,7 @@
 			LEFT JOIN t_candidate b on ci.CANDIDATE_ID = b.CANDIDATE_ID
 			LEFT JOIN t_cs_dept dept on dept.CS_SUBDEPT_ID = ci.CSSUBDEPT
 	        WHERE USER_ID = #{userId} and (ci.FEEDBACK='' or ci.FEEDBACK is null)
+	        and ci.CONFIRM_STATUS = "1"
 			ORDER BY ci.INTERVIEW_DATE
 	        LIMIT #{currentPage},#{pageDataCount};
 	</select>
@@ -115,14 +118,16 @@
 	     SELECT count(0) 
         	FROM t_user a 
 			LEFT JOIN t_candidate_interview ci ON ci.INTERVIEWER_ID = a.USER_ID
-        	WHERE USER_ID = #{userId} and (ci.FEEDBACK='' or ci.FEEDBACK is null);
+        	WHERE USER_ID = #{userId} and (ci.FEEDBACK='' or ci.FEEDBACK is null) 
+        	and ci.CONFIRM_STATUS = "1";
 	</select>
 	
 	<select id="queryinterviewAllFeedBackCount" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="int" >
 	     SELECT count(0) 
         	FROM t_user a 
 			LEFT JOIN t_candidate_interview ci ON (ci.INTERVIEWER_ID = a.USER_ID or ci.INTERVIEWER_ID != a.USER_ID)
-        	WHERE USER_ID = #{userId} and (ci.FEEDBACK='' or ci.FEEDBACK is null);
+        	WHERE USER_ID = #{userId} and (ci.FEEDBACK='' or ci.FEEDBACK is null)
+        	and ci.CONFIRM_STATUS = "1";
 	</select>
 	
 	<select id="queryCandidateResumePath" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="java.lang.String" >

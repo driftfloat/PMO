@@ -6,5 +6,7 @@ public interface CandidateInterviewMapper {
 	CandidateInterview queryCandidateInterviewById(String interviewId);
 	
 	boolean updateCandidateInterviewMark(CandidateInterview candidateInterview);
+	
+	boolean updateConfirmStatus(CandidateInterview candidateInterview);
 
 }
