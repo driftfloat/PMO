@@ -15,6 +15,9 @@ $(function(){
 	
 })
 
+$("#pageRecordsNum").change(function(){
+	loadDemandList();
+})
 
 /*加载skill本地json信息*/
 function loadSkill(){
@@ -170,6 +173,7 @@ function loadDemandList(currPage){
 	/*var position= $("#position").val();*/
 	var department= $("#department").val();
 	var sub_department= $("#sub_department").val();
+	var  pageRecordsNum = $("#pageRecordsNum").find("option:selected").text();
 	
 	/*var status= $("#status").val();*/
 	var rr= $("#rr").val();
@@ -185,7 +189,7 @@ function loadDemandList(currPage){
 		cache:false,
 		type:"post",
 		data:{"csBuName":csBuName,"hsbcDept.hsbcDeptName":department,"hsbcDept.hsbcSubDeptName":sub_department,
-			"rr":rr,"currPage":currPage,"csSubDept":csSubDept,"flag":1,"candidateName":candName},
+			"rr":rr,"currPage":currPage,"csSubDept":csSubDept,"flag":1,"candidateName":candName,"pageRecordsNum":pageRecordsNum},
 		success:function(result){
 			//alert(result.list.length);
 			var userType = result.user.userType;
