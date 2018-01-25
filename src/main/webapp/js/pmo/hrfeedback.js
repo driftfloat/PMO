@@ -24,7 +24,7 @@ function feedbackCandidateInfo(candidateId,candidateName){
 			for (var i = 0; i < result.length; i++) {
 				var tr = $("<tr ></tr>");
 				tr.appendTo(tbody);
-				$("<td>HR Name:" +result[i].userName+"</td>" +
+				$("<td>HR Name:" +result[i].nickname+"</td>" +
 				"<td>FeedbackDATE:"+ result[i].feedbacktime+ "</td>").appendTo(tr);
 				var trr = $("<tr ></tr>");
 				trr.appendTo(tbody);
@@ -42,6 +42,29 @@ function feedbackCandidateInfo(candidateId,candidateName){
 function updateHRFeedBack(){
 	var candidateId=$("#hrcandidateId").val();
 	var hrFeedBack=$("#hrFeedBack").val();
+	$('#hrFeedBackForm').bootstrapValidator({
+		message: 'This value is not valid',
+
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+        	hrFeedBack: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter Feedback'
+                    }
+                }
+            }
+        }
+    });
+	var bootstrapValidator = $("#hrFeedBackForm").data('bootstrapValidator');
+	bootstrapValidator.validate();
+	if(!bootstrapValidator.isValid()){
+		return;
+	}
 	$.ajax({
 		url:path+"/service/hrfeedback/hrFinalFeedBack",
 		dataType:"json",
@@ -50,6 +73,8 @@ function updateHRFeedBack(){
 		cache:false,
 		type:"post",
 		success:function(result){
+			$("#hrFeedBack").val(" ");
+			$('#hrFeedBackForm').data('bootstrapValidator').resetForm(); 
 			if(result)
 			{
 			     $('#hrfeedBackbox').modal('hide');
@@ -120,5 +145,11 @@ function confirmInterviewDate(){
 			$('#hrInterviewConfirmbox').modal('hide');
 		}
 	})
+}
+
+function cancel(){
+	$('#hrFeedBackForm').data('bootstrapValidator').resetForm(); 
+	$('#hrfeedBackbox').modal('hide');
+	$("#hrFeedBack").val("");
 }
 	
