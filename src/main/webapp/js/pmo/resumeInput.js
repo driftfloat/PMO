@@ -14,17 +14,17 @@ $(document).ready(function() {
                 group: '.group',
 				validators: {
                     notEmpty: {
-                        message: '请输入中文名'
+                        message: 'Please enter name'
                     },
-                    regexp: {
+                    /*regexp: {
                         regexp: /^([\u4E00-\u9FA5])*$/,
 
                         message: '请输入中文字符'
 
-                    },
+                    },*/
                     stringLength: {
-                        max: 25,
-                        message: '请输入25字以内的中文名'
+                        max: 64,
+                        message: 'Exceeded the maxLength'
                     }
                 }
             },
@@ -33,11 +33,11 @@ $(document).ready(function() {
          		group: '.group',
          		validators: {
                      notEmpty: {
-                    	 message: '请输入电话号码'
+                    	 message: 'Please enter phone number'
                      },
                      regexp: {
                          regexp: /^1[3|5|7|8]\d{9}$/,
-                         message: '请输入正确的手机号'
+                         message: 'Please enter a correctly formatted phone number'
                      },
                      remote: {
                     	 type:"POST",
@@ -45,7 +45,7 @@ $(document).ready(function() {
                     	 data:{
                     		 tel:function(){return $("#candidateTel").val();}
                     	 },
-                    	 message:"手机号码已存在"
+                    	 message:"Phone number already exists"
                      },
                         
                  }
@@ -55,11 +55,11 @@ $(document).ready(function() {
           		group: '.group',
           		validators: {
                       notEmpty: {
-                          message: '请输入年龄'
+                          message: 'Please enter age'
                       },
                       regexp: {
                           regexp: "^[1-9][0-9]$",
-                          message: '年龄必须两位整数'
+                          message: 'Please enter a double-digit number'
                       }
                       
                   }
@@ -69,7 +69,7 @@ $(document).ready(function() {
           		group: '.group',
           		validators: {
                       notEmpty: {
-                          message: '请输入性别'
+                          message: 'Please enter sex'
                       },
                       
                   }
@@ -78,7 +78,7 @@ $(document).ready(function() {
           		group: '.group',
           		validators: {
                       notEmpty: {
-                          message: '请输入学历'
+                          message: 'Please enter education'
                       },
                       
                   }
@@ -88,17 +88,17 @@ $(document).ready(function() {
                   group: '.group',
   				validators: {
                       notEmpty: {
-                          message: '请输入毕业院校名称'
+                          message: 'Please enter university'
                       },
-                      regexp: {
+                      /*regexp: {
                           regexp: /^([\u4E00-\u9FA5])*$/,
 
                           message: '请输入中文字符'
 
-                      },
+                      },*/
                       stringLength: {
-                          max: 25,
-                          message: '请输入25字以内的中文名'
+                          max: 32,
+                          message: 'Exceeded the maxLength'
                       }
                   }
               },
@@ -106,7 +106,7 @@ $(document).ready(function() {
           		group: '.group',
           		validators: {
                       notEmpty: {
-                          message: '请确认是否是计算机专业'
+                          message: 'Please enter whether it is a computer major'
                       },
                       
                   }
@@ -115,7 +115,7 @@ $(document).ready(function() {
           		group: '.group',
           		validators: {
                       notEmpty: {
-                          message: '请输入工作年限'
+                          message: 'Please enter working years'
                       },
                       
                   }
@@ -125,7 +125,7 @@ $(document).ready(function() {
           		group: '.group',
           		validators: {
                       notEmpty: {
-                          message: '请输入技能'
+                          message: 'Please enter skill'
                       },
                       
                   }
@@ -134,11 +134,11 @@ $(document).ready(function() {
           		group: '.group',
           		validators: {
                       notEmpty: {
-                          message: '请输入毕业时间'
+                          message: 'Please enter graduation date'
                       },
                       date : {  
                           format : 'YYYY-MM-DD',  
-                          message : '日期格式不正确'  
+                          message : 'Time format is incorrect'  
                       }
                   }
               },
@@ -147,7 +147,7 @@ $(document).ready(function() {
           		group: '.group',
           		validators: {
                       notEmpty: {
-                          message: '请输入英语水平'
+                          message: 'Please enter english level'
                       },
                       
                   }
@@ -156,7 +156,7 @@ $(document).ready(function() {
           		group: '.group',
           		validators: {
                       notEmpty: {
-                          message: '请输入候选人状态'
+                          message: 'Please enter candidate status'
                       },
                       
                   }
@@ -166,7 +166,7 @@ $(document).ready(function() {
           		group: '.group',
           		validators: {
                       notEmpty: {
-                          message: '请输入简历来源'
+                          message: 'Please enter resume source'
                       },
                       
                   }
@@ -175,7 +175,7 @@ $(document).ready(function() {
           		group: '.group',
           		validators: {
                       notEmpty: {
-                          message: '请输入角色'
+                          message: 'Please enter role'
                       },
                       
                   }
@@ -185,11 +185,11 @@ $(document).ready(function() {
          		group: '.group',
          		validators: {
                      notEmpty: {
-                         message: '请输入邮箱号'
+                         message: 'Please enter email'
                      },
                      regexp: {
                          regexp: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
-                         message: '请输入正确的邮箱号'
+                         message: 'Please enter the correct format of the mailbox'
                      },
                     
                  }
@@ -199,7 +199,7 @@ $(document).ready(function() {
          		group: '.group',
          		validators: {
                      notEmpty: {
-                         message: '简历未上传'
+                         message: 'Please upload the resume'
                      },
                  }
              },
@@ -209,7 +209,7 @@ $(document).ready(function() {
  				validators: {
                      stringLength: {
                          max: 25,
-                         message: '请输入25字以内的入职日期'
+                         message: 'Please enter entry date information'
                      }
                  }
              },
@@ -218,7 +218,7 @@ $(document).ready(function() {
             	 validators: {
             		 regexp: {
             	            regexp: "^[1-9][0-9]*$",
-            	            message: '期望薪资为大于0的正整数'
+            	            message: 'Please enter an integer greater than 0'
             	        },
             	 }
              },
@@ -227,7 +227,7 @@ $(document).ready(function() {
             	 validators: {
             		 regexp: {
             			 regexp: "^[1-9][0-9]*$",
-            			 message: '实际薪资为大于0的正整数'
+            			 message: 'Please enter an integer greater than 0'
             		 },
             	 }
              },
@@ -259,17 +259,17 @@ $(document).ready(function() {
                     group: '.group',
     				validators: {
                         notEmpty: {
-                            message: '请输入中文名'
+                            message: 'Please enter name'
                         },
-                        regexp: {
+                       /* regexp: {
                             regexp: /^([\u4E00-\u9FA5])*$/,
 
                             message: '请输入中文字符'
 
-                        },
+                        },*/
                         stringLength: {
                             max: 25,
-                            message: '请输入25字以内的中文名'
+                            message: 'Exceeded the max length'
                         }
                     }
                 },
@@ -278,11 +278,11 @@ $(document).ready(function() {
              		group: '.group',
              		validators: {
                          notEmpty: {
-                        	 message: '请输入电话号码'
+                        	 message: 'Please enter phone number'
                          },
                          regexp: {
                              regexp: /^1[3|5|7|8]\d{9}$/,
-                             message: '请输入正确的手机号'
+                             message: 'Please enter a correctly formatted phone number'
                          },
                      }
                  },
@@ -291,11 +291,11 @@ $(document).ready(function() {
               		group: '.group',
               		validators: {
                           notEmpty: {
-                              message: '请输入年龄'
+                              message: 'Please enter age'
                           },
                           regexp: {
                               regexp: "^[1-9][0-9]$",
-                              message: '年龄必须两位整数'
+                              message: 'Please enter a double-digit number'
                           }
                           
                       }
@@ -305,7 +305,7 @@ $(document).ready(function() {
               		group: '.group',
               		validators: {
                           notEmpty: {
-                              message: '请输入性别'
+                              message: 'Please enter sex'
                           },
                           
                       }
@@ -314,7 +314,7 @@ $(document).ready(function() {
               		group: '.group',
               		validators: {
                           notEmpty: {
-                              message: '请输入学历'
+                              message: 'Please enter education'
                           },
                           
                       }
@@ -324,17 +324,17 @@ $(document).ready(function() {
                       group: '.group',
       				validators: {
                           notEmpty: {
-                              message: '请输入毕业院校名称'
+                              message: 'Please enter university'
                           },
-                          regexp: {
+                          /*regexp: {
                               regexp: /^([\u4E00-\u9FA5])*$/,
 
                               message: '请输入中文字符'
 
-                          },
+                          },*/
                           stringLength: {
                               max: 25,
-                              message: '请输入25字以内的中文名'
+                              message: 'Exceeded the max length'
                           }
                       }
                   },
@@ -342,7 +342,7 @@ $(document).ready(function() {
               		group: '.group',
               		validators: {
                           notEmpty: {
-                              message: '请确认是否是计算机专业'
+                              message: 'Please enter whether it is a computer major'
                           },
                           
                       }
@@ -351,7 +351,7 @@ $(document).ready(function() {
               		group: '.group',
               		validators: {
                           notEmpty: {
-                              message: '请输入工作年限'
+                              message: 'Please enter working years'
                           },
                           
                       }
@@ -361,7 +361,7 @@ $(document).ready(function() {
               		group: '.group',
               		validators: {
                           notEmpty: {
-                              message: '请输入技能'
+                              message: 'Please enter skill'
                           },
                           
                       }
@@ -370,11 +370,11 @@ $(document).ready(function() {
               		group: '.group',
               		validators: {
                           notEmpty: {
-                              message: '请输入毕业时间'
+                              message: 'Please enter graduation date'
                           },
                           date : {  
                               format : 'YYYY-MM-DD',  
-                              message : '日期格式不正确'  
+                              message : 'Time format is incorrect'  
                           }
                       }
                   },
@@ -383,7 +383,7 @@ $(document).ready(function() {
               		group: '.group',
               		validators: {
                           notEmpty: {
-                              message: '请输入英语水平'
+                              message: 'Please enter english level'
                           },
                           
                       }
@@ -392,7 +392,7 @@ $(document).ready(function() {
               		group: '.group',
               		validators: {
                           notEmpty: {
-                              message: '请输入候选人状态'
+                              message: 'Please enter candidate status'
                           },
                           
                       }
@@ -402,7 +402,7 @@ $(document).ready(function() {
               		group: '.group',
               		validators: {
                           notEmpty: {
-                              message: '请输入简历来源'
+                              message: 'Please enter resume source'
                           },
                           
                       }
@@ -411,7 +411,7 @@ $(document).ready(function() {
               		group: '.group',
               		validators: {
                           notEmpty: {
-                              message: '请输入角色'
+                              message: 'Please enter role'
                           },
                           
                       }
@@ -421,11 +421,11 @@ $(document).ready(function() {
              		group: '.group',
              		validators: {
                          notEmpty: {
-                             message: '请输入邮箱号'
+                             message: 'Please enter email'
                          },
                          regexp: {
                              regexp: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
-                             message: '请输入正确的邮箱号'
+                             message: 'Please enter the correct format of the mailbox'
                          },
                         
                      }
@@ -435,7 +435,7 @@ $(document).ready(function() {
              		group: '.group',
              		validators: {
                          notEmpty: {
-                             message: '简历未上传'
+                             message: 'Please upload the resume'
                          },
                      }
                  },
@@ -445,7 +445,7 @@ $(document).ready(function() {
      				validators: {
                          stringLength: {
                              max: 25,
-                             message: '请输入25字以内的入职日期'
+                             message: 'Please enter entry date information'
                          }
                      }
                  },
@@ -454,7 +454,7 @@ $(document).ready(function() {
                 	 validators: {
                 		 regexp: {
                 	            regexp: "^[1-9][0-9]*$",
-                	            message: '期望薪资为大于0的正整数'
+                	            message: 'Please enter an integer greater than 0'
                 	        },
                 	 }
                  },
@@ -463,7 +463,7 @@ $(document).ready(function() {
                 	 validators: {
                 		 regexp: {
                 			 regexp: "^[1-9][0-9]*$",
-                			 message: '实际薪资为大于0的正整数'
+                			 message: 'Please enter an integer greater than 0'
                 		 },
                 	 }
                  },
@@ -510,7 +510,7 @@ function dateType(){
 {
 	 var uploadId = $("#uploadId").val();
 	if(uploadId==''){
-		alert("请选择上传文件！");
+		alert("Please upload file!");
 		return;
 	}else{
 		var fileType=uploadId.slice(-3);
@@ -526,7 +526,7 @@ function dateType(){
 		          var jsonOut = eval('('+data+')');
 		          
 		          $("#resume_path").val(jsonOut.url)
-		          alert("上传成功！");
+		          alert("Uploaded successfully!");
 		           
 		        },
 		        error: function (data, status, e)//服务器响应失败处理函数
@@ -536,7 +536,7 @@ function dateType(){
 		    });
 			
 		}else{
-			alert("请上传pdf格式的简历！");
+			alert("Please upload a resume in PDF format!");
 		}
 	}
 	
@@ -549,7 +549,7 @@ return false;
 
 function addCandidate(){
 	if($("#resume_path").val()==''){
-		alert("简历未上传！");
+		alert("Please upload file!");
 		return;
 	}
 	var candidateName = $("#candidateName").val();
@@ -607,13 +607,13 @@ function addCandidate(){
 		success:function(flag){
 			if(flag=='0'){
 				$("html,body").animate({scrollTop:0}, 500);
-				$('#successAlert').html('候选人'+candidateName+'录入成功').show();
+				$('#successAlert').html('Candidate:'+candidateName+' information added succesffully').show();
 				setTimeout(function () {
 					$('#successAlert').hide();
 				}, 4000);
 				/*window.location.href=path+"/service/resume/input.html";*/
 			}else{
-				alert("录入失败！！！")
+				alert("Information added unsuccesffully!")
 			}
 		}
 	})

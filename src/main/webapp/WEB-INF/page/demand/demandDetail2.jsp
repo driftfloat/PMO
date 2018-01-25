@@ -84,7 +84,7 @@ $(function(){
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> 招聘需求详情
+									<i class="glyphicon glyphicon-user"></i> Demand Information
 								</h2>
 							</div>
 							<div id="demandInfo" class="box-content">

@@ -19,7 +19,7 @@ function feedbackCandidateInfo(candidateId,candidateName){
 				$('#recordTable').display = "none";
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
-				$("<td colspan='4' style='color: red;text-align: center;'>无反馈记录！</td>").appendTo(tr);
+				$("<td colspan='4' style='color: red;text-align: center;'>No record!</td>").appendTo(tr);
 			}
 			for (var i = 0; i < result.length; i++) {
 				var tr = $("<tr ></tr>");
@@ -56,7 +56,7 @@ function updateHRFeedBack(){
 			     loadCandidateList();	
 			}else{
 				 $('#hrfeedBackbox').modal('hide');
-				 alert("反馈失败。")
+				 alert("Feedback unsuccessfully")
 			}
 		}
 	})
@@ -113,7 +113,7 @@ function confirmInterviewDate(){
 		type:"post",
 		success:function(result){
 			if (result == false) {
-				alert("确认失败.");
+				alert("Reconfirm unsuccessfully");
 			} else if (result == true) {
 				$("#reconfirm").hide();
 			}

@@ -279,7 +279,7 @@ function loadDemandList(currPage){
 		type:"post",
 		data:{"csBuName":csBuName,"skill":skill,"position":position,
 
-			"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept,"engagementType":engagementType,"jobCode":jobCode,"pageRecordsNum":
+			"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept,"engagementType":engagementType,"jobCode":jobCode,"pageRecordsNum":pageRecordsNum
          
        },
 
@@ -289,7 +289,7 @@ function loadDemandList(currPage){
 			if(result.list.length > 0){
 				$("#exportExcel").removeAttr("disabled");
 			}else{
-				$("#demandList").append("<tr><td colspan='8' style='text-align:center'>暂无数据！</td></tr>");
+				$("#demandList").append("<tr><td colspan='8' style='text-align:center'>No record!</td></tr>");
 			}
 			//$.each(reslut, function(i,data){
 			for (var i = 0; i < result.list.length; i++) {
