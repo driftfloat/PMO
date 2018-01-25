@@ -136,10 +136,26 @@ var path='<%=path%>';
 											</div>
 										</div>
 										<div class="group">
+											<label class="col-sm-2 control-label">EngagementType</label>
+											<div class="col-sm-4">
+												<select class="form-control" name="engagementType" data-bv-notempty
+													data-bv-notempty-message="请选择角色" id="engagementType" data-bv-group=".group">
+													<option value="">--Option--</option>
+												</select>
+											</div>
+										</div>
+									   </br></br></br>
+										<div class="group">
 											<label class="col-sm-2 control-label">RR #</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="rr"
 													id="rr"/>
+											</div>
+										</div><div class="group">
+											<label class="col-sm-2 control-label">Job Code</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="jobcode"
+													id="jobcode"/>
 											</div>
 										</div>
 										</br></br></br>
