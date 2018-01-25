@@ -290,7 +290,9 @@ vertical-align: middle!important;
 							<div class="group">
 								<label class="col-sm-2 control-label">Confirm Information:</label>
 								<div class="col-sm-10">
-									<textarea id="confirmInfo" class="form-control" style="width: 80%;" rows="4"></textarea>
+								<form id="confirmForm">
+									<textarea name="confirmInfo" id="confirmInfo" class="form-control" style="width: 78%;" rows="4"></textarea>
+								</form>
 								</div>
 							</div>
 							</br></br></br></br></br></br></br>

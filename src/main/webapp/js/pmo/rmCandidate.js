@@ -349,6 +349,29 @@ function displayPDF(candidateId) {
 
 function confirmContent(candidateId,candidateName){
 	$("#confirmBox").modal('show');
+	$('#confirmForm').bootstrapValidator({
+		message: 'This value is not valid',
+
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+        	confirmInfo: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter Confirm Information'
+                    }
+                }
+            }
+        }
+    });
+	var bootstrapValidator = $("#confirmForm").data('bootstrapValidator');
+	bootstrapValidator.validate();
+	if(!bootstrapValidator.isValid()){
+		return;
+	}
 		$.ajax({
 			url : path + '/service/rmCandidate/getConfirminfo',
 			dataType : "json",

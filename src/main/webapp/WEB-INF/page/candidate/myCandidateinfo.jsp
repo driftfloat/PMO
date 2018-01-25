@@ -496,15 +496,17 @@ var path='<%=path%>';
 									</div>
 						
 						<div class="group">
+						<from id="hrFeedBackForm">
 							<label class="col-sm-2 control-label">Feedback:</label>
-							<textarea id="hrFeedBack" class="form-control" style="margin:15px;width: 80%;" rows="6"></textarea>
+							<textarea name="hrFeedBack" id="hrFeedBack" class="form-control" style="margin:15px;width: 78%;" rows="6" data-bv-group=".group"></textarea>
+							</from>
 						</div>
 						<div class="center">
 							<a class="btn btn-success" href="#"
 								onClick="updateHRFeedBack()"> 
 								<i class="glyphicon glyphicon-ok icon-white"></i> Confirm
 							</a> 
-							<a class="btn btn-info" href="#" data-dismiss="modal"> 
+							<a class="btn btn-info" href="#" onClick="cancel()"> 
 								<i class="glyphicon glyphicon-remove icon-white"></i> Cancel
 							</a>
 						</div>

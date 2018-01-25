@@ -9,6 +9,7 @@
 		<result property="hrFeedBack" 	column="FEEDBACK" 		javaType="String" />
 		<result property="feedbacktime" 	column="FEEDBACK_DATE" 				javaType="String" />
 		<result property="userName" 	column="USER_NAME" 				javaType="String" />
+		<result property="nickname" 	column="NICKNAME" 				javaType="String" />
 		<!-- <association property="user" javaType="com.pmo.dashboard.entity.User" 
 		resultMap="com.pmo.dashboard.dao.UserMapper.userMap" >
 		    <result column="USER_NAME" property="userName"/>
