@@ -20,7 +20,7 @@ function exportCondition(){
 	var exportDataColumn = "";
 	var exportPageColumn = "";
 	if(lb.length <= 0){
-		alert("未勾选导出列！");
+		alert("Please select item!");
 		return;
 	}
 	for (var i=0;i<lb.length;i++)
@@ -67,7 +67,7 @@ function updateResumeInfo(candidateId){
 
 function downLoadCandidateResume(candidateId,resumePath){
 	if(resumePath == null || resumePath == ''){
-		alert("未上传此候选人简历");
+		alert("Not uploading the resume");
 		return;
 	}
 	var url = path+'/service/candidate/downLoadCandidateResume?candidateId='+candidateId;
@@ -78,7 +78,7 @@ function downLoadCandidateResume(candidateId,resumePath){
 //gkf
 function displayPDF(candidateId,resumePath){
 	if(resumePath == null || resumePath == ''){
-		alert("未上传此候选人简历");
+		alert("Not uploading the resume");
 		return;
 	}
 	var url = path+'/service/display/getPdf?candidateId='+candidateId;
@@ -124,7 +124,7 @@ function loadCandidateList(pageState)
 				$("#exportCandidateExcel").attr("disabled",true);
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
-				$("<td colspan='14' style='color: red;text-align: center;'>未查询到数据！</td>").appendTo(tr);
+				$("<td colspan='14' style='color: red;text-align: center;'>No Record!</td>").appendTo(tr);
 			}else{
 				$("#exportCandidateExcel").removeAttr("disabled");
 			}
@@ -200,7 +200,7 @@ function lock(candidateId,resumePath){
 				$("#"+candidateId).children().eq(13).html("<a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=downLoadCandidateResume('"+candidateId+"','"+resumePath+"')>Resume</a>");
 			}else{
-				alert('保存失败');
+				alert('Lock unsuccessful');
 			}
 		}
 	})

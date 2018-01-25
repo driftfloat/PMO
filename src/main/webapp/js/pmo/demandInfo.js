@@ -3,7 +3,7 @@ $(function(){
 	loadSkill();
 	loadPosition();
 	loadDemandStatus();
-	
+	loadEngagementType();
 	loadDemandList();
 	$("#searchBtn").click(function(){
 		loadDemandList();
@@ -19,6 +19,10 @@ $("#skill").change(function(){
 })
 $("#position").change(function(){
 	$("#exportExcel").attr("disabled", true);
+})
+
+$("#pageRecordsNum").change(function(){
+	loadDemandList();
 })
 /*$("#department").change(function(){
 	$("#exportExcel").attr("disabled", true);
@@ -256,12 +260,15 @@ function loadCSSubDept(result){
 function loadDemandList(currPage){
 	var skill= $("#skill").val();
 	var position= $("#position").val();
+	var  pageRecordsNum = $("#pageRecordsNum").find("option:selected").text();
 	/*var department= $("#department").val();
 	var sub_department= $("#sub_department").val();*/
 	var status= $("#status").val();
 	var rr= $("#rr").val();
 	var csBuName = $("#csBuName").val();
 	var csSubDept = $("#csSubDept").val();
+	var engagementType=$("#engagementType").val();
+	var jobCode=$("#jobcode").val();
 	//$("#demandList").empty();
 	$("#demandList  tr:not(:first)").html("");
 	$.ajax({
@@ -271,14 +278,18 @@ function loadDemandList(currPage){
 		cache:false,
 		type:"post",
 		data:{"csBuName":csBuName,"skill":skill,"position":position,
-			"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept},
+
+			"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept,"engagementType":engagementType,"jobCode":jobCode,"pageRecordsNum":pageRecordsNum
+         
+       },
+
 		success:function(result){
 			//alert(result.list.length);
 			var userType = result.user.userType;
 			if(result.list.length > 0){
 				$("#exportExcel").removeAttr("disabled");
 			}else{
-				$("#demandList").append("<tr><td colspan='8' style='text-align:center'>暂无数据！</td></tr>");
+				$("#demandList").append("<tr><td colspan='8' style='text-align:center'>No record!</td></tr>");
 			}
 			//$.each(reslut, function(i,data){
 			for (var i = 0; i < result.list.length; i++) {
@@ -359,7 +370,7 @@ function loadDemandList(currPage){
             loadCSSubDept(result);			
 		}
 	})
-	
+
 }
 
 $('#exportExcel').bind("click", function(){
@@ -408,7 +419,14 @@ function demandDetailUpdate(demandId,statusa,engagementType){
 	$("#detailForm").submit();
 }
 
-
+function loadEngagementType(){
+	var url = path+'/json/engagementType.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#engagementType").append("<option>"+item.name+"</option>");
+	       })
+	});
+}
 /*function demandDetailUpdate(){
 	var demandId = "1";
 	$.ajax({

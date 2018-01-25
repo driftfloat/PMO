@@ -30,10 +30,20 @@ public class HrFeedback extends PageCondition
 	private String resumePath;
 	private String lockPerson;
 	private String userName;
+	private String nickname;
 	private String createDate;
 	private String updateDate;
 	private User user;
 	private String source;
+	
+	
+	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public User getUser() {
 		return user;
 	}

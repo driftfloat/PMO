@@ -62,7 +62,7 @@ function exportCondition(){
 	var exportDataColumn = "";
 	var exportPageColumn = "";
 	if(lb.length <= 0){
-		alert("未勾选导出列！");
+		alert("Please select item!");
 		return;
 	}
 	for (var i=0;i<lb.length;i++)
@@ -186,7 +186,7 @@ function addMyWaitCandidateValidate(){
 		        	    group: '.group',
 		          		validators: {
 		                      notEmpty: {
-		                          message: 'Please select ARRIVAL DATE'
+		                          message: 'Please select arrive date'
 		                      },
 		                      date : {  
 		                          format : 'YYYY-MM-DD',  
@@ -210,7 +210,7 @@ function addMyWaitCandidateValidate(){
 	        		group: '.group',
 	          		validators: {
 	          			 notEmpty: {
-	                          message: 'Please select CANDIDATE STATUS'
+	                          message: 'Please select candidate status'
 	                      }
 	                  }
 	              },
@@ -218,7 +218,7 @@ function addMyWaitCandidateValidate(){
 	        		group: '.group',
 	          		validators: {
 	          			 notEmpty: {
-	                          message: 'Please select REMARK'
+	                          message: 'Please select remark'
 	                      }
 	                  }
 	              }
@@ -246,9 +246,9 @@ function entryMyWaitCandidateOk(){
 		type:"post",
 		success:function(flag){
 			if(flag){
-				alert("入职信息填写成功！");
+				alert("Information added succesffully!");
 			}else{
-				alert("入职信息填写失败！请刷新页面重试！");
+				alert("information added unsuccesffully!");
 			}
 			$('#entryMyWaitCandidateModal').modal('hide');	
 			entryClearData();
@@ -291,9 +291,9 @@ function abortMyWaitCandidateOk(){
 		type:"post",
 		success:function(flag){
 			if(flag){
-				alert("abort成功！");
+				alert("Abort successfully!");
 			}else{
-				alert("abort失败！请刷新页面重试！");
+				alert("Abort unsuccessfully");
 			}
 			$('#abortMyWaitCandidateModal').modal('hide');	
 			abortClearData();
@@ -323,9 +323,9 @@ function delayMyWaitCandidateOk(){
 		type:"post",
 		success:function(flag){
 			if(flag){
-				alert("延期成功！");
+				alert("Delay successfully!");
 			}else{
-				alert("延期失败！请刷新页面重试！");
+				alert("Delay unsuccessfully!");
 			}
 			$('#delayMyWaitCandidateModal').modal('hide');	
 			entryClearData1();
@@ -392,7 +392,7 @@ function loadCandidateList(pageState)
 				$("#exportCandidateExcel").attr("disabled",true);
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
-				$("<td colspan='13' style='color: red;text-align: center;'>未查询到数据！</td>").appendTo(tr);
+				$("<td colspan='13' style='color: red;text-align: center;'>No record!</td>").appendTo(tr);
 			}else{
 				$("#exportCandidateExcel").removeAttr("disabled");
 			}
@@ -472,7 +472,7 @@ function loadCandidateList(pageState)
 //gkf
 function displayPDF(candidateId,resumePath){
 	if(resumePath == null || resumePath == ''){
-		alert("未上传此候选人简历");
+		alert("Not uploading the resume");
 		return;
 	}
 	var url = path+'/service/display/getPdf?candidateId='+candidateId;

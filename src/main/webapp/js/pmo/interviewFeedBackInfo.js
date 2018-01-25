@@ -21,7 +21,7 @@ $('#interviewForm').bootstrapValidator({
 			group : '.group',
 			validators : {
 				notEmpty : {
-					message : '请选择'
+					message : 'Please select'
 				},
 			}
 		},
@@ -29,7 +29,7 @@ $('#interviewForm').bootstrapValidator({
 			group : '.group',
 			validators : {
 				notEmpty : {
-					message : '请输入反馈信息'
+					message : 'Please entry feedback information'
 				},
 			}
 		}
@@ -144,7 +144,7 @@ function loadCandidateList(pageState) {
 //gkf
 function displayPDF(candidateId,resumePath){
 	if(resumePath == null || resumePath == ''){
-		alert("未上传此人简历");
+		alert("Not uploading the resume");
 		return;
 	}
 	var url = path+'/service/display/getPdf?candidateId='+candidateId;
@@ -171,7 +171,7 @@ function interviewFeedBack(interviewId, candidateName, candidateId, interviewNam
 
 function downLoadCandidateResume(candidateId,resumePath){
 	if(resumePath == null || resumePath == ''){
-		alert("未上传此候选人简历");
+		alert("Not uploading the resume");
 		return;
 	}
 	var url = path+'/service/candidate/downLoadCandidateResume?candidateId='+candidateId;

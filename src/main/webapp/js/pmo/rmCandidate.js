@@ -77,7 +77,7 @@ function loadMyCandidate(currPage) {
 					if (result.candidatelist.length <= 0) {
 						$("#rmCandidateList")
 								.append(
-										"<tr><td colspan='13' style='text-align:center'>暂无数据！</td></tr>");
+										"<tr><td colspan='13' style='text-align:center'>No record!</td></tr>");
 						return;
 					}
 					// $.each(result,function(candidatePush){
@@ -349,6 +349,29 @@ function displayPDF(candidateId) {
 
 function confirmContent(candidateId,candidateName){
 	$("#confirmBox").modal('show');
+	$('#confirmForm').bootstrapValidator({
+		message: 'This value is not valid',
+
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+        	confirmInfo: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter Confirm Information'
+                    }
+                }
+            }
+        }
+    });
+	var bootstrapValidator = $("#confirmForm").data('bootstrapValidator');
+	bootstrapValidator.validate();
+	if(!bootstrapValidator.isValid()){
+		return;
+	}
 		$.ajax({
 			url : path + '/service/rmCandidate/getConfirminfo',
 			dataType : "json",
@@ -428,11 +451,11 @@ function rescheduleInterview(pushId,candidateId) {
 								$('#myModal').modal('hide');
 								// BootstrapDialog.alert('安排面试成功!');
 								BootstrapDialog.show({
-									title : '面试安排',
-									message : '新一轮面试安排成功!',
+									title : 'Interview arrangement',
+									message : 'Arrange successfully!',
 									size : BootstrapDialog.SIZE_NORMAL,
 									buttons : [ {
-										label : '确认',
+										label : 'Confirm',
 										action : function(dialog) {
 											loadMyCandidate();
 											dialog.close();
@@ -440,7 +463,7 @@ function rescheduleInterview(pushId,candidateId) {
 									} ]
 								});
 							} else {
-								BootstrapDialog.alert('安排面试失败!');
+								BootstrapDialog.alert('Arrange unsuccessfully!');
 							}
 						}
 					})
@@ -519,11 +542,11 @@ function scheduleInterview(pushId) {
 					$('#myModal').modal('hide');
 					// BootstrapDialog.alert('安排面试成功!');
 					BootstrapDialog.show({
-						title : '面试安排',
-						message : '新一轮面试安排成功!',
+						title : 'Interview arrangement',
+						message : 'Arrange successfully!',
 						size : BootstrapDialog.SIZE_NORMAL,
 						buttons : [ {
-							label : '确认',
+							label : 'Confirm',
 							action : function(dialog) {
 								loadMyCandidate();
 								dialog.close();
@@ -531,7 +554,7 @@ function scheduleInterview(pushId) {
 						} ]
 					});
 				} else {
-					BootstrapDialog.alert('安排面试失败!');
+					BootstrapDialog.alert('Arrange unsuccessfully!');
 				}
 			}
 		})
@@ -572,11 +595,11 @@ function nextInterview(pushId, projectName) {
 				if (data == "1") {
 					$('#myModal').modal('hide');
 					BootstrapDialog.show({
-						title : '面试安排',
-						message : '下一次面试安排成功!',
+						title : 'Interview arrangement',
+						message : 'Arrange successfully!',
 						size : BootstrapDialog.SIZE_NORMAL,
 						buttons : [ {
-							label : '确认',
+							label : 'Confirm',
 							action : function(dialog) {
 								loadMyCandidate();
 								dialog.close();
@@ -584,7 +607,7 @@ function nextInterview(pushId, projectName) {
 						} ]
 					});
 				} else {
-					BootstrapDialog.alert('安排面试失败!');
+					BootstrapDialog.alert('Arrange unsuccessfully!');
 				}
 			}
 		})
@@ -603,11 +626,11 @@ function interviewBack(pushId, candidateId) {
 
 	// alert(pushId+","+candidateId);
 	BootstrapDialog.show({
-		title : '面试安排',
-		message : '确认退回此候选人？',
+		title : 'Interview arrangement',
+		message : 'Are you sure to withdraw the candidate?',
 		size : BootstrapDialog.SIZE_NORMAL,
 		buttons : [ {
-			label : '确认',
+			label : 'Confirm',
 			action : function(dialog) {
 				$.ajax({
 					url : path + '/service/rmCandidate/interviewBack',
@@ -626,7 +649,7 @@ function interviewBack(pushId, candidateId) {
 				dialog.close();
 			}
 		}, {
-			label : '取消',
+			label : 'Cancel',
 			action : function(dialog) {
 				dialog.close();
 			}
@@ -743,8 +766,8 @@ function offerInterview(pushId) {
 					success : function(data) {
 						if (data == "1") {
 							BootstrapDialog.show({
-								title : '面试安排',
-								message : 'offer成功！',
+								title : 'Interview arrangement',
+								message : 'Offering successfully',
 								size : BootstrapDialog.SIZE_SMALL
 							})
 						}

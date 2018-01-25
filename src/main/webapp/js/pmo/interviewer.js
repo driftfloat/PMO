@@ -97,7 +97,7 @@ $('#searchBtn').bind("click", function(){
 /* 点击认定时执行的方法*/
 function renDing(employeeId,status)
 {
-	if(confirm("确认指定为面试官？"))
+	if(confirm("Are you sure to authorize?"))
 	{
 		$.ajax({
 			url:path+'/service/interviewer/interviewerRenDing',
@@ -117,7 +117,7 @@ function renDing(employeeId,status)
 /* 点击取消时执行的方法*/
 function quXiao(employeeId,status)
 {
-	if(confirm("取消指定面试官？"))
+	if(confirm("Are you sure to cancel?"))
 	{
 		$.ajax({
 			url:path+'/service/interviewer/interviewerRenDing',
@@ -131,7 +131,7 @@ function quXiao(employeeId,status)
 				if(resultFlag){
 					
 					$("html,body").animate({scrollTop:0}, 500);
-					$('#successAlert').html('面试官取消成功').show();
+					$('#successAlert').html('Cancel successfully').show();
 					setTimeout(function () {
 						$('#successAlert').hide();
 					}, 2000);
@@ -183,10 +183,10 @@ function loadInterviewerList(currPage){
 				}else{
 					status='否';
 				}
-					
+				var staff_Id = result.list[i].hsbcStaffId == null? '' : result.list[i].hsbcStaffId;	
 				$("<td>"+result.list[i].ehr+"</td>"+
 				"<td>"+result.list[i].lob+"</td>"+
-				"<td>"+result.list[i].hsbcStaffId+"</td>"+
+				"<td>"+staff_Id+"</td>"+
 				"<td>"+result.list[i].staffName+"</td>"+
 				"<td>"+result.list[i].skill+"</td>"+
 				"<td>"+result.list[i].staffRegion+"</td>"+

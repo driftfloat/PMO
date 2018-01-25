@@ -20,7 +20,7 @@ function exportCondition(){
 	var exportDataColumn = "";
 	var exportPageColumn = "";
 	if(lb.length <= 0){
-		alert("未勾选导出列！");
+		alert("Please select item");
 		return;
 	}
 	for (var i=0;i<lb.length;i++)
@@ -148,9 +148,9 @@ function updateStatus(){
 		type:"post",
 		success:function(flag){
 			if(flag){
-				alert("更新成功！");				    
+				alert("Update successfully!");				    
 			}else{
-				alert("更新失败！请刷新页面重试！");
+				alert("Update unsuccessfully,please refresh the page and try again.");
 			}
 			$('#myCandidateStatusModal').modal('hide');	
 			loadCandidateList();
@@ -203,17 +203,17 @@ function pushCandidateOk(){
 		type:"post",
 		success:function(flag){
 			if(flag == '5'){
-				alert("推送成功！");
+				alert("Push successfully!");
 			}else if(flag == '0'){
-				alert("推送失败！此候选人不存在，请刷新页面重试！");
+				alert("Push unsuccessfully,please refresh the page and try again.");
 			}else if(flag == '1'){
-				alert("推送失败！此候选人状态不在招聘中！不能推送！");
+				alert("Push unsuccessfully,please refresh the page and try again.");
 			}else if(flag == '2'){
-				alert("推送失败！请勿重复推送！");
+				alert("Push unsuccessfully,please refresh the page and try again.");
 			}else if(flag == '3'){
-				alert("推送失败！更新候选人状态失败，请刷新页面重试！");
+				alert("Push unsuccessfully,please refresh the page and try again.");
 			}else if(flag == '4'){
-				alert("推送失败！新增推送候选人数据失败，请刷新页面重试！");
+				alert("Push unsuccessfully,please refresh the page and try again.");
 			}
 			$('#myCandidatePushModal').modal('hide');	
 			loadCandidateList();
@@ -222,7 +222,7 @@ function pushCandidateOk(){
 }
 
 function backCandidateToDept(candidateId){
-	if(confirm("确定要撤回吗?"))
+	if(confirm("Are you sure to withdraw the candidate?"))
 	{
 		$.ajax({
 			url:path+'/service/candidate/backCandidateToDept',
@@ -233,13 +233,13 @@ function backCandidateToDept(candidateId){
 			type:"post",
 			success:function(flag){
 				if(flag == '3'){
-					alert("撤回成功！");
+					alert("Withdraw successfully");
 				}else if(flag == '0'){
-					alert("撤回失败！此候选人不存在，请刷新页面重试！");
+					alert("Withdraw unsuccessfully,please refresh the page and try again.");
 				}else if(flag == '1'){
-					alert("撤回失败！此候选人当前状态不能撤回！");
+					alert("Withdraw unsuccessfully,please refresh the page and try again.");
 				}else if(flag == '2'){
-					alert("撤回失败！更新候选人状态失败，请刷新页面重试！");
+					alert("Withdraw unsuccessfully,please refresh the page and try again.");
 				}	
 				loadCandidateList();
 			}
@@ -260,7 +260,7 @@ function updateResumeInfo(candidateId){
 
 function downLoadCandidateResume(candidateId,resumePath){
 	if(resumePath == null || resumePath == ''){
-		alert("未上传此候选人简历");
+		alert("Not uploading the resume");
 		return;
 	}
 	var url = path+'/service/candidate/downLoadCandidateResume?candidateId='+candidateId;
@@ -280,7 +280,7 @@ function loadCandidateSkillInfo(){
 //gkf
 function displayPDF(candidateId,resumePath){
 	if(resumePath == null || resumePath == ''){
-		alert("未上传此候选人简历");
+		alert("Not uploading the resume");
 		return;
 	}
 	var url = path+'/service/display/getPdf?candidateId='+candidateId;
@@ -317,7 +317,7 @@ function loadCandidateList(pageState)
 				$("#exportCandidateExcel").attr("disabled",true);
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
-				$("<td colspan='15' style='color: red;text-align: center;'>未查询到数据！</td>").appendTo(tr);
+				$("<td colspan='15' style='color: red;text-align: center;'>No record!</td>").appendTo(tr);
 			}else{
 				$("#exportCandidateExcel").removeAttr("disabled");
 			}

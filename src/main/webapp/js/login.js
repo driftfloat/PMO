@@ -83,7 +83,7 @@ function login(e){
 						$("#loginAlert").html('Incorrect username or password.').show();
 						$("#loginAlert").css({color:"red"});
 					}else if(data=="2"){
-						$("#loginAlert").html('Incorrect userstatus.').show();
+						$("#loginAlert").html('User has already written off.').show();
 						$("#loginAlert").css({color:"red"});
 					}
 				}

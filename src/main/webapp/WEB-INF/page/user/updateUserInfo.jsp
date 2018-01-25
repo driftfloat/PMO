@@ -80,7 +80,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> 用户信息修改
+									<i class="glyphicon glyphicon-user"></i> Edit User
 								</h2>
 							</div>
 							<div id="register" class="box-content" style="overflow: auto;">
@@ -151,7 +151,7 @@ var path='<%=path%>';
 								
 								<div class="form-group">
 									    <div style="text-align:center;width:100%;">
-									    <input type="button" value="修&nbsp;&nbsp;改"
+									    <input type="button" value="Update"
 										name="subscribe" id="sub_search" href="#"
 										class="button btn btn-primary" data-dismiss="modal"
 										onclick="updateUser()"

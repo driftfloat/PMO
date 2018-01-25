@@ -16,13 +16,17 @@ $('#exportCandidateExcel').bind("click", function(){
 	exportdata = new FormData(document.getElementById("stayinForm"));
 	$('#myStayinListModal').modal('show');	
 });
+
+$("#pageRecordsNum").change(function(){
+	loadStayinList();
+})
 //导出条件
 function exportCondition(){
 	var lb = $("label input");
 	var exportDataColumn = "";
 	var exportPageColumn = "";
 	if(lb.length <= 0){
-		alert("未勾选导出列！");
+		alert("Please select item!");
 		return;
 	}
 	for (var i=0;i<lb.length;i++)
@@ -94,12 +98,14 @@ function loadRole(){
 function loadStayinList(pageState)
 {
 	var candidate = new FormData(document.getElementById("stayinForm"));
+	var  pageSize =parseInt($("#pageRecordsNum").find("option:selected").text());
 	if(null != pageState)
 	{
 		candidate.append("pageState",pageState);
 	}
 	candidate.append("currentPage",currentPage);
 	candidate.append("pageCount",pageCount);
+	candidate.append("pageSize",pageSize);
 	$.ajax({
 		url:path+"/service/stayin/queryStayinList",
 		dataType:"json",
@@ -250,7 +256,7 @@ function queryDemandList(candidateId,demandId){
 		success:function(result){
 			if(result.length<0)
 			{
-				$("#demandList").append("<tr><td colspan='10' style='text-align:center'>暂无数据！</td></tr>");
+				$("#demandList").append("<tr><td colspan='10' style='text-align:center'>No record!</td></tr>");
 				return;
 			}
 			for(var i =0;i<result.length;i++){
@@ -311,7 +317,7 @@ function updateDemand(demandId,candidateId){
 		data:{"demandId":demandId,"candidateId":candidateId},
 	    success:function(flag){
 		     if(flag){
-		    	 alert("更改成功！");
+		    	 alert("Update successfully!");
 		         location.reload();
 		    	 
 		     }

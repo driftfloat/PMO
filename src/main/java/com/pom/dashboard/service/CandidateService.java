@@ -74,5 +74,8 @@ public interface CandidateService
 	CandidateInterview queryCandidateInterviewById(String interviewId);
 	
 	boolean updateCandidateInterviewMark(CandidateInterview candidateInterview);
+	
+	boolean updateConfirmStatus(CandidateInterview candidateInterview);
+
 
 }
