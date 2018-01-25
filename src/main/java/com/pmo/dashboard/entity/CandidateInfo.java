@@ -48,6 +48,7 @@ public class CandidateInfo extends PageCondition {
 	private String nickName;
 	private String fatherInterviewId;
 	private String interviewSerrial;
+	private String confirmStatus;
 	
 	//面试项目
 	private String projectName;
@@ -55,6 +56,14 @@ public class CandidateInfo extends PageCondition {
 	
 	
 	
+
+	public String getConfirmStatus() {
+		return confirmStatus;
+	}
+
+	public void setConfirmStatus(String confirmStatus) {
+		this.confirmStatus = confirmStatus;
+	}
 
 	public String getInterviewType()
     {

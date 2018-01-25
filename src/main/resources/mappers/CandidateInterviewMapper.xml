@@ -23,5 +23,9 @@
 	<update id="updateCandidateInterviewMark" parameterType="com.pmo.dashboard.entity.CandidateInfo">
 	    update t_candidate_interview set MARK = #{mark} WHERE INTERVIEW_ID = #{interviewId}; 
 	</update>
+	
+	<update id="updateConfirmStatus" parameterType="com.pmo.dashboard.entity.CandidateInfo">
+	    update t_candidate_interview set CONFIRM_STATUS = #{confirmStatus} WHERE INTERVIEW_ID = #{interviewId}; 
+	</update>
 
 </mapper>

@@ -30,6 +30,16 @@ public class CandidateInterview {
 	private String projectName;
 	
 	private String mark;
+	
+	private String confirmStatus;
+
+	public String getConfirmStatus() {
+		return confirmStatus;
+	}
+
+	public void setConfirmStatus(String confirmStatus) {
+		this.confirmStatus = confirmStatus;
+	}
 
 	public String getMark() {
 		return mark;

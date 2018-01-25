@@ -66,10 +66,13 @@ public class HrFeedbackController
 		String candidateId = request.getParameter("candidateId");
 		CandidateInfo candidateInfo = candidateService.queryCandidateForId(candidateId);
 		CandidateInterview candidateInterview = candidateService.queryCandidateInterviewById(interviewId);
+		boolean confirmStatus = true;
 		if (candidateInfo != null && candidateInfo.getInterviewStatus().equals("6")) {
 			if (confirmDateType.equals("确认") ) {
 				candidateInfo.setInterviewStatus("2");
 				candidateInterview.setMark("");
+				candidateInterview.setConfirmStatus("1");
+				confirmStatus = candidateService.updateConfirmStatus(candidateInterview);
 			} else if (confirmDateType.equals("取消")){
 				candidateInfo.setInterviewStatus("7");
 				candidateInterview.setMark(mark);
@@ -80,6 +83,6 @@ public class HrFeedbackController
 
 		boolean updateStatus = candidateService.updateCandidateInterviewStatus(candidateInfo);
 		
-		return updateMark && updateStatus;
+		return confirmStatus && updateMark && updateStatus;
     }
 }
