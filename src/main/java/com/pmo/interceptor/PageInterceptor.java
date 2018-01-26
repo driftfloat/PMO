@@ -48,9 +48,12 @@ public class PageInterceptor extends HandlerInterceptorAdapter
                 || requestUri.indexOf("service/manage/logout") > 0
                 || requestUri.indexOf("service/manage/login") > 0
                 || requestUri.indexOf("WEB-INF/page") > 0
-                || requestUri.indexOf("service/employee/index.html") > 0)
+                || requestUri.indexOf("service/employee/index.html") > 0
+                || requestUri.indexOf("service/syncEmployInfo") > 0
+        		)
         {
-            return true;
+        	System.out.println("页面拦截器======================");
+        	return true;
         }
         else
         {

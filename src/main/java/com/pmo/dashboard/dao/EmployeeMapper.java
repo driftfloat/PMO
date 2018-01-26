@@ -18,4 +18,5 @@ public interface EmployeeMapper
     List<Employee> selectByHSBCStaffID(String staffId);
 	String getBillRate(Employee employee);
 	List<Employee> getAllInterviewer();
+	List<Employee> queryAllEmployee();
 }

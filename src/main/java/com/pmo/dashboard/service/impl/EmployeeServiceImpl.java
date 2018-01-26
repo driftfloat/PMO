@@ -82,5 +82,10 @@ public class EmployeeServiceImpl implements EmployeeService
 	public List<Employee> getAllInterviewer() {
 		return employeeMapper.getAllInterviewer();
 	}
+
+	@Override
+	public List<Employee> getAllEmployee() {
+		return employeeMapper.queryAllEmployee();
+	}
 	
 }
