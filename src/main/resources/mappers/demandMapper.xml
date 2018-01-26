@@ -83,7 +83,7 @@
 	</select>
 	
 	<select id="queryDemandBycandidateId" parameterType="String" resultMap ="demandMap">
-	    SELECT * FROM t_demand a ,t_cs_dept b,t_hsbc_dept c WHERE a.CS_SUBDEPT=b.CS_SUBDEPT_ID and a.HSBC_SUBDEPT_ID=c.HSBC_SUBDEPT_ID and   a.CANDIDATE_ID = #{candidateId};
+	    SELECT * FROM t_demand a  WHERE a.CANDIDATE_ID = #{candidateId};
 	</select>
 	<select id="queryDemandList" parameterType="java.util.HashMap" resultMap="demandMap">
 		select *

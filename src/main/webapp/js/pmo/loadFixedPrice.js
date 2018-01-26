@@ -30,6 +30,7 @@ function addEmployee(){
 	var bootstrapValidator = $("#registerEmployeeForm").data('bootstrapValidator');
 	bootstrapValidator.validate();
 	if(bootstrapValidator.isValid()){
+		alert("ok");
 		var eHr = $('#eHr').val();
 		var lob = $('#lob').val();
 		var hsbcStaffId = $('#hsbcStaffId').val();

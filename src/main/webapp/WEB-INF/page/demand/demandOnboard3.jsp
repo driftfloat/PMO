@@ -102,12 +102,10 @@ var empObj =<%=empInfo%>;
 											<form id="recruitdemandFormEdit" method="post">
 												<div class="form-group hidden">
 													<div class="form-group hidden">
-														<div class="form-group hidden">
-															<input type="hidden" name="demandIdEdit"
-																id="demandIdEdit" value="${demand.demandId}" /> <input
-																type="hidden" name="candidateId" id="candidateId"
-																value="${demand.candidateId}" />
-														</div>
+														<input type="hidden" name="demandIdEdit" id="demandIdEdit"
+															value="${demand.demandId}" /> <input type="hidden"
+															name="candidateId" id="candidateId"
+															value="${demand.candidateId}" />
 													</div>
 												</div>
 
@@ -135,26 +133,8 @@ var empObj =<%=empInfo%>;
 														</div>
 													</div>
 												</div>
-												<br><br><br>
-												<div class="form-group">
-													<div class="group">
-														<label class="col-sm-2 control-label">RR</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control" name="rrEdit"
-																value="${demand.rr}" id="rrEdit" />
-														</div>
-													</div>
-													<div class="group">
-														<label class="col-sm-2 control-label">Job Code</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control"
-																name="jobCodeEdit" value="${demand.jobCode}"
-																id="jobCodeEdit" />
-														</div>
-													</div>
-												</div>
-												<br><br><br>
-
+												<br/><br/><br/>
+				
 												<div class="form-group">
 													<div class="group">
 														<label class="col-lg-2 control-label">Skill</label>
@@ -182,7 +162,7 @@ var empObj =<%=empInfo%>;
 														</div>
 													</div>
 												</div>
-												<br><br><br>
+												<br/><br/><br/>
 												<div class="form-group">
 													<div class="group">
 														<label class="col-lg-2 control-label">Location</label>
@@ -198,15 +178,14 @@ var empObj =<%=empInfo%>;
 														</div>
 													</div>
 													<div class="group">
-														<label class="col-sm-2 control-label">Planned
-															Onboard Date </label>
+														<label class="col-sm-2 control-label">Planned Onboard Date </label>
 														<div class="col-md-4">
 															<div class="input-group date form_datetime1 col-sm-12"
 																data-link-field="dt_set_order_time_input">
 																<input class="form-control" type="text" readonly
 																	data-bv-group=".group" id="plannedOnboardDate1"
 																	name="plannedOnboardDate1"
-																	value="${demand.plannedOnboardDate}"> <span
+																	value="${demand.plannedOnboardDate }"> <span
 																	class="input-group-addon"><span
 																	class="glyphicon glyphicon-th"></span></span> <input
 																	type="hidden" id="plannedOnboardDate2"
@@ -215,8 +194,7 @@ var empObj =<%=empInfo%>;
 														</div>
 													</div>
 												</div>
-												<br><br><br>
-
+												<br/><br/><br/>
 												<div class="form-group">
 													<div class="group">
 														<label class="col-lg-2 control-label">HR Priority</label>
@@ -235,88 +213,16 @@ var empObj =<%=empInfo%>;
 														<label class="col-sm-2 control-label">Remark</label>
 														<div class="col-md-4">
 															<input type="text" class="form-control" name="remarkEdit"
-																value="${demand.remark}" id="remarkEdit" />
+																value="${demand.remark }" id="remarkEdit" />
 														</div>
 													</div>
 												</div>
-												<br><br><br>
-												<div class="form-group">
-													<div class="group">
-														<label class="col-sm-2 control-label">No. of
-															Profiles Sent to HSBC</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control"
-																name="profilesNoEdit" value="${demand.profilesNo }"
-																id="profilesNoEdit" />
-														</div>
-													</div>
-													<div class="group">
-														<label class="col-sm-2 control-label">No of Profiles Interviewed</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control"
-																name="interviewedNoEdit"
-																value="${demand.interviewedNo }" id="interviewedNoEdit" />
-														</div>
-													</div>
-												</div>
-												<br><br><br>
-												<div class="form-group">
-													<div class="group">
-														<label class="col-sm-2 control-label">Req published Date</label>
-														<div class="col-md-4">
-															<div class="input-group date form_datetime col-sm-12"
-																data-link-field="dt_set_order_time_input">
-																<input class="form-control" type="text" readonly
-																	data-bv-group=".group" id="reqPublishedDate1Edit"
-																	name="reqPublishedDate1Edit"
-																	value="${demand.reqPublishedDate }"> <span
-																	class="input-group-addon"> <span
-																	class="glyphicon glyphicon-th"> </span>
-																</span> <input type="hidden" id="reqPublishedDate2Edit"
-																	name="reqPublishedDate2Edit" />
-															</div>
-														</div>
-													</div>
-													<div class="group">
-														<label class="col-sm-2 control-label">Ageing</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control" name="ageingEdit"
-																value="${demand.ageing }" id="ageingEdit" />
-														</div>
-													</div>
+												<br/><br/><br/>
 
-												</div>
-												<br><br><br>
 												<div class="form-group">
-													<div class="group">
-														<label class="col-lg-2 control-label">HSBC Department</label>
-														<div class="col-lg-4">
-															<input type="text" style="display: none"
-																value="${demand.hsbcDept.hsbcDeptName}"
-																id="hsbcDeptInput" /> <select class="form-control"
-																name="hsbcDeptEdit" data-bv-notempty
-																data-bv-notempty-message="Please Select Your HsbcDept"
-																id="hsbcDeptEdit" data-bv-group=".group">
-																<option value="">-- Option --</option>
-															</select>
-														</div>
-													</div>
-													<div class="group">
-														<label class="col-lg-2 control-label">HSBC Sub-Department</label>
-														<div class="col-lg-4">
-															<select class="form-control" name="hsbcSubDeptEdit"
-																data-bv-notempty
-																data-bv-notempty-message="Please Select Your HsbcSubDept"
-																id="hsbcSubDeptEdit" data-bv-group=".group">
-																<option value="${demand.hsbcDept.hsbcSubDeptName }"></option>
-															</select>
-														</div>
-													</div>
-												</div>
-												<br><br><br>
-												<div class="form-group">
-													<div class="group">
-														<label class="col-lg-2 control-label">HSBC Requestor</label>
+													<div class="group" id="requestor" style='display: none'>
+														<label class="col-lg-2 control-label">HSBC
+															Requestor</label>
 														<div class="col-lg-4">
 															<input type="text" class="form-control"
 																name="requestorEdit" value="${demand.requestor }"
@@ -324,7 +230,8 @@ var empObj =<%=empInfo%>;
 														</div>
 													</div>
 													<div class="group">
-														<label class="col-sm-2 control-label">CS Department</label>
+														<label class="col-sm-2 control-label">CS
+															Department</label>
 														<div class="col-sm-4">
 															<select class="form-control" name="csSubDeptEdit"
 																data-bv-notempty
@@ -334,49 +241,42 @@ var empObj =<%=empInfo%>;
 															</select>
 														</div>
 													</div>
-
-												</div>
-												<br><br><br>
-												<div class="form-group" id="atype" style='display: none'>
 													<div class="group" id="staffnameEdit" style='display: none'>
 														<label class="col-sm-2 control-label">Staff Name</label>
 														<div class="col-sm-4">
 															<input type="text" class="form-control"
-																name="candidateNameEdit"
-																value="${demand.candidateName }" id="candidateNameEdit" />
+																name="candidateNameEdit" id="candidateNameEdit" />
 														</div>
 													</div>
+
+												</div>
+												<br/><br/><br/>
+												<div class="form-group" id="atype" style='display: none'>
 													<div class="group" id="joiningEdit" style='display: none'>
-														<label class="col-sm-2 control-label">Proposed
-															Date of Joining</label>
-														<div class="col-sm-4">
+														<label class="col-sm-2 control-label">Proposed Date of Joining</label>
+														<%-- <div class="col-sm-4">
 															<input type="text" class="form-control"
 																name="proposedJoiningDateEdit"
 																value="${demand.proposedJoiningDate }"
 																id="proposedJoiningDateEdit" />
+														</div> --%>
+														<div class="col-md-4">
+															<div class="input-group date form_datetime1 col-sm-12"
+																data-link-field="dt_set_order_time_input">
+																<input class="form-control" type="text" readonly
+																	data-bv-group=".group" id="proposedJoiningDateEdit"
+																	name="proposedJoiningDateEdit"
+																	value="${demand.proposedJoiningDate}"> <span
+																	class="input-group-addon"><span
+																	class="glyphicon glyphicon-th"></span></span> <input
+																	type="hidden" id="proposedJoiningDateEdit2"
+																	name="proposedJoiningDateEdit2" />
+															</div>
 														</div>
 													</div>
 												</div>
-												<br><br><br>
-												<div class="form-group" id="btype" style='display: none'>
-													<div class="group" id="bgvEdit" style='display: none'>
-														<label class="col-sm-2 control-label">BGV Cleared</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control"
-																name="bgvClearedEdit" value="${demand.bgvCleared }"
-																id="bgvClearedEdit" />
-														</div>
-													</div>
-													<div class="group" id="donumberEdit" style='display: none'>
-														<label class="col-sm-2 control-label">DO number</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control"
-																name="doNumberEdit" value="${demand.doNumber }"
-																id="doNumberEdit" />
-														</div>
-													</div>
-												</div>
-												<br><br><br>
+												<br/><br/><br/>
+	
 												<div class="form-group" id="ctype" style='display: none'>
 													<div class="group" id="reasonAbort" style='display: none'>
 														<label class="col-sm-2 control-label">Reason for
@@ -395,6 +295,8 @@ var empObj =<%=empInfo%>;
 														</div>
 													</div>
 												</div>
+												<br/><br/><br/>
+										
 											</form>
 										</div>
 									</div>
@@ -405,6 +307,7 @@ var empObj =<%=empInfo%>;
 
 												<div id="successAlert" class="alert alert-success"
 													style="display: none;"></div>
+
 												<div class="form-group">
 													<div class="group">
 														<label class="col-sm-2 control-label">E-HR</label>
@@ -422,19 +325,8 @@ var empObj =<%=empInfo%>;
 													</div>
 
 												</div>
-												<br><br><br>
-
+												<br/><br/><br/>
 												<div class="form-group">
-
-													<div class="group">
-														<label class="col-sm-2 control-label">HSBC Staff
-															ID</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control"
-																name="hsbcStaffId" id="hsbcStaffId"
-																data-bv-group=".group" />
-														</div>
-													</div>
 													<div class="group">
 														<label class="col-sm-2 control-label">Staff Name</label>
 														<div class="col-sm-4">
@@ -442,57 +334,23 @@ var empObj =<%=empInfo%>;
 																id="staffName" data-bv-group=".group" />
 														</div>
 													</div>
-												</div>
-												<br><br><br>
-
-												<div class="form-group">
 													<div class="group">
-														<label class="col-sm-2 control-label">LN</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control" name="LN" id="LN"
-																data-bv-group=".group" />
-														</div>
-													</div>
-													<div class="group">
-														<label class="col-sm-2 control-label">Email</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control" name="email"
-																id="email" data-bv-group=".group" />
-														</div>
-													</div>
-
-												</div>
-												<br><br><br>
-
-												<div class="form-group">
-													<div class="group">
-														<label class="col-lg-2 control-label">Staff
-															Location</label>
+														<label class="col-lg-2 control-label">Staff Region</label>
 														<div class="col-lg-4">
-															<select class="form-control" name="staffLocation"
+															<select class="form-control" name="staffRegion"
 																data-bv-notempty
-																data-bv-notempty-message="Please Select  StaffLocation"
-																id="staffLocation" data-bv-group=".group">
-																<option value="">--Option--</option>
-															</select>
-														</div>
-													</div>
-													<div class="group">
-														<label class="col-lg-2 control-label">Location
-															Type</label>
-														<div class="col-lg-4">
-															<select class="form-control" name="locationType"
-																data-bv-notempty
-																data-bv-notempty-message="Please Select  LocationType"
-																id="locationType" data-bv-group=".group">
+																data-bv-notempty-message="Please Select  staffRegion"
+																id="staffRegion" data-bv-group=".group"
+																onchange="changeData()">
 																<option value="">--Option--</option>
 															</select>
 														</div>
 													</div>
 												</div>
-												<br><br><br>
+												<br/><br/><br/>
 
 												<div class="form-group">
+
 													<div class="group">
 														<label class="col-lg-2 control-label">CS Dept</label>
 														<div class="col-lg-4">
@@ -505,108 +363,6 @@ var empObj =<%=empInfo%>;
 														</div>
 													</div>
 													<div class="group">
-														<label class="col-lg-2 control-label">GBGF</label>
-														<div class="col-lg-4">
-															<select class="form-control" name="gbGf" data-bv-notempty
-																data-bv-notempty-message="please select  GB_GF"
-																id="gbGf" data-bv-group=".group">
-																<option value="">--Option--</option>
-															</select>
-														</div>
-													</div>
-												</div>
-												<br><br><br>
-												<div class="form-group">
-													<div class="group">
-														<label class="col-lg-2 control-label">HSBC Dept</label>
-														<div class="col-lg-4">
-															<select class="form-control" name="hsbcDept"
-																id="hsbcDept" data-bv-notempty
-																data-bv-notempty-message="please select  HSBDept"
-																data-bv-group=".group">
-																<option value="">--Option--</option>
-															</select>
-														</div>
-													</div>
-													<div class="group">
-														<label class="col-lg-2 control-label">HSBC Sub
-															Dept</label>
-														<div class="col-lg-4">
-															<select class="form-control" name="hsbcSubDept"
-																id="hsbcSubDept" data-bv-notempty
-																data-bv-notempty-message="please select  HSBSubDept"
-																data-bv-group=".group">
-																<option value="">--Option--</option>
-															</select>
-														</div>
-													</div>
-												</div>
-												<br><br><br>
-
-												<div class="form-group">
-													<div class="group">
-														<label class="col-sm-2 control-label">SOW#</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control" name="sow"
-																id="sow" data-bv-group=".group" />
-														</div>
-													</div>
-													<div class="group">
-														<label class="col-sm-2 control-label ">SOW#
-															Expired Date</label>
-														<div class="col-md-4">
-															<div class="input-group date form_datetime1 col-sm-12"
-																data-link-field="dt_set_order_time_input">
-																<input class="form-control" type="text" readonly
-																	data-bv-group=".group" id="sowExpiredDate1"
-																	name="sowExpiredDate1"> <span
-																	class="input-group-addon"><span
-																	class="glyphicon glyphicon-calendar"></span></span> <input
-																	type="hidden" id="sowExpiredDate2"
-																	name="sowExpiredDate2" />
-															</div>
-														</div>
-													</div>
-
-												</div>
-												<br><br><br>
-
-												<div class="form-group">
-													<div class="group">
-														<label class="col-sm-2 control-label">HSBC Project
-															Name</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control"
-																name="hsbcProjectName" id="hsbcProjectName"
-																data-bv-group=".group" />
-														</div>
-													</div>
-													<div class="group">
-														<label class="col-sm-2 control-label">HSBC Project
-															Manager</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control"
-																name="hsbcProjectManager" id="hsbcProjectManager"
-																data-bv-group=".group" />
-														</div>
-													</div>
-												</div>
-												<br><br><br>
-
-												<div class="form-group">
-													<div class="group">
-														<label class="col-lg-2 control-label">Staff
-															Category</label>
-														<div class="col-lg-4">
-															<select class="form-control" name="staffCategory"
-																data-bv-notempty
-																data-bv-notempty-message="please select  staffCategory"
-																id="staffCategory" data-bv-group=".group">
-																<option value="">--Option--</option>
-															</select>
-														</div>
-													</div>
-													<div class="group">
 														<label class="col-lg-2 control-label">Engagement
 															Type</label>
 														<div class="col-lg-4">
@@ -614,12 +370,12 @@ var empObj =<%=empInfo%>;
 																data-bv-notempty
 																data-bv-notempty-message="please select  engagementType"
 																id="engagementType2" data-bv-group=".group">
-																<option value="${demand.engagementType}">${demand.engagementType}</option>
+																<option value="Support" selected="selected">Support</option>
 															</select>
 														</div>
 													</div>
 												</div>
-												<br><br><br>
+												<br/><br/><br/>
 
 												<div class="form-group">
 													<div class="group">
@@ -639,7 +395,8 @@ var empObj =<%=empInfo%>;
 														</div>
 													</div>
 													<div class="group">
-														<label class="col-sm-2 control-label">EntryDate</label>
+														<label class="col-sm-2 control-label">Date of
+															Joining</label>
 														<div class="col-md-4">
 															<div class="input-group date form_datetime2 col-sm-12"
 																data-link-field="dt_set_order_time_input">
@@ -648,39 +405,13 @@ var empObj =<%=empInfo%>;
 																	name="entryDate1"> <span
 																	class="input-group-addon"><span
 																	class="glyphicon glyphicon-calendar"></span></span> <input
-																	type="hidden" id="entryDate2" name="entryDate2" />
+																	type="hidden" id="entryDate2" name="entryDate1" />
 															</div>
 														</div>
 													</div>
 												</div>
-												<br><br><br>
-												<div class="form-group">
-													<div class="group">
-														<label class="col-lg-2 control-label">Staff Region</label>
-														<div class="col-lg-4">
-															<select class="form-control" name="staffRegion"
-																data-bv-notempty
-																data-bv-notempty-message="Please Select  staffRegion"
-																id="staffRegion" data-bv-group=".group"
-																onchange="changeData()">
-																<option value="">--Option--</option>
-															</select>
-														</div>
-													</div>
-													<div class="group">
-														<label class="col-lg-2 control-label">Onshore or
-															Offshore</label>
-														<div class="col-lg-4">
-															<select class="form-control" name="onshoreOrOffshore"
-																data-bv-notempty
-																data-bv-notempty-message="Please Select  onshore or Offshore"
-																id="onshoreOrOffshore" data-bv-group=".group">
-																<option value="">--Option--</option>
-															</select>
-														</div>
-													</div>
-												</div>
-												<br><br><br>
+												<br/><br/><br/>
+
 												<div class="form-group">
 													<div class="group">
 														<label class="col-lg-2 control-label">MSA Role</label>
@@ -705,49 +436,23 @@ var empObj =<%=empInfo%>;
 														</div>
 													</div>
 												</div>
-												<br><br><br>
-
+												<br/><br/><br/>
 												<div class="form-group">
 													<div class="group">
-														<label class="col-lg-2 control-label">Billing
-															Currency</label>
+														<label class="col-sm-2 control-label">Email</label>
+														<div class="col-sm-4">
+															<input type="text" class="form-control" name="email"
+																id="email" data-bv-group=".group" />
+														</div>
+													</div>
+													<div class="group">
+														<label class="col-lg-2 control-label">Resource
+															Status</label>
 														<div class="col-lg-4">
-															<select class="form-control" name="billingCurrency"
+															<select class="form-control" name="resourceStatus"
 																data-bv-notempty
-																data-bv-notempty-message="please select  billingCurrency"
-																id="billingCurrency" data-bv-group=".group">
-																<option value="">--Option--</option>
-															</select>
-														</div>
-													</div>
-													<div class="group">
-														<label class="col-sm-2 control-label">Bill Rate</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control" name="billRate"
-																id="billRate" data-bv-group=".group" />
-														</div>
-													</div>
-												</div>
-												<br><br><br>
-												<div class="form-group">
-													<div class="group">
-														<label class="col-sm-2 control-label">HSBC DOJ</label>
-														<div class="col-md-4">
-															<div class="input-group date form_datetime col-sm-12"
-																data-link-field="dt_set_order_time_input">
-																<input class="form-control" type="text" readonly
-																	data-bv-group=".group" id="hsbcDOJ1" name="hsbcDOJ1">
-																<span class="input-group-addon"><span
-																	class="glyphicon glyphicon-calendar"></span></span> <input
-																	type="hidden" id="hsbcDOJ2" name="hsbcDOJ2" />
-															</div>
-														</div>
-													</div>
-													<div class="group">
-														<label class="col-sm-2 control-label">RM</label>
-														<div class="col-sm-4">
-															<select class="form-control" name="nickName"
-																data-bv-notempty id="RM" data-bv-group=".group">
+																data-bv-notempty-message="please select  resourceStatus"
+																id="resourceStatus" data-bv-group=".group">
 																<option value="">--Option--</option>
 															</select>
 														</div>
@@ -809,10 +514,11 @@ var empObj =<%=empInfo%>;
 	<script src="<%=path%>/js/jquery.history.js"></script>
 	<!-- application script for Charisma demo -->
 	<script src="<%=path%>/js/charisma.js"></script>
-
+	
 	<script type="text/javascript"
 		src="<%=path%>/js/pmo/recruitdemandafixedprice.js"></script>
-	<script type="text/javascript" src="<%=path%>/js/pmo/demandInfoEdit.js"></script>
+	<script type="text/javascript"
+		src="<%=path%>/js/pmo/demandInfoEdit.js"></script>
 	<script type="text/javascript" src="<%=path%>/js/pmo/demandvalid.js"></script>
 
 	<script type="text/javascript"

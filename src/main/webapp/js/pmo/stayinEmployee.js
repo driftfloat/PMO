@@ -142,19 +142,18 @@ function loadStayinList(pageState)
 				$("<td>"+ result.data[i].englishLevel+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].education+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].experienceYears+ "</td>").appendTo(tr);
+				$("<td>"+ result.data[i].demandStatus+ "</td>").appendTo(tr);
 				/*$("<td>"+ result.data[i].demandId+ "</td>").appendTo(tr);*/
-				if(result.data[i].demandStatus=='offering'){
+				if(result.data[i].demandStatus=='Offering'){
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small'"+
 						     "onclick=queryDemandList('"+result.data[i].candidateId+"','"+result.data[i].demandId+"')>Update</a>" +
-						    /* '"+result[i].demandId+"','"+result[i].candidateId+"'*/
 					"</td>").appendTo(tr);
 				}else{
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small'" +
-						"onclick=onboard('"+result.data[i].candidateId+"')>Onboard</a>" +
+						"onclick='onboard(\""+result.data[i].candidateId+"\",\""+result.data[i].engagementType+"\")'>Onboard</a>" +
 					     "&nbsp;&nbsp;" +
 					     "<a href='javascript:void(0);' class='btn btn-info btn-small'"+
 					     "onclick=queryDemandList('"+result.data[i].candidateId+"','"+result.data[i].demandId+"')>Update</a>" +
-					    /* '"+result[i].demandId+"','"+result[i].candidateId+"'*/
 				"</td>").appendTo(tr);
 					
 				}
@@ -194,6 +193,43 @@ function loadStayinList(pageState)
 					$(this).parent("li").siblings("li").removeClass("disabled");
 				}
 			});
+			
+			 loadCSSubDept(result);	
+		}
+	})
+}
+
+function loadCSSubDept(result){
+	var userType = result.user.userType;
+	var csSubDeptNames = result.csSubDeptNames;
+	$.ajax({
+		url:path+'/service/csDept/queryAllCSSubDeptName',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(list){
+			$("#csSubDept").empty();
+			$("#csSubDept").append("<option value=''>--Option--</option>");
+			for(var i = 0;i<list.length;i++){
+				$("#csSubDept").append("<option>"+list[i].csSubDeptName+"</option>");
+			}
+			
+			if(userType=='3' || userType=='4' || userType=='5'|| userType=='11'||userType=='12'){
+				if(csSubDeptNames.length==1){
+					$('#csSubDept').val(result.csSubDeptNames[0]);
+					$("#csSubDept").attr("disabled","disabled");
+				}else if(csSubDeptNames.length>1){
+					$("#csSubDept").empty();
+					for(var i = 0;i<csSubDeptNames.length;i++){
+						$("#csSubDept").append("<option>"+csSubDeptNames[i]+"</option>");
+						$('#csSubDept').val(result.csSubDeptName);
+					}
+				}
+			}else{
+				$('#csSubDept').val(result.csSubDeptName);
+				
+			}
 		}
 	})
 }

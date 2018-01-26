@@ -1,211 +1,210 @@
 $(document).ready(function() {
 	// 对编辑页面加校验
-	$('#recruitdemandFormEdit').bootstrapValidator({ 
-	message: 'This value is not valid', 
-	 feedbackIcons: { 
-	valid: 'glyphicon glyphicon-ok', 
-	invalid: 'glyphicon glyphicon-remove', 
-	validating: 'glyphicon glyphicon-refresh' 
-	}, 
-	fields: { 
-	rrEdit: { 
-	validators: { 
-	notEmpty: { 
-	message: 'Please enter your rr' 
-	}, 
-	} 
-	}, 
-	 jobCodeEdit: { 
-	validators: { 
-	notEmpty: { 
-	message: 'Please enter your jobCode' 
-	} 
-	} 
-	}, 
-	 requestorEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	ageingEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	 profilesNoEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	interviewedNoEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	proposedJoiningDateEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	sowSignedEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	bgvClearedEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	reasonEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	remarkEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	doNumberEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	reqPublishedDate1Edit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	plannedOnboardDate1: { 
-	validators: { 
-	
-	 } 
-	} 
-	} 
-	})  
-	
-    $('#recruitdemandForm').bootstrapValidator({
-		message: 'This value is not valid',
+	$('#recruitdemandFormEdit').bootstrapValidator({
+		message : 'This value is not valid',
+		feedbackIcons : {
+			valid : 'glyphicon glyphicon-ok',
+			invalid : 'glyphicon glyphicon-remove',
+			validating : 'glyphicon glyphicon-refresh'
+		},
+		fields : {
+			rrEdit : {
+				validators : {
+					notEmpty : {
+						message : 'Please enter your rr'
+					},
+				}
+			},
+			jobCodeEdit : {
+				validators : {
+					notEmpty : {
+						message : 'Please enter your jobCode'
+					}
+				}
+			},
+			requestorEdit : {
+				validators : {
 
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-        	rr: {
-				validators: {
-                    notEmpty: {
-                        message: 'Please enter your rr'
-                    },
-                    remote:{
-                    	type:"post",
-                    	url: path+'/service/resume/checkTel',
-                    	date:{
-                    		rr:function(){return $("#rr").val();}
-                    	},
-                        message:"rr already exists"
-                    }
+				}
+			},
+			ageingEdit : {
+				validators : {
 
-                   /*
-					 * regexp: { regexp: /^([\u4E00-\u9FA5]|\w)*$/, message:
-					 * '请勿包含特殊字符' }, stringLength: { min: 1, max: 20, message:
-					 * '请输入长度在1到20位之间的用户名' }, remote: { url:
-					 * paths+'/service/employee/checkErExists', message:
-					 * '用戶名不存在', delay : 2000,//per 2s send a request type:
-					 * 'POST' }
-					 */
-                 }
-            },
+				}
+			},
+			profilesNoEdit : {
+				validators : {
 
-            reqPublishedDate1: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please entry date'
-                    },
-                    date : {  
-                        format : 'YYYY-MM-DD',  
-                        message : 'Time format is incorrect'  
-                    }
+				}
+			},
+			interviewedNoEdit : {
+				validators : {
 
-                }
-            },
-            
-            
-            jobCode: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please enter your jobCode'
-                    }
-                }
-            },
-            
-            
-            skill: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please enter your jobCode'
-                    }
-                }
-            },
-            requestor: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please enter your requestor'
-                    }
+				}
+			},
+			proposedJoiningDateEdit : {
+				validators : {
 
-                }
-            },
-            position: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please select your position'
-                    }
+				}
+			},
+			sowSignedEdit : {
+				validators : {
 
-                }
-            },
+				}
+			},
+			bgvClearedEdit : {
+				validators : {
 
-            hsbcSubDeptId: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please enter your hsbcSubDeptId'
-                    }
+				}
+			},
+			reasonEdit : {
+				validators : {
 
-                }
-            },
-           /*
+				}
+			},
+			remarkEdit : {
+				validators : {
+
+				}
+			},
+			doNumberEdit : {
+				validators : {
+
+				}
+			},
+			reqPublishedDate1Edit : {
+				validators : {
+
+				}
+			},
+			plannedOnboardDate1 : {
+				validators : {
+					
+				}
+			}
+		}
+	})
+
+	$('#recruitdemandForm').bootstrapValidator({
+		message : 'This value is not valid',
+
+		feedbackIcons : {
+			valid : 'glyphicon glyphicon-ok',
+			invalid : 'glyphicon glyphicon-remove',
+			validating : 'glyphicon glyphicon-refresh'
+		},
+		fields : {
+			rr : {
+				validators : {
+					notEmpty : {
+						message : 'Please enter your rr'
+					},
+					remote : {
+						type : "post",
+						url : path + '/service/resume/checkTel',
+						date : {
+							rr : function() {
+								return $("#rr").val();
+							}
+						},
+						message : "rr already exists"
+					}
+
+				/*
+				 * regexp: { regexp: /^([\u4E00-\u9FA5]|\w)*$/, message:
+				 * '请勿包含特殊字符' }, stringLength: { min: 1, max: 20, message:
+				 * '请输入长度在1到20位之间的用户名' }, remote: { url:
+				 * paths+'/service/employee/checkErExists', message: '用戶名不存在',
+				 * delay : 2000,//per 2s send a request type: 'POST' }
+				 */
+				}
+			},
+
+			reqPublishedDate1 : {
+				validators : {
+					notEmpty : {
+						message : 'Please entry date'
+					},
+					date : {
+						format : 'YYYY-MM-DD',
+						message : 'Time format is incorrect'
+					}
+
+				}
+			},
+
+			jobCode : {
+				validators : {
+					notEmpty : {
+						message : 'Please enter your jobCode'
+					}
+				}
+			},
+
+			skill : {
+				validators : {
+					notEmpty : {
+						message : 'Please enter your jobCode'
+					}
+				}
+			},
+			requestor : {
+				validators : {
+					notEmpty : {
+						message : 'Please enter your requestor'
+					}
+
+				}
+			},
+			position : {
+				validators : {
+					notEmpty : {
+						message : 'Please select your position'
+					}
+
+				}
+			},
+
+			hsbcSubDeptId : {
+				validators : {
+					notEmpty : {
+						message : 'Please enter your hsbcSubDeptId'
+					}
+
+				}
+			},
+			/*
 			 * staffName: { validators: { notEmpty: { message: '请输入中文名字' },
 			 * regexp: { regexp: /^([\u4E00-\u9FA5])*$/,
 			 * 
 			 * message: '请输入中文字符' } } },
 			 */
-            status: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please select your status'
-                    }
+			status : {
+				validators : {
+					notEmpty : {
+						message : 'Please select your status'
+					}
 
-                }
-            },
-            hrPriority: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please select your hrPriority'
-                    }
+				}
+			},
+			hrPriority : {
+				validators : {
+					notEmpty : {
+						message : 'Please select your hrPriority'
+					}
 
-                }
-            },
-            reqPublishedDate: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please Choose your Date'
-                    }
+				}
+			},
+			reqPublishedDate : {
+				validators : {
+					notEmpty : {
+						message : 'Please Choose your Date'
+					}
 
-                }
-            }
-        }
-    }) /*
+				}
+			}
+		}
+	}) /*
 		 * .on('success.form.bv', function(e) { // Prevent submit form
 		 * e.preventDefault();
 		 * 
@@ -213,22 +212,20 @@ $(document).ready(function() {
 		 * $form.data('bootstrapValidator'); if(validator){ login(e.target); } }) ;
 		 */
 
-    });
+});
 
 // 验证jobCode
-function jobCode(field,alerttxt){
-	with(field){
-		if(value==null || value=="" ||!value==jobCode){
+function jobCode(field, alerttxt) {
+	with (field) {
+		if (value == null || value == "" || !value == jobCode) {
 			alert(alerttxt);
 			return false;
-		}else{
+		} else {
 			return true;
 		}
 	}
-	
+
 }
-
-
 
 /*
  * function login(e) { var userName = $("#userName").val(); var password =

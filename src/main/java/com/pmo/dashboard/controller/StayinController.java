@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,11 +30,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmo.dashboard.entity.AddDemand;
+import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.PageCondition;
 import com.pmo.dashboard.entity.StayinCandidate;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
+import com.pom.dashboard.service.CSDeptService;
 import com.pom.dashboard.service.StayinService;
 
 @Controller
@@ -46,7 +49,8 @@ public class StayinController
     @Resource
     private StayinService StayinService;
     
-   
+    @Resource
+	private CSDeptService csDeptService;
     @RequestMapping("/stayin")
     public String stayin(final HttpServletRequest request,
             final HttpServletResponse response)
@@ -65,17 +69,28 @@ public class StayinController
     	 User user =  (User)request.getSession().getAttribute("loginUser");
     	 String userType = user.getUserType();
     	 String userId = user.getUserId();
+    	 List<String>  csSubDeptNames = new ArrayList<String>();   
+    	 String csSubDeptName = candidate.getCsSubDept();  
+ 	     List<CSDept> cSDepts= csDeptService.queryCSDeptByIds(user.getCsdeptId().split(","));
+ 	        
+ 	    if(cSDepts != null && !cSDepts.isEmpty()){        
+ 	       for (CSDept csDept : cSDepts) {
+ 	            csSubDeptNames.add(csDept.getCsSubDeptName());
+ 	       }
+ 	    }
+ 	   if(("".equals(candidate.getCsSubDept()) || candidate.getCsSubDept() == null) ){
+           
+           if("3".equals(userType)|| "4".equals(userType)|| "5".equals(userType)||"11".equals(userType)||"12".equals(userType)){
+           	csSubDeptName = cSDepts.get(0).getCsSubDeptName(); 
+           }
+           
+       }
+ 	   String  csSubdeptId=  csDeptService.changeCsSubDeptNameToId(csSubDeptName);
+ 	   candidate.setCsSubDept(csSubdeptId);
     	 if(null == userId || "".equals(userId))
      	{
      		return null;
      	}
-    	 String lockPerson = "";
-    	 /*if("0".equals(userType)){
-    		 lockPerson = "all";
-    	 }else */if("3".equals(userType)){
-    		 lockPerson = user.getCsdeptId();
-    	 }
-    	 candidate.setLockPerson(lockPerson);
 		 int dataCount = StayinService.queryCandidateCount(candidate);
 		 Integer pageSize = candidate.getPageSize();
 		 
@@ -98,11 +113,14 @@ public class StayinController
     	int num = (Integer.valueOf(page.getCurrentPage())-1)*pageSize;
     	candidate.setNum(num);
         List<StayinCandidate> list = StayinService.queryStayinList(candidate);
-        //gkf 加入session
+        //加入session
         request.getSession().setAttribute("candidateList", list);
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("data", list);
         result.put("pageInfo", page);
+        result.put("csSubDeptNames", csSubDeptNames);
+        result.put("user", user);
+        result.put("csSubDeptName", csSubDeptName);
         return result;
     }
     

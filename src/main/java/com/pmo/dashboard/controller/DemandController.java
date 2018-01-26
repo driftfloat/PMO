@@ -26,8 +26,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.Demand;
+import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.HSBCDept;
 import com.pmo.dashboard.entity.PageCondition;
+import com.pmo.dashboard.entity.StayinCandidate;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
@@ -418,19 +420,40 @@ public class DemandController {
 	 * @return
 	 */
 	@RequestMapping("/demandOnboard")
-	public String demandOnboar(String candidateId,Model model,HttpServletRequest request){
-		List<Demand> list = (List<Demand>) request.getSession().getAttribute("demandList");
-		for (Demand demand : list) {
-			if(candidateId.equals(demand.getCandidateId())){
-				model.addAttribute("demand", demand);
-				return "/demand/demandOnboard";
-			}
-		}
-		Demand demand = demandService.queryDemandByCandidateId(candidateId);
+	public String demandOnboard(String candidateId,Model model,HttpServletRequest request,String type){
 		
+		Employee em = new Employee();
+		@SuppressWarnings("unchecked")
+		List<StayinCandidate> list = (List<StayinCandidate>) request.getSession().getAttribute("candidateList");
+    	//拿到需求和待入职的人员信息  gkf
+    	if(list!=null &&list.size()>0&&candidateId!=null) {
+    		for(StayinCandidate candidate :list ) {
+    			if(candidate.getCandidateId().equals(candidateId)) {
+    				em.setStaffName(candidate.getCandidateName());
+    				//em.setBillRate();
+    				em.setGraduationDate(candidate.getGraduateDate());
+    			}
+    		}
+    	}
+		Demand demand = demandService.queryDemandByCandidateId(candidateId);
+		if(candidateId.equals(demand.getCandidateId())) {
+			em.setStaffRegion(demand.getLocation());
+			em.setStaffLocation("China");
+			em.setSow(demand.getDoNumber());
+			em.setRole(demand.getPosition());
+			em.setSkill(demand.getSkill());
+			em.setResourceStatus("Active");
+		}
+		model.addAttribute("employee", em);
 	    model.addAttribute("demand", demand);
-	    request.setAttribute("onboardInfo", demand);
-		return "/demand/demandOnboard";
+		if("2".equals(type)) {
+			return "/demand/demandOnboard2";
+		}else if("3".equals(type)) {
+			return "/demand/demandOnboard3";
+		}else {
+			return "/demand/demandOnboard";
+		}
+		
 	}
 	
 	/**

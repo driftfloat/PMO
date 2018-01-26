@@ -171,13 +171,13 @@ var path='<%=path%>';
 									<div class="group">
 										<label class="col-sm-2 control-label">Date of Joining</label>
 										<div class="col-md-4">
-											<div class="input-group date form_datetime0 col-sm-12"
+											<div class="input-group date form_datetime2 col-sm-12"
 												data-link-field="dt_set_order_time_input">
 												<input class="form-control" type="text" readonly data-bv-group=".group"
 													id="entryDate1" name="entryDate1"> <span
 													class="input-group-addon"><span
 													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
-													id="entryDate1" name="entryDate1" />
+													id="entryDate2" name="entryDate2" />
 											</div>
 										</div>
 									</div>
