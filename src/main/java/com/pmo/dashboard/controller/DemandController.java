@@ -432,11 +432,21 @@ public class DemandController {
     				em.setStaffName(candidate.getCandidateName());
     				//em.setBillRate();
     				em.setGraduationDate(candidate.getGraduateDate());
+    				em.setCsSubDept(candidate.getCsSubDept());
+    				em.setEntryDate(candidate.getEntyDate());
+    				em.setEmail(candidate.getEmail());
     			}
     		}
     	}
 		Demand demand = demandService.queryDemandByCandidateId(candidateId);
-		if(candidateId.equals(demand.getCandidateId())) {
+		if(demand!=null) {
+			HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
+			if(hSBCDept!=null) {
+				if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
+					hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
+				}
+			}
+			demand.setHsbcDept(hSBCDept);
 			em.setStaffRegion(demand.getLocation());
 			em.setStaffLocation("China");
 			em.setSow(demand.getDoNumber());
@@ -444,6 +454,7 @@ public class DemandController {
 			em.setSkill(demand.getSkill());
 			em.setResourceStatus("Active");
 		}
+		
 		model.addAttribute("employee", em);
 	    model.addAttribute("demand", demand);
 		if("2".equals(type)) {

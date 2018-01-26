@@ -138,8 +138,6 @@ function loadStayinList(pageState)
 				$("<td>"+ result.data[i].skill+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].role+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].collage+ "</td>").appendTo(tr);
-				$("<td>"+ result.data[i].majorStatus+ "</td>").appendTo(tr);
-				$("<td>"+ result.data[i].englishLevel+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].education+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].experienceYears+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].demandStatus+ "</td>").appendTo(tr);
@@ -165,8 +163,6 @@ function loadStayinList(pageState)
 			var dataCount = parseInt(result.pageInfo.dataCount);
 			$("#pageCount").html(pageCount);
 			$("#currentPage").html(currentPage);
-			$("#pageDataCount").html(pageDataCount);
-			$("#dataCount").html(dataCount);
 			$("#nextPage").attr("onclick","loadStayinList('next')");
 			$("#previousPage").attr("onclick","loadStayinList('previous')");
 			$("#lastPage").attr("onclick","loadStayinList('last')");
@@ -322,10 +318,29 @@ function updateDemand(demandId,candidateId){
 		    	 
 		     }
 		     
-	}
-});
+	    }
+	});
 }
 
+function onboard(index,engagementType){
+	if(confirm("确定要Onborad吗?")){
+		if(engagementType=="Time&Material"||engagementType=="Team Delivery"){
+			url = path+'/service/demand/demandOnboard.html?type=1';
+			$("#editForm").attr("action",url);
+		}else if(engagementType=="Fixed Price"){
+			url = path+'/service/demand/demandOnboard.html?type=2';
+			$("#editForm").attr("action",url);
+		}else if(engagementType=="Support"){
+			url = path+'/service/demand/demandOnboard.html?type=3';
+			$("#editForm").attr("action",url);
+		}else{
+			url = path+'/service/demand/demandOnboard.html?type=1';
+			$("#editForm").attr("action",url);
+		}
+		$("#candidateId").val(index);
+		$("#editForm").submit();
+	}
+}
 
 
 

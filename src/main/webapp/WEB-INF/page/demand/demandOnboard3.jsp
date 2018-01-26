@@ -358,7 +358,7 @@ var empObj =<%=empInfo%>;
 																data-bv-notempty
 																data-bv-notempty-message="Please Select  csDept"
 																id="csSubDept" data-bv-group=".group">
-																<option value="">--Option--</option>
+																<option value="${demand.csSubDept }"></option>
 															</select>
 														</div>
 													</div>

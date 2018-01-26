@@ -370,6 +370,7 @@ function loadpage(){
 	        $('#staffnameEdit').show();
 	        $('#joiningEdit').show();
 	        $('#bgvEdit').show();
+	        
 	        $('#contract').show();
 	        
 	}
