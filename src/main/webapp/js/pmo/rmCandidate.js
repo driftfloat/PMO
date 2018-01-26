@@ -406,6 +406,15 @@ function dateType() {
 
 function rescheduleInterview(pushId,candidateId) {
 	
+	$("#graduationDate1").val("");
+	$("#interviewer").val("");
+	$('#projectName').val("");
+	$('#interviewType').val("");
+	
+	if($("#graduationDate1").val()==''||$("#interviewer").val()==''||$('#projectName').val()==''||$('#interviewType').val()==''){
+		 $('#addInterviewer').attr("disabled", "disabled");
+	}
+	
 	/*上次面试信息回显*/
 	$.ajax({
 		url:path + '/service/rmCandidate/getIntervieInfo',
@@ -421,7 +430,7 @@ function rescheduleInterview(pushId,candidateId) {
 		    	$('#graduationDate1').val(result.interviewDate);
 				$('#projectName').val(result.projectName);
 				$("#interviewType").val(result.interviewType);
-				$('#interviewerId').val(result.interviewerId);
+				$('#interviewer').val(result.interviewerId);
 				
 				
 				
@@ -518,6 +527,15 @@ function rescheduleInterview(pushId,candidateId) {
 /* 新一轮面试 */
 function scheduleInterview(pushId) {
 	$('#myModal').modal('show');
+	$("#graduationDate1").val("");
+	$("#interviewer").val("");
+	$('#projectName').val("");
+	$('#interviewType').val("");
+	 	
+	if($("#graduationDate1").val()==''||$("#interviewer").val()==''||$('#projectName').val()==''||$('#interviewType').val()==''){
+	 	$('#addInterviewer').attr("disabled", "disabled");
+	 }
+	
 	loadInterviewer();
 	$("#addInterviewer").click(function() {
 		var interviewDate = $("#interviewDate").val();
@@ -571,6 +589,15 @@ function nextInterview(pushId, projectName) {
 	$('#projectName').val(projectName);
 	$('#projectName').attr("disabled", "disabled");
 	$('#myModal').modal('show');
+	$("#graduationDate1").val("");
+	$("#interviewer").val("");
+	$('#interviewType').val("");
+	
+	
+	if($("#graduationDate1").val()==''||$("#interviewer").val()==''||$('#projectName').val()==''||$('#interviewType').val()==''){
+		$('#addInterviewer').attr("disabled", "disabled");
+	}
+	
 	loadInterviewer();
 	$("#addInterviewer").click(function() {
 		var interviewDate = $("#interviewDate").val();
@@ -688,8 +715,7 @@ function offerInterview(pushId) {
 		$(this).find("input[type=radio]").prop("checked", true);
 	});
 
-	$
-			.ajax({
+	$.ajax({
 				url : path + '/service/rmCandidate/offerDemandList',
 				dataType : 'json',
 				async : false,
@@ -725,7 +751,8 @@ function offerInterview(pushId) {
 						// Felix, 20171213, Demand Detail, Begin.
 						var td10 = $("<td><div class='btn-group btn-group-sm'><a href='javascript:void(0);' class='btn btn-info btn-small' onclick='demandDetail(\""
 								+ result.list[i].demandId
-								+ "\")'>Detail</a></div></td>");
+								+ "\")'>Detail</a></div>" 
+								+ "<div class='btn-group btn-group-sm'><a href='javascript:void(0);' class='btn btn-info btn-small' onclick = offerConfirm('"+pushId+"','"+result.list[i].demandId+"')>Confirm</div></td>");
 						// Felix, 20171213, Demand Detail, End.
 						td1.appendTo(tr);
 						td2.appendTo(tr);
@@ -744,39 +771,12 @@ function offerInterview(pushId) {
 			});
 
 	var demandTable = $("#demandList");
-	var demandId1 = $("input[name=checked]:checked").val();
 	BootstrapDialog.show({
 		title : 'DemandList',
 		message : demandTable,
 		size : BootstrapDialog.SIZE_WIDE,
-		buttons : [ {
-			label : 'Confirm',
-			action : function(dialog) {
-				var demandId = $("input[name=checkAll]:checked").val();
-				$.ajax({
-					url : path + '/service/rmCandidate/offerInterview',
-					dataType : "json",
-					async : false,
-					cache : false,
-					type : "post",
-					data : {
-						"pushId" : pushId,
-						"demandId" : demandId
-					},
-					success : function(data) {
-						if (data == "1") {
-							BootstrapDialog.show({
-								title : 'Interview arrangement',
-								message : 'Offering successfully',
-								size : BootstrapDialog.SIZE_SMALL
-							})
-						}
-						loadMyCandidate();
-					}
-				});
-				dialog.close();
-			}
-		}, {
+		buttons : [ 
+			 {
 			label : 'Cancel',
 			action : function(dialog) {
 				dialog.close();
@@ -785,6 +785,29 @@ function offerInterview(pushId) {
 		onshown : function(e) {
 			$(".bootstrap-dialog-message").css("maxHeight",
 					window.innerHeight - 240 + "px")
+		}
+	});
+}
+
+function offerConfirm(pushId,demandId) {
+	var pushId = pushId;
+	var demandId = demandId;
+	$.ajax({
+		url : path + '/service/rmCandidate/offerInterview',
+		dataType : "json",
+		async : false,
+		cache : false,
+		type : "post",
+		data : {
+			"pushId" : pushId,
+			"demandId" : demandId
+		},
+		success : function(data) {
+			if (data == "1") {
+				alert("Offering successfully!");
+				location.reload();
+			}
+			loadMyCandidate();
 		}
 	});
 }
@@ -802,4 +825,54 @@ $("#pageRecordsNum").change(function(){
 
 $("#searchBtn").click(function(){
 	loadMyCandidate();
+});
+
+$("#graduationDate1").bind("input propertychange change",function(){
+	if ($("#graduationDate1").val() == '') {
+		$('#addInterviewer').attr("disabled", "disabled");
+	}
+	
+	if ($("#graduationDate1").val() != ''
+			&& $("#interviewer").val() != ''
+			&& $("#projectName").val() != ''
+			&& $("#interviewType").val() != '') {
+		$("#addInterviewer").removeAttr("disabled");
+	}
+});
+
+$("#interviewer").change(function(){
+	if ($("#interviewer").val() == '') {
+		$('#addInterviewer').attr("disabled", "disabled");
+	}
+	if ($("#graduationDate1").val() != ''
+			&& $("#interviewer").val() != ''
+			&& $("#projectName").val() != ''
+			&& $("#interviewType").val() != '') {
+		$("#addInterviewer").removeAttr("disabled");
+	}
+});
+
+$('#projectName').bind("input propertychange change",function(){
+	if ($("#projectName").val() == '') {
+		$('#addInterviewer').attr("disabled", "disabled");
+	}
+	if ($("#graduationDate1").val() != ''
+			&& $("#interviewer").val() != ''
+			&& $("#projectName").val() != ''
+			&& $("#interviewType").val() != '') {
+		$("#addInterviewer").removeAttr("disabled");
+	}
+});
+
+$('#interviewType').change(function(){
+	if ($("#interviewType").val() == '') {
+		$('#addInterviewer').attr("disabled", "disabled");
+	}
+	if ($("#graduationDate1").val() != ''
+			&& $("#interviewer").val() != ''
+			&& $("#projectName").val() != ''
+			&& $("#interviewType").val() != '') {
+		$("#addInterviewer").removeAttr("disabled");
+	}
+		
 });

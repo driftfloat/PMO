@@ -199,7 +199,7 @@ vertical-align: middle!important;
 									<div class="input-group date form_datetime col-sm-12"
 										data-link-field="dt_set_order_time_input">
 										<input class="form-control" type="text" disabled="disabled"
-											id="graduationDate1" name="graduationDate1"> <span
+											id="graduationDate1" name="graduationDate1"/> <span
 											class="input-group-addon"><span
 											class="glyphicon glyphicon-th"></span></span> <input type="hidden"
 											id="interviewDate" name="interviewDate" />
@@ -301,7 +301,7 @@ vertical-align: middle!important;
 				</div>
 			</div>
 		</div>
-		
+	</div>		
 		
 		<form id="resumeForm" action="" method="post" target="_blank">
 			<input type="hidden" id="candidateId" name="candidateId" ></input>
@@ -309,7 +309,7 @@ vertical-align: middle!important;
 		<div style="display: none" id="table_area" ></div>
 		<c:import url="/service/manage/footer" />
 
-	</div>
+
 	<!--/.fluid-container-->
 
 	<!-- external javascript -->
