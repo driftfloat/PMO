@@ -556,22 +556,24 @@ var path='<%=path%>';
 							<div class="col-sm-4" style="width:60%;">
 								<select class="form-control"  id="confirmDate" name="confirmDate" data-bv-group=".group">
 									<option value="confirm">确认</option>
-									<option value="change">取消</option> -->
+									<option value="change">取消</option> 
 								</select>
 							</div>
 						</div>
 						<br/><br/><br/>
 						
 						<div class="group" style="display: none" id = "newInterviewDate">
+							<form id="conformForm">
 							<label class="col-sm-2 control-label" style="width:30%;">New Interview Date:</label>
-							<textarea id="newDate" class="form-control" style="margin:15px;width:60%;" rows="6"></textarea>
+							<textarea name="newDate" id="newDate" class="form-control" style="margin:15px;width:60%;" rows="6" data-bv-group=".group"></textarea>
+						    </form>
 						</div>
 						<div class="center">
 							<a class="btn btn-success" href="#"
 								onClick="confirmInterviewDate()"> 
 								<i class="glyphicon glyphicon-ok icon-white"></i> Confirm
 							</a> 
-							<a class="btn btn-info" href="#" data-dismiss="modal"> 
+							<a class="btn btn-info" href="#" onClick="cancelConform()"> 
 								<i class="glyphicon glyphicon-remove icon-white"></i> Cancel
 							</a>
 						</div>
