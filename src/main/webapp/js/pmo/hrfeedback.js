@@ -110,6 +110,8 @@ function interviewConfirm(candidateId,candidateName,csSubdeptName){
 			$("#hrConfirmInterviewId").val(result.interviewId);
 			$("#interviewDate").val(result.interviewDate);
 			$("#interviewDate").attr("disabled", true);
+			//$("#newDate").val(" ");
+			
 		}
 	})
 	
@@ -129,6 +131,36 @@ function confirmInterviewDate(){
 	var confirmDateType =  $("#confirmDate").find("option:selected").text()
 	var interviewId = $("#hrConfirmInterviewId").val();
 	var newDate = $("#newDate").val();
+	var bootstrapValidator;
+	if($('#newInterviewDate').is(':hidden')){
+	      //如果隐藏时的处理方法
+	}else{
+		//alert("显示");
+	      //如果显示时的处理方法
+		$('#conformForm').bootstrapValidator({
+			message: 'This value is not valid',
+
+	        feedbackIcons: {
+	            valid: 'glyphicon glyphicon-ok',
+	            invalid: 'glyphicon glyphicon-remove',
+	            validating: 'glyphicon glyphicon-refresh'
+	        },
+	        fields: {
+	        	newDate: {
+	                validators: {
+	                    notEmpty: {
+	                        message: 'Please enter New Interview Date'
+	                    }
+	                }
+	            }
+	        }
+	    });
+		bootstrapValidator = $("#conformForm").data('bootstrapValidator');
+		bootstrapValidator.validate();
+		if(!bootstrapValidator.isValid()){
+			return;
+		}
+	}
 	$.ajax({
 		url:path+"/service/hrfeedback/confirmInterviewDate",
 		dataType:"json",
@@ -137,6 +169,7 @@ function confirmInterviewDate(){
 		cache:false,
 		type:"post",
 		success:function(result){
+			$('#conformForm').data('bootstrapValidator').resetForm(); 
 			if (result == false) {
 				alert("Reconfirm unsuccessfully");
 			} else if (result == true) {
@@ -152,4 +185,8 @@ function cancel(){
 	$('#hrfeedBackbox').modal('hide');
 	$("#hrFeedBack").val("");
 }
-	
+function cancelConform(){
+	$('#conformForm').data('bootstrapValidator').resetForm(); 
+	$('#hrInterviewConfirmbox').modal('hide');
+	$("#newDate").val("");
+}	
