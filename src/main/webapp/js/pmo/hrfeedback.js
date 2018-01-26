@@ -181,12 +181,16 @@ function confirmInterviewDate(){
 }
 
 function cancel(){
-	$('#hrFeedBackForm').data('bootstrapValidator').resetForm(); 
+	if($('#hrFeedBackForm').data('bootstrapValidator')!=undefined){
+		$('#hrFeedBackForm').data('bootstrapValidator').resetForm();  
+	}
 	$('#hrfeedBackbox').modal('hide');
 	$("#hrFeedBack").val("");
 }
 function cancelConform(){
-	$('#conformForm').data('bootstrapValidator').resetForm(); 
+	if($('#conformForm').data('bootstrapValidator')!=undefined){
+		$('#conformForm').data('bootstrapValidator').resetForm(); 
+	}
 	$('#hrInterviewConfirmbox').modal('hide');
 	$("#newDate").val("");
 }	
