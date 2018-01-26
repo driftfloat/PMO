@@ -31,12 +31,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmo.dashboard.entity.AddDemand;
 import com.pmo.dashboard.entity.CSDept;
+import com.pmo.dashboard.entity.Demand;
 import com.pmo.dashboard.entity.PageCondition;
 import com.pmo.dashboard.entity.StayinCandidate;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.CSDeptService;
+import com.pom.dashboard.service.DemandService;
 import com.pom.dashboard.service.StayinService;
 
 @Controller
@@ -51,6 +53,9 @@ public class StayinController
     
     @Resource
 	private CSDeptService csDeptService;
+    
+    @Resource
+	private DemandService demandService;
     @RequestMapping("/stayin")
     public String stayin(final HttpServletRequest request,
             final HttpServletResponse response)
@@ -150,8 +155,21 @@ public class StayinController
     	//把传过来的保存到session中
     	 request.getSession().setAttribute("candidateId",candidateId);
     	 request.getSession().setAttribute("demandId", demandId);
-    	List<AddDemand> result = StayinService.queryDemand();
-
+    	 Demand demand = demandService.queryDemandById(demandId);
+    	 
+     	List<AddDemand> result = new ArrayList<>();
+     	
+     	if(demand!=null){
+	    	String csSubdept = demand.getCsSubDept();
+	    	 
+	    	List<AddDemand> list = StayinService.queryDemand();
+	    	for (AddDemand addDemand : list) {
+				if(addDemand.getCsSubDept().equals(csSubdept)){
+					result.add(addDemand);
+				}
+			}
+     	}
+     	
     	return result;
     }
     	
