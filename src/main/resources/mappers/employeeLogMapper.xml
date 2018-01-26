@@ -189,10 +189,12 @@
             AND LEVEL_STATUS = #{levelStatus}
         </if>
         <if test="newdept==3" >
-            AND CS_SUBDEPT_ID_NEW != null
+            AND CS_SUBDEPT_ID_NEW is not null
+            AND CS_SUBDEPT_ID_NEW !=''
         </if>
         <if test="newstatus==4"  >
-            AND STATUS_NEW != null
+            AND STATUS_NEW is not null
+            AND STATUS_NEW !=''
         </if>
 			
   </select>
@@ -212,10 +214,12 @@
             AND LEVEL_STATUS = #{levelStatus}
         </if>
         <if test="newdept==3" >
-            AND CS_SUBDEPT_ID_NEW != null
+            AND CS_SUBDEPT_ID_NEW is not null
+            AND CS_SUBDEPT_ID_NEW !=''
         </if>
         <if test="newstatus==4"  >
-            AND STATUS_NEW != null
+            AND STATUS_NEW is not null
+            AND STATUS_NEW !=''
         </if>
 		order by UPDATE_DATE desc
 		LIMIT #{currentPage},#{pageRecordsNum}
