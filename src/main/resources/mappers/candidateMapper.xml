@@ -271,7 +271,7 @@
 	    update t_candidate set ARRIVAL_DATE = #{arrivalDate} WHERE CANDIDATE_ID = #{candidateId}; 
 	</update>
 	<update id="updateDemandStatusDelay" parameterType="com.pmo.dashboard.entity.CandidateInfo">
-	    update t_demand set STATUS = 'delay' WHERE CANDIDATE_ID = #{candidateId} and STATUS in ('OfferMade','Offermade');
+	    update t_demand set STATUS = 'Delay' WHERE CANDIDATE_ID = #{candidateId} and STATUS in ('OfferMade','Offermade');
 	</update>
 	<update id="updateCandidateAbortInfo" parameterType="com.pmo.dashboard.entity.CandidateInfo">
 	    update t_candidate set CANDIDATE_STATUS = #{candidateStatus},REMARK = #{remark} WHERE CANDIDATE_ID = #{candidateId}; 
@@ -287,6 +287,7 @@
 	    	values (#{DEMAND_ID},#{RR},#{JOB_CODE},#{SKILL},#{REQUESTOR},#{POSITION},#{HSBC_SUBDEPT_ID},#{LOCATION},#{REQ_PUBLISHED_DATE},#{AGEING},#{PROFILES_NO},#{INTERVIEWED_NO},'OPEN',#{PROPOSED_JOINING_DATE},#{SOW_SIGNED},#{REASON},#{REMARK},#{CS_SUBDEPT},#{PLANNED_ONBOARD_DATE},#{DO_NUMBER},#{HR_PRIORITY},#{CREATE_DATE},#{COMPLETION_DATE})
 	</insert>
 	<sql id="candidateWherePart">
+			And STATUS != 'Onboard' 
 		<if test="candidateName != null and candidateName != ''">
 			AND a.CANDIDATE_NAME = #{candidateName}
 		</if>
