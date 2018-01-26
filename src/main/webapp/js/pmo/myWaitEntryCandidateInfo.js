@@ -405,11 +405,11 @@ function loadCandidateList(pageState)
 				"<td>"+ result.data[i].candidateAge+ "</td>"+
 				"<td>"+ result.data[i].candidateTel+ "</td>"+
 				"<td>"+ result.data[i].email+ "</td>"+
-				"<td>"+ result.data[i].source+ "</td>"+
-				"<td>"+ result.data[i].candidateStatus+ "</td>"+
+				//"<td>"+ result.data[i].source+ "</td>"+
+				//"<td>"+ result.data[i].candidateStatus+ "</td>"+
 				"<td>"+ result.data[i].experienceYears+ "</td>"+
 				"<td>"+ result.data[i].skill+ "</td>"+
-				"<td>"+ result.data[i].interviewStatus+ "</td>"+
+				//"<td>"+ result.data[i].interviewStatus+ "</td>"+
 				"<td>"+ result.data[i].csSubdeptName+ "</td>"+
 				"<td>"+ result.data[i].demandStatus+ "</td>").appendTo(tr);
 				if(result.data[i].demandStatus == 'Onboard'){
@@ -425,7 +425,7 @@ function loadCandidateList(pageState)
 							"onclick=abortMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"'," +
 								"'"+result.data[i].candidateStatus+"','"+result.data[i].remark+"')>Abort</a>" +
 					"</td>").appendTo(tr);
-				}else if(result.data[i].demandStatus == 'OfferMade'){
+				}else if(result.data[i].demandStatus == 'OfferMade' || result.data[i].demandStatus == 'Delay'){
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +

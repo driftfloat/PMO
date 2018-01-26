@@ -118,13 +118,12 @@ var path='<%=path%>';
 										</div>
 									</div>
 									<div class="group">
-										<label class="col-lg-2 control-label">Candidate Status</label>
+										<label class="col-lg-2 control-label">Demand Status</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="candidateStatus" id="candidateStatus" data-bv-group=".group">
+											<select class="form-control" name="demandStatus" id="demandStatus" data-bv-group=".group">
 												<option value="">--Option--</option>
-												<option value="0">招聘中</option>
-												<option value="1">offer中</option>
-												<option value="2">已入职</option>
+												<option value="OfferMade">OfferMade</option>
+												<option value="delay">delay</option>
 											</select>
 										</div>
 									</div>
@@ -165,18 +164,7 @@ var path='<%=path%>';
 										</div>
 									</div>
 									<br/><br/><br/>
-									<div class="group">
-										<label class="col-lg-2 control-label">Demand Status</label>
-										<div class="col-lg-4">
-											<select class="form-control" name="demandStatus" id="demandStatus" data-bv-group=".group">
-												<option value="">--Option--</option>
-												<option value="OfferMade">OfferMade</option>
-												<option value="Onboard">Onboard</option>
-												<option value="delay">delay</option>
-											</select>
-										</div>
-									</div>
-									<br/><br/><br/>
+									
 									<div class="form-group">
 									    <div style="text-align:center;width:50%;float:left;margin-right:40px;margin-top:10px;">
 									    	<input type="button" value="Search"
@@ -205,11 +193,11 @@ var path='<%=path%>';
 												<th>Age</th>
 												<th>Tel</th>
 												<th>Email</th>
-												<th>Source</th>
-												<th>CandidateE Status</th>
+												<!-- <th>Source</th>
+												<th>CandidateE Status</th> -->
 												<th>Work Years</th>
 												<th>Skill</th>
-												<th>Interview Status</th>
+												<!-- <th>Interview Status</th> -->
 												<th>Subdept Name</th>
 												<th>Demand Status</th>
 												<th>Operation</th>
@@ -413,10 +401,10 @@ var path='<%=path%>';
 							<div class="col-lg-4" style="width:60%;">
 								<select class="form-control" id="abortMyWaitCandidateStatus" name="abortMyWaitCandidateStatus" data-bv-group=".group">
 									<option value="">--Option--</option>
-									<option value="0">招聘中</option>
+									<!--  <option value="0">招聘中</option>
 									<option value="1">offer中</option>
 									<option value="2">已入职</option>
-									<option value="3">闲置中</option>
+									<option value="3">闲置中</option> -->
 									<option value="4">暂不关注</option>
 									<option value="5">黑名单</option>
 									<option value="6">入职他司</option>
