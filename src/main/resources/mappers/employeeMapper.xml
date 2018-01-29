@@ -109,4 +109,10 @@
 	<select id="getAllInterviewer"  resultMap="employeeMap">
 		select * from t_employee where INTERVIERW_STATUS = "1" 
 	</select>
+	
+	
+	<select id="queryAllEmployee" parameterType="com.pmo.dashboard.entity.Employee" resultMap="employeeMap">
+	    SELECT * FROM t_employee e left join t_cs_dept c on e.CS_SUBDEPT_ID = c.CS_SUBDEPT_ID WHERE 1 = 1 
+	</select>
+	
 </mapper>

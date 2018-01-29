@@ -24,6 +24,7 @@ public class UserAuthorityInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
+		System.out.println("用户权限拦截器======================");
 		HttpSession session = request.getSession();  
 		User user = (User) session.getAttribute("loginUser"); 	
 		if(user==null) {
