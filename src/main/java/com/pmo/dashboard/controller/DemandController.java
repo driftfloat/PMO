@@ -425,6 +425,7 @@ public class DemandController {
 		Employee em = new Employee();
 		@SuppressWarnings("unchecked")
 		List<StayinCandidate> list = (List<StayinCandidate>) request.getSession().getAttribute("candidateList");
+		Demand demand = demandService.queryDemandByCandidateId(candidateId);
     	//拿到需求和待入职的人员信息  gkf
     	if(list!=null &&list.size()>0&&candidateId!=null) {
     		for(StayinCandidate candidate :list ) {
@@ -435,28 +436,30 @@ public class DemandController {
     				em.setCsSubDept(candidate.getCsSubDept());
     				em.setEntryDate(candidate.getEntyDate());
     				em.setEmail(candidate.getEmail());
+    				
+    				if(demand!=null) {
+    					HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
+    					if(hSBCDept!=null) {
+    						if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
+    							hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
+    						}
+    					}
+    					demand.setHsbcDept(hSBCDept);
+    					demand.setProposedJoiningDate(candidate.getArrivalDate());
+    					em.setStaffRegion(demand.getLocation());
+    					em.setStaffLocation("China");
+    					em.setSow(demand.getDoNumber());
+    					em.setRole(demand.getPosition());
+    					em.setSkill(demand.getSkill());
+    					em.setResourceStatus("Active");
+    				}
+    				model.addAttribute("employee", em);
+    			    model.addAttribute("demand", demand);
+    				break;
     			}
     		}
     	}
-		Demand demand = demandService.queryDemandByCandidateId(candidateId);
-		if(demand!=null) {
-			HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
-			if(hSBCDept!=null) {
-				if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
-					hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
-				}
-			}
-			demand.setHsbcDept(hSBCDept);
-			em.setStaffRegion(demand.getLocation());
-			em.setStaffLocation("China");
-			em.setSow(demand.getDoNumber());
-			em.setRole(demand.getPosition());
-			em.setSkill(demand.getSkill());
-			em.setResourceStatus("Active");
-		}
 		
-		model.addAttribute("employee", em);
-	    model.addAttribute("demand", demand);
 		if("2".equals(type)) {
 			return "/demand/demandOnboard2";
 		}else if("3".equals(type)) {

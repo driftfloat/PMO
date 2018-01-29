@@ -16,4 +16,5 @@ public interface AddDemandMapper {
 	public boolean updateDemandAfter(AddDemand d1);
 	
 	int modifyDemand(AddDemand demand);
+	int modifyDemand2(AddDemand demand);
 }

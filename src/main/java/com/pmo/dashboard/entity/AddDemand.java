@@ -6,7 +6,7 @@ package com.pmo.dashboard.entity;
  */
 public class AddDemand
 {
-
+	
     private String demandId;
     
     public String getEngagementType() {
@@ -84,10 +84,26 @@ public class AddDemand
     
     private String onboardDate;
 
+	public String getOnboardDate() {
+		return onboardDate;
+	}
+
+	public void setOnboardDate(String onboardDate) {
+		this.onboardDate = onboardDate;
+	}
+
 	private String bgvCleared;
 
-	
+	private String onborad;
 
+
+	public String getOnborad() {
+		return onborad;
+	}
+
+	public void setOnborad(String onborad) {
+		this.onborad = onborad;
+	}
 
 	public String getDemandId() {
 		return demandId;
@@ -350,13 +366,7 @@ public class AddDemand
 		this.completionDate = completionDate;
 	}
 
-	public String getOnboardDate() {
-		return onboardDate;
-	}
-
-	public void setOnboardDate(String onboardDate) {
-		this.onboardDate = onboardDate;
-	}
+	
 
 
 	
@@ -378,7 +388,7 @@ public class AddDemand
 			String proposedJoiningDate, String sowSigned, String onboarded, String abort, String delayed, String reason,
 			String candidateId, String remark, String csSubDept, String plannedOnboardDate, String doNumber,
 			String hrPriority, String creatDate, String updateDate, String completionDay, String completionDate,
-			String onboardDate, String bgvCleared) {
+			String bgvCleared) {
 		super();
 		this.demandId = demandId;
 		this.rr = rr;
@@ -412,7 +422,6 @@ public class AddDemand
 		this.updateDate = updateDate;
 		this.completionDay = completionDay;
 		this.completionDate = completionDate;
-		this.onboardDate = onboardDate;
 		this.bgvCleared = bgvCleared;
 	}
 
