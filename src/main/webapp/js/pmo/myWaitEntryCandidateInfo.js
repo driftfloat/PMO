@@ -425,7 +425,7 @@ function loadCandidateList(pageState)
 							"onclick=abortMyWaitCandidate('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"'," +
 								"'"+result.data[i].candidateStatus+"','"+result.data[i].remark+"')>Abort</a>" +
 					"</td>").appendTo(tr);
-				}else if(result.data[i].demandStatus == 'OfferMade' || result.data[i].demandStatus == 'Delay'){
+				}else if(result.data[i].demandStatus == 'OfferMade' || result.data[i].demandStatus == 'Delayed'){
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small' " +
 							"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>" +
 						"<a href='javascript:void(0);' class='btn btn-info btn-small' " +

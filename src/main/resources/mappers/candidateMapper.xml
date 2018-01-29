@@ -246,7 +246,7 @@
         	t_demand d 
         ON a.CANDIDATE_ID = d.CANDIDATE_ID 
         WHERE 
-			 LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','delay','Onboard','Offering') 
+			 LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','Delayed','Onboard','Offering') 
 			 AND d.STATUS != 'Onboard'
         	<include refid="candidateWherePart"/>
 		ORDER BY d.STATUS,CANDIDATE_STATUS,INTERVIEW_STATUS,c.CS_SUBDEPT_NAME,MAJOR_STATUS,CANDIDATE_ID 
@@ -261,7 +261,7 @@
         	t_demand d 
         ON a.CANDIDATE_ID  = d.CANDIDATE_ID 
         WHERE 
-			LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','delay','Onboard','Offering') 
+			LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','Delayed','Onboard','Offering') 
 			AND d.STATUS != 'Onboard'
         	<include refid="candidateWherePart"/>
         ;
@@ -273,16 +273,16 @@
 	    update t_candidate set ARRIVAL_DATE = #{arrivalDate} WHERE CANDIDATE_ID = #{candidateId}; 
 	</update>
 	<update id="updateDemandStatusDelay" parameterType="com.pmo.dashboard.entity.CandidateInfo">
-	    update t_demand set STATUS = 'Delay' WHERE CANDIDATE_ID = #{candidateId} and STATUS in ('OfferMade','Offermade');
+	    update t_demand set STATUS = 'Delayed' WHERE CANDIDATE_ID = #{candidateId} and STATUS in ('OfferMade','Offermade');
 	</update>
 	<update id="updateCandidateAbortInfo" parameterType="com.pmo.dashboard.entity.CandidateInfo">
 	    update t_candidate set CANDIDATE_STATUS = #{candidateStatus},REMARK = #{remark} WHERE CANDIDATE_ID = #{candidateId}; 
 	</update>
 	<update id="updateDemandAbortColumnInfo" parameterType="com.pmo.dashboard.entity.CandidateInfo">
-	    update t_demand set STATUS = 'Abort' WHERE CANDIDATE_ID = #{candidateId} and STATUS in ('OfferMade','Offermade','delay'); 
+	    update t_demand set STATUS = 'Abort' WHERE CANDIDATE_ID = #{candidateId} and STATUS in ('OfferMade','Offermade','Delayed'); 
 	</update>
 	<select id="queryDemandForCandidateId" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="java.util.HashMap" >
-		select * from t_demand where CANDIDATE_ID = #{candidateId} and STATUS in ('OfferMade','Offermade','delay'); 
+		select * from t_demand where CANDIDATE_ID = #{candidateId} and STATUS in ('OfferMade','Offermade','Delayed'); 
 	</select>
 	<insert id="insertDemandForAbortCandidate" parameterType="java.util.HashMap">
 	    insert into t_demand (DEMAND_ID,RR,JOB_CODE,SKILL,REQUESTOR,POSITION,HSBC_SUBDEPT_ID,LOCATION,REQ_PUBLISHED_DATE,AGEING,PROFILES_NO,INTERVIEWED_NO,`STATUS`,PROPOSED_JOINING_DATE,SOW_SIGNED,REASON,REMARK,CS_SUBDEPT,PLANNED_ONBOARD_DATE,DO_NUMBER,HR_PRIORITY,CREATE_DATE,COMPLETION_DATE)
