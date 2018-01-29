@@ -288,31 +288,27 @@ var empObj =<%=empInfo%>;
 												</div>
 												<br><br><br>
 												<div class="form-group">
-													<div class="group">
-														<label class="col-lg-2 control-label">HSBC Department</label>
-														<div class="col-lg-4">
-															<input type="text" style="display: none"
-																value="${demand.hsbcDept.hsbcDeptName}"
-																id="hsbcDeptInput" /> <select class="form-control"
-																name="hsbcDeptEdit" data-bv-notempty
-																data-bv-notempty-message="Please Select Your HsbcDept"
-																id="hsbcDeptEdit" data-bv-group=".group">
-																<option value="">-- Option --</option>
-															</select>
-														</div>
-													</div>
-													<div class="group">
-														<label class="col-lg-2 control-label">HSBC Sub-Department</label>
-														<div class="col-lg-4">
-															<select class="form-control" name="hsbcSubDeptEdit"
-																data-bv-notempty
-																data-bv-notempty-message="Please Select Your HsbcSubDept"
-																id="hsbcSubDeptEdit" data-bv-group=".group">
-																<option value="${demand.hsbcDept.hsbcSubDeptName }"></option>
-															</select>
-														</div>
-													</div>
-												</div>
+								       <div class="group">
+										<label class="col-lg-2 control-label">HSBC Department</label>
+										<div class="col-lg-4">
+											<input type="text" style="display:none" value="${demand.hsbcDept.hsbcDeptName}" 
+													id="hsbcDeptInput" />
+											<select class="form-control" name="hsbcDeptEdit" data-bv-notempty
+												data-bv-notempty-message="Please Select Your HsbcDept" id="hsbcDeptEdit" data-bv-group=".group">
+												<option value="">-- Option --</option>
+											</select>
+										</div>
+										</div>
+										<div class="group">
+										<label class="col-lg-2 control-label">HSBC Sub-Department</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="hsbcSubDeptEdit" data-bv-notempty
+												data-bv-notempty-message="Please Select Your HsbcSubDept" id="hsbcSubDeptEdit" data-bv-group=".group">
+												<option value="${demand.hsbcDept.hsbcSubDeptName }"></option>
+											</select>
+										</div>
+										</div>
+								</div>
 												<br><br><br>
 												<div class="form-group">
 													<div class="group">
@@ -367,7 +363,7 @@ var empObj =<%=empInfo%>;
 																id="bgvClearedEdit" />
 														</div>
 													</div>
-													<div class="group" id="donumberEdit" style='display: none'>
+													<div class="group" id="donumberEdit" >
 														<label class="col-sm-2 control-label">DO number</label>
 														<div class="col-sm-4">
 															<input type="text" class="form-control"
@@ -500,7 +496,7 @@ var empObj =<%=empInfo%>;
 																data-bv-notempty
 																data-bv-notempty-message="Please Select  csDept"
 																id="csSubDept" data-bv-group=".group">
-																<option value="">--Option--</option>
+																<option value="${demand.csSubDept }"></option>
 															</select>
 														</div>
 													</div>
@@ -520,6 +516,8 @@ var empObj =<%=empInfo%>;
 													<div class="group">
 														<label class="col-lg-2 control-label">HSBC Dept</label>
 														<div class="col-lg-4">
+															<input type="text" style="display: none"
+																value="${demand.hsbcDept.hsbcDeptName}" id="hsbcDeptInput2" />
 															<select class="form-control" name="hsbcDept"
 																id="hsbcDept" data-bv-notempty
 																data-bv-notempty-message="please select  HSBDept"
@@ -529,14 +527,13 @@ var empObj =<%=empInfo%>;
 														</div>
 													</div>
 													<div class="group">
-														<label class="col-lg-2 control-label">HSBC Sub
-															Dept</label>
+														<label class="col-lg-2 control-label">HSBC Sub Dept</label>
 														<div class="col-lg-4">
 															<select class="form-control" name="hsbcSubDept"
 																id="hsbcSubDept" data-bv-notempty
 																data-bv-notempty-message="please select  HSBSubDept"
 																data-bv-group=".group">
-																<option value="">--Option--</option>
+																<option value="${demand.hsbcDept.hsbcSubDeptName }"></option>
 															</select>
 														</div>
 													</div>
@@ -815,8 +812,7 @@ var empObj =<%=empInfo%>;
 	<script type="text/javascript" src="<%=path%>/js/pmo/demandInfoEdit.js"></script>
 	<script type="text/javascript" src="<%=path%>/js/pmo/demandvalid.js"></script>
 
-	<script type="text/javascript"
-		src="<%=path%>/js/pmo/employeeOnborad.js"></script>
+	<script type="text/javascript" src="<%=path%>/js/pmo/employeeOnborad.js"></script>
 	<script type="text/javascript" src="<%=path%>/js/pmo/employeeValid.js"></script>
 
 	<script type="text/javascript"

@@ -282,11 +282,18 @@ var path='<%=path%>';
 													<div class="group" id="joiningEdit" style='display: none'>
 														<label class="col-sm-2 control-label">Proposed
 															Date of Joining</label>
-														<div class="col-sm-4">
-															<input type="text" class="form-control"
-																name="proposedJoiningDateEdit"
-																value="${demand.proposedJoiningDate }"
-																id="proposedJoiningDateEdit" />
+														<div class="col-md-4">
+															<div class="input-group date form_datetime1 col-sm-12"
+																data-link-field="dt_set_order_time_input">
+																<input class="form-control" type="text" readonly
+																	data-bv-group=".group" id="proposedJoiningDateEdit"
+																	name="proposedJoiningDateEdit"
+																	value="${demand.proposedJoiningDate}"> <span
+																	class="input-group-addon"><span
+																	class="glyphicon glyphicon-th"></span></span> <input
+																	type="hidden" id="proposedJoiningDateEdit2"
+																	name="proposedJoiningDateEdit2" />
+															</div>
 														</div>
 													</div>
 												</div>
@@ -460,7 +467,7 @@ var path='<%=path%>';
 																data-bv-notempty
 																data-bv-notempty-message="Please Select  csDept"
 																id="csSubDept" data-bv-group=".group">
-																<option value="">--Option--</option>
+																<option value="${demand.csSubDept }"></option>
 															</select>
 														</div>
 													</div>

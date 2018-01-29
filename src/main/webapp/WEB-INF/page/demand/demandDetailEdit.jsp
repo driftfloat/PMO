@@ -316,7 +316,7 @@ var userType='<%=userType%>'
 													id="bgvClearedEdit"/>
 											</div>
 										</div>
-										<div class="group" id="donumberEdit" style='display:none'>
+										<div class="group" id="donumberEdit">
 											<label class="col-sm-2 control-label">DO number</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="doNumberEdit" value="${demand.doNumber }"
