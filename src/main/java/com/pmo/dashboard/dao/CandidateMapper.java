@@ -80,4 +80,7 @@ public interface CandidateMapper
 	List<CandidateInfo> queryBlackList(CandidateInfo candidate);
 	
 	int queryBlackListCount(CandidateInfo candidate);
+	boolean updateCandidatepushed(String pushId);
+	boolean deleteInterview(String candidateId);
+	String queryPushedCS(String pushId);
 }

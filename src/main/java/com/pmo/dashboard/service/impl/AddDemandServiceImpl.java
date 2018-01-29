@@ -24,6 +24,7 @@ public class AddDemandServiceImpl implements AddDemandService{
 	@Override
 	public boolean addDemand(AddDemand demand) {
 		Map<String, Object> params = new HashMap<String, Object>();
+		if(demand.getHsbcDept()!=null||demand.getHsbcSubDept()!=""){
 		if(demand.getHsbcDept().equals(demand.getHsbcSubDept())) {
 			params.put("hsbcDeptName",demand.getHsbcDept() );
 		}else {
@@ -32,6 +33,8 @@ public class AddDemandServiceImpl implements AddDemandService{
 		}
 		String hsbcSubDeptId = hsbcDeptMapper.queryHsbcSubDeptId(params);
 		demand.setHsbcSubDeptId(hsbcSubDeptId);
+		}
+		
 		if(addDemandMapper.addDemand(demand)>0){
 			return true;
 		}
@@ -45,6 +48,7 @@ public class AddDemandServiceImpl implements AddDemandService{
 	@Override
 	public boolean updateDemand(AddDemand demand) {
 		Map<String, Object> params = new HashMap<String, Object>();
+
 		if(demand.getHsbcDept()!=""&&demand.getHsbcDept()!=null) {
 			if(demand.getHsbcDept().equals(demand.getHsbcSubDept())) {
 				params.put("hsbcDeptName",demand.getHsbcDept() );
