@@ -303,8 +303,17 @@ var userType='<%=userType%>'
 									    <div class="group" id="joiningEdit" style='display:none'>
 											<label class="col-sm-2 control-label">Proposed Date of Joining</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="proposedJoiningDateEdit" value="${demand.proposedJoiningDate }"
-													id="proposedJoiningDateEdit"/>
+											<div class="input-group date form_datetime col-sm-12"
+													data-link-field="dt_set_order_time_input">
+													<input class="form-control" type="text" readonly data-bv-group=".group"value="${demand.proposedJoiningDate }"
+														id="proposedJoiningDateEdit" name="proposedJoiningDateEdit"> 
+														<span class="input-group-addon">
+															<span class="glyphicon glyphicon-th">
+															</span>
+														</span> 
+														<input type="hidden" id="proposedJoiningDateEdit2" name="proposedJoiningDateEdit2" value="${demand.proposedJoiningDate }" />
+													
+													</div>
 											</div>
 										</div>
 										<div class="group" id="reasonAbort" style='display:none'>
