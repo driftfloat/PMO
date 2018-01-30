@@ -91,7 +91,7 @@ var userType='<%=userType%>'
 							<form  id="recruitdemandFormEdit" method="post">
 							    <div class="form-group hidden">
 									    <input type="hidden" name="demandIdEdit" id="demandIdEdit" value="${demand.demandId}"/>
-									   <%--  <input type="hidden" name="statusEdit" id="statusEdit" value="${demand.status}"/> --%>
+									   <input type="hidden" name="userType" id="UserType" value="${demand.userType}"/>
 								</div>
 									
 							    
@@ -304,9 +304,9 @@ var userType='<%=userType%>'
 											<label class="col-sm-2 control-label">Proposed Date of Joining</label>
 											<div class="col-sm-4">
 											<div class="input-group date form_datetime col-sm-12"
-													data-link-field="dt_set_order_time_input">
+													data-link-field="dt_set_order_time_input" id="proposedDate">
 													<input class="form-control" type="text" readonly data-bv-group=".group"value="${demand.proposedJoiningDate }"
-														id="proposedJoiningDateEdit" name="proposedJoiningDateEdit"> 
+														id="proposedJoiningDateEdit1" name="proposedJoiningDateEdit1"> 
 														<span class="input-group-addon">
 															<span class="glyphicon glyphicon-th">
 															</span>

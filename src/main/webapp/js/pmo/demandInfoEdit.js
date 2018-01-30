@@ -51,6 +51,7 @@ function loadHrPriorityEdit(){
 		    for (i=1; i<all_options.length; i++){
 			   if (all_options[i].value == responseValue){
 				   document.getElementById("hrPriorityEdit").options[i].selected = true;
+				   var userType=$("#UserType").val();
 				   if(userType!=0){
 					   $("#hrPriorityEdit").attr("disabled","disabled");
 				   }
@@ -58,6 +59,8 @@ function loadHrPriorityEdit(){
 			   }  
 		    }
 	});
+	
+	
 }
 
 /*add by jama 加载location*/
@@ -469,7 +472,7 @@ function demandDetailUpdate(demandId){
 	})*/
 }
 
-function updateDemand(index){
+function updateDemand(){
 	var bootstrapValidator = $("#recruitdemandFormEdit").data('bootstrapValidator');
 	   bootstrapValidator.validate();
 	if(bootstrapValidator.isValid()){
@@ -489,7 +492,7 @@ function updateDemand(index){
 		var profilesNo=$('#profilesNoEdit').val();
 		var interviewedNo=$('#interviewedNoEdit').val();
 		var status=$('#status').val();
-		var proposedJoiningDate=$('#proposedJoiningDateEdit').val();
+		var proposedJoiningDate=$('#proposedJoiningDateEdit1').val();
 		var bgvCleared=$('#bgvClearedEdit').val();
 		var sowSigned=$('#sowSignedEdit').val();
 		var reason=$('#reasonEdit').val();
@@ -528,5 +531,7 @@ function updateDemand(index){
 				}
 			}
 		})
+	}else{
+		return;
 	}
 }

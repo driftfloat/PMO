@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +18,8 @@ import com.pmo.dashboard.api.constant.ErrorConstant;
 import com.pmo.dashboard.api.constant.ResultConstant;
 import com.pmo.dashboard.api.reqmodel.EmployeeSynReqmodel;
 import com.pmo.dashboard.api.respmodel.EmployeeSynRespmodel;
-import com.pmo.dashboard.api.templete.ResponseTemplete;
+import com.pmo.dashboard.entity.ApiUser;
 import com.pmo.dashboard.entity.Employee;
-import com.pmo.dashboard.entity.User;
 import com.pom.dashboard.service.EmployeeService;
 import com.pom.dashboard.service.UserService;
 
@@ -32,7 +33,7 @@ import com.pom.dashboard.service.UserService;
  *
  */
 @Controller
-@RequestMapping(value="syncEmployInfo")
+@RequestMapping(value="/syncEmployInfo")
 public class EmployeeSynApi {
 	
 	@Resource
@@ -42,71 +43,73 @@ public class EmployeeSynApi {
     private EmployeeService employeeService;
 	
 	
-	@RequestMapping(value="",method=RequestMethod.POST)  
+	@RequestMapping(value="",method = RequestMethod.POST)  
 	@ResponseBody
-	public Map<String,Object> syncEmployInfo(@RequestBody EmployeeSynReqmodel reqmodel){
+	public Map<String,Object> syncEmployInfo(@RequestBody String requetObj){
+		JSONObject jsonObj = new JSONObject(requetObj);
 		Map<String,Object> resmap = new HashMap<String,Object>();
 		List<String> errorList = new ArrayList<String>();
-		ResponseTemplete resTem = new ResponseTemplete();
+		List<EmployeeSynRespmodel> dataList = new ArrayList<>();
+		EmployeeSynReqmodel reqmodel = new EmployeeSynReqmodel();
+		reqmodel.setUserName(jsonObj.getString("userName"));
+		reqmodel.setPassword(jsonObj.getString("password"));
+		reqmodel.setSystemId(jsonObj.getString("systemId"));
+		reqmodel.setLastUpdateTime(jsonObj.getString("lastUpdateTime"));
+
+		
 		/**
 		 * 登录权限认证
 		 */
-		boolean certificationFlag = false;
-		User user = null;
+		ApiUser apiUser = null;
 		System.out.println("请求到接口=========================="+reqmodel.getUserName());
 		try{
-			user = userService.login(reqmodel.getUserName(),reqmodel.getPassword());
-		}catch(Exception e){
-			resTem.setResult(ResultConstant.Fail);
-			errorList.add(ErrorConstant.Exception);
-			resTem.setErrorList(errorList);
-			
-			return resmap;
-		}
+			apiUser = userService.loginApiUser(reqmodel.getUserName(), reqmodel.getPassword(), reqmodel.getSystemId());
 		
-		if(user!=null){
-			if(!"0".equals(user.getLoginStatus())){
+			if(apiUser!= null){
+				//认证成功
+					
+				//put result 
+				resmap.put("result", ResultConstant.Success);
+					
+				//put errorList
+				resmap.put("errorList", errorList);
+					
+				//put dataList
+				List<Employee> emp = employeeService.getEmployeeByLastUpdateTime(reqmodel.getLastUpdateTime());
+				dataList = changeModelList(emp);
+				resmap.put("dataList", dataList);
+					
+				return resmap;
+			}else{
 				//认证失败
-				certificationFlag = false;
+				System.out.println("认证失败==========================");
+				//put result 
+				resmap.put("result", ResultConstant.Fail);
+				
+				//put errorList
 				errorList.add(ErrorConstant.CertificationFail);
-				resTem.setErrorList(errorList);
-				resTem.setResult(ResultConstant.Fail);
+				resmap.put("errorList", errorList);
+				
+				//put dataList
+				resmap.put("dataList", dataList);
 				
 				return resmap;
 			}
-			//认证成功
-			certificationFlag = true;
-		}else{
-			//认证失败
-			System.out.println("认证失败==========================");
-			certificationFlag = false;
-			errorList.add(ErrorConstant.CertificationFail);
-			resTem.setErrorList(errorList);
-			resTem.setResult(ResultConstant.Fail);
+		
+		}catch(Exception e){
+			//put result 
+			resmap.put("result", ResultConstant.Fail);
+			
+			//put errorList
+			errorList.add(ErrorConstant.Exception);
+			resmap.put("errorList", errorList);
+			
+			//put dataList
+			resmap.put("dataList", dataList);
 			
 			return resmap;
 		}
 		
-		/**
-		 * 认证成功同步员工信息
-		 */
-		if(certificationFlag){
-			try{
-				List<Employee> emp = employeeService.getAllEmployee();
-				List<Object> resmodelList = changeModelList(emp);
-				resTem.setResult(ResultConstant.Success);
-				resTem.setDataList(resmodelList);
-				
-				return resmap;
-			}catch(Exception e){
-				resTem.setResult(ResultConstant.Fail);
-				errorList.add(ErrorConstant.Exception);
-				resTem.setErrorList(errorList);
-				
-				return resmap;
-			}
-		}
-		return resmap;
 	}
 	
 	
@@ -124,14 +127,15 @@ public class EmployeeSynApi {
 		return resemp;
 	}
 
-	private List<Object> changeModelList(List<Employee> empList){
-		List<Object> respList = new ArrayList<Object>();
+	private List<EmployeeSynRespmodel> changeModelList(List<Employee> empList){
+		
+		List<EmployeeSynRespmodel> dataList = new ArrayList<EmployeeSynRespmodel>();
 		if(empList != null && empList.size()>0){
 			for(int i=0;i<empList.size();i++){
 				EmployeeSynRespmodel model = changeModel(empList.get(i));
-				respList.add(model);
+				dataList.add(model);
 			}
 		}
-		return respList;
+		return dataList;
 	}
 }

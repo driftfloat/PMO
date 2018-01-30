@@ -71,13 +71,16 @@ public class HrFeedbackController
 			if (confirmDateType.equals("确认") ) {
 				candidateInfo.setInterviewStatus("2");
 				candidateInterview.setMark("");
-				candidateInterview.setConfirmStatus("1");
+				candidateInterview.setConfirmStatus("0");
 				confirmStatus = candidateService.updateConfirmStatus(candidateInterview);
 			} else if (confirmDateType.equals("取消")){
 				candidateInfo.setInterviewStatus("7");
 				candidateInterview.setMark(mark);
+				candidateInterview.setConfirmStatus("1");
 			}
 		}
+		
+		candidateInfo.setCandidateStatus("0");
 		
 		boolean updateMark = candidateService.updateCandidateInterviewMark(candidateInterview);
 

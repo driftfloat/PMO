@@ -3,7 +3,7 @@ $(function(){
 	loadSkill();
 	//loadPosition();
 	loadLocation();
-	loadStatus();
+	//loadStatus();
 	//loadHrPriority();
 	dateType();
 	dateType1();
@@ -18,15 +18,15 @@ $(function(){
 	$("#recruitdemandForm").submit();
 }*/
 
-$('#rr').blur(function(){
+/*$('#rr').blur(function(){
 	hrPriority();
 });
 
 $('#jobCode').blur(function(){
 	hrPriority();
-});
+});*/
 
-function hrPriority(){
+/*function hrPriority(){
 	$('#hrPriority').empty();
 	if($('#rr').val() == '' || $('#rr').val() == null){
 		$('#hrPriority').append("<option>4</option>");
@@ -39,7 +39,7 @@ function hrPriority(){
 	}
 	
 	$('#hrPriority').append("<option>3</option>");
-}
+}*/
 
 
 function loadDept(){
@@ -252,14 +252,14 @@ function loadLocation(){
 	});
 }
 
-function loadStatus(){
+/*function loadStatus(){
 	var url = path+'/json/status.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
 	    	   $("#status").append("<option>"+item.name+"</option>");
 	       })
 	});
-}
+}*/
 
 function loadHrPriority(){
 	var url = path+'/json/hrPriority.json'
