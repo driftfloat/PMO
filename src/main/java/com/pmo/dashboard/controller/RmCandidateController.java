@@ -83,17 +83,18 @@ public class RmCandidateController {
 	
 	@RequestMapping("/loadInterviewer")
 	@ResponseBody
-	public Object loadInterviewer(HttpServletRequest request){
+	public Object loadInterviewer(HttpServletRequest request,String pushId){
 		User user = (User)request.getSession().getAttribute("loginUser");
 		/*
 		List<Employee> list = employeeService.queryEmployeeByCsSubDeptId(user.getCsdeptId());
 		*/
+		String csSubdept=candidateService.queryPushedCS(pushId);
 		List<Employee> list  = new ArrayList<>();
 		String user_type = user.getUserType();
 		if(user.getUserType().equals("0")){
 			 list = employeeService.getAllInterviewer();
 		}else if(user_type.equals("5")||user_type.equals("12")||user_type.equals("14")){
-			list = employeeService.queryEmployeeByCsSubDeptId(user.getCsdeptId());
+			list = employeeService.queryEmployeeByCsSubDeptId(csSubdept);
 		}
 		return list;
 	}
@@ -186,8 +187,15 @@ public class RmCandidateController {
 	    CandidateInfo candidate = new CandidateInfo();
 	    candidate.setCandidateId(candidateId);
 	    candidate.setInterviewStatus("0");
-	    boolean resultFlag = candidateService.updateCandidateInterviewStatus(candidate);
+	    candidate.setCandidateStatus("0");
 	    try {
+	    	 //更新候选人表中的面试状态
+		    candidateService.updateCandidateInterviewStatus(candidate);
+		    //更新push表中的交付部信息
+		    candidateService.updateCandidatePushed(pushId);
+		    //删除面试表中已安排但是并未参加面试的
+		    candidateService.deleteArrangedinter(candidateId);
+		    
 			rmCandidateService.interviewBack(pushId);
 			return "1";
 		} catch (Exception e) {

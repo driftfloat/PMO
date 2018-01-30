@@ -60,7 +60,7 @@ public interface CandidateService
 	CandidateInfo queryCandidateForId(String candidateId);
 	
 	boolean updateCandidateInterviewStatus(CandidateInfo candidate);
-	
+	boolean updateCandidatePushed(String pushId);
 	boolean updateOnboardCandidate(String candidateId);
 	static List<CandidateInfo> queryCandidateNameById(String candidateId) {
 		// TODO Auto-generated method stub
@@ -74,8 +74,14 @@ public interface CandidateService
 	CandidateInterview queryCandidateInterviewById(String interviewId);
 	
 	boolean updateCandidateInterviewMark(CandidateInterview candidateInterview);
+
 	
 	boolean updateConfirmStatus(CandidateInterview candidateInterview);
 
+
+
+	public boolean deleteArrangedinter(String candidateId);
+	
+	String queryPushedCS(String pushId);
 
 }

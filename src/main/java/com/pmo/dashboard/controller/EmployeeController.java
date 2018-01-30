@@ -1230,7 +1230,7 @@ public String getTMemployee(final HttpServletRequest request,
     		String duOrg = empLog.getCsSubdeptIdOriginal();
     		
     		// Release
-    		if(!StringUtils.equals(statusNew, statusOrg) && "Release".equals(statusNew)){
+    		if(!StringUtils.equals(statusNew, statusOrg) && "Released".equals(statusNew)){
     			if(releaseMap01.containsKey(empId)){
     				String firstStatusOrg = releaseMap01.get(empId);
     				if(StringUtils.equals(statusNew, firstStatusOrg)){

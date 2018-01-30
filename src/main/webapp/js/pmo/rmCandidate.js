@@ -527,6 +527,7 @@ function rescheduleInterview(pushId,candidateId) {
 /* 新一轮面试 */
 function scheduleInterview(pushId) {
 	$('#myModal').modal('show');
+
 	$("#graduationDate1").val("");
 	$("#interviewer").val("");
 	$('#projectName').val("");
@@ -537,6 +538,9 @@ function scheduleInterview(pushId) {
 	 }
 	
 	loadInterviewer();
+
+	loadInterviewer(pushId);
+
 	$("#addInterviewer").click(function() {
 		var interviewDate = $("#interviewDate").val();
 		var interviewerId = $("#interviewer").val();
@@ -589,6 +593,7 @@ function nextInterview(pushId, projectName) {
 	$('#projectName').val(projectName);
 	$('#projectName').attr("disabled", "disabled");
 	$('#myModal').modal('show');
+
 	$("#graduationDate1").val("");
 	$("#interviewer").val("");
 	$('#interviewType').val("");
@@ -599,6 +604,9 @@ function nextInterview(pushId, projectName) {
 	}
 	
 	loadInterviewer();
+
+	loadInterviewer(pushId);
+
 	$("#addInterviewer").click(function() {
 		var interviewDate = $("#interviewDate").val();
 		var interviewerId = $("#interviewer").val();
@@ -685,13 +693,15 @@ function interviewBack(pushId, candidateId) {
 
 }
 
-function loadInterviewer() {
+function loadInterviewer(pushId) {
 	$("#interviewer").empty();
 	$("#interviewer").append("<option value=''>--Option--</option>");
 	$.ajax({
 		url : path + '/service/rmCandidate/loadInterviewer',
 		dataType : "json",
 		async : true,
+		data  :{"pushId":pushId
+		},
 		cache : false,
 		type : "post",
 		success : function(data) {

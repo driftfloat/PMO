@@ -87,9 +87,10 @@
 	</select>
 	<select id="queryDemandList" parameterType="java.util.HashMap" resultMap="demandMap">
 		select *
-		from  t_demand a,t_cs_dept b 
+		from  t_demand a,t_cs_dept b,t_hsbc_dept c 
 		<where>
 		    b.cs_subdept_id=a.cs_subdept <!-- and(( 1 = 1  -->
+		    and a.hsbc_subdept_id=c.hsbc_subdept_id
 			<if test="demand.skill!=null and demand.skill!=''">
 				and a.SKILL = #{demand.skill}
 			</if>
@@ -140,9 +141,9 @@
 	
 	<select id="queryDemandListForCandidate" parameterType="java.util.HashMap" resultMap="demandMap">
 		select *
-		from  t_demand a,t_cs_dept b 
+		from  t_demand a,t_cs_dept b,t_hsbc_dept c
 		<where>
-		    a.CANDIDATE_ID!="" and b.cs_subdept_id=a.cs_subdept and a.STATUS in("Onboard","OfferMade")
+		    a.CANDIDATE_ID!="" and b.cs_subdept_id=a.cs_subdept and a.hsbc_subdept_id=c.hsbc_subdept_id and a.STATUS in("Onboard","OfferMade")
 			<if test="demand.candidateName!=null and demand.candidateName!=''">
 				and a.CANDIDATE_NAME = #{demand.candidateName}
 			</if>

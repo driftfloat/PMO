@@ -169,7 +169,9 @@ function confirmInterviewDate(){
 		cache:false,
 		type:"post",
 		success:function(result){
-			$('#conformForm').data('bootstrapValidator').resetForm(); 
+			if ($('#conformForm').data('bootstrapValidator') != undefined) {
+				$('#conformForm').data('bootstrapValidator').resetForm();
+			}
 			if (result == false) {
 				alert("Reconfirm unsuccessfully");
 			} else if (result == true) {

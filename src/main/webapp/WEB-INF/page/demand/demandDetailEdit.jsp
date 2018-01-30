@@ -84,7 +84,7 @@ var userType='<%=userType%>'
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> 招聘需求信息
+									<i class="glyphicon glyphicon-user"></i> Demand Information
 								</h2>
 							</div>
 							<div id="register" class="box-content" style="overflow: auto;">
@@ -180,11 +180,11 @@ var userType='<%=userType%>'
 										<div class="col-md-4">
 											<div class="input-group date form_datetime1 col-sm-12"
 												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" readonly data-bv-group=".group"
-													id="plannedOnboardDate1" name="plannedOnboardDate1" value="${demand.plannedOnboardDate }"> <span
+												<input class="form-control" type="text" readonly data-bv-group=".group"value="${demand.plannedOnboardDate }"
+													id="plannedOnboardDate1" name="plannedOnboardDate1" > <span
 													class="input-group-addon"><span
 													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
-													id="plannedOnboardDate2" name="plannedOnboardDate2" />
+													id="plannedOnboardDate2" name="plannedOnboardDate2"value="${demand.plannedOnboardDate }" />
 											</div>
 										</div>
 									</div>
@@ -232,13 +232,13 @@ var userType='<%=userType%>'
 											<div class="col-md-4">
 												<div class="input-group date form_datetime col-sm-12"
 													data-link-field="dt_set_order_time_input">
-													<input class="form-control" type="text" readonly data-bv-group=".group"
-														id="reqPublishedDate1Edit" name="reqPublishedDate1Edit" value="${demand.reqPublishedDate }"> 
+													<input class="form-control" type="text" readonly data-bv-group=".group"value="${demand.reqPublishedDate }"
+														id="reqPublishedDate1Edit" name="reqPublishedDate1Edit"> 
 														<span class="input-group-addon">
 															<span class="glyphicon glyphicon-th">
 															</span>
 														</span> 
-														<input type="hidden" id="reqPublishedDate2Edit" name="reqPublishedDate2Edit" />
+														<input type="hidden" id="reqPublishedDate2Edit" name="reqPublishedDate2Edit" value="${demand.reqPublishedDate }" />
 												</div>
 											</div>
 										</div>
@@ -312,9 +312,12 @@ var userType='<%=userType%>'
 								        <div class="group" id="bgvEdit" style='display:none'>
 											<label class="col-sm-2 control-label">BGV Cleared</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="bgvClearedEdit" value="${demand.bgvCleared }"
-													id="bgvClearedEdit"/>
+													<select class="form-control" name="bgvClearedEdit" data-bv-notempty
+												data-bv-notempty-message="Please Select Your CsSubDept" id="bgvClearedEdit" data-bv-group=".group">
+												<option value="${demand.bgvCleared}">${demand.bgvCleared }</option>
+												</select>
 											</div>
+											
 										</div>
 										<div class="group" id="donumberEdit">
 											<label class="col-sm-2 control-label">DO number</label>
@@ -344,14 +347,14 @@ var userType='<%=userType%>'
 								
 								<div class="form-group">
 									    <div style="text-align:center;width:50%;float:left">
-									    <input type="button" value="修&nbsp;&nbsp;改"
+									    <input type="button" value="Update"
 										name="subscribe" id="sub_search" href="#"
 										class="button btn btn-primary" data-dismiss="modal"
 										onclick="updateDemand()"
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
 									    </div>
 									    <div style="text-align:center;width:50%;float:right">
-									    <input type="reset" value="重&nbsp;&nbsp;置"
+									    <input type="reset" value="Reset"
 										name="subscribe" id="sub_add" href="#"
 										class="button btn btn-primary" data-dismiss="modal"
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
@@ -420,7 +423,7 @@ var userType='<%=userType%>'
 
     <%-- <script type="text/javascript" src="<%=path %>/js/pmo/loadHSBCDept.js"></script>  --%>
 	<script type="text/javascript" src="<%=path %>/js/pmo/recruitdemanda.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/pmo/demandvalid.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/demandvalidEditTm.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>

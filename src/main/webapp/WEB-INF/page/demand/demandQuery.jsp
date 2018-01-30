@@ -151,13 +151,16 @@ var path='<%=path%>';
 												<input type="text" class="form-control" name="rr"
 													id="rr"/>
 											</div>
-										</div><div class="group">
+										</div>
+										<div class="group">
 											<label class="col-sm-2 control-label">Job Code</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="jobcode"
 													id="jobcode"/>
 											</div>
 										</div>
+										<input type="hidden" name="cssubName" id="cssubName" />
+									    <input type="hidden" name="hsbcsubName" id="hsbcsubName" />
 										</br></br></br>
 										
 										

@@ -184,7 +184,7 @@ var userType='<%=userType%>'
 													id="plannedOnboardDate1" name="plannedOnboardDate1" value="${demand.plannedOnboardDate }"> <span
 													class="input-group-addon"><span
 													class="glyphicon glyphicon-th"></span></span> <input type="hidden"
-													id="plannedOnboardDate2" name="plannedOnboardDate2" />
+													id="plannedOnboardDate2" name="plannedOnboardDate2"value="${demand.plannedOnboardDate }"> 
 											</div>
 										</div>
 									</div>
@@ -238,7 +238,7 @@ var userType='<%=userType%>'
 															<span class="glyphicon glyphicon-th">
 															</span>
 														</span> 
-														<input type="hidden" id="reqPublishedDate2Edit" name="reqPublishedDate2Edit" />
+														<input type="hidden" id="reqPublishedDate2Edit" name="reqPublishedDate2Edit" value="${demand.reqPublishedDate }"/>
 												</div>
 											</div>
 										</div>
@@ -427,7 +427,7 @@ var userType='<%=userType%>'
 
     <%-- <script type="text/javascript" src="<%=path %>/js/pmo/loadHSBCDept.js"></script>  --%>
 	<script type="text/javascript" src="<%=path %>/js/pmo/recruitdemandafixedprice.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/pmo/demandvalid.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/demandvalidEditFp.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>
