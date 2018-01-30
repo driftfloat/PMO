@@ -114,7 +114,7 @@ var path='<%=path%>
 												<select class="form-control" name="status" data-bv-notempty
 													data-bv-notempty-message="Please Select Your Status"
 													id="status" data-bv-group=".group">
-													<option value="">-- Option--</option>
+													<option value="Open">Open</option>
 
 												</select>
 											</div>
@@ -202,7 +202,7 @@ var path='<%=path%>
 													data-bv-notempty
 													data-bv-notempty-message="Please Select Your HrPriority"
 													id="hrPriority" data-bv-group=".group">
-													<option>4</option>
+													<option>3</option>
 												</select>
 											</div>
 										</div>

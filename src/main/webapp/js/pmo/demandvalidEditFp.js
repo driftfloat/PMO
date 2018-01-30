@@ -29,7 +29,8 @@ $(document).ready(function() {
 	}, 
 	ageingEdit: { 
 	validators: { 
-	
+		notEmpty: { 
+			message: 'Please enter your Ageing' 
 	 } 
 	}, 
 	 profilesNoEdit: { 
@@ -149,6 +150,13 @@ $(document).ready(function() {
                     }
                 }
             },
+            ageingEdit: { 
+            	validators: { 
+            		 notEmpty: {
+                         message: 'Please enter your Ageing'
+                     }
+            	 } 
+            	}, 
             requestor: {
                 validators: {
                     notEmpty: {
