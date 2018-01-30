@@ -78,7 +78,7 @@ var empObj =<%=empInfo%>;
 						<div class="box-inner">
 							<div class="box-header well">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> 员工Onborard
+									<i class="glyphicon glyphicon-user"></i>EmployeeOnborard
 								</h2>
 
 								<div class="box-icon">

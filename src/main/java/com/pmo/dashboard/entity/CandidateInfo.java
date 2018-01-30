@@ -28,6 +28,7 @@ public class CandidateInfo extends PageCondition {
 	private String arrivalDate;
 	private String oldCompany;
 	private String remark;
+	private String reason;//延迟原因
 	
 	private String createUser;
 	private String interviewStatus;
@@ -56,6 +57,14 @@ public class CandidateInfo extends PageCondition {
 	
 	
 	
+	
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 
 	public String getConfirmStatus() {
 		return confirmStatus;

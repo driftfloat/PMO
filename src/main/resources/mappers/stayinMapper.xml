@@ -34,10 +34,11 @@
 		<result property="demandId"         column="DEMAND_ID"          javaType="String"/>
 		<result property="demandStatus"     column="STATUS"             javaType="String"/>
 		<result property="engagementType"   column="ENGAGEMENT_TYPE"    javaType="String"/>
+		<result property="reason"           column="REASON"    javaType="String"/>
 	</resultMap>
 	
 	<select id="queryStayinList" parameterType="com.pmo.dashboard.entity.StayinCandidate" resultMap="stayinMap" >
-	    SELECT a.*,d.STATUS,d.DEMAND_ID,d.ENGAGEMENT_TYPE  FROM 
+	    SELECT a.*,d.STATUS,d.DEMAND_ID,d.ENGAGEMENT_TYPE ,d.REASON FROM 
         	t_candidate a
         left join 
         	t_demand d 

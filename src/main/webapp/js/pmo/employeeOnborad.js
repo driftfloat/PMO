@@ -538,9 +538,9 @@ function updateDemandOnboard(){
 	if(bootstrapValidator.isValid()&&bootstrapValidator2.isValid()){
 		updateDemand("onborad");
 		addEmployee();
+		self.opener.location.reload();
 	}
 	
-	self.opener.location.reload();
 	/*var candidateId = $("#candidateId").val();
 	var profilesNo = $("#profilesNo").val();
 	var interviewedNo = $('#interviewedNo').val();

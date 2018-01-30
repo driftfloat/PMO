@@ -40,7 +40,15 @@ public class StayinCandidate extends PageCondition
     private int num;
 	private String engagementType;
 	private String csSubDept;
+    private String reason;
     
+    
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 	public String getCsSubDept() {
 		return csSubDept;
 	}

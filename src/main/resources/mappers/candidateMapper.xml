@@ -43,6 +43,7 @@
 		<result property="projectName" 		column="PROJECT_NAME" 		javaType="String" />
 		<result property="interviewType" 		column="INTERVIEW_TYPE" 		javaType="String" />
 		<result property="confirmStatus" 		column="CONFIRM_STATUS" 		javaType="String" />
+		<result property="reason" 		column="REASON" 		javaType="String" />
 	</resultMap>
 	<resultMap id="candidatePushMap" type="com.pmo.dashboard.entity.CandidatePush">
 		<id 	property="pushId" 		column="PUSH_ID" 		javaType="String" />
@@ -230,7 +231,7 @@
 	
 	<select id="queryMyWaitEntryCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
 		SELECT 
-	    	a.*,c.CS_SUBDEPT_NAME,d.STATUS as demandStatus 
+	    	a.*,c.CS_SUBDEPT_NAME,d.REASON,d.STATUS as demandStatus 
         FROM 
         	t_candidate a 
         LEFT JOIN 
@@ -281,7 +282,7 @@
 	    update t_candidate set ARRIVAL_DATE = #{arrivalDate} WHERE CANDIDATE_ID = #{candidateId}; 
 	</update>
 	<update id="updateDemandStatusDelay" parameterType="com.pmo.dashboard.entity.CandidateInfo">
-	    update t_demand set STATUS = 'Delayed' WHERE CANDIDATE_ID = #{candidateId} and STATUS in ('OfferMade','Offermade');
+	    update t_demand set STATUS = 'Delayed',REASON =#{reason} WHERE CANDIDATE_ID = #{candidateId} and STATUS in ('OfferMade','Delayed');
 	</update>
 	<update id="updateCandidateAbortInfo" parameterType="com.pmo.dashboard.entity.CandidateInfo">
 	    update t_candidate set CANDIDATE_STATUS = #{candidateStatus},REMARK = #{remark} WHERE CANDIDATE_ID = #{candidateId}; 
