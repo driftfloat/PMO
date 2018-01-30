@@ -474,6 +474,7 @@ public class CandidateServiceImpl implements CandidateService {
     	//更改候选人状态
     	CandidateInfo candidate = new CandidateInfo();
     	candidate.setCandidateId(candidateId);
+    	candidate.setCandidateStatus("0");
     	candidate.setInterviewStatus("1");
     	boolean updateFlag = candidateMapper.updateCandidateInterviewStatus(candidate);
     	if(!updateFlag)

@@ -79,6 +79,8 @@ public class HrFeedbackController
 			}
 		}
 		
+		candidateInfo.setCandidateStatus("0");
+		
 		boolean updateMark = candidateService.updateCandidateInterviewMark(candidateInterview);
 
 		boolean updateStatus = candidateService.updateCandidateInterviewStatus(candidateInfo);
