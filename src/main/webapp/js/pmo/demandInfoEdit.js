@@ -489,7 +489,7 @@ function updateDemand(index){
 		var profilesNo=$('#profilesNoEdit').val();
 		var interviewedNo=$('#interviewedNoEdit').val();
 		var status=$('#status').val();
-		var proposedJoiningDate=$('#proposedJoiningDateEdit').val();
+		var proposedJoiningDate=$('#proposedJoiningDateEdit1').val();
 		var bgvCleared=$('#bgvClearedEdit').val();
 		var sowSigned=$('#sowSignedEdit').val();
 		var reason=$('#reasonEdit').val();
