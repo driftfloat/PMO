@@ -340,15 +340,15 @@ function loadpage(){
 	        $("#status").bind("click",function(){
 	      		 var result=$("#status").find("option:selected").val();
 	      		 if(result=='Abort'){
-	      			$('#ctype').show();
+	      			$('#atype').show();
 	                $('#reasonAbort').show();
 	                $('#reasonDelayed').hide();
 	      		 }else if(result=='Delayed'){
-	      			$('#ctype').show();
+	      			$('#atype').show();
 	                $('#reasonDelayed').show();
 	                $('#reasonAbort').hide();
 	      		 }else{
-	      			$('#ctype').hide();
+	      			$('#atype').hide();
 	                $('#reasonAbort').hide();
 	      		 }
 	      		 
@@ -385,15 +385,31 @@ function loadpage(){
         $("#status").append("<option >Cancel</option>");
         $("#status").append("<option >Abort</option>");
         $("#status").append("<option >Onboard</option>");*/
-        $('#ctype').show();
+        $('#atype').show();
         $('#reasonDelayed').show();
-        $("#status").bind("click",function(){
+        $("#status").bind("click",function(){  
      		 var result=$("#status").find("option:selected").val();
      		 if(result=='Abort'){
-               $('#reasonAbort').show();
-     		 }else{
-               $('#reasonAbort').hide();
+	      			$('#ctype').show();
+	                $('#reasonAbort').show();
+	                $('#reasonDelayed').hide();
+	      		 }else if(result=='Delayed'){
+	      			$('#ctype').show();
+	                $('#reasonDelayed').show();
+	                $('#reasonAbort').hide();
+	      		 }else{
+	      			$('#ctype').hide();
+	                $('#reasonAbort').hide();
+	      		 }
+     		 if(result=='Onboard'){
+     			 $('#atype').show();
+     	         $('#staffnameEdit').show();
+     	         $('#joiningEdit').show();
+     	         $('#ctype').show();
+                 $('#reasonAbort').hide();
+                 $('#reasonDelayed').show();
      		 }
+     		 
      		 
  });   
         
