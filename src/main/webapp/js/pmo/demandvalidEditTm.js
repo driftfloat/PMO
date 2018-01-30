@@ -24,22 +24,30 @@ $(document).ready(function() {
 	}, 
 	 requestorEdit: { 
 	validators: { 
-	
+		notEmpty: { 
+			message: 'Please enter your HSBC requestor' 
+			} 
 	 } 
 	}, 
 	ageingEdit: { 
 	validators: { 
-	
+		notEmpty: { 
+			message: 'Please enter your Ageing' 
+			} 
 	 } 
 	}, 
 	 profilesNoEdit: { 
 	validators: { 
-	
+		notEmpty: { 
+			message: 'Please enter your No. of Profiles Sent to HSBC' 
+			} 
 	 } 
 	}, 
 	interviewedNoEdit: { 
 	validators: { 
-	
+		notEmpty: { 
+			message: 'Please enter your No of Profiles Interviewed' 
+			} 
 	 } 
 	}, 
 	proposedJoiningDateEdit: { 
