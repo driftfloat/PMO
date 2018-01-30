@@ -72,7 +72,17 @@ public class Demand
     private String completionDay;
     
     private String hsbcSubDeptName;
-    public String getHsbcSubDeptName() {
+    
+    private String userType;
+    public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	public String getHsbcSubDeptName() {
 		return hsbcSubDeptName;
 	}
 
