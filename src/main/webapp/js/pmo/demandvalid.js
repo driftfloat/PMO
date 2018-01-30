@@ -7,6 +7,7 @@ $(document).ready(function() {
 			invalid : 'glyphicon glyphicon-remove',
 			validating : 'glyphicon glyphicon-refresh'
 		},
+		excluded:[":disabled"],
 		fields : {
 			rrEdit : {
 				validators : {

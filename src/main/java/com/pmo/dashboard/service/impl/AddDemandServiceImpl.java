@@ -1,5 +1,7 @@
 package com.pmo.dashboard.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,11 +61,21 @@ public class AddDemandServiceImpl implements AddDemandService{
 			String hsbcSubDeptId = hsbcDeptMapper.queryHsbcSubDeptId(params);
 			demand.setHsbcSubDeptId(hsbcSubDeptId);
 		}
-		
-		
-		if(addDemandMapper.modifyDemand(demand)>0){
-			return true;
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");  
+		String onboradDate = format.format(new Date());
+		if(demand.getOnborad()!=null&&demand.getOnborad()!="") {
+			demand.setOnboardDate(onboradDate);
 		}
+		if(demand.getOnborad()!=null&&demand.getOnborad()!="") {
+			if(addDemandMapper.modifyDemand2(demand)>0){
+				return true;
+			}
+		}else {
+			if(addDemandMapper.modifyDemand(demand)>0){
+				return true;
+			}
+		}
+		
 		return false;
 	}
 	

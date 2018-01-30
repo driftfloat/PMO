@@ -63,4 +63,13 @@
 					HR_PRIORITY = #{hrPriority},CANDIDATE_NAME = #{staffName},ENGAGEMENT_TYPE=#{engagementType}
 	        WHERE DEMAND_ID = #{demandId};
 	</update>
+	
+	<!-- 做onBorad操作 -->
+	<update id="modifyDemand2" parameterType="com.pmo.dashboard.entity.AddDemand" >
+		update t_demand set RR = #{rr}, JOB_CODE = #{jobCode},SKILL = #{skill},REQUESTOR = #{requestor},POSITION = #{position},HSBC_SUBDEPT_ID = #{hsbcSubDeptId},LOCATION = #{location},
+                    REQ_PUBLISHED_DATE = #{reqPublishedDate},AGEING = #{ageing},PROFILES_NO = #{profilesNo},INTERVIEWED_NO = #{interviewedNo},STATUS = #{status},PROPOSED_JOINING_DATE = #{proposedJoiningDate},
+					BGV_CLEARED = #{bgvCleared},SOW_SIGNED = #{sowSigned},REASON = #{reason},REMARK = #{remark},CS_SUBDEPT = #{csSubDept},PLANNED_ONBOARD_DATE = #{plannedOnboardDate},DO_NUMBER = #{doNumber},
+					HR_PRIORITY = #{hrPriority},CANDIDATE_NAME = #{staffName},ENGAGEMENT_TYPE=#{engagementType},ONBOARD_DATE = #{onboardDate}
+	        WHERE DEMAND_ID = #{demandId};
+	</update>
 </mapper>

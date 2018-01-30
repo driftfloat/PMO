@@ -536,7 +536,7 @@ function updateDemandOnboard(){
 	var bootstrapValidator2 = $("#recruitdemandFormEdit").data('bootstrapValidator');
 	bootstrapValidator2.validate();
 	if(bootstrapValidator.isValid()&&bootstrapValidator2.isValid()){
-		updateDemand();
+		updateDemand("onborad");
 		addEmployee();
 	}
 	

@@ -469,7 +469,7 @@ function demandDetailUpdate(demandId){
 	})*/
 }
 
-function updateDemand(){
+function updateDemand(index){
 	var bootstrapValidator = $("#recruitdemandFormEdit").data('bootstrapValidator');
 	   bootstrapValidator.validate();
 	if(bootstrapValidator.isValid()){
@@ -513,7 +513,7 @@ function updateDemand(){
 				"reason":reason,"bgvCleared":bgvCleared,
 				"remark":remark,"csSubDept":csSubDept,"plannedOnboardDate":plannedOnboardDate,
 				"doNumber":doNumber,"hrPriority":hrPriority,
-				"hsbcDept":hsbcDept,"hsbcSubDept":hsbcSubDept},
+				"hsbcDept":hsbcDept,"hsbcSubDept":hsbcSubDept,"onborad":index},
 			async:true,
 			cache:false,
 			type:"post",
