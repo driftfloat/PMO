@@ -24,23 +24,30 @@ $(document).ready(function() {
 	}, 
 	 requestorEdit: { 
 	validators: { 
-	
+		notEmpty: { 
+			message: 'Please enter your HSBC requestor' 
+			} 
 	 } 
 	}, 
 	ageingEdit: { 
 	validators: { 
 		notEmpty: { 
 			message: 'Please enter your Ageing' 
+			} 
 	 } 
 	}, 
 	 profilesNoEdit: { 
 	validators: { 
-	
+		notEmpty: { 
+			message: 'Please enter your No. of Profiles Sent to HSBC' 
+			} 
 	 } 
 	}, 
 	interviewedNoEdit: { 
 	validators: { 
-	
+		notEmpty: { 
+			message: 'Please enter your No of Profiles Interviewed' 
+			} 
 	 } 
 	}, 
 	proposedJoiningDateEdit: { 
@@ -95,7 +102,7 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-        	rr: {
+        	rrEdit: {
 				validators: {
                     notEmpty: {
                         message: 'Please enter your rr'
@@ -119,53 +126,21 @@ $(document).ready(function() {
 					 */
                  }
             },
-
-            reqPublishedDate1: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please entry date'
-                    },
-                    date : {  
-                        format : 'YYYY-MM-DD',  
-                        message : 'Time format is incorrect'  
-                    }
-
-                }
-            },
-            
-            
-            jobCode: {
+            jobCodeEdit: {
                 validators: {
                     notEmpty: {
                         message: 'Please enter your jobCode'
                     }
                 }
             },
-            
-            
-            skill: {
+            skillEdit: {
                 validators: {
                     notEmpty: {
-                        message: 'Please enter your jobCode'
+                        message: 'Please enter your skill'
                     }
                 }
             },
-            ageingEdit: { 
-            	validators: { 
-            		 notEmpty: {
-                         message: 'Please enter your Ageing'
-                     }
-            	 } 
-            	}, 
-            requestor: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please enter your requestor'
-                    }
-
-                }
-            },
-            position: {
+            positionEdit: {
                 validators: {
                     notEmpty: {
                         message: 'Please select your position'
@@ -173,46 +148,15 @@ $(document).ready(function() {
 
                 }
             },
-
-            hsbcSubDeptId: {
+            locationEdit: {
                 validators: {
                     notEmpty: {
-                        message: 'Please enter your hsbcSubDeptId'
+                        message: 'Please select your location'
                     }
 
                 }
             },
-           /*
-			 * staffName: { validators: { notEmpty: { message: '请输入中文名字' },
-			 * regexp: { regexp: /^([\u4E00-\u9FA5])*$/,
-			 * 
-			 * message: '请输入中文字符' } } },
-			 */
-            status: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please select your status'
-                    }
-
-                }
-            },
-            hrPriority: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please select your hrPriority'
-                    }
-
-                }
-            },
-            reqPublishedDate: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please Choose your Date'
-                    }
-
-                }
-            },
-            plannedOnboardDate1: {
+            plannedOnboardDate1Edit: {
                 validators: {
                     notEmpty: {
                         message: 'Please entry date'
@@ -220,6 +164,121 @@ $(document).ready(function() {
                     date : {  
                         format : 'YYYY-MM-DD',  
                         message : 'Time format is incorrect'  
+                    }
+
+                }
+            },
+            hrPriorityEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select your hrPriority'
+                    }
+
+                }
+            },
+            profilesNoEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select your No. of Profiles Sent to HSBC'
+                    }
+
+                }
+            },
+            
+            interviewedNoEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select your No of Profiles Interviewed'
+                    }
+
+                }
+            },
+            reqPublishedDate1Edit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please entry date'
+                    },
+                    date : {  
+                        format : 'YYYY-MM-DD',  
+                        message : 'Time format is incorrect'  
+                    }
+
+                }
+            },
+            ageingEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select your ageing'
+                    }
+
+                }
+            },
+            hsbcDeptEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select your HSBC Department'
+                    }
+
+                }
+            },
+            hsbcSubDeptEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select your HSBC Sub-Department'
+                    }
+
+                }
+            },
+            requestorEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your requestor'
+                    }
+
+                }
+            },
+            csSubDeptEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your CS Department'
+                    }
+
+                }
+            },
+            candidateNameEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your Staff Name'
+                    }
+
+                }
+            },
+          
+           
+            proposedJoiningDateEdit: {
+            	 validators: {
+                     notEmpty: {
+                         message: 'Please entry date'
+                     },
+                     date : {  
+                         format : 'YYYY-MM-DD',  
+                         message : 'Time format is incorrect'  
+                     }
+
+                 }
+            },
+            bgvClearedEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select your BGV Cleared'
+                    }
+
+                }
+            },
+            doNumberEdit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select your DO number'
                     }
 
                 }

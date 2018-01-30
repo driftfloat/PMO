@@ -472,7 +472,7 @@ function demandDetailUpdate(demandId){
 	})*/
 }
 
-function updateDemand(index){
+function updateDemand(){
 	var bootstrapValidator = $("#recruitdemandFormEdit").data('bootstrapValidator');
 	   bootstrapValidator.validate();
 	if(bootstrapValidator.isValid()){
@@ -531,5 +531,7 @@ function updateDemand(index){
 				}
 			}
 		})
+	}else{
+		return;
 	}
 }
