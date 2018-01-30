@@ -62,7 +62,7 @@
 			LEFT JOIN t_candidate b on ci.CANDIDATE_ID = b.CANDIDATE_ID
 			LEFT JOIN t_cs_dept dept on dept.CS_SUBDEPT_ID = ci.CSSUBDEPT
 	        WHERE USER_ID = #{userId} and (ci.FEEDBACK='' or ci.FEEDBACK is null)
-	        and ci.CONFIRM_STATUS = "1"
+	        and ci.CONFIRM_STATUS = "0"
 			ORDER BY ci.INTERVIEW_DATE
 	        LIMIT #{currentPage},#{pageDataCount};
 	</select>
@@ -74,7 +74,7 @@
 			LEFT JOIN t_candidate b on ci.CANDIDATE_ID = b.CANDIDATE_ID
 			LEFT JOIN t_cs_dept dept on dept.CS_SUBDEPT_ID = ci.CSSUBDEPT
 	        WHERE USER_ID = #{userId} and (ci.FEEDBACK='' or ci.FEEDBACK is null)
-	        and ci.CONFIRM_STATUS = "1"
+	        and ci.CONFIRM_STATUS = "0"
 			ORDER BY ci.INTERVIEW_DATE
 	        LIMIT #{currentPage},#{pageDataCount};
 	</select>
@@ -119,7 +119,7 @@
         	FROM t_user a 
 			LEFT JOIN t_candidate_interview ci ON ci.INTERVIEWER_ID = a.USER_ID
         	WHERE USER_ID = #{userId} and (ci.FEEDBACK='' or ci.FEEDBACK is null) 
-        	and ci.CONFIRM_STATUS = "1";
+        	and ci.CONFIRM_STATUS = "0";
 	</select>
 	
 	<select id="queryinterviewAllFeedBackCount" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="int" >
@@ -127,7 +127,7 @@
         	FROM t_user a 
 			LEFT JOIN t_candidate_interview ci ON (ci.INTERVIEWER_ID = a.USER_ID or ci.INTERVIEWER_ID != a.USER_ID)
         	WHERE USER_ID = #{userId} and (ci.FEEDBACK='' or ci.FEEDBACK is null)
-        	and ci.CONFIRM_STATUS = "1";
+        	and ci.CONFIRM_STATUS = "0";
 	</select>
 	
 	<select id="queryCandidateResumePath" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="java.lang.String" >

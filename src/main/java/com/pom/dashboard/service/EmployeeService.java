@@ -17,5 +17,6 @@ public interface EmployeeService
     public List<Employee> selectByHSBCStaffID(String staffId);
 	public List<Employee> getAllInterviewer();
 	public List<Employee> getAllEmployee();
+	public List<Employee> getEmployeeByLastUpdateTime(String lastUpdateTime);
 
 }

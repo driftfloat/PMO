@@ -19,4 +19,6 @@ public interface EmployeeMapper
 	String getBillRate(Employee employee);
 	List<Employee> getAllInterviewer();
 	List<Employee> queryAllEmployee();
+	List<Employee> getEmployeeByLastUpdateTime(String lastUpdateTime);
+
 }

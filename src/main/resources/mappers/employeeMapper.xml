@@ -111,8 +111,9 @@
 	</select>
 	
 	
-	<select id="queryAllEmployee" parameterType="com.pmo.dashboard.entity.Employee" resultMap="employeeMap">
+	<select id="getEmployeeByLastUpdateTime" parameterType="String" resultMap="employeeMap">
 	    SELECT * FROM t_employee e left join t_cs_dept c on e.CS_SUBDEPT_ID = c.CS_SUBDEPT_ID WHERE 1 = 1 
+	    and e.UPDATE_TIME >#{lastUpdateTime}
 	</select>
 	
 </mapper>
