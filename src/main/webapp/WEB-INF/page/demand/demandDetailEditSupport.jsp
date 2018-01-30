@@ -307,25 +307,7 @@ var userType='<%=userType%>'
 													id="proposedJoiningDateEdit"/>
 											</div>
 										</div>
-								</div>
-								<%-- <div class="form-group" id="btype"style='display:none'>
-								        <div class="group" id="bgvEdit" style='display:none'>
-											<label class="col-sm-2 control-label">BGV Cleared</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="bgvClearedEdit" value="${demand.bgvCleared }"
-													id="bgvClearedEdit"/>
-											</div>
-										</div>
-										<div class="group" id="donumberEdit" style='display:none'>
-											<label class="col-sm-2 control-label">DO number</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="doNumberEdit" value="${demand.doNumber }"
-													id="doNumberEdit"/>
-											</div>
-										</div>
-								</div> --%>
-								<div class="form-group"id="ctype" style='display:none'>
-								       <div class="group" id="reasonAbort" style='display:none'>
+										<div class="group" id="reasonAbort" style='display:none'>
 											<label class="col-sm-2 control-label">Reason for Abort</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="reasonEdit" value="${demand.reason }"
