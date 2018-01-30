@@ -91,7 +91,7 @@ var userType='<%=userType%>'
 							<form  id="recruitdemandFormEdit" method="post">
 							    <div class="form-group hidden">
 									    <input type="hidden" name="demandIdEdit" id="demandIdEdit" value="${demand.demandId}"/>
-									   <%--  <input type="hidden" name="statusEdit" id="statusEdit" value="${demand.status}"/> --%>
+									   <input type="hidden" name="userType" id="UserType" value="${demand.userType}"/>
 								</div>
 									
 							    

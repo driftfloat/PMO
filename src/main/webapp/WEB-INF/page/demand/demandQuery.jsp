@@ -225,6 +225,7 @@ var path='<%=path%>';
 								<form action="" id="detailForm" method="post" target="_blank">
 									<input id="demandId" name="demandId" type="hidden" />
 									<input id="statusa" name="statusa" type="hidden" />
+									<input id="userType" name="userType" type="hidden" />
 								</form>
 								<form action="" id="conditionForm" method="post">
 							    	<input type="hidden" id="condition" name="condition">

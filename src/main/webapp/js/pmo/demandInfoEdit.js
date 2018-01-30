@@ -51,6 +51,7 @@ function loadHrPriorityEdit(){
 		    for (i=1; i<all_options.length; i++){
 			   if (all_options[i].value == responseValue){
 				   document.getElementById("hrPriorityEdit").options[i].selected = true;
+				   var userType=$("#UserType").val();
 				   if(userType!=0){
 					   $("#hrPriorityEdit").attr("disabled","disabled");
 				   }
@@ -58,6 +59,8 @@ function loadHrPriorityEdit(){
 			   }  
 		    }
 	});
+	
+	
 }
 
 /*add by jama 加载location*/

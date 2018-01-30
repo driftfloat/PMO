@@ -314,7 +314,7 @@ function loadDemandList(currPage){
 					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Detail</a></td>");
 				}else if(userType=='13' || userType=='14'){
 					if(result.list[i].csSubDept == result.user.bu){
-						var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Detail</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Edit</a></td>");
+						var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Detail</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\",\""+userType+"\")>Edit</a></td>");
 					}else{
 						var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Detail</a></td>");
 					}
@@ -324,7 +324,7 @@ function loadDemandList(currPage){
 					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Detail</a></td>");
 
 				}else{
-					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Detail</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Edit</a></td>");
+					var td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=demandDetail(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\")>Detail</a><a href='javascript:void(0); ' class='btn btn-info btn-small' onclick=demandDetailUpdate(\""+demandId+"\",\""+statusa+"\",\""+engagementType.replace(/\s/g, "")+"\",\""+userType+"\")>Edit</a></td>");
 
 				}
 				td1.appendTo(tr);
@@ -409,10 +409,11 @@ function demandDetail(demandId,statusa,engagementType){
 }
 
 //add by jama
-function demandDetailUpdate(demandId,statusa,engagementType){
+function demandDetailUpdate(demandId,statusa,engagementType,userType){
 	
 	$("#demandId").val(demandId);
 	$('#statusa').val(statusa);
+	$('#userType').val(userType);
 	if(engagementType=="FixedPrice"){
 		var url = path+'/service/demand/demandDetailUpdate?engagementType=1';
 	}else if(engagementType=="Support"){
