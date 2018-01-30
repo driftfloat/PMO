@@ -1,12 +1,21 @@
 package com.pmo.dashboard.service.impl;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.json.XML;
 import org.springframework.stereotype.Service;
 
+import com.pmo.dashboard.api.reqmodel.EmployeeSynReqmodel;
 import com.pmo.dashboard.dao.UserMapper;
+import com.pmo.dashboard.entity.ApiUser;
 import com.pmo.dashboard.entity.User;
 import com.pom.dashboard.service.UserService;
 
@@ -68,6 +77,60 @@ public class UserServiceImpl implements UserService{
             return true;
         }
         return false;
+	}
+	
+	@Override
+	public List<ApiUser> loadAllApiUsers() {
+		//xml file path 
+		
+		String path = this.getClass().getClassLoader().getResource("").getPath()+"conf/syncEmployInfo.xml";
+		SAXReader reader = new SAXReader();
+		reader.setEncoding("utf-8");
+		Document document ;
+		List<ApiUser> apiUsers= new ArrayList<>();
+
+		try {
+			document = reader.read(new File(path));
+			Element root = document.getRootElement();//得到xml跟标签
+			List<Element> list = root.elements("user");  
+			
+			for (Element element : list) {
+				ApiUser  apiUser = new ApiUser();
+				String userName = element.element("userName").getStringValue();
+				String password = element.element("password").getStringValue();
+				String systemId = element.element("systemId").getStringValue();
+
+				apiUser.setUserName(userName);
+				apiUser.setPassword(password);
+				apiUser.setSystemId(systemId);
+				apiUsers.add(apiUser);
+			}
+			
+		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		return apiUsers;
+	}
+	
+	@Override
+	public ApiUser loginApiUser(String userName, String password, String systemId) {
+		
+		List<ApiUser> apiUsers = new ArrayList<>();
+		
+		//得到所有的api用户信息
+		apiUsers	= loadAllApiUsers();
+		
+		//判断登录信息
+		if(apiUsers.size()>0){
+			for (ApiUser apiUser : apiUsers) {
+				if(apiUser.getUserName().equals(userName) && apiUser.getPassword().equals(password) && apiUser.getSystemId().equals(systemId)){
+					return apiUser;
+				}
+			}
+		}
+		
+		return null;
 	}
 
 }

@@ -87,5 +87,10 @@ public class EmployeeServiceImpl implements EmployeeService
 	public List<Employee> getAllEmployee() {
 		return employeeMapper.queryAllEmployee();
 	}
+
+	@Override
+	public List<Employee> getEmployeeByLastUpdateTime(String lastUpdateTime) {
+		return employeeMapper.getEmployeeByLastUpdateTime(lastUpdateTime);
+	}
 	
 }

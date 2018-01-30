@@ -2,6 +2,7 @@ package com.pom.dashboard.service;
 
 import java.util.List;
 
+import com.pmo.dashboard.entity.ApiUser;
 import com.pmo.dashboard.entity.User;
 
 /**
@@ -29,4 +30,8 @@ public interface UserService {
 	// Felix, 180105, End
 	
 	boolean update(User user);
+	
+	List<ApiUser> loadAllApiUsers();
+	
+	ApiUser loginApiUser(String userName, String password, String systemId);
 }
