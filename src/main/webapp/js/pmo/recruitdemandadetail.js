@@ -8,7 +8,8 @@ $(function(){
 	dateType();
 	dateType1();
 	loadCsSubDept();
-
+	loadbgv();
+	//loadEngagementType();
 	loadpage();
 })
 
@@ -57,15 +58,22 @@ function loadDept(){
 		}
 	})
 }
-//function loadEngagementType(){
-//	var url = path+'/json/engagementType.json'
-//	$.getJSON(url,  function(data) {
-//	       $.each(data, function(i, item) {
-//	    	   $("#engagementType").append("<option>"+item.name+"</option>");
-//	       })
-//	});
-//}
-
+function loadEngagementType(){
+	var url = path+'/json/engagementType.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#engagementType").append("<option>"+item.name+"</option>");
+	       })
+	});
+}
+function loadbgv(){
+	var url = path+'/json/bgv.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#bgvClearedEdit").append("<option>"+item.name+"</option>");
+	       })
+	});
+}
 $("#hsbcDept").change(function(){
 	var hsbcSubDeptId = $('#hsbcDept').val();
 	$("#projectName").find("option").remove(); 
@@ -333,11 +341,10 @@ function loadpage(){
 		});
 	        $('#atype').show();
 	        $('#btype').show();
-	        $('#ctype').show();
 	        $('#staffnameEdit').show();
 	        $('#joiningEdit').show();
 	        $('#bgvEdit').show();
-	        $('#contract').show();
+	        $('#donumberEdit').show();
 	        $("#status").bind("click",function(){
 	      		 var result=$("#status").find("option:selected").val();
 	      		 if(result=='Abort'){
@@ -366,12 +373,10 @@ function loadpage(){
     	    $("#status").disabled='true';
     	    $('#atype').show();
 	        $('#btype').show();
-	        $('#ctype').show();
 	        $('#staffnameEdit').show();
 	        $('#joiningEdit').show();
 	        $('#bgvEdit').show();
-	        
-	        $('#contract').show();
+	        $('#donumberEdit').show();
 	        
 	}
     if(status=='Delayed'){
@@ -400,6 +405,18 @@ function loadpage(){
      		 
  });   
         
+}
+    if(status=='Abort'){
+    	
+    	
+		
+	/*$("#status").append("<option >Frozen</option>");
+    $("#status").append("<option >Cancel</option>");
+    $("#status").append("<option >Abort</option>");
+    $("#status").append("<option >Onboard</option>");*/
+    $('#ctype').show();
+    $('#reasonAbort').show();
+    
 }
     if(status=='Offerring'){
     	var url = path+'/json/statusoffering.json'

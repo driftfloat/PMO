@@ -125,8 +125,8 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 		
 		candidateInterview.setInterviewSerial(String.valueOf(newSerial));
 		interviewMapper.addInterview(candidateInterview);
-		//候选人表interviewStatus=2 表示面试中
-		params.put("interviewStatus", "2");
+		//候选人表interviewStatus=6表示面试中
+		params.put("interviewStatus", "6");
 		candidateMapper.updateInterviewStatusById(params);
 	}
 
@@ -160,6 +160,12 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 	public CandidateInterview getConfirminfo(String candidateId) {
 		CandidateInterview candidateInterview=interviewMapper.getConfirminfo(candidateId);
 		return candidateInterview;
+	}
+
+	@Override
+	public boolean updateCSinfo(String pushId) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

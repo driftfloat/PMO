@@ -496,6 +496,7 @@ function updateDemand(index){
 		
 		var remark=$('#remarkEdit').val();
 		var csSubDept=$('#csSubDeptEdit').val();
+
 		var plannedOnboardDate=$('#plannedOnboardDate1').val();
 		var doNumber=$('#doNumberEdit').val();
 		var hrPriority=$('#hrPriorityEdit').val();

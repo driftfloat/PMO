@@ -83,8 +83,14 @@
 		update t_candidate_interview set FEEDBACK = #{interviewFeedBack}, INTERVIEW_STATUS = #{candidateStatus}
 	        WHERE INTERVIEW_ID = #{interviewId};
 	</update>
-	
-	
+	<update id="updateCandidatepushed" parameterType="String" >
+		update t_candidate_push set CS_SUBDEPT_ID = ''
+	        WHERE PUSH_ID = #{pushId};
+	</update>
+	<delete id="deleteInterview" parameterType="String" >
+		delete from t_candidate_interview 
+	        WHERE CANDIDATE_ID = #{candidateId} AND CONFIRM_STATUS='1';
+	</delete>
 	<select id="queryCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >
 	    SELECT 
 	    	a.*,b.NICKNAME 
@@ -206,7 +212,7 @@
 	    SELECT * FROM t_candidate a WHERE CANDIDATE_ID = #{candidateId};
 	</select>
 	<update id="updateCandidateInterviewStatus" parameterType="com.pmo.dashboard.entity.CandidateInfo">
-	    update t_candidate set INTERVIEW_STATUS = #{interviewStatus} WHERE CANDIDATE_ID = #{candidateId}; 
+	    update t_candidate set INTERVIEW_STATUS = #{interviewStatus},CANDIDATE_STATUS= #{candidateStatus} WHERE CANDIDATE_ID = #{candidateId}; 
 	</update>
 	<insert id="insertCandidatePushData" parameterType="com.pmo.dashboard.entity.CandidatePush">
 	    insert into t_candidate_push (PUSH_ID,CANDIDATE_ID,CS_SUBDEPT_ID,PUSH_USER_ID,PUSH_STATUS,PUSH_DATE)
@@ -246,7 +252,8 @@
         	t_demand d 
         ON a.CANDIDATE_ID = d.CANDIDATE_ID 
         WHERE 
-			 LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','Delayed','Onboard','Offering')
+			 LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','Delayed','Onboard','Offering') 
+			 AND d.STATUS != 'Onboard'
         	<include refid="candidateWherePart"/>
 		ORDER BY d.STATUS,CANDIDATE_STATUS,INTERVIEW_STATUS,c.CS_SUBDEPT_NAME,MAJOR_STATUS,CANDIDATE_ID 
         LIMIT #{currentPage},#{pageDataCount};
@@ -260,7 +267,8 @@
         	t_demand d 
         ON a.CANDIDATE_ID  = d.CANDIDATE_ID 
         WHERE 
-			LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','Delayed','Onboard','Offering')
+			LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS in (1,2) and d.STATUS in ('OfferMade','Offermade','Delayed','Onboard','Offering') 
+			AND d.STATUS != 'Onboard'
         	<include refid="candidateWherePart"/>
         ;
 	</select>
@@ -287,7 +295,6 @@
 	    	values (#{DEMAND_ID},#{RR},#{JOB_CODE},#{SKILL},#{REQUESTOR},#{POSITION},#{HSBC_SUBDEPT_ID},#{LOCATION},#{REQ_PUBLISHED_DATE},#{AGEING},#{PROFILES_NO},#{INTERVIEWED_NO},'OPEN',#{PROPOSED_JOINING_DATE},#{SOW_SIGNED},#{REASON},#{REMARK},#{CS_SUBDEPT},#{PLANNED_ONBOARD_DATE},#{DO_NUMBER},#{HR_PRIORITY},#{CREATE_DATE},#{COMPLETION_DATE})
 	</insert>
 	<sql id="candidateWherePart">
-			And STATUS != 'Onboard' 
 		<if test="candidateName != null and candidateName != ''">
 			AND a.CANDIDATE_NAME = #{candidateName}
 		</if>
@@ -347,6 +354,9 @@
 			<if test="candidateTel != null and candidateTel != ''">
 				AND TEL = #{candidateTel}
 			</if>
+	</select>
+	<select id="queryPushedCS" parameterType="String" resultType="String" >
+			SELECT CS_SUBDEPT_ID FROM T_CANDIDATE_PUSH WHERE PUSH_ID=#{pushId}
 	</select>
 	
 	<select id="getCandidateList" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultMap="candidateMap" >

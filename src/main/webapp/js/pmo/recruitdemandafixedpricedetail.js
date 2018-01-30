@@ -8,7 +8,7 @@ $(function(){
 	dateType();
 	dateType1();
 	loadCsSubDept();
-
+	//loadEngagementType();
 	loadpage();
 })
 
@@ -57,14 +57,14 @@ function loadDept(){
 		}
 	})
 }
-//function loadEngagementType(){
-//	var url = path+'/json/engagementType.json'
-//	$.getJSON(url,  function(data) {
-//	       $.each(data, function(i, item) {
-//	    	   $("#engagementType").append("<option>"+item.name+"</option>");
-//	       })
-//	});
-//}
+function loadEngagementType(){
+	var url = path+'/json/engagementType.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#engagementType").append("<option>"+item.name+"</option>");
+	       })
+	});
+}
 
 $("#hsbcDept").change(function(){
 	var hsbcSubDeptId = $('#hsbcDept').val();
@@ -370,7 +370,6 @@ function loadpage(){
 	        $('#staffnameEdit').show();
 	        $('#joiningEdit').show();
 	        $('#bgvEdit').show();
-	        
 	        $('#contract').show();
 	        
 	}
