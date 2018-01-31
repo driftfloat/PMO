@@ -126,11 +126,11 @@ var path='<%=path%>';
 											<select class="form-control" name="chType" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="chType" data-bv-group=".group">
 												<option value="">-- Option--</option>
-												<option value="0">项目有变更</option>
-												<option value="1">合同有变更</option>
-												<option value="2">级别有变更</option>
-												<option value="3">交付部有变更</option>
-												<option value="4">状态有变更</option>
+												<option value="0">Project Changed</option>
+												<option value="1">Contract Changed</option>
+												<option value="2">Level Changed</option>
+												<option value="3">DeliveryDepartment Changed</option>
+												<option value="4">Status Changed</option>
 											</select>
 										</div>
 										</div>
