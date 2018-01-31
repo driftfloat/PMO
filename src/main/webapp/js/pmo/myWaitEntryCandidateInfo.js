@@ -194,7 +194,15 @@ function addMyWaitCandidateValidate(){
 		                      }
 		                      
 		                  }
-		              }
+		              },
+		              delayMyWaitCandidateReason: {
+			        		group: '.group',
+			          		validators: {
+			          			 notEmpty: {
+			                          message: 'Please select reason'
+			                      }
+			                  }
+			              }
 	     
 	        }
 	    });	
@@ -229,7 +237,7 @@ function addMyWaitCandidateValidate(){
 
 function entryMyWaitCandidateOk(){
 	var realSalary = $("#entryMyWaitCandidateRealSalary").val();		
-	var arrivalDate = $("#entryMyWaitCandidateArrivalDate").val();		
+	var arrivalDate = $("#entryMyWaitCandidateArrivalDate").val();
 	var candidate = new FormData();
 	candidate.append("candidateId",$("#entryMyWaitCandidateId").val());
 	candidate.append("arrivalDate",arrivalDate);
@@ -308,9 +316,11 @@ function delayMyWaitCandidate(candidateId,candidateName){
 }
 function delayMyWaitCandidateOk(){
 	var arrivalDate = $("#delayMyWaitCandidateArrivalDate").val();	
+	var delayMyWaitCandidateReason = $("#delayMyWaitCandidateReason").val();
 	var candidate = new FormData();
 	candidate.append("candidateId",$("#delayMyWaitCandidateId").val());
 	candidate.append("arrivalDate",arrivalDate);
+	candidate.append("reason",delayMyWaitCandidateReason)
 	
 	$.ajax({
 		url:path+'/service/candidate/delayMyWaitCandidateOk',
@@ -328,7 +338,7 @@ function delayMyWaitCandidateOk(){
 				alert("Delay unsuccessfully!");
 			}
 			$('#delayMyWaitCandidateModal').modal('hide');	
-			entryClearData1();
+			delayClearData();
 			loadCandidateList();
 		}
 	})
@@ -399,17 +409,17 @@ function loadCandidateList(pageState)
 			for (var i = 0; i < result.data.length; i++) {
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
-				$("<td><a href='javascript:void(0);' " +
-				"onclick=displayPDF('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>"+ result.data[i].candidateName+"</a></td>"+
-				"<td>"+ result.data[i].candidateSex+ "</td>"+
+				if(result.data[i].demandStatus=='Delayed'){
+					$("<td><a href='javascript:void(0);' onclick='displayReason(\""+result.data[i].candidateId+"\",\""+result.data[i].candidateName+"\",\""+result.data[i].arrivalDate+"\",\""+result.data[i].reason+"\")'>"+ result.data[i].candidateName+"</a></td>").appendTo(tr);
+				}else{
+					$("<td>"+ result.data[i].candidateName+"</td>").appendTo(tr);
+				}
+				$("<td>"+ result.data[i].candidateSex+ "</td>"+
 				"<td>"+ result.data[i].candidateAge+ "</td>"+
 				"<td>"+ result.data[i].candidateTel+ "</td>"+
 				"<td>"+ result.data[i].email+ "</td>"+
-				//"<td>"+ result.data[i].source+ "</td>"+
-				//"<td>"+ result.data[i].candidateStatus+ "</td>"+
 				"<td>"+ result.data[i].experienceYears+ "</td>"+
 				"<td>"+ result.data[i].skill+ "</td>"+
-				//"<td>"+ result.data[i].interviewStatus+ "</td>"+
 				"<td>"+ result.data[i].csSubdeptName+ "</td>"+
 				"<td>"+ result.data[i].demandStatus+ "</td>").appendTo(tr);
 				if(result.data[i].demandStatus == 'Onboard'){
@@ -484,3 +494,11 @@ function displayPDF(candidateId,resumePath){
 $("#pageRecordsNum").change(function(){
 	loadCandidateList();
 })
+
+function displayReason(candidateId,candidateName,arrivalDate,reason){
+	$('#delayMyWaitCandidateId1').val(candidateId);
+	$('#delayMyWaitCandidateName1').val(candidateName);
+	$('#delayMyWaitCandidateArrivalDate2').val(arrivalDate);
+	$('#delayMyWaitCandidateReason1').val(reason);
+	$('#delayMyWaitCandidateModal1').modal('show');
+}

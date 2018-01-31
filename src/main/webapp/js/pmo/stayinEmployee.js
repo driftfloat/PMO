@@ -130,7 +130,11 @@ function loadStayinList(pageState)
 			for (var i = 0; i < result.data.length; i++) {
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
-				$("<td>" +result.data[i].candidateName+ "</td>").appendTo(tr);
+				if(result.data[i].demandStatus=='Delayed'){
+					$("<td><a href='javascript:void(0);' onclick='displayReason(\""+result.data[i].candidateId+"\",\""+result.data[i].candidateName+"\",\""+result.data[i].arrivalDate+"\",\""+result.data[i].reason+"\")'>"+ result.data[i].candidateName+"</a></td>").appendTo(tr);
+				}else{
+					$("<td>"+ result.data[i].candidateName+"</td>").appendTo(tr);
+				}
 				$("<td>"+ result.data[i].candidateSex+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].candidateAge+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].candidateTel+ "</td>").appendTo(tr);
@@ -138,10 +142,14 @@ function loadStayinList(pageState)
 				$("<td>"+ result.data[i].skill+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].role+ "</td>").appendTo(tr);
 				$("<td>"+ result.data[i].collage+ "</td>").appendTo(tr);
-				$("<td>"+ result.data[i].education+ "</td>").appendTo(tr);
-				$("<td>"+ result.data[i].experienceYears+ "</td>").appendTo(tr);
+				/*$("<td>"+ result.data[i].education+ "</td>").appendTo(tr);
+				$("<td>"+ result.data[i].experienceYears+ "</td>").appendTo(tr);*/
 				$("<td>"+ result.data[i].demandStatus+ "</td>").appendTo(tr);
-				/*$("<td>"+ result.data[i].demandId+ "</td>").appendTo(tr);*/
+				if(result.data[i].arrivalDate==null||result.data[i].arrivalDate==""){
+					$("<td>--</td>").appendTo(tr);
+				}else{
+					$("<td>"+ result.data[i].arrivalDate+ "</td>").appendTo(tr);
+				}
 				if(result.data[i].demandStatus=='Offering'){
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small'"+
 						     "onclick=queryDemandList('"+result.data[i].candidateId+"','"+result.data[i].demandId+"')>Update</a>" +
@@ -342,7 +350,13 @@ function onboard(index,engagementType){
 	}
 }
 
-
+function displayReason(candidateId,candidateName,arrivalDate,reason){
+	$('#delayMyWaitCandidateId').val(candidateId);
+	$('#delayMyWaitCandidateName').val(candidateName);
+	$('#delayMyWaitCandidateArrivalDate').val(arrivalDate);
+	$('#delayMyWaitCandidateReason').val(reason);
+	$('#delayMyWaitCandidateModal').modal('show');
+}
 
 
 

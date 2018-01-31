@@ -153,9 +153,8 @@ var path='<%=path%>';
 													<th>Skill</th>
 													<th>Role</th>
 													<th>College</th>
-													<th>Education</th>
-													<th>Work Years</th>
 													<th>STATUS</th>
+													<th>ArrivalDate</th>
 	 												<th>Operate</th>
 												</tr>
 											</thead>
@@ -198,6 +197,52 @@ var path='<%=path%>';
 		</div>
 		<hr>
         <div style="display: none" id="table_area" ></div>
+        
+        <div class="modal fade" id="delayMyWaitCandidateModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="box-header well" data-original-title="">
+						<h2>
+							<i class="glyphicon glyphicon-user"></i> Delay
+						</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-round btn-default  btn-minimize "><i
+								class="glyphicon glyphicon-chevron-up"></i></a> <a
+								class="btn btn-round btn-default" href="#" data-dismiss="modal" >
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</div>
+					</div>
+					<div id="excelCheckBox" class="box-content">
+					 <form id="delayCandidateForm" method="post" class="form-horizontal">
+						<div class="group">
+							<label class="col-sm-2 control-label" style="width:30%;">Candidate Name</label>
+							<div class="col-sm-4" style="width:60%;">
+								<input type="text" class="form-control" name="delayMyWaitCandidateName" id="delayMyWaitCandidateName" disabled="disabled" />
+								<input type="hidden"  name="delayMyWaitCandidateId" id="delayMyWaitCandidateId" />
+							</div>
+						</div>
+						<br/><br/><br/>
+						<div class="group">
+							<label class="col-lg-2 control-label" style="width:30%;">Arrival Date</label>
+							<div class="col-sm-4" style="width:60%;">
+								<input class="form-control" type="text" readonly  id="delayMyWaitCandidateArrivalDate" name="delayMyWaitCandidateArrivalDate"/>  
+							</div>
+						</div>
+						<br/><br/><br/>
+						<div class="group">
+							<label class="col-sm-2 control-label" style="width:30%;">DelayReason</label>
+							<div class="col-sm-4" style="width:60%;">
+								<textarea id = "delayMyWaitCandidateReason" name = "delayMyWaitCandidateReason" readonly class="form-control" style="width:80%;height:100px" data-bv-group=".group"></textarea>
+							</div>
+						</div>
+						<br/><br/><br/><br/><br/><br/>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 		<c:import url="/service/manage/footer" />
 	</div>
 	<!--/.fluid-container-->
