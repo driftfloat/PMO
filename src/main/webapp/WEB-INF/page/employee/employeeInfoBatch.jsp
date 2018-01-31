@@ -103,7 +103,7 @@ var path='<%=path%>';
 											</select>
 										</div>
 									</div>
-									</br> </br> </br>
+									<br/> <br/> <br/>
 									<div class="group">
 										<label class="col-sm-2 control-label">LOB</label>
 										<div class="col-sm-4">
@@ -117,7 +117,7 @@ var path='<%=path%>';
 												id="hsbcStaffId" />
 										</div>
 									</div>
-									</br> </br> </br>
+									<br/> <br/> <br/>
 
 									<div id="successAlert" class="alert alert-success"
 										style="display: none;"></div>
@@ -135,7 +135,7 @@ var path='<%=path%>';
 												id="staffName" />
 										</div>
 									</div>
-									</br> </br> </br>
+									<br/> <br/> <br/>
 									<div class="group">
 										<label class="col-lg-2 control-label">Status</label>
 										<div class="col-lg-4">
@@ -156,7 +156,7 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
-										</br></br></br>
+										<br/><br/><br/>
 										
 									<div class="group">
 										<label class="col-lg-2 control-label">RM</label>
@@ -167,7 +167,7 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>									
-									</br></br></br>
+									<br/><br/><br/>
 									
 									<div class="form-group">
 										<div style="text-align: center; width: 50%; float: right">
@@ -178,14 +178,14 @@ var path='<%=path%>';
 										</div>
 										<div style="text-align: center; width: 50%; float: left">
 											<input type="button" value="Search" name="searchBtn"
-												id="searchBtn" href="#" class="button btn btn-primary"
+												id="searchBtn"  class="button btn btn-primary"
 												data-dismiss="modal"
 												style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin: auto;">
 										</div>
-										</br> </br>
+										<br/> <br/>
 										<div class="group" style="text-align: center; display: none;"
 											id="transferBox">
-											<label class="col-sm-2 control-label">Employee</label>
+											<label id="num" class="col-sm-2 control-label">Employee</label>
 											<div class="col-sm-4">
 												<textarea name="transBox" cols="80" rows="4" id="transBox" disabled="disabled"></textarea>
 											</div>
@@ -197,7 +197,7 @@ var path='<%=path%>';
 											class="table table-striped table-bordered">
 											<thead>
 												<tr>
-													<th width="30px" align="center"></th>
+													<th width="30px" align="center"><input id='employeeIds' type='checkbox' onclick='checkedEmployeeAll()' ></th>
 													<th>StaffName</th>												
 													<th>ER</th>
 													<th>LOB</th>
@@ -370,22 +370,24 @@ var path='<%=path%>';
 					</div>
 					<div id="excelCheckBox" class="box-content">
 						<form id="modifyForm" method="post" class="form-horizontal">
+						<div class="form-group">
 						    <div class="group">
-							<label class="col-sm-2 control-label" >Staff Name</label>
-							<div class="col-sm-8" >
-								<input type="text" class="form-control" name="staffNames" id="staffNames" disabled="disabled" />
-								<input type="hidden"  name="staffIds" id="staffIds" />
+								<label class="col-sm-2 control-label" >Staff Name</label>
+								<div class="col-sm-8" >
+									<input type="text" class="form-control" name="staffNames" id="staffNames" disabled="disabled" />
+									<input type="hidden"  name="staffIds" id="staffIds" />
+								</div>
 							</div>
-						</div>
-						
-						    <br /> <br /> <br />
+						</div>	
+						    
+						    <div class="form-group">
 							<div class="group">
 								<label class="col-lg-2 control-label" >Modify
 									Type</label>
 								<div class="col-lg-8" >
 									<select class="form-control" name="modifyName" id="modifyName"
 										data-bv-group=".group">
-										<option value="0" selected="selected">-Option-</option>
+										<option value="" >-Option-</option>
 										<option value="1">Project properties</option>
 										<option value="2">Role</option>
 										<option value="3">Department</option>
@@ -393,22 +395,27 @@ var path='<%=path%>';
 									</select>
 								</div>
 							</div>
+							</div>
 							<div style="display: none" id="projectProperties">
-								<br /> <br /> <br />
+								<div class="form-group">
 								<div class="group">
 									<label class="col-sm-2 control-label" >Project Name</label>
 									<div class="col-sm-8" >
-										<input type="text" class="form-control" name="projectName" id="projectName"  /> 
+										<input type="text" class="form-control" name="projectName" data-bv-group=".group" id="projectName"  /> 
 									</div>
 								</div>
-								<br /> <br /> <br />
+								</div>
+								
+								<div class="form-group">
 								<div class="group">
 									<label class="col-sm-2 control-label" >SOW#</label>
 									<div class="col-sm-8" >
-										<input type="text" class="form-control" name="sowName" id="sowName"  />
+										<input type="text" class="form-control" name="sowName" data-bv-group=".group" id="sowName"  />
 									</div>
 								</div>
-								<br /> <br /> <br />
+								</div>
+								
+								<div class="form-group">
 								<div class="group">
 									<label class="col-sm-2 control-label " >SOW# Expired Date</label>
 										<div class="col-md-8" >
@@ -422,7 +429,9 @@ var path='<%=path%>';
 											</div>
 										</div>
 								</div>
-								<br /> <br /> <br /><br/>
+								</div>
+								
+								<div class="form-group">
 								<div class="group">
 									<label class="col-lg-2 control-label" >Engagement Type</label>
 										<div class="col-lg-8" >
@@ -432,9 +441,10 @@ var path='<%=path%>';
 											</select>
 										</div>
 								</div>
+								</div>
 							</div>
 							<div style="display: none" id="humanRole">
-								<br /> <br /> <br />
+								<div class="form-group">
 								<div class="group">
 									<label class="col-lg-2 control-label" >MSA Role</label>
 										<div class="col-lg-8" >
@@ -444,7 +454,8 @@ var path='<%=path%>';
 											</select>
 										</div>
 								</div>
-								<br /> <br /> <br />
+								</div>
+								<div class="form-group">
 								<div class="group">
 										<label class="col-lg-2 control-label" >Skills/Technology</label>
 										<div class="col-lg-8" >
@@ -454,7 +465,8 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
-								<br /> <br /> <br />
+							</div>
+							<div class="form-group">
 								<div class="group">
 									<label class="col-lg-2 control-label" >Staff Region</label>
 										<div class="col-lg-8" >
@@ -464,7 +476,8 @@ var path='<%=path%>';
 											</select>
 										</div>
 								</div>
-								<br /> <br /> <br />
+								</div>
+								<div class="form-group">
 								<div class="group">
 									<label class="col-sm-2 control-label" >Bill
 										Rate</label>
@@ -472,9 +485,10 @@ var path='<%=path%>';
 										<input type="text" class="form-control" name="billRate" id="billRate"  /> 
 									</div>
 								</div>
+								</div>
 							</div>
 							<div style="display: none" id="departmentModify">
-								<br /> <br /> <br />
+								<div class="form-group">
 								<div class="group">
 									<label class="col-lg-2 control-label" >HSBC Dept</label>
 										<div class="col-lg-8" >
@@ -484,7 +498,8 @@ var path='<%=path%>';
 											</select>
 										</div>
 								</div>
-								<br /> <br /> <br />
+								</div>
+								<div class="form-group">
 								<div class="group">
 									<label class="col-lg-2 control-label" >HSBC Sub Dept</label>
 										<div class="col-lg-8" >
@@ -493,7 +508,8 @@ var path='<%=path%>';
 											</select>
 										</div>
 								</div>
-								<br /> <br /> <br />
+								</div>
+								<div class="form-group">
 								<div class="group">
 									<label class="col-sm-2 control-label" >HSBC
 										Manager</label>
@@ -501,9 +517,10 @@ var path='<%=path%>';
 										<input type="text" class="form-control" name="hsbcManager" id="hsbcManager"  /> 
 									</div>
 								</div>
+								</div>
 							</div>
 							<div style="display: none" id="nickName">
-								<br /> <br /> <br/>
+								<div class="form-group">
 								<div class="group">
 											<label class="col-lg-2 control-label">RM</label>
 											<div class="col-lg-8">
@@ -513,8 +530,8 @@ var path='<%=path%>';
 												</select>
 											</div>
 								</div>
+								</div>
 							</div>
-							<br /> <br /> <br/>
 							<div class="center">
 								<a class="btn btn-success" href="#" id="transSubmit"> <i
 									class="glyphicon glyphicon-ok icon-white"></i> Confirm
