@@ -118,9 +118,8 @@ public class EmployeeSynApi {
 	}
 	
 	
-	private EmployeeSynRespmodel changeModel(Employee emp){
+	private EmployeeSynRespmodel changeModel(Employee emp,List<CSDept> cSDepts){
 		EmployeeSynRespmodel resemp =  new EmployeeSynRespmodel();
-		List<CSDept> cSDepts = cSDeptService.queryAllCSDept();
 		CSDept empCSDept = null;
 		if(emp != null){
 			resemp.setSkill(emp.getSkill());
@@ -129,6 +128,7 @@ public class EmployeeSynApi {
 			resemp.setErNum(emp.geteHr());
 			resemp.setcUserName(emp.getStaffName());
 			
+			//get Employee CSDept
 			if(emp.getCsSubDept()!=null&&emp.getCsSubDept()!=""){
 				for (CSDept csDept : cSDepts) {
 					if(csDept.getCsSubDeptId().equals(emp.getCsSubDept())){
@@ -137,6 +137,8 @@ public class EmployeeSynApi {
 					}
 				}
 			}
+			
+			//set orgName and buName 
 			if(empCSDept!=null){
 				resemp.setBuName(empCSDept.getCsBuName());
 				resemp.setOrgName(empCSDept.getCsSubDeptName());
@@ -150,10 +152,13 @@ public class EmployeeSynApi {
 
 	private List<EmployeeSynRespmodel> changeModelList(List<Employee> empList){
 		
+		//get all CSDept
+		List<CSDept> cSDepts = cSDeptService.queryAllCSDept();
+		
 		List<EmployeeSynRespmodel> dataList = new ArrayList<EmployeeSynRespmodel>();
 		if(empList != null && empList.size()>0){
 			for(int i=0;i<empList.size();i++){
-				EmployeeSynRespmodel model = changeModel(empList.get(i));
+				EmployeeSynRespmodel model = changeModel(empList.get(i),cSDepts);
 				dataList.add(model);
 			}
 		}
