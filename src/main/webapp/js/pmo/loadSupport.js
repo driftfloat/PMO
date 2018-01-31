@@ -6,7 +6,7 @@ $(function(){
 	loadGbGf();
 	loadBillingEntity();
 	loadBillingCurrency();
-    loadResourceStatus();
+    //loadResourceStatus();
 	loadCSDept();
 	loadUserType();
 	loadStaffRegion();
@@ -25,7 +25,7 @@ $(function(){
 		$("#staffLocation").val(regionMap.get(staffRegion));
 	});
 
-
+var lastConditionStr = "";
 function addEmployee(){
 	var bootstrapValidator = $("#registerEmployeeForm").data('bootstrapValidator');
 	bootstrapValidator.validate();
@@ -59,7 +59,26 @@ function addEmployee(){
 		var gbGf = $('#gbGf').val();
 		var entryDate = $('#entryDate1').val();
 		var rmName= $("#RM").val();
-		
+		var addEmpConditionStr = eHr + lob + hsbcStaffId + staffName + LN
+						+ staffRegion + staffLocation + locationType
+						+ onshoreOrOffshore + csSubDept + hsbcSubDept + projectName
+						+ projectManager + sow + sowExpiredDate + staffCategory
+						+ engagementType + hsbcDOJ + graduationDate + role + skill
+						+ billingCurrency + billRate + terminationReason + email + gbGf
+						+ entryDate + rmName;
+		if (lastConditionStr != addEmpConditionStr) {
+			lastConditionStr = addEmpConditionStr;
+		} else {
+			$("html,body").animate({
+				scrollTop : 0
+			}, 500);
+			$('#successAlert').html('Duplicate data,do not resubmit!').show();
+			setTimeout(function() {
+				$('#successAlert').hide();
+			}, 2000);
+			return;
+		}
+
 		$.ajax({
 			url:path+'/service/employee/addEmployee',
 			dataType:"json",

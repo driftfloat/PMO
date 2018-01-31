@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -196,6 +198,15 @@ public class EmployeeController {
         String gbGf = request.getParameter("gbGf");
         String entryDate = request.getParameter("entryDate");
         String rmUserId = request.getParameter("rmUserId");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date curDate = new Date();
+        Timestamp createTime = null;
+		try {
+			createTime = new Timestamp(sdf.parse(sdf.format(curDate)).getTime());
+		} catch (ParseException e) {
+			logger.error(e.getMessage());
+		}
+        Timestamp updateTime = createTime;
         Employee employee = new Employee(employeeId,eHr,lob,
                 hsbcStaffId, staffName, LN, staffRegion,
                 staffLocation, locationType, onshoreOrOffshore,
@@ -204,7 +215,8 @@ public class EmployeeController {
                 staffCategory, engagementType, hsbcDOJ,
                 graduationDate, role, skill,
                 billingCurrency, billRate, resourceStatus,
-                terminatedDate, terminationReason,email,gbGf,entryDate,rmUserId);
+                terminatedDate, terminationReason,email,gbGf,
+                entryDate,rmUserId, createTime, updateTime);
         
         boolean resultFlag = employeeService.addEmployee(employee);
         
@@ -261,6 +273,14 @@ public class EmployeeController {
         String gbGf = request.getParameter("gbGf");
         String entryDate = request.getParameter("entryDate");
         String rmUserId = request.getParameter("rmUserId");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date curDate = new Date();
+        Timestamp updateTime = null;
+		try {
+			updateTime = new Timestamp(sdf.parse(sdf.format(curDate)).getTime());
+		} catch (ParseException e) {
+			logger.error(e.getMessage());
+		}
         Employee employee = new Employee(employeeId,eHr,lob,
                 hsbcStaffId, staffName, LN, staffRegion,
                 staffLocation, locationType, onshoreOrOffshore,
@@ -269,7 +289,7 @@ public class EmployeeController {
                 staffCategory, engagementType, hsbcDOJ,
                 graduationDate, role, skill,
                 billingCurrency, billRate, resourceStatus,
-                terminatedDate, terminationReason,email,gbGf,entryDate,rmUserId);
+                terminatedDate, terminationReason,email,gbGf,entryDate,rmUserId,updateTime);
         
         /**
          * 添加日志

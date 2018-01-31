@@ -1,5 +1,7 @@
 package com.pmo.dashboard.entity;
 
+import java.sql.Timestamp;
+
 public class Employee
 {
     
@@ -37,6 +39,9 @@ public class Employee
     private String entryDate;
     private String rmUserId;
     private String csSubDeptName;
+    
+    private Timestamp createTime;
+    private Timestamp updateTime;
     
     
 	public String getCsSubDeptName() {
@@ -293,11 +298,21 @@ public class Employee
     {
         this.interviewStatus = interviewStatus;
     }
-    
-    public Employee()
+    public Timestamp getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
+	public Timestamp getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
+	}
+	public Employee()
     {
         super();
-        // TODO Auto-generated constructor stub
     }
     public Employee(String employeeId, String eHr, String lob,
             String hsbcStaffId, String staffName, String ln, String staffRegion,
@@ -307,7 +322,8 @@ public class Employee
             String staffCategory, String engagementType, String hsbcDOJ,
             String graduationDate, String role, String skill,
             String billingCurrency, String billRate, String resourceStatus,
-            String terminatedDate, String terminationReason,String email, String gbGf,String entryDate,String rmUserId)
+            String terminatedDate, String terminationReason,String email, String gbGf,
+            String entryDate,String rmUserId, Timestamp createTime, Timestamp updateTime)
     {
         super();
         this.employeeId = employeeId;
@@ -341,11 +357,53 @@ public class Employee
         this.gbGf = gbGf;
         this.entryDate = entryDate;
         this.rmUserId = rmUserId;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+    public Employee(String employeeId, String eHr, String lob,
+            String hsbcStaffId, String staffName, String ln, String staffRegion,
+            String staffLocation, String locationType, String onshoreOrOffshore,
+            String csSubDept, String hsbcSubDept, String projectName,
+            String projectManager, String sow, String sowExpiredDate,
+            String staffCategory, String engagementType, String hsbcDOJ,
+            String graduationDate, String role, String skill,
+            String billingCurrency, String billRate, String resourceStatus,
+            String terminatedDate, String terminationReason,String email, String gbGf,
+            String entryDate,String rmUserId, Timestamp updateTime)
+    {
+        super();
+        this.employeeId = employeeId;
+        this.eHr = eHr;
+        this.lob = lob;
+        this.hsbcStaffId = hsbcStaffId;
+        this.staffName = staffName;
+        this.ln = ln;
+        this.staffRegion = staffRegion;
+        this.staffLocation = staffLocation;
+        this.locationType = locationType;
+        this.onshoreOrOffshore = onshoreOrOffshore;
+        this.csSubDept = csSubDept;
+        this.hsbcSubDept = hsbcSubDept;
+        this.projectName = projectName;
+        this.projectManager = projectManager;
+        this.sow = sow;
+        this.sowExpiredDate = sowExpiredDate;
+        this.staffCategory = staffCategory;
+        this.engagementType = engagementType;
+        this.hsbcDOJ = hsbcDOJ;
+        this.graduationDate = graduationDate;
+        this.role = role;
+        this.skill = skill;
+        this.billingCurrency = billingCurrency;
+        this.billRate = billRate;
+        this.resourceStatus = resourceStatus;
+        this.terminatedDate = terminatedDate;
+        this.terminationReason = terminationReason;
+        this.email = email;
+        this.gbGf = gbGf;
+        this.entryDate = entryDate;
+        this.rmUserId = rmUserId;
+        this.updateTime = updateTime;
     }
     
-    
-    
-    
-    
-
 }
