@@ -364,11 +364,24 @@ var empObj =<%=empInfo%>;
 												<div class="form-group" id="btype" style='display: none'>
 													<div class="group" id="bgvEdit" style='display: none'>
 														<label class="col-sm-2 control-label">BGV Cleared</label>
-														<div class="col-sm-4">
+														<%-- <div class="col-sm-4">
 															<input type="text" class="form-control"
 																name="bgvClearedEdit" value="${demand.bgvCleared }"
 																id="bgvClearedEdit" />
-														</div>
+														</div> --%>
+														<div class="col-sm-4">
+															<input type="text" style="display:none" value="${demand.bgvCleared }" 
+																id="bgvClearedInput" />
+															<select id="bgvClearedEdit" name="bgvClearedEdit" class="form-control" data-bv-notempty>
+																<option value="${demand.bgvCleared }">--Option--</option>
+																<option value="Green">Green</option>
+																<option value="Blue">Blue</option>
+																<option value="Yellow">Yellow</option>
+																<option value="Red">Red</option>
+																<option value="Other">Other</option>
+																<option value="Initiated">Initiated</option>
+															</select>
+								</div>
 													</div>
 													<div class="group" id="donumberEdit" >
 														<label class="col-sm-2 control-label">DO number</label>

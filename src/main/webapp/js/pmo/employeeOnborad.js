@@ -23,7 +23,7 @@ $(function(){
 	$('#candidateNameEdit').val(empObj.staffName);
 	$('#graduationDate1').val(empObj.graduationDate);
 	$('#sow').val(empObj.sow);
-	$('#entryDate1').val(empObj.entryDate);
+//	$('#entryDate1').val(empObj.entryDate);
 	$('#email').val(empObj.email);
 })
 
@@ -393,7 +393,7 @@ function loadUserForRM(du){
 		}
 	})
 }
-$("#csDept").change(function(){
+/*$("#csDept").change(function(){
 	var csSubDeptId = $('#csDept').val();
 	$("#csSubDept").find("option").remove(); 
 	$("#csSubDept").append("<option value=''>-- 请选择项目 --</option>");
@@ -413,7 +413,7 @@ $("#csDept").change(function(){
 		}
 	})
 })
-
+*/
 
 function loadHsbcDept(){
 	$.ajax({
