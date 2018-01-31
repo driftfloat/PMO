@@ -273,6 +273,7 @@ public class EmployeeController {
         String gbGf = request.getParameter("gbGf");
         String entryDate = request.getParameter("entryDate");
         String rmUserId = request.getParameter("rmUserId");
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date curDate = new Date();
         Timestamp updateTime = null;
@@ -281,6 +282,9 @@ public class EmployeeController {
 		} catch (ParseException e) {
 			logger.error(e.getMessage());
 		}
+
+        //修改后的employee
+
         Employee employee = new Employee(employeeId,eHr,lob,
                 hsbcStaffId, staffName, LN, staffRegion,
                 staffLocation, locationType, onshoreOrOffshore,
@@ -296,9 +300,16 @@ public class EmployeeController {
          */
         try{
         	User user = (User)request.getSession().getAttribute("loginUser");
+        	//修改前的employee
+        	Employee em = employeeService.queryEmployeeById(employee.getEmployeeId());
         	EmployeeLog log = getEmployeeLog(employee,user,"1");
     		@SuppressWarnings({ "unused", "unchecked" })
-			boolean flag = employeeLogService.save(log);
+    		StringBuffer[] result=checkFieldChange(em,employee);
+    		if(result[0].length()>0){
+    			@SuppressWarnings({ "unchecked", "unused" })
+				boolean flag = employeeLogService.save(log);
+    		}
+			
         }catch(Exception e){
         	e.printStackTrace();
         }

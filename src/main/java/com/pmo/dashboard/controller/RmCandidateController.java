@@ -186,7 +186,7 @@ public class RmCandidateController {
 	public Object interviewBack(String pushId,String candidateId){
 	    CandidateInfo candidate = new CandidateInfo();
 	    candidate.setCandidateId(candidateId);
-	    candidate.setInterviewStatus("0");
+	    candidate.setInterviewStatus("5");
 	    candidate.setCandidateStatus("0");
 	    try {
 	    	 //更新候选人表中的面试状态
