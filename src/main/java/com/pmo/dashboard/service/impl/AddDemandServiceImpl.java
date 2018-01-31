@@ -25,17 +25,17 @@ public class AddDemandServiceImpl implements AddDemandService{
 	
 	@Override
 	public boolean addDemand(AddDemand demand) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		if(demand.getHsbcDept()!=null&&demand.getHsbcDept()!=""){
-		if(demand.getHsbcDept().equals(demand.getHsbcSubDept())) {
-			params.put("hsbcDeptName",demand.getHsbcDept() );
-		}else {
-			params.put("hsbcSubDeptName", demand.getHsbcSubDept());
-			params.put("hsbcDeptName",demand.getHsbcDept() );
-		}
-		String hsbcSubDeptId = hsbcDeptMapper.queryHsbcSubDeptId(params);
-		demand.setHsbcSubDeptId(hsbcSubDeptId);
-		}
+//		Map<String, Object> params = new HashMap<String, Object>();
+//		if(demand.getHsbcDept()!=null&&demand.getHsbcDept()!=""){
+//		if(demand.getHsbcDept().equals(demand.getHsbcSubDept())) {
+//			params.put("hsbcDeptName",demand.getHsbcDept() );
+//		}else {
+//			params.put("hsbcSubDeptName", demand.getHsbcSubDept());
+//			params.put("hsbcDeptName",demand.getHsbcDept() );
+//		}
+//		String hsbcSubDeptId = hsbcDeptMapper.queryHsbcSubDeptId(params);
+//		demand.setHsbcSubDeptId(hsbcSubDeptId);
+//		}
 		
 		if(addDemandMapper.addDemand(demand)>0){
 			return true;

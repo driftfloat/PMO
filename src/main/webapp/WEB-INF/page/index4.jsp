@@ -220,7 +220,7 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" name="resourceStatus" data-bv-notempty
 												data-bv-notempty-message="please select  resourceStatus" id="resourceStatus" data-bv-group=".group">
-												<option value="">--Option--</option>
+												<option selected="selected">Active</option>
 											</select>
 										</div>
 										</div>

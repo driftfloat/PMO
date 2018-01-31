@@ -125,6 +125,7 @@ function loadCsSubDept(){
 	})
 }
 
+var lastConditionStr = "";
 function addDemand(){
 	//var isvalid = false;
 	//isvalid = $('#recruitdemandForm').data('bootstrapValidator').isValid();
@@ -171,6 +172,27 @@ function addDemand(){
 		var completionDate=$('#completionDate').val();
 		var onboardDate=$('#onboardDate').val();
 		var staffName=$('#staffName').val();
+		var addDemandConditionStr = demandId + engagementType + rr + jobCode
+						+ skill + requestor + position + hsbcDept + hsbcSubDept
+						+ location + reqPublishedDate + ageing + profilesNo
+						+ interviewedNo + status + proposedJoiningDate + dcCleared
+						+ sowSigned + onboarded + abort + delayed + reason + nextAction
+						+ status2 + remark + csSubDept + plannedOnboardDate + doNumber
+						+ hrPriority + reqReceivedDate + ageingReceived
+						+ demandPriority + creatDate + updateDate + recruitmentCycle
+						+ completionDay + completionDate + onboardDate + staffName;
+		if (lastConditionStr != addDemandConditionStr) {
+			lastConditionStr = addDemandConditionStr;
+		} else {
+			$("html,body").animate({
+				scrollTop : 0
+			}, 500);
+			$('#successAlert').html('Duplicate data,do not resubmit!').show();
+			setTimeout(function() {
+				$('#successAlert').hide();
+			}, 2000);
+			return;
+		}
 		
 		$.ajax({
 			url:path+'/service/demand/addDemand',

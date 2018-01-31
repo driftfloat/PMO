@@ -186,6 +186,9 @@
         WHERE 
 			LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS not in (3,4,5,6) 
         	<include refid="candidateWherePart"/>
+        	<if test="interviewStatus == 3">
+				 OR INTERVIEW_STATUS in('3','4')
+			</if>
 		ORDER BY CANDIDATE_STATUS,INTERVIEW_STATUS,c.CS_SUBDEPT_NAME,MAJOR_STATUS,CANDIDATE_ID 
         LIMIT #{currentPage},#{pageDataCount};
 	</select>
@@ -198,6 +201,9 @@
         WHERE 
 			LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS not in (3,4,5,6) 
         	<include refid="candidateWherePart"/>
+        	<if test="interviewStatus == 3">
+				 OR INTERVIEW_STATUS in('3','4')
+			</if>
 			;
 	</select>
 	<select id="queryCusDeptInfo" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="java.util.HashMap" >
