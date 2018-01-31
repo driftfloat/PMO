@@ -200,7 +200,10 @@ var path='<%=path%>';
 												<option value="1">已推送</option>
 												<option value="2">面试中</option>
 												<option value="3">面试完成</option>
-												<option value="4">已退回</option>
+												<option value="5">已退回</option>
+												<option value="6">面试确认</option>
+												<option value="7">重安排面试</option>
+												
 											</select>
 										</div>
 									</div>
