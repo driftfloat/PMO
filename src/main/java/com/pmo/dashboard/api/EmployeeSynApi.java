@@ -19,7 +19,9 @@ import com.pmo.dashboard.api.constant.ResultConstant;
 import com.pmo.dashboard.api.reqmodel.EmployeeSynReqmodel;
 import com.pmo.dashboard.api.respmodel.EmployeeSynRespmodel;
 import com.pmo.dashboard.entity.ApiUser;
+import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.Employee;
+import com.pom.dashboard.service.CSDeptService;
 import com.pom.dashboard.service.EmployeeService;
 import com.pom.dashboard.service.UserService;
 
@@ -41,6 +43,9 @@ public class EmployeeSynApi {
 	
 	@Resource
     private EmployeeService employeeService;
+	
+	@Resource
+	private CSDeptService cSDeptService;
 	
 	
 	@RequestMapping(value="",method = RequestMethod.POST)  
@@ -113,26 +118,47 @@ public class EmployeeSynApi {
 	}
 	
 	
-	private EmployeeSynRespmodel changeModel(Employee emp){
+	private EmployeeSynRespmodel changeModel(Employee emp,List<CSDept> cSDepts){
 		EmployeeSynRespmodel resemp =  new EmployeeSynRespmodel();
+		CSDept empCSDept = null;
 		if(emp != null){
 			resemp.setSkill(emp.getSkill());
-			resemp.setOrgName("");
 			resemp.setHrNum(emp.getLob());
 			resemp.seteUserName(emp.getLn());
 			resemp.setErNum(emp.geteHr());
 			resemp.setcUserName(emp.getStaffName());
-			resemp.setBuName("");
+			
+			//get Employee CSDept
+			if(emp.getCsSubDept()!=null&&emp.getCsSubDept()!=""){
+				for (CSDept csDept : cSDepts) {
+					if(csDept.getCsSubDeptId().equals(emp.getCsSubDept())){
+						empCSDept = csDept;
+						break;
+					}
+				}
+			}
+			
+			//set orgName and buName 
+			if(empCSDept!=null){
+				resemp.setBuName(empCSDept.getCsBuName());
+				resemp.setOrgName(empCSDept.getCsSubDeptName());
+			}else{
+				resemp.setOrgName("");
+				resemp.setBuName("");
+			}
 		}
 		return resemp;
 	}
 
 	private List<EmployeeSynRespmodel> changeModelList(List<Employee> empList){
 		
+		//get all CSDept
+		List<CSDept> cSDepts = cSDeptService.queryAllCSDept();
+		
 		List<EmployeeSynRespmodel> dataList = new ArrayList<EmployeeSynRespmodel>();
 		if(empList != null && empList.size()>0){
 			for(int i=0;i<empList.size();i++){
-				EmployeeSynRespmodel model = changeModel(empList.get(i));
+				EmployeeSynRespmodel model = changeModel(empList.get(i),cSDepts);
 				dataList.add(model);
 			}
 		}
