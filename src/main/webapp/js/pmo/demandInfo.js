@@ -294,8 +294,18 @@ function loadDemandList(currPage){
 			//$.each(reslut, function(i,data){
 			for (var i = 0; i < result.list.length; i++) {
 				var tr = $("<tr id='"+result.list[i].rr+"'></tr>");
-				var td1 = $("<td>"+result.list[i].rr+"</td>");
-				var td2 = $("<td>"+result.list[i].jobCode+"</td>");
+				var rrp=result.list[i].rr;
+				var jobCodep=result.list[i].jobCode;
+				if(rrp==null||rrp==""){
+					var td1 = $("<td></td>");
+				}else{
+					var td1 = $("<td>"+result.list[i].rr+"</td>");
+				}
+				if(jobCodep==null||jobCodep==""){
+					var td2 = $("<td></td>");
+				}else{
+					var td2 = $("<td>"+result.list[i].jobCode+"</td>");
+				}
 				var td3 = $("<td>"+result.list[i].skill+"</td>");
 				var td4 = $("<td>"+result.list[i].position+"</td>");
 				var td5 = $("<td>"+result.list[i].location+"</td>");
