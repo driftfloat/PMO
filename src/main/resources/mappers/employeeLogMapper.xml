@@ -10,7 +10,7 @@
     <result column="ROLE_ORIGINAL" property="roleOriginal" jdbcType="VARCHAR" />
     <result column="STATUS_NEW" property="statusNew" jdbcType="VARCHAR" />
     <result column="STATUS_ORIGINAL" property="statusOriginal" jdbcType="VARCHAR" />
-    <result column="UPDATE_DATE" property="updateDate" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
     <result column="OPERATION_PERSON" property="operationPerson" jdbcType="VARCHAR" />
     <result column="LOG_TYPE" property="logType" jdbcType="VARCHAR" />
     <result column="PROJECT_STATUS" property="projectStatus" jdbcType="VARCHAR" />

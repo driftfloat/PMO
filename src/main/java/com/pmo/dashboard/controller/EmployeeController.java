@@ -781,8 +781,14 @@ public String getTMemployee(final HttpServletRequest request,
     private EmployeeLog getEmployeeLog(Employee employee,User user,String type){
     	//修改前
     	Employee em = employeeService.queryEmployeeById(employee.getEmployeeId());
-    	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");
-    	String time = simpleDateFormat.format(new Date());
+    	SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");
+    	Timestamp time = null;
+    	try {
+			time = new Timestamp(sdf.parse(sdf.format(new Date())).getTime());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	EmployeeLog log = new EmployeeLog();
     	StringBuffer[] finalchangeInfo = null;
     	StringBuffer addInfo = null;
@@ -1230,12 +1236,12 @@ public String getTMemployee(final HttpServletRequest request,
     	}
     	
     	// month change
-    	int tempMonth = Integer.parseInt(empLogList.get(0).getUpdateDate().substring(5, 7));
+    	int tempMonth = Integer.parseInt(empLogList.get(0).getUpdateDate().toString().substring(5, 7));
     	int xFlag = 1;
     	for(int i=0; i<empLogList.size(); i++){
     		EmployeeLog empLog = empLogList.get(i);
     		String empId = empLog.getEmployeeId();
-    		String updateDate = empLog.getUpdateDate();
+    		String updateDate = empLog.getUpdateDate().toString();
     		int updateMonth = Integer.parseInt(updateDate.substring(5, 7));
     		if(i == 0){
     			set.add(updateDate.substring(0, 7));
@@ -1251,7 +1257,7 @@ public String getTMemployee(final HttpServletRequest request,
     			intoDUList01.clear();
     			tempMonth = updateMonth;
     			xFlag++;
-    			set.add(empLog.getUpdateDate().substring(0, 7));
+    			set.add(empLog.getUpdateDate().toString().substring(0, 7));
     		}
     		String statusNew = empLog.getStatusNew();
     		String statusOrg = empLog.getStatusOriginal();
@@ -1306,7 +1312,7 @@ public String getTMemployee(final HttpServletRequest request,
     			levelMap.put(xFlag, levelMap01.size());
     			terminatedMap.put(xFlag, terminatedMap01.size());
     			intoDUMap.put(xFlag, intoDUList01.size());
-    			set.add(empLog.getUpdateDate().substring(0, 7));
+    			set.add(empLog.getUpdateDate().toString().substring(0, 7));
     		}
     	}
     	
@@ -1332,7 +1338,7 @@ public String getTMemployee(final HttpServletRequest request,
     	if(null == outDUempLogList || outDUempLogList.isEmpty() || StringUtils.isEmpty(du)){
     		return null;
     	}
-    	int tempMonth = Integer.parseInt(outDUempLogList.get(0).getUpdateDate().substring(5, 7));
+    	int tempMonth = Integer.parseInt(outDUempLogList.get(0).getUpdateDate().toString().substring(5, 7));
     	List<String> outDUList01 = new ArrayList<String>();
     	int xFlag = 1;
     	Set<String> ymSet = new TreeSet<String>(); 
@@ -1341,13 +1347,13 @@ public String getTMemployee(final HttpServletRequest request,
     		String duNew = empLog.getCsSubdeptIdNew();
     		String duOrg = empLog.getCsSubdeptIdOriginal();
     		String empId = empLog.getEmployeeId();
-    		String updateDate = empLog.getUpdateDate();
+    		String updateDate = empLog.getUpdateDate().toString();
     		int updateMonth = Integer.parseInt(updateDate.substring(5, 7));
     		if(i == 0){
     			ymSet.add(updateDate.substring(0, 7));
     		}
     		if(updateMonth != tempMonth){
-    			String xym = empLog.getUpdateDate().substring(0, 7);
+    			String xym = empLog.getUpdateDate().toString().substring(0, 7);
     			ymSet.add(xym);
     			outDUMap.put(xFlag, outDUList01.size());
     			outDUList01.clear();
@@ -1358,7 +1364,7 @@ public String getTMemployee(final HttpServletRequest request,
     			outDUList01.add(empId);
     		}
     		if(i == outDUempLogList.size()-1){
-    			ymSet.add(empLog.getUpdateDate().substring(0, 7));
+    			ymSet.add(empLog.getUpdateDate().toString().substring(0, 7));
     			outDUMap.put(xFlag, outDUList01.size());
     			outDUMap.put("ymOutDUSet", ymSet);
     		}

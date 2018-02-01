@@ -1,5 +1,7 @@
 package com.pmo.dashboard.entity;
 
+import java.sql.Timestamp;
+
 public class EmployeeLog extends EmployeeLogPageCondition{
 	
 	
@@ -11,7 +13,7 @@ public class EmployeeLog extends EmployeeLogPageCondition{
     private String roleOriginal;//原角色
     private String statusNew;//新状态
     private String statusOriginal;//原状态
-    private String updateDate;//更新时间
+    private Timestamp updateDate;//更新时间
     private String operationPerson;//用户ID(userid)
     private String changeInformation;//修改具体字段拼接信息
     private String logType;//日志类型(0:add,1:update)
@@ -138,15 +140,16 @@ public class EmployeeLog extends EmployeeLogPageCondition{
         this.statusOriginal = statusOriginal == null ? null : statusOriginal.trim();
     }
 
-    public String getUpdateDate() {
-        return updateDate;
-    }
+    
+    public Timestamp getUpdateDate() {
+		return updateDate;
+	}
 
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate == null ? null : updateDate.trim();
-    }
+	public void setUpdateDate(Timestamp updateDate) {
+		this.updateDate = updateDate;
+	}
 
-    public String getOperationPerson() {
+	public String getOperationPerson() {
         return operationPerson;
     }
 

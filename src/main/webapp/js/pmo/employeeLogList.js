@@ -32,7 +32,7 @@ function loadEmployeeLogList(pageState){
 				var tr = $("<table class='table table-striped table-bordered' border='1' width='100%'>" +
 						"<tr>"+
 						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>Date</td>"+
-						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].updateDate.replace('.0','')+"</td>"+
+						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].updateDate.toString().replace('.0','')+"</td>"+
 						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>OperatePerson</td>"+
 						"<td style='font-weight:500;line-height:1.1;color:#317eac;'>"+result.data[i].operationPersonName+"</td>"+
 						"</tr>"+
