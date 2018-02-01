@@ -185,10 +185,7 @@
         ON b.CS_SUBDEPT_ID = c.CS_SUBDEPT_ID 
         WHERE 
 			LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS not in (3,4,5,6) 
-        	<include refid="candidateWherePart"/>
-        	<if test="interviewStatus == 3">
-				 OR INTERVIEW_STATUS in('3','4')
-			</if>
+        	<include refid="queryMyCandidateListPart"/>
 		ORDER BY CANDIDATE_STATUS,INTERVIEW_STATUS,c.CS_SUBDEPT_NAME,MAJOR_STATUS,CANDIDATE_ID 
         LIMIT #{currentPage},#{pageDataCount};
 	</select>
@@ -200,10 +197,7 @@
         	t_candidate a 
         WHERE 
 			LOCK_PERSION = if(#{lockPerson}='all',a.LOCK_PERSION,#{lockPerson}) and a.LOCK_PERSION is not null and a.LOCK_PERSION != '' and CANDIDATE_STATUS not in (3,4,5,6) 
-        	<include refid="candidateWherePart"/>
-        	<if test="interviewStatus == 3">
-				 OR INTERVIEW_STATUS in('3','4')
-			</if>
+        	<include refid="queryMyCandidateListPart"/>
 			;
 	</select>
 	<select id="queryCusDeptInfo" parameterType="com.pmo.dashboard.entity.CandidateInfo" resultType="java.util.HashMap" >
@@ -433,4 +427,56 @@
         	<include refid="candidateWherePart"/>
 			;
 	</select>
+	
+	<sql id="queryMyCandidateListPart">
+		<if test="candidateName != null and candidateName != ''">
+			AND a.CANDIDATE_NAME = #{candidateName}
+		</if>
+		<if test="candidateTel != null and candidateTel != ''">
+			AND TEL like CONCAT('%',#{candidateTel},'%')
+		</if>
+		<if test="candidateStatus != null and candidateStatus != ''">
+			AND CANDIDATE_STATUS = #{candidateStatus}
+		</if>
+		<if test="majorStatus != null and majorStatus != ''">
+			AND MAJOR_STATUS = #{majorStatus}
+		</if>
+		<if test="workYearsStart != null and workYearsStart != ''">
+			AND EXPERIENCE_YEARS >= ${workYearsStart}
+		</if>
+		<if test="workYearsEnd != null and workYearsEnd != ''">
+			AND EXPERIENCE_YEARS <![CDATA[<=]]> ${workYearsEnd}
+		</if>
+		<if test="education != null and education != ''">
+			AND EDUCATION = #{education}
+		</if>
+		<if test="skill != null and skill != ''">
+			AND a.SKILL = #{skill}
+		</if>
+		<if test="email != null and email != ''">
+			AND EMAIL like CONCAT('%',#{email},'%')
+		</if>
+		<if test="englishLevel != null and englishLevel != ''">
+			AND ENGLISH_LEVEL = #{englishLevel}
+		</if>
+		<if test="userName != null and userName != ''">
+			AND NICKNAME = #{userName}
+		</if>
+		<if test="source != null and source != ''">
+			AND SOURCE = #{source}
+		</if>
+		<if test="interviewStatus != null and interviewStatus != '' and interviewStatus != 3 ">
+			AND INTERVIEW_STATUS = #{interviewStatus}
+		</if>
+		<if test="interviewStatus == 3">
+				 AND INTERVIEW_STATUS in('3','4')
+		</if>
+		<if test="demandStatus != null and demandStatus != ''">
+			AND STATUS = #{demandStatus}
+		</if>
+		<if test="csSubdeptName != null and csSubdeptName != ''">
+			AND CS_SUBDEPT_NAME = #{csSubdeptName}
+		</if>
+    </sql>
+    
 </mapper>
