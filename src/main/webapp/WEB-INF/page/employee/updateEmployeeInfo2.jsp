@@ -245,7 +245,7 @@ var path='<%=path%>';
 										<div class="group">
 										<label class="col-sm-2 control-label ">Contract Expired Date</label>
 										<div class="col-md-4">
-											<div class="input-group date form_datetime1 col-sm-12"
+											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
 												<input class="form-control" type="text" readonly data-bv-group=".group"
 													id="sowExpiredDate1" name="sowExpiredDate1"> <span
