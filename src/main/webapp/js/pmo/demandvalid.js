@@ -75,6 +75,13 @@ $(document).ready(function() {
 			},
 			reqPublishedDate1Edit : {
 				validators : {
+					notEmpty : {
+						message : 'Please entry date'
+					},
+					date : {
+						format : 'YYYY-MM-DD',
+						message : 'Time format is incorrect'
+					}
 
 				}
 			},
