@@ -851,14 +851,22 @@ function batchMaintenanceValidate() {
 					}
 				}
 			},
-			billRate : {
-				group : '.group',
-				validators : {
-					notEmpty : {
-						message : 'please input billRate.'
-					}
-				}
-			},
+			billRate: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter billRate'
+                    },
+                    
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
+                    regexp:{
+            			regexp:/^([1-9]\d*(\.\d*[1-9])?(\/(m|M))?)$|^(0\.\d*[1-9](\/(m|M))?)$/,
+            			message:'billRate is not zero.'
+            		},
+                }
+            },
 
 			hsbcDept : {
 				group : '.group',
