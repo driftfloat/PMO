@@ -198,6 +198,7 @@ var path='<%=path%>';
 											<thead>
 												<tr>
 													<th width="30px" align="center"><input id='employeeIds' type='checkbox' onclick='checkedEmployeeAll()' ></th>
+													<th>SL</th>
 													<th>StaffName</th>												
 													<th>ER</th>
 													<th>LOB</th>
@@ -233,6 +234,7 @@ var path='<%=path%>';
 														<option value="10">10</option>
 														<option value="20">20</option>
 														<option value="50">50</option>
+														<option value="100">100</option>
 												</select> 
 											</b>
 										</div>

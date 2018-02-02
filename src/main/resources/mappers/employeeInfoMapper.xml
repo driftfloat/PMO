@@ -56,7 +56,7 @@
 				AND e.ENGAGEMENT_TYPE = #{engagementType}
 			</if>
 			
-		
+		ORDER BY u.NICKNAME,e.ROLE
         LIMIT #{currentPage},#{pageRecordsNum};
 	</select>
 	
