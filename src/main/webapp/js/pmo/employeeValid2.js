@@ -171,15 +171,12 @@ $(document).ready(function() {
                     notEmpty: {
                         message: 'Please enter billRate'
                     },
-                    numeric:{
-                    	message:'Please enter number'
-                    },
                     stringLength: {
                         max: 32,
                         message: 'Exceeded the maxLength'
                     },
                     regexp:{
-            			regexp:/^([1-9]\d*(\.\d*[1-9])?)|(0\.\d*[1-9])$/,
+            			regexp:/^([1-9]\d*(\.\d*[1-9])?(\/(m|M))?)$|^(0\.\d*[1-9](\/(m|M))?)$/,
             			message:'billRate is not zero.'
             		},
                 }
@@ -335,15 +332,12 @@ $(document).ready(function() {
                     notEmpty: {
                         message: 'Please Choose billRate'
                     },
-                    numeric:{
-                    	message:'please enter number'
-                    },
                     stringLength: {
                         max: 32,
                         message: 'Exceeded the maxLength'
                     },
                     regexp:{
-            			regexp:/^([1-9]\d*(\.\d*[1-9])?)|(0\.\d*[1-9])$/,
+            			regexp:/^([1-9]\d*(\.\d*[1-9])?(\/(m|M))?)$|^(0\.\d*[1-9](\/(m|M))?)$/,
             			message:'billRate is not zero.'
             		},
 
