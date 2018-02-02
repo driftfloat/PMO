@@ -42,7 +42,7 @@ public class InterviewController {
 
 		int dataCount = interviewService.getCandidateListCount(candidate);
 		page.setDataCount(dataCount + "");
-		page.setPageCount((dataCount - 1) / 10 + 1 + "");
+		page.setPageCount((dataCount - 1) / candidate.getPageRecNum() + 1 + "");
 		if(candidate.getPageRecNum()!=null){
 			page.setPageDataCount(candidate.getPageRecNum() + "");
 		}else{
