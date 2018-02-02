@@ -481,29 +481,12 @@ $(document).ready(function() {
 });
 
 $(function () {
-	dateType();
     $("#upload").click(function () {
         ajaxFileUpload();
     })
 })
 
 
-function dateType(){
-	$('.form_datetime').datetimepicker({
-		endDate:new Date(),
-		weekStart: 1,
-		minView:'month',
-		todayBtn:  2,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-		language:'zh-CN',
-		format: 'yyyy-mm-dd',
-		pickerPosition: 'bottom-left',
-		showMeridian: 1
-	});
-}
 
 
  function ajaxFileUpload()

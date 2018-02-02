@@ -24,6 +24,9 @@ function dateType(){
 		format: 'yyyy-mm-dd',
 		pickerPosition: 'bottom-left',
 		showMeridian: 1
+	}).on('changeDate', function(ev){
+		 $('#registerEmployeeForm').bootstrapValidator('revalidateField', 'GRADUATE_DATE1'); 
+	
 	});
 }
 
