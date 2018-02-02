@@ -36,6 +36,7 @@
 		<result property="entryDate" column="ENTRY_DATE" javaType="String" />
 		<result property="rmUserId" column="RM_USER_ID" javaType="String" />
 		<result property="engagementType" column="ENGAGEMENT_TYPE" javaType="String" />
+		<result property="nickname" column="NICKNAME" javaType="String" />
 	</resultMap>
 	
 	
@@ -47,7 +48,10 @@
 	</insert>
 	
 	<select id="queryEmployeeById" parameterType="String" resultMap="employeeMap">
-	    SELECT e.*,c.CS_SUBDEPT_NAME as csSubDeptName FROM t_employee e left join  t_cs_dept c on e.CS_SUBDEPT_ID= c.CS_SUBDEPT_ID WHERE EMPLOYEE_ID = #{employeeId};
+	    SELECT e.*,c.CS_SUBDEPT_NAME as csSubDeptName,u.NICKNAME  FROM t_employee e 
+	    left join  t_cs_dept c on e.CS_SUBDEPT_ID= c.CS_SUBDEPT_ID 
+	    left join t_user u on e.RM_USER_ID = u.USER_ID
+	    WHERE EMPLOYEE_ID = #{employeeId};
 	</select>
 	
 	<select id="queryEmployeeList" parameterType="com.pmo.dashboard.entity.EmployeePageCondition" resultMap="employeeMap">

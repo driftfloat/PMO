@@ -388,9 +388,14 @@ function loadEmployeeList(pageState, csDeptName, csSubDeptName, csBuName,
 							result.pageInfo.rmUserId);
 
 					rmAuthority(result);
+					
 				}
 
 			})
+			if(document.getElementById('employeeIds').checked){
+				document.getElementById('employeeIds').checked=false;
+			}
+			
 }
 
 // RM修改权限
@@ -694,10 +699,12 @@ function checkedEmployeeAll(){
 	var all=document.getElementById('employeeIds');//获取到点击全选的那个复选框的id  
 	var one=document.getElementsByName('checkedEmployee[]');//获取到复选框的名称  
 	if(all.checked==true){
-		for(var i=0;i<one.length;i++){  
-			one[i].checked=true; 
-			checkEmployeeValue = one[i].value.split(",");
-			checkedEmployee(checkEmployeeValue[0],checkEmployeeValue[1],checkEmployeeValue[2])
+		for(var i=0;i<one.length;i++){ 
+			if(one[i].checked==false){
+				one[i].checked=true; 
+				checkEmployeeValue = one[i].value.split(",");
+				checkedEmployee(checkEmployeeValue[0],checkEmployeeValue[1],checkEmployeeValue[2])
+			}
 		} 
 	}else{
 		for(var i=0;i<one.length;i++){  
@@ -923,8 +930,8 @@ function updateProperties() {
 		success : function(result) {
 			if (result) {
 				alert("Information modified succesffully.");
-				$("#modifyName").val("0");
-				$("#projectProperties").hide();
+//				$("#modifyName").val("");
+//				$("#projectProperties").hide();
 				$("#projectName").val("");
 				$("#sowName").val("");
 				$("#sowExpiredDate1").val("");
@@ -963,8 +970,8 @@ function updateRoles() {
 			if (result) {
 				alert("Information modified succesffully.");
 				// $('#modifyMadal').modal('hide');
-				$("#modifyName").val("0");
-				$("#humanRole").hide();
+//				$("#modifyName").val("");
+//				$("#humanRole").hide();
 				$("#role").val("");
 				$("#skill").val("");
 				$("#staffRegion").val("");
@@ -1000,8 +1007,8 @@ function updateDept() {
 			if (result) {
 				alert("Information modified succesffully.");
 				// $('#modifyMadal').modal('hide');
-				$("#modifyName").val("0");
-				$("#departmentModify").hide();
+//				$("#modifyName").val("");
+//				$("#departmentModify").hide();
 				$("#hsbcDept").val("");
 				$("#hsbcSubDept").val("");
 				$("#hsbcManager").val("");
@@ -1017,7 +1024,8 @@ function updateDept() {
 
 // gkf add
 function updateRM() {
-	var nickName = $("#rmName").find("option:selected").val();
+	var rmUserId = $("#rmName").find("option:selected").val();
+	var nickName = $("#rmName").find("option:selected").text();
 	var staffIds = $("#staffIds").val();
 	$.ajax({
 		url : path + '/service/employee/updateRM',
@@ -1025,16 +1033,17 @@ function updateRM() {
 		async : true,
 		data : {
 			"staffIds" : staffIds,
-			"nickName" : nickName
+			"nickName" : nickName,
+			"rmUserId":  rmUserId
 		},
 		cache : false,
 		type : "post",
 		success : function(result) {
 			if (result) {
 				alert("Information modified succesffully.");
-				$('#modifyMadal').modal('hide');
-				$("#nickName").hide();
-				$("#modifyName").val("0");
+//				$('#modifyMadal').modal('hide');
+//				$("#nickName").hide();
+//				$("#modifyName").val("");
 				$("#rmName").val("");
 				loadEmployeeList();
 			} else {
