@@ -289,13 +289,17 @@ function loadEmployeeList(pageState, csDeptName, csSubDeptName, csBuName,
 						var employeeId = result.data[i].employeeId;
 						var tr = $("<tr></tr>");
 						tr.appendTo(tbody);
-						var td1 = $("<td><input id='ls"
+						
+						var td0 = $("<td><input id='ls"
 								+ employeeId
 								+ "' type='checkbox' name='checkedEmployee[]' value='"
 								+ lob + "," + staffName + ","
 								+ employeeId + "' onclick='checkedEmployee(\""
 								+ lob + "\",\"" + staffName + "\",\""
 								+ employeeId + "\")' ></td>");
+						var td1 = $("<td>"
+								+ (i+1)
+								+ "</td>");
 						var td2 = $("<td>" + result.data[i].staffName + "</td>");
 						var td3 = $("<td>" + result.data[i].eHr + "</td>");
 						var td4 = $("<td>" + result.data[i].lob + "</td>");
@@ -339,6 +343,7 @@ function loadEmployeeList(pageState, csDeptName, csSubDeptName, csBuName,
 							var td81 = $("<td></td>");
 						}
 
+						td0.appendTo(tr);
 						td1.appendTo(tr);
 						td2.appendTo(tr);
 						td3.appendTo(tr);

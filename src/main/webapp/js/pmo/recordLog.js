@@ -5,6 +5,10 @@ $(function(){
 	
 })
 
+$("#pageRecordsNum").change(function(){
+	loadEmployeeList();
+})
+
 function loadEmployeeList(pageState,csSubDeptName,csBuName){
 
 	var lob = $("#lob").val();

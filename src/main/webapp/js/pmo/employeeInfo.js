@@ -389,6 +389,9 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
 				
+				var td0 = $("<td>"
+						+ (i+1)
+						+ "</td>");
 				var td1 = $("<td>"
 						+ result.data[i].staffName
 						+ "</td>");
@@ -454,6 +457,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 				if((result.data[i].nickname)==null){
 					var td71 = $("<td></td>");
 				}
+				td0.appendTo(tr);
 				td1.appendTo(tr);
 				td2.appendTo(tr);
 				td3.appendTo(tr);
