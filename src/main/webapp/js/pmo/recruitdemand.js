@@ -307,7 +307,7 @@ function dateType(){
 		pickerPosition: 'bottom-left',
 		showMeridian: 1
 	}).on('changeDate', function(ev){
-		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField', 'reqPublishedDate1Edit'); 
+		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField', 'plannedOnboardDate1'); 
 	});
 }
 
@@ -325,7 +325,7 @@ function dateType1(){
 		pickerPosition: 'bottom-left',
 		showMeridian: 1
 	}).on('changeDate', function(ev){
-		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField', 'plannedOnboardDate1'); 
+		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField', 'reqPublishedDate1'); 
 	});
 }
 

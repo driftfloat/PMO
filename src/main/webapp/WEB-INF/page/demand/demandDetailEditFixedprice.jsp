@@ -178,7 +178,7 @@ var userType='<%=userType%>'
 										<label class="col-sm-2 control-label">Planned Onboard Date
 											</label>
 										<div class="col-md-4">
-											<div class="input-group date form_datetime1 col-sm-12"
+											<div class="input-group date form_datetime col-sm-12"
 												data-link-field="dt_set_order_time_input">
 												<input class="form-control" type="text" readonly data-bv-group=".group"
 													id="plannedOnboardDate1" name="plannedOnboardDate1" value="${demand.plannedOnboardDate }"> <span
@@ -187,6 +187,18 @@ var userType='<%=userType%>'
 													id="plannedOnboardDate2" name="plannedOnboardDate2"value="${demand.plannedOnboardDate }"> 
 											</div>
 										</div>
+										<%-- <div class="col-md-4">
+												<div class="input-group date form_datetime col-sm-12"
+													data-link-field="dt_set_order_time_input">
+													<input class="form-control" type="text" readonly data-bv-group=".group"
+														id="reqPublishedDate1Edit" name="reqPublishedDate1Edit" value="${demand.reqPublishedDate }"> 
+														<span class="input-group-addon">
+															<span class="glyphicon glyphicon-th">
+															</span>
+														</span> 
+														<input type="hidden" id="reqPublishedDate2Edit" name="reqPublishedDate2Edit" value="${demand.reqPublishedDate }"/>
+												</div>
+											</div> --%>
 									</div>
 								</div>
 								
@@ -246,7 +258,7 @@ var userType='<%=userType%>'
 											<label class="col-sm-2 control-label">Ageing</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="ageingEdit" value="${demand.ageing }"
-													id="ageingEdit"/>
+													id="ageingEdit" data-bv-group=".group"/>
 											</div>
 										</div>
 								
