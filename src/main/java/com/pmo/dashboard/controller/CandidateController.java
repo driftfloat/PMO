@@ -96,7 +96,7 @@ public class CandidateController
     	 }
 		 int dataCount = candidateService.queryCandidateCount(candidate);
 	     page.setDataCount(dataCount+"");
-		 page.setPageCount((dataCount-1)/10 + 1 +"");
+		 page.setPageCount((dataCount-1)/candidate.getPageRecNum() + 1 +"");
 		 if (candidate.getPageRecNum() != null) {
 			page.setPageDataCount(candidate.getPageRecNum()+"");
 		 }else{
@@ -111,7 +111,7 @@ public class CandidateController
          }else if("last".equals(pageState)){
         	 page.setCurrentPage(page.getPageCount());
          }
-    	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*Constants.PAGE_DATA_COUNT+"");
+    	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*candidate.getPageRecNum()+"");
     	if(candidate.getPageRecNum()!=null){
     		candidate.setPageDataCount(candidate.getPageRecNum()+"");
     	}else{
@@ -311,7 +311,7 @@ public class CandidateController
     	
 		 int dataCount = candidateService.queryMyCandidateCount(candidate);
 	     page.setDataCount(dataCount+"");
-		 page.setPageCount((dataCount-1)/10 + 1 +"");
+		 page.setPageCount((dataCount-1)/candidate.getPageRecNum() + 1 +"");
 		 if(candidate.getPageRecNum()!=null){
 			 page.setPageDataCount(candidate.getPageRecNum()+"");
 		 }else{
@@ -326,7 +326,7 @@ public class CandidateController
          }else if("last".equals(pageState)){
         	 page.setCurrentPage(page.getPageCount());
          }
-    	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*Constants.PAGE_DATA_COUNT+"");
+    	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*candidate.getPageRecNum()+"");
     	if(candidate.getPageRecNum()!=null){
     		candidate.setPageDataCount(candidate.getPageRecNum()+"");
     	}else{
@@ -415,7 +415,7 @@ public class CandidateController
 			 dataCount = candidateService.queryinterviewFeedBackCount(candidate);
 		 }
 		page.setDataCount(dataCount + "");
-		page.setPageCount((dataCount - 1) / 10 + 1 + "");
+		page.setPageCount((dataCount - 1) / candidate.getPageRecNum() + 1 + "");
 		if(candidate.getPageRecNum()!=null){
 			page.setPageDataCount(candidate.getPageRecNum() + "");
 		}else{
@@ -491,7 +491,7 @@ public class CandidateController
     	
 		 int dataCount = candidateService.queryMyWaitEntryCandidateCount(candidate);
 	     page.setDataCount(dataCount+"");
-		 page.setPageCount((dataCount-1)/10 + 1 +"");
+		 page.setPageCount((dataCount-1)/candidate.getPageRecNum() + 1 +"");
 		 if(candidate.getPageRecNum()!=null){
 			 page.setPageDataCount(candidate.getPageRecNum()+"");
 		 }else{
@@ -506,7 +506,7 @@ public class CandidateController
          }else if("last".equals(pageState)){
         	 page.setCurrentPage(page.getPageCount());
          }
-    	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*Constants.PAGE_DATA_COUNT+"");
+    	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*candidate.getPageRecNum()+"");
     	if(candidate.getPageRecNum()!=null){
     		candidate.setPageDataCount(candidate.getPageRecNum()+"");
     	}else{
@@ -581,7 +581,7 @@ public class CandidateController
     	
 		 int dataCount = candidateService.queryBlackListCount(candidate);
 	     page.setDataCount(dataCount+"");
-		 page.setPageCount((dataCount-1)/10 + 1 +"");
+		 page.setPageCount((dataCount-1)/candidate.getPageRecNum() + 1 +"");
 		 if(candidate.getPageRecNum()!=null){
 			 page.setPageDataCount(candidate.getPageRecNum()+"");
 		 }else{
@@ -596,7 +596,7 @@ public class CandidateController
          }else if("last".equals(pageState)){
         	 page.setCurrentPage(page.getPageCount());
          }
-    	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*Constants.PAGE_DATA_COUNT+"");
+    	candidate.setCurrentPage((Integer.valueOf(page.getCurrentPage())-1)*candidate.getPageRecNum()+"");
     	if(candidate.getPageRecNum()!=null){
     		candidate.setPageDataCount(candidate.getPageRecNum()+"");
     	}else{
