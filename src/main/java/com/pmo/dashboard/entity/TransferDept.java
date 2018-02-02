@@ -13,7 +13,22 @@ public class TransferDept {
 	private String engagementType;
 	private String msaRole;
 	private String nickName;
+	private String rmUserId;
 	
+	private String skill;
+	private String staffRegion;
+	private String billRate;
+	private String hsbcDept;
+	private String hsbcSubDept;
+	private String hsbcManager;
+	
+	
+	public String getRmUserId() {
+		return rmUserId;
+	}
+	public void setRmUserId(String rmUserId) {
+		this.rmUserId = rmUserId;
+	}
 	public String getEmployeeId() {
 		return employeeId;
 	}
@@ -118,11 +133,4 @@ public class TransferDept {
 		this.nickName = nickName;
 	}
 
-
-	private String skill;
-	private String staffRegion;
-	private String billRate;
-	private String hsbcDept;
-	private String hsbcSubDept;
-	private String hsbcManager;
 }

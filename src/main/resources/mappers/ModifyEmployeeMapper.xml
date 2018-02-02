@@ -27,7 +27,7 @@
 	
 	<update id="modifyRM" parameterType="com.pmo.dashboard.entity.TransferDept">
 	  update t_employee 
-	        set RM_USER_ID=#{nickName}
+	        set RM_USER_ID=#{rmUserId}
 	         where EMPLOYEE_ID=#{employeeId}
 	</update>
 </mapper>
