@@ -862,8 +862,8 @@ function batchMaintenanceValidate() {
                         message: 'Exceeded the maxLength'
                     },
                     regexp:{
-            			regexp:/^([1-9]\d*(\.\d*[1-9])?(\/(m|M))?)$|^(0\.\d*[1-9](\/(m|M))?)$/,
-            			message:'billRate is not zero.'
+            			regexp:/^([1-9]\d*(\.\d*[0-9])?(\/(m|M))?)$|^(0\.\d*[0-9](\/(m|M))?)$/,
+            			message:'Please enter the correct format.'
             		},
                 }
             },
