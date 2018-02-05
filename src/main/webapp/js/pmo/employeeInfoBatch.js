@@ -362,6 +362,15 @@ function loadEmployeeList(pageState, csDeptName, csSubDeptName, csBuName,
 										'true');
 							}
 						}
+						//全选效果
+						if(contains(lobArray,result.data[i].employeeId)){
+							document.getElementById('employeeIds').checked=true;
+						}else{
+							if(document.getElementById('employeeIds').checked){
+								document.getElementById('employeeIds').checked=false;
+							}
+						}
+						
 					}
 					$("#employeeList").append("</tbdoy>");
 					// alert(window.location.href);
@@ -397,11 +406,18 @@ function loadEmployeeList(pageState, csDeptName, csSubDeptName, csBuName,
 				}
 
 			})
-			if(document.getElementById('employeeIds').checked){
-				document.getElementById('employeeIds').checked=false;
-			}
 			
 }
+
+function contains(arr, obj) {  
+    var i = arr.length;  
+    while (i--) {  
+        if (arr[i] === obj) {  
+            return true;  
+        }  
+    }  
+    return false;  
+} 
 
 // RM修改权限
 function rmAuthority(result) {
@@ -904,6 +920,14 @@ function batchMaintenanceValidate() {
 		}
 	});
 }
+
+//Modal验证销毁重构
+$('#modifyMadal').on('hidden.bs.modal', function() {
+    $("#modifyForm").data('bootstrapValidator').destroy();
+    $('#modifyForm').data('bootstrapValidator', null);
+    batchMaintenanceValidate();
+});
+
 $("#transSubmit").on("click", function() {
 	 var bootstrapValidator = $("#modifyForm").data('bootstrapValidator');
 	   bootstrapValidator.validate();
@@ -943,13 +967,13 @@ function updateProperties() {
 		success : function(result) {
 			if (result) {
 				alert("Information modified succesffully.");
-//				$("#modifyName").val("");
-//				$("#projectProperties").hide();
+				$("#modifyName").val("");
+				$("#projectProperties").hide();
 				$("#projectName").val("");
 				$("#sowName").val("");
 				$("#sowExpiredDate1").val("");
 				$("#engagementType").val("");
-				// $('#modifyMadal').modal('hide');
+				$('#modifyMadal').modal('hide');
 				loadEmployeeList();
 
 			} else {
@@ -982,9 +1006,9 @@ function updateRoles() {
 		success : function(result) {
 			if (result) {
 				alert("Information modified succesffully.");
-				// $('#modifyMadal').modal('hide');
-//				$("#modifyName").val("");
-//				$("#humanRole").hide();
+				$('#modifyMadal').modal('hide');
+				$("#modifyName").val("");
+				$("#humanRole").hide();
 				$("#role").val("");
 				$("#skill").val("");
 				$("#staffRegion").val("");
@@ -1019,9 +1043,9 @@ function updateDept() {
 		success : function(result) {
 			if (result) {
 				alert("Information modified succesffully.");
-				// $('#modifyMadal').modal('hide');
-//				$("#modifyName").val("");
-//				$("#departmentModify").hide();
+				$('#modifyMadal').modal('hide');
+				$("#modifyName").val("");
+				$("#departmentModify").hide();
 				$("#hsbcDept").val("");
 				$("#hsbcSubDept").val("");
 				$("#hsbcManager").val("");
@@ -1054,9 +1078,9 @@ function updateRM() {
 		success : function(result) {
 			if (result) {
 				alert("Information modified succesffully.");
-//				$('#modifyMadal').modal('hide');
-//				$("#nickName").hide();
-//				$("#modifyName").val("");
+				$('#modifyMadal').modal('hide');
+				$("#nickName").hide();
+				$("#modifyName").val("");
 				$("#rmName").val("");
 				loadEmployeeList();
 			} else {

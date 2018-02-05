@@ -265,7 +265,7 @@ var path='<%=path%>';
 							</a>
 						</div>
 					</div>
-					<div id="excelCheckBox" class="box-content">
+					<div id="batchModify" class="box-content">
 						<form id="modifyForm" method="post" class="form-horizontal">
 						<div class="form-group">
 						    <div class="group">
