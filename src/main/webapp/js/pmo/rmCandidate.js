@@ -111,9 +111,9 @@ function loadMyCandidate(currPage) {
 						}
 
 						if (result.candidatelist[i].candidateInfo.candidateSex == '0') {
-							var td3 = $("<td>女</td>");
-						} else {
 							var td3 = $("<td>男</td>");
+						} else {
+							var td3 = $("<td>女</td>");
 						}
 						var td4 = $("<td>"
 								+ result.candidatelist[i].candidateInfo.candidateAge
