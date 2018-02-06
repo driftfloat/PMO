@@ -279,7 +279,7 @@ vertical-align: middle!important;
 						</div>
 					</div>
 					<div class="box-content">
-						<form id="interviewForm">
+						<form id="confirmForm">
 							<!-- <input type="hidden" name="interviewId" id="interviewId" /> -->
 							<div class="group">
 								<label class="col-sm-2 control-label">Candidate Name:</label>
@@ -291,7 +291,7 @@ vertical-align: middle!important;
 							<div class="group">
 								<label class="col-sm-2 control-label">Confirm Information:</label>
 								<div class="col-sm-10">
-								<form id="confirmForm">
+								<form id="confirmForm01">
 									<textarea name="confirmInfo" id="confirmInfo" class="form-control" style="width: 78%;" rows="4"></textarea>
 								</form>
 								</div>
