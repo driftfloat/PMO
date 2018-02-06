@@ -426,7 +426,7 @@ function rescheduleInterview(pushId,candidateId) {
 		},
 		success : function(result) {
 				$('#myModal').modal('show');
-		    	loadInterviewer();
+		    	//loadInterviewer();
 		    	$('#graduationDate1').val(result.interviewDate);
 				$('#projectName').val(result.projectName);
 				$("#interviewType").val(result.interviewType);
@@ -537,7 +537,7 @@ function scheduleInterview(pushId) {
 	 	$('#addInterviewer').attr("disabled", "disabled");
 	 }
 	
-	loadInterviewer();
+	//loadInterviewer();
 
 	loadInterviewer(pushId);
 
@@ -603,7 +603,7 @@ function nextInterview(pushId, projectName) {
 		$('#addInterviewer').attr("disabled", "disabled");
 	}
 	
-	loadInterviewer();
+	//loadInterviewer();
 
 	loadInterviewer(pushId);
 
