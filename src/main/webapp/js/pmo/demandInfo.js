@@ -316,7 +316,12 @@ function loadDemandList(currPage){
 				var td7 = $("<td>"+result.list[i].csSubDept+"</td>");
 				var demandId = result.list[i].demandId;
 				var statusa  = result.list[i].status;
-				var engagementType =result.list[i].engagementType;
+				
+				var engagementType ="";
+				if(result.list[i].engagementType!=null){
+					engagementType = result.list[i].engagementType;
+				}
+				
 				/*$("#hsbcsubName").val(hsbcSubDeptName);
 				$("#cssubName").val(cssubName);*/
 				if(userType=='2' || userType=='4' || userType=='6' || userType=='7'  || userType=='9' || userType=='15'){

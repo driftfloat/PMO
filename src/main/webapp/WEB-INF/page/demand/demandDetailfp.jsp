@@ -68,8 +68,7 @@
 </head>
 <script>
 var path='<%=path%>';
-var userType='<%=userType%>
-	'
+var userType='<%=userType%>'
 </script>
 <body>
 	<!-- topbar starts -->
