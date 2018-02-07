@@ -3,7 +3,7 @@ $(function(){
 	loadSkillEdit();
 	loadPositionEdit();
 	/*loadDemandStatusEdit();*/
-	loadDepartmentEdit();
+	//loadDepartmentEdit();
 	//loadSubDepartmentEdit();
 	dateType();
 	dateType1();
@@ -507,7 +507,7 @@ function demandDetailUpdate(demandId){
 	})*/
 }
 
-function updateDemand(){
+function updateDemand(index){
 	var bootstrapValidator = $("#recruitdemandFormEdit").data('bootstrapValidator');
 	   bootstrapValidator.validate();
 	if(bootstrapValidator.isValid()){
