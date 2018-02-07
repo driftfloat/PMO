@@ -107,7 +107,13 @@ function renDing(employeeId,status)
 			type:"post",
 			data:{"employeeId":employeeId,"status":status},
 			success:function(flag){
-		
+				if(flag){
+					$("html,body").animate({scrollTop:0}, 500);
+					$('#successAlert').html('Authorize successfully').show();
+					setTimeout(function () {
+						$('#successAlert').hide();
+					}, 2000);
+				}
 				
 				loadInterviewerList();
 			}
