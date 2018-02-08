@@ -408,8 +408,8 @@ function loadCandidateList(pageState)
 										"onclick=updateResumeInfo('"+result.data[i].candidateId+"')>Edit</a>"+
 								    "<a href='javascript:void(0); ' class='btn btn-info btn-small' id = 'reconfirm' " +
 										"onclick=interviewConfirm('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].csSubdeptName+"')>Reconfirm</a>" +
-									"<a href='javascript:void(0);' class='btn btn-info btn-small' " +					
-										"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>Status</a>" +
+									//"<a href='javascript:void(0);' class='btn btn-info btn-small' " +					
+										//"onclick=updateCandidateStatus('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"','"+result.data[i].candidateStatus+"')>Status</a>" +
 									"<a href='javascript:void(0); ' class='btn btn-info btn-small' " +
 										"onclick=feedbackCandidateInfo('"+result.data[i].candidateId+"','"+result.data[i].candidateName+"')>FeedBack</a>" +
 								"<a href='javascript:void(0);' class='btn btn-info btn-small' " +
