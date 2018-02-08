@@ -154,6 +154,13 @@ function loadStayinList(pageState)
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small'"+
 						     "onclick=queryDemandList('"+result.data[i].candidateId+"','"+result.data[i].demandId+"')>Update</a>" +
 					"</td>").appendTo(tr);
+				}else if(result.data[i].demandStatus=='Frozen'||result.data[i].demandStatus=='Cancel'){
+					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small'" +
+							"onclick='entryEmployee(\""+result.data[i].candidateId+"\",\""+result.data[i].engagementType+"\")'>Entry</a>" +
+						     "&nbsp;&nbsp;" +
+						     "<a href='javascript:void(0);' class='btn btn-info btn-small'"+
+						     "onclick=cancelEmployee('"+result.data[i].candidateId+"','"+result.data[i].demandId+"')>Cancel</a>" +
+					"</td>").appendTo(tr);
 				}else{
 					$("<td><a href='javascript:void(0);' class='btn btn-info btn-small'" +
 						"onclick='onboard(\""+result.data[i].candidateId+"\",\""+result.data[i].engagementType+"\")'>Onboard</a>" +
@@ -358,6 +365,18 @@ function displayReason(candidateId,candidateName,arrivalDate,reason){
 	$('#delayMyWaitCandidateModal').modal('show');
 }
 
+function entryEmployee(candidateId,engagementType){
+	if(confirm("确定要Entry吗?")){
+		url = path+'/service/employee/entryEmployee.html?'+candidateId;
+		$("#editForm").attr("action",url);
+	}
+	$("#candidateId").val(candidateId);
+	$("#editForm").submit();
+}
+
+function cancelEmployee(candidateId,engagementType){
+	alert("cancelEmployee");
+}
 
 
 

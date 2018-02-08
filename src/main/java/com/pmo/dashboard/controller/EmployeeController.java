@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pmo.dashboard.entity.CSDept;
+import com.pmo.dashboard.entity.CandidateInfo;
 import com.pmo.dashboard.entity.Demand;
 import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.EmployeeGraphParam;
@@ -44,6 +45,7 @@ import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.CSDeptService;
+import com.pom.dashboard.service.CandidateService;
 import com.pom.dashboard.service.EmployeeLogService;
 import com.pom.dashboard.service.EmployeeService;
 import com.pom.dashboard.service.HSBCDeptService;
@@ -79,6 +81,10 @@ public class EmployeeController {
 	
 	@Resource
 	private EmployeeLogService  employeeLogService;
+	
+	@Resource
+	private CandidateService candidateService;
+
 
 	
     @RequestMapping("/welcome")
@@ -776,6 +782,16 @@ public String getTMemployee(final HttpServletRequest request,
 	}else if("4".equals(status)){		return "index4";
 	}
 	return "index2";
+}
+
+
+@RequestMapping("/entryEmployee")
+public String entryEmployee(final HttpServletRequest request,
+        final HttpServletResponse response,String candidateId){
+	CandidateInfo candidateInfo = candidateService.queryCandidateForId(candidateId);
+	request.setAttribute("candidateInfo", candidateInfo);
+	request.getSession().setAttribute("onboardCandidateId", candidateId);
+	return "index5";
 }
 
     private EmployeeLog getEmployeeLog(Employee employee,User user,String type){
