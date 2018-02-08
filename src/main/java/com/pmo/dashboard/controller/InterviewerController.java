@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmo.dashboard.entity.Interviewer;
 import com.pmo.dashboard.entity.User;
+import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.InterviewerService;
 import com.pom.dashboard.service.UserService;
 
@@ -117,47 +118,55 @@ public class InterviewerController
     	String employeeId = request.getParameter("employeeId");
     	String status = request.getParameter("status");
     	
+    	Interviewer interviewers = interviewerService.selectInterviewer(employeeId);
+    	
     	Interviewer interviewer = new Interviewer();
     	interviewer.setEmployeeId(employeeId);
     	User u= null;
     	boolean resultFlag = false;
     	
+    	//取消面试官资格
     	if("1".equals(status)){
-    		interviewer.setStatus("0");
-    		resultFlag = interviewerService.update(interviewer);
-    		User user = interviewerService.selectUser(employeeId);
-    		u = new User();
-    		u.setUserId(employeeId);
-    		u.setLoginStatus("1");//不可登录
-    		if("".equals(user)||user==null){
-    			if(user.getUserType().equals("10")){
-    				userService.update(u);
+    		boolean flag = true;
+    		User user = userService.checkUser(interviewers.getEhr());
+    		if(user!=null) {
+    			if("10".equals(user.getUserType())) {
+    				user.setLoginStatus("1");//不可登录
+    				flag = userService.update(user);
     			}
     		}
-    		return resultFlag;
+    		interviewer.setStatus("0");
+    		resultFlag = interviewerService.update(interviewer);
+    		
+    		return resultFlag & flag;
+    		
+    	//授权面试官资格	
     	}else{
-    		interviewer.setStatus("1");
-    		boolean flag1 =  interviewerService.update(interviewer);
-    		Interviewer interviewers = interviewerService.selectInterviewer(employeeId);
-    		boolean flag2=true;
-    		User user = interviewerService.selectUser(employeeId);
-    		if("".equals(user)||user==null){
-    		 u = new User();
-    		 u.setUserId(employeeId);
-    		 u.setUserName(interviewers.getEhr());
-    		 u.setNickname(interviewers.getStaffName());
-    		 u.setPassword("123");
-    		 u.setUserType("10");
-    		 u.setCsdeptId(interviewers.getCsSubDeptId());
-    		 u.setLoginStatus("0");//可登录
-    		 flag2 = userService.addUser(u);
-    		}else{
-    		 u = new User();
-    		 u.setLoginStatus("0");//可登录
-    		 u.setUserId(employeeId);
-    		 userService.update(u);
+    		boolean flag0 = true;
+    		boolean flag1 = true;
+    		boolean flag2 = true;
+    		//判断授权人是否在用户表
+    		User user = userService.checkUser(interviewers.getEhr());
+    		if(user!=null) {
+    			//存在
+    			user.setLoginStatus("0");//可登录
+    			flag0 = userService.update(user);
+	       		
+    		}else {
+    			//不存在
+    			 u = new User();
+	       		 u.setUserId(Utils.getUUID());
+	       		 u.setUserName(interviewers.getEhr());
+	       		 u.setNickname(interviewers.getStaffName());
+	       		 u.setPassword("123");
+	       		 u.setUserType("10");
+	       		 u.setCsdeptId(interviewers.getCsSubDeptId());
+	       		 u.setLoginStatus("0");//可登录
+	       		 flag1 = userService.addUser(u);
     		}
-    		boolean flag = flag1 & flag2;
+    		interviewer.setStatus("1");//面试官
+    		flag2 =  interviewerService.update(interviewer);
+    		boolean flag = flag0 & flag1 & flag2;
     		return flag;
     	}
 
