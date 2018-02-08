@@ -178,6 +178,7 @@ function confirmInterviewDate(){
 				$("#reconfirm").hide();
 			}
 			$('#hrInterviewConfirmbox').modal('hide');
+			loadCandidateList();
 		}
 	})
 }
