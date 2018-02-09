@@ -214,14 +214,14 @@ var userType='<%=userType%>'
 								       <div class="group">
 										<label class="col-lg-2 control-label">HSBC Department</label>
 										<div class="col-lg-4">
-											<input type="text" class="form-control" value="${demand.hsbcDeptName}" 
+											<input type="text" class="form-control" value="${demand.hsbcDept.hsbcDeptName }" 
 													id="hsbcDeptInput" disabled="true"/>
 										</div>
 										</div>
 										<div class="group">
 										<label class="col-lg-2 control-label">HSBC Sub-Department</label>
 										<div class="col-lg-4">
-										<input type="text"  class="form-control"value="${demand.hsbcSubDeptName}" 
+										<input type="text"  class="form-control" value="${demand.hsbcDept.hsbcSubDeptName }"
 													id="hsbcSubDeptEdit" disabled="true"/>
 										</div>
 										</div>

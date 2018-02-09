@@ -3,8 +3,8 @@ $(function(){
 	loadSkillEdit();
 	loadPositionEdit();
 	/*loadDemandStatusEdit();*/
-	//loadDepartmentEdit();
-	//loadSubDepartmentEdit();
+	loadDepartmentEdit();
+	loadSubDepartmentEdit();
 	dateType();
 	dateType1();
 	//loadDemandListEdit();
