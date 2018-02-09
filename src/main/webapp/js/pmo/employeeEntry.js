@@ -1,7 +1,6 @@
 var cInfoStrJSon = JSON.parse(cInfoStr);
 
 $(function(){
-	loadDept();
 	loadEngagementType();
 	loadRole();
 	loadSkill();
@@ -22,10 +21,10 @@ $(function(){
 	$('#graduationDate1').val(cInfoStrJSon.graduateDate);
 })
 
-	$("#staffRegion").change(function(){
-		var staffRegion = $("#staffRegion").val();
-		$("#staffLocation").val(regionMap.get(staffRegion));
-	});
+$("#staffRegion").change(function(){
+	var staffRegion = $("#staffRegion").val();
+	$("#staffLocation").val(regionMap.get(staffRegion));
+});
 
 var lastConditionStr = "";
 function addEmployee(){
@@ -332,48 +331,9 @@ function loadCSDept(){
 		}
 	})
 }
-$("#csSubDept").change(function(){
-	var du =$("#csSubDept").val();
-	loadUserForRM(du);
-})
 
 
-$("#csDept").change(function(){
-	var csSubDeptId = $('#csDept').val();
-	$("#csSubDept").find("option").remove(); 
-	$("#csSubDept").append("<option value=''>-- 请选择项目 --</option>");
-	$.ajax({
-		url:path+'/service/csDept/queryCSSubDeptName',
-		dataType:"json",
-		async:true,
-		data:{"csSubDeptId":csSubDeptId},
-		cache:false,
-		type:"post",
-		success:function(list){
-			$("#csSubDept").find("option").remove(); 
-			$("#csSubDept").append("<option value=''>-- 请选择子交付部 --</option>");
-			for(var i = 0;i<list.length;i++){
-				$("#csSubDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csSubDeptName+"</option>");
-			}
-		}
-	})
-})
 
-
-function loadDept(){
-	$.ajax({
-		url:path+'/service/hsbcDept/queryDeptName',
-		dataType:"json",
-		async:true,
-		cache:false,
-		type:"post",
-		success:function(list){
-			for(var i = 0;i<list.length;i++){
-				$("#hsbcDept").append("<option value='"+list[i].hsbcSubDeptId+"'>"+list[i].hsbcDeptName+"</option>");
-			}
-		}
-	})
-}
 
 
 function changeData(){
