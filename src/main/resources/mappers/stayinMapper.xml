@@ -52,6 +52,7 @@
 		    </if>
         	and d.STATUS IN ('OfferMade','Delayed','Offering','Frozen','Cancel') and 
         	d.CANDIDATE_ID is not null and d.CANDIDATE_ID !='' and
+        	a.CANDIDATE_STATUS = '1'  and
 		    <include refid="candidateWherePart"/>
 		 limit #{num}, #{pageSize}
 	</select>
@@ -74,6 +75,7 @@
 		    </if>
         	and d.STATUS IN ('OfferMade','Delayed','Offering','Frozen','Cancel') and 
         	d.CANDIDATE_ID is not null and d.CANDIDATE_ID !='' and
+        	a.CANDIDATE_STATUS = '1'  and
         	<include refid="candidateWherePart"/>
 			;
 	</select>

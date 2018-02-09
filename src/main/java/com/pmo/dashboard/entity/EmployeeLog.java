@@ -26,6 +26,19 @@ public class EmployeeLog extends EmployeeLogPageCondition{
     private String csSubdeptIdNewName;
     private String csSubdeptIdOriginalName;
     
+    private String updateDateStr;//更新时间的String形式
+    
+    
+
+    
+    public String getUpdateDateStr() {
+		return updateDate.toString();
+	}
+
+	public void setUpdateDateStr(String updateDateStr) {
+		this.updateDateStr = updateDateStr;
+	}
+    
 
     
     public String getProjectStatus() {
