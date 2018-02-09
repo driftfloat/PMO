@@ -3,12 +3,9 @@ $(function(){
 	loadSkill();
 	loadPosition();
 	loadLocation();
-	//loadStatus();
-	//loadHrPriority();
 	dateType();
 	dateType1();
 	loadCsSubDept();
-	//loadEngagementType();
 	loadpage();
 })
 

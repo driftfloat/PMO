@@ -2,21 +2,15 @@
 $(function(){
 	loadSkillEdit();
 	loadPositionEdit();
-	/*loadDemandStatusEdit();*/
-	loadDepartmentEdit();
-	//loadSubDepartmentEdit();
 	dateType();
 	dateType1();
-	//loadDemandListEdit();
 	$("#searchBtn").click(function(){
 		loadDemandListEdit();
 	})
-	//loadCsBuName();
 	loadScSubDeptNameEdit();
 	loadLocationEdit();
 	loadHrPriorityEdit();
 })
-
 $("#skill").change(function(){
 	$("#exportExcel").attr("disabled", true);
 })
