@@ -201,7 +201,7 @@ var empObj =<%=empInfo%>;
 														<label class="col-sm-2 control-label">Planned
 															Onboard Date </label>
 														<div class="col-md-4">
-															<div class="input-group date form_datetime1 col-sm-12"
+															<div class="input-group date form_datetime col-sm-12"
 																data-link-field="dt_set_order_time_input">
 																<input class="form-control" type="text" readonly
 																	data-bv-group=".group" id="plannedOnboardDate1"
@@ -346,7 +346,7 @@ var empObj =<%=empInfo%>;
 														<label class="col-sm-2 control-label">Proposed
 															Date of Joining</label>
 														<div class="col-md-4">
-															<div class="input-group date form_datetime1 col-sm-12"
+															<div class="input-group date form_datetime col-sm-12"
 																data-link-field="dt_set_order_time_input">
 																<input class="form-control" type="text" readonly
 																	data-bv-group=".group" id="proposedJoiningDateEdit"
@@ -572,7 +572,7 @@ var empObj =<%=empInfo%>;
 														<label class="col-sm-2 control-label ">SOW#
 															Expired Date</label>
 														<div class="col-md-4">
-															<div class="input-group date form_datetime1 col-sm-12"
+															<div class="input-group date form_datetime col-sm-12"
 																data-link-field="dt_set_order_time_input">
 																<input class="form-control" type="text" readonly
 																	data-bv-group=".group" id="sowExpiredDate1"
@@ -643,7 +643,7 @@ var empObj =<%=empInfo%>;
 														<label class="col-sm-2 control-label">Graduation
 															Date</label>
 														<div class="col-md-4">
-															<div class="input-group date form_datetime0 col-sm-12"
+															<div class="input-group date form_datetime col-sm-12"
 																data-link-field="dt_set_order_time_input">
 																<input class="form-control" type="text" readonly
 																	data-bv-group=".group" id="graduationDate1"
@@ -658,7 +658,7 @@ var empObj =<%=empInfo%>;
 													<div class="group">
 														<label class="col-sm-2 control-label">EntryDate</label>
 														<div class="col-md-4">
-															<div class="input-group date form_datetime2 col-sm-12"
+															<div class="input-group date form_datetime col-sm-12"
 																data-link-field="dt_set_order_time_input">
 																<input class="form-control" type="text" readonly
 																	data-bv-group=".group" id="entryDate1"
@@ -753,10 +753,12 @@ var empObj =<%=empInfo%>;
 															<div class="input-group date form_datetime col-sm-12"
 																data-link-field="dt_set_order_time_input">
 																<input class="form-control" type="text" readonly
-																	data-bv-group=".group" id="hsbcDOJ1" name="hsbcDOJ1">
-																<span class="input-group-addon"><span
+																	data-bv-group=".group" id="hsbcDOJ1"
+																	name="hsbcDOJ1"> <span
+																	class="input-group-addon"><span
 																	class="glyphicon glyphicon-calendar"></span></span> <input
-																	type="hidden" id="hsbcDOJ2" name="hsbcDOJ2" />
+																	type="hidden" id="hsbcDOJ2"
+																	name="hsbcDOJ2" />
 															</div>
 														</div>
 													</div>

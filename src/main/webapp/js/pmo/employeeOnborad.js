@@ -1,6 +1,5 @@
 var url;
 $(function(){
-	loadHsbcDept();
 	loadStaffCategory();
 	loadRole();
 	loadSkill();
@@ -14,10 +13,7 @@ $(function(){
 	loadStaffLocation();
 	loadLocationType();
 	loadOnshoreOrOffshore();
-	dateType();
-	dateType0();
-	dateType1();
-	dateType2();
+	dateTypeForEmp();
 	loadUserForRM();
 	$('#staffName').val(empObj.staffName);
 	$('#candidateNameEdit').val(empObj.staffName);
@@ -25,6 +21,7 @@ $(function(){
 	$('#sow').val(empObj.sow);
 //	$('#entryDate1').val(empObj.entryDate);
 	$('#email').val(empObj.email);
+	loadHsbcDept();
 })
 
 	$("#staffRegion").change(function(){
@@ -80,43 +77,18 @@ function addEmployee(){
 			cache:false,
 			type:"post",
 			success:function(resultFlag){
-				
-				$.ajax({
-					url:path+'/service/candidate/updateOnboardCandidate',
-					dataType:"json",
-					async:true,
-					cache:false,
-					type:"post",
-					success:function(result){
-						if(result){
-							$("html,body").animate({scrollTop:0}, 500);
-							$('#successAlert').html('Employee:'+staffName+' information added succesffully').show();
-							setTimeout(function () {
-								$('#successAlert').hide();
-							}, 2000);
-						}
-					}
-				})
-				
 				if(resultFlag){
-					$("html,body").animate({scrollTop:0}, 500);
-					$('#successAlert').html('Employee:'+staffName+' information added succesffully').show();
-					setTimeout(function () {
-						$('#successAlert').hide();
-					}, 2000);
+					return ture;		
 				}
 			}
 		})
-		
-	}else{
-		return;
+		return true;
 	}
-	
 	
 }
 
 
-function dateType(){
+function dateTypeForEmp(){
 	$('.form_datetime').datetimepicker({
 		weekStart: 1,
 		minView:'month',
@@ -131,67 +103,11 @@ function dateType(){
 		showMeridian: 1
 	}).on('changeDate', function(ev){
 		 $('#registerEmployeeForm').bootstrapValidator('revalidateField', 'hsbcDOJ1'); 
-	
-	});
-}
-
-function dateType0(){
-	$('.form_datetime0').datetimepicker({
-		weekStart: 1,
-		minView:'month',
-		todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-		language:'zh-CN',
-		format: 'yyyy-mm-dd',
-		pickerPosition: 'bottom-left',
-		showMeridian: 1
-	}).on('changeDate', function(ev){
-		 $('#registerEmployeeForm').bootstrapValidator('revalidateField', 'graduationDate1'); 
-	
-	});
-}
-
-function dateType1(){
-	$('.form_datetime1').datetimepicker({
-		weekStart: 1,
-		minView:'month',
-		todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-		language:'zh-CN',
-		format: 'yyyy-mm-dd',
-		pickerPosition: 'bottom-left',
-		showMeridian: 1
-	}).on('changeDate', function(ev){
-	
 		 $('#registerEmployeeForm').bootstrapValidator('revalidateField', 'sowExpiredDate1'); 
-		
-	});
-}
-
-function dateType2(){
-	$('.form_datetime2').datetimepicker({
-		weekStart: 1,
-		minView:'month',
-		todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-		language:'zh-CN',
-		format: 'yyyy-mm-dd',
-		pickerPosition: 'bottom-left',
-		showMeridian: 1
-	}).on('changeDate', function(ev){		 
+		 $('#registerEmployeeForm').bootstrapValidator('revalidateField', 'graduationDate1');
 		 $('#registerEmployeeForm').bootstrapValidator('revalidateField', 'entryDate1'); 
 	});
 }
-
 function loadOnshoreOrOffshore(){
 	var url = path+'/json/onshoreOrOffshore.json'
 	$.getJSON(url,  function(data) {
@@ -429,14 +345,17 @@ function loadHsbcDept(){
 			//add by jama 设置部门回显值
 			var responseValue = $("#hsbcDeptInput2").val();
 			var resSubDeptValue = $("#hsbcSubDept").val();//子部门的返回值
-			var all_options = document.getElementById("hsbcDept").options;
-		    for (i=1; i<all_options.length; i++){
-			   if (all_options[i].value == responseValue){
-				   document.getElementById("hsbcDept").options[i].selected = true;
-				   //上一行代码改变部门后，子部门的值跟着变化了，所以将子部门的返回值继续设置在节点上供后面使用
-				   break;
-			   }  
-		    }
+			if(document.getElementById("hsbcDept")!=null){
+				var all_options = document.getElementById("hsbcDept").options;
+			    for (i=1; i<all_options.length; i++){
+				   if (all_options[i].value == responseValue){
+					   document.getElementById("hsbcDept").options[i].selected = true;
+					   //上一行代码改变部门后，子部门的值跟着变化了，所以将子部门的返回值继续设置在节点上供后面使用
+					   break;
+				   }  
+			    }
+			}
+			
 		   genSubDeptDept(resSubDeptValue);
 		}
 	})
@@ -466,13 +385,16 @@ function genSubDeptDept(resSubDeptValue){
 				document.getElementById("hsbcSubDept").value = resSubDeptValue;
 			}
 			var responseValue = $("#hsbcSubDept").val();
-			var all_options = document.getElementById("hsbcSubDept").options;
-		    for (i=1; i<all_options.length; i++){
-			   if (all_options[i].value == responseValue){
-				   document.getElementById("hsbcSubDept").options[i].selected = true;
-				   break;
-			   }  
-		    }
+			if(document.getElementById("hsbcSubDept")!=null){
+				var all_options = document.getElementById("hsbcSubDept").options;
+			    for (i=1; i<all_options.length; i++){
+				   if (all_options[i].value == responseValue){
+					   document.getElementById("hsbcSubDept").options[i].selected = true;
+					   break;
+				   }  
+			    }
+			}
+			
 		}
 	})
 }
@@ -536,47 +458,31 @@ function updateDemandOnboard(){
 	var bootstrapValidator2 = $("#recruitdemandFormEdit").data('bootstrapValidator');
 	bootstrapValidator2.validate();
 	if(bootstrapValidator.isValid()&&bootstrapValidator2.isValid()){
-		updateDemand("onborad");
-		addEmployee();
-		show_confirm();
+		var onboradDemandFlag = updateDemandForOnborad("onborad");
+		var onboradEmpFlag = addEmployee();
+		self.opener.location.reload();
 	}
 	
-	/*var candidateId = $("#candidateId").val();
-	var profilesNo = $("#profilesNo").val();
-	var interviewedNo = $('#interviewedNo').val();
-	var onboardDate1 = $('#onboardDate1').val();
-	var plannedOnboardDate1 = $('#plannedOnboardDate1').val();
-	var doNumber = $('#doNumber').val();
-	$.ajax({
-		url:path+'/service/demand/updateDemandOnBoardById',
-		dataType:"json",
-		async:true,
-		cache:false,
-		type:"post",
-		data:{"candidateId":candidateId,"profilesNo":profilesNo,"interviewedNo":interviewedNo,"onboardDate":onboardDate1,"doNumber":doNumber,"plannedOnboardDate":plannedOnboardDate1},
-		success:function(result){
-				if(result){
-					//子窗口刷新父窗口
-					self.opener.location.reload();
-//					self.close();
-					//员工注册
-					$("#candId").val(candidateId);
-					var url1 = path+'/service/employee/index1';
-					$("#onBoardForm").attr("action",url1);
-					$("#onBoardForm").submit();
-				}
-			}
-		});*/
+	if(onboradDemandFlag&&onboradEmpFlag){
+		$("html,body").animate({
+			scrollTop : 0
+		}, 500);
+		$('#successAlert').html('Onboard successfully!').show();
+		setTimeout(function() {
+			$('#successAlert').hide();
+			CloseWebPage();
+		}, 2000);
+		
+	}
+	
 }
 
-function show_confirm() {
-	var r = confirm("Onboard successfully!");
-	if (r == true) {
-		CloseWebPage();
-	} /*else {
-		alert("You pressed Cancel!");
-	}*/
-}
+//function show_confirm() {
+//	var r = confirm("Onboard successfully!");
+//	if (r == true) {
+//		CloseWebPage();
+//	} 
+//}
 
 function CloseWebPage() {
 	if (navigator.userAgent.indexOf("MSIE") > 0) {
@@ -593,5 +499,63 @@ function CloseWebPage() {
 		window.opener = null;
 		window.open('', '_self', '');
 		window.close();
+	}
+}
+ 
+function updateDemandForOnborad(index){
+	var bootstrapValidator = $("#recruitdemandFormEdit").data('bootstrapValidator');
+	   bootstrapValidator.validate();
+	if(bootstrapValidator.isValid()){
+		var demandId=$('#demandIdEdit').val();
+		var engagementType=$('#engagementType').val();
+		var rr=$('#rrEdit').val();
+		var jobCode=$('#jobCodeEdit').val();
+		var skill=$('#skillEdit').val();
+		var requestor=$('#requestorEdit').val();
+		var position=$('#positionEdit').val();
+		//部门信息
+		var hsbcDept=$('#hsbcDeptEdit').val();
+		var hsbcSubDept=$('#hsbcSubDeptEdit').val();
+		var location=$('#locationEdit').val();
+		var reqPublishedDate=$('#reqPublishedDate1Edit').val();
+		var ageing=$('#ageingEdit').val();
+		var profilesNo=$('#profilesNoEdit').val();
+		var interviewedNo=$('#interviewedNoEdit').val();
+		var status=$('#status').val();
+		var proposedJoiningDate=$('#proposedJoiningDateEdit1').val();
+		var bgvCleared=$('#bgvClearedEdit').val();
+		var sowSigned=$('#sowSignedEdit').val();
+		var reason=$('#reasonEdit').val();
+		
+		var remark=$('#remarkEdit').val();
+		var csSubDept=$('#csSubDeptEdit').val();
+
+		var plannedOnboardDate=$('#plannedOnboardDate1').val();
+		var doNumber=$('#doNumberEdit').val();
+		var hrPriority=$('#hrPriorityEdit').val();
+		var staffName=$('#candidateNameEdit').val();
+		
+		$.ajax({
+			url:path+'/service/demand/updateDemand',
+			dataType:"json",
+			data:{"demandId":demandId,"rr":rr,"engagementType":engagementType,"jobCode":jobCode,"skill":skill,"requestor":requestor,
+				"position":position,"location":location,
+				"reqPublishedDate":reqPublishedDate,"ageing":ageing,"profilesNo":profilesNo,
+				"interviewedNo":interviewedNo,"status":status,"staffName":staffName,
+				"proposedJoiningDate":proposedJoiningDate,"sowSigned":sowSigned,
+				"reason":reason,"bgvCleared":bgvCleared,
+				"remark":remark,"csSubDept":csSubDept,"plannedOnboardDate":plannedOnboardDate,
+				"doNumber":doNumber,"hrPriority":hrPriority,
+				"hsbcDept":hsbcDept,"hsbcSubDept":hsbcSubDept,"onborad":index},
+			async:true,
+			cache:false,
+			type:"post",
+			success:function(resultFlag){
+				if(resultFlag){
+					return true;
+				}
+			}
+		})
+		return true;
 	}
 }

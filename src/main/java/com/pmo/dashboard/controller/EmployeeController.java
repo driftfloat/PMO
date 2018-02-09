@@ -225,19 +225,22 @@ public class EmployeeController {
                 entryDate,rmUserId, createTime, updateTime);
         
         boolean resultFlag = employeeService.addEmployee(employee);
-        
-        /**
-         * 添加日志
-         */
-        try{
-        	User user = (User)request.getSession().getAttribute("loginUser");
-        	EmployeeLog log = getEmployeeLog(employee,user,"0");
-    		@SuppressWarnings({ "unused", "unchecked" })
-			boolean flag = employeeLogService.save(log);
-        }catch(Exception e){
-        	e.printStackTrace();
+        if(resultFlag) {
+        	String candidateId=(String) request.getSession().getAttribute("onboardCandidateId");
+    		candidateService.updateOnboardCandidate(candidateId);
+    		
+    		/**
+             * 添加日志
+             */
+            try{
+            	User user = (User)request.getSession().getAttribute("loginUser");
+            	EmployeeLog log = getEmployeeLog(employee,user,"0");
+        		@SuppressWarnings({ "unused", "unchecked" })
+    			boolean flag = employeeLogService.save(log);
+            }catch(Exception e){
+            	e.printStackTrace();
+            }
         }
-        
         return resultFlag;
     }
    
