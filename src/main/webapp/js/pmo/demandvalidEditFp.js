@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	// 对编辑页面加校验
-	$('#recruitdemandFormEdit').bootstrapValidator({ 
+	/*$('#recruitdemandFormEdit').bootstrapValidator({ 
 	message: 'This value is not valid', 
 	 feedbackIcons: { 
 	valid: 'glyphicon glyphicon-ok', 
@@ -92,8 +92,8 @@ $(document).ready(function() {
 	} 
 	} 
 	})  
-	
-    $('#recruitdemandForm').bootstrapValidator({
+	*/
+    $('#recruitdemandFormEdit').bootstrapValidator({
 		message: 'This value is not valid',
 
         feedbackIcons: {
@@ -156,7 +156,7 @@ $(document).ready(function() {
 
                 }
             },
-            plannedOnboardDate1Edit: {
+            plannedOnboardDate1: {
                 validators: {
                     notEmpty: {
                         message: 'Please entry date'

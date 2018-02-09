@@ -1,91 +1,7 @@
 $(document).ready(function() {
 	// 对编辑页面加校验
-	$('#recruitdemandFormEdit').bootstrapValidator({ 
-	message: 'This value is not valid', 
-	 feedbackIcons: { 
-	valid: 'glyphicon glyphicon-ok', 
-	invalid: 'glyphicon glyphicon-remove', 
-	validating: 'glyphicon glyphicon-refresh' 
-	}, 
-	fields: { 
-	rrEdit: { 
-	validators: { 
-	notEmpty: { 
-	message: 'Please enter your rr' 
-	}, 
-	} 
-	}, 
-	 jobCodeEdit: { 
-	validators: { 
-	notEmpty: { 
-	message: 'Please enter your jobCode' 
-	} 
-	} 
-	}, 
-	 requestorEdit: { 
-	validators: { 
 	
-	 } 
-	}, 
-	ageingEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	 profilesNoEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	interviewedNoEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	proposedJoiningDateEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	sowSignedEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	bgvClearedEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	reasonEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	remarkEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	doNumberEdit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	reqPublishedDate1Edit: { 
-	validators: { 
-	
-	 } 
-	}, 
-	plannedOnboardDate1: { 
-	validators: { 
-	
-	 } 
-	} 
-	} 
-	})  
-	
-    $('#recruitdemandForm').bootstrapValidator({
+    $('#recruitdemandFormEdit').bootstrapValidator({
 		message: 'This value is not valid',
 
         feedbackIcons: {
@@ -119,7 +35,7 @@ $(document).ready(function() {
                  }
             },
 
-            reqPublishedDate1: {
+            reqPublishedDate1Edit: {
                 validators: {
                     notEmpty: {
                         message: 'Please entry date'
@@ -204,6 +120,13 @@ $(document).ready(function() {
 
                 }
             },
+            candidateNameEdit: {
+        		validators: { 
+        			  notEmpty: {
+                          message: 'Please entry staffName'
+        		 } 
+        	}
+        },
             plannedOnboardDate1: {
                 validators: {
                     notEmpty: {
@@ -216,6 +139,7 @@ $(document).ready(function() {
 
                 }
             },
+            
         }
     }) /*
 		 * .on('success.form.bv', function(e) { // Prevent submit form

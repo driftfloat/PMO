@@ -6,7 +6,6 @@ $(function(){
 	//loadStatus();
 	//loadHrPriority();
 	dateType();
-	dateType1();
 	loadCsSubDept();
 
 	loadpage();
@@ -262,27 +261,11 @@ function dateType(){
 		pickerPosition: 'bottom-left',
 		showMeridian: 1
 	}).on('changeDate', function(ev){
-		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField', 'reqPublishedDate1Edit'); 
-	});
-}
-
-function dateType1(){
-	$('.form_datetime1').datetimepicker({
-		weekStart: 1,
-		minView:'month',
-		todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-		language:'zh-CN',
-		format: 'yyyy-mm-dd',
-		pickerPosition: 'bottom-left',
-		showMeridian: 1
-	}).on('changeDate', function(ev){
+		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField', 'reqPublishedDate1Edit');
 		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField', 'plannedOnboardDate1'); 
 	});
 }
+
 
 $("#sub_add").on("click",function(e){
 	$(".has-feedback").removeClass("has-feedback");

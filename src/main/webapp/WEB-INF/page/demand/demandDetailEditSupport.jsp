@@ -334,7 +334,7 @@ var userType='<%=userType%>'
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/pmo/demandInfoEdit.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/demandInfoEditSupport.js"></script>
 
 </body>
 </html>
