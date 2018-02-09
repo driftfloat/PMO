@@ -45,6 +45,13 @@ $(document).ready(function() {
 			},
 			proposedJoiningDateEdit : {
 				validators : {
+					notEmpty : {
+						message : 'Please entry date'
+					},
+					date : {
+						format : 'YYYY-MM-DD',
+						message : 'Time format is incorrect'
+					}
 
 				}
 			},
@@ -73,6 +80,18 @@ $(document).ready(function() {
 
 				}
 			},
+			plannedOnboardDate1 : {
+				validators : {
+					notEmpty : {
+						message : 'Please entry date'
+					},
+					date : {
+						format : 'YYYY-MM-DD',
+						message : 'Time format is incorrect'
+					}
+
+				}
+			},
 			reqPublishedDate1Edit : {
 				validators : {
 					notEmpty : {
@@ -85,18 +104,7 @@ $(document).ready(function() {
 
 				}
 			},
-			plannedOnboardDate1 : {
-				validators : {
-					notEmpty : {
-						message : 'Please entry date'
-					},
-					date : {
-						format : 'YYYY-MM-DD',
-						message : 'Time format is incorrect'
-					}
-
-				}
-			}
+			
 		}
 	})
 

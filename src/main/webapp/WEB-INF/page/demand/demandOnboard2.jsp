@@ -95,7 +95,7 @@ var path='<%=path%>';
 									<li class="active"><a href="#demand">demandInfo</a></li>
 									<li><a href="#employee">EmployeeInfo</a></li>
 								</ul>
-
+								<div id="successAlert" class="alert alert-success" style="display: none;"></div>
 								<div id="myTabContent" class="tab-content">
 									<div class="tab-pane active" id="demand">
 										<div id="register" class="box-content" style="overflow: auto;">
@@ -108,8 +108,6 @@ var path='<%=path%>';
 
 
 												<div class="form-group">
-													<div id="successAlert" class="alert alert-success"
-														style="display: none;"></div>
 													<div class="group">
 														<label class="col-sm-2 control-label">Engagement
 															Type</label>
@@ -178,12 +176,12 @@ var path='<%=path%>';
 														<label class="col-sm-2 control-label">Planned
 															Onboard Date </label>
 														<div class="col-md-4">
-															<div class="input-group date form_datetime1 col-sm-12"
+															<div class="input-group date form_datetime col-sm-12"
 																data-link-field="dt_set_order_time_input">
 																<input class="form-control" type="text" readonly
 																	data-bv-group=".group" id="plannedOnboardDate1"
 																	name="plannedOnboardDate1"
-																	value="${demand.plannedOnboardDate }"> <span
+																	value="${demand.plannedOnboardDate}"> <span
 																	class="input-group-addon"><span
 																	class="glyphicon glyphicon-th"></span></span> <input
 																	type="hidden" id="plannedOnboardDate2"
@@ -228,7 +226,7 @@ var path='<%=path%>';
 																	name="reqPublishedDate1Edit"
 																	value="${demand.reqPublishedDate }"> <span
 																	class="input-group-addon"> <span
-																	class="glyphicon glyphicon-th"> </span>
+																	class="glyphicon glyphicon-calendar"> </span>
 																</span> <input type="hidden" id="reqPublishedDate2Edit"
 																	name="reqPublishedDate2Edit" />
 															</div>
@@ -283,7 +281,7 @@ var path='<%=path%>';
 														<label class="col-sm-2 control-label">Proposed
 															Date of Joining</label>
 														<div class="col-md-4">
-															<div class="input-group date form_datetime1 col-sm-12"
+															<div class="input-group date form_datetime col-sm-12"
 																data-link-field="dt_set_order_time_input">
 																<input class="form-control" type="text" readonly
 																	data-bv-group=".group" id="proposedJoiningDateEdit"
@@ -353,8 +351,8 @@ var path='<%=path%>';
 											style="overflow: auto;">
 											<form id="registerEmployeeForm" method="post">
 
-												<div id="successAlert" class="alert alert-success"
-													style="display: none;"></div>
+												<!-- <div id="successAlert" class="alert alert-success"
+													style="display: none;"></div> -->
 
 												<div class="form-group">
 													<div class="group">
@@ -489,7 +487,7 @@ var path='<%=path%>';
 														<label class="col-sm-2 control-label">Graduation
 															Date</label>
 														<div class="col-md-4">
-															<div class="input-group date form_datetime0 col-sm-12"
+															<div class="input-group date form_datetime col-sm-12"
 																data-link-field="dt_set_order_time_input">
 																<input class="form-control" type="text" readonly
 																	data-bv-group=".group" id="graduationDate1"
@@ -505,7 +503,7 @@ var path='<%=path%>';
 														<label class="col-sm-2 control-label">Date of
 															Joining</label>
 														<div class="col-md-4">
-															<div class="input-group date form_datetime2 col-sm-12"
+															<div class="input-group date form_datetime col-sm-12"
 																data-link-field="dt_set_order_time_input">
 																<input class="form-control" type="text" readonly
 																	data-bv-group=".group" id="entryDate1"
@@ -558,7 +556,7 @@ var path='<%=path%>';
 														<label class="col-sm-2 control-label">Contract
 															Expired Date</label>
 														<div class="col-md-4">
-															<div class="input-group date form_datetime1 col-sm-12"
+															<div class="input-group date form_datetime col-sm-12"
 																data-link-field="dt_set_order_time_input">
 																<input class="form-control" type="text" readonly
 																	data-bv-group=".group" id="sowExpiredDate1"
@@ -570,20 +568,6 @@ var path='<%=path%>';
 															</div>
 														</div>
 													</div>
-													<!-- <div class="group">
-										<label class="col-sm-2 control-label">Date of Joining</label>
-										<div class="col-md-4">
-											<div class="input-group date form_datetime0 col-sm-12"
-												data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" readonly data-bv-group=".group"
-													id="entryDate1" name="entryDate1"> <span
-													class="input-group-addon"><span
-													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
-													id="entryDate2" name="entryDate2" />
-											</div>
-										</div>
-									</div> -->
-
 												</div>
 												<br /> <br /> <br />
 												<div class="form-group">
@@ -721,10 +705,12 @@ var path='<%=path%>';
 	<!-- application script for Charisma demo -->
 	<script src="<%=path%>/js/charisma.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/pmo/recruitdemandafixedprice.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/pmo/demandInfoEdit.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/pmo/demandvalid.js"></script>
-	
 	<script type="text/javascript" src="<%=path%>/js/pmo/employeeOnborad.js"></script>
+	
+	<script type="text/javascript" src="<%=path%>/js/pmo/demandInfoEdit.js"></script>
+	
+	<script type="text/javascript" src="<%=path%>/js/pmo/demandvalid.js"></script>
+	
 	<script type="text/javascript" src="<%=path%>/js/pmo/employeeValid.js"></script>
 	
 	<script type="text/javascript" src="<%=path%>/js/bootstrap-datetimepicker.js"></script>

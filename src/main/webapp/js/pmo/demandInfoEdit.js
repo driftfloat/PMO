@@ -6,7 +6,6 @@ $(function(){
 	loadDepartmentEdit();
 	//loadSubDepartmentEdit();
 	dateType();
-	dateType1();
 	//loadDemandListEdit();
 	$("#searchBtn").click(function(){
 		loadDemandListEdit();
@@ -212,26 +211,11 @@ function dateType(){
 		showMeridian: 1
 	}).on('changeDate', function(ev){
 		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField','plannedOnboardDate1'); 
+		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField', 'reqPublishedDate1Edit');
+		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField', 'proposedJoiningDateEdit');
 	});
 }
 
-function dateType1(){
-	$('.form_datetime').datetimepicker({
-		weekStart: 1,
-		minView:'month',
-		todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-		language:'zh-CN',
-		format: 'yyyy-mm-dd',
-		pickerPosition: 'bottom-left',
-		showMeridian: 1
-	}).on('changeDate', function(ev){
-		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField', 'reqPublishedDate1Edit'); 
-	});
-}
 /*异步加载Department信息*/
 function loadDepartmentEdit(){
 	$.ajax({
@@ -247,15 +231,17 @@ function loadDepartmentEdit(){
 			//add by jama 设置部门回显值
 			var responseValue = $("#hsbcDeptInput").val();
 			var resSubDeptValue = $("#hsbcSubDeptEdit").val();//子部门的返回值
-			var all_options = document.getElementById("hsbcDeptEdit").options;
-		    for (i=1; i<all_options.length; i++){
-			   if (all_options[i].value == responseValue){
-				   document.getElementById("hsbcDeptEdit").options[i].selected = true;
-				   //上一行代码改变部门后，子部门的值跟着变化了，所以将子部门的返回值继续设置在节点上供后面使用
-				   //document.getElementById("hsbcSubDeptEdit").value = resSubDeptValue;
-				   break;
-			   }  
-		    }
+			if(document.getElementById("hsbcDeptEdit")!=null){
+				var all_options = document.getElementById("hsbcDeptEdit").options;
+			    for (i=1; i<all_options.length; i++){
+				   if (all_options[i].value == responseValue){
+					   document.getElementById("hsbcDeptEdit").options[i].selected = true;
+					   //上一行代码改变部门后，子部门的值跟着变化了，所以将子部门的返回值继续设置在节点上供后面使用
+					   //document.getElementById("hsbcSubDeptEdit").value = resSubDeptValue;
+					   break;
+				   }  
+			    }
+			}
 		   genSubDept4Dept(resSubDeptValue);
 		}
 	})
@@ -311,13 +297,16 @@ function genSubDept4Dept(resSubDeptValue){
 				document.getElementById("hsbcSubDeptEdit").value = resSubDeptValue;
 			}
 			var responseValue = $("#hsbcSubDeptEdit").val();
-			var all_options = document.getElementById("hsbcSubDeptEdit").options;
-		    for (i=1; i<all_options.length; i++){
-			   if (all_options[i].value == responseValue){
-				   document.getElementById("hsbcSubDeptEdit").options[i].selected = true;
-				   break;
-			   }  
-		    }
+			if(document.getElementById("hsbcSubDeptEdit")!=null){
+				var all_options = document.getElementById("hsbcSubDeptEdit").options;
+			    for (i=1; i<all_options.length; i++){
+				   if (all_options[i].value == responseValue){
+					   document.getElementById("hsbcSubDeptEdit").options[i].selected = true;
+					   break;
+				   }  
+			    }
+			}
+			
 		}
 	})
 }
@@ -558,11 +547,11 @@ function updateDemand(index){
 			success:function(resultFlag){
 				if(resultFlag){
 					$("html,body").animate({scrollTop:0}, 500);
-					$('#successAlert').html('需求信息更新成功').show();
+					$('#successAlert').html('demand update sucessful!').show();
 					setTimeout(function () {
 						$('#successAlert').hide();
 					}, 2000);
-					self.opener.location.reload(); 
+					self.opener.location.reload();
 				}
 			}
 		})
