@@ -467,7 +467,7 @@ public class EmployeeController {
                List<HSBCDept> allHSBCDept = hsbcDeptService.queryAllHSBCDept();
                List<User> allRM = userService.getUserForRM();
                
-               CSDept csDept = new CSDept();
+               CSDept csDept = null;
                HSBCDept hsbcDept = null;
                List<String> subDeptIdColl = new ArrayList<String>();
                String  listEtoCsSubDept = "";
@@ -478,9 +478,10 @@ public class EmployeeController {
                }
                for (int i = 1; i - 1 < listE.size(); i++) {
             	 listEtoCsSubDept = listE.get(i - 1).getCsSubDept();
-				if(listEtoCsSubDept!=null||!"".equals(listEtoCsSubDept)){
+            	 if(listEtoCsSubDept!=null||!"".equals(listEtoCsSubDept)){
 					for (CSDept csD : allCSDept) {
 						if(!subDeptIdColl.contains(listEtoCsSubDept)) {
+							csDept = new CSDept();
 							csDept.setCsSubDeptName(listEtoCsSubDept);
 							break;
 						}else {
