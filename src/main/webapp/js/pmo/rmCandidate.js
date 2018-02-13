@@ -1,58 +1,3 @@
-/*
-$('#interviewForm').bootstrapValidator({
-	feedbackIcons: {
-        valid: 'glyphicon glyphicon-ok',
-        invalid: 'glyphicon glyphicon-remove',
-        validating: 'glyphicon glyphicon-refresh'
-	},
-	fields : {
-		interviewDate : {
-			group : '.group',
-			validators : {
-				notEmpty : {
-					message : '请选择'
-				},
-			}
-		},
-		interviewType : {
-			group : '.group',
-			validators : {
-				notEmpty : {
-					message : '请输入'
-				},
-			}
-		},
-		projectName : {
-			group : '.group',
-			validators : {
-				notEmpty : {
-					message : '请输入'
-				},
-			}
-		},
-		interviewer : {
-			group : '.group',
-			validators : {
-				notEmpty : {
-					message : '请输入'
-				},
-			}
-		}
-	}
-}).on('success.form.bv', function(e) {
-    // Prevent submit form
-    e.preventDefault();
-
-    var $form = $(e.target);
-        validator = $form.data('bootstrapValidator');
-    if(validator){
-    	updateInterviewFeedBack(e.target);
-    }
-    return false;
-}) ;
-
- */
-
 $(function() {
 	loadMyCandidate();
 	dateType();
@@ -410,7 +355,6 @@ function rescheduleInterview(pushId,candidateId) {
 	$("#interviewer").val("");
 	$('#projectName').val("");
 	$('#interviewType').val("");
-	
 	if($("#graduationDate1").val()==''||$("#interviewer").val()==''||$('#projectName').val()==''||$('#interviewType').val()==''){
 		 $('#addInterviewer').attr("disabled", "disabled");
 	}
@@ -425,13 +369,14 @@ function rescheduleInterview(pushId,candidateId) {
 			"candidateId" : candidateId
 		},
 		success : function(result) {
+			if(result!=null||result!=null){
 				$('#myModal').modal('show');
-		    	//loadInterviewer();
+				var interviewerId=result.interviewerId;
 		    	$('#graduationDate1').val(result.interviewDate);
 				$('#projectName').val(result.projectName);
 				$("#interviewType").val(result.interviewType);
 				$('#interviewer').val(result.interviewerId);
-				
+				loadInterviewer(pushId,interviewerId);
 				
 				
 				$("#addInterviewer").click(function() {
@@ -481,6 +426,7 @@ function rescheduleInterview(pushId,candidateId) {
 					$("#interviewer").val("");
 					$('#interviewType').val("");
 				})
+			}
 			/*	
 				$.ajax({
 					url : path + '/service/rmCandidate/updateInterview',
@@ -537,9 +483,8 @@ function scheduleInterview(pushId) {
 	 	$('#addInterviewer').attr("disabled", "disabled");
 	 }
 	
-	//loadInterviewer();
 
-	loadInterviewer(pushId);
+	loadInterviewer(pushId,interviewerId);
 
 	$("#addInterviewer").click(function() {
 		var interviewDate = $("#interviewDate").val();
@@ -603,9 +548,8 @@ function nextInterview(pushId, projectName) {
 		$('#addInterviewer').attr("disabled", "disabled");
 	}
 	
-	//loadInterviewer();
 
-	loadInterviewer(pushId);
+	loadInterviewer(pushId,interviewerId);
 
 	$("#addInterviewer").click(function() {
 		var interviewDate = $("#interviewDate").val();
@@ -693,7 +637,7 @@ function interviewBack(pushId, candidateId) {
 
 }
 
-function loadInterviewer(pushId) {
+function loadInterviewer(pushId,interviewerId) {
 	$("#interviewer").empty();
 	$("#interviewer").append("<option value=''>--Option--</option>");
 	$.ajax({
@@ -710,6 +654,9 @@ function loadInterviewer(pushId) {
 						"<option value='" + item.employeeId + "'>"
 								+ item.staffName + "</option>")
 			})
+			if(interviewerId!=null||interviewerId!=""){
+				$("#interviewer").val(interviewerId);
+			}
 		}
 	})
 }
