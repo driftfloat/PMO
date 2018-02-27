@@ -54,9 +54,9 @@ $(document).ready(function() {
              age: {
           		group: '.group',
           		validators: {
-                      notEmpty: {
+                      /*notEmpty: {
                           message: 'Please enter age'
-                      },
+                      },*/
                       regexp: {
                           regexp: "^[1-9][0-9]$",
                           message: 'Please enter a double-digit number'
