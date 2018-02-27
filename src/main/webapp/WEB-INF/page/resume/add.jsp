@@ -104,7 +104,9 @@ var path='<%=path%>';
 											</div>
 										</div>
 								</div>
-								<br/><br/><br/>
+								<br/><br/><br/><br/>
+								
+								
 								<div class="form-group">
 										<div class="group">
 											<label class="col-sm-2 control-label">Age</label>
@@ -124,7 +126,8 @@ var path='<%=path%>';
 										</div>
 										</div>
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Education</label>
@@ -132,9 +135,9 @@ var path='<%=path%>';
 											<select class="form-control" id="education" name="education" data-bv-notempty>
 												<option value="">-- Option--</option>
 												<option value="0">博士</option>
-												<option value="1">研究生</option>
-												<option value="2">本科</option>
-												<option value="3">大专</option>
+												<option value="1">硕士</option>
+												<option value="2">学士</option>
+												<option value="3">专科</option>
 												<option value="4">高中</option>
 											</select>
 											
@@ -148,7 +151,8 @@ var path='<%=path%>';
 											</div>
 										</div>
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Is Computer major</label>
@@ -176,7 +180,8 @@ var path='<%=path%>';
 										</div>
 									    </div>
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Skill</label>
@@ -197,7 +202,8 @@ var path='<%=path%>';
 									</div>
 									</div>
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">English Level</label>
@@ -218,7 +224,8 @@ var path='<%=path%>';
 										</div>
 										</div>
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
+								
 								<div class="form-group">
 										
 										<div class="group">
@@ -241,7 +248,8 @@ var path='<%=path%>';
 									</div>
 									
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
+								
 								<div class="form-group">
 									<div class="group">
 										<label class="col-lg-2 control-label">Source</label>
@@ -264,7 +272,8 @@ var path='<%=path%>';
 									</div>
 									
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
+								
 								<div class="form-group">
 										
 										<div class="group">
@@ -287,7 +296,8 @@ var path='<%=path%>';
 										</div>
 									</div>
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
+								
 								<div class="form-group">
 									
 									<div class="group">
@@ -317,7 +327,7 @@ var path='<%=path%>';
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
 									    </div>
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
 							</form>
 							</div>
 						</div>
