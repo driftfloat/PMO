@@ -188,7 +188,7 @@ $(document).ready(function() {
                          message: 'Please enter email'
                      },
                      regexp: {
-                         regexp: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
+                         regexp: /^[a-zA-Z0-9_-]{1}(\.[a-zA-Z0-9_-]+)*@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
                          message: 'Please enter the correct format of the mailbox'
                      },
                     
