@@ -141,9 +141,9 @@ var path='<%=path%>';
 											<select class="form-control" name="education" id="education" data-bv-group=".group">
 												<option value="">--Option--</option>
 												<option value="0">博士</option>
-												<option value="1">研究生</option>
-												<option value="2">本科</option>
-												<option value="3">大专</option>
+												<option value="1">硕士</option>
+												<option value="2">学士</option>
+												<option value="3">专科</option>
 												<option value="4">高中</option>
 											</select>
 										</div>

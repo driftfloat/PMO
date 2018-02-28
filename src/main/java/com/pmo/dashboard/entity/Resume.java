@@ -23,7 +23,7 @@ public class Resume {
 	//电话
 	private String tel;
 	
-	//学历 0:博士 1：研究生，2：本科，3：大专，4：高中
+	//学历 0:博士 1：硕士，2：学士，3：专科 4：高中
 	private String education;
 	
 	//学校名称

@@ -69,11 +69,11 @@ function loadMyCandidate(currPage) {
 						if (result.candidatelist[i].candidateInfo.education == '0') {
 							var td6 = $("<td>博士</td>");
 						} else if (result.candidatelist[i].candidateInfo.education == '1') {
-							var td6 = $("<td>研究生</td>");
+							var td6 = $("<td>硕士</td>");
 						} else if (result.candidatelist[i].candidateInfo.education == '2') {
-							var td6 = $("<td>本科</td>");
+							var td6 = $("<td>学士</td>");
 						} else if (result.candidatelist[i].candidateInfo.education == '3') {
-							var td6 = $("<td>大专</td>");
+							var td6 = $("<td>专科</td>");
 						} else if (result.candidatelist[i].candidateInfo.education == '4') {
 							var td6 = $("<td>高中</td>");
 						}
@@ -484,7 +484,7 @@ function scheduleInterview(pushId) {
 	 }
 	
 
-	loadInterviewer(pushId,interviewerId);
+	loadInterviewer(pushId,"");
 
 	$("#addInterviewer").click(function() {
 		var interviewDate = $("#interviewDate").val();
@@ -549,7 +549,7 @@ function nextInterview(pushId, projectName) {
 	}
 	
 
-	loadInterviewer(pushId,interviewerId);
+	loadInterviewer(pushId,"");
 
 	$("#addInterviewer").click(function() {
 		var interviewDate = $("#interviewDate").val();

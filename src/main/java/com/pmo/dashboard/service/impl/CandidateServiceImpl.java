@@ -89,11 +89,11 @@ public class CandidateServiceImpl implements CandidateService {
 					if ("0".equals(education)) {
 						education = "博士";
 					} else if ("1".equals(education)) {
-						education = "研究生";
+						education = "硕士";
 					} else if ("2".equals(education)) {
-						education = "本科";
+						education = "学士";
 					} else if ("3".equals(education)) {
-						education = "大专";
+						education = "专科";
 					} else if ("4".equals(education)) {
 						education = "高中";
 					}
@@ -150,11 +150,11 @@ public class CandidateServiceImpl implements CandidateService {
 					if ("0".equals(education)) {
 						education = "博士";
 					} else if ("1".equals(education)) {
-						education = "研究生";
+						education = "硕士";
 					} else if ("2".equals(education)) {
-						education = "本科";
+						education = "学士";
 					} else if ("3".equals(education)) {
-						education = "大专";
+						education = "专科";
 					} else if ("4".equals(education)) {
 						education = "高中";
 					}

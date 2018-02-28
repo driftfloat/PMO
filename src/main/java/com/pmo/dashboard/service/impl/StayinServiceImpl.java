@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.pmo.dashboard.dao.AddDemandMapper;
 import com.pmo.dashboard.dao.StayinMapper;
 import com.pmo.dashboard.entity.AddDemand;
 import com.pmo.dashboard.entity.StayinCandidate;
-
 import com.pom.dashboard.service.StayinService;
 
 import jxl.Workbook;
@@ -71,11 +71,11 @@ public class StayinServiceImpl implements StayinService{
 					if ("0".equals(education)){
 						education = "博士";
 					}else if ("1".equals(education)){
-						education = "研究生";
+						education = "硕士";
 					}else if ("2".equals(education)){
-						education = "本科";
+						education = "学士";
 					}else if ("3".equals(education)){
-						education = "大专";
+						education = "专科";
 					}else if ("4".equals(education)){
 						education = "高中";
 					}
@@ -148,11 +148,11 @@ public class StayinServiceImpl implements StayinService{
 					if ("0".equals(education)){
 						education = "博士";
 					}else if ("1".equals(education)){
-						education = "研究生";
+						education = "硕士";
 					}else if ("2".equals(education)){
-						education = "本科";
+						education = "学士";
 					}else if ("3".equals(education)){
-						education = "大专";
+						education = "专科";
 					}else if ("4".equals(education)){
 						education = "高中";
 					}
