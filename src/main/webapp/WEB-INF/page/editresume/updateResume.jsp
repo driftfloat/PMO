@@ -125,7 +125,9 @@
 											</div>
 										</div>
 								</div>
-								<br/><br/><br/>
+								<br/><br/><br/><br/>
+								
+								
 								<div class="form-group">
 										<div class="group">
 											<label class="col-sm-2 control-label">Age</label>
@@ -145,7 +147,8 @@
 										</div>
 										</div>
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Education</label>
@@ -164,7 +167,8 @@
 											</div>
 										</div>
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Is Computer major</label>
@@ -190,7 +194,8 @@
 										</div>
 									    </div>
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Skill</label>
@@ -211,7 +216,8 @@
 									</div>
 									</div>
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">English Level</label>
@@ -232,7 +238,8 @@
 										</div>
 										</div>
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
+								
 								<div class="form-group">
 										
 										<div class="group">
@@ -255,7 +262,8 @@
 									</div>
 									
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<div class="group">
@@ -276,7 +284,8 @@
 										</div>
 										</div>
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
+								
 								<div class="form-group">
 										<div class="group">
 										<div class="group">
@@ -297,7 +306,7 @@
 										</div>
 									</div>
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
 								
 								
 								<div class="form-group">
@@ -344,7 +353,7 @@
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
 									    </div>
 								</div>
-								<br/><br/>
+								<br/><br/><br/>
 							</form>
 							</div>
 						</div>

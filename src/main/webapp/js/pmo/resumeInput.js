@@ -188,7 +188,7 @@ $(document).ready(function() {
                          message: 'Please enter email'
                      },
                      regexp: {
-                         regexp: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
+                         regexp: /^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
                          message: 'Please enter the correct format of the mailbox'
                      },
                     
@@ -290,9 +290,9 @@ $(document).ready(function() {
                  age: {
               		group: '.group',
               		validators: {
-                          notEmpty: {
+                          /*notEmpty: {
                               message: 'Please enter age'
-                          },
+                          },*/
                           regexp: {
                               regexp: "^[1-9][0-9]$",
                               message: 'Please enter a double-digit number'
@@ -424,7 +424,7 @@ $(document).ready(function() {
                              message: 'Please enter email'
                          },
                          regexp: {
-                             regexp: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
+                        	 regexp: /^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
                              message: 'Please enter the correct format of the mailbox'
                          },
                         
