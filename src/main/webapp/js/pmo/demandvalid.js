@@ -163,6 +163,18 @@ $(document).ready(function() {
 					}
 				}
 			},
+			
+			requirementNumber : {
+				validators : {
+					notEmpty : {
+						message : 'Please enter your requirement Number'
+					},
+					regexp: {
+                        regexp: /^[1-2]{1,2}$/,
+                        message: 'Please enter one or two digit number'
+                    },
+				}
+			},
 
 			skill : {
 				validators : {

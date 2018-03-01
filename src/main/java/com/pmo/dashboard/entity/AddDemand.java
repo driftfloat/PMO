@@ -83,6 +83,20 @@ public class AddDemand
     private String completionDate;
     
     private String onboardDate;
+    
+    
+    //表外字段
+    private int requirementNumber;
+    
+    
+
+	public int getRequirementNumber() {
+		return requirementNumber;
+	}
+
+	public void setRequirementNumber(int requirementNumber) {
+		this.requirementNumber = requirementNumber;
+	}
 
 	public String getOnboardDate() {
 		return onboardDate;

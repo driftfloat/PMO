@@ -130,6 +130,7 @@ function addDemand(){
 	//isvalid = $('#recruitdemandForm').data('bootstrapValidator').isValid();
 	 var bootstrapValidator = $("#recruitdemandForm").data('bootstrapValidator');
 	   bootstrapValidator.validate();
+	alert(bootstrapValidator.isValid());
 	if(bootstrapValidator.isValid()){
 		var demandId=$('#demandId').val();
 		var engagementType=$('#engagementType').val();
@@ -171,6 +172,10 @@ function addDemand(){
 		var completionDate=$('#completionDate').val();
 		var onboardDate=$('#onboardDate').val();
 		var staffName=$('#staffName').val();
+		
+		//需求数量
+		var requirementNumber=$('#requirementNumber').val();
+		alert("保存"+requirementNumber);
 		var addDemandConditionStr = demandId + engagementType + rr + jobCode
 						+ skill + requestor + position + hsbcDept + hsbcSubDept
 						+ location + reqPublishedDate + ageing + profilesNo
@@ -179,7 +184,7 @@ function addDemand(){
 						+ status2 + remark + csSubDept + plannedOnboardDate + doNumber
 						+ hrPriority + reqReceivedDate + ageingReceived
 						+ demandPriority + creatDate + updateDate + recruitmentCycle
-						+ completionDay + completionDate + onboardDate + staffName;
+						+ completionDay + completionDate + onboardDate + staffName + requirementNumber;
 		if (lastConditionStr != addDemandConditionStr) {
 			lastConditionStr = addDemandConditionStr;
 		} else {
@@ -206,7 +211,7 @@ function addDemand(){
 				"status2":status2,"remark":remark,"csSubDept":csSubDept,"plannedOnboardDate":plannedOnboardDate,
 				"doNumber":doNumber,"hrPriority":hrPriority,"reqReceivedDate":reqReceivedDate,"ageingReceived":ageingReceived,
 				"demandPriority":demandPriority,"creatDate":creatDate,"updateDate":updateDate,"recruitmentCycle":recruitmentCycle,
-				"completionDay":completionDay,"completionDate":completionDate,"onboardDate":onboardDate,"hsbcDept":hsbcDept,"hsbcSubDept":hsbcSubDept},
+				"completionDay":completionDay,"completionDate":completionDate,"onboardDate":onboardDate,"hsbcDept":hsbcDept,"hsbcSubDept":hsbcSubDept,"requirementNumber":requirementNumber},
 			async:true,
 			cache:false,
 			type:"post",
