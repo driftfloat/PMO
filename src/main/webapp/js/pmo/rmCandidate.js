@@ -122,7 +122,13 @@ function loadMyCandidate(currPage) {
 									+ result.candidatelist[i].pushId
 									+ "' name='"
 									+ result.candidatelist[i].candidateInfo.candidateId
-									+ "' class='btn btn-info btn-small '  onclick='offerInterview(this.id)'>Offer</a></td>");
+									+ "' class='btn btn-info btn-small '  onclick='offerInterview(this.id)'>Offer</a>&nbsp;" 
+									+ "<a href='javascript:void(0);' disabled='disabled' id='"
+									+ result.candidatelist[i].pushId
+									+ "' name='"
+									+ result.candidatelist[i].candidateInfo.candidateId
+									+ "' class='btn btn-info btn-small ' onclick='rescheduleInterview(this.id,this.name)'>Reschedualing</a>&nbsp;"
+									+		"</td>");
 						} else if (interviewStatus == 2) {
 							var td13 = $("<td><a href='javascript:void(0);' disabled='disabled' id='"
 									+ result.candidatelist[i].pushId
@@ -143,7 +149,13 @@ function loadMyCandidate(currPage) {
 									+ result.candidatelist[i].pushId
 									+ "' name='"
 									+ result.candidatelist[i].candidateInfo.candidateId
-									+ "' class='btn btn-info btn-small' onclick='offerInterview(this.id)'>Offer</a></td>");
+									+ "' class='btn btn-info btn-small' onclick='offerInterview(this.id)'>Offer</a>"
+									+ "<a href='javascript:void(0);' id='"
+									+ result.candidatelist[i].pushId
+									+ "' name='"
+									+ result.candidatelist[i].candidateInfo.candidateId
+									+ "' class='btn btn-info btn-small ' onclick='rescheduleInterview(this.id,this.name)'>Reschedualing</a>&nbsp;"
+									+		"</td>");
 						} else if (interviewStatus == 3) {
 							var td13 = $("<td><a href='javascript:void(0);' id='"
 									+ result.candidatelist[i].pushId
@@ -164,7 +176,13 @@ function loadMyCandidate(currPage) {
 									+ result.candidatelist[i].pushId
 									+ "' name='"
 									+ result.candidatelist[i].candidateInfo.candidateId
-									+ "' class='btn btn-info btn-small' onclick='offerInterview(this.id)'>Offer</a></td>");
+									+ "' class='btn btn-info btn-small' onclick='offerInterview(this.id)'>Offer</a>"
+									+ "<a href='javascript:void(0);' disabled='disabled' id='"
+									+ result.candidatelist[i].pushId
+									+ "' name='"
+									+ result.candidatelist[i].candidateInfo.candidateId
+									+ "' class='btn btn-info btn-small ' onclick='rescheduleInterview(this.id,this.name)'>Reschedualing</a>&nbsp;"
+									+		"</td>");
 						} else if (interviewStatus == 4) {
 							var td13 = $("<td><a href='javascript:void(0);' id='"
 									+ result.candidatelist[i].pushId
@@ -185,7 +203,13 @@ function loadMyCandidate(currPage) {
 									+ result.candidatelist[i].pushId
 									+ "' name='"
 									+ result.candidatelist[i].candidateInfo.candidateId
-									+ "' class='btn btn-info btn-small' onclick='offerInterview(this.id)'>Offer</a></td>");
+									+ "' class='btn btn-info btn-small' onclick='offerInterview(this.id)'>Offer</a>"
+									+ "<a href='javascript:void(0);' disabled='disabled' id='"
+									+ result.candidatelist[i].pushId
+									+ "' name='"
+									+ result.candidatelist[i].candidateInfo.candidateId
+									+ "' class='btn btn-info btn-small ' onclick='rescheduleInterview(this.id,this.name)'>Reschedualing</a>&nbsp;"
+									+		"</td>");
 						}else if(interviewStatus==6){
 							var td13 = $("<td><a href='javascript:void(0);'disabled='disabled' id='"
 									+ result.candidatelist[i].pushId
@@ -206,19 +230,41 @@ function loadMyCandidate(currPage) {
 									+ result.candidatelist[i].pushId
 									+ "' name='"
 									+ result.candidatelist[i].candidateInfo.candidateId
-									+ "' class='btn btn-info btn-small' onclick='offerInterview(this.id)'>Offer</a></td>");
-							
-						}else if(interviewStatus==7){
-							var td13 = $("<td><a href='javascript:void(0);' id='"
+									+ "' class='btn btn-info btn-small' onclick='offerInterview(this.id)'>Offer</a>"
+									+ "<a href='javascript:void(0);' disabled='disabled' id='"
 									+ result.candidatelist[i].pushId
 									+ "' name='"
 									+ result.candidatelist[i].candidateInfo.candidateId
 									+ "' class='btn btn-info btn-small ' onclick='rescheduleInterview(this.id,this.name)'>Reschedualing</a>&nbsp;"
+									+		"</td>");
+							
+						}else if(interviewStatus==7){
+							var td13 = $("<td><a href='javascript:void(0);'disabled='disabled' id='"
+									+ result.candidatelist[i].pushId
+									+ "' name='"
+									+ result.candidatelist[i].interviewList[0].projectName
+									+ "' class='btn btn-info btn-small ' onclick='scheduleInterview(this.id)'>New Turn</a>&nbsp;"
+									+ "<a href='javascript:void(0);' disabled='disabled' id='"
+									+ result.candidatelist[i].pushId
+									+ "' name='"
+									+ result.candidatelist[i].interviewList[0].projectName
+									+ "' class='btn btn-info btn-small' onclick='nextInterview(this.id,this.name)'>Next Interview</a>&nbsp;"
 									+ "<a href='javascript:void(0);' id='"
 									+ result.candidatelist[i].pushId
 									+ "' name='"
 									+ result.candidatelist[i].candidateInfo.candidateId
-									+ "' class='btn btn-info btn-small' onclick='interviewBack(this.id,this.name)'>Back</a></td>");
+									+ "' class='btn btn-info btn-small' onclick='interviewBack(this.id,this.name)'>Back</a>&nbsp;"
+									+ "<a href='javascript:void(0);' disabled='disabled' id='"
+									+ result.candidatelist[i].pushId
+									+ "' name='"
+									+ result.candidatelist[i].candidateInfo.candidateId
+									+ "' class='btn btn-info btn-small' onclick='offerInterview(this.id)'>Offer</a>"
+									+ "<a href='javascript:void(0);' id='"
+									+ result.candidatelist[i].pushId
+									+ "' name='"
+									+ result.candidatelist[i].candidateInfo.candidateId
+									+ "' class='btn btn-info btn-small ' onclick='rescheduleInterview(this.id,this.name)'>Reschedualing</a>&nbsp;"
+									+		"</td>");
 						}
 
 						td1.appendTo(tr);
