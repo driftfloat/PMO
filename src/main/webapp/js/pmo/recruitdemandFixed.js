@@ -130,7 +130,7 @@ function addDemand(){
 	//isvalid = $('#recruitdemandForm').data('bootstrapValidator').isValid();
 	 var bootstrapValidator = $("#recruitdemandForm").data('bootstrapValidator');
 	   bootstrapValidator.validate();
-	alert(bootstrapValidator.isValid());
+	//alert(bootstrapValidator.isValid());
 	if(bootstrapValidator.isValid()){
 		var demandId=$('#demandId').val();
 		var engagementType=$('#engagementType').val();

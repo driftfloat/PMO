@@ -66,7 +66,7 @@ function loadMyCandidate(currPage) {
 						var td5 = $("<td>"
 								+ result.candidatelist[i].candidateInfo.skill
 								+ "</td>");
-						if (result.candidatelist[i].candidateInfo.education == '0') {
+						/*if (result.candidatelist[i].candidateInfo.education == '0') {
 							var td6 = $("<td>博士</td>");
 						} else if (result.candidatelist[i].candidateInfo.education == '1') {
 							var td6 = $("<td>研究生</td>");
@@ -76,34 +76,34 @@ function loadMyCandidate(currPage) {
 							var td6 = $("<td>大专</td>");
 						} else if (result.candidatelist[i].candidateInfo.education == '4') {
 							var td6 = $("<td>高中</td>");
-						}
+						}*/
 						// var td6 =
 						// $("<td>"+result.candidatelist[i].candidateInfo.education+"</td>");
-						var td7 = $("<td>"
+						var td6 = $("<td>"
 								+ result.candidatelist[i].candidateInfo.experienceYears
 								+ "</td>");
-						var td8 = $("<td>"
+						var td7 = $("<td>"
 								+ result.candidatelist[i].candidateInfo.candidateTel
 								+ "</td>");
-						var td9 = $("<td>"
+						var td8 = $("<td>"
 								+ result.candidatelist[i].candidateInfo.email
 								+ "</td>");
-						var td11 = $("<td>"
+						var td9 = $("<td>"
 								+ result.candidatelist[i].csDept.csSubDeptName
 								+ "</td>");
 						if (interviewStatus == 7) {
-							var td12 = $("<td> <a href='javascript:void(0);' "
+							var td10 = $("<td> <a href='javascript:void(0);' "
 									+ "onclick=confirmContent('"
 									+ result.candidatelist[i].candidateInfo.candidateId
 									+ "','"+result.candidatelist[i].candidateInfo.candidateName+"')>"+result.candidatelist[i].user.nickname+ "</a></td>");
 						}else{
-						var td12 = $("<td>"
+						var td10 = $("<td>"
 								+ result.candidatelist[i].user.nickname
 								+ "</td>");
 						}
 						var status = result.candidatelist[i].interviewList[0].interviewId;
 						if (interviewStatus == 1) {
-							var td13 = $("<td><a href='javascript:void(0);' id='"
+							var td11 = $("<td><a href='javascript:void(0);' id='"
 									+ result.candidatelist[i].pushId
 									+ "' name='"
 									+ result.candidatelist[i].interviewList[0].projectName
@@ -130,7 +130,7 @@ function loadMyCandidate(currPage) {
 									+ "' class='btn btn-info btn-small ' onclick='rescheduleInterview(this.id,this.name)'>Reschedualing</a>&nbsp;"
 									+		"</td>");
 						} else if (interviewStatus == 2) {
-							var td13 = $("<td><a href='javascript:void(0);' disabled='disabled' id='"
+							var td11 = $("<td><a href='javascript:void(0);' disabled='disabled' id='"
 									+ result.candidatelist[i].pushId
 									+ "' name='"
 									+ result.candidatelist[i].interviewList[0].projectName
@@ -157,7 +157,7 @@ function loadMyCandidate(currPage) {
 									+ "' class='btn btn-info btn-small ' onclick='rescheduleInterview(this.id,this.name)'>Reschedualing</a>&nbsp;"
 									+		"</td>");
 						} else if (interviewStatus == 3) {
-							var td13 = $("<td><a href='javascript:void(0);' id='"
+							var td11 = $("<td><a href='javascript:void(0);' id='"
 									+ result.candidatelist[i].pushId
 									+ "' name='"
 									+ result.candidatelist[i].interviewList[0].projectName
@@ -184,7 +184,7 @@ function loadMyCandidate(currPage) {
 									+ "' class='btn btn-info btn-small ' onclick='rescheduleInterview(this.id,this.name)'>Reschedualing</a>&nbsp;"
 									+		"</td>");
 						} else if (interviewStatus == 4) {
-							var td13 = $("<td><a href='javascript:void(0);' id='"
+							var td11 = $("<td><a href='javascript:void(0);' id='"
 									+ result.candidatelist[i].pushId
 									+ "' name='"
 									+ result.candidatelist[i].interviewList[0].projectName
@@ -211,7 +211,7 @@ function loadMyCandidate(currPage) {
 									+ "' class='btn btn-info btn-small ' onclick='rescheduleInterview(this.id,this.name)'>Reschedualing</a>&nbsp;"
 									+		"</td>");
 						}else if(interviewStatus==6){
-							var td13 = $("<td><a href='javascript:void(0);'disabled='disabled' id='"
+							var td11 = $("<td><a href='javascript:void(0);'disabled='disabled' id='"
 									+ result.candidatelist[i].pushId
 									+ "' name='"
 									+ result.candidatelist[i].interviewList[0].projectName
@@ -239,7 +239,7 @@ function loadMyCandidate(currPage) {
 									+		"</td>");
 							
 						}else if(interviewStatus==7){
-							var td13 = $("<td><a href='javascript:void(0);'disabled='disabled' id='"
+							var td11 = $("<td><a href='javascript:void(0);'disabled='disabled' id='"
 									+ result.candidatelist[i].pushId
 									+ "' name='"
 									+ result.candidatelist[i].interviewList[0].projectName
@@ -272,13 +272,13 @@ function loadMyCandidate(currPage) {
 						td3.appendTo(tr);
 						td4.appendTo(tr);
 						td5.appendTo(tr);
+						//td6.appendTo(tr);
 						td6.appendTo(tr);
 						td7.appendTo(tr);
 						td8.appendTo(tr);
 						td9.appendTo(tr);
+						td10.appendTo(tr);
 						td11.appendTo(tr);
-						td12.appendTo(tr);
-						td13.appendTo(tr);
 						$("#rmCandidateList").append(tr);
 					}
 					$("#pageCount").html(result.pageCondition.totalPage);

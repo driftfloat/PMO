@@ -206,17 +206,7 @@ var path='<%=path%>
 												</select>
 											</div>
 										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">Remark</label>
-											<div class="col-md-4">
-												<input type="text" class="form-control" name="remark"
-													id="remark" />
-											</div>
-										</div>
-
-									</div>
-
-									<div class="form-group">
+										
 										<div class="group">
 											<label class="col-lg-2 control-label">Requestor</label>
 											<div class="col-lg-4">
@@ -224,6 +214,22 @@ var path='<%=path%>
 													id="requestor" data-bv-group=".group" />
 											</div>
 										</div>
+
+									</div>
+
+									<div class="form-group">
+										<div class="group">
+											<label class="col-lg-2 control-label">HSBC Department</label>
+											<div class="col-lg-4">
+												<select class="form-control" name="hsbcDept"
+													data-bv-notempty
+													data-bv-notempty-message="Please Select Your HsbcDept"
+													id="hsbcDept" data-bv-group=".group">
+													<option value="">-- Option --</option>
+												</select>
+											</div>
+										</div>
+										
 										<div class="group">
 											<label class="col-sm-2 control-label">Req Published
 												Date</label>
@@ -245,13 +251,14 @@ var path='<%=path%>
 
 									<div class="form-group">
 										<div class="group">
-											<label class="col-lg-2 control-label">HSBC Department</label>
-											<div class="col-lg-4">
-												<select class="form-control" name="hsbcDept"
+											<label class="col-sm-2 control-label">CS Department</label>
+											<div class="col-sm-4">
+												<select class="form-control" name="csSubDept"
 													data-bv-notempty
-													data-bv-notempty-message="Please Select Your HsbcDept"
-													id="hsbcDept" data-bv-group=".group">
-													<option value="">-- Option --</option>
+													data-bv-notempty-message="Please Select Your CsSubDept"
+													id="csSubDept" data-bv-group=".group">
+													<option value="">-- Option--</option>
+
 												</select>
 											</div>
 										</div>
@@ -271,26 +278,21 @@ var path='<%=path%>
 
 									<div class="form-group">
 										<div class="group">
-											<label class="col-sm-2 control-label">CS Department</label>
-											<div class="col-sm-4">
-												<select class="form-control" name="csSubDept"
-													data-bv-notempty
-													data-bv-notempty-message="Please Select Your CsSubDept"
-													id="csSubDept" data-bv-group=".group">
-													<option value="">-- Option--</option>
-
-												</select>
-											</div>
-										</div>
-										<div class="group">
 											<label class="col-sm-2 control-label">Requirement Number</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="requirementNumber"
 													id="requirementNumber" data-bv-group=".group"/>
 											</div>
 										</div>
-
+										<div class="group">
+											<label class="col-sm-2 control-label">Remark</label>
+											<div class="col-sm-4">
+												<textarea type="text" rows="6" class="form-control" name="remark"
+													id="remark" data-bv-group=".group"></textarea>
+											</div>
+										</div>
 									</div>
+                                    <br/><br/><br/>
 
 									<div class="form-group">
 										<div style="text-align: center; width: 50%; float: left">
