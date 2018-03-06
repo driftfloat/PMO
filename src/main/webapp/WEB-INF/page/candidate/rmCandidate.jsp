@@ -116,7 +116,7 @@ vertical-align: middle!important;
 												<th>Gender</th>
 												<th>Age</th>
 												<th>Skill</th>
-												<th>Education</th>
+												<!-- <th>Education</th> -->
 												<th>Works Years</th>
 												<th>Tel</th>
 												<th>Email</th>
