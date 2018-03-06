@@ -282,6 +282,13 @@ var path='<%=path%>
 												</select>
 											</div>
 										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">Requirement Number</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="requirementNumber"
+													id="requirementNumber" data-bv-group=".group"/>
+											</div>
+										</div>
 
 									</div>
 

@@ -50,9 +50,18 @@ public class AddDemandController {
     @ResponseBody
     public boolean addDemand(AddDemand demand)
     {      
-    	String demandId = Utils.getUUID();
-    	demand.setDemandId(demandId);
-    	boolean resultFlag = addDemandService.addDemand(demand);
+    	boolean resultFlag = false;
+    	if(demand.getRequirementNumber()>1){
+    		for(int i=0;i<demand.getRequirementNumber();i++){
+    			String demandId = Utils.getUUID();
+    	    	demand.setDemandId(demandId);
+    	    	resultFlag = addDemandService.addDemand(demand);
+        	}
+    	}else{
+    		String demandId = Utils.getUUID();
+	    	demand.setDemandId(demandId);
+	    	resultFlag = addDemandService.addDemand(demand);
+    	}
         return resultFlag;
     }
     
