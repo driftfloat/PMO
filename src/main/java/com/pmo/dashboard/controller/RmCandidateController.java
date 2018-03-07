@@ -286,8 +286,8 @@ public class RmCandidateController {
 	@RequestMapping("/updateInterview")
 	@ResponseBody
 	public boolean updateInterview(CandidateInterview candidateInterview){
-		//将面试状态修改为1
-		candidateInterview.setInterviewStatus("1");
+		//将确认状态修改为1
+		candidateInterview.setConfirmStatus("1");
 		boolean result=rmCandidateService.updateInterview(candidateInterview);
 		return result;
 		
