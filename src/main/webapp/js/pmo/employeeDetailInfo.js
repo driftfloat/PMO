@@ -39,7 +39,8 @@ function loadEmployeeInfo(){
 			$('#eHr').val(employee.eHr);
 			$('#csSubDept').val(employee.csSubDeptName);
 			loadHSBCSubDept(employee.hsbcSubDept);
-			loadTerminationReason(employee);
+			//loadTerminationReason(employee);
+			$('#terminationReason').val(employee.terminationReason);
 			loadCSDept(employee);
 			$('#email').val(employee.email);
 			$('#entryDate1').val(employee.entryDate);
