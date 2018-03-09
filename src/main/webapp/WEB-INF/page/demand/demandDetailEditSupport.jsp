@@ -171,7 +171,7 @@ var userType='<%=userType%>'
 									</div>
 								</div>
 								
-								<div class="form-group">
+								<!-- <div class="form-group">
 										<div class="group">
 											<label class="col-lg-2 control-label">HR Priority</label>
 											<div class="col-lg-4">
@@ -186,11 +186,11 @@ var userType='<%=userType%>'
 								        <div class="group">
 											<label class="col-sm-2 control-label">Remark</label>
 											<div class="col-md-4">
-												<input type="text" class="form-control" name="remarkEdit" value="${demand.remark }"
-														id="remarkEdit" />
+												<textarea type="text" class="form-control" rows="10" name="remarkEdit"
+														id="remarkEdit">${demand.remark }</textarea>
 											</div>
 									    </div>
-								</div>
+								</div> -->
 								<div class="form-group">
 								         <div class="group" id="requestor" style='display:none'>
 											<label class="col-lg-2 control-label">HSBC Requestor</label>
@@ -250,7 +250,27 @@ var userType='<%=userType%>'
 											</div>
 										</div>
 								</div>
-								
+								<div class="form-group">
+										<div class="group">
+											<label class="col-lg-2 control-label">HR Priority</label>
+											<div class="col-lg-4">
+												<input type="text" style="display:none" value="${demand.hrPriority}" 
+													id="hrPriorityInput" />
+												<select class="form-control" name="hrPriorityEdit" data-bv-notempty
+													data-bv-notempty-message="Please Select Your HrPriority" id="hrPriorityEdit" data-bv-group=".group">
+													<option value="">--Option--</option>
+												</select>
+											</div>
+										</div>
+								        <div class="group">
+											<label class="col-sm-2 control-label">Remark</label>
+											<div class="col-md-4">
+												<textarea type="text" class="form-control" rows="6" name="remarkEdit"
+														id="remarkEdit">${demand.remark }</textarea>
+											</div>
+									    </div>
+								</div>
+								<br/><br/><br/>
 								
 								<div class="form-group">
 									    <div style="text-align:center;width:50%;float:left">

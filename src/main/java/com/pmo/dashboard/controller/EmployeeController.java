@@ -718,10 +718,39 @@ public class EmployeeController {
                    }
                    
                    if(conditionList.contains("CS Dept")){
-                	   if(csDept!=null) {
-                		   Label label= new Label(++j, i, csDept.getCsSubDeptName());
-                           ws.addCell(label); 
-                	   }else {
+                	   String temp = "";
+                	   String[] t = null;
+                	   if(listE.get(i-1).getCsSubDept()!=null && !"".equals(listE.get(i-1).getCsSubDept())){
+                		   if(listE.get(i-1).getCsSubDept().indexOf(",")!=-1){
+                			   t = listE.get(i-1).getCsSubDept().split(",");
+                		   }
+                	   }
+                	   if(allCSDept!=null && allCSDept.size()>0){
+                		   for(int k=0;k<allCSDept.size();k++){
+                			   if(t!=null && t.length>0){
+                				   for(int n=0;n<t.length;n++){
+                					   if(t[n].equals(allCSDept.get(k).getCsSubDeptId())){
+                						   temp+=allCSDept.get(k).getCsSubDeptName()+",";
+                					   }
+                				   }
+                			   }else{
+                				   if(listE.get(i-1).getCsSubDept()!=null && !"".equals(listE.get(i-1).getCsSubDept())){
+                					   if(listE.get(i-1).getCsSubDept().equals(allCSDept.get(k).getCsSubDeptId())){
+                						   temp=allCSDept.get(k).getCsSubDeptName();
+                					   }
+                				   }
+                			   }
+                			   
+                		   }
+                		   if(temp.indexOf(",")!=-1){
+                			   Label label= new Label(++j, i, temp.substring(0, temp.length()-1));
+                               ws.addCell(label); 
+                		   }else{
+                			   Label label= new Label(++j, i, temp);
+                               ws.addCell(label); 
+                		   }
+                	   }
+                	   if("".equals(temp)) {
                 		   Label label= new Label(++j, i, "");
                            ws.addCell(label); 
                 	   }
