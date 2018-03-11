@@ -311,7 +311,7 @@ function dateType(){
 		pickerPosition: 'bottom-left',
 		showMeridian: 1
 	}).on('changeDate', function(ev){
-		 $('#recruitdemandFormEdit').bootstrapValidator('revalidateField', 'reqPublishedDate1Edit'); 
+		 $('#recruitdemandForm').bootstrapValidator('revalidateField', 'reqPublishedDate1'); 
 	});
 }
 
