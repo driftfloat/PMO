@@ -63,7 +63,7 @@ $(document).ready(function() {
 
                 }
             },
-            plannedOnboardDate1: {
+            /*plannedOnboardDate1: {
                 validators: {
                     notEmpty: {
                         message: 'Please entry date'
@@ -74,7 +74,7 @@ $(document).ready(function() {
                     }
 
                 }
-            },
+            },*/
             hrPriorityEdit: {
                 validators: {
                     notEmpty: {
@@ -83,23 +83,23 @@ $(document).ready(function() {
 
                 }
             },
-            profilesNoEdit: {
+            /*profilesNoEdit: {
                 validators: {
                     notEmpty: {
                         message: 'Please select your No. of Profiles Sent to HSBC'
                     }
 
                 }
-            },
+            },*/
             
-            interviewedNoEdit: {
+            /*interviewedNoEdit: {
                 validators: {
                     notEmpty: {
                         message: 'Please select your No of Profiles Interviewed'
                     }
 
                 }
-            },
+            },*/
             reqPublishedDate1Edit: {
                 validators: {
                     notEmpty: {
@@ -112,14 +112,14 @@ $(document).ready(function() {
 
                 }
             },
-            ageingEdit: {
+            /*ageingEdit: {
                 validators: {
                     notEmpty: {
                         message: 'Please select your ageing'
                     }
 
                 }
-            },
+            },*/
             remarkEdit: { 
             	validators: { 
             		notEmpty: {
