@@ -464,6 +464,8 @@ function exportCondition(){
 }
 
 function demandDetail(demandId){
+	
+	
 	$("#demandId").val(demandId);
 	var url = path+'/service/demand/demandDetail';
 	$("#detailForm").attr("action",url);
@@ -481,6 +483,8 @@ function demandDetail(demandId){
 
 //add by jama
 function demandDetailUpdate(demandId){
+	
+	
 	$("#demandId").val(demandId);
 	var url = path+'/service/demand/demandDetailUpdate';
 	$("#detailForm").attr("action",url);
@@ -499,7 +503,73 @@ function demandDetailUpdate(demandId){
 function updateDemand(index){
 	var bootstrapValidator = $("#recruitdemandFormEdit").data('bootstrapValidator');
 	   bootstrapValidator.validate();
-	if(bootstrapValidator.isValid()){
+	   
+	   setTimeout(function(){
+		   var flag2 = $("#recruitdemandFormEdit").data('bootstrapValidator').validate();
+		   if(flag2){
+			   if(bootstrapValidator.isValid()){
+					var demandId=$('#demandIdEdit').val();
+					var engagementType=$('#engagementType').val();
+					var rr=$('#rrEdit').val();
+					var jobCode=$('#jobCodeEdit').val();
+					var skill=$('#skillEdit').val();
+					var requestor=$('#requestorEdit').val();
+					var position=$('#positionEdit').val();
+					//部门信息
+					var hsbcDept=$('#hsbcDeptEdit').val();
+					var hsbcSubDept=$('#hsbcSubDeptEdit').val();
+					var location=$('#locationEdit').val();
+					var reqPublishedDate=$('#reqPublishedDate1Edit').val();
+					var ageing=$('#ageingEdit').val();
+					var profilesNo=$('#profilesNoEdit').val();
+					var interviewedNo=$('#interviewedNoEdit').val();
+					var status=$('#status').val();
+					var proposedJoiningDate=$('#proposedJoiningDateEdit1').val();
+					var bgvCleared=$('#bgvClearedEdit').val();
+					var sowSigned=$('#sowSignedEdit').val();
+					var reason=$('#reasonEdit').val();
+					
+					var remark=$('#remarkEdit').val();
+					var csSubDept=$('#csSubDeptEdit').val();
+
+					var plannedOnboardDate=$('#plannedOnboardDate1').val();
+					var doNumber=$('#doNumberEdit').val();
+					var hrPriority=$('#hrPriorityEdit').val();
+					var staffName=$('#candidateNameEdit').val();
+					
+					$.ajax({
+						url:path+'/service/demand/updateDemand',
+						dataType:"json",
+						data:{"demandId":demandId,"rr":rr,"engagementType":engagementType,"jobCode":jobCode,"skill":skill,"requestor":requestor,
+							"position":position,"location":location,
+							"reqPublishedDate":reqPublishedDate,"ageing":ageing,"profilesNo":profilesNo,
+							"interviewedNo":interviewedNo,"status":status,"staffName":staffName,
+							"proposedJoiningDate":proposedJoiningDate,"sowSigned":sowSigned,
+							"reason":reason,"bgvCleared":bgvCleared,
+							"remark":remark,"csSubDept":csSubDept,"plannedOnboardDate":plannedOnboardDate,
+							"doNumber":doNumber,"hrPriority":hrPriority,
+							"hsbcDept":hsbcDept,"hsbcSubDept":hsbcSubDept,"onborad":index},
+						async:true,
+						cache:false,
+						type:"post",
+						success:function(resultFlag){
+							if(resultFlag){
+								$("html,body").animate({scrollTop:0}, 500);
+								$('#successAlert').html('demand update sucessful!').show();
+								setTimeout(function () {
+									$('#successAlert').hide();
+								}, 2000);
+								self.opener.location.reload();
+							}
+						}
+					})
+				}else{
+					return;
+				}
+		   }
+	   },500);
+	   
+	/*if(bootstrapValidator.isValid()){
 		var demandId=$('#demandIdEdit').val();
 		var engagementType=$('#engagementType').val();
 		var rr=$('#rrEdit').val();
@@ -557,5 +627,5 @@ function updateDemand(index){
 		})
 	}else{
 		return;
-	}
+	}*/
 }
