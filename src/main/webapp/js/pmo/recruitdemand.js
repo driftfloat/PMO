@@ -1,4 +1,9 @@
 $(function(){
+	$('#demandDraftTip').hide();
+	$("#haveDraftTip").hide();
+	loadDemandDraft();
+	//定义一个反复执行的调用 
+	setInterval(addDemandDraft,3000);
 	loadDept();
 	loadSkill();
 	loadPosition();
@@ -10,8 +15,9 @@ $(function(){
 	//dateType2();
 	loadCsSubDept();
 	//loadEngagementType();
+	
 })
-
+var draftFlag = false;
 /*function addDemand(){
 	var url = path+'/service/demand/addDemand';
 	alert(url);
@@ -42,6 +48,7 @@ $('#jobCode').blur(function(){
 	$('#hrPriority').append("<option>3</option>");
 }*/
 
+ 
 
 function loadDept(){
 	$.ajax({
@@ -355,5 +362,180 @@ $("#getSupport").click(function(){
 	window.location.href = path+"/service/demand/recruitType.html?status=3";
 });
 
+//保存需求草稿
+function addDemandDraft(){
+		var demandId=$('#demandId').val();
+		var engagementType=$('#engagementType').val();
+		var rr=$('#rr').val();
+		var jobCode=$('#jobCode').val();
+		var skill=$('#skill').val();
+		var requestor=$('#requestor').val();
+		var position=$('#position').val();
+		//部门信息
+		var hsbcDept=$('#hsbcDept').val();
+		var hsbcSubDept=$('#hsbcSubDept').val();
+		var location=$('#location').val();
+		var reqPublishedDate=$('#reqPublishedDate2').val();
+		var ageing=$('#ageing').val();
+		var profilesNo=$('#profilesNo').val();
+		var interviewedNo=$('#interviewedNo').val();
+		var status=$('#status').val();
+		var proposedJoiningDate=$('#proposedJoiningDate').val();
+		var dcCleared=$('#dcCleared').val();
+		var sowSigned=$('#sowSigned').val();
+		var onboarded=$('#onboarded').val();
+		var abort=$('#abort').val();
+		var delayed=$('#delayed').val();
+		var reason=$('#reason').val();
+		var nextAction=$('#nextAction').val();
+		var status2=$('#status2').val();
+		var remark=$('#remark').val();
+		var csSubDept=$('#csSubDept').val();
+		var plannedOnboardDate=$('#plannedOnboardDate2').val();
+		var doNumber=$('#doNumber').val();
+		var hrPriority=$('#hrPriority').val();
+		var reqReceivedDate=$('#reqReceivedDate').val();
+		var ageingReceived=$('#ageingReceived').val();
+		var demandPriority=$('#demandPriority').val();
+		var creatDate=$('#creatDate').val();
+		var updateDate=$('#updateDate').val();
+		var recruitmentCycle=$('#recruitmentCycle').val();
+		var completionDay=$('#completionDay').val();
+		var completionDate=$('#completionDate').val();
+		var onboardDate=$('#onboardDate').val();
+		var staffName=$('#staffName').val();
+		
+		//需求数量
+		var requirementNumber=$('#requirementNumber').val();
+		var addDemandConditionStr = demandId + engagementType + rr + jobCode
+						+ skill + requestor + position + hsbcDept + hsbcSubDept
+						+ location + reqPublishedDate + ageing + profilesNo
+						+ interviewedNo + status + proposedJoiningDate + dcCleared
+						+ sowSigned + onboarded + abort + delayed + reason + nextAction
+						+ status2 + remark + csSubDept + plannedOnboardDate + doNumber
+						+ hrPriority + reqReceivedDate + ageingReceived
+						+ demandPriority + creatDate + updateDate + recruitmentCycle
+						+ completionDay + completionDate + onboardDate + staffName + requirementNumber;
+		
+		$.ajax({
+			url:path+'/service/demandDraft/add',
+			dataType:"json",
+			data:{"rr":rr,"jobCode":jobCode,"engagementType":engagementType,"skill":skill,"requestor":requestor,
+				"position":position,"location":location,
+				"reqPublishedDate":reqPublishedDate,"ageing":ageing,"profilesNo":profilesNo,
+				"interviewedNo":interviewedNo,"status":status,"staffName":staffName,
+				"proposedJoiningDate":proposedJoiningDate,"dcCleared":dcCleared,"sowSigned":sowSigned,
+				"onboarded":onboarded,"abort":abort,"delayed":delayed,"reason":reason,"nextAction":nextAction,
+				"status2":status2,"remark":remark,"csSubDept":csSubDept,"plannedOnboardDate":plannedOnboardDate,
+				"doNumber":doNumber,"hrPriority":hrPriority,"reqReceivedDate":reqReceivedDate,"ageingReceived":ageingReceived,
+				"demandPriority":demandPriority,"creatDate":creatDate,"updateDate":updateDate,"recruitmentCycle":recruitmentCycle,
+				"completionDay":completionDay,"completionDate":completionDate,"onboardDate":onboardDate,"hsbcDept":hsbcDept,"hsbcSubDept":hsbcSubDept,"requirementNumber":requirementNumber},
+			async:true,
+			cache:false,
+			type:"post",
+			success:function(resultFlag){
+				if(resultFlag){
+					/*$("html,body").animate({scrollTop:0}, 500);
+					$('#successAlert').html('The information was added successfully').show();
+					setTimeout(function () {
+						$('#successAlert').hide();
+					}, 2000);*/
+					
+					if(draftFlag==false){
+						$("#demandDraftTip").show();
+						draftFlag = true;
+					}
+					setTimeout(function () {
+						$('#demandDraftTip').hide();
+					}, 3000);
+				}
+			}
+		})
+}
 
+function loadDemandDraft(){
+	$.ajax({
+		url:path+'/service/demandDraft/getByID',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			if(result!=null){
+				$("#haveDraftTip").show();
+			}
+		}
+	})
+}
+
+function delDemandDraft(){
+	$.ajax({
+		url:path+'/service/demandDraft/delete',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			if(result){
+				$("#haveDraftTip").hide();
+			}
+		}
+	})
+}
+
+function recoveryDemandDraft(){
+	$("#haveDraftTip").hide();
+	$.ajax({
+		url:path+'/service/demandDraft/getByID',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			if(result!=null){
+				if(result.rr!=null && result.rr!=''){
+					$("#rr").val(result.rr);
+				}
+                if(result.engagementType!=null && result.engagementType!=''){
+                	$("#engagementType").val(result.engagementType);
+				}
+                if(result.skill!=null && result.skill!=''){
+                	$("#skill").val(result.skill);
+                }
+                if(result.location!=null && result.location!=''){
+                	$("#location").val(result.location);
+                }
+                if(result.jobCode!=null && result.jobCode!=''){
+                	$("#jobCode").val(result.jobCode);
+                }
+                if(result.position!=null && result.position!=''){
+                	$("#position").val(result.position);
+                }
+                if(result.requestor!=null && result.requestor!=''){
+                	$("#requestor").val(result.requestor);
+                }
+                if(result.remark!=null && result.remark!=''){
+                	$("#remark").val(result.remark);
+                }
+                if(result.hsbcSubdeptId!=null && result.hsbcSubdeptId!=''){
+                	//$("#hsbcDept").val(result.hsbcSubdeptId);
+                	$("#hsbcDept").find("option[value='"+result.hsbcSubdeptId+"']").attr("selected",true);
+                }
+                if(result.csSubdept!=null && result.csSubdept!=''){
+                	//$("#csSubDept").val(result.csSubdept);
+                	$("#csSubDept").find("option[value='"+result.csSubdept+"']").attr("selected",true);
+                }
+                /*if(){
+	
+                }
+                if(){
+	
+                }
+                if(){
+	
+                }*/
+			}
+		}
+	})
+}
 

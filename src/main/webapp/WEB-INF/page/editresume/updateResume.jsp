@@ -289,7 +289,7 @@
 								<div class="form-group">
 										<div class="group">
 										<div class="group">
-											<label class="col-sm-2 control-label">Expected Salary</label>
+											<label class="col-sm-2 control-label">Expected Salary(元)</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="expected_salary"
 													id="expected_salary" />
@@ -298,7 +298,7 @@
 									</div>
 									<div class="group">
 										<div class="group">
-											<label class="col-sm-2 control-label">Real Salary</label>
+											<label class="col-sm-2 control-label">Real Salary(元)</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="real_salary"
 													id="real_salary" />

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pmo.dashboard.dao.DemandDraftMapper" >
+  <resultMap id="BaseResultMap" type="com.pmo.dashboard.entity.DemandDraft" >
+    <id column="DEMAND_ID" property="demandId" jdbcType="VARCHAR" />
+    <result column="RR" property="rr" jdbcType="VARCHAR" />
+    <result column="JOB_CODE" property="jobCode" jdbcType="VARCHAR" />
+    <result column="SKILL" property="skill" jdbcType="VARCHAR" />
+    <result column="REQUESTOR" property="requestor" jdbcType="VARCHAR" />
+    <result column="POSITION" property="position" jdbcType="VARCHAR" />
+    <result column="HSBC_SUBDEPT_ID" property="hsbcSubdeptId" jdbcType="VARCHAR" />
+    <result column="LOCATION" property="location" jdbcType="VARCHAR" />
+    <result column="REQ_PUBLISHED_DATE" property="reqPublishedDate" jdbcType="VARCHAR" />
+    <result column="AGEING" property="ageing" jdbcType="VARCHAR" />
+    <result column="PROFILES_NO" property="profilesNo" jdbcType="VARCHAR" />
+    <result column="INTERVIEWED_NO" property="interviewedNo" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CANDIDATE_NAME" property="candidateName" jdbcType="VARCHAR" />
+    <result column="CANDIDATE_ID" property="candidateId" jdbcType="VARCHAR" />
+    <result column="PROPOSED_JOINING_DATE" property="proposedJoiningDate" jdbcType="VARCHAR" />
+    <result column="BGV_CLEARED" property="bgvCleared" jdbcType="VARCHAR" />
+    <result column="SOW_SIGNED" property="sowSigned" jdbcType="VARCHAR" />
+    <result column="REASON" property="reason" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CS_SUBDEPT" property="csSubdept" jdbcType="VARCHAR" />
+    <result column="PLANNED_ONBOARD_DATE" property="plannedOnboardDate" jdbcType="VARCHAR" />
+    <result column="DO_NUMBER" property="doNumber" jdbcType="VARCHAR" />
+    <result column="HR_PRIORITY" property="hrPriority" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="VARCHAR" />
+    <result column="COMPLETION_DAY" property="completionDay" jdbcType="VARCHAR" />
+    <result column="COMPLETION_DATE" property="completionDate" jdbcType="VARCHAR" />
+    <result column="ENGAGEMENT_TYPE" property="engagementType" jdbcType="VARCHAR" />
+    <result column="ONBOARD_DATE" property="onboardDate" jdbcType="VARCHAR" />
+    <result column="OPERATE_ID" property="operateId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DEMAND_ID, RR, JOB_CODE, SKILL, REQUESTOR, POSITION, HSBC_SUBDEPT_ID, LOCATION, REQ_PUBLISHED_DATE, 
+    AGEING, PROFILES_NO, INTERVIEWED_NO, STATUS, CANDIDATE_NAME, CANDIDATE_ID, PROPOSED_JOINING_DATE, 
+    BGV_CLEARED, SOW_SIGNED, REASON, REMARK, CS_SUBDEPT, PLANNED_ONBOARD_DATE, DO_NUMBER, 
+    HR_PRIORITY, CREATE_DATE, UPDATE_DATE, COMPLETION_DAY, COMPLETION_DATE, ENGAGEMENT_TYPE, 
+    ONBOARD_DATE, OPERATE_ID
+  </sql>
+  
+  <select id="getByID" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_demand_draft
+    where OPERATE_ID = #{operateId,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.String" >
+    delete from t_demand_draft
+    where OPERATE_ID = #{operateId,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="add" parameterType="com.pmo.dashboard.entity.DemandDraft" >
+    insert into t_demand_draft
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="demandId != null" >
+        DEMAND_ID,
+      </if>
+      <if test="rr != null" >
+        RR,
+      </if>
+      <if test="jobCode != null" >
+        JOB_CODE,
+      </if>
+      <if test="skill != null" >
+        SKILL,
+      </if>
+      <if test="requestor != null" >
+        REQUESTOR,
+      </if>
+      <if test="position != null" >
+        POSITION,
+      </if>
+      <if test="hsbcSubdeptId != null" >
+        HSBC_SUBDEPT_ID,
+      </if>
+      <if test="location != null" >
+        LOCATION,
+      </if>
+      <if test="reqPublishedDate != null" >
+        REQ_PUBLISHED_DATE,
+      </if>
+      <if test="ageing != null" >
+        AGEING,
+      </if>
+      <if test="profilesNo != null" >
+        PROFILES_NO,
+      </if>
+      <if test="interviewedNo != null" >
+        INTERVIEWED_NO,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="candidateName != null" >
+        CANDIDATE_NAME,
+      </if>
+      <if test="candidateId != null" >
+        CANDIDATE_ID,
+      </if>
+      <if test="proposedJoiningDate != null" >
+        PROPOSED_JOINING_DATE,
+      </if>
+      <if test="bgvCleared != null" >
+        BGV_CLEARED,
+      </if>
+      <if test="sowSigned != null" >
+        SOW_SIGNED,
+      </if>
+      <if test="reason != null" >
+        REASON,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="csSubdept != null" >
+        CS_SUBDEPT,
+      </if>
+      <if test="plannedOnboardDate != null" >
+        PLANNED_ONBOARD_DATE,
+      </if>
+      <if test="doNumber != null" >
+        DO_NUMBER,
+      </if>
+      <if test="hrPriority != null" >
+        HR_PRIORITY,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE,
+      </if>
+      <if test="completionDay != null" >
+        COMPLETION_DAY,
+      </if>
+      <if test="completionDate != null" >
+        COMPLETION_DATE,
+      </if>
+      <if test="engagementType != null" >
+        ENGAGEMENT_TYPE,
+      </if>
+      <if test="onboardDate != null" >
+        ONBOARD_DATE,
+      </if>
+      <if test="operateId != null" >
+        OPERATE_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="demandId != null" >
+        #{demandId,jdbcType=VARCHAR},
+      </if>
+      <if test="rr != null" >
+        #{rr,jdbcType=VARCHAR},
+      </if>
+      <if test="jobCode != null" >
+        #{jobCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skill != null" >
+        #{skill,jdbcType=VARCHAR},
+      </if>
+      <if test="requestor != null" >
+        #{requestor,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="hsbcSubdeptId != null" >
+        #{hsbcSubdeptId,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="reqPublishedDate != null" >
+        #{reqPublishedDate,jdbcType=VARCHAR},
+      </if>
+      <if test="ageing != null" >
+        #{ageing,jdbcType=VARCHAR},
+      </if>
+      <if test="profilesNo != null" >
+        #{profilesNo,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewedNo != null" >
+        #{interviewedNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="candidateName != null" >
+        #{candidateName,jdbcType=VARCHAR},
+      </if>
+      <if test="candidateId != null" >
+        #{candidateId,jdbcType=VARCHAR},
+      </if>
+      <if test="proposedJoiningDate != null" >
+        #{proposedJoiningDate,jdbcType=VARCHAR},
+      </if>
+      <if test="bgvCleared != null" >
+        #{bgvCleared,jdbcType=VARCHAR},
+      </if>
+      <if test="sowSigned != null" >
+        #{sowSigned,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="csSubdept != null" >
+        #{csSubdept,jdbcType=VARCHAR},
+      </if>
+      <if test="plannedOnboardDate != null" >
+        #{plannedOnboardDate,jdbcType=VARCHAR},
+      </if>
+      <if test="doNumber != null" >
+        #{doNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="hrPriority != null" >
+        #{hrPriority,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="completionDay != null" >
+        #{completionDay,jdbcType=VARCHAR},
+      </if>
+      <if test="completionDate != null" >
+        #{completionDate,jdbcType=VARCHAR},
+      </if>
+      <if test="engagementType != null" >
+        #{engagementType,jdbcType=VARCHAR},
+      </if>
+      <if test="onboardDate != null" >
+        #{onboardDate,jdbcType=VARCHAR},
+      </if>
+      <if test="operateId != null" >
+        #{operateId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="com.pmo.dashboard.entity.DemandDraft" >
+    update t_demand_draft
+    <set >
+      <if test="rr != null" >
+        RR = #{rr,jdbcType=VARCHAR},
+      </if>
+      <if test="jobCode != null" >
+        JOB_CODE = #{jobCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skill != null" >
+        SKILL = #{skill,jdbcType=VARCHAR},
+      </if>
+      <if test="requestor != null" >
+        REQUESTOR = #{requestor,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        POSITION = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="hsbcSubdeptId != null" >
+        HSBC_SUBDEPT_ID = #{hsbcSubdeptId,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        LOCATION = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="reqPublishedDate != null" >
+        REQ_PUBLISHED_DATE = #{reqPublishedDate,jdbcType=VARCHAR},
+      </if>
+      <if test="ageing != null" >
+        AGEING = #{ageing,jdbcType=VARCHAR},
+      </if>
+      <if test="profilesNo != null" >
+        PROFILES_NO = #{profilesNo,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewedNo != null" >
+        INTERVIEWED_NO = #{interviewedNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="candidateName != null" >
+        CANDIDATE_NAME = #{candidateName,jdbcType=VARCHAR},
+      </if>
+      <if test="candidateId != null" >
+        CANDIDATE_ID = #{candidateId,jdbcType=VARCHAR},
+      </if>
+      <if test="proposedJoiningDate != null" >
+        PROPOSED_JOINING_DATE = #{proposedJoiningDate,jdbcType=VARCHAR},
+      </if>
+      <if test="bgvCleared != null" >
+        BGV_CLEARED = #{bgvCleared,jdbcType=VARCHAR},
+      </if>
+      <if test="sowSigned != null" >
+        SOW_SIGNED = #{sowSigned,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        REASON = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="csSubdept != null" >
+        CS_SUBDEPT = #{csSubdept,jdbcType=VARCHAR},
+      </if>
+      <if test="plannedOnboardDate != null" >
+        PLANNED_ONBOARD_DATE = #{plannedOnboardDate,jdbcType=VARCHAR},
+      </if>
+      <if test="doNumber != null" >
+        DO_NUMBER = #{doNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="hrPriority != null" >
+        HR_PRIORITY = #{hrPriority,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE = #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="completionDay != null" >
+        COMPLETION_DAY = #{completionDay,jdbcType=VARCHAR},
+      </if>
+      <if test="completionDate != null" >
+        COMPLETION_DATE = #{completionDate,jdbcType=VARCHAR},
+      </if>
+      <if test="engagementType != null" >
+        ENGAGEMENT_TYPE = #{engagementType,jdbcType=VARCHAR},
+      </if>
+      <if test="onboardDate != null" >
+        ONBOARD_DATE = #{onboardDate,jdbcType=VARCHAR},
+      </if>
+      <if test="operateId != null" >
+        OPERATE_ID = #{operateId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DEMAND_ID = #{demandId,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

@@ -278,7 +278,7 @@ var path='<%=path%>';
 										
 										<div class="group">
 										<div class="group">
-											<label class="col-sm-2 control-label">Expected Salary</label>
+											<label class="col-sm-2 control-label">Expected Salary(元)</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="expected_salary"
 													id="expected_salary" />
