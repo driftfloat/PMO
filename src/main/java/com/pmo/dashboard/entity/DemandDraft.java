@@ -69,8 +69,22 @@ public class DemandDraft {
     private String onboardDate;
 
     private String operateId;
+    
+    
+    //表外字段
+    private String type;//1:Time&Material Team Delivery,2:Fixed Price,3:Support
+    
+    
 
-    public String getDemandId() {
+    public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getDemandId() {
         return demandId;
     }
 

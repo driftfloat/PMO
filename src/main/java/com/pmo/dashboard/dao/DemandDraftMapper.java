@@ -1,13 +1,15 @@
 package com.pmo.dashboard.dao;
 
+import java.util.Map;
+
 import com.pmo.dashboard.entity.DemandDraft;
 
 public interface DemandDraftMapper {
-    int delete(String demandId);
+    int delete(Map<String,String> param);
 
     int add(DemandDraft record);
 
-    DemandDraft getByID(String demandId);
+    DemandDraft getByID(Map<String,String> param);
 
     int update(DemandDraft record);
 }

@@ -1,5 +1,7 @@
 package com.pom.dashboard.service;
 
+import java.util.Map;
+
 import com.pmo.dashboard.entity.DemandDraft;
 
 /**
@@ -14,8 +16,8 @@ public interface DemandDraftService {
 	
 	boolean update(DemandDraft record);
 	
-	boolean delete(String id);
+	boolean delete(Map<String,String> param);
 	
-	DemandDraft getByID(String id);
+	DemandDraft getByID(Map<String,String> param);
 
 }

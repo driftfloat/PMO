@@ -1,9 +1,10 @@
+var t1;
 $(function(){
 	$('#demandDraftTip').hide();
 	$("#haveDraftTip").hide();
 	loadDemandDraft();
 	//定义一个反复执行的调用 
-	setInterval(addDemandDraft,3000);
+	t1 = setInterval(addDemandDraft,3000);
 	loadDept();
 	loadSkill();
 	loadPosition();
@@ -135,9 +136,7 @@ function loadCsSubDept(){
 
 var lastConditionStr = "";
 function addDemand(){
-	//dateType2();
-	//var isvalid = false;
-	//isvalid = $('#recruitdemandForm').data('bootstrapValidator').isValid();
+	clearInterval(t1);
 	 var bootstrapValidator = $("#recruitdemandForm").data('bootstrapValidator');
 	   bootstrapValidator.validate();
 	if(bootstrapValidator.isValid()){
@@ -219,7 +218,7 @@ function addDemand(){
 				"status2":status2,"remark":remark,"csSubDept":csSubDept,"plannedOnboardDate":plannedOnboardDate,
 				"doNumber":doNumber,"hrPriority":hrPriority,"reqReceivedDate":reqReceivedDate,"ageingReceived":ageingReceived,
 				"demandPriority":demandPriority,"creatDate":creatDate,"updateDate":updateDate,"recruitmentCycle":recruitmentCycle,
-				"completionDay":completionDay,"completionDate":completionDate,"onboardDate":onboardDate,"hsbcDept":hsbcDept,"hsbcSubDept":hsbcSubDept,"requirementNumber":requirementNumber},
+				"completionDay":completionDay,"completionDate":completionDate,"onboardDate":onboardDate,"hsbcDept":hsbcDept,"hsbcSubDept":hsbcSubDept,"requirementNumber":requirementNumber,"type":1},
 			async:true,
 			cache:false,
 			type:"post",
@@ -429,7 +428,7 @@ function addDemandDraft(){
 				"status2":status2,"remark":remark,"csSubDept":csSubDept,"plannedOnboardDate":plannedOnboardDate,
 				"doNumber":doNumber,"hrPriority":hrPriority,"reqReceivedDate":reqReceivedDate,"ageingReceived":ageingReceived,
 				"demandPriority":demandPriority,"creatDate":creatDate,"updateDate":updateDate,"recruitmentCycle":recruitmentCycle,
-				"completionDay":completionDay,"completionDate":completionDate,"onboardDate":onboardDate,"hsbcDept":hsbcDept,"hsbcSubDept":hsbcSubDept,"requirementNumber":requirementNumber},
+				"completionDay":completionDay,"completionDate":completionDate,"onboardDate":onboardDate,"hsbcDept":hsbcDept,"hsbcSubDept":hsbcSubDept,"requirementNumber":requirementNumber,"type":1},
 			async:true,
 			cache:false,
 			type:"post",
@@ -447,7 +446,7 @@ function addDemandDraft(){
 					}
 					setTimeout(function () {
 						$('#demandDraftTip').hide();
-					}, 3000);
+					}, 2000);
 				}
 			}
 		})
@@ -457,6 +456,7 @@ function loadDemandDraft(){
 	$.ajax({
 		url:path+'/service/demandDraft/getByID',
 		dataType:"json",
+		data:{"type":1},
 		async:true,
 		cache:false,
 		type:"post",
@@ -472,6 +472,7 @@ function delDemandDraft(){
 	$.ajax({
 		url:path+'/service/demandDraft/delete',
 		dataType:"json",
+		data:{"type":1},
 		async:true,
 		cache:false,
 		type:"post",
@@ -488,6 +489,7 @@ function recoveryDemandDraft(){
 	$.ajax({
 		url:path+'/service/demandDraft/getByID',
 		dataType:"json",
+		data:{"type":1},
 		async:true,
 		cache:false,
 		type:"post",
@@ -518,20 +520,20 @@ function recoveryDemandDraft(){
                 	$("#remark").val(result.remark);
                 }
                 if(result.hsbcSubdeptId!=null && result.hsbcSubdeptId!=''){
-                	//$("#hsbcDept").val(result.hsbcSubdeptId);
                 	$("#hsbcDept").find("option[value='"+result.hsbcSubdeptId+"']").attr("selected",true);
                 }
                 if(result.csSubdept!=null && result.csSubdept!=''){
-                	//$("#csSubDept").val(result.csSubdept);
                 	$("#csSubDept").find("option[value='"+result.csSubdept+"']").attr("selected",true);
                 }
+                if(result.plannedOnboardDate!=null && result.plannedOnboardDate!=''){
+                	$("#plannedOnboardDate1").val(result.plannedOnboardDate);
+                	$("#plannedOnboardDate2").val(result.plannedOnboardDate);
+                }
+                if(result.reqPublishedDate!=null && result.reqPublishedDate!=''){
+                	$("#reqPublishedDate1").val(result.reqPublishedDate);
+                	$("#reqPublishedDate2").val(result.reqPublishedDate);
+                }
                 /*if(){
-	
-                }
-                if(){
-	
-                }
-                if(){
 	
                 }*/
 			}

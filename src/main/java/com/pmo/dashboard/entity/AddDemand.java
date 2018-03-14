@@ -87,8 +87,19 @@ public class AddDemand
     
     //表外字段
     private int requirementNumber;
+    private String type;//1:Time&Material Team Delivery,2:Fixed Price,3:Support
     
     
+    
+    
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public int getRequirementNumber() {
 		return requirementNumber;

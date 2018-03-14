@@ -104,8 +104,8 @@ var path='<%=path%>
 	                                    <div id="haveDraftTip" class="alert alert-dismissable alert-info">
 		                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		                                 <strong>Info:</strong>
-		                                 <a href="#" onClick="recoveryDemandDraft()" class="alert-link">恢复草稿</a> &nbsp;
-		                                 <a href="#" onClick="delDemandDraft();" class="alert-link">删除草稿</a>
+		                                 <a href="#" onClick="recoveryDemandDraft()" class="alert-link">Restore Draft</a> &nbsp;
+		                                 <a href="#" onClick="delDemandDraft();" class="alert-link">Delete Draft</a>
 	                                    </div>
 											
 										<div class="group">

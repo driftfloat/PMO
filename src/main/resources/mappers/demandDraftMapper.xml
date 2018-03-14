@@ -33,25 +33,36 @@
     <result column="ENGAGEMENT_TYPE" property="engagementType" jdbcType="VARCHAR" />
     <result column="ONBOARD_DATE" property="onboardDate" jdbcType="VARCHAR" />
     <result column="OPERATE_ID" property="operateId" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     DEMAND_ID, RR, JOB_CODE, SKILL, REQUESTOR, POSITION, HSBC_SUBDEPT_ID, LOCATION, REQ_PUBLISHED_DATE, 
     AGEING, PROFILES_NO, INTERVIEWED_NO, STATUS, CANDIDATE_NAME, CANDIDATE_ID, PROPOSED_JOINING_DATE, 
     BGV_CLEARED, SOW_SIGNED, REASON, REMARK, CS_SUBDEPT, PLANNED_ONBOARD_DATE, DO_NUMBER, 
     HR_PRIORITY, CREATE_DATE, UPDATE_DATE, COMPLETION_DAY, COMPLETION_DATE, ENGAGEMENT_TYPE, 
-    ONBOARD_DATE, OPERATE_ID
+    ONBOARD_DATE, OPERATE_ID, TYPE
   </sql>
   
   <select id="getByID" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from t_demand_draft
-    where OPERATE_ID = #{operateId,jdbcType=VARCHAR}
+    from t_demand_draft where 1=1
+    <if test="operateId != null" >
+      and OPERATE_ID = #{operateId,jdbcType=VARCHAR}
+    </if>
+    <if test="type != null" >
+      and TYPE = #{type,jdbcType=VARCHAR}
+    </if>
   </select>
   
   <delete id="delete" parameterType="java.lang.String" >
-    delete from t_demand_draft
-    where OPERATE_ID = #{operateId,jdbcType=VARCHAR}
+    delete from t_demand_draft where 1=1
+    <if test="operateId != null" >
+      and OPERATE_ID = #{operateId,jdbcType=VARCHAR}
+    </if>
+    <if test="type != null" >
+      and TYPE = #{type,jdbcType=VARCHAR}
+    </if>
   </delete>
   
   <insert id="add" parameterType="com.pmo.dashboard.entity.DemandDraft" >
@@ -150,6 +161,9 @@
       <if test="operateId != null" >
         OPERATE_ID,
       </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="demandId != null" >
@@ -244,6 +258,9 @@
       </if>
       <if test="operateId != null" >
         #{operateId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -340,6 +357,9 @@
       </if>
       <if test="operateId != null" >
         OPERATE_ID = #{operateId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
       </if>
     </set>
     where DEMAND_ID = #{demandId,jdbcType=VARCHAR}

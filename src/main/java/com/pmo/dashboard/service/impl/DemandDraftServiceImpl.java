@@ -1,5 +1,7 @@
 package com.pmo.dashboard.service.impl;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -35,8 +37,8 @@ public class DemandDraftServiceImpl implements DemandDraftService{
 	}
 
 	@Override
-	public boolean delete(String id) {
-		int i = demandDraftMapper.delete(id);
+	public boolean delete(Map<String,String> param) {
+		int i = demandDraftMapper.delete(param);
 		if(i>0){
 			return true;
 		}else{
@@ -45,8 +47,8 @@ public class DemandDraftServiceImpl implements DemandDraftService{
 	}
 
 	@Override
-	public DemandDraft getByID(String id) {
-		return demandDraftMapper.getByID(id);
+	public DemandDraft getByID(Map<String,String> param) {
+		return demandDraftMapper.getByID(param);
 	}
 
 }
