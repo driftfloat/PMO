@@ -96,12 +96,12 @@ var path='<%=path%>
 										<div id="successAlert" class="alert alert-success"
 											style="display: none;"></div>
 											
-										<div id="demandDraftTip" class="alert alert-dismissable alert-info">
+										<div id="demandDraftTip" class="alert alert-dismissable alert-info" style="display: none;">
 		                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		                                 <strong>Info:</strong>Automatic preservation of drafts
 	                                    </div>
 	                                    
-	                                    <div id="haveDraftTip" class="alert alert-dismissable alert-info">
+	                                    <div id="haveDraftTip" class="alert alert-dismissable alert-info" style="display: none;">
 		                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		                                 <strong>Info:</strong>
 		                                 <a href="#" onClick="recoveryDemandDraft()" class="alert-link">Restore Draft</a> &nbsp;
