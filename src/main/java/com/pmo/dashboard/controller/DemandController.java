@@ -34,6 +34,7 @@ import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.CSDeptService;
+import com.pom.dashboard.service.CandidateService;
 import com.pom.dashboard.service.DemandService;
 import com.pom.dashboard.service.HSBCDeptService;
 
@@ -54,6 +55,9 @@ public class DemandController {
 	
 	@Resource
 	DemandService demandService;
+	
+	@Resource
+    private CandidateService candidateService;
 	
 	@Resource
 	HSBCDeptService hsbcDeptService;
@@ -407,27 +411,53 @@ public class DemandController {
 	public String demandDetail(String demandId,String engagementType,String statusa,Model model,HttpServletRequest request){
 		
 	    //Demand demand = demandService.queryDemandById(demandId);
-		List<Demand> list = (List<Demand>) request.getSession().getAttribute("demandList");
-		for (Demand demand : list) {
-			if(demand.getDemandId().equals(demandId)){
-				HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
-				if(hSBCDept!=null) {
-					if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
-						hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
+		try{
+			List<Demand> list = (List<Demand>) request.getSession().getAttribute("demandList");
+			long day = 0;
+			for (Demand demand : list) {
+				if(demand.getDemandId().equals(demandId)){
+					HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
+					if(hSBCDept!=null) {
+						if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
+							hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
+						}
 					}
+					demand.setHsbcDept(hSBCDept);
+					
+					//ageing计算
+					if(demand.getStatus().equals("Onboard")){
+						SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+						if(demand.getOnboardDate()!=null && demand.getReqPublishedDate()!=null){
+							Date d1 = sf.parse(demand.getOnboardDate());
+							Date d2 = sf.parse(demand.getReqPublishedDate());
+							day=(d1.getTime()-d2.getTime())/(24*60*60*1000);
+							demand.setAgeing(String.valueOf(day));
+						}
+						
+						//计算发送简历和面试人数
+						if(demand.getCandidateId()!=null){
+							int i = candidateService.getCount(demand.getCandidateId());
+							demand.setProfilesNo(String.valueOf(i));
+							demand.setInterviewedNo(String.valueOf(i));
+						}
+					}
+					
+					
+					model.addAttribute("demand", demand);
+					if("1".equals(engagementType)){
+						return "/demand/demandDetailfp";
+					}else if("2".equals(engagementType)){
+						return "/demand/demandDetailSupport";
+					}else{
+						return "/demand/demandDetailtm";
+					}
+					
 				}
-				demand.setHsbcDept(hSBCDept);
-				model.addAttribute("demand", demand);
-				if("1".equals(engagementType)){
-					return "/demand/demandDetailfp";
-				}else if("2".equals(engagementType)){
-					return "/demand/demandDetailSupport";
-				}else{
-					return "/demand/demandDetailtm";
-				}
-				
 			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
+		
 		return "/demand/demandDetailtm";
 	}
 	
@@ -524,27 +554,51 @@ public class DemandController {
 	 */
 	@RequestMapping("/demandDetailUpdate")
 	public String demandDetailUpdate(String demandId,Model model,String userType,HttpServletRequest request,String engagementType){
-		List<Demand> list = (List<Demand>) request.getSession().getAttribute("demandList");
-		for (Demand demand : list) {
-			if(demand.getDemandId().equals(demandId)){
-				HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
-				if(hSBCDept!=null) {
-					if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
-						hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
+		try{
+			List<Demand> list = (List<Demand>) request.getSession().getAttribute("demandList");
+			long day = 0;
+			for (Demand demand : list) {
+				if(demand.getDemandId().equals(demandId)){
+					HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
+					if(hSBCDept!=null) {
+						if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
+							hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
+						}
 					}
+					demand.setHsbcDept(hSBCDept);
+					demand.setUserType(userType);
+					
+					//ageing计算
+					if(demand.getStatus().equals("Onboard")){
+						SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+						if(demand.getOnboardDate()!=null && demand.getReqPublishedDate()!=null){
+							Date d1 = sf.parse(demand.getOnboardDate());
+							Date d2 = sf.parse(demand.getReqPublishedDate());
+							day=(d1.getTime()-d2.getTime())/(24*60*60*1000);
+							demand.setAgeing(String.valueOf(day));
+						}
+						
+						//计算发送简历和面试人数
+						if(demand.getCandidateId()!=null){
+							int i = candidateService.getCount(demand.getCandidateId());
+							demand.setProfilesNo(String.valueOf(i));
+							demand.setInterviewedNo(String.valueOf(i));
+						}
+					}
+					
+					model.addAttribute("demand", demand);
+					if("1".equals(engagementType)){
+						return "/demand/demandDetailEditFixedprice";
+					}else if("2".equals(engagementType)){
+						return "/demand/demandDetailEditSupport";
+					}else{
+						return "/demand/demandDetailEdit";
+					}
+					
 				}
-				demand.setHsbcDept(hSBCDept);
-				demand.setUserType(userType);
-				model.addAttribute("demand", demand);
-				if("1".equals(engagementType)){
-					return "/demand/demandDetailEditFixedprice";
-				}else if("2".equals(engagementType)){
-					return "/demand/demandDetailEditSupport";
-				}else{
-					return "/demand/demandDetailEdit";
-				}
-				
 			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return "/demand/demandDetailEdit";
 	}

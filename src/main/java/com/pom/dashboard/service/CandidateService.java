@@ -83,5 +83,8 @@ public interface CandidateService
 	public boolean deleteArrangedinter(String candidateId);
 	
 	String queryPushedCS(String pushId);
+	
+	int getCount(String candidateId);
+	
 
 }

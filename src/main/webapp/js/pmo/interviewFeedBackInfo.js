@@ -79,11 +79,12 @@ function loadCandidateList(pageState) {
 						$("<td><a href='javascript:void(0);' " +
 								"onclick=displayPDF('"+result.data[i].candidateId+"','"+result.data[i].resumePath.replace(/\s+/g, "")+"')>"+ result.data[i].candidateName + "</a></td>")
 								.appendTo(tr);
-						if("0" == result.data[i].candidateSex){
+						/*if("0" == result.data[i].candidateSex){
 							$("<td>男</td>").appendTo(tr);
 						}else{
 							$("<td>女</td>").appendTo(tr);
-						}
+						}*/
+						$("<td>"+result.data[i].candidateSex+"</td>").appendTo(tr);
 						
 						$("<td>" + result.data[i].candidateAge + "</td>")
 								.appendTo(tr);

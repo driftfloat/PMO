@@ -694,5 +694,10 @@ public class CandidateServiceImpl implements CandidateService {
 
 	}
 
+	@Override
+	public int getCount(String candidateId) {
+		return candidateMapper.getCount(candidateId);
+	}
+
 
 }

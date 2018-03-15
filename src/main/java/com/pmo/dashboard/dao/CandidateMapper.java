@@ -83,4 +83,6 @@ public interface CandidateMapper
 	boolean updateCandidatepushed(String pushId);
 	boolean deleteInterview(String candidateId);
 	String queryPushedCS(String pushId);
+	
+	int getCount(String candidateId);
 }
