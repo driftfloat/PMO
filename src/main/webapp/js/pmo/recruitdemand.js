@@ -140,6 +140,13 @@ function addDemand(){
 	 var bootstrapValidator = $("#recruitdemandForm").data('bootstrapValidator');
 	   bootstrapValidator.validate();
 	if(bootstrapValidator.isValid()){
+		if($('#jobCode').val()!=null && $('#jobCode').val()!=''){
+			if($('#requirementNumber').val()!=1){
+				$("#modal-container-489917").modal('show');
+				return
+			}
+		}
+		
 		var demandId=$('#demandId').val();
 		var engagementType=$('#engagementType').val();
 		var rr=$('#rr').val();
