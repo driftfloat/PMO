@@ -200,30 +200,7 @@ var userType='<%=userType%>'
 
 										</div>
 									</div>
-									<div class="form-group">
-										<!-- <div class="group">
-											<label class="col-lg-2 control-label">HSBC Requestor</label>
-											<div class="col-lg-4">
-												<input type="text" class="form-control" name="requestorEdit"
-													id="requestorEdit" value="${demand.requestor }"  disabled="true"/>
-											</div>
-										</div> -->
-										<div class="group">
-											<label class="col-sm-2 control-label">CS Department</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="csSubDeptEdit"
-													id="csSubDeptEdit"value="${demand.csDeptName }" disabled="true" />
-											</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">Remark</label>
-											<div class="col-md-4">
-												<textarea type="text" class="form-control" rows="10" name="remarkEdit"
-													id="remarkEdit"  disabled="true">${demand.remark }</textarea>
-											</div>
-										</div>
-
-									</div>
+									
 									<div class="form-group" id="atype" style='display: none'>
 										<div class="group" id="staffnameEdit" style='display: none'>
 											<label class="col-sm-2 control-label">Staff Name</label>
@@ -269,6 +246,31 @@ var userType='<%=userType%>'
 													value="${demand.reason }" disabled="true"/>
 											</div>
 										</div>
+									</div>
+									
+									<div class="form-group">
+										<!-- <div class="group">
+											<label class="col-lg-2 control-label">HSBC Requestor</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" name="requestorEdit"
+													id="requestorEdit" value="${demand.requestor }"  disabled="true"/>
+											</div>
+										</div> -->
+										<div class="group">
+											<label class="col-sm-2 control-label">CS Department</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="csSubDeptEdit"
+													id="csSubDeptEdit"value="${demand.csDeptName }" disabled="true" />
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">Remark</label>
+											<div class="col-md-4">
+												<textarea type="text" class="form-control" rows="10" name="remarkEdit"
+													id="remarkEdit"  disabled="true">${demand.remark }</textarea>
+											</div>
+										</div>
+
 									</div>
 
 

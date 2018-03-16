@@ -255,37 +255,7 @@ var userType='<%=userType%>'
 										</div>
 										</div>
 								</div>
-								<div class="form-group">
-								         <!-- <div class="group">
-											<label class="col-lg-2 control-label">HSBC Requestor</label>
-											<div class="col-lg-4">
-													<input type="text" class="form-control" name="requestorEdit" value="${demand.requestor }"
-														id="requestorEdit" disabled="true"/>
-											</div>
-										</div> -->
-										<div class="group" id="staffnameEdit" style='display:none'>
-											<label class="col-sm-2 control-label">Staff Name</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="candidateNameEdit" value="${demand.candidateName }"
-													id="candidateNameEdit"disabled="true"/>
-											</div>
-										</div>
-								        <div class="group">
-											<label class="col-sm-2 control-label">CS Department</label>
-											<div class="col-sm-4">
-											<input type="text" class="form-control" name="csSubDeptEdit" value="${demand.csDeptName }"
-														id="csSubDeptEdit"disabled="true" />
-											</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">Remark</label>
-											<div class="col-sm-4">
-												<textarea type="text" class="form-control" rows="10" name="remarkEdit"
-														id="remarkEdit" disabled="true">${demand.remark }</textarea>
-											</div>
-									    </div>
 								
-								</div>
 								<div class="form-group" id="atype" style='display:none'>
 										<!-- <div class="group" id="staffnameEdit" style='display:none'>
 											<label class="col-sm-2 control-label">Staff Name</label>
@@ -333,6 +303,16 @@ var userType='<%=userType%>'
 													id="doNumberEdit"disabled="true"/>
 											</div>
 										</div>
+										<c:if test="${demand.doNumber !=null }">
+										<div class="group" id="staffnameEdit" style='display:none'>
+											<label class="col-sm-2 control-label">Staff Name</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="candidateNameEdit" value="${demand.candidateName }"
+													id="candidateNameEdit"disabled="true"/>
+											</div>
+										</div>
+										</c:if>
+										
 								</div>
 								<div class="form-group"id="ctype" style='display:none'>
 								       <!-- <div class="group" id="reasonAbort" style='display:none'>
@@ -356,6 +336,38 @@ var userType='<%=userType%>'
 														id="remarkEdit" disabled="true"></textarea>
 											</div>
 									    </div>  -->
+								</div>
+								
+								<div class="form-group">
+								         <!-- <div class="group">
+											<label class="col-lg-2 control-label">HSBC Requestor</label>
+											<div class="col-lg-4">
+													<input type="text" class="form-control" name="requestorEdit" value="${demand.requestor }"
+														id="requestorEdit" disabled="true"/>
+											</div>
+										</div> -->
+										<!-- <div class="group" id="staffnameEdit" style='display:none'>
+											<label class="col-sm-2 control-label">Staff Name</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="candidateNameEdit" value="${demand.candidateName }"
+													id="candidateNameEdit"disabled="true"/>
+											</div>
+										</div> -->
+								        <div class="group">
+											<label class="col-sm-2 control-label">CS Department</label>
+											<div class="col-sm-4">
+											<input type="text" class="form-control" name="csSubDeptEdit" value="${demand.csDeptName }"
+														id="csSubDeptEdit"disabled="true" />
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">Remark</label>
+											<div class="col-sm-4">
+												<textarea type="text" class="form-control" rows="10" name="remarkEdit"
+														id="remarkEdit" disabled="true">${demand.remark }</textarea>
+											</div>
+									    </div>
+								
 								</div>
 								
 							</form>
