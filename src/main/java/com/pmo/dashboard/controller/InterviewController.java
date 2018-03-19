@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -104,9 +105,11 @@ public class InterviewController {
 	}
 
 	@RequestMapping("/employeeDetailInfo")
-	public String employeeDetailInfo(HttpServletRequest request, HttpServletResponse response,String type) {
+	public String employeeDetailInfo(HttpServletRequest request, HttpServletResponse response,String type,Model model) {
 		String employeeId = request.getParameter("employeeId");
+		String typepage = request.getParameter("batchinfo");
 		request.setAttribute("employeeId", employeeId);
+		model.addAttribute("typepage", typepage);
 		if("1".equals(type)) {
 			return "employee/employeeDetailInfo";
 		}else if("2".equals(type)) {

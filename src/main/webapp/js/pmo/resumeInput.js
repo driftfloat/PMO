@@ -594,6 +594,8 @@ function addCandidate(){
 				setTimeout(function () {
 					$('#successAlert').hide();
 				}, 4000);
+				var urlTo = path+"/service/candidate/getMyCandidate.html";
+				window.location.href = urlTo;
 				/*window.location.href=path+"/service/resume/input.html";*/
 			}else{
 				alert("Information added unsuccesffully!")

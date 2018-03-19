@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pom.dashboard.service.EmployeeService;
@@ -23,9 +24,10 @@ public class employeeInfoBatchController {
 	
 
     @RequestMapping("/employeeInfoBatch")
-    public String employeeInfo(final HttpServletRequest request,final HttpServletResponse response)
+    public String employeeInfo(final HttpServletRequest request,final HttpServletResponse response,Model model)
     {
-        return "employee/employeeInfoBatch";
+        model.addAttribute("batch","batch");
+    	return "employee/employeeInfoBatch";
     }
     
   

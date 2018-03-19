@@ -227,6 +227,9 @@ function addDemand(){
 					setTimeout(function () {
 						$('#successAlert').hide();
 					}, 2000);
+					
+					var urlTo = path+'/service/demand/demandInfo.html';
+					window.location.href = urlTo;
 				}
 			}
 		})

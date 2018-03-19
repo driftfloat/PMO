@@ -242,6 +242,7 @@ var path='<%=path%>';
 								</form>
 								<form action="" id="editForm" method="post" target="_blank">
 									<input id="employeeId" name="employeeId" type="hidden" />
+									<input type="hidden" name="batchinfo" id="batchinfo" value="${batch}"></input>
 								</form>
 							</div>
 						</div>
@@ -267,6 +268,7 @@ var path='<%=path%>';
 					</div>
 					<div id="batchModify" class="box-content">
 						<form id="modifyForm" method="post" class="form-horizontal">
+						
 						<div class="form-group">
 						    <div class="group">
 								<label class="col-sm-2 control-label" >Staff Name</label>

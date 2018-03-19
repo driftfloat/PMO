@@ -560,6 +560,9 @@ function updateDemand(index){
 									$('#successAlert').hide();
 								}, 2000);
 								self.opener.location.reload();
+								var urlTo = path+'/service/demand/demandInfo.html';
+								window.location.href = urlTo;
+								//$("#modal-container-489917").modal('show');
 							}
 						}
 					})
@@ -628,4 +631,9 @@ function updateDemand(index){
 	}else{
 		return;
 	}*/
+}
+
+function back(){
+	var urlTo = path+'/service/demand/demandInfo.html';
+	window.location.href = urlTo;
 }

@@ -107,3 +107,16 @@ function loadCSDept(employee){
 		}
 	})
 }
+
+function back(type){
+	var temp = $("#bt").val();
+	//alert(temp);
+	var urlTo = path+'/service/employee/employeeInfo.html';
+	var urlTo3 = path+'/service/employee/employeeInfoBatch.html';
+	if(temp == 'batch'){
+		window.location.href = urlTo3;
+	}else{
+		window.location.href = urlTo;
+	}
+	
+}

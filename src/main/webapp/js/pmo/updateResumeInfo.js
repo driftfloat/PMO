@@ -82,7 +82,8 @@ function toUpdateResumeNew(){
 				setTimeout(function () {
 					$('#successAlert').hide();
 				}, 2000);
-				
+				var urlTo = path+"/service/candidate/getMyCandidate.html";
+				window.location.href = urlTo;
 			}
 			if(!resultFlag){
 				alert('修改失败');

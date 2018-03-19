@@ -556,7 +556,9 @@ function updateDemand(index){
 					setTimeout(function () {
 						$('#successAlert').hide();
 					}, 2000);
-					self.opener.location.reload(); 
+					self.opener.location.reload();
+					var urlTo = path+'/service/demand/demandInfo.html';
+					window.location.href = urlTo;
 				}
 			}
 		})

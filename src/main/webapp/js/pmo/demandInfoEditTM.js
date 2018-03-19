@@ -550,3 +550,8 @@ function updateDemand(index){
 		return;
 	}
 }
+
+function back(){
+	var urlTo = path+'/service/demand/demandInfo.html';
+	window.location.href = urlTo;
+}
