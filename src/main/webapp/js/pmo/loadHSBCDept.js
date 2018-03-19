@@ -116,6 +116,9 @@ function addEmployee(){
 					setTimeout(function () {
 						$('#successAlert').hide();
 					}, 2000);
+					
+					var urlTo = path+'/service/employee/employeeInfo.html';
+					window.location.href = urlTo;
 				}
 			}
 		})

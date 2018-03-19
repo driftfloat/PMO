@@ -43,5 +43,7 @@
         {"name":"UI"},
         {"name":"vb"},
         {"name":"Vision Plus"},
-        {"name":"Windows phone"}
+        {"name":"Windows phone"},
+        {"name":"WEB"},
+        {"name":"PM"}
 ]
