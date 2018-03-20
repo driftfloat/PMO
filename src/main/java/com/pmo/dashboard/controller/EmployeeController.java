@@ -235,6 +235,9 @@ public class EmployeeController {
             try{
             	User user = (User)request.getSession().getAttribute("loginUser");
             	EmployeeLog log = getEmployeeLog(employee,user,"0");
+            	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            	String ts = sf.format(new Date());
+            	log.setUpdateDate(Timestamp.valueOf(ts));
         		@SuppressWarnings({ "unused", "unchecked" })
     			boolean flag = employeeLogService.save(log);
             }catch(Exception e){
@@ -316,6 +319,9 @@ public class EmployeeController {
     		StringBuffer[] result=checkFieldChange(em,employee);
     		if(result[0].length()>0){
     			@SuppressWarnings({ "unchecked", "unused" })
+    			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            	String ts = sf.format(new Date());
+            	log.setUpdateDate(Timestamp.valueOf(ts));
 				boolean flag = employeeLogService.save(log);
     		}
 			

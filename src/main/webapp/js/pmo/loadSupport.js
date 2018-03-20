@@ -30,6 +30,8 @@ function addEmployee(){
 	var bootstrapValidator = $("#registerEmployeeForm").data('bootstrapValidator');
 	bootstrapValidator.validate();
 	if(bootstrapValidator.isValid()){
+		$('#sub_search').addClass('disabled'); 
+		
 		var eHr = $('#eHr').val();
 		var lob = $('#lob').val();
 		var hsbcStaffId = $('#hsbcStaffId').val();
@@ -69,6 +71,7 @@ function addEmployee(){
 		if (lastConditionStr != addEmpConditionStr) {
 			lastConditionStr = addEmpConditionStr;
 		} else {
+			$('#sub_search').removeClass('disabled'); 
 			$("html,body").animate({
 				scrollTop : 0
 			}, 500);
@@ -116,7 +119,7 @@ function addEmployee(){
 					setTimeout(function () {
 						$('#successAlert').hide();
 					}, 2000);
-					
+					$('#sub_search').removeClass('disabled'); 
 					var urlTo = path+'/service/employee/employeeInfo.html';
 					window.location.href = urlTo;
 				}

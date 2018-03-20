@@ -45,5 +45,8 @@
         {"name":"Vision Plus"},
         {"name":"Windows phone"},
         {"name":"WEB"},
-        {"name":"PM"}
+        {"name":"PM"},
+        {"name":"BMO"},
+        {"name":"Devops"},
+        {"name":"Dynamic"}
 ]
