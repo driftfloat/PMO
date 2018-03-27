@@ -2,6 +2,7 @@ package com.pmo.dashboard.controller;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -38,6 +39,8 @@ public class UserRelevantController {
 	
 	@Resource
     private UserService userService;
+	
+	ObjectMapper objectMapper = new ObjectMapper();  
 	
 	/**
 	 * 添加页面
@@ -86,6 +89,29 @@ public class UserRelevantController {
             return resultFlag;
         }
         return resultFlag;
+    }
+	
+	/**
+	 * 获取HR
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/getHR")
+	@ResponseBody
+    public List<User> getHR(final HttpServletRequest request,
+            final HttpServletResponse response,Model model)
+    {
+		try{
+			List<User> list = userService.getHR("");
+		    Map map = new HashMap();
+		    map.put("data", list);
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
     }
 	
 	/**

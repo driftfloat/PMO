@@ -2,7 +2,9 @@ package com.pmo.dashboard.service.impl;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,10 +12,8 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.json.XML;
 import org.springframework.stereotype.Service;
 
-import com.pmo.dashboard.api.reqmodel.EmployeeSynReqmodel;
 import com.pmo.dashboard.dao.UserMapper;
 import com.pmo.dashboard.entity.ApiUser;
 import com.pmo.dashboard.entity.User;
@@ -131,6 +131,19 @@ public class UserServiceImpl implements UserService{
 		}
 		
 		return null;
+	}
+	@Override
+	public List<User> getHR(String type) {
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("type1", "6");
+		param.put("type2", "7");
+		List<User> list = userMapper.getUser(param);
+		return list;
+	}
+	@Override
+	public List<User> getUser(Map<String, Object> map) {
+		List<User> list = userMapper.getUser(map);
+		return list;
 	}
 
 }

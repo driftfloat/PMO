@@ -1,6 +1,7 @@
 package com.pmo.dashboard.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -31,5 +32,7 @@ public interface UserMapper {
 	// Felix, 180105, End
 	
 	int update(User user);
+	
+	List<User> getUser(Map<String,Object> param);
 
 }

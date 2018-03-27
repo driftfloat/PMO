@@ -1,6 +1,7 @@
 package com.pom.dashboard.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.pmo.dashboard.entity.ApiUser;
 import com.pmo.dashboard.entity.User;
@@ -34,4 +35,8 @@ public interface UserService {
 	List<ApiUser> loadAllApiUsers();
 	
 	ApiUser loginApiUser(String userName, String password, String systemId);
+	
+	List<User> getHR(String type);
+	
+	List<User> getUser(Map<String,Object> map);
 }

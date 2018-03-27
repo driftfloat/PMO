@@ -38,8 +38,18 @@ public class User {
 	//用户状态(0:可登录,1:不可登录)
 	private String loginStatus;
 	
+	//邮箱
+	private String email;
 	
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getLoginStatus() {
 		return loginStatus;
 	}

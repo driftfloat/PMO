@@ -11,6 +11,7 @@
 		<result property="csdeptId" column="CSDEPT_ID" javaType="String" />
 		<result property="bu" column="BU" javaType="String" />
 		<result property="loginStatus" column="LOGIN_STATUS" jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
 	</resultMap>
 	
 	
@@ -59,6 +60,9 @@
       <if test="loginStatus != null" >
         LOGIN_STATUS,
       </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -84,6 +88,9 @@
       </if>
       <if test="loginStatus != null" >
         #{loginStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -125,8 +132,21 @@
       <if test="loginStatus != null" >
         LOGIN_STATUS = #{loginStatus,jdbcType=VARCHAR},
       </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
      </set>
      where USER_ID = #{userId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="getUser" resultMap="userMap" parameterType="java.lang.String" >
+    select * from t_user where 1=1
+    <if test="type1 != null || type2 !=null" >
+      and (USER_TYPE = #{type1,jdbcType=VARCHAR} or USER_TYPE = #{type2,jdbcType=VARCHAR})
+    </if>
+    <if test="ehr != null" >
+      and USER_NAME = #{ehr,jdbcType=VARCHAR}
+    </if>
+  </select>
   
 </mapper>
