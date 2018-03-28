@@ -269,6 +269,7 @@ function loadDemandList(currPage){
 	var csSubDept = $("#csSubDept").val();
 	var engagementType=$("#engagementType").val();
 	var jobCode=$("#jobcode").val();
+	var demandNumber = $("#demandNumber").val();
 	//$("#demandList").empty();
 	$("#demandList  tr:not(:first)").html("");
 	$.ajax({
@@ -279,7 +280,7 @@ function loadDemandList(currPage){
 		type:"post",
 		data:{"csBuName":csBuName,"skill":skill,"position":position,
 
-			"status":status,"rr":rr,"currPage":currPage,"csSubDept":csSubDept,"engagementType":engagementType,"jobCode":jobCode,"pageRecordsNum":pageRecordsNum
+			"status":status,"demandId":demandNumber,"rr":rr,"currPage":currPage,"csSubDept":csSubDept,"engagementType":engagementType,"jobCode":jobCode,"pageRecordsNum":pageRecordsNum
          
        },
 

@@ -166,6 +166,14 @@ var path='<%=path%>';
 												id="jobcode" />
 										</div>
 									</div>
+									</br> </br> </br>
+									<div class="group">
+										<label class="col-sm-2 control-label">DemandNumber</label>
+										<div class="col-sm-4">
+											<input type="text" class="form-control" name="demandNumber"
+												id="demandNumber" />
+										</div>
+									</div>
 									<input type="hidden" name="cssubName" id="cssubName" /> <input
 										type="hidden" name="hsbcsubName" id="hsbcsubName" /> </br> </br> </br>
 
