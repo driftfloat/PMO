@@ -557,12 +557,96 @@ function updateDemand(index){
 						$('#successAlert').hide();
 					}, 2000);
 					self.opener.location.reload();
-					var urlTo = path+'/service/demand/demandInfo.html';
-					window.location.href = urlTo;
+					
+					$("#issendemail").modal('show');
+					//var urlTo = path+'/service/demand/demandInfo.html';
+					//window.location.href = urlTo;
 				}
 			}
 		})
 	}else{
 		return;
 	}
+}
+
+//获取HR
+function getHr(){
+	$.ajax({
+		url:path+'/service/user/getHR',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"get",
+		success:function(result){
+			if(result){
+				if(result != null && result.length>0){
+					$("#hrdatatable tbody").remove();
+					var tbody = $("<tbody>");
+					tbody.appendTo($("#hrdatatable"));
+					for(var i=0;i<result.length;i++){
+						$("<tr>" +
+								"<td><input value='"+result[i].userName+"' type='checkbox' name='hremail'/></td>"+
+								"<td>"+result[i].userName+"</td>" +
+								"<td>"+result[i].nickname+"</td>" +
+								"<td>"+result[i].userType+"</td>" +
+								"<td>"+result[i].email+"</td>" +
+								"</tr>").appendTo(tbody);
+					}
+					$("#hrlist").modal('show');
+					//隐藏掉是否发送邮件的提示
+					$("#issendemail").modal('hide');
+				}
+				
+			}
+		}
+	})
+	
+}
+
+//发送邮件
+function sendemail(){
+	$("#hrlist").modal('hide');
+	$("#jindu").modal('show');
+	obj = document.getElementsByName("hremail");
+    ehs = [];
+    for(k in obj){
+        if(obj[k].checked)
+        	ehs.push(obj[k].value);
+    }
+    //alert(ehs);
+    //获取需求编号
+    var demandid = $("#demandIdEdit").val();
+	
+	$.ajax({
+		url:path+'/service/sendemail/send2',
+		dataType:"json",
+		data:{ehr:JSON.stringify(ehs),demandid:demandid},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			if(result){
+				$("#jindu").modal('hide');
+				alert("发送成功");
+				$("#hrlist").modal('hide');
+			}
+		}
+	})
+	
+}
+
+function selAll(){
+		var all=document.getElementById('checkAll');//获取到点击全选的那个复选框的id  
+		var one=document.getElementsByName('hremail');//获取到复选框的名称  
+		if(all.checked==true){
+			for(var i=0;i<one.length;i++){ 
+				if(one[i].checked==false){
+					one[i].checked=true; 
+				}
+			} 
+		}else{
+			for(var i=0;i<one.length;i++){  
+				one[i].checked=false;
+			} 
+		}
 }

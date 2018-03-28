@@ -562,7 +562,7 @@ function sendemail(){
     //alert(ehs);
 	
 	$.ajax({
-		url:path+'/service/demand/sendemail/send1',
+		url:path+'/service/sendemail/send1',
 		dataType:"json",
 		data:{ehr:JSON.stringify(ehs)},
 		async:true,
