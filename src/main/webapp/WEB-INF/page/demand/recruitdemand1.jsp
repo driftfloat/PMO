@@ -431,6 +431,19 @@ var path='<%=path%>
 				
 	</div>
 	
+	<!-- 进度显示 -->
+	<div class="modal fade" id="jindu" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="progress progress-striped active" style="margin-top:300px;">
+	          <div class="progress-bar progress-bar-success" role="progressbar"
+		            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+		            style="width: 100%;">邮件发送中......
+		            <span class="sr-only">100% 完成</span>
+	          </div>
+             </div>
+		</div>		
+	</div>
+	
 	<!--/.fluid-container-->
 
 	<!-- external javascript -->

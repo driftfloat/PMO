@@ -571,6 +571,8 @@ function getHr(){
 
 //发送邮件
 function sendemail(){
+	$("#hrlist").modal('hide');
+	$("#jindu").modal('show');
 	obj = document.getElementsByName("hremail");
     ehs = [];
     for(k in obj){
@@ -589,6 +591,7 @@ function sendemail(){
 		type:"post",
 		success:function(result){
 			if(result){
+				$("#jindu").modal('hide');
 				alert("发送成功");
 				$("#hrlist").modal('hide');
 			}
