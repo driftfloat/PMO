@@ -92,4 +92,97 @@ public class SendEmailController {
 		}
 		return false;
 	}
+	
+	/**
+	 * 发送邮件--招聘管理-HR确认
+	 * @param sei
+	 * @return
+	 */
+	@RequestMapping("/send3")
+	@ResponseBody
+	public boolean send3(final HttpServletRequest request,
+            final HttpServletResponse response){
+		try{
+			String eHr = request.getParameter("ehr");
+			//获取需求编号
+			//String demandid = request.getParameter("demandid");
+			Map<String,Object> map = new HashMap<String,Object>();
+			JSONArray array= new JSONArray(eHr);
+			for(int i=0;i<array.length();i++){
+				if(array.get(i)!=null && !"".equals(array.get(i))){
+					map.put("ehr", array.get(i));
+					List<User> list = userService.getUser(map);
+					if(list.get(0).getEmail()!=null && !"".equals(list.get(0).getEmail())){
+						SendUtil.send(list.get(0).getEmail(), "Pmo系统,HR已确认面试安排", "你好：HR已确认面试安排，请及时查看,谢谢!");
+					}
+				}
+			}
+			return true;
+		}catch(Exception e){
+			
+		}
+		return false;
+	}
+	
+	/**
+	 * 发送邮件--面试管理-面试安排
+	 * @param sei
+	 * @return
+	 */
+	@RequestMapping("/send4")
+	@ResponseBody
+	public boolean send4(final HttpServletRequest request,
+            final HttpServletResponse response){
+		try{
+			String eHr = request.getParameter("ehr");
+			//获取需求编号
+			//String demandid = request.getParameter("demandid");
+			Map<String,Object> map = new HashMap<String,Object>();
+			JSONArray array= new JSONArray(eHr);
+			for(int i=0;i<array.length();i++){
+				if(array.get(i)!=null && !"".equals(array.get(i))){
+					map.put("ehr", array.get(i));
+					List<User> list = userService.getUser(map);
+					if(list.get(0).getEmail()!=null && !"".equals(list.get(0).getEmail())){
+						SendUtil.send(list.get(0).getEmail(), "Pmo系统,RM已成功安排面试", "你好：RM已成功安排面试，请及时跟候选人确认,谢谢!");
+					}
+				}
+			}
+			return true;
+		}catch(Exception e){
+			
+		}
+		return false;
+	}
+	
+	/**
+	 * 发送邮件--招聘管理-推送候选人
+	 * @param sei
+	 * @return
+	 */
+	@RequestMapping("/send5")
+	@ResponseBody
+	public boolean send5(final HttpServletRequest request,
+            final HttpServletResponse response){
+		try{
+			String eHr = request.getParameter("ehr");
+			//获取需求编号
+			//String demandid = request.getParameter("demandid");
+			Map<String,Object> map = new HashMap<String,Object>();
+			JSONArray array= new JSONArray(eHr);
+			for(int i=0;i<array.length();i++){
+				if(array.get(i)!=null && !"".equals(array.get(i))){
+					map.put("ehr", array.get(i));
+					List<User> list = userService.getUser(map);
+					if(list.get(0).getEmail()!=null && !"".equals(list.get(0).getEmail())){
+						SendUtil.send(list.get(0).getEmail(), "Pmo系统,HR已成功推送候选人", "你好：HR已成功推送候选人，请及时安排面试,谢谢!");
+					}
+				}
+			}
+			return true;
+		}catch(Exception e){
+			
+		}
+		return false;
+	}
 }

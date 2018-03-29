@@ -168,4 +168,13 @@ public class RmCandidateServiceImpl implements RmCandidateService {
 		return false;
 	}
 
+	@Override
+	public List<CandidatePush> getPushUser(String pushid) {
+		Map<String,Object> param = new HashMap<String,Object>();
+		if(pushid!= null && !"".equals(pushid)){
+			param.put("pushid", pushid);
+		}
+		return rmCandidateMapper.getPushUser(param);
+	}
+
 }

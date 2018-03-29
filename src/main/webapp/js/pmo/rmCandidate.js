@@ -103,6 +103,8 @@ function loadMyCandidate(currPage) {
 						}
 						var status = result.candidatelist[i].interviewList[0].interviewId;
 						if (interviewStatus == 1) {
+							//var cid1 = result.candidatelist[i].candidateInfo.candidateId;
+							//alert(cid1);
 							var td11 = $("<td><a href='javascript:void(0);' id='"
 									+ result.candidatelist[i].pushId
 									+ "' name='"
@@ -518,6 +520,7 @@ function rescheduleInterview(pushId,candidateId) {
 }
 /* 新一轮面试 */
 function scheduleInterview(pushId) {
+	//alert("dd"+cid);
 	$('#myModal').modal('show');
 
 	$("#graduationDate1").val("");
@@ -531,6 +534,8 @@ function scheduleInterview(pushId) {
 	
 
 	loadInterviewer(pushId,"");
+	$("#puid").val();
+	$("#puid").val(pushId);
 
 	$("#addInterviewer").click(function() {
 		var interviewDate = $("#interviewDate").val();
@@ -553,6 +558,7 @@ function scheduleInterview(pushId) {
 			success : function(data) {
 				if (data == "1") {
 					$('#myModal').modal('hide');
+					$("#issendemail").modal('show');
 					// BootstrapDialog.alert('安排面试成功!');
 					BootstrapDialog.show({
 						title : 'Interview arrangement',
@@ -879,3 +885,87 @@ $('#interviewType').change(function(){
 	}
 		
 });
+
+
+//获取HR
+function getHr(){
+	var puid = $("#puid").val();
+	//alert(puid);
+	$.ajax({
+		url:path+'/service/user/getHR',
+		dataType:"json",
+		data:{"puid":puid},
+		async:true,
+		cache:false,
+		type:"get",
+		success:function(result){
+			if(result){
+				if(result != null && result.length>0){
+					$("#hrdatatable tbody").remove();
+					var tbody = $("<tbody>");
+					tbody.appendTo($("#hrdatatable"));
+					for(var i=0;i<result.length;i++){
+						$("<tr>" +
+								"<td><input value='"+result[i].userName+"' type='checkbox' name='hremail'/></td>"+
+								"<td>"+result[i].userName+"</td>" +
+								"<td>"+result[i].nickname+"</td>" +
+								"<td>"+result[i].userType+"</td>" +
+								"<td>"+result[i].email+"</td>" +
+								"</tr>").appendTo(tbody);
+					}
+					$("#hrlist").modal('show');
+					//隐藏掉是否发送邮件的提示
+					$("#issendemail").modal('hide');
+				}
+				
+			}
+		}
+	})
+	
+}
+
+//发送邮件
+function sendemail(){
+	$("#hrlist").modal('hide');
+	$("#jindu").modal('show');
+	obj = document.getElementsByName("hremail");
+    ehs = [];
+    for(k in obj){
+        if(obj[k].checked)
+        	ehs.push(obj[k].value);
+    }
+    //alert(ehs);
+	
+	$.ajax({
+		url:path+'/service/sendemail/send4',
+		dataType:"json",
+		data:{ehr:JSON.stringify(ehs)},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			if(result){
+				$("#jindu").modal('hide');
+				alert("发送成功");
+				$("#hrlist").modal('hide');
+			}
+		}
+	})
+	
+}
+
+function selAll(){
+		var all=document.getElementById('checkAll');//获取到点击全选的那个复选框的id  
+		var one=document.getElementsByName('hremail');//获取到复选框的名称  
+		if(all.checked==true){
+			for(var i=0;i<one.length;i++){ 
+				if(one[i].checked==false){
+					one[i].checked=true; 
+				}
+			} 
+		}else{
+			for(var i=0;i<one.length;i++){  
+				one[i].checked=false;
+			} 
+		}
+}

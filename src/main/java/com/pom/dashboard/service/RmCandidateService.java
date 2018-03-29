@@ -25,4 +25,6 @@ public interface RmCandidateService {
 	public boolean updateInterview(CandidateInterview candidateInterview);
 	public CandidateInterview getConfirminfo(String candidateId);
 	
+	List<CandidatePush> getPushUser(String pushid);
+	
 }

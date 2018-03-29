@@ -119,6 +119,14 @@
 		where PUSH_ID = #{pushId}
 	</update>
 	
+	<select id="getPushUser" parameterType="java.util.HashMap" resultMap="candidatePushMap">
+		select * from t_candidate_push
+		where 1=1
+		<if test="pushid != null" >
+          and PUSH_ID = #{pushid,jdbcType=VARCHAR}
+        </if>
+	</select>
+	
 	<!-- <update id="updateInterviewId" parameterType="java.util.HashMap">
 		update t_candidate_push
 		set INTERVIEW_ID = #{interviewId}

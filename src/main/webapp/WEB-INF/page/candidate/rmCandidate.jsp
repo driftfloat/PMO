@@ -191,6 +191,7 @@ vertical-align: middle!important;
 					</div>
 					<div id="excelCheckBox" class="box-content">
 					<form action="" id="interviewForm">
+					    <input id="puid" name="puid" type="hidden"></input>
 						<table id="excelBox"
 							class="table table-striped table-bordered">
 							<thead>
@@ -240,7 +241,7 @@ vertical-align: middle!important;
 						<div class="center">
 							<!-- <a class="btn btn-success" href="#" id="addInterviewer"><i  class="glyphicon glyphicon-ok icon-white" ></i> 确定
 							</a>  -->
-							<button type="submit" id="addInterviewer" class="btn btn-primary btn-primary-new">Confirm</button>
+							<button type="button" id="addInterviewer" class="btn btn-primary btn-primary-new">Confirm</button>
 							<a class="btn btn-info" href="#" data-dismiss="modal"> <i
 								class="glyphicon glyphicon-remove icon-white"></i> Cancel
 							</a>
@@ -312,6 +313,89 @@ vertical-align: middle!important;
 
 
 	<!--/.fluid-container-->
+	
+	<!-- 是否发送邮件框提示 -->
+	<div class="modal fade" id="issendemail" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					    <div class="modal-header">
+							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							 <h4 class="modal-title" id="myModalLabel">
+								 Info!
+							 </h4>
+						</div>
+						<div class="modal-body">
+				          <h5>Do you want to send an email to HR?</h5>
+			            </div>
+						<div class="modal-footer">
+							 <button type="button" class="btn btn-default" data-dismiss="modal">No&nbsp;</button>
+							 <button type="button" onclick="getHr()" class="btn btn-primary">Yes</button>
+						</div>
+					</div>
+					
+				</div>
+				
+	</div>
+	
+	<!-- HR列表 -->
+	<div class="modal fade" id="hrlist" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					    <div class="modal-header">
+							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							 <h4 class="modal-title" id="myModalLabel">
+								 HR List
+							 </h4>
+						</div>
+						<div class="modal-body">
+				          
+				          <table id="hrdatatable" class="table table-bordered table-hover table-condensed">
+				            <thead>
+					          <tr>
+					            <th>
+					             <input onclick="selAll()" id="checkAll" type="checkbox"/>
+					            </th>
+						        <th>
+							      USERNAME
+						        </th>
+						        <th>
+							      NICKNAME
+						        </th>
+						        <th>
+							      USERTYPE
+						        </th>
+						        <th>
+							      EMAIL
+						        </th>
+					         </tr>
+				           </thead>
+				           <tbody id="hrdata">
+				           </tbody>
+			             </table>
+				          
+			            </div>
+						<div class="modal-footer">
+							 <button id="cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel&nbsp;</button>
+							 <button id="send" type="button" onclick="sendemail()" class="btn btn-primary">Send&nbsp;&nbsp;</button>
+						</div>
+					</div>
+					
+				</div>
+				
+	</div>
+	
+	<!-- 进度显示 -->
+	<div class="modal fade" id="jindu" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="progress progress-striped active" style="margin-top:300px;">
+	          <div class="progress-bar progress-bar-success" role="progressbar"
+		            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+		            style="width: 100%;">邮件发送中......
+		            <span class="sr-only">100% 完成</span>
+	          </div>
+             </div>
+		</div>		
+	</div>
 
 	<!-- external javascript -->
 

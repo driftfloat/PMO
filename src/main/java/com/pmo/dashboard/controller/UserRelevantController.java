@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pmo.dashboard.entity.CandidateInterview;
+import com.pmo.dashboard.entity.CandidatePush;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Utils;
+import com.pom.dashboard.service.RmCandidateService;
 import com.pom.dashboard.service.UserService;
 
 
@@ -39,6 +42,9 @@ public class UserRelevantController {
 	
 	@Resource
     private UserService userService;
+	
+	@Resource
+	private RmCandidateService rmCandidateService;
 	
 	ObjectMapper objectMapper = new ObjectMapper();  
 	
@@ -98,14 +104,70 @@ public class UserRelevantController {
 	 * @param model
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/getHR")
 	@ResponseBody
     public List<User> getHR(final HttpServletRequest request,
             final HttpServletResponse response,Model model)
     {
 		try{
-			List<User> list = userService.getHR("");
-		    Map map = new HashMap();
+			String puid = request.getParameter("puid");
+			List<CandidatePush> pushuser = null;
+			List<User> list = null;
+			if(puid!=null && !"".equals(puid)){
+				pushuser = rmCandidateService.getPushUser(puid);
+			}
+			if(pushuser!=null && pushuser.size()>0){
+				list = userService.getHR(pushuser.get(0).getPushUserId());
+			}else{
+				list = userService.getHR("");
+			}
+		    @SuppressWarnings("rawtypes")
+			Map map = new HashMap();
+		    map.put("data", list);
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+    }
+	
+	/**
+	 * 获取RM
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/getRM")
+	@ResponseBody
+    public List<User> getRM(final HttpServletRequest request,
+            final HttpServletResponse response,Model model)
+    {
+		try{
+			String canid = request.getParameter("canid");
+			String csdeptid = request.getParameter("csdeptid");
+			CandidateInterview civ = null;
+			List<User> list = null;
+			//通过canid获取推送到的部门
+			if(canid!=null && !"".equals(canid)){
+				civ = rmCandidateService.getIntervieInfo(canid);
+			}
+			//通过推送到的部门获取对应部门RM
+			Map<String,Object> param = new HashMap<String,Object>();
+			if(civ!=null){
+				param.put("csdeptID", civ.getCssubDept());
+				param.put("rmtype", 5);
+			}else{
+				param.put("rmtype", 5);
+			}
+			if(csdeptid!=null && !"".equals(csdeptid)){
+				param.put("csdeptID", csdeptid);
+			}
+			list = userService.getUser(param);
+		    @SuppressWarnings("rawtypes")
+			Map map = new HashMap();
 		    map.put("data", list);
 			return list;
 		}catch(Exception e){

@@ -133,10 +133,13 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 	@Override
-	public List<User> getHR(String type) {
+	public List<User> getHR(String userid) {
 		Map<String,Object> param = new HashMap<String,Object>();
 		param.put("type1", "6");
 		param.put("type2", "7");
+		if(userid != null && !"".equals(userid)){
+			param.put("userid", userid);
+		}
 		List<User> list = userMapper.getUser(param);
 		return list;
 	}

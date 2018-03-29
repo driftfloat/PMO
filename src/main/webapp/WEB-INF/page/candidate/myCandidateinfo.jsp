@@ -370,6 +370,7 @@ var path='<%=path%>';
 					</div>
 					<div id="excelCheckBox" class="box-content">
 					 <form id="pushCandidateForm" method="post" class="form-horizontal">
+					    <input type="hidden" name="csdeptid" id="csdeptid"></input>
 						<div class="group">
 							<label class="col-sm-2 control-label" style="width:30%;">Candidate Name</label>
 							<div class="col-sm-4" style="width:60%;">
@@ -588,6 +589,159 @@ var path='<%=path%>';
 		<c:import url="/service/manage/footer" />
 	</div>	
 	<!--/.fluid-container-->
+	
+	<!-- 是否发送邮件框提示1 -->
+	<div class="modal fade" id="issendemail" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					    <div class="modal-header">
+							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							 <h4 class="modal-title" id="myModalLabel">
+								 Info!
+							 </h4>
+						</div>
+						<div class="modal-body">
+				          <h5>Confirmed Success,Do you want to send an email to RM?</h5>
+			            </div>
+						<div class="modal-footer">
+							 <button type="button" class="btn btn-default" data-dismiss="modal">No&nbsp;</button>
+							 <button type="button" onclick="getRm()" class="btn btn-primary">Yes</button>
+						</div>
+					</div>
+					
+				</div>
+				
+	</div>
+	
+	<!-- 是否发送邮件框提示2 -->
+	<div class="modal fade" id="issendemail2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					    <div class="modal-header">
+							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							 <h4 class="modal-title" id="myModalLabel">
+								 Info!
+							 </h4>
+						</div>
+						<div class="modal-body">
+				          <h5>Push Successful,Do you want to send an email to RM?</h5>
+			            </div>
+						<div class="modal-footer">
+							 <button type="button" class="btn btn-default" data-dismiss="modal">No&nbsp;</button>
+							 <button type="button" onclick="getRm2()" class="btn btn-primary">Yes</button>
+						</div>
+					</div>
+					
+				</div>
+				
+	</div>
+	
+	<!-- RM列表1 -->
+	<div class="modal fade" id="rmlist1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					    <div class="modal-header">
+							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							 <h4 class="modal-title" id="myModalLabel">
+								 RM List
+							 </h4>
+						</div>
+						<div class="modal-body">
+				          
+				          <table id="hrdatatable" class="table table-bordered table-hover table-condensed">
+				            <thead>
+					          <tr>
+					            <th>
+					             <input onclick="selAll()" id="checkAll" type="checkbox"/>
+					            </th>
+						        <th>
+							      USERNAME
+						        </th>
+						        <th>
+							      NICKNAME
+						        </th>
+						        <th>
+							      USERTYPE
+						        </th>
+						        <th>
+							      EMAIL
+						        </th>
+					         </tr>
+				           </thead>
+				           <tbody id="hrdata">
+				           </tbody>
+			             </table>
+				          
+			            </div>
+						<div class="modal-footer">
+							 <button id="cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel&nbsp;</button>
+							 <button id="send" type="button" onclick="sendemail()" class="btn btn-primary">Send&nbsp;&nbsp;</button>
+						</div>
+					</div>
+					
+				</div>
+				
+	</div>
+	
+	<!-- RM列表2 -->
+	<div class="modal fade" id="rmlist2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					    <div class="modal-header">
+							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							 <h4 class="modal-title" id="myModalLabel">
+								 RM List
+							 </h4>
+						</div>
+						<div class="modal-body">
+				          
+				          <table id="hrdatatable2" class="table table-bordered table-hover table-condensed">
+				            <thead>
+					          <tr>
+					            <th>
+					             <input onclick="selAll2()" id="checkAll2" type="checkbox"/>
+					            </th>
+						        <th>
+							      USERNAME
+						        </th>
+						        <th>
+							      NICKNAME
+						        </th>
+						        <th>
+							      USERTYPE
+						        </th>
+						        <th>
+							      EMAIL
+						        </th>
+					         </tr>
+				           </thead>
+				           <tbody id="hrdata">
+				           </tbody>
+			             </table>
+				          
+			            </div>
+						<div class="modal-footer">
+							 <button id="cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel&nbsp;</button>
+							 <button id="send" type="button" onclick="sendemail2()" class="btn btn-primary">Send&nbsp;&nbsp;</button>
+						</div>
+					</div>
+					
+				</div>
+				
+	</div>
+	
+	<!-- 进度显示 -->
+	<div class="modal fade" id="jindu" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="progress progress-striped active" style="margin-top:300px;">
+	          <div class="progress-bar progress-bar-success" role="progressbar"
+		            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+		            style="width: 100%;">邮件发送中......
+		            <span class="sr-only">100% 完成</span>
+	          </div>
+             </div>
+		</div>		
+	</div>
 
 	<!-- external javascript -->
 

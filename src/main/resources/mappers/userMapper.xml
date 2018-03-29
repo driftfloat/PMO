@@ -147,6 +147,15 @@
     <if test="ehr != null" >
       and USER_NAME = #{ehr,jdbcType=VARCHAR}
     </if>
+    <if test="userid != null" >
+      and USER_ID = #{userid,jdbcType=VARCHAR}
+    </if>
+    <if test="csdeptID != null" >
+      and CSDEPT_ID = #{csdeptID,jdbcType=VARCHAR}
+    </if>
+    <if test="rmtype != null" >
+      and USER_TYPE = #{rmtype,jdbcType=VARCHAR}
+    </if>
   </select>
   
 </mapper>

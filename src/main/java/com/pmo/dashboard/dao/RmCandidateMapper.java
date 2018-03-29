@@ -19,5 +19,5 @@ public interface RmCandidateMapper {
 	public int queryAllCandidateCount(Map<String, Object> params);
 	public void updateCandidateStatus(Map<String, Object> params);
 	//public void updateInterviewId(Map<String, Object> params1);
-	
+	List<CandidatePush> getPushUser(Map<String,Object> param);
 }

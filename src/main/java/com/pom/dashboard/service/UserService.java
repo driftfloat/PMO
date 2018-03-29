@@ -36,7 +36,7 @@ public interface UserService {
 	
 	ApiUser loginApiUser(String userName, String password, String systemId);
 	
-	List<User> getHR(String type);
+	List<User> getHR(String userid);
 	
 	List<User> getUser(Map<String,Object> map);
 }

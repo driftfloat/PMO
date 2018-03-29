@@ -188,6 +188,8 @@ function pushCandidateOk(){
 		alert("请选择推送部门！");
 		return;
 	}*/
+	$("#csdeptid").val("");
+	$("#csdeptid").val(csSubDeptId);
 	var candidatePush = new FormData();
 	candidatePush.append("csSubDeptId",csSubDeptId);
 	candidatePush.append("candidateId",$("#pushCandidateId").val());
@@ -203,7 +205,9 @@ function pushCandidateOk(){
 		type:"post",
 		success:function(flag){
 			if(flag == '5'){
-				alert("Push successfully!");
+			    $('#myCandidatePushModal').modal('hide');	
+			    $("#issendemail2").modal('show');
+				//alert("Push successfully!");
 			}else if(flag == '0'){
 				alert("Push unsuccessfully,please refresh the page and try again.");
 			}else if(flag == '1'){
@@ -215,7 +219,6 @@ function pushCandidateOk(){
 			}else if(flag == '4'){
 				alert("Push unsuccessfully,please refresh the page and try again.");
 			}
-			$('#myCandidatePushModal').modal('hide');	
 			loadCandidateList();
 		}
 	})
@@ -455,3 +458,84 @@ function loadCandidateList(pageState)
 $("#pageRecordsNum").change(function(){
 	loadCandidateList();
 })
+
+//获取RM
+function getRm2(){
+	var csdeptid = $("#csdeptid").val();
+	$.ajax({
+		url:path+'/service/user/getRM',
+		dataType:"json",
+		data:{"csdeptid":csdeptid},
+		async:true,
+		cache:false,
+		type:"get",
+		success:function(result){
+			if(result){
+				if(result != null && result.length>0){
+					$("#hrdatatable2 tbody").remove();
+					var tbody = $("<tbody>");
+					tbody.appendTo($("#hrdatatable2"));
+					for(var i=0;i<result.length;i++){
+						$("<tr>" +
+								"<td><input value='"+result[i].userName+"' type='checkbox' name='hremail2'/></td>"+
+								"<td>"+result[i].userName+"</td>" +
+								"<td>"+result[i].nickname+"</td>" +
+								"<td>"+result[i].userType+"</td>" +
+								"<td>"+result[i].email+"</td>" +
+								"</tr>").appendTo(tbody);
+					}
+					$("#rmlist2").modal('show');
+					//隐藏掉是否发送邮件的提示
+					$("#issendemail2").modal('hide');
+				}
+				
+			}
+		}
+	})
+	
+}
+
+//发送邮件
+function sendemail2(){
+	$("#rmlist2").modal('hide');
+	$("#jindu").modal('show');
+	obj = document.getElementsByName("hremail2");
+    ehs = [];
+    for(k in obj){
+        if(obj[k].checked)
+        	ehs.push(obj[k].value);
+    }
+	
+	$.ajax({
+		url:path+'/service/sendemail/send5',
+		dataType:"json",
+		data:{ehr:JSON.stringify(ehs)},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			if(result){
+				$("#jindu").modal('hide');
+				alert("发送成功");
+				$("#rmlist2").modal('hide');
+			}
+		}
+	})
+	
+}
+
+function selAll2(){
+	var all=document.getElementById('checkAll2');//获取到点击全选的那个复选框的id  
+	var one=document.getElementsByName('hremail2');//获取到复选框的名称  
+	if(all.checked==true){
+		for(var i=0;i<one.length;i++){ 
+			if(one[i].checked==false){
+				one[i].checked=true; 
+			}
+		} 
+	}else{
+		for(var i=0;i<one.length;i++){  
+			one[i].checked=false;
+		} 
+	}
+}
