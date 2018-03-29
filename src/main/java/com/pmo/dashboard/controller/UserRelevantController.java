@@ -122,6 +122,12 @@ public class UserRelevantController {
 			}else{
 				list = userService.getHR("");
 			}
+			
+			for(int k=0;k<list.size();k++){
+				if(list.get(k).getUserType()!=null && !"".equals(list.get(k).getUserType())){
+					list.get(k).setUserType(changeUserType(list.get(k).getUserType()));
+				}
+			}
 		    @SuppressWarnings("rawtypes")
 			Map map = new HashMap();
 		    map.put("data", list);
@@ -166,6 +172,12 @@ public class UserRelevantController {
 				param.put("csdeptID", csdeptid);
 			}
 			list = userService.getUser(param);
+			
+			for(int k=0;k<list.size();k++){
+				if(list.get(k).getUserType()!=null && !"".equals(list.get(k).getUserType())){
+					list.get(k).setUserType(changeUserType(list.get(k).getUserType()));
+				}
+			}
 		    @SuppressWarnings("rawtypes")
 			Map map = new HashMap();
 		    map.put("data", list);
@@ -225,6 +237,66 @@ public class UserRelevantController {
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * 用户类型转换成汉字
+	 * @param userType
+	 * @return
+	 */
+	private String changeUserType(String userType){
+		if(userType!=null && !"".equals(userType)){
+			if(userType.equals("0")){
+				return "管理员";
+			}
+			if(userType.equals("1")){
+				return "事业部经理";
+			}
+            if(userType.equals("2")){
+            	return "事业部助理";
+			}
+            if(userType.equals("3")){
+            	return "交付部经理";
+			}
+            if(userType.equals("4")){
+            	return "交付部助理";
+			}
+            if(userType.equals("5")){
+            	return "RM";
+			}
+            if(userType.equals("6")){
+            	return "招聘部经理";
+			}
+            if(userType.equals("7")){
+            	return "招聘专员";
+			}
+            if(userType.equals("8")){
+            	return "职能人员";
+			}
+            if(userType.equals("9")){
+            	return "HRBP";
+			}
+            if(userType.equals("10")){
+            	return "面试官";
+			}
+            if(userType.equals("11")){
+            	return "职能部经理";
+			}
+            if(userType.equals("12")){
+            	return "职能部助理";
+			}
+            if(userType.equals("13")){
+            	return "HRBP经理";
+			}
+            if(userType.equals("14")){
+            	return "HRBP助理";
+			}
+            if(userType.equals("15")){
+            	return "业务线";
+			}
+            return userType;
+		}
+		return userType;
 	}
 
 }
