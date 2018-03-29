@@ -12,4 +12,6 @@ public interface InterviewMapper {
 	public CandidateInterview getIntervieInfo(String candidateId);
 	public boolean updateInterview(CandidateInterview candidateInterview);
 	public CandidateInterview getConfirminfo(String candidateId);
+	
+	public CandidateInterview getInteviewer(Map<String,Object> map);
 }

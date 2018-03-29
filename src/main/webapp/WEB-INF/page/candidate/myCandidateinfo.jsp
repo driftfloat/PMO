@@ -647,7 +647,8 @@ var path='<%=path%>';
 							 </h4>
 						</div>
 						<div class="modal-body">
-				          
+				          <input type="checkbox" name="issendtointerview" id="issendtointerview" value="1">
+				                          是否发送邮件到面试官
 				          <table id="hrdatatable" class="table table-bordered table-hover table-condensed">
 				            <thead>
 					          <tr>

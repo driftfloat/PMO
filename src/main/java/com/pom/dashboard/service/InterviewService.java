@@ -25,5 +25,7 @@ public interface InterviewService {
 	HSBCDept queryHSBCSubDeptById(String hsbcSubDeptId);
 
 	CandidateInterview getNewInterviewRecord(String candidateId, String csSubdeptName);
+	
+	CandidateInterview getInteviewer(Map<String,Object> map);
 
 }

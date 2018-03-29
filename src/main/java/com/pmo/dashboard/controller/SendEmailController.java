@@ -13,8 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pmo.dashboard.entity.CandidateInterview;
+import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.SendUtil;
+import com.pom.dashboard.service.EmployeeService;
+import com.pom.dashboard.service.InterviewService;
 import com.pom.dashboard.service.UserService;
 
 
@@ -31,6 +35,12 @@ public class SendEmailController {
 	
 	@Resource
 	UserService userService;
+	
+	@Resource
+	InterviewService interviewService;
+	
+	@Resource
+	EmployeeService employeeService;
 	
 	/**
 	 * 发送邮件--添加需求时
@@ -104,10 +114,14 @@ public class SendEmailController {
             final HttpServletResponse response){
 		try{
 			String eHr = request.getParameter("ehr");
-			//获取需求编号
-			//String demandid = request.getParameter("demandid");
+			//获取候选人ID
+			String canid = request.getParameter("candidateId");
+			//获取是否发送到面试官标志
+			String issendtointerview = request.getParameter("issendtointerview");
+			
 			Map<String,Object> map = new HashMap<String,Object>();
 			JSONArray array= new JSONArray(eHr);
+			//发送到RM
 			for(int i=0;i<array.length();i++){
 				if(array.get(i)!=null && !"".equals(array.get(i))){
 					map.put("ehr", array.get(i));
@@ -117,6 +131,19 @@ public class SendEmailController {
 					}
 				}
 			}
+			//发送到面试官
+			if(issendtointerview.equals("1")){
+				Map<String,Object> param = new HashMap<String,Object>();
+				param.put("candidid", canid);
+				CandidateInterview ci = interviewService.getInteviewer(param);
+				if(ci.getInterviewerId()!=null && !"".equals(ci.getInterviewerId())){
+					Employee ep = employeeService.queryEmployeeById(ci.getInterviewerId());
+					if(ep.getEmail()!=null && !"".equals(ep.getEmail())){
+						SendUtil.send(ep.getEmail(), "Pmo系统,HR已确认面试安排", "你好：HR已确认面试安排，请及时面试,谢谢!");
+					}
+				}
+			}
+			
 			return true;
 		}catch(Exception e){
 			
@@ -185,4 +212,5 @@ public class SendEmailController {
 		}
 		return false;
 	}
+	
 }

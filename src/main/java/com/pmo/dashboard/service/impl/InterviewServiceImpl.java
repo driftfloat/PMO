@@ -139,4 +139,9 @@ public class InterviewServiceImpl implements InterviewService {
 		return candidateInfo;
 	}
 
+	@Override
+	public CandidateInterview getInteviewer(Map<String, Object> map) {
+		return interviewMapper.getInteviewer(map);
+	}
+
 }

@@ -247,13 +247,17 @@ function sendemail(){
         	ehs.push(obj[k].value);
     }
     //alert(ehs);
-    //获取需求编号
-    //var demandid = $("#demandIdEdit").val();
+    //获取候选人ID
+    var candidateId = $("#hrConfirmCandidateId").val();
+    //alert(candidateId);
+    //获取是否发送到面试官标志
+    var issendtointerview = $("#issendtointerview").val();
+    //alert(issendtointerview);
 	
 	$.ajax({
 		url:path+'/service/sendemail/send3',
 		dataType:"json",
-		data:{ehr:JSON.stringify(ehs)},
+		data:{ehr:JSON.stringify(ehs),candidateId:candidateId,issendtointerview:issendtointerview},
 		async:true,
 		cache:false,
 		type:"post",

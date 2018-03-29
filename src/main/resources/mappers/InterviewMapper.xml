@@ -59,4 +59,14 @@
 			where a.CANDIDATE_ID = b.CANDIDATE_ID and b.CSSUBDEPT = #{csSubDeptId}) 
 	</select>
 	
+	<select id="getInteviewer" parameterType="java.util.HashMap" resultMap="interviewMap">
+		select * from  t_candidate_interview
+		where 1=1
+		<if test="candidid != null" >
+           and CANDIDATE_ID = #{candidid,jdbcType=VARCHAR}
+            and INTERVIEW_STATUS is null
+        </if>
+			
+	</select>
+	
 </mapper>
