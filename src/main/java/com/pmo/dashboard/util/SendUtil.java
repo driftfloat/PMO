@@ -59,4 +59,8 @@ public class SendUtil {
 	          }
 	          return false;
 	   }
+	   
+//	   public static void main(String args[]){
+//		   send("zhoupeng@chinasofti.com","Pmo系统邮件发送测试","Pmo系统邮件发送测试,请勿回复");
+//	   }
 }
