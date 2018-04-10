@@ -40,7 +40,9 @@ public class SendEmailUtil {
               mailMessage.setSentDate(new Date());
               //设置邮件消息内容
               String mailcontext=mailinfo.getContext();
-              mailMessage.setText(mailcontext);
+              //mailMessage.setText(mailcontext);
+              mailMessage.setContent(mailcontext, "text/html; charset=\"UTF-8\"");
+              mailMessage.setHeader("Content-Type", "text/html; charset=\"UTF-8\"");
               //组装附件
               //MimeBodyPart file=new MimeBodyPart();
               //file.attachFile("C:/Documents and Settings/Administrator/桌面/Image.rar");
