@@ -381,6 +381,19 @@ var path='<%=path%>';
 											</div>
 										</div>
 								</div>
+								
+								<div class="form-group">
+									<div class="group">
+										<label class="col-sm-2 control-label">IT Work Year</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" name="itworkyear"
+													id="itworkyear" data-bv-group=".group"/>
+										</div>
+									</div>
+									<div class="group">
+											
+									</div>
+								</div>
 								<!-- <div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Resource Status</label>

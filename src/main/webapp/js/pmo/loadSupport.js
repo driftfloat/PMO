@@ -61,13 +61,15 @@ function addEmployee(){
 		var gbGf = $('#gbGf').val();
 		var entryDate = $('#entryDate1').val();
 		var rmName= $("#RM").val();
+		//拿到IT行业工作年限
+		var itWorkYear = $("#itworkyear").val();
 		var addEmpConditionStr = eHr + lob + hsbcStaffId + staffName + LN
 						+ staffRegion + staffLocation + locationType
 						+ onshoreOrOffshore + csSubDept + hsbcSubDept + projectName
 						+ projectManager + sow + sowExpiredDate + staffCategory
 						+ engagementType + hsbcDOJ + graduationDate + role + skill
 						+ billingCurrency + billRate + terminationReason + email + gbGf
-						+ entryDate + rmName;
+						+ entryDate + rmName + itWorkYear;
 		if (lastConditionStr != addEmpConditionStr) {
 			lastConditionStr = addEmpConditionStr;
 		} else {
@@ -90,7 +92,7 @@ function addEmployee(){
 				"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,
 				"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,
 				"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":'Active',"terminatedDate":'',
-				"email":email,"gbGf":gbGf,"entryDate":entryDate,"rmUserId":rmName,"terminationReason":terminationReason},
+				"email":email,"gbGf":gbGf,"entryDate":entryDate,"rmUserId":rmName,"terminationReason":terminationReason,"itindustryWorkYear":itWorkYear},
 			async:true,
 			cache:false,
 			type:"post",
