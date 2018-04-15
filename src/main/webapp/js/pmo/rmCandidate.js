@@ -426,7 +426,9 @@ function rescheduleInterview(pushId,candidateId) {
 				$('#interviewer').val(result.interviewerId);
 				loadInterviewer(pushId,interviewerId);
 				
-				
+				$("#puid").val();
+				$("#puid").val(pushId);
+
 				$("#addInterviewer").click(function() {
 					var interviewDate = $("#graduationDate1").val();
 					var interviewerId = $("#interviewer").val();
@@ -451,6 +453,7 @@ function rescheduleInterview(pushId,candidateId) {
 						success : function(data) {
 							if (data) {
 								$('#myModal').modal('hide');
+								$("#issendemail").modal('show');
 								// BootstrapDialog.alert('安排面试成功!');
 								BootstrapDialog.show({
 									title : 'Interview arrangement',
@@ -602,6 +605,9 @@ function nextInterview(pushId, projectName) {
 	
 
 	loadInterviewer(pushId,"");
+	
+	$("#puid").val();
+	$("#puid").val(pushId);
 
 	$("#addInterviewer").click(function() {
 		var interviewDate = $("#interviewDate").val();
@@ -625,6 +631,7 @@ function nextInterview(pushId, projectName) {
 			success : function(data) {
 				if (data == "1") {
 					$('#myModal').modal('hide');
+					$("#issendemail").modal('show');
 					BootstrapDialog.show({
 						title : 'Interview arrangement',
 						message : 'Arrange successfully!',
