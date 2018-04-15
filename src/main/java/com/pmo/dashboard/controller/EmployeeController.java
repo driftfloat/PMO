@@ -534,6 +534,7 @@ public class EmployeeController {
                        ws.addCell(label);
                    }
                    
+                   
                    if(conditionList.contains("E-Mail")){
                        Label label= new Label(++j, i, listE.get(i-1).getEmail());
                        ws.addCell(label);
@@ -762,6 +763,11 @@ public class EmployeeController {
                 		   Label label= new Label(++j, i, "");
                            ws.addCell(label); 
                 	   }
+                   }
+                   
+                   if(conditionList.contains("Itworkyear")){
+                       Label label= new Label(++j, i, listE.get(i-1).getItindustryWorkYear());
+                       ws.addCell(label);
                    }
                    
                }

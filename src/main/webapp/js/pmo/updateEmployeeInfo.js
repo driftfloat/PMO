@@ -72,11 +72,13 @@ function updateEmployee() {
 		var email =  $('#email').val();
 		var entryDate = $('#entryDate1').val();
 		var gbGf = $('#gbGf').val();
+		//拿到IT行业工作年限
+		var itWorkYear = $("#itworkyear").val();
 		$.ajax({
 			url:path+'/service/employee/updateEmployee',
 			dataType:"json",
 			data:{"employeeId":employeeId,"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason,
-				"email":email,"entryDate":entryDate,"gbGf":gbGf},
+				"email":email,"entryDate":entryDate,"gbGf":gbGf,"itindustryWorkYear":itWorkYear},
 			async:true,
 			cache:false,
 			type:"post",
@@ -144,6 +146,7 @@ function loadEmployeeInfo() {
 			$('#eHr').val(employee.eHr);
 			$('#email').val(employee.email);
 			$('#entryDate1').val(employee.entryDate);
+			$('#itworkyear').val(employee.itindustryWorkYear);
 		}
 	})
 }

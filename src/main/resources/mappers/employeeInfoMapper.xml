@@ -17,7 +17,7 @@
 	</resultMap>
 	
 	<select id="queryEmployeeList" parameterType="com.pmo.dashboard.entity.EmployeePageCondition" resultMap="employeeInfoMap" >
-	    SELECT e.EMPLOYEE_ID,e.HSBC_STAFF_ID,e.E_HR,e.LOB,e.STAFF_NAME,e.LN,d.CS_SUBDEPT_NAME,e.RESOURCE_STATUS,e.RM_USER_ID,u.NICKNAME,e.ENGAGEMENT_TYPE
+	    SELECT e.ITINDUSTRY_WORK_YEAR,e.EMPLOYEE_ID,e.HSBC_STAFF_ID,e.E_HR,e.LOB,e.STAFF_NAME,e.LN,d.CS_SUBDEPT_NAME,e.RESOURCE_STATUS,e.RM_USER_ID,u.NICKNAME,e.ENGAGEMENT_TYPE
         FROM t_employee AS e
         LEFT JOIN t_cs_dept AS d
         ON e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID

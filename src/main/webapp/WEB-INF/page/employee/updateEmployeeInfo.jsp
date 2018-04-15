@@ -380,6 +380,19 @@ var path='<%=path%>';
 										</div>
 									</div> 
 								</div>
+								
+								<div class="form-group">
+									<div class="group">
+										<label class="col-sm-2 control-label">IT Work Year</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" name="itworkyear"
+													id="itworkyear" data-bv-group=".group"/>
+										</div>
+									</div>
+									<div class="group">
+											
+									</div>
+								</div> 
 								<div class="form-group">
 										<div class="group" style="display:none" id="terminatedDateDiv">
 										<label class="col-sm-2 control-label">LWD</label>
@@ -404,7 +417,9 @@ var path='<%=path%>';
 											</select>
 										</div>
 										</div>
-								</div>  
+								</div>
+								
+								 
 								<div class="form-group">
 									    <div style="text-align:center;width:100%;">
 									    <input type="button" value="Update"
