@@ -45,6 +45,7 @@ function loadEmployeeInfo(){
 			$('#email').val(employee.email);
 			$('#entryDate1').val(employee.entryDate);
 			$('#gbGf').val(employee.gbGf);
+			$('#itworkyear').val(employee.itindustryWorkYear);
 			
 			if ($('#resourceStatus').val() == "Active") {
 				$("#terminatedDateDiv").hide();
