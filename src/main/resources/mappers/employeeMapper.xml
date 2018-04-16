@@ -46,7 +46,220 @@
 	    values
 	    (#{employeeId},#{hsbcStaffId},#{staffName},#{ln},#{staffRegion},#{staffLocation},#{locationType},#{onshoreOrOffshore},#{sow},#{sowExpiredDate},#{staffCategory},#{engagementType},#{hsbcDOJ},#{graduationDate},#{billingCurrency},#{billRate},#{resourceStatus},#{terminatedDate},#{terminationReason},#{eHr},#{hsbcSubDept},#{skill},#{role},#{csSubDept},#{lob},#{projectManager},#{projectName},
 	    #{email},#{gbGf},#{entryDate},#{rmUserId},#{createTime},#{updateTime},#{itindustryWorkYear,jdbcType=VARCHAR})
-	</insert>
+	</insert>  
+	
+	<!--
+	<insert id="addEmployee" parameterType="com.pmo.dashboard.entity.Employee" >
+    insert into t_employee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="employeeId != null" >
+        EMPLOYEE_ID,
+      </if>
+      <if test="hsbcStaffId != null" >
+        HSBC_STAFF_ID,
+      </if>
+      <if test="staffName != null" >
+        STAFF_NAME,
+      </if>
+      <if test="ln != null" >
+        LN,
+      </if>
+      <if test="staffRegion != null" >
+        STAFF_REGION,
+      </if>
+      <if test="staffLocation != null" >
+        STAFF_LOCATION,
+      </if>
+      <if test="locationType != null" >
+        LOCATION_TYPE,
+      </if>
+      <if test="onshoreOrOffshore != null" >
+        ONSHORE_OR_OFFSHORE,
+      </if>
+      <if test="sow != null" >
+        SOW,
+      </if>
+      <if test="sowExpiredDate != null" >
+        SOW_EXPIRED_DATE,
+      </if>
+      <if test="staffCategory != null" >
+        STAFF_CATEGORY,
+      </if>
+      <if test="engagementType != null" >
+        ENGAGEMENT_TYPE,
+      </if>
+      <if test="hsbcDoj != null" >
+        HSBC_DOJ,
+      </if>
+      <if test="graduationDate != null" >
+        GRADUATION_DATE,
+      </if>
+      <if test="billCurrency != null" >
+        BILL_CURRENCY,
+      </if>
+      <if test="billRate != null" >
+        BILL_RATE,
+      </if>
+      <if test="resourceStatus != null" >
+        RESOURCE_STATUS,
+      </if>
+      <if test="mentionLwd != null" >
+        MENTION_LWD,
+      </if>
+      <if test="reasonForTermination != null" >
+        REASON_FOR_TERMINATION,
+      </if>
+      <if test="eHr != null" >
+        E_HR,
+      </if>
+      <if test="hsbcSubdeptId != null" >
+        HSBC_SUBDEPT_ID,
+      </if>
+      <if test="skill != null" >
+        SKILL,
+      </if>
+      <if test="role != null" >
+        ROLE,
+      </if>
+      <if test="csSubdeptId != null" >
+        CS_SUBDEPT_ID,
+      </if>
+      <if test="lob != null" >
+        LOB,
+      </if>
+      <if test="intervierwStatus != null" >
+        INTERVIERW_STATUS,
+      </if>
+      <if test="hsbcManager != null" >
+        HSBC_MANAGER,
+      </if>
+      <if test="hsbcProjectName != null" >
+        HSBC_PROJECT_NAME,
+      </if>
+      <if test="rmUserId != null" >
+        RM_USER_ID,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="gbGf != null" >
+        GB_GF,
+      </if>
+      <if test="entryDate != null" >
+        ENTRY_DATE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="employeeId != null" >
+        #{employeeId},
+      </if>
+      <if test="hsbcStaffId != null" >
+        #{hsbcStaffId},
+      </if>
+      <if test="staffName != null" >
+        #{staffName},
+      </if>
+      <if test="ln != null" >
+        #{ln},
+      </if>
+      <if test="staffRegion != null" >
+        #{staffRegion},
+      </if>
+      <if test="staffLocation != null" >
+        #{staffLocation},
+      </if>
+      <if test="locationType != null" >
+        #{locationType},
+      </if>
+      <if test="onshoreOrOffshore != null" >
+        #{onshoreOrOffshore},
+      </if>
+      <if test="sow != null" >
+        #{sow},
+      </if>
+      <if test="sowExpiredDate != null" >
+        #{sowExpiredDate},
+      </if>
+      <if test="staffCategory != null" >
+        #{staffCategory},
+      </if>
+      <if test="engagementType != null" >
+        #{engagementType},
+      </if>
+      <if test="hsbcDoj != null" >
+        #{hsbcDoj},
+      </if>
+      <if test="graduationDate != null" >
+        #{graduationDate},
+      </if>
+      <if test="billCurrency != null" >
+        #{billCurrency},
+      </if>
+      <if test="billRate != null" >
+        #{billRate},
+      </if>
+      <if test="resourceStatus != null" >
+        #{resourceStatus},
+      </if>
+      <if test="mentionLwd != null" >
+        #{mentionLwd},
+      </if>
+      <if test="reasonForTermination != null" >
+        #{reasonForTermination},
+      </if>
+      <if test="eHr != null" >
+        #{eHr},
+      </if>
+      <if test="hsbcSubdeptId != null" >
+        #{hsbcSubdeptId},
+      </if>
+      <if test="skill != null" >
+        #{skill},
+      </if>
+      <if test="role != null" >
+        #{role},
+      </if>
+      <if test="csSubdeptId != null" >
+        #{csSubdeptId},
+      </if>
+      <if test="lob != null" >
+        #{lob},
+      </if>
+      <if test="intervierwStatus != null" >
+        #{intervierwStatus},
+      </if>
+      <if test="hsbcManager != null" >
+        #{hsbcManager},
+      </if>
+      <if test="hsbcProjectName != null" >
+        #{hsbcProjectName},
+      </if>
+      <if test="rmUserId != null" >
+        #{rmUserId},
+      </if>
+      <if test="email != null" >
+        #{email},
+      </if>
+      <if test="gbGf != null" >
+        #{gbGf},
+      </if>
+      <if test="entryDate != null" >
+        #{entryDate},
+      </if>
+      <if test="createTime != null" >
+        #{createTime},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>  -->
 	
 	<select id="queryEmployeeById" parameterType="String" resultMap="employeeMap">
 	    SELECT e.*,c.CS_SUBDEPT_NAME as csSubDeptName,u.NICKNAME  FROM t_employee e 

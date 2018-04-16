@@ -63,6 +63,7 @@ function addEmployee(){
 		var gbGf = $('#gbGf').val();
 		var entryDate = $('#entryDate1').val();
 		var rmName= $("#RM").val();
+		var itworkyear= $("#itworkyear").val();
 		
 		$.ajax({
 			url:path+'/service/employee/addEmployee',
@@ -72,7 +73,7 @@ function addEmployee(){
 				"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,
 				"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,
 				"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":'Active',"terminatedDate":'',
-				"email":email,"gbGf":gbGf,"entryDate":entryDate,"rmUserId":rmName,"terminationReason":terminationReason},
+				"email":email,"gbGf":gbGf,"entryDate":entryDate,"rmUserId":rmName,"terminationReason":terminationReason,"itindustryWorkYear":itworkyear},
 			async:true,
 			cache:false,
 			type:"post",
