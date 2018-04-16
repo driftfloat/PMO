@@ -86,12 +86,14 @@ function updateEmployee() {
 		var year = parseInt(days / (1000 * 60 * 60 * 24 * 365)); 
 		//alert("毕业的年限"+year);
 		//判断IT工作年限不能大于实际工作年限
-		if(year!=null && year!=""){
+		//if(year!=null && year!=""){
+			//alert(parseInt(itWorkYear));
+			//alert(parseInt(year));
 			if(parseInt(itWorkYear)>parseInt(year)){
 				$("#modal-container-489917").modal('show');
 				return;
 			}
-		}
+		//}
 		
 		
 		$.ajax({
