@@ -337,4 +337,9 @@
 	    and e.UPDATE_TIME >#{lastUpdateTime}
 	</select>
 	
+	<update id="importEmployeeProject" parameterType="com.pmo.dashboard.entity.Employee">
+ 	    update t_employee set CHSOFTI_PRO_NUMBER = #{chsoftiProNumber},CHSOFTI_PRO_NAME = #{chsoftiProName},CHSOFTI_PRO_STARTDATE = #{chsoftiProStartdate}
+ 	      WHERE EMPLOYEE_ID = #{employeeId} 
+ 	</update>
+	
 </mapper>
