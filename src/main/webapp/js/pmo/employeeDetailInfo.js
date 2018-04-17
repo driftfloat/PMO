@@ -46,6 +46,9 @@ function loadEmployeeInfo(){
 			$('#entryDate1').val(employee.entryDate);
 			$('#gbGf').val(employee.gbGf);
 			$('#itworkyear').val(employee.itindustryWorkYear);
+			$('#chsoftiProNumber').val(employee.chsoftiProNumber);
+			$('#chsoftiProStartDate').val(employee.chsoftiProStartdate);
+			$('#chsoftiProName').val(employee.chsoftiProName);
 			
 			if ($('#resourceStatus').val() == "Active") {
 				$("#terminatedDateDiv").hide();

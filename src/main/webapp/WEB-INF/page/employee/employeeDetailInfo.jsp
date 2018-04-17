@@ -343,7 +343,28 @@ var path='<%=path%>';
 										</div>
 									</div>
 									<div class="group">
-											
+										<label class="col-sm-2 control-label">Chsofti Pro Number</label>
+										<div class="col-md-4">
+											<input type="text" readonly class="form-control" name="chsoftiProNumber"
+													id="chsoftiProNumber" data-bv-group=".group"/>
+										</div>	
+									</div>
+								</div> 
+								<br/><br/>
+								<div class="form-group">
+									<div class="group">
+										<label class="col-sm-2 control-label">Chsofti Pro StartDate</label>
+										<div class="col-md-4">
+											<input type="text" readonly class="form-control" name="chsoftiProStartDate"
+													id="chsoftiProStartDate" data-bv-group=".group"/>
+										</div>
+									</div>
+									<div class="group">
+										<label class="col-sm-2 control-label">Chsofti Pro Name</label>
+										<div class="col-md-4">
+											<input type="text" readonly class="form-control" name="chsoftiProName"
+													id="chsoftiProName" data-bv-group=".group"/>
+										</div>	
 									</div>
 								</div> 
 								<br/><br/>

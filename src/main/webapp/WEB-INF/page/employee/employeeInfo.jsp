@@ -323,6 +323,9 @@ var path='<%=path%>';
 									<!-- <label><input type="checkbox" name="AM"/>AM&nbsp;&nbsp;</label> -->
 									<label><input type="checkbox" name="CS Dept"/>CS Dept&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Itworkyear"/>Itworkyear&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Ch Pro Number"/>Ch Pro Number&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Ch Pro StartDate"/>Ch Pro StartDate&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="Ch Pro Name"/>Ch Pro Name&nbsp;&nbsp;</label>
 								</tr>
 							</thead>
 							<tbody>

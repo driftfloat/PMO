@@ -38,6 +38,9 @@
 		<result property="engagementType" column="ENGAGEMENT_TYPE" javaType="String" />
 		<result property="nickname" column="NICKNAME" javaType="String" />
 		<result column="ITINDUSTRY_WORK_YEAR" property="itindustryWorkYear" jdbcType="VARCHAR" />
+		<result column="CHSOFTI_PRO_NUMBER" property="chsoftiProNumber" jdbcType="VARCHAR" />
+        <result column="CHSOFTI_PRO_STARTDATE" property="chsoftiProStartdate" jdbcType="TIMESTAMP" />
+        <result column="CHSOFTI_PRO_NAME" property="chsoftiProName" jdbcType="VARCHAR" />
 	</resultMap>
 	
 	

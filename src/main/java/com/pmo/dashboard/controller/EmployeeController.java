@@ -770,6 +770,26 @@ public class EmployeeController {
                        ws.addCell(label);
                    }
                    
+                   //中软项目编号
+                   if(conditionList.contains("Ch Pro Number")){
+                       Label label= new Label(++j, i, listE.get(i-1).getChsoftiProNumber());
+                       ws.addCell(label);
+                   }
+                   
+                   //项目开始日期
+                   if(conditionList.contains("Ch Pro StartDate")){
+                	   if(listE.get(i-1).getChsoftiProStartdate()!=null && !"".equals(listE.get(i-1).getChsoftiProStartdate())){
+                		   Label label= new Label(++j, i, listE.get(i-1).getChsoftiProStartdate().toString());
+                           ws.addCell(label);
+                	   }
+                   }
+                   
+                   //中软项目名称
+                   if(conditionList.contains("Ch Pro Name")){
+                       Label label= new Label(++j, i, listE.get(i-1).getChsoftiProName());
+                       ws.addCell(label);
+                   }
+                   
                }
              
               //写进文档
