@@ -181,6 +181,21 @@ $(document).ready(function() {
             		},
                 }
             },
+            itworkyear: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter Itworkyear'
+                    },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
+                    regexp:{
+            			regexp:/^([1-9]\d*(\.\d*[0-9])?(\/(m|M))?)$|^(0\.\d*[0-9](\/(m|M))?)$/,
+            			message:'Please enter the correct format.'
+            		},
+                }
+            },
             email: {
                 validators: {
                 	 regexp: {
@@ -341,6 +356,21 @@ $(document).ready(function() {
             			message:'Please enter the correct format.'
             		},
 
+                }
+            },
+            itworkyear: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter Itworkyear'
+                    },
+                    stringLength: {
+                        max: 32,
+                        message: 'Exceeded the maxLength'
+                    },
+                    regexp:{
+            			regexp:/^([1-9]\d*(\.\d*[0-9])?(\/(m|M))?)$|^(0\.\d*[0-9](\/(m|M))?)$/,
+            			message:'Please enter the correct format.'
+            		},
                 }
             },
             email: {

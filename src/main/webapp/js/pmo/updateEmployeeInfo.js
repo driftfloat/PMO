@@ -72,11 +72,35 @@ function updateEmployee() {
 		var email =  $('#email').val();
 		var entryDate = $('#entryDate1').val();
 		var gbGf = $('#gbGf').val();
+		//拿到IT行业工作年限
+		var itWorkYear = $("#itworkyear").val();
+		
+		//alert("毕业日期"+graduationDate);
+		var currentDate = getCurrentDate();
+		//alert("当前日期"+currentDate);
+		var date1_temp = graduationDate.split("-");  
+		var date2_temp = currentDate.split("-"); 
+		var date1 = new Date(date1_temp[0], date1_temp[1]-1, date1_temp[2]);
+		var date2 = new Date(date2_temp[0], date2_temp[1]-1, date2_temp[2]);  
+		var days = date2.getTime() - date1.getTime(); 
+		var year = parseInt(days / (1000 * 60 * 60 * 24 * 365)); 
+		//alert("毕业的年限"+year);
+		//判断IT工作年限不能大于实际工作年限
+		//if(year!=null && year!=""){
+			//alert(parseInt(itWorkYear));
+			//alert(parseInt(year));
+			if(parseInt(itWorkYear)>parseInt(year)){
+				$("#modal-container-489917").modal('show');
+				return;
+			}
+		//}
+		
+		
 		$.ajax({
 			url:path+'/service/employee/updateEmployee',
 			dataType:"json",
 			data:{"employeeId":employeeId,"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason,
-				"email":email,"entryDate":entryDate,"gbGf":gbGf},
+				"email":email,"entryDate":entryDate,"gbGf":gbGf,"itindustryWorkYear":itWorkYear},
 			async:true,
 			cache:false,
 			type:"post",
@@ -144,6 +168,7 @@ function loadEmployeeInfo() {
 			$('#eHr').val(employee.eHr);
 			$('#email').val(employee.email);
 			$('#entryDate1').val(employee.entryDate);
+			$('#itworkyear').val(employee.itindustryWorkYear);
 		}
 	})
 }
@@ -512,3 +537,21 @@ $("#hsbcDept").change(
 				}
 			})
 		})
+		
+		
+//获取当前时间，格式YYYY-MM-DD
+function getCurrentDate() {
+     var date = new Date();
+     var seperator1 = "-";
+     var year = date.getFullYear();
+     var month = date.getMonth() + 1;
+     var strDate = date.getDate();
+     if (month >= 1 && month <= 9) {
+         month = "0" + month;
+     }
+     if (strDate >= 0 && strDate <= 9) {
+         strDate = "0" + strDate;
+     }
+     var currentdate = year + seperator1 + month + seperator1 + strDate;
+     return currentdate;
+}

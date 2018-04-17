@@ -348,6 +348,19 @@ var path='<%=path%>';
 										</div>
 										</div>
 								</div>
+								
+								<div class="form-group">
+									<div class="group">
+										<label class="col-sm-2 control-label">IT Work Year</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" name="itworkyear"
+													id="itworkyear" data-bv-group=".group"/>
+										</div>
+									</div>
+									<div class="group">
+											
+									</div>
+								</div> 
 								<!--  
 								<div class="form-group">
 										<div class="group">
@@ -444,6 +457,28 @@ var path='<%=path%>';
 
 		<c:import url="/service/manage/footer" />
 
+	</div>
+	
+	<!-- IT行业工作年限不能大于实际工作年限 -->
+	<div class="modal fade" id="modal-container-489917" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					    <div class="modal-header">
+							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							 <h4 class="modal-title" id="myModalLabel">
+								 Warning!
+							 </h4>
+						</div>
+						<div class="modal-body">
+				          <h5>IT industry work years can't longer than the actual work years</h5>
+			            </div>
+						<div class="modal-footer">
+							 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+					
+				</div>
+				
 	</div>
 	<!--/.fluid-container-->
 

@@ -49,6 +49,7 @@ public class Employee
     private String chsoftiProStartdate;
     private String chsoftiProName;
     
+    private String itindustryWorkYear;
     
 	public String getChsoftiProNumber() {
 		return chsoftiProNumber;
@@ -69,6 +70,14 @@ public class Employee
 	public void setChsoftiProName(String chsoftiProName) {
 		this.chsoftiProName = chsoftiProName;
 	}
+	
+	public String getItindustryWorkYear() {
+		return itindustryWorkYear;
+	}
+	public void setItindustryWorkYear(String itindustryWorkYear) {
+		this.itindustryWorkYear = itindustryWorkYear;
+	}
+	
 	public String getNickname() {
 		return nickname;
 	}
@@ -249,7 +258,8 @@ public class Employee
     {
         this.engagementType = engagementType;
     }
-    public String getHsbcDOJ()
+    
+	public String getHsbcDOJ()
     {
         return hsbcDOJ;
     }
@@ -354,7 +364,7 @@ public class Employee
             String graduationDate, String role, String skill,
             String billingCurrency, String billRate, String resourceStatus,
             String terminatedDate, String terminationReason,String email, String gbGf,
-            String entryDate,String rmUserId, Timestamp createTime, Timestamp updateTime)
+            String entryDate,String rmUserId, Timestamp createTime, Timestamp updateTime,String itindustryWorkYear)
     {
         super();
         this.employeeId = employeeId;
@@ -390,6 +400,7 @@ public class Employee
         this.rmUserId = rmUserId;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.itindustryWorkYear = itindustryWorkYear;
     }
     public Employee(String employeeId, String eHr, String lob,
             String hsbcStaffId, String staffName, String ln, String staffRegion,
@@ -400,7 +411,7 @@ public class Employee
             String graduationDate, String role, String skill,
             String billingCurrency, String billRate, String resourceStatus,
             String terminatedDate, String terminationReason,String email, String gbGf,
-            String entryDate,String rmUserId, Timestamp updateTime)
+            String entryDate,String rmUserId, Timestamp updateTime,String itindustryWorkYear)
     {
         super();
         this.employeeId = employeeId;
@@ -435,6 +446,7 @@ public class Employee
         this.entryDate = entryDate;
         this.rmUserId = rmUserId;
         this.updateTime = updateTime;
+        this.itindustryWorkYear = itindustryWorkYear;
     }
     
 }

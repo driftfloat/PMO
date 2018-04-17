@@ -9,6 +9,8 @@ import javax.mail.Message;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
+
 import com.pmo.dashboard.entity.MailBaseInfo;
 public class SendEmailUtil {
 	
@@ -35,12 +37,12 @@ public class SendEmailUtil {
               Address to=new InternetAddress(mailinfo.getAcceptAddress());
               mailMessage.setRecipient(Message.RecipientType.TO,to);
               //设置邮件消息的主题
-              mailMessage.setSubject(mailinfo.getSubject());
+              String subject = MimeUtility.encodeWord(mailinfo.getSubject(), "UTF-8", "Q");
+              mailMessage.setSubject(subject);
               //设置邮件消息发送的时间
               mailMessage.setSentDate(new Date());
               //设置邮件消息内容
               String mailcontext=mailinfo.getContext();
-              //mailMessage.setText(mailcontext);
               mailMessage.setContent(mailcontext, "text/html; charset=\"UTF-8\"");
               mailMessage.setHeader("Content-Type", "text/html; charset=\"UTF-8\"");
               //组装附件

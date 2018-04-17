@@ -39,17 +39,232 @@
 		<result property="nickname" column="NICKNAME" javaType="String" />
 		
 		<result property="chsoftiProNumber" column="CHSOFTI_PRO_NUMBER" javaType="String" />
+		<result property="chsoftiProStartdate" column="CHSOFTI_PRO_STARTDATE" javaType="String" />
 		<result property="chsoftiProName" column="CHSOFTI_PRO_NAME" javaType="String" />
+		<result column="ITINDUSTRY_WORK_YEAR" property="itindustryWorkYear" jdbcType="VARCHAR" />
 		
 	</resultMap>
 	
 	
 	<insert id="addEmployee" parameterType="com.pmo.dashboard.entity.Employee">
-	    insert into t_employee (EMPLOYEE_ID,HSBC_STAFF_ID,STAFF_NAME,LN,STAFF_REGION,STAFF_LOCATION,LOCATION_TYPE,ONSHORE_OR_OFFSHORE,SOW,SOW_EXPIRED_DATE,STAFF_CATEGORY,ENGAGEMENT_TYPE,HSBC_DOJ,GRADUATION_DATE,BILL_CURRENCY,BILL_RATE,RESOURCE_STATUS,MENTION_LWD,REASON_FOR_TERMINATION,E_HR,HSBC_SUBDEPT_ID,SKILL,ROLE,CS_SUBDEPT_ID,LOB,HSBC_MANAGER,HSBC_PROJECT_NAME,Email,GB_GF,ENTRY_DATE,RM_USER_ID,CREATE_TIME,UPDATE_TIME)
+	    insert into t_employee (EMPLOYEE_ID,HSBC_STAFF_ID,STAFF_NAME,LN,STAFF_REGION,STAFF_LOCATION,LOCATION_TYPE,ONSHORE_OR_OFFSHORE,SOW,SOW_EXPIRED_DATE,STAFF_CATEGORY,ENGAGEMENT_TYPE,HSBC_DOJ,GRADUATION_DATE,BILL_CURRENCY,BILL_RATE,RESOURCE_STATUS,MENTION_LWD,REASON_FOR_TERMINATION,E_HR,HSBC_SUBDEPT_ID,SKILL,ROLE,CS_SUBDEPT_ID,LOB,HSBC_MANAGER,HSBC_PROJECT_NAME,Email,GB_GF,ENTRY_DATE,RM_USER_ID,CREATE_TIME,UPDATE_TIME,ITINDUSTRY_WORK_YEAR)
 	    values
 	    (#{employeeId},#{hsbcStaffId},#{staffName},#{ln},#{staffRegion},#{staffLocation},#{locationType},#{onshoreOrOffshore},#{sow},#{sowExpiredDate},#{staffCategory},#{engagementType},#{hsbcDOJ},#{graduationDate},#{billingCurrency},#{billRate},#{resourceStatus},#{terminatedDate},#{terminationReason},#{eHr},#{hsbcSubDept},#{skill},#{role},#{csSubDept},#{lob},#{projectManager},#{projectName},
-	    #{email},#{gbGf},#{entryDate},#{rmUserId},#{createTime},#{updateTime})
-	</insert>
+	    #{email},#{gbGf},#{entryDate},#{rmUserId},#{createTime},#{updateTime},#{itindustryWorkYear,jdbcType=VARCHAR})
+	</insert>  
+	
+	<!--
+	<insert id="addEmployee" parameterType="com.pmo.dashboard.entity.Employee" >
+    insert into t_employee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="employeeId != null" >
+        EMPLOYEE_ID,
+      </if>
+      <if test="hsbcStaffId != null" >
+        HSBC_STAFF_ID,
+      </if>
+      <if test="staffName != null" >
+        STAFF_NAME,
+      </if>
+      <if test="ln != null" >
+        LN,
+      </if>
+      <if test="staffRegion != null" >
+        STAFF_REGION,
+      </if>
+      <if test="staffLocation != null" >
+        STAFF_LOCATION,
+      </if>
+      <if test="locationType != null" >
+        LOCATION_TYPE,
+      </if>
+      <if test="onshoreOrOffshore != null" >
+        ONSHORE_OR_OFFSHORE,
+      </if>
+      <if test="sow != null" >
+        SOW,
+      </if>
+      <if test="sowExpiredDate != null" >
+        SOW_EXPIRED_DATE,
+      </if>
+      <if test="staffCategory != null" >
+        STAFF_CATEGORY,
+      </if>
+      <if test="engagementType != null" >
+        ENGAGEMENT_TYPE,
+      </if>
+      <if test="hsbcDoj != null" >
+        HSBC_DOJ,
+      </if>
+      <if test="graduationDate != null" >
+        GRADUATION_DATE,
+      </if>
+      <if test="billCurrency != null" >
+        BILL_CURRENCY,
+      </if>
+      <if test="billRate != null" >
+        BILL_RATE,
+      </if>
+      <if test="resourceStatus != null" >
+        RESOURCE_STATUS,
+      </if>
+      <if test="mentionLwd != null" >
+        MENTION_LWD,
+      </if>
+      <if test="reasonForTermination != null" >
+        REASON_FOR_TERMINATION,
+      </if>
+      <if test="eHr != null" >
+        E_HR,
+      </if>
+      <if test="hsbcSubdeptId != null" >
+        HSBC_SUBDEPT_ID,
+      </if>
+      <if test="skill != null" >
+        SKILL,
+      </if>
+      <if test="role != null" >
+        ROLE,
+      </if>
+      <if test="csSubdeptId != null" >
+        CS_SUBDEPT_ID,
+      </if>
+      <if test="lob != null" >
+        LOB,
+      </if>
+      <if test="intervierwStatus != null" >
+        INTERVIERW_STATUS,
+      </if>
+      <if test="hsbcManager != null" >
+        HSBC_MANAGER,
+      </if>
+      <if test="hsbcProjectName != null" >
+        HSBC_PROJECT_NAME,
+      </if>
+      <if test="rmUserId != null" >
+        RM_USER_ID,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="gbGf != null" >
+        GB_GF,
+      </if>
+      <if test="entryDate != null" >
+        ENTRY_DATE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="employeeId != null" >
+        #{employeeId},
+      </if>
+      <if test="hsbcStaffId != null" >
+        #{hsbcStaffId},
+      </if>
+      <if test="staffName != null" >
+        #{staffName},
+      </if>
+      <if test="ln != null" >
+        #{ln},
+      </if>
+      <if test="staffRegion != null" >
+        #{staffRegion},
+      </if>
+      <if test="staffLocation != null" >
+        #{staffLocation},
+      </if>
+      <if test="locationType != null" >
+        #{locationType},
+      </if>
+      <if test="onshoreOrOffshore != null" >
+        #{onshoreOrOffshore},
+      </if>
+      <if test="sow != null" >
+        #{sow},
+      </if>
+      <if test="sowExpiredDate != null" >
+        #{sowExpiredDate},
+      </if>
+      <if test="staffCategory != null" >
+        #{staffCategory},
+      </if>
+      <if test="engagementType != null" >
+        #{engagementType},
+      </if>
+      <if test="hsbcDoj != null" >
+        #{hsbcDoj},
+      </if>
+      <if test="graduationDate != null" >
+        #{graduationDate},
+      </if>
+      <if test="billCurrency != null" >
+        #{billCurrency},
+      </if>
+      <if test="billRate != null" >
+        #{billRate},
+      </if>
+      <if test="resourceStatus != null" >
+        #{resourceStatus},
+      </if>
+      <if test="mentionLwd != null" >
+        #{mentionLwd},
+      </if>
+      <if test="reasonForTermination != null" >
+        #{reasonForTermination},
+      </if>
+      <if test="eHr != null" >
+        #{eHr},
+      </if>
+      <if test="hsbcSubdeptId != null" >
+        #{hsbcSubdeptId},
+      </if>
+      <if test="skill != null" >
+        #{skill},
+      </if>
+      <if test="role != null" >
+        #{role},
+      </if>
+      <if test="csSubdeptId != null" >
+        #{csSubdeptId},
+      </if>
+      <if test="lob != null" >
+        #{lob},
+      </if>
+      <if test="intervierwStatus != null" >
+        #{intervierwStatus},
+      </if>
+      <if test="hsbcManager != null" >
+        #{hsbcManager},
+      </if>
+      <if test="hsbcProjectName != null" >
+        #{hsbcProjectName},
+      </if>
+      <if test="rmUserId != null" >
+        #{rmUserId},
+      </if>
+      <if test="email != null" >
+        #{email},
+      </if>
+      <if test="gbGf != null" >
+        #{gbGf},
+      </if>
+      <if test="entryDate != null" >
+        #{entryDate},
+      </if>
+      <if test="createTime != null" >
+        #{createTime},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>  -->
 	
 	<select id="queryEmployeeById" parameterType="String" resultMap="employeeMap">
 	    SELECT e.*,c.CS_SUBDEPT_NAME as csSubDeptName,u.NICKNAME  FROM t_employee e 
@@ -95,7 +310,7 @@
 	
 	<update id="updateEmployee" parameterType="com.pmo.dashboard.entity.Employee">
 	    update t_employee set E_Hr = #{eHr},LOB = #{lob},HSBC_STAFF_ID = #{hsbcStaffId},STAFF_NAME = #{staffName},LN = #{ln},STAFF_REGION = #{staffRegion},STAFF_LOCATION = #{staffLocation},LOCATION_TYPE = #{locationType},ONSHORE_OR_OFFSHORE = #{onshoreOrOffshore},CS_SUBDEPT_ID = #{csSubDept},HSBC_SUBDEPT_ID = #{hsbcSubDept},HSBC_PROJECT_NAME = #{projectName},HSBC_MANAGER = #{projectManager},SOW = #{sow},SOW_EXPIRED_DATE = #{sowExpiredDate},STAFF_CATEGORY = #{staffCategory},ENGAGEMENT_TYPE = #{engagementType},HSBC_DOJ= #{hsbcDOJ},GRADUATION_DATE = #{graduationDate},BILL_CURRENCY = #{billingCurrency},BILL_RATE = #{billRate},RESOURCE_STATUS = #{resourceStatus},MENTION_LWD = #{terminatedDate},REASON_FOR_TERMINATION = #{terminationReason},ROLE = #{role},SKILL = #{skill},
-	     Email = #{email},GB_GF = #{gbGf},ENTRY_DATE = #{entryDate},UPDATE_TIME = #{updateTime} WHERE EMPLOYEE_ID = #{employeeId} 
+	     Email = #{email},GB_GF = #{gbGf},ENTRY_DATE = #{entryDate},UPDATE_TIME = #{updateTime},ITINDUSTRY_WORK_YEAR = #{itindustryWorkYear,jdbcType=VARCHAR} WHERE EMPLOYEE_ID = #{employeeId} 
 	</update>
 	
 	<update id="importEmployeeProject" parameterType="com.pmo.dashboard.entity.Employee">

@@ -204,6 +204,7 @@ public class EmployeeController {
         String gbGf = request.getParameter("gbGf");
         String entryDate = request.getParameter("entryDate");
         String rmUserId = request.getParameter("rmUserId");
+        String itindustryWorkYear = request.getParameter("itindustryWorkYear");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date curDate = new Date();
         Timestamp createTime = null;
@@ -222,7 +223,7 @@ public class EmployeeController {
                 graduationDate, role, skill,
                 billingCurrency, billRate, resourceStatus,
                 terminatedDate, terminationReason,email,gbGf,
-                entryDate,rmUserId, createTime, updateTime);
+                entryDate,rmUserId, createTime, updateTime,itindustryWorkYear);
         
         boolean resultFlag = employeeService.addEmployee(employee);
         if(resultFlag) {
@@ -285,6 +286,7 @@ public class EmployeeController {
         String gbGf = request.getParameter("gbGf");
         String entryDate = request.getParameter("entryDate");
         String rmUserId = request.getParameter("rmUserId");
+        String itindustryWorkYear = request.getParameter("itindustryWorkYear");
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date curDate = new Date();
@@ -305,7 +307,7 @@ public class EmployeeController {
                 staffCategory, engagementType, hsbcDOJ,
                 graduationDate, role, skill,
                 billingCurrency, billRate, resourceStatus,
-                terminatedDate, terminationReason,email,gbGf,entryDate,rmUserId,updateTime);
+                terminatedDate, terminationReason,email,gbGf,entryDate,rmUserId,updateTime,itindustryWorkYear);
         
         /**
          * 添加日志
@@ -531,6 +533,7 @@ public class EmployeeController {
                        Label label= new Label(++j, i, listE.get(i-1).getLn());
                        ws.addCell(label);
                    }
+                   
                    
                    if(conditionList.contains("E-Mail")){
                        Label label= new Label(++j, i, listE.get(i-1).getEmail());
@@ -760,6 +763,11 @@ public class EmployeeController {
                 		   Label label= new Label(++j, i, "");
                            ws.addCell(label); 
                 	   }
+                   }
+                   
+                   if(conditionList.contains("Itworkyear")){
+                       Label label= new Label(++j, i, listE.get(i-1).getItindustryWorkYear());
+                       ws.addCell(label);
                    }
                    
                }
