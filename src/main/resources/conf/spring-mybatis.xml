@@ -17,6 +17,7 @@
         <property name="locations">
             <list>
                 <value>classpath*:conf/jdbc.properties</value>
+                <value>classpath*:conf/importconfig.properties</value>
             </list>
         </property>
         <property name="ignoreUnresolvablePlaceholders" value="true" />

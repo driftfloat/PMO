@@ -18,5 +18,5 @@ public interface EmployeeService
 	public List<Employee> getAllInterviewer();
 	public List<Employee> getAllEmployee();
 	public List<Employee> getEmployeeByLastUpdateTime(String lastUpdateTime);
-
+	boolean importEmployeeProject(Employee employee);
 }
