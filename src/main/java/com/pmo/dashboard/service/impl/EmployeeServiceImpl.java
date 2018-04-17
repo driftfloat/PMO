@@ -44,6 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService
         }
         return false;
     }
+    
 
     @Override
     public List<Employee> queryEmployeeList(EmployeePageCondition employeePageCondition)
@@ -93,4 +94,12 @@ public class EmployeeServiceImpl implements EmployeeService
 		return employeeMapper.getEmployeeByLastUpdateTime(lastUpdateTime);
 	}
 	
+//	@Override
+    public boolean importEmployeeProject(Employee employee)
+    {
+        if(employeeMapper.importEmployeeProject(employee)>0){
+            return true;
+        }
+        return false;
+    }
 }

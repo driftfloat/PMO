@@ -1,7 +1,6 @@
 package com.pmo.dashboard.entity;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class Employee
 {
@@ -45,27 +44,27 @@ public class Employee
     private Timestamp updateTime;
     private String nickname;
     
-    private String itindustryWorkYear;
     private String chsoftiProNumber;
-    private Date chsoftiProStartdate;
+    private String chsoftiProStartdate;
     private String chsoftiProName;
     
+    private String itindustryWorkYear;
     
     
-    
-    
+	
+	public String getChsoftiProStartdate() {
+		return chsoftiProStartdate;
+	}
+
+	public void setChsoftiProStartdate(String chsoftiProStartdate) {
+		this.chsoftiProStartdate = chsoftiProStartdate;
+	}
 	
 	public String getChsoftiProNumber() {
 		return chsoftiProNumber;
 	}
 	public void setChsoftiProNumber(String chsoftiProNumber) {
 		this.chsoftiProNumber = chsoftiProNumber;
-	}
-	public Date getChsoftiProStartdate() {
-		return chsoftiProStartdate;
-	}
-	public void setChsoftiProStartdate(Date chsoftiProStartdate) {
-		this.chsoftiProStartdate = chsoftiProStartdate;
 	}
 	public String getChsoftiProName() {
 		return chsoftiProName;
@@ -79,6 +78,7 @@ public class Employee
 	public void setItindustryWorkYear(String itindustryWorkYear) {
 		this.itindustryWorkYear = itindustryWorkYear;
 	}
+	
 	public String getNickname() {
 		return nickname;
 	}

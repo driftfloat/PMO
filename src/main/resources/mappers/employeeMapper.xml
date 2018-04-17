@@ -37,10 +37,10 @@
 		<result property="rmUserId" column="RM_USER_ID" javaType="String" />
 		<result property="engagementType" column="ENGAGEMENT_TYPE" javaType="String" />
 		<result property="nickname" column="NICKNAME" javaType="String" />
+		<result property="chsoftiProNumber" column="CHSOFTI_PRO_NUMBER" javaType="String" />
+		<result property="chsoftiProStartdate" column="CHSOFTI_PRO_STARTDATE" javaType="String" />
+		<result property="chsoftiProName" column="CHSOFTI_PRO_NAME" javaType="String" />
 		<result column="ITINDUSTRY_WORK_YEAR" property="itindustryWorkYear" jdbcType="VARCHAR" />
-		<result column="CHSOFTI_PRO_NUMBER" property="chsoftiProNumber" jdbcType="VARCHAR" />
-        <result column="CHSOFTI_PRO_STARTDATE" property="chsoftiProStartdate" jdbcType="TIMESTAMP" />
-        <result column="CHSOFTI_PRO_NAME" property="chsoftiProName" jdbcType="VARCHAR" />
 	</resultMap>
 	
 	
