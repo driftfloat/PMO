@@ -62,10 +62,11 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 //		int rmCount = OfflineOperMapper.rmCount(condition);
 //		if( 0 == rmCount) {
 //		}
+		List<OfflineOper> rtn = null ;
 		Set<User> rmSet = new HashSet();
 		if("5".equals(user.getUserType())) { // RM
 			condition.setRmId(user.getUserId());
-			return OfflineOperMapper.queryByRM(condition) ;
+			rtn = OfflineOperMapper.queryByRM(condition) ;
 		}else if("3".equals(user.getUserType())) {  // 交付部经理
 			List<CSDept> csDepts = csDeptMapper.queryCSDeptByIds(user.getCsdeptId().split(","));  // 交付部经理所在的部门
 			for(CSDept d :csDepts ) {
@@ -73,10 +74,19 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 				 rmSet.addAll(rms) ;
 			}
 			int a = 1;
+			String[] rmIDs = new String[rmSet.size()] ;
+			int index = 0;
+			for(User u : rmSet) {
+				rmIDs[index] = u.getUserId() ;
+				index++ ;
+			}
+			condition.setRmIDs(rmIDs); 
+			rtn = OfflineOperMapper.queryByRM(condition) ;
 		}else if("1".equals(user.getUserType())){ // 事业部经理
 			List<CSDept> list = csDeptMapper.queryCSSubDeptNameByCsBuName("csBuName");  // csBuName 根据事业部名称查
+			rtn = OfflineOperMapper.queryByRM(condition) ;
 		}
-		return null ;
+		return rtn ;
 	}
 
 }
