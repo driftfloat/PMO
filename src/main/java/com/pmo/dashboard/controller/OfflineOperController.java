@@ -39,6 +39,12 @@ public class OfflineOperController {
 	@Resource
     private EmployeeService employeeService;
 	
+	
+	@RequestMapping("/listPage")
+	public String listPage(){
+		return "offline/offline";
+	}
+	
 	/**
 	 * 返回数据
 	 * @param request
