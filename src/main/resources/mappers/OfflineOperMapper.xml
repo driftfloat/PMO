@@ -83,8 +83,13 @@
     , o.REMARK
     from t_employee e 
     LEFT JOIN  t_offline_oper o ON o.EMPLOYEE_ID = e.EMPLOYEE_ID 
-    where rm_id = #{rmId} AND YEAR = #{year}  AND MONTH = #{month} 
-     AND RESOURCE_STATUS='Active'
+    where  YEAR = #{year}  AND MONTH = #{month}  AND RESOURCE_STATUS='Active'
+     and rm_id IN 
+     <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+		#{item.rmIDs}
+	 </foreach>
+     
+    
 <!--     <if test="year != null and year != ''"> -->
 <!-- 		AND YEAR = #{year} -->
 <!-- 	</if> -->
