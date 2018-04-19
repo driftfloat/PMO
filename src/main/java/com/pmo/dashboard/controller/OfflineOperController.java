@@ -62,10 +62,12 @@ public class OfflineOperController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		Map<String,Object> param = new HashMap<String,Object>();
 		
-		map.put("page",page);
+//		map.put("page",page);
 //        map.put("list",list);
-		map.put("condition", condition);
+//		map.put("condition", condition);
 //		return objectMapper.writeValueAsString(map);
+		map.put("total", page.getTotal());
+		map.put("rows", page.getList());
 		return map;
 	}
 }
