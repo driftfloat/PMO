@@ -7,7 +7,7 @@ $(function () {
 //线下运营列表
 function loadOfflineOperList(){
 	
-    var queryUrl = path+'/json/test.json'
+    var queryUrl = path+'/service/offlineOper/query';
     var table = $('#OfflineOperList').bootstrapTable({
         url: queryUrl,                      //请求后台的URL（*）
         method: 'GET',                      //请求方式（*）
@@ -43,8 +43,8 @@ function loadOfflineOperList(){
             checkbox: true,  
             visible: true                  //是否显示复选框  
         }, {
-            field: 'adminName',
-            title: 'Name',
+            field: 'staffName',
+            title: 'staffName',
             editable: {
                 type: 'text',
                 title: '用户名',
@@ -55,8 +55,8 @@ function loadOfflineOperList(){
             },
             sortable: true
         }, {
-            field: 'statusName',
-            title: 'StatusName',
+            field: 'eHr',
+            title: 'eHr',
             editable: {
                 type: 'text',
                 title: '用户名',

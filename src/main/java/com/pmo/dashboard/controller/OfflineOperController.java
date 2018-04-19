@@ -54,26 +54,15 @@ public class OfflineOperController {
 	 */
 	@RequestMapping("/query")
 	@ResponseBody
-	public Object query(int pageSize,int pageNumber,OfflineOper condition,HttpServletRequest request) throws JsonProcessingException{
+	public String query(int pageSize,int pageNumber,OfflineOper condition,HttpServletRequest request) throws JsonProcessingException{
+		User user = (User) request.getSession().getAttribute("loginUser");
 		//第一个参数当前页码，第二个参数每页条数
 		PageHelper.startPage(pageNumber,pageSize);  
-//		OfflineOper condition = new OfflineOper();
-//		condition
-		
-		User user = (User) request.getSession().getAttribute("loginUser");
-		
 		List<OfflineOper> list = offlineOperService.query(condition,user);
-		
 		PageInfo<OfflineOper> page = new PageInfo(list);
 		Map<String,Object> map = new HashMap<String,Object>();
-		Map<String,Object> param = new HashMap<String,Object>();
-		
-//		map.put("page",page);
-//        map.put("list",list);
-//		map.put("condition", condition);
-//		return objectMapper.writeValueAsString(map);
 		map.put("total", page.getTotal());
-		map.put("rows", page.getList());
-		return map;
+		map.put("rows", list);
+		return objectMapper.writeValueAsString(map);
 	}
 }
