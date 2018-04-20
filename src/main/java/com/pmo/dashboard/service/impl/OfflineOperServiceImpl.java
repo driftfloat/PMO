@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
 import com.pmo.dashboard.dao.CSDeptMapper;
 import com.pmo.dashboard.dao.EmployeeMapper;
 import com.pmo.dashboard.dao.OfflineOperMapper;
@@ -57,7 +58,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 	}
 
 	@Override
-	public List<OfflineOper> query(OfflineOper condition, User user) {
+	public List<OfflineOper> query(OfflineOper condition, User user,int pageSize,int pageNumber) {
 		//1. count
 //		int rmCount = OfflineOperMapper.rmCount(condition);
 //		if( 0 == rmCount) {
@@ -66,25 +67,57 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 		Set<User> rmSet = new HashSet();
 		if("5".equals(user.getUserType())) { // RM
 			condition.setRmId(user.getUserId());
+//			String[] rmIDs = {user.getUserId()};
+//			condition.setRmIDs(rmIDs); 
+			//第一个参数当前页码，第二个参数每页条数
+			PageHelper.startPage(pageNumber,pageSize); 
 			rtn = OfflineOperMapper.queryByRM(condition) ;
 		}else if("3".equals(user.getUserType())) {  // 交付部经理
 			List<CSDept> csDepts = csDeptMapper.queryCSDeptByIds(user.getCsdeptId().split(","));  // 交付部经理所在的部门
-			for(CSDept d :csDepts ) {
-				 List<User> rms = OfflineOperMapper.queryRMFromDept(d.getCsSubDeptId()) ; csDepts.get(0).getCsSubDeptId() ;  // subDeptId
-				 rmSet.addAll(rms) ;
-			}
-			int a = 1;
-			String[] rmIDs = new String[rmSet.size()] ;
+//			for(CSDept d :csDepts ) {
+//				 List<User> rms = OfflineOperMapper.queryRMFromDept(d.getCsSubDeptId()) ; csDepts.get(0).getCsSubDeptId() ;  // subDeptId
+//				 rmSet.addAll(rms) ;
+//			}
+//			String[] rmIDs = new String[rmSet.size()] ;
+//			for(User u : rmSet) {
+//				rmIDs[index] = u.getUserId() ;
+//				index++ ;
+//			}
+			
 			int index = 0;
-			for(User u : rmSet) {
-				rmIDs[index] = u.getUserId() ;
+			String[] ids = new String[csDepts.size()] ;
+			for(CSDept d :csDepts ) {
+				ids[index] = d.getCsSubDeptId() ;
 				index++ ;
 			}
-			condition.setRmIDs(rmIDs); 
-			rtn = OfflineOperMapper.queryByRM(condition) ;
+			condition.setIds(ids);
+			//第一个参数当前页码，第二个参数每页条数
+			PageHelper.startPage(pageNumber,pageSize); 
+			rtn = OfflineOperMapper.queryBySubDept(condition) ;
 		}else if("1".equals(user.getUserType())){ // 事业部经理
-			List<CSDept> list = csDeptMapper.queryCSSubDeptNameByCsBuName("csBuName");  // csBuName 根据事业部名称查
-			rtn = OfflineOperMapper.queryByRM(condition) ;
+			List<CSDept> csDepts = csDeptMapper.queryCSSubDeptNameByCsBuName(user.getBu());  // csBuName 根据事业部名称查
+//			for(CSDept d :csDepts ) {
+//				 List<User> rms = OfflineOperMapper.queryRMFromDept(d.getCsSubDeptId()) ; csDepts.get(0).getCsSubDeptId() ;  // subDeptId
+//				 rmSet.addAll(rms) ;
+//			}
+//			String[] rmIDs = new String[rmSet.size()] ;
+//			int index = 0;
+//			for(User u : rmSet) {
+//				rmIDs[index] = u.getUserId() ;
+//				index++ ;
+//			}
+//			condition.setRmIDs(rmIDs); 
+			
+			int index = 0;
+			String[] ids = new String[csDepts.size()] ;
+			for(CSDept d :csDepts ) {
+				ids[index] = d.getCsSubDeptId() ;
+				index++ ;
+			}
+			condition.setIds(ids);
+			//第一个参数当前页码，第二个参数每页条数
+			PageHelper.startPage(pageNumber,pageSize); 
+			rtn = OfflineOperMapper.queryByDept(condition) ;
 		}
 		return rtn ;
 	}

@@ -20,5 +20,5 @@ public interface OfflineOperService {
 //
 //    int updateByPrimaryKey(OfflineOper record);
     
-    List<OfflineOper> query(OfflineOper condition, User user);
+    List<OfflineOper> query(OfflineOper condition, User user,int pageSize,int pageNumber);
 }

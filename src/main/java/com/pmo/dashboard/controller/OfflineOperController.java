@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.pmo.dashboard.entity.OfflineOper;
+import com.pmo.dashboard.entity.PageCondition;
 import com.pmo.dashboard.entity.User;
 import com.pom.dashboard.service.CSDeptService;
 import com.pom.dashboard.service.EmployeeService;
@@ -54,15 +55,13 @@ public class OfflineOperController {
 	 */
 	@RequestMapping("/query")
 	@ResponseBody
-	public String query(int pageSize,int pageNumber,OfflineOper condition,HttpServletRequest request,String name) throws JsonProcessingException{
+	public Object query(int pageSize,int pageNumber,OfflineOper condition,HttpServletRequest request,String name) throws JsonProcessingException{
 		User user = (User) request.getSession().getAttribute("loginUser");
-		//第一个参数当前页码，第二个参数每页条数
-		PageHelper.startPage(pageNumber,pageSize);  
-		List<OfflineOper> list = offlineOperService.query(condition,user);
+		List<OfflineOper> list = offlineOperService.query(condition,user,pageSize,pageNumber);
 		PageInfo<OfflineOper> page = new PageInfo(list);
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("total", page.getTotal());
 		map.put("rows", list);
-		return objectMapper.writeValueAsString(map);
+		return map;
 	}
 }
