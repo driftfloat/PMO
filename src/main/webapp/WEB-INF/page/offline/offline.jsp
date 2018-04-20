@@ -53,21 +53,19 @@ var path='<%=path%>';
 							<div class="panel panel-default">
 							  <div class="panel-heading">Query Conditions</div>
                               <div class="panel-body">
-                                <form id="formSearch" class="form-horizontal">
                                   <div class="form-group" style="margin-top:15px">
-                                    <label class="control-label col-sm-1" for="txt_search_departmentname">Name</label>
+                                    <label class="control-label col-sm-1" for="txt_search_departmentname">StaffName</label>
                                     <div class="col-sm-3">
-                                     <input type="text" class="form-control" id="txt_search_departmentname"/>
+                                     <input type="text" class="form-control" id="staffName"/>
                                     </div>
-                                    <label class="control-label col-sm-1" for="txt_search_statu">Status</label>
+                                    <label class="control-label col-sm-1" for="txt_search_statu">E-hr</label>
                                     <div class="col-sm-3">
-                                     <input type="text" class="form-control" id="txt_search_statu"/>
+                                     <input type="text" class="form-control" id="ehr"/>
                                     </div>
                                     <div class="col-sm-4" style="text-align:left;">
-                                    <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">Search</button>
+                                    <button onClick="search()" type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">Search</button>
                                     </div>
                                   </div>
-                                </form>
                                </div>
                              </div>
                              <!-- 工具栏  -->

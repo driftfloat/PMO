@@ -8,6 +8,7 @@ $(function () {
 function loadOfflineOperList(){
 	
     var queryUrl = path+'/service/offlineOper/query';
+	//var queryUrl = path+'/json/test.json';
     var table = $('#OfflineOperList').bootstrapTable({
         url: queryUrl,                      //请求后台的URL（*）
         method: 'GET',                      //请求方式（*）
@@ -43,8 +44,8 @@ function loadOfflineOperList(){
             checkbox: true,  
             visible: true                  //是否显示复选框  
         }, {
-            field: 'staffName',
-            title: 'staffName',
+            field: 'adminName',
+            title: 'adminName',
             editable: {
                 type: 'text',
                 title: '用户名',
@@ -55,8 +56,8 @@ function loadOfflineOperList(){
             },
             sortable: true
         }, {
-            field: 'eHr',
-            title: 'eHr',
+            field: 'statusName',
+            title: 'statusName',
             editable: {
                 type: 'text',
                 title: '用户名',
@@ -83,4 +84,17 @@ function loadOfflineOperList(){
            // EditViewById(id, 'view');
         },
     });
+}
+
+function search(){
+	//获取查询条件
+	var staffName = $("#staffName").val();
+	var ehr = $("#ehr").val();
+	var queryParams = { 
+		query: {  
+		   name:staffName
+        }
+    }  
+	//刷新表格  
+    $('#OfflineOperList').bootstrapTable('refresh',queryParams);  
 }

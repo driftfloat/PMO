@@ -54,7 +54,7 @@ public class OfflineOperController {
 	 */
 	@RequestMapping("/query")
 	@ResponseBody
-	public String query(int pageSize,int pageNumber,OfflineOper condition,HttpServletRequest request) throws JsonProcessingException{
+	public String query(int pageSize,int pageNumber,OfflineOper condition,HttpServletRequest request,String name) throws JsonProcessingException{
 		User user = (User) request.getSession().getAttribute("loginUser");
 		//第一个参数当前页码，第二个参数每页条数
 		PageHelper.startPage(pageNumber,pageSize);  
