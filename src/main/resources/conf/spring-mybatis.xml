@@ -30,14 +30,23 @@
         <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
  		<property name="maxWait" value="${jdbc.maxWait}" />
-
     </bean>
 
     <!-- reference mybatis config file，scan mapper dir -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     	<property name="dataSource" ref="sampleDataSource"/>
     	<property name="mapperLocations" value="classpath:mappers/*.xml"/>
-    	<property name="configLocation" value="classpath:conf/mybatis-config.xml" />
+		<property name="plugins">
+		    <array>
+		      <bean class="com.github.pagehelper.PageHelper">
+		        <property name="properties">
+		          <value>
+		            dialect=mysql
+		          </value>
+		        </property>
+		      </bean>
+		    </array>
+		</property>
     </bean>
 
     <!-- spring and mybatis integration，scan dao package -->
