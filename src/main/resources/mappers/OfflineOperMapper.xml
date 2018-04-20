@@ -77,11 +77,14 @@
     from t_offline_oper
     where ID = #{id,jdbcType=VARCHAR}
   </select>
+  
+  
   <select id="queryByRM" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" >
     select 
     <include refid="Left_Column_List" />
     , o.REMARK
-    from t_employee e 
+    FROM t_employee z1 LEFT JOIN(
+    select O.* from t_employee e 
     LEFT JOIN  t_offline_oper o ON o.EMPLOYEE_ID = e.EMPLOYEE_ID 
     where RESOURCE_STATUS='Active'
     <if test="year != null and year != ''">
@@ -93,8 +96,47 @@
 	<if test="rmId != null and rmId != ''">
 		AND o.rm_id = #{rmId}
 	</if>
-	order by o.E_HR
+	) o
+	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
+   WHERE 1=1 
+   AND z1.RM_USER_ID = #{rmId}
+   AND z1.RESOURCE_STATUS='Active' 
   </select>
+  
+  
+
+  
+
+<!--   <sql id="union_Column_List" > -->
+<!--     E_HR, STAFF_NAME, EMPLOYEE_ID, CS_SUBDEPT_ID, RM_ID, CREATE_DATE, CREATE_UPDATE,  -->
+<!--     RM_NAME, OPERATOR_ID, MONTH, YEAR, CHSOFTI_MSK_HOURS, CHSOFTI_AW_HOURS, CHSOFTI_IW_HOURS,  -->
+<!--     CHSOFTI_OT_HOURS, CHSOFTI_TO_HOURS, CHSOFTI_APW_HOURS, CHSOFTI_IFAW, CHSOFTI_INVALID,  -->
+<!--     CHSOFTI_INF_OT, CHSOFTI_INF_PT, CHSOFTI_INF_AD, CHSOFTI_INF_TRAVEL, CHSOFTI_INF_EQUIPMENT,  -->
+<!--     CHSOFTI_INF_SUB, CHSOFTI_INF_TOTAL, CHSOFTI_INF_CURRENT, CHSOFTI_EFFECTIVE_NR, CHSOFTI_EFFECTIVE_ST,  -->
+<!--     CHSOFTI_INVALID_ST, REMARK, ID -->
+<!--   </sql>  -->
+<!--   <sql id="null_Column_List" > -->
+<!--     E_HR, STAFF_NAME, EMPLOYEE_ID, CS_SUBDEPT_ID, RM_ID, CREATE_DATE, CREATE_UPDATE,  -->
+<!--     RM_NAME, OPERATOR_ID, MONTH, YEAR, CHSOFTI_MSK_HOURS, CHSOFTI_AW_HOURS, CHSOFTI_IW_HOURS,  -->
+<!--     CHSOFTI_OT_HOURS, CHSOFTI_TO_HOURS, CHSOFTI_APW_HOURS, CHSOFTI_IFAW, CHSOFTI_INVALID,  -->
+<!--     CHSOFTI_INF_OT, CHSOFTI_INF_PT, CHSOFTI_INF_AD, CHSOFTI_INF_TRAVEL, CHSOFTI_INF_EQUIPMENT,  -->
+<!--     CHSOFTI_INF_SUB, CHSOFTI_INF_TOTAL, CHSOFTI_INF_CURRENT, CHSOFTI_EFFECTIVE_NR, CHSOFTI_EFFECTIVE_ST,  -->
+<!--     CHSOFTI_INVALID_ST, REMARK, ID -->
+<!--   </sql>  -->
+  
+   
+<!--   <select id="queryByRM" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" > -->
+<!-- 	SELECT <include refid="union_Column_List" /> -->
+<!--  FROM t_offline_oper  WHERE RM_ID = #{rmId} -->
+<!--  UNION -->
+<!--  SELECT E_HR, STAFF_NAME, EMPLOYEE_ID, CS_SUBDEPT_ID, RM_USER_ID RM_ID -->
+<!--  FROM t_employee  -->
+<!--  WHERE RESOURCE_STATUS='Active' AND RM_USER_ID= #{rmId} -->
+<!--   AND E_HR NOT IN  -->
+<!--   (SELECT E_HR FROM t_offline_oper WHERE YEAR= #{year} AND MONTH= #{month} AND RM_ID= #{rmId}) -->
+<!--   </select> -->
+  
+  
   <select id="queryBySubDept" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" >
     select 
     <include refid="Left_Column_List" />
@@ -134,25 +176,23 @@
 	order by o.E_HR
   </select>
   
+  <resultMap id="ResultMap_offline_employee" type="com.pmo.dashboard.entity.OfflineOper" >
+    <result column="E_HR" property="eHr" jdbcType="VARCHAR" />
+    <result column="STAFF_NAME" property="staffName" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR" />
+    <result column="CS_SUBDEPT_ID" property="csSubdeptId" jdbcType="VARCHAR" />
+    <result column="RM_USER_ID" property="rmId" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="employee_List" >
-    E_HR, STAFF_NAME, EMPLOYEE_ID, CS_SUBDEPT_ID, RM_ID
+    E_HR, STAFF_NAME, EMPLOYEE_ID, CS_SUBDEPT_ID, RM_USER_ID
   </sql>
-<!--   <select id="queryFromEmployeeByRM" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" > -->
-<!--     select  -->
-<!--     from t_employee e      -->
-<!--     where RESOURCE_STATUS='Active' -->
-<!--     <if test="year != null and year != ''"> -->
-<!-- 		AND YEAR = #{year} -->
-<!-- 	</if> -->
-<!-- 	<if test="month != null and month != ''"> -->
-<!-- 		AND MONTH = #{month} -->
-<!-- 	</if> -->
-<!-- 	AND o.CS_SUBDEPT_ID in  -->
-<!-- 	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">   -->
-<!-- 		#{item} -->
-<!-- 	 </foreach> -->
-<!-- 	order by E_HR -->
-<!--   </select> -->
+  <select id="queryFromEmployeeByRM" resultMap="ResultMap_offline_employee" parameterType="com.pmo.dashboard.entity.OfflineOper" >
+    select 
+    <include refid="employee_List" />
+    from t_employee     
+    where RESOURCE_STATUS='Active'
+     and RM_USER_ID = #{rmId}
+  </select>
   
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
