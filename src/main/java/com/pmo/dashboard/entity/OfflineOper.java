@@ -69,7 +69,7 @@ public class OfflineOper {
 
     private String remark;
     
-    private String[] rmIDs;
+    private String[] ids;
 
     public String getId() {
         return id;
@@ -327,12 +327,11 @@ public class OfflineOper {
         this.remark = remark;
     }
 
-	public String[] getRmIDs() {
-		return rmIDs;
+	public String[] getIds() {
+		return ids;
 	}
 
-	public void setRmIDs(String[] rmIDs) {
-		this.rmIDs = rmIDs;
+	public void setIds(String[] ids) {
+		this.ids = ids;
 	}
-
 }

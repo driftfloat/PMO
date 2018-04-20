@@ -83,24 +83,78 @@
     , o.REMARK
     from t_employee e 
     LEFT JOIN  t_offline_oper o ON o.EMPLOYEE_ID = e.EMPLOYEE_ID 
-    where  YEAR = #{year}  AND MONTH = #{month}  AND RESOURCE_STATUS='Active'
-     and rm_id IN 
-     <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
-		#{item.rmIDs}
+    where RESOURCE_STATUS='Active'
+    <if test="year != null and year != ''">
+		AND o.YEAR = #{year}
+	</if>
+	<if test="month != null and month != ''">
+		AND o.MONTH = #{month}
+	</if>
+	<if test="rmId != null and rmId != ''">
+		AND o.rm_id = #{rmId}
+	</if>
+	order by o.E_HR
+  </select>
+  <select id="queryBySubDept" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" >
+    select 
+    <include refid="Left_Column_List" />
+    , o.REMARK
+    from t_employee e 
+    LEFT JOIN  t_offline_oper o ON o.EMPLOYEE_ID = e.EMPLOYEE_ID 
+    where RESOURCE_STATUS='Active'
+    <if test="year != null and year != ''">
+		AND o.YEAR = #{year}
+	</if>
+	<if test="month != null and month != ''">
+		AND o.MONTH = #{month}
+	</if>
+	AND o.CS_SUBDEPT_ID in 
+	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
+		#{item}
+	</foreach>
+	order by o.E_HR
+  </select>
+  <select id="queryByDept" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" >
+    select 
+    <include refid="Left_Column_List" />
+    , o.REMARK
+    from t_employee e 
+    LEFT JOIN  t_offline_oper o ON o.EMPLOYEE_ID = e.EMPLOYEE_ID 
+    where RESOURCE_STATUS='Active'
+    <if test="year != null and year != ''">
+		AND o.YEAR = #{year}
+	</if>
+	<if test="month != null and month != ''">
+		AND o.MONTH = #{month}
+	</if>
+	AND o.CS_SUBDEPT_ID in 
+	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
+		#{item}
 	 </foreach>
-     
-    
+	order by o.E_HR
+  </select>
+  
+  <sql id="employee_List" >
+    E_HR, STAFF_NAME, EMPLOYEE_ID, CS_SUBDEPT_ID, RM_ID
+  </sql>
+<!--   <select id="queryFromEmployeeByRM" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" > -->
+<!--     select  -->
+<!--     from t_employee e      -->
+<!--     where RESOURCE_STATUS='Active' -->
 <!--     <if test="year != null and year != ''"> -->
 <!-- 		AND YEAR = #{year} -->
 <!-- 	</if> -->
 <!-- 	<if test="month != null and month != ''"> -->
 <!-- 		AND MONTH = #{month} -->
 <!-- 	</if> -->
-<!-- 	<if test="rmId != null and rmId != ''"> -->
-<!-- 		AND RM_ID = #{rmId} -->
-<!-- 	</if> -->
-	order by E_HR
-  </select>
+<!-- 	AND o.CS_SUBDEPT_ID in  -->
+<!-- 	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">   -->
+<!-- 		#{item} -->
+<!-- 	 </foreach> -->
+<!-- 	order by E_HR -->
+<!--   </select> -->
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_offline_oper
     where ID = #{id,jdbcType=VARCHAR}
@@ -499,8 +553,8 @@
     where ID = #{id,jdbcType=VARCHAR}
   </update>
   
-  <select id="countUserList" parameterType="com.pmo.dashboard.entity.OfflineOper" resultType="int" >
-	    SELECT count(*)
+  <select id="rmCount" parameterType="com.pmo.dashboard.entity.OfflineOper" resultType="int" >
+	    SELECT count(*) From t_offline_oper 
         WHERE YEAR = #{year} and MONTH = #{month} and RM_ID = #{rmId}
   </select>
   
