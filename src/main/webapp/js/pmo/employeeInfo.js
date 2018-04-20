@@ -419,7 +419,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 				//var td7 = $("<td><a class='btn btn-info' href='javascript:void(0);'> <i class='glyphicon glyphicon-edit icon-white'></i> 编辑</a></td>");
 				var td8 = null;
 				var engagementType = result.data[i].engagementType.replace(/\s+/g,"");
-				if(userType=='2' || userType=='4'|| userType=='6'|| userType=='7'|| userType=='8'|| userType=='9'|| userType=='10'|| userType=='15'){
+				if(userType=='2' || userType=='4'|| userType=='6'|| userType=='7' || userType=='9'|| userType=='10'|| userType=='15'){
 					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a></td>");
 				}else if(userType=='5'){
 					if($("#userId").val()==result.data[i].rmUserId || result.data[i].rmUserId=='' || result.data[i].rmUserId==null){
@@ -435,6 +435,9 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 					}else{
 						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a></td>");
 					}
+				}else if(userType=='8'){
+					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a></td>");
 				}else{
 					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a></td>");
