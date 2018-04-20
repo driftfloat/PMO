@@ -70,8 +70,17 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 //			String[] rmIDs = {user.getUserId()};
 //			condition.setRmIDs(rmIDs); 
 			//第一个参数当前页码，第二个参数每页条数
+			
+//			int count = OfflineOperMapper.rmCount(condition);
 			PageHelper.startPage(pageNumber,pageSize); 
 			rtn = OfflineOperMapper.queryByRM(condition) ;
+//			if(0 == count) {
+//				PageHelper.startPage(pageNumber,pageSize); 
+//				rtn = OfflineOperMapper.queryFromEmployeeByRM(condition);
+//			}else {
+//				PageHelper.startPage(pageNumber,pageSize); 
+//				rtn = OfflineOperMapper.queryByRM(condition) ;
+//			}
 		}else if("3".equals(user.getUserType())) {  // 交付部经理
 			List<CSDept> csDepts = csDeptMapper.queryCSDeptByIds(user.getCsdeptId().split(","));  // 交付部经理所在的部门
 //			for(CSDept d :csDepts ) {

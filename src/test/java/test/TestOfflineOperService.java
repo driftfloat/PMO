@@ -30,6 +30,7 @@ import com.pom.dashboard.service.OfflineOperService;
 		})
 @WebAppConfiguration
 public class TestOfflineOperService {
+	int pageSize = 10, pageNumber = 1 ;
 	@Resource
 	private OfflineOperService offlineOperService;
 	
@@ -47,24 +48,23 @@ public class TestOfflineOperService {
 //	}
 	
 	@Test
-	public void testQuery() {
-		int pageSize = 10, pageNumber = 1 ;
+	public void queryByRM() {
 		OfflineOper condition = new OfflineOper();
 		condition.setYear("2018"); 
 		condition.setMonth("4");
 		User user = new User();
 		
-//		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培
+		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培
 //		user.setUserId("cff5fa689a2e40afa02ba2ceda914bbb");  // 梁嘉杰
-//		user.setUserType("5");
+		user.setUserType("5");
 		
 //		user.setUserType("3");  
 //		user.setUserId("c7b38226545c45e598f16a33031f85aa"); // c7b38226545c45e598f16a33031f85aa 李佳洲
 //		user.setCsdeptId("9,12");
 		
-		user.setUserType("1"); 
-		user.setUserId("1573"); // 风控数据事业部  潘亮
-		user.setBu("风控数据事业部");
+//		user.setUserType("1"); 
+//		user.setUserId("1573"); // 风控数据事业部  潘亮
+//		user.setBu("风控数据事业部");
 		
 		List<OfflineOper> list = offlineOperService.query(condition, user, pageSize, pageNumber) ;
 		PageInfo<OfflineOper> page = new PageInfo(list);
@@ -87,17 +87,16 @@ public class TestOfflineOperService {
 	
 	
 	public void queryFromEmployeeByRM() {
-		int pageSize = 10, pageNumber = 1 ;
+		
 		OfflineOper condition = new OfflineOper();
-		condition.setYear("2018"); 
-		condition.setMonth("4");
-		User user = new User();
+		condition.setRmId("cb00bad3f16a4e8baf450e7b88af7c4b");
 		
-		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培
+//		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培
 //		user.setUserId("cff5fa689a2e40afa02ba2ceda914bbb");  // 梁嘉杰
-		user.setUserType("5");
+//		user.setUserType("5");
 		
-//		OfflineOperMapper.queryFromEmployeeByRM(condition);
+		List<OfflineOper> list = OfflineOperMapper.queryFromEmployeeByRM(condition);
+		System.out.println(list.size());
 		
 	}
 }

@@ -54,5 +54,5 @@ public interface OfflineOperMapper {
    * @param condition
    * @return
    */
-//  List<OfflineOper> queryFromEmployeeByRM(OfflineOper condition);
+   List<OfflineOper> queryFromEmployeeByRM(OfflineOper condition);
 }
