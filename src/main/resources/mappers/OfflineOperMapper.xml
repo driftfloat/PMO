@@ -59,8 +59,8 @@
     CHSOFTI_INVALID_ST
   </sql>
   <sql id="Left_Column_List" >
-    o.ID, o.E_HR, o.STAFF_NAME, o.EMPLOYEE_ID, o.CREATE_DATE, o.CREATE_UPDATE, o.CS_SUBDEPT_ID 
-    ,o.RM_ID, o.RM_NAME, o.OPERATOR_ID, o.MONTH, o.YEAR, o.CHSOFTI_MSK_HOURS, o.CHSOFTI_AW_HOURS
+    o.ID, z1.E_HR, z1.STAFF_NAME, z1.EMPLOYEE_ID, o.CREATE_DATE, o.CREATE_UPDATE, z1.CS_SUBDEPT_ID
+    ,z1.RM_USER_ID RM_ID, o.RM_NAME, o.OPERATOR_ID, MONTH(NOW())  MONTH, YEAR(NOW())  YEAR, o.CHSOFTI_MSK_HOURS, o.CHSOFTI_AW_HOURS
     , o.CHSOFTI_IW_HOURS, o.CHSOFTI_OT_HOURS, o.CHSOFTI_TO_HOURS, o.CHSOFTI_APW_HOURS, o.CHSOFTI_IFAW
     , o.CHSOFTI_INVALID, o.CHSOFTI_INF_OT, o.CHSOFTI_INF_PT, o.CHSOFTI_INF_AD, o.CHSOFTI_INF_TRAVEL
     , o.CHSOFTI_INF_EQUIPMENT, o.CHSOFTI_INF_SUB, o.CHSOFTI_INF_TOTAL, o.CHSOFTI_INF_CURRENT
@@ -87,10 +87,10 @@
     select * from t_offline_oper 
     where 1=1 
     <if test="year != null and year != ''">
-		AND YEAR = #{year}
+		AND YEAR = YEAR(NOW())
 	</if>
 	<if test="month != null and month != ''">
-		AND MONTH = #{month}
+		AND MONTH = MONTH(NOW())
 	</if>
 	<if test="rmId != null and rmId != ''">
 		AND rm_id = #{rmId}
@@ -120,6 +120,7 @@
 		#{item}
 	</foreach>
 	) o
+	on z1.CSDEPT_ID 
 	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
    WHERE 1=1   
    AND z1.RESOURCE_STATUS='Active' 
