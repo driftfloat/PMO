@@ -196,7 +196,7 @@ function loadOfflineOperList(){
         	//console.log(row);
             $.ajax({
                 type: "POST",
-                url: path+"/service/testOper/test",
+                url: path+"/service/offlineOper/save",
                 contentType: "application/json;charset=utf-8",
                 data: JSON.stringify(row),
                 dataType: 'JSON',
