@@ -54,13 +54,13 @@ public class TestOfflineOperService {
 		condition.setMonth("4");
 		User user = new User();
 		
-		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培
-//		user.setUserId("cff5fa689a2e40afa02ba2ceda914bbb");  // 梁嘉杰
-		user.setUserType("5");
+//		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培
+////		user.setUserId("cff5fa689a2e40afa02ba2ceda914bbb");  // 梁嘉杰
+//		user.setUserType("5");
 		
-//		user.setUserType("3");  
-//		user.setUserId("c7b38226545c45e598f16a33031f85aa"); // c7b38226545c45e598f16a33031f85aa 李佳洲
-//		user.setCsdeptId("9,12");
+		user.setUserType("3");  
+		user.setUserId("c7b38226545c45e598f16a33031f85aa"); // c7b38226545c45e598f16a33031f85aa 李佳洲
+		user.setCsdeptId("9,12");
 		
 //		user.setUserType("1"); 
 //		user.setUserId("1573"); // 风控数据事业部  潘亮
