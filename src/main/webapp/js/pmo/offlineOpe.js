@@ -29,7 +29,7 @@ function loadOfflineOperList(){
         minimumCountColumns: 2,             //最少允许的列数
         clickToSelect: true,                //是否启用点击选中行
         //height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-        uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+        uniqueId: "id",                     //每一行的唯一标识，一般为主键列
         showToggle: false,                   //是否显示详细视图和列表视图的切换按钮
         cardView: false,                    //是否显示详细视图
         detailView: false,                  //是否显示父子表
@@ -43,37 +43,138 @@ function loadOfflineOperList(){
         columns: [{
             checkbox: true,  
             visible: true                  //是否显示复选框  
-        }, {
-            field: 'adminName',
-            title: 'adminName',
+        }, 
+        {
+            field: 'year',
+            title: 'Year',
+            sortable: true
+        },
+        {
+            field: 'month',
+            title: 'Month',
+            sortable: true
+        },
+        {
+            field: 'staffName',
+            title: 'StaffName',
+            sortable: true
+        }, 
+        {
+            field: 'eHr',
+            title: 'EHr',
+            sortable: true
+        },
+        {
+            field: 'chsoftiAwHours',
+            title: 'AwHours',
             editable: {
                 type: 'text',
-                title: '用户名',
+                title: '中软实际工时',
                 validate: function (v) {
-                    if (!v) return '用户名不能为空';
+                    if (!v) return '中软实际工时不能为空';
 
                 }
             },
             sortable: true
-        }, {
-            field: 'statusName',
-            title: 'statusName',
+        }, 
+        {
+            field: 'chsoftiIwHours',
+            title: 'IwHours',
             editable: {
                 type: 'text',
-                title: '用户名',
+                title: '中软无效工时',
                 validate: function (v) {
-                    if (!v) return '用户名不能为空';
+                    if (!v) return '中软无效工时不能为空';
 
                 }
             },
             sortable: true
-        }, {
-            field:'ID',
+        },
+        {
+            field: 'chsoftiOtHours',
+            title: 'OtHours',
+            editable: {
+                type: 'text',
+                title: '中软加班费工时',
+                validate: function (v) {
+                    if (!v) return '中软加班费工时不能为空';
+
+                }
+            },
+            sortable: true
+        },
+        {
+            field: 'chsoftiToHours',
+            title: 'ToHours',
+            editable: {
+                type: 'text',
+                title: '中软调休工时',
+                validate: function (v) {
+                    if (!v) return '中软调休工时不能为空';
+
+                }
+            },
+            sortable: true
+        },
+        {
+            field: 'chsoftiApwHours',
+            title: 'ApwHours',
+            editable: {
+                type: 'text',
+                title: '中软调整上月工时',
+                validate: function (v) {
+                    if (!v) return '中软调整上月工时不能为空';
+
+                }
+            },
+            sortable: true
+        },
+        {
+            field: 'chsoftiInfTravel',
+            title: 'InfTravel',
+            editable: {
+                type: 'text',
+                title: '差旅收入',
+                validate: function (v) {
+                    if (!v) return '差旅收入不能为空';
+
+                }
+            },
+            sortable: true
+        },
+        {
+            field: 'chsoftiInfEquipment',
+            title: 'InfEquipment',
+            editable: {
+                type: 'text',
+                title: '付费设备收入',
+                validate: function (v) {
+                    if (!v) return '付费设备收入不能为空';
+
+                }
+            },
+            sortable: true
+        },
+        {
+            field: 'chsoftiInfSub',
+            title: 'InfSub',
+            editable: {
+                type: 'text',
+                title: '分包收入',
+                validate: function (v) {
+                    if (!v) return '分包收入不能为空';
+
+                }
+            },
+            sortable: true
+        },
+        {
+            field:'id',
             title: 'Operation',
             width: 120,
             align: 'center',
             valign: 'middle'
-        }, ],
+        }],
         onLoadSuccess: function () {
         },
         onLoadError: function () {
