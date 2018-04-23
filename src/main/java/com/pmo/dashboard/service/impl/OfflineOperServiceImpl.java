@@ -83,15 +83,6 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 //			}
 		}else if("3".equals(user.getUserType())) {  // 交付部经理
 			List<CSDept> csDepts = csDeptMapper.queryCSDeptByIds(user.getCsdeptId().split(","));  // 交付部经理所在的部门
-//			for(CSDept d :csDepts ) {
-//				 List<User> rms = OfflineOperMapper.queryRMFromDept(d.getCsSubDeptId()) ; csDepts.get(0).getCsSubDeptId() ;  // subDeptId
-//				 rmSet.addAll(rms) ;
-//			}
-//			String[] rmIDs = new String[rmSet.size()] ;
-//			for(User u : rmSet) {
-//				rmIDs[index] = u.getUserId() ;
-//				index++ ;
-//			}
 			
 			int index = 0;
 			String[] ids = new String[csDepts.size()] ;
@@ -105,17 +96,6 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			rtn = OfflineOperMapper.queryBySubDept(condition) ;
 		}else if("1".equals(user.getUserType())){ // 事业部经理
 			List<CSDept> csDepts = csDeptMapper.queryCSSubDeptNameByCsBuName(user.getBu());  // csBuName 根据事业部名称查
-//			for(CSDept d :csDepts ) {
-//				 List<User> rms = OfflineOperMapper.queryRMFromDept(d.getCsSubDeptId()) ; csDepts.get(0).getCsSubDeptId() ;  // subDeptId
-//				 rmSet.addAll(rms) ;
-//			}
-//			String[] rmIDs = new String[rmSet.size()] ;
-//			int index = 0;
-//			for(User u : rmSet) {
-//				rmIDs[index] = u.getUserId() ;
-//				index++ ;
-//			}
-//			condition.setRmIDs(rmIDs); 
 			
 			int index = 0;
 			String[] ids = new String[csDepts.size()] ;

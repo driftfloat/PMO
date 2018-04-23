@@ -78,7 +78,6 @@
     where ID = #{id,jdbcType=VARCHAR}
   </select>
   
-  
   <select id="queryByRM" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" >
     select 
     <include refid="Left_Column_List" />
@@ -103,6 +102,34 @@
     ORDER BY o.e_hr DESC
   </select>
   <select id="queryBySubDept" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" >
+     select 
+    <include refid="Left_Column_List" />
+    , o.REMARK
+    FROM t_employee z1 LEFT JOIN(
+    select * from t_offline_oper 
+    where 1=1 
+    <if test="year != null and year != ''">
+		AND YEAR = YEAR(NOW())
+	</if>
+	<if test="month != null and month != ''">
+		AND MONTH = MONTH(NOW())
+	</if>
+	AND CS_SUBDEPT_ID in 
+	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
+		#{item}
+	 </foreach>
+	) o
+	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
+   WHERE 1=1 
+     AND z1.RESOURCE_STATUS='Active' 
+     AND z1.CS_SUBDEPT_ID in 
+	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
+		#{item}
+	 </foreach>
+    ORDER BY o.e_hr DESC
+  </select>
+  
+  <select id="queryByDept" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" >
     select 
     <include refid="Left_Column_List" />
     , o.REMARK
@@ -110,61 +137,24 @@
     select * from t_offline_oper 
     where 1=1 
     <if test="year != null and year != ''">
-		AND YEAR = #{year}
+		AND YEAR = YEAR(NOW())
 	</if>
 	<if test="month != null and month != ''">
-		AND MONTH = #{month}
+		AND MONTH = MONTH(NOW())
 	</if>
 	AND CS_SUBDEPT_ID in 
 	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
 		#{item}
-	</foreach>
+	 </foreach>
 	) o
-	on z1.CSDEPT_ID 
 	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
-   WHERE 1=1   
-   AND z1.RESOURCE_STATUS='Active' 
-    ORDER BY o.e_hr DESC
-  </select>
-  
-  
-<!--   <select id="queryBySubDept" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" > -->
-<!--     select  -->
-<!--     <include refid="Left_Column_List" /> -->
-<!--     , o.REMARK -->
-<!--     from t_employee e  -->
-<!--     LEFT JOIN  t_offline_oper o ON o.EMPLOYEE_ID = e.EMPLOYEE_ID  -->
-<!--     where RESOURCE_STATUS='Active' -->
-<!--     <if test="year != null and year != ''"> -->
-<!-- 		AND o.YEAR = #{year} -->
-<!-- 	</if> -->
-<!-- 	<if test="month != null and month != ''"> -->
-<!-- 		AND o.MONTH = #{month} -->
-<!-- 	</if> -->
-<!-- 	AND o.CS_SUBDEPT_ID in  -->
-<!-- 	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">   -->
-<!-- 		#{item} -->
-<!-- 	</foreach> -->
-<!-- 	order by o.E_HR -->
-<!--   </select> -->
-  <select id="queryByDept" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" >
-    select 
-    <include refid="Left_Column_List" />
-    , o.REMARK
-    from t_employee e 
-    LEFT JOIN  t_offline_oper o ON o.EMPLOYEE_ID = e.EMPLOYEE_ID 
-    where RESOURCE_STATUS='Active'
-    <if test="year != null and year != ''">
-		AND o.YEAR = #{year}
-	</if>
-	<if test="month != null and month != ''">
-		AND o.MONTH = #{month}
-	</if>
-	AND o.CS_SUBDEPT_ID in 
+   WHERE 1=1 
+     AND z1.RESOURCE_STATUS='Active' 
+     AND z1.CS_SUBDEPT_ID in 
 	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
 		#{item}
 	 </foreach>
-	order by o.E_HR
+    ORDER BY o.e_hr DESC
   </select>
   
   <resultMap id="ResultMap_offline_employee" type="com.pmo.dashboard.entity.OfflineOper" >
