@@ -1,7 +1,9 @@
 package com.pmo.dashboard.service.impl;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -12,6 +14,7 @@ import com.github.pagehelper.PageHelper;
 import com.pmo.dashboard.dao.CSDeptMapper;
 import com.pmo.dashboard.dao.EmployeeMapper;
 import com.pmo.dashboard.dao.OfflineOperMapper;
+import com.pmo.dashboard.dao.UserMapper;
 import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.OfflineOper;
 import com.pmo.dashboard.entity.User;
@@ -27,6 +30,9 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 	
 	@Resource
     private EmployeeMapper employeeMapper;
+	
+	@Resource
+	private UserMapper userMapper;
 	
 	@Override
 	public boolean delete(String id) {
@@ -109,6 +115,25 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			rtn = OfflineOperMapper.queryByDept(condition) ;
 		}
 		return rtn ;
+	}
+	
+	@Override
+	public boolean save(OfflineOper offlineOper) {
+		Map<String, Object> userMap = new HashMap<String, Object>();
+		userMap.put("userid", offlineOper.getRmId());
+		List<User> users = userMapper.getUser(userMap);
+		if(users.size()>0) {
+			offlineOper.setRmName(users.get(0).getNickname());  // userName 是 EHR，中文名是 NICKNAME
+		}
+		
+		int rtnCount = 0;
+		int count = OfflineOperMapper.employeeCount(offlineOper);
+		if(1 == count) {
+			rtnCount = OfflineOperMapper.updateByPrimaryKeySelective(offlineOper) ;
+		}else {
+			rtnCount = OfflineOperMapper.insertSelective(offlineOper) ;
+		}
+		return rtnCount>0? true : false  ;
 	}
 
 }

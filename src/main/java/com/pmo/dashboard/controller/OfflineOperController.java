@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -47,7 +49,7 @@ public class OfflineOperController {
 	}
 	
 	/**
-	 * 返回数据
+	 * 查询数据
 	 * @param request
 	 * @param response
 	 * @return
@@ -63,5 +65,19 @@ public class OfflineOperController {
 		map.put("total", page.getTotal());
 		map.put("rows", data);
 		return objectMapper.writeValueAsString(map);
+	}
+	
+	/**
+	 * 保存数据
+	 * @param offo
+	 * @param request
+	 * @return
+	 * @throws JsonProcessingException
+	 */
+	@RequestMapping(value= {"/save"},method=RequestMethod.POST)
+	@ResponseBody
+	public String test(@RequestBody OfflineOper offlineOper,HttpServletRequest request) throws JsonProcessingException{
+		boolean rtn = offlineOperService.save(offlineOper);
+		return objectMapper.writeValueAsString( rtn? "0" : "-1");
 	}
 }
