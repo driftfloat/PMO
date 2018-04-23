@@ -31,6 +31,7 @@ import com.pom.dashboard.service.OfflineOperService;
 @WebAppConfiguration
 public class TestOfflineOperService {
 	int pageSize = 10, pageNumber = 1 ;
+	String year= "2018", month = "4";
 	@Resource
 	private OfflineOperService offlineOperService;
 	
@@ -54,9 +55,9 @@ public class TestOfflineOperService {
 		condition.setMonth("3");
 		User user = new User();
 		
-//		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
+		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
 ////		user.setUserId("cff5fa689a2e40afa02ba2ceda914bbb");  // 梁嘉杰 9
-		user.setUserId("20f1aeff297d49d4b3c42877687a7076");  // 张盛  9,12
+//		user.setUserId("20f1aeff297d49d4b3c42877687a7076");  // 张盛  9,12
 		user.setUserType("5");
 		
 //		user.setUserType("3");  
@@ -98,6 +99,16 @@ public class TestOfflineOperService {
 		
 		List<OfflineOper> list = OfflineOperMapper.queryFromEmployeeByRM(condition);
 		System.out.println(list.size());
-		
+	}
+	
+//	@Test
+	public void employeeCount() {
+		OfflineOper condition = new OfflineOper();
+//		condition.setYear(year); 
+//		condition.setMonth(month);
+		String employeeId = "cb00bad3f16a4e8baf450e7b88af7c4b" ; 
+		condition.setEmployeeId(employeeId);
+		int count = OfflineOperMapper.employeeCount(condition);
+		System.out.println(count);
 	}
 }
