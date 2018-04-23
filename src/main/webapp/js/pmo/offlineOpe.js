@@ -47,12 +47,18 @@ function loadOfflineOperList(){
         {
             field: 'year',
             title: 'Year',
-            sortable: true
+            sortable: true,
+            formatter:function(value,row,index){
+                return value+"年";
+            }
         },
         {
             field: 'month',
             title: 'Month',
-            sortable: true
+            sortable: true,
+            formatter:function(value,row,index){
+                return value+"月";
+            }
         },
         {
             field: 'staffName',
