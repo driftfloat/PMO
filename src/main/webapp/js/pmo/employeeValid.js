@@ -354,9 +354,9 @@ $(document).ready(function() {
             },
             email: {
                 validators: {
-                	notEmpty: {
+                	/*notEmpty: {
                 		message: 'Please enter email'
-                	},
+                	},*/
                     emailAddress:{
                     	message:'Email address is incorrect'
                     },

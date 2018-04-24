@@ -109,28 +109,18 @@ var path='<%=path%>';
 								
 								<div class="form-group">
 								
-										<div class="group">
+										<!-- <div class="group">
 											<label class="col-sm-2 control-label">HSBC Staff ID</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="hsbcStaffId"
 													id="hsbcStaffId" data-bv-group=".group"/>
 											</div>
-										</div>
+										</div> -->
 										<div class="group">
 											<label class="col-sm-2 control-label">Staff Name</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="staffName"
 													id="staffName" data-bv-group=".group"/>
-											</div>
-										</div>
-								</div>
-								
-								<div class="form-group">
-										<div class="group">
-											<label class="col-sm-2 control-label">LN</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="LN"
-													id="LN" data-bv-group=".group"/>
 											</div>
 										</div>
 										<div class="group">
@@ -140,8 +130,25 @@ var path='<%=path%>';
 													id="email" data-bv-group=".group"/>
 											</div>
 										</div>
-										
 								</div>
+								
+								<!--<div class="form-group">
+										<div class="group">
+											<label class="col-sm-2 control-label">LN</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="LN"
+													id="LN" data-bv-group=".group"/>
+											</div>
+										</div> 
+										<div class="group">
+											<label class="col-sm-2 control-label">Email</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="email"
+													id="email" data-bv-group=".group"/>
+											</div>
+										</div>
+										
+								</div>-->
 								
 								<div class="form-group">
 										<div class="group">
