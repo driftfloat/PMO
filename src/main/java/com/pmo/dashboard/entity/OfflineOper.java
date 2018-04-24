@@ -70,6 +70,10 @@ public class OfflineOper {
     private String remark;
     
     private String[] ids;
+    
+    private String eHr2;
+
+    private String staffName2;
 
     public String getId() {
         return id;
@@ -334,4 +338,21 @@ public class OfflineOper {
 	public void setIds(String[] ids) {
 		this.ids = ids;
 	}
+
+	public String geteHr2() {
+		return eHr2;
+	}
+
+	public void seteHr2(String eHr2) {
+		this.eHr2 = eHr2;
+	}
+
+	public String getStaffName2() {
+		return staffName2;
+	}
+
+	public void setStaffName2(String staffName2) {
+		this.staffName2 = staffName2;
+	}
+
 }

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmo.dashboard.dao.HKWorkHourMapper">
+  <resultMap id="BaseResultMap" type="com.pmo.dashboard.entity.HKWorkHour">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="MONTH" jdbcType="VARCHAR" property="month" />
+    <result column="YEAR" jdbcType="VARCHAR" property="year" />
+    <result column="STANDARD_WORKDAY" jdbcType="DECIMAL" property="standardWorkday" />
+    <result column="STANDARD_WORKHOUR" jdbcType="DECIMAL" property="standardWorkhour" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, MONTH, YEAR, STANDARD_WORKDAY, STANDARD_WORKHOUR
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_hk_workhour
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_hk_workhour
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pmo.dashboard.entity.HKWorkHour">
+    insert into t_hk_workhour (ID, MONTH, YEAR, 
+      STANDARD_WORKDAY, STANDARD_WORKHOUR)
+    values (#{id,jdbcType=VARCHAR}, #{month,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{standardWorkday,jdbcType=DECIMAL}, #{standardWorkhour,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pmo.dashboard.entity.HKWorkHour">
+    insert into t_hk_workhour
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="month != null">
+        MONTH,
+      </if>
+      <if test="year != null">
+        YEAR,
+      </if>
+      <if test="standardWorkday != null">
+        STANDARD_WORKDAY,
+      </if>
+      <if test="standardWorkhour != null">
+        STANDARD_WORKHOUR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null">
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="standardWorkday != null">
+        #{standardWorkday,jdbcType=DECIMAL},
+      </if>
+      <if test="standardWorkhour != null">
+        #{standardWorkhour,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pmo.dashboard.entity.HKWorkHour">
+    update t_hk_workhour
+    <set>
+      <if test="month != null">
+        MONTH = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        YEAR = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="standardWorkday != null">
+        STANDARD_WORKDAY = #{standardWorkday,jdbcType=DECIMAL},
+      </if>
+      <if test="standardWorkhour != null">
+        STANDARD_WORKHOUR = #{standardWorkhour,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pmo.dashboard.entity.HKWorkHour">
+    update t_hk_workhour
+    set MONTH = #{month,jdbcType=VARCHAR},
+      YEAR = #{year,jdbcType=VARCHAR},
+      STANDARD_WORKDAY = #{standardWorkday,jdbcType=DECIMAL},
+      STANDARD_WORKHOUR = #{standardWorkhour,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="queryWorkHour" parameterType="com.pmo.dashboard.entity.WorkHour" resultType="java.math.BigDecimal">
+    select STANDARD_WORKHOUR    
+    from t_hk_workhour
+    where YEAR = #{year} and MONTH = #{month}
+  </select>
+  </mapper>
