@@ -59,6 +59,7 @@ public class OfflineOperController {
 	@ResponseBody
 	public String query(int pageSize,int pageNumber,OfflineOper condition,HttpServletRequest request,String name) throws JsonProcessingException{
 		User user = (User) request.getSession().getAttribute("loginUser");
+		condition.setStaffName2(name);   //  StaffName query
 		List<OfflineOper> data = offlineOperService.query(condition,user,pageSize,pageNumber);
 		PageInfo<OfflineOper> page = new PageInfo(data);
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -77,7 +78,8 @@ public class OfflineOperController {
 	@RequestMapping(value= {"/save"},method=RequestMethod.POST)
 	@ResponseBody
 	public String test(@RequestBody OfflineOper offlineOper,HttpServletRequest request) throws JsonProcessingException{
-		boolean rtn = offlineOperService.save(offlineOper);
+		User user = (User) request.getSession().getAttribute("loginUser");
+		boolean rtn = offlineOperService.save(offlineOper,user);
 		return objectMapper.writeValueAsString( rtn? "0" : "-1");
 	}
 }
