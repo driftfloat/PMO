@@ -92,18 +92,18 @@
 		AND MONTH = MONTH(NOW())
 	</if>
 	<if test="rmId != null and rmId != ''">
-		AND rm_id = #{rmId}
+		AND RM_ID = #{rmId}
 	</if>
 	) o
 	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
    WHERE 1=1 
    AND z1.RM_USER_ID = #{rmId}
-   AND z1.RESOURCE_STATUS='Active'
-   <if test="staffName != null and staffName != ''">
-		AND z1.STAFF_NAME like concat(concat('%',#{staffName}),'%')
+   AND z1.RESOURCE_STATUS='Active' 
+   <if test="staffName2 != null and staffName2 != ''">
+		AND z1.STAFF_NAME like concat(concat('%',#{staffName2}),'%')
    </if>
-   <if test="eHr != null and eHr != ''">
-		AND z1.E_HR = #{eHr}
+   <if test="eHr2 != null and eHr2 != ''">
+		AND z1.E_HR = #{eHr2}
    </if> 
     ORDER BY o.e_hr DESC
   </select>
@@ -128,12 +128,12 @@
 	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
    WHERE 1=1 
      AND z1.RESOURCE_STATUS='Active'
-     <if test="staffName != null and staffName != ''">
-		AND z1.STAFF_NAME like concat(concat('%',#{staffName}),'%')
-     </if>
-     <if test="eHr != null and eHr != ''">
-		AND z1.E_HR = #{eHr}
-     </if>  
+     <if test="staffName2 != null and staffName2 != ''">
+		AND z1.STAFF_NAME like concat(concat('%',#{staffName2}),'%')
+	 </if>
+	 <if test="eHr2 != null and eHr2 != ''">
+		AND z1.E_HR = #{eHr2}
+	 </if> 
      AND z1.CS_SUBDEPT_ID in 
 	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
 		#{item}
@@ -161,13 +161,13 @@
 	) o
 	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
    WHERE 1=1 
-     AND z1.RESOURCE_STATUS='Active'
-     <if test="staffName != null and staffName != ''">
-		AND z1.STAFF_NAME like concat(concat('%',#{staffName}),'%')
-     </if>
-     <if test="eHr != null and eHr != ''">
-		AND z1.E_HR = #{eHr}
-     </if>  
+     AND z1.RESOURCE_STATUS='Active' 
+     <if test="staffName2 != null and staffName2 != ''">
+		AND z1.STAFF_NAME like concat(concat('%',#{staffName2}),'%')
+	 </if>
+	 <if test="eHr2 != null and eHr2 != ''">
+		AND z1.E_HR = #{eHr2}
+	 </if>
      AND z1.CS_SUBDEPT_ID in 
 	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
 		#{item}
@@ -601,10 +601,18 @@
 	    SELECT count(*) From t_offline_oper 
         WHERE YEAR = YEAR(NOW()) and MONTH = MONTH(NOW()) and EMPLOYEE_ID = #{employeeId}
   </select>
-  
-  <select id="queryRMFromDept" parameterType="String" resultMap="userMap">
-		SELECT * FROM t_user WHERE user_type='5'  AND FIND_IN_SET( #{subDeptId},CSDEPT_ID )>0 
+  <select id="queryByEmployeeID" parameterType="com.pmo.dashboard.entity.OfflineOper" resultMap="ResultMapWithBLOBs" >
+	    select 
+    	<include refid="Base_Column_List" />
+    	,
+    	<include refid="Blob_Column_List" />
+   		 from t_offline_oper
+        WHERE YEAR = YEAR(NOW()) and MONTH = MONTH(NOW()) and EMPLOYEE_ID = #{employeeId}
   </select>
+  
+<!--   <select id="queryRMFromDept" parameterType="String" resultMap="userMap"> -->
+<!-- 		SELECT * FROM t_user WHERE user_type='5'  AND FIND_IN_SET( #{subDeptId},CSDEPT_ID )>0  -->
+<!--   </select> -->
   
   
 </mapper>

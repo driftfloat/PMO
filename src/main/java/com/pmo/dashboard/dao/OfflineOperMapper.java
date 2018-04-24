@@ -61,4 +61,10 @@ public interface OfflineOperMapper {
     * EMPLOYEE count
     */
    int employeeCount(OfflineOper condition);
+   
+   /**
+    * 根据：年份、月份、EMPLOYEE_ID、三个条件在线下运营提交表去count查询
+    * OfflineOper
+    */
+   OfflineOper queryByEmployeeID(OfflineOper condition);
 }

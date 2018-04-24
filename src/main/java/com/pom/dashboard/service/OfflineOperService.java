@@ -22,5 +22,5 @@ public interface OfflineOperService {
     
     List<OfflineOper> query(OfflineOper condition, User user,int pageSize,int pageNumber);
 
-	boolean save(OfflineOper offlineOper);
+	boolean save(OfflineOper offlineOper, User user);
 }
