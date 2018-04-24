@@ -192,12 +192,62 @@ function loadOfflineOperList(){
             sortable: true
         },
         {
+            field: 'chsoftiIfaw',
+            title: 'Ifaw',
+            sortable: true
+        },
+        {
+            field: 'chsoftiInvalid',
+            title: 'Invalid',
+            sortable: true
+        },
+        {
+            field: 'chsoftiInfOt',
+            title: 'InfOt',
+            sortable: true
+        },
+        {
+            field: 'chsoftiInfPt',
+            title: 'InfPt',
+            sortable: true
+        },
+        {
+            field: 'chsoftiInfAd',
+            title: 'InfAd',
+            sortable: true
+        },
+        {
+            field: 'chsoftiInfTotal',
+            title: 'InfTotal',
+            sortable: true
+        },
+        {
+            field: 'chsoftiInfCurrent',
+            title: 'InfCurrent',
+            sortable: true
+        },
+        {
+            field: 'chsoftiEffectiveNr',
+            title: 'EffectiveNr',
+            sortable: true
+        },
+        {
+            field: 'chsoftiEffectiveSt',
+            title: 'EffectiveSt',
+            sortable: true
+        },
+        {
+            field: 'chsoftiInvalidSt',
+            title: 'InvalidSt',
+            sortable: true
+        }
+        /*{
             field:'id',
             title: 'Operation',
             width: 120,
             align: 'center',
             valign: 'middle'
-        }],
+        }*/],
         onEditableSave: function (field, row, oldValue, $el) {
         	console.log(row);
             $.ajax({
