@@ -98,7 +98,13 @@
 	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
    WHERE 1=1 
    AND z1.RM_USER_ID = #{rmId}
-   AND z1.RESOURCE_STATUS='Active' 
+   AND z1.RESOURCE_STATUS='Active'
+   <if test="staffName != null and staffName != ''">
+		AND z1.STAFF_NAME like concat(concat('%',#{staffName}),'%')
+   </if>
+   <if test="eHr != null and eHr != ''">
+		AND z1.E_HR = #{eHr}
+   </if> 
     ORDER BY o.e_hr DESC
   </select>
   <select id="queryBySubDept" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" >
@@ -121,7 +127,13 @@
 	) o
 	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
    WHERE 1=1 
-     AND z1.RESOURCE_STATUS='Active' 
+     AND z1.RESOURCE_STATUS='Active'
+     <if test="staffName != null and staffName != ''">
+		AND z1.STAFF_NAME like concat(concat('%',#{staffName}),'%')
+     </if>
+     <if test="eHr != null and eHr != ''">
+		AND z1.E_HR = #{eHr}
+     </if>  
      AND z1.CS_SUBDEPT_ID in 
 	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
 		#{item}
@@ -149,7 +161,13 @@
 	) o
 	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
    WHERE 1=1 
-     AND z1.RESOURCE_STATUS='Active' 
+     AND z1.RESOURCE_STATUS='Active'
+     <if test="staffName != null and staffName != ''">
+		AND z1.STAFF_NAME like concat(concat('%',#{staffName}),'%')
+     </if>
+     <if test="eHr != null and eHr != ''">
+		AND z1.E_HR = #{eHr}
+     </if>  
      AND z1.CS_SUBDEPT_ID in 
 	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
 		#{item}
