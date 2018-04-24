@@ -238,7 +238,8 @@ function search(){
 	var ehr = $("#ehr").val();
 	var queryParams = { 
 		query: {  
-		   name:staffName
+		   staffName:staffName,
+		   eHr:ehr
         }
     }  
 	//刷新表格  

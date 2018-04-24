@@ -80,7 +80,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> Employee Information
+									<i class="glyphicon glyphicon-user"></i> Employee Information Price Fix
 								</h2>
 							</div>
 							<div id="register" class="box-content" style="overflow: auto;">
@@ -112,13 +112,13 @@ var path='<%=path%>';
 							    
 								<div class="form-group">
 								
-										<div class="group">
+										<!-- <div class="group">
 											<label class="col-sm-2 control-label">HSBC Staff ID</label>
 											<div class="col-sm-4">
 												<input type="text" readonly class="form-control" name="hsbcStaffId"
 													id="hsbcStaffId" />
 											</div>
-										</div>
+										</div>  -->
 										<div class="group">
 											<label class="col-sm-2 control-label">Staff Name</label>
 											<div class="col-sm-4">
@@ -126,16 +126,7 @@ var path='<%=path%>';
 													id="staffName" />
 											</div>
 										</div>
-								</div>
-								<br/><br/>
-								<div class="form-group">
-										<div class="group">
-											<label class="col-sm-2 control-label">LN</label>
-											<div class="col-sm-4">
-												<input type="text" readonly class="form-control" name="LN"
-													id="LN" />
-											</div>
-										</div>
+										
 										<div class="group">
 											<label class="col-sm-2 control-label">Email</label>
 											<div class="col-sm-4">
