@@ -1,5 +1,6 @@
 package com.pmo.dashboard.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -8,6 +9,9 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
@@ -21,6 +25,7 @@ import com.pmo.dashboard.dao.UserMapper;
 import com.pmo.dashboard.dao.WorkHourMapper;
 import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.ChinaWorkHour;
+import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.HKWorkHour;
 import com.pmo.dashboard.entity.MLWorkHour;
 import com.pmo.dashboard.entity.OfflineOper;
@@ -132,6 +137,9 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			PageHelper.startPage(pageNumber,pageSize); 
 			rtn = offlineOperMapper.queryByDept(condition) ;
 		}
+		for(OfflineOper offlineOper :rtn) {
+			workHour(offlineOper);
+		}
 		return rtn ;
 	}
 	
@@ -149,6 +157,104 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 //			}
 //		} 
 		
+		offlineOper = workHour(offlineOper);
+		Employee employee = employeeMapper.queryEmployeeById(offlineOper.getEmployeeId()) ;
+		
+		int rtnCount = 0;
+		int count = offlineOperMapper.employeeCount(offlineOper);
+		if(1 == count) {
+			if(null == offlineOper.getId()) {
+				OfflineOper rtn = offlineOperMapper.queryByEmployeeID(offlineOper);
+				if(rtn != null) {
+					offlineOper.setId(rtn.getId());
+				}
+			}
+			offlineOper.setCreateUpdate(new Date());
+			calculte(offlineOper, employee);
+			rtnCount = offlineOperMapper.updateByPrimaryKeySelective(offlineOper) ;
+		}else {
+			offlineOper.setCreateDate(new Date());
+			offlineOper.setId(Utils.getUUID());
+			calculte(offlineOper, employee);
+			rtnCount = offlineOperMapper.insertSelective(offlineOper) ;
+		}
+		return rtnCount>0? true : false  ;
+	}
+	
+	private boolean checkCalculte(OfflineOper offlineOper,Employee employee) {
+		if(null == offlineOper.getChsoftiMskHours()) {
+			return false;
+		}
+		if(null == offlineOper.getChsoftiAwHours()) {
+			return false;
+		}
+		if(null == offlineOper.getChsoftiIwHours()) {
+			return false;
+		}
+		
+		if(null == offlineOper.getChsoftiOtHours()) {
+			return false;
+		}
+		if(null == offlineOper.getChsoftiToHours()) {
+			return false;
+		}
+		if(null == offlineOper.getChsoftiApwHours()) {
+			return false;
+		}
+		
+		if(null == offlineOper.getChsoftiInfTravel()) {
+			return false;
+		}
+		if(null == offlineOper.getChsoftiInfEquipment()) {
+			return false;
+		}
+		if(null == offlineOper.getChsoftiInfSub()) {
+			return false;
+		}
+		
+		String emploeeBill = employee.getBillRate() ;
+		if(StringUtils.isBlank(emploeeBill)) {
+			return false;
+		}
+		return true;
+	}
+	private void calculte(OfflineOper oper,Employee employee) {
+		if(!checkCalculte(oper, employee)) {
+			return ;
+		}
+		/**
+		 *  CHSOFTI_IFAW	　		实际工时收入=				员工单价*中软实际工时
+			CHSOFTI_INVALID	　		无效工时收入=				员工单价*中软无效工时
+			CHSOFTI_INF_OT	　		加班费工时收入=			员工单价*中软加班费工时
+			CHSOFTI_INF_PT	　		调休工时收入=				员工单价*中软调休工时
+			CHSOFTI_INF_AD	　		调整上月工时收入=			员工单价*中软调整上月工时
+			CHSOFTI_INF_TOTAL	　	月收入合计=				实际工时收入+无效工时收入+加班费工时收入+调休工时收入+调整上月工时收入+差旅收入+付费设备收入+分包收入
+			CHSOFTI_INF_CURRENT	　	当月有效收入=				月收入合计-无效工时收入			
+			CHSOFTI_EFFECTIVE_NR	有效NR=					当月有效收入/1.06
+			CHSOFTI_EFFECTIVE_ST	当月有效人力=				中软实际工时/中软月标准工时
+			CHSOFTI_INVALID_ST	　	当月无效人力=				中软无效工时/中软月标准工时
+		 */
+//		oper.set
+		// 员工单价  BILL_RATE , BILL_CURRENCY 货币类型
+		
+		BigDecimal billRate = new BigDecimal(employee.getBillRate());	// 员工单价
+		oper.setChsoftiIfaw( billRate.multiply( oper.getChsoftiAwHours())) ; 		//实际工时收入 
+		oper.setChsoftiInvalid( billRate.multiply( oper.getChsoftiIwHours())) ; 	//无效工时收入
+		oper.setChsoftiInfOt( billRate.multiply( oper.getChsoftiOtHours())) ; 	//加班费工时收入 
+		oper.setChsoftiInfPt( billRate.multiply( oper.getChsoftiToHours())) ; 	//调休工时收入 
+		oper.setChsoftiInfAd( billRate.multiply( oper.getChsoftiApwHours())) ; 	//调整上月工时收入
+		
+		oper.setChsoftiInfTotal(oper.getChsoftiIfaw().add(oper.getChsoftiInvalid()).add(oper.getChsoftiInfOt())
+				.add(oper.getChsoftiInfPt()).add(oper.getChsoftiInfAd()).add(oper.getChsoftiInfTravel())
+				.add(oper.getChsoftiInfEquipment()).add(oper.getChsoftiInfSub()));
+		oper.setChsoftiInfCurrent(oper.getChsoftiInfTotal().subtract(oper.getChsoftiInvalid()));
+		oper.setChsoftiEffectiveNr(oper.getChsoftiInfCurrent().divide(new BigDecimal("1.06"),2 , BigDecimal.ROUND_HALF_EVEN));
+		oper.setChsoftiEffectiveSt(oper.getChsoftiAwHours().divide(oper.getChsoftiMskHours(),2 , BigDecimal.ROUND_HALF_EVEN));
+		oper.setChsoftiInvalidSt(oper.getChsoftiIwHours().divide(oper.getChsoftiMskHours(),2, BigDecimal.ROUND_HALF_EVEN ));
+		return ;
+	}
+	
+	private OfflineOper workHour(OfflineOper offlineOper) {
 //		标准工时
 		String  location = employeeMapper.queryEmployeeById(offlineOper.getEmployeeId()).getStaffLocation() ;
 		if(StringUtils.isNotBlank(location) ) {
@@ -165,30 +271,24 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			workHour.setMonth(offlineOper.getMonth()+"月");
 			offlineOper.setChsoftiMskHours( workHourMapper.queryWorkHour(workHour)); 
 		}
-		
-		
-		int rtnCount = 0;
-		int count = offlineOperMapper.employeeCount(offlineOper);
-		if(1 == count) {
-			if(null == offlineOper.getId()) {
-				OfflineOper rtn = offlineOperMapper.queryByEmployeeID(offlineOper);
-				if(rtn != null) {
-					offlineOper.setId(rtn.getId());
-				}
-			}
-			offlineOper.setCreateUpdate(new Date());
-			rtnCount = offlineOperMapper.updateByPrimaryKeySelective(offlineOper) ;
-		}else {
-			offlineOper.setCreateDate(new Date());
-			offlineOper.setId(Utils.getUUID());
-			rtnCount = offlineOperMapper.insertSelective(offlineOper) ;
-		}
-		return rtnCount>0? true : false  ;
+		return offlineOper;
 	}
-	
-	private OfflineOper calculte(OfflineOper offlineOper) {
-		
-		return null;
+
+	@Override
+	public void export(User user) {
+		XSSFWorkbook workBook = new XSSFWorkbook();
+	    XSSFSheet sheet = workBook.createSheet();
+	    workBook.setSheetName(0,"过程数据");
+	    XSSFRow titleRow = sheet.createRow(0);
+	    
+		if("5".equals(user.getUserType())) { // RM
+			
+		}else if("3".equals(user.getUserType())) {  // 交付部经理
+			
+		}else if("1".equals(user.getUserType())){ // 事业部经理
+			
+		}
+			
 	}
 
 }

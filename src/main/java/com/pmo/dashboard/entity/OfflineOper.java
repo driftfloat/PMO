@@ -5,75 +5,71 @@ import java.util.Date;
 import java.util.List;
 
 public class OfflineOper {
-    private String id;
+    private String id;						//id
+    
+    private String eHr; 					//员工E-HR账号
 
-    private String eHr;
+    private String staffName;				//员工中文名
 
-    private String staffName;
+    private String employeeId;				//员工employee_id
 
-    private String employeeId;
+    private Date createDate;				//创建日期
 
-    private Date createDate;
+    private Date createUpdate;				//修改日期
 
-    private Date createUpdate;
+    private String csSubdeptId;				//中软部门ID
 
-    private String csSubdeptId;
+    private String rmId;					//RM_ID
 
-    private String rmId;
+    private String rmName;					//RM姓名
 
-    private String rmName;
+    private String operatorId;				//操作人ID
 
-    private String operatorId;
+    private String month;					//月份
 
-    private String month;
+    private String year;					//年份
 
-    private String year;
+    private BigDecimal chsoftiMskHours;		//中软月标准工时
 
-    private BigDecimal chsoftiMskHours;
+    private BigDecimal chsoftiAwHours;		//中软实际工时
 
-    private BigDecimal chsoftiAwHours;
+    private BigDecimal chsoftiIwHours;		//中软无效工时
 
-    private BigDecimal chsoftiIwHours;
+    private BigDecimal chsoftiOtHours;		//中软加班费工时
 
-    private BigDecimal chsoftiOtHours;
+    private BigDecimal chsoftiToHours;		//中软调休工时
 
-    private BigDecimal chsoftiToHours;
+    private BigDecimal chsoftiApwHours;		//中软调整上月工时
 
-    private BigDecimal chsoftiApwHours;
+    private BigDecimal chsoftiIfaw;			//实际工时收入
 
-    private BigDecimal chsoftiIfaw;
+    private BigDecimal chsoftiInvalid;		//无效工时收入
 
-    private BigDecimal chsoftiInvalid;
+    private BigDecimal chsoftiInfOt;		//加班费工时收入
 
-    private BigDecimal chsoftiInfOt;
+    private BigDecimal chsoftiInfPt;		//调休工时收入
 
-    private BigDecimal chsoftiInfPt;
+    private BigDecimal chsoftiInfAd;		//调整上月工时收入
 
-    private BigDecimal chsoftiInfAd;
+    private BigDecimal chsoftiInfTravel;	//差旅收入
 
-    private BigDecimal chsoftiInfTravel;
+    private BigDecimal chsoftiInfEquipment;	//付费设备收入
 
-    private BigDecimal chsoftiInfEquipment;
+    private BigDecimal chsoftiInfSub;		//分包收入
 
-    private BigDecimal chsoftiInfSub;
+    private BigDecimal chsoftiInfTotal;		//月收入合计
 
-    private BigDecimal chsoftiInfTotal;
+    private BigDecimal chsoftiInfCurrent;	//当月有效收入
 
-    private BigDecimal chsoftiInfCurrent;
+    private BigDecimal chsoftiEffectiveNr;	//有效NR
 
-    private BigDecimal chsoftiEffectiveNr;
+    private BigDecimal chsoftiEffectiveSt;	//当月有效人力
 
-    private BigDecimal chsoftiEffectiveSt;
+    private BigDecimal chsoftiInvalidSt;	//当月无效人力
 
-    private BigDecimal chsoftiInvalidSt;
-
-    private String remark;
+    private String remark;					//备注
     
     private String[] ids;
-    
-    private String eHr2;
-
-    private String staffName2;
 
     public String getId() {
         return id;
@@ -337,22 +333,6 @@ public class OfflineOper {
 
 	public void setIds(String[] ids) {
 		this.ids = ids;
-	}
-
-	public String geteHr2() {
-		return eHr2;
-	}
-
-	public void seteHr2(String eHr2) {
-		this.eHr2 = eHr2;
-	}
-
-	public String getStaffName2() {
-		return staffName2;
-	}
-
-	public void setStaffName2(String staffName2) {
-		this.staffName2 = staffName2;
 	}
 
 }
