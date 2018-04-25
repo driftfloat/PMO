@@ -1,5 +1,7 @@
 package test;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -32,8 +34,8 @@ import com.pom.dashboard.service.OfflineOperService;
 		})
 @WebAppConfiguration
 public class TestOfflineOperService {
-	int pageSize = 10, pageNumber = 1 ;
-	String year= "2018", month = "4";
+	final static int PAGESIZE = 10, PAGENUMBER = 1 ;
+	final static String YEAR= ""+LocalDate.now().getYear(), MONTH = ""+LocalDate.now().getMonthValue();
 	@Resource
 	private OfflineOperService offlineOperService;
 	
@@ -52,13 +54,11 @@ public class TestOfflineOperService {
 //		mockMvc.perform(MockMvcRequestBuilders.get("/offlineOper/query").param("pageNumber", "1")).andReturn();
 //	}
 	
-	@Test
+	
 	public void queryByRM() {
 		OfflineOper condition = new OfflineOper();
-		condition.seteHr2("E000834441");
-		condition.setStaffName2("白世铭");
-//		condition.setYear("2018"); 
-//		condition.setMonth("3");
+		condition.seteHr("E000834441");
+		condition.setStaffName("白世铭");
 		User user = new User();
 		
 		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
@@ -74,7 +74,7 @@ public class TestOfflineOperService {
 //		user.setUserId("1573"); // 风控数据事业部  潘亮
 		user.setBu("风控数据事业部");
 		
-		List<OfflineOper> list = offlineOperService.query(condition, user, pageSize, pageNumber) ;
+		List<OfflineOper> list = offlineOperService.query(condition, user, PAGESIZE, PAGENUMBER) ;
 		PageInfo<OfflineOper> page = new PageInfo(list);
 		
 		System.out.println(list.size());
@@ -85,8 +85,8 @@ public class TestOfflineOperService {
 	
 	public void testRWCount() {
 		OfflineOper condition = new OfflineOper();
-		condition.setYear("2018"); 
-		condition.setMonth("4");
+		condition.setYear(YEAR); 
+		condition.setMonth(MONTH);
 		String rmId = "cb00bad3f16a4e8baf450e7b88af7c4b" ; 
 		condition.setRmId(rmId); ;
 		int count = offlineOperMapper.rmCount(condition);
@@ -107,11 +107,8 @@ public class TestOfflineOperService {
 		System.out.println(list.size());
 	}
 	
-//	@Test
 	public void employeeCount() {
 		OfflineOper condition = new OfflineOper();
-//		condition.setYear(year); 
-//		condition.setMonth(month);
 		String employeeId = "cb00bad3f16a4e8baf450e7b88af7c4b" ; 
 		condition.setEmployeeId(employeeId);
 		int count = offlineOperMapper.employeeCount(condition);
@@ -127,10 +124,36 @@ public class TestOfflineOperService {
 		System.out.println(objectMapper.writeValueAsString(o));
 	}
 	
+	private static void initOfflineOper(OfflineOper data) {
+		data.setYear(YEAR);
+		data.setMonth(MONTH);
+		data.setStaffName("白世铭");
+		data.seteHr("E000834441");
+		data.setEmployeeId("04fcb811aeae4808bb303aaf2cabba52");
+		data.setCsSubdeptId("12");
+		data.setRmId("cb00bad3f16a4e8baf450e7b88af7c4b");
+		data.setChsoftiAwHours(new BigDecimal("133"));
+		data.setChsoftiIwHours(new BigDecimal("27"));
+		data.setChsoftiOtHours(new BigDecimal("8"));
+		data.setChsoftiToHours(new BigDecimal("9"));
+		data.setChsoftiApwHours(new BigDecimal("10"));
+		data.setChsoftiInfTravel(new BigDecimal("11"));
+		data.setChsoftiInfEquipment(new BigDecimal("12"));
+		data.setChsoftiInfSub(new BigDecimal("13"));
+		data.setRemark("test");
+	}
 	
+	@Test
 	public void save() {
+		OfflineOper data = new OfflineOper();
+		data.setStaffName("白世铭");
 		User user = new User();
-		
+		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
+		user.setUserType("5");
+		List<OfflineOper> list =  offlineOperService.query(data, user, PAGESIZE , PAGENUMBER) ;
+		if(list.size()>0) {
+			offlineOperService.delete(list.get(0).getId());
+		}
 		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
 ////		user.setUserId("cff5fa689a2e40afa02ba2ceda914bbb");  // 梁嘉杰 9
 //		user.setUserId("20f1aeff297d49d4b3c42877687a7076");  // 张盛  9,12
@@ -144,8 +167,7 @@ public class TestOfflineOperService {
 ////		user.setUserId("1573"); // 风控数据事业部  潘亮
 //		user.setBu("风控数据事业部");
 		
-		OfflineOper data = new OfflineOper();
-		data.setEmployeeId("0081837a89a6403c8ffc82c4f366eabe");
+		initOfflineOper(data);
 		System.out.println(offlineOperService.save(data, user));
 		
 	}
