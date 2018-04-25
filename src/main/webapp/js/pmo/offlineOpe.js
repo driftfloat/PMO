@@ -14,6 +14,7 @@ function loadOfflineOperList(){
         method: 'GET',                      //请求方式（*）
         toolbar: '#toolbar',              //工具按钮用哪个容器
         striped: true,                      //是否显示行间隔色
+        singleSelect : true,                // 单选checkbox 
         cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,                   //是否显示分页（*）
         sortable: true,                     //是否启用排序
@@ -40,7 +41,8 @@ function loadOfflineOperList(){
         		pageNumber: params.offset/params.limit+1,
             };
         },
-        columns: [{
+        columns: [
+        {
             checkbox: true,  
             visible: true                  //是否显示复选框  
         }, 
@@ -68,6 +70,11 @@ function loadOfflineOperList(){
         {
             field: 'eHr',
             title: 'EHr',
+            sortable: true
+        },
+        {
+            field: 'chsoftiMskHours',
+            title: 'MskHours',
             sortable: true
         },
         {
@@ -192,54 +199,132 @@ function loadOfflineOperList(){
             sortable: true
         },
         {
-            field: 'chsoftiIfaw',
+            field: 'chsoftiIfaw',//实际工时收入=员工单价*中软实际工时
             title: 'Ifaw',
-            sortable: true
+            sortable: true,
+            formatter: function (value, row, index) {  
+            	if(row.chsoftiAwHours==null){
+            		return 0;
+            	}
+            	var res = parseFloat(120)*parseFloat(row.chsoftiAwHours);
+            	//计算后的值赋给字段
+            	row.chsoftiIfaw=res;
+            	return res;
+            }
         },
         {
-            field: 'chsoftiInvalid',
+            field: 'chsoftiInvalid',//无效工时收入=员工单价*中软无效工时
             title: 'Invalid',
-            sortable: true
+            sortable: true,
+            formatter: function (value, row, index) {  
+            	if(row.chsoftiIwHours==null){
+            		return 0;
+            	}
+            	var res = parseFloat(120)*parseFloat(row.chsoftiIwHours);
+            	//计算后的值赋给字段
+            	row.chsoftiInvalid=res;
+            	return res;
+            }
         },
         {
-            field: 'chsoftiInfOt',
+            field: 'chsoftiInfOt',//加班费工时收入=员工单价*中软加班费工时
             title: 'InfOt',
-            sortable: true
+            sortable: true,
+            formatter: function (value, row, index) {  
+            	if(row.chsoftiOtHours==null){
+            		return 0;
+            	}
+            	var res = parseFloat(120)*parseFloat(row.chsoftiOtHours);
+            	//计算后的值赋给字段
+            	row.chsoftiInfOt=res;
+            	return res;
+            }
         },
         {
-            field: 'chsoftiInfPt',
+            field: 'chsoftiInfPt',//调休工时收入=员工单价*中软调休工时
             title: 'InfPt',
-            sortable: true
+            sortable: true,
+            formatter: function (value, row, index) {  
+            	if(row.chsoftiToHours==null){
+            		return 0;
+            	}
+            	var res = parseFloat(120)*parseFloat(row.chsoftiToHours);
+            	//计算后的值赋给字段
+            	row.chsoftiInfPt=res;
+            	return res;
+            }
         },
         {
-            field: 'chsoftiInfAd',
+            field: 'chsoftiInfAd',//调整上月工时收入=员工单价*中软调整上月工时
             title: 'InfAd',
-            sortable: true
+            sortable: true,
+            formatter: function (value, row, index) {  
+            	if(row.chsoftiApwHours==null){
+            		return 0;
+            	}
+            	var res = parseFloat(120)*parseFloat(row.chsoftiApwHours);
+            	//计算后的值赋给字段
+            	row.chsoftiInfAd=res;
+            	return res;
+            }
         },
         {
-            field: 'chsoftiInfTotal',
+            field: 'chsoftiInfTotal',//月收入合计=实际工时收入+无效工时收入+加班费工时收入+调休工时收入+调整上月工时收入+差旅收入+付费设备收入+分包收入
             title: 'InfTotal',
-            sortable: true
+            sortable: true,
+            formatter: function (value, row, index) {  
+            	var res = row.chsoftiIfaw+row.chsoftiInvalid+
+            	row.chsoftiInfOt+row.chsoftiInfPt+
+            	row.chsoftiInfAd+row.chsoftiInfTravel+
+            	row.chsoftiInfEquipment+row.chsoftiInfSub;
+            	return res;
+            	//计算后的值赋给字段
+            	row.chsoftiInfTotal=res;
+            }
         },
         {
-            field: 'chsoftiInfCurrent',
+            field: 'chsoftiInfCurrent',//当月有效收入=月收入合计-无效工时收入
             title: 'InfCurrent',
-            sortable: true
+            sortable: true,
+            formatter: function (value, row, index) {  
+            	var res = row.chsoftiInfTotal-row.chsoftiInvalid;
+            	//计算后的值赋给字段
+            	row.chsoftiInfCurrent=res;
+            	return res;
+            }
         },
         {
-            field: 'chsoftiEffectiveNr',
+            field: 'chsoftiEffectiveNr',//有效NR=当月有效收入/1.06
             title: 'EffectiveNr',
-            sortable: true
+            sortable: true,
+            formatter: function (value, row, index) {  
+            	var res = row.chsoftiInfCurrent/1.06;
+            	//计算后的值赋给字段
+            	//row.chsoftiEffectiveNr=res;
+            	return res;
+            }
         },
         {
-            field: 'chsoftiEffectiveSt',
+            field: 'chsoftiEffectiveSt',//当月有效人力=中软实际工时/中软月标准工时
             title: 'EffectiveSt',
-            sortable: true
+            sortable: true,
+            formatter: function (value, row, index) {  
+            	var res = row.chsoftiIfaw/1;
+            	//计算后的值赋给字段
+            	row.chsoftiEffectiveSt=res;
+            	return res;
+            }
         },
         {
-            field: 'chsoftiInvalidSt',
+            field: 'chsoftiInvalidSt',//当月无效人力=中软无效工时/中软月标准工时
             title: 'InvalidSt',
-            sortable: true
+            sortable: true,
+            formatter: function (value, row, index) {  
+            	var res = row.chsoftiInvalid/1;
+            	//计算后的值赋给字段
+            	row.chsoftiInvalidSt=res;
+            	return res;
+            }
         }
         /*{
             field:'id',
@@ -249,7 +334,8 @@ function loadOfflineOperList(){
             valign: 'middle'
         }*/],
         onEditableSave: function (field, row, oldValue, $el) {
-        	console.log(row);
+        	//console.log(row);
+        	//console.log(oldValue);
             $.ajax({
                 type: "POST",
                 url: path+"/service/offlineOper/save",
@@ -258,7 +344,8 @@ function loadOfflineOperList(){
                 dataType: 'JSON',
                 success: function (data, status) {
                     if (data == "0") {
-                        alert('提交数据成功');
+                    	//刷新表格
+                    	$('#OfflineOperList').bootstrapTable('refresh');  
                     }
                 },
                 error: function () {
@@ -273,12 +360,12 @@ function loadOfflineOperList(){
         onLoadSuccess: function () {
         },
         onLoadError: function () {
-            //showTips("数据加载失败！");
+        	
         },
         onDblClickRow: function (row, $element) {
-            //var id = row.ID;
-           // EditViewById(id, 'view');
+           
         },
+        
     });
 }
 
@@ -295,3 +382,4 @@ function search(){
 	//刷新表格  
     $('#OfflineOperList').bootstrapTable('refresh',queryParams);  
 }
+
