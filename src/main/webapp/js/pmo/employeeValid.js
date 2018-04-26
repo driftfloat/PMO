@@ -200,7 +200,7 @@ $(document).ready(function() {
                           message: 'Please enter correct Email'
                       },
                       stringLength: {
-                          max: 32,
+                          max: 100,
                           message: 'Exceeded the maxLength'
                       },
                       
@@ -361,7 +361,7 @@ $(document).ready(function() {
                     	message:'Email address is incorrect'
                     },
                     stringLength: {
-                        max: 32,
+                        max: 100,
                         message: 'Exceeded the maxLength'
                     },
                 }
