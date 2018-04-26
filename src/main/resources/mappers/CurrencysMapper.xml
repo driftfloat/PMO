@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pmo.dashboard.dao.CurrencysMapper" >
+  <resultMap id="BaseResultMap" type="com.pmo.dashboard.entity.Currencys" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PLACE_WORK" property="placeWork" jdbcType="VARCHAR" />
+    <result column="CURRENCY" property="currency" jdbcType="VARCHAR" />
+    <result column="EX_RATE" property="exRate" jdbcType="DECIMAL" />
+    <result column="MONTH" property="month" jdbcType="VARCHAR" />
+    <result column="YEAR" property="year" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="queryCurrency" parameterType="com.pmo.dashboard.entity.Currencys" resultMap="BaseResultMap">
+    select ID, PLACE_WORK, CURRENCY, EX_RATE, MONTH, YEAR
+    from t_currency
+    where YEAR = #{year} and MONTH = #{month} and PLACE_WORK = #{placeWork}
+  </select>
+  
+</mapper>

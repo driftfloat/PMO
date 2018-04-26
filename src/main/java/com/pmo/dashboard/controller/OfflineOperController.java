@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,6 +25,7 @@ import com.github.pagehelper.PageInfo;
 import com.pmo.dashboard.entity.OfflineOper;
 import com.pmo.dashboard.entity.PageCondition;
 import com.pmo.dashboard.entity.User;
+import com.pmo.dashboard.util.ExportExcel;
 import com.pom.dashboard.service.CSDeptService;
 import com.pom.dashboard.service.EmployeeService;
 import com.pom.dashboard.service.OfflineOperService;
@@ -80,5 +84,22 @@ public class OfflineOperController {
 		User user = (User) request.getSession().getAttribute("loginUser");
 		boolean rtn = offlineOperService.save(offlineOper,user);
 		return objectMapper.writeValueAsString( rtn? "0" : "-1");
+	}
+	
+	@RequestMapping(value= {"/export"})
+	public String export(HttpServletRequest request) throws JsonProcessingException{
+		User user = (User) request.getSession().getAttribute("loginUser");
+//		boolean rtn = offlineOperService.save(offlineOper,user);
+//		return objectMapper.writeValueAsString( rtn? "0" : "-1");
+		
+		ApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext()) ;
+		ExportExcel exportExcel = (ExportExcel)context.getBean(ExportExcel.class);
+		String fileName = exportExcel.getExportFile() ;
+//		System.out.println(fileName);
+		
+		List<String[]> dataList = exportExcel.exportData(); 
+		String sheetName = "过程数据" ;
+		exportExcel.export(dataList, fileName, sheetName);
+		return "export";
 	}
 }
