@@ -29,7 +29,7 @@ public class OfflineOper {
 
     private String year;					//年份
 
-    private BigDecimal chsoftiMskHours;		//中软月标准工时
+    private BigDecimal chsoftiMskHours = BigDecimal.ZERO ;		//中软月标准工时
 
     private BigDecimal chsoftiAwHours;		//中软实际工时
 
@@ -41,15 +41,15 @@ public class OfflineOper {
 
     private BigDecimal chsoftiApwHours;		//中软调整上月工时
 
-    private BigDecimal chsoftiIfaw;			//实际工时收入
+    private BigDecimal chsoftiIfaw = BigDecimal.ZERO ;			//实际工时收入
 
-    private BigDecimal chsoftiInvalid;		//无效工时收入
+    private BigDecimal chsoftiInvalid = BigDecimal.ZERO ;		//无效工时收入
 
-    private BigDecimal chsoftiInfOt;		//加班费工时收入
+    private BigDecimal chsoftiInfOt = BigDecimal.ZERO ;		//加班费工时收入
 
-    private BigDecimal chsoftiInfPt;		//调休工时收入
+    private BigDecimal chsoftiInfPt = BigDecimal.ZERO ;		//调休工时收入
 
-    private BigDecimal chsoftiInfAd;		//调整上月工时收入
+    private BigDecimal chsoftiInfAd = BigDecimal.ZERO ;		//调整上月工时收入
 
     private BigDecimal chsoftiInfTravel;	//差旅收入
 
@@ -57,19 +57,21 @@ public class OfflineOper {
 
     private BigDecimal chsoftiInfSub;		//分包收入
 
-    private BigDecimal chsoftiInfTotal;		//月收入合计
+    private BigDecimal chsoftiInfTotal = BigDecimal.ZERO ;		//月收入合计
 
-    private BigDecimal chsoftiInfCurrent;	//当月有效收入
+    private BigDecimal chsoftiInfCurrent = BigDecimal.ZERO ;	//当月有效收入
 
-    private BigDecimal chsoftiEffectiveNr;	//有效NR
+    private BigDecimal chsoftiEffectiveNr = BigDecimal.ZERO ;	//有效NR
 
-    private BigDecimal chsoftiEffectiveSt;	//当月有效人力
+    private BigDecimal chsoftiEffectiveSt = BigDecimal.ZERO ;	//当月有效人力
 
-    private BigDecimal chsoftiInvalidSt;	//当月无效人力
+    private BigDecimal chsoftiInvalidSt = BigDecimal.ZERO ;	//当月无效人力
 
     private String remark;					//备注
     
     private String[] ids;
+    
+    private String billRate;  
 
     public String getId() {
         return id;
@@ -333,6 +335,14 @@ public class OfflineOper {
 
 	public void setIds(String[] ids) {
 		this.ids = ids;
+	}
+
+	public String getBillRate() {
+		return billRate;
+	}
+
+	public void setBillRate(String billRate) {
+		this.billRate = billRate;
 	}
 
 }

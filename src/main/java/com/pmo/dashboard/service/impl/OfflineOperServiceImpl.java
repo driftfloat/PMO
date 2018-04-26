@@ -2,8 +2,10 @@ package com.pmo.dashboard.service.impl;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -139,6 +141,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 		}
 		for(OfflineOper offlineOper :rtn) {
 			workHour(offlineOper);
+			offlineOper.setBillRate(employeeMapper.getBillRate(employeeMapper.queryEmployeeById(offlineOper.getEmployeeId())));
 		}
 		return rtn ;
 	}
@@ -148,14 +151,14 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 		if(!"5".equals(user.getUserType())) { // ! RM
 			offlineOper.setOperatorId(user.getUserId());
 		}
-//		if(StringUtils.isBlank(offlineOper.getRmName())) { 
-//			Map<String, Object> userMap = new HashMap<String, Object>();
-//			userMap.put("userid", offlineOper.getRmId());
-//			List<User> users = userMapper.getUser(userMap);
-//			if(users.size()>0) {
-//				offlineOper.setRmName(users.get(0).getNickname());  // userName 是 EHR，中文名是 NICKNAME
-//			}
-//		} 
+		if(StringUtils.isBlank(offlineOper.getRmName())) { 
+			Map<String, Object> userMap = new HashMap<String, Object>();
+			userMap.put("userid", offlineOper.getRmId());
+			List<User> users = userMapper.getUser(userMap);
+			if(users.size()>0) {
+				offlineOper.setRmName(users.get(0).getNickname());  // userName 是 EHR，中文名是 NICKNAME
+			}
+		} 
 		
 		offlineOper = workHour(offlineOper);
 		Employee employee = employeeMapper.queryEmployeeById(offlineOper.getEmployeeId()) ;
@@ -276,6 +279,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 
 	@Override
 	public void export(User user) {
+		final int COLUMNS = 37 ; // 37列
 		XSSFWorkbook workBook = new XSSFWorkbook();
 	    XSSFSheet sheet = workBook.createSheet();
 	    workBook.setSheetName(0,"过程数据");

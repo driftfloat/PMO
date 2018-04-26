@@ -6,22 +6,17 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
+import com.pmo.dashboard.dao.CurrencysMapper;
 import com.pmo.dashboard.dao.OfflineOperMapper;
+import com.pmo.dashboard.entity.Currencys;
 import com.pmo.dashboard.entity.OfflineOper;
 import com.pmo.dashboard.entity.User;
 import com.pom.dashboard.service.OfflineOperService;
@@ -42,6 +37,9 @@ public class TestOfflineOperService {
 	@Resource
 	private OfflineOperMapper offlineOperMapper;
 	
+	@Resource
+	private CurrencysMapper currencysMapper;
+	
 	private ObjectMapper objectMapper = new ObjectMapper();  
 
 //	@Before
@@ -54,7 +52,7 @@ public class TestOfflineOperService {
 //		mockMvc.perform(MockMvcRequestBuilders.get("/offlineOper/query").param("pageNumber", "1")).andReturn();
 //	}
 	
-	
+//	@Test
 	public void queryByRM() {
 		OfflineOper condition = new OfflineOper();
 		condition.seteHr("E000834441");
@@ -74,7 +72,7 @@ public class TestOfflineOperService {
 //		user.setUserId("1573"); // 风控数据事业部  潘亮
 		user.setBu("风控数据事业部");
 		
-		List<OfflineOper> list = offlineOperService.query(condition, user, PAGESIZE, PAGENUMBER) ;
+		List<OfflineOper> list = offlineOperService.query(condition, user, 2 << 16 , PAGENUMBER) ; //PAGESIZE
 		PageInfo<OfflineOper> page = new PageInfo(list);
 		
 		System.out.println(list.size());
@@ -124,7 +122,7 @@ public class TestOfflineOperService {
 		System.out.println(objectMapper.writeValueAsString(o));
 	}
 	
-	private static void initOfflineOper(OfflineOper data) {
+	private static void initOfflineOper(OfflineOper data,User user) {
 		data.setYear(YEAR);
 		data.setMonth(MONTH);
 		data.setStaffName("白世铭");
@@ -143,21 +141,36 @@ public class TestOfflineOperService {
 		data.setRemark("test");
 	}
 	
-	@Test
+//	@Test
+//	public void queryCurrency() {
+//		Currencys c = new Currencys();
+//		c.setYear(YEAR);
+//		c.setMonth(""+3);
+//		c.setPlaceWork("HK");
+//		c = currencysMapper.queryCurrency(c) ; 
+//		System.out.println(c.getExRate());
+//	}
+	
+
 	public void save() {
 		OfflineOper data = new OfflineOper();
-		data.setStaffName("白世铭");
+		
+//		data.setStaffName("白世铭");
+		data.setEmployeeId("04fcb811aeae4808bb303aaf2cabba52");  //白世铭
 		User user = new User();
 		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
-		user.setUserType("5");
-		List<OfflineOper> list =  offlineOperService.query(data, user, PAGESIZE , PAGENUMBER) ;
+		
+//		E000814351
+		
+		
+		List<OfflineOper> list =  offlineOperService.query(data, user, PAGESIZE , PAGENUMBER) ; //
 		if(list.size()>0) {
 			offlineOperService.delete(list.get(0).getId());
 		}
-		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
-////		user.setUserId("cff5fa689a2e40afa02ba2ceda914bbb");  // 梁嘉杰 9
-//		user.setUserId("20f1aeff297d49d4b3c42877687a7076");  // 张盛  9,12
-		user.setUserType("5");
+//		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
+//////		user.setUserId("cff5fa689a2e40afa02ba2ceda914bbb");  // 梁嘉杰 9
+////		user.setUserId("20f1aeff297d49d4b3c42877687a7076");  // 张盛  9,12
+//		user.setUserType("5");
 		
 //		user.setUserType("3");  
 ////		user.setUserId("c7b38226545c45e598f16a33031f85aa"); // c7b38226545c45e598f16a33031f85aa 李佳洲
@@ -167,7 +180,7 @@ public class TestOfflineOperService {
 ////		user.setUserId("1573"); // 风控数据事业部  潘亮
 //		user.setBu("风控数据事业部");
 		
-		initOfflineOper(data);
+		initOfflineOper(data,user);
 		System.out.println(offlineOperService.save(data, user));
 		
 	}
