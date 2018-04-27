@@ -70,7 +70,7 @@ var path='<%=path%>';
                              </div>
                              <!-- 工具栏  -->
                              <div id="toolbar" class="btn-group">
-                               <button id="btn_add" type="button" onclick="export()" class="btn btn-default">
+                               <button id="btn_add" type="button" onclick="exportData()" class="btn btn-default">
                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Export
                                </button>
                              </div>
