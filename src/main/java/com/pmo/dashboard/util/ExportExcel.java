@@ -11,18 +11,24 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Color;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.pmo.dashboard.dao.CurrencysMapper;
+import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.Currencys;
 import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.OfflineOper;
@@ -34,8 +40,6 @@ import com.pom.dashboard.service.UserService;
 
 @Component
 public class ExportExcel {
-	private static final int PAGESIZE = 2 << 16 ;
-	
 	@Resource
 	private OfflineOperService offlineOperService;
 	
@@ -48,6 +52,23 @@ public class ExportExcel {
 	@Resource
 	private UserService userService;
 	
+	public OfflineOperService getOfflineOperService() {
+		return offlineOperService;
+	}
+	public CSDeptService getCsDeptService() {
+		return csDeptService;
+	}
+	public EmployeeService getEmployeeService() {
+		return employeeService;
+	}
+	public UserService getUserService() {
+		return userService;
+	}
+	public CurrencysMapper getCurrencysMapper() {
+		return currencysMapper;
+	}
+
+
 	@Resource
 	private CurrencysMapper currencysMapper;
 	
@@ -62,11 +83,20 @@ public class ExportExcel {
 	}
 	
 	private String toValue(BigDecimal b) {
-		
-		return (null == b)? "0.00" : b.toPlainString() ;
+		if(null == b) {
+			return "";
+		}else if(BigDecimal.ZERO.compareTo(b)==0){
+			return "";
+		}
+		return (null == b)? "" : b.toPlainString() ;
 	}
 	
-	public List<String[]> exportData() {
+	public String export(String sheetName, User user ) {
+		List<String[]> dataList = exportData(user);
+		return exportExcel(dataList, exportFile, sheetName);
+	}
+	
+	private List<String[]> exportData(User user) {
 		List<String[]> dataList = new ArrayList<String[]>();
 		String[] cellTitle = { "月份", "业务线", "事业部", "执行交付部", "项目类型", "员工E-HR编码", "员工姓名", "项目编号", "项目名称", "工作地" 
 				,"技能", "级别", "币种", "当月汇率", "员工单价（h）-原币种", "月标准工时", "实际工时", "无效工时", "加班费工时", "调休工时"
@@ -74,30 +104,25 @@ public class ExportExcel {
 				,"差旅收入-收入5", "付费设备收入-收入6", "分包收入-收入7", "当月收入合计-原币种", "当月收入合计-RMB", "当月有效收入", "有效NR-与月滚一致"
 				, "当月有效人力", "当月无效人力", "RM", "备注"  };
 		dataList.add(cellTitle);
-		String[] row = new String[cellTitle.length];
+		
 		
 		OfflineOper condition = new OfflineOper();
-		condition.seteHr("E000834441");
+//		condition.seteHr("E000834441");
 //		condition.setStaffName("白世铭");
-		User user = new User();
 		
-		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
-////		user.setUserId("cff5fa689a2e40afa02ba2ceda914bbb");  // 梁嘉杰 9
-//		user.setUserId("20f1aeff297d49d4b3c42877687a7076");  // 张盛  9,12
-		user.setUserType("5");
-		
-		user = userService .queryUserById("cb00bad3f16a4e8baf450e7b88af7c4b");
-		user.setCsDept(csDeptService.queryCSDeptById(user.getCsdeptId()));
-		
-		List<OfflineOper> list = offlineOperService.query(condition, user, PAGESIZE, 1) ; //PAGESIZE
+		List<OfflineOper> list = offlineOperService.exportData(user) ; 
 		
 		for(OfflineOper o:list) {
+			String[] row = new String[cellTitle.length];
 			Employee e = employeeService.queryEmployeeById(o.getEmployeeId())  ;
+			CSDept csdept = csDeptService.queryCSDeptById(e.getCsSubDept()) ; 
+//			csDeptService.queryCSDeptById(e.getCsSubDeptName())
+			
 			Currencys currencyCondition = new Currencys();
 			currencyCondition.setYear(o.getYear());
 			currencyCondition.setMonth(o.getMonth());
-			e.getStaffLocation();
 			String staffLocation = e.getStaffLocation()  ;
+			staffLocation = ( null == staffLocation ) ? "China":staffLocation ;
 			if("China".equals(staffLocation)  ) {
 				staffLocation = "北京";
 			}else if("HK".equals(staffLocation)){
@@ -107,11 +132,17 @@ public class ExportExcel {
 			}
 			currencyCondition.setPlaceWork(staffLocation);
 			Currencys currencys = currencysMapper.queryCurrency(currencyCondition);
+			if(null == currencys) {
+				int i = 1;
+			}
+			if(null == currencys.getExRate()) {
+				currencys.setExRate(BigDecimal.ZERO);
+			}
 			
 			row[0] = o.getMonth()+"月";
 			row[1] = "汇丰业务线";
-			row[2] = user.getBu();
-			row[3] = user.getCsDept().getCsBuName();
+			row[2] = csdept == null ?"": csdept.getCsBuName();  // user.getBu() 
+			row[3] = e.getCsSubDeptName();  // e.getCsSubDeptName()  user.getCsDept().getCsSubDeptName()
 			row[4] = e.getEngagementType() ; 
 			
 			row[5] = o.geteHr();
@@ -122,7 +153,7 @@ public class ExportExcel {
 			
 			row[10] = e.getSkill();
 			row[11] = e.getRole();
-			row[12] = e.getBillingCurrency();
+			row[12] = StringUtils.isBlank(e.getBillingCurrency()) ?currencys.getCurrency():e.getBillingCurrency();
 			row[13] = toValue(currencys.getExRate());  //当月汇率
 			row[14] = e.getBillRate();
 //			
@@ -150,7 +181,16 @@ public class ExportExcel {
 			row[33] = toValue(o.getChsoftiEffectiveSt());
 			row[34] = toValue(o.getChsoftiInvalidSt());
 //			
-			row[35] = o.getRmName();
+			if(null == o.getRmName()) {
+				User rm = userService.queryUserById(e.getRmUserId());
+				if(rm != null) {
+					row[35] = rm.getNickname();
+				}
+				
+			}else {
+				row[35] = o.getRmName();
+			}
+			
 			row[36] = o.getRemark();
 			
 			dataList.add(row) ;
@@ -158,18 +198,9 @@ public class ExportExcel {
 		return dataList;
 		
 	}
-	public static void main(String[] args) throws IOException {
-		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:/conf/spring-mybatis.xml");
-		ExportExcel exportExcel = (ExportExcel)context.getBean(ExportExcel.class);
-		String fileName = exportExcel.getExportFile() ;
-//		System.out.println(fileName);
-		
-		List<String[]> dataList = exportExcel.exportData(); 
-		String sheetName = "过程数据" ;
-		exportExcel.export(dataList, fileName, sheetName);
-	}
+	
 
-	public void export(List<String[]> dataList, String fileName, String sheetName)  {
+	private String exportExcel(List<String[]> dataList, String fileName, String sheetName)  {
 		String[] cellTitle = dataList.get(0);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		String now = dateFormat.format(new Date());
@@ -187,8 +218,39 @@ public class ExportExcel {
 		workBook.setSheetName(0, sheetName);
 		// 创建表格标题行 第一行
 		XSSFRow titleRow = sheet.createRow(0);
+		titleRow.setHeightInPoints(30);
 		CellStyle style = workBook.createCellStyle();
-		style.setFillForegroundColor(IndexedColors.YELLOW.index) ;
+        style.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		style.setAlignment(HorizontalAlignment.CENTER);
+		style.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);  
+		
+		style.setBorderBottom(CellStyle.BORDER_THIN); //    BORDER_THICK BORDER_DASHED BORDER_DOUBLE
+		style.setBorderTop(CellStyle.BORDER_THIN);   
+		style.setBorderLeft(CellStyle.BORDER_THIN);   
+		style.setBorderRight(CellStyle.BORDER_THIN);  
+		
+		Font ztFont = workBook.createFont();  
+		ztFont.setFontName("微软雅黑"); 
+		ztFont.setFontHeightInPoints((short)9);
+		ztFont.setBold(true);
+		style.setFont(ztFont);                   
+		
+		CellStyle numberStyle = workBook.createCellStyle();
+//		numberStyle.setDataFormat(XSSFDataFormat  .getBuiltinFormat("0.00"));
+		numberStyle.setAlignment(HorizontalAlignment.RIGHT);
+		numberStyle.setBorderBottom(CellStyle.BORDER_THIN); //    BORDER_THICK BORDER_DASHED BORDER_DOUBLE
+		numberStyle.setBorderTop(CellStyle.BORDER_THIN);   
+		numberStyle.setBorderLeft(CellStyle.BORDER_THIN);   
+		numberStyle.setBorderRight(CellStyle.BORDER_THIN);  
+		
+		CellStyle dataStyle = workBook.createCellStyle();
+//		numberStyle.setDataFormat(XSSFDataFormat  .getBuiltinFormat("0.00"));
+		dataStyle.setAlignment(HorizontalAlignment.LEFT);
+		dataStyle.setBorderBottom(CellStyle.BORDER_THIN); //    BORDER_THICK BORDER_DASHED BORDER_DOUBLE
+		dataStyle.setBorderTop(CellStyle.BORDER_THIN);   
+		dataStyle.setBorderLeft(CellStyle.BORDER_THIN);   
+		dataStyle.setBorderRight(CellStyle.BORDER_THIN);  
 		
 		for (int i = 0; i < cellTitle.length; i++) {
 			XSSFCell cell = titleRow.createCell(i);
@@ -204,14 +266,15 @@ public class ExportExcel {
 //			row.setHeight(height);
 //			row.setRowStyle(style);
 			
-//			row.createCell(0).setCellValue(i);
-//			row.createCell(0).setCellValue(dataList.get(i)[0]);
-//			row.createCell(1).setCellValue(dataList.get(i)[1]);
-//			row.createCell(2).setCellValue(dataList.get(i)[2]);
-//			row.createCell(3).setCellValue(dataList.get(i)[3]);
-			
 			for (int j = 0; j < cellTitle.length; j++) {
-				row.createCell(j).setCellValue(dataList.get(i)[j]);
+//				row.createCell(j).setCellValue(dataList.get(i)[j]);
+				XSSFCell cell = row.createCell(j);
+				cell.setCellValue(dataList.get(i)[j]);
+				if(j>12 && j < 35 ) {
+					cell.setCellStyle(numberStyle);
+				}else {
+					cell.setCellStyle(dataStyle);
+				}
 			}
 		}
 		
@@ -221,7 +284,7 @@ public class ExportExcel {
 		
 //		sheet.setColumnWidth(1, 7.88); 
 		// 设置表格默认列宽度为15个字节
-        sheet.setDefaultColumnWidth((short) 15);
+        sheet.setDefaultColumnWidth((short) 16);
 		
 		File file = new File(/*basePath + */ exportFileName);
 		// 文件输出流
@@ -234,7 +297,8 @@ public class ExportExcel {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("导出成功！" /* + basePath */ + exportFileName);
+//		System.out.println("导出成功！" /* + basePath */ + exportFileName);
+		return exportFileName;
 	}
 
 }

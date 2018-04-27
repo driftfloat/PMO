@@ -24,5 +24,7 @@ public interface OfflineOperService {
 
 	boolean save(OfflineOper offlineOper, User user);
 	
-	void export(User user);
+//	void export(User user);
+
+	List<OfflineOper> exportData(User user);
 }

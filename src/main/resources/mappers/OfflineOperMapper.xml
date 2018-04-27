@@ -174,6 +174,25 @@
 	 </foreach>
     ORDER BY o.e_hr DESC
   </select>
+  <select id="queryAllStaff" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" >
+    select 
+    <include refid="Left_Column_List" />
+    , o.REMARK
+    FROM t_employee z1 LEFT JOIN(
+    select * from t_offline_oper 
+    where 1=1 
+    <if test="year != null and year != ''">
+		AND YEAR = YEAR(NOW())
+	</if>
+	<if test="month != null and month != ''">
+		AND MONTH = MONTH(NOW())
+	</if>
+	) o
+	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
+   WHERE 1=1 
+     AND z1.RESOURCE_STATUS='Active' 
+    ORDER BY o.e_hr DESC
+  </select>
   
   <resultMap id="ResultMap_offline_employee" type="com.pmo.dashboard.entity.OfflineOper" >
     <result column="E_HR" property="eHr" jdbcType="VARCHAR" />
