@@ -9,7 +9,7 @@ function loadOfflineOperList(){
 	
     var queryUrl = path+'/service/offlineOper/query';
 	//var queryUrl = path+'/json/test.json';
-    var table = $('#OfflineOperList').bootstrapTable('destroy').bootstrapTable({
+    var table = $('#OfflineOperList').bootstrapTable({
         url: queryUrl,                      //请求后台的URL（*）
         method: 'GET',                      //请求方式（*）
         toolbar: '#toolbar',              //工具按钮用哪个容器
@@ -208,10 +208,10 @@ function loadOfflineOperList(){
             	if(row.chsoftiAwHours==null){
             		return 0;
             	}
-            	var res = parseFloat(120)*parseFloat(row.chsoftiAwHours);
+            	var res = parseFloat(row.billRate)*parseFloat(row.chsoftiAwHours);
             	//计算后的值赋给字段
             	row.chsoftiIfaw=res;
-            	return res;
+            	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
             }
         },
         {
@@ -222,10 +222,10 @@ function loadOfflineOperList(){
             	if(row.chsoftiIwHours==null){
             		return 0;
             	}
-            	var res = parseFloat(120)*parseFloat(row.chsoftiIwHours);
+            	var res = parseFloat(row.billRate)*parseFloat(row.chsoftiIwHours);
             	//计算后的值赋给字段
             	row.chsoftiInvalid=res;
-            	return res;
+            	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
             }
         },
         {
@@ -236,10 +236,10 @@ function loadOfflineOperList(){
             	if(row.chsoftiOtHours==null){
             		return 0;
             	}
-            	var res = parseFloat(120)*parseFloat(row.chsoftiOtHours);
+            	var res = parseFloat(row.billRate)*parseFloat(row.chsoftiOtHours);
             	//计算后的值赋给字段
             	row.chsoftiInfOt=res;
-            	return res;
+            	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
             }
         },
         {
@@ -250,10 +250,10 @@ function loadOfflineOperList(){
             	if(row.chsoftiToHours==null){
             		return 0;
             	}
-            	var res = parseFloat(120)*parseFloat(row.chsoftiToHours);
+            	var res = parseFloat(row.billRate)*parseFloat(row.chsoftiToHours);
             	//计算后的值赋给字段
             	row.chsoftiInfPt=res;
-            	return res;
+            	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
             }
         },
         {
@@ -264,10 +264,10 @@ function loadOfflineOperList(){
             	if(row.chsoftiApwHours==null){
             		return 0;
             	}
-            	var res = parseFloat(120)*parseFloat(row.chsoftiApwHours);
+            	var res = parseFloat(row.billRate)*parseFloat(row.chsoftiApwHours);
             	//计算后的值赋给字段
             	row.chsoftiInfAd=res;
-            	return res;
+            	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
             }
         },
         {
@@ -279,9 +279,10 @@ function loadOfflineOperList(){
             	row.chsoftiInfOt+row.chsoftiInfPt+
             	row.chsoftiInfAd+row.chsoftiInfTravel+
             	row.chsoftiInfEquipment+row.chsoftiInfSub;
-            	return res;
             	//计算后的值赋给字段
             	row.chsoftiInfTotal=res;
+            	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
+            	
             }
         },
         {
@@ -289,10 +290,13 @@ function loadOfflineOperList(){
             title: 'InfCurrent',
             sortable: true,
             formatter: function (value, row, index) {  
+            	if(row.chsoftiInfTotal==null){
+            		return 0;
+            	}
             	var res = row.chsoftiInfTotal-row.chsoftiInvalid;
             	//计算后的值赋给字段
             	row.chsoftiInfCurrent=res;
-            	return res;
+            	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
             }
         },
         {
@@ -300,10 +304,14 @@ function loadOfflineOperList(){
             title: 'EffectiveNr',
             sortable: true,
             formatter: function (value, row, index) {  
+            	if(row.chsoftiInfCurrent==null){
+            		return 0;
+            	}
             	var res = row.chsoftiInfCurrent/1.06;
+            	var res_temp = Math.floor(res * 100) / 100;
             	//计算后的值赋给字段
-            	//row.chsoftiEffectiveNr=res;
-            	return res;
+            	row.chsoftiEffectiveNr=res_temp;
+            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
             }
         },
         {
@@ -311,10 +319,14 @@ function loadOfflineOperList(){
             title: 'EffectiveSt',
             sortable: true,
             formatter: function (value, row, index) {  
-            	var res = row.chsoftiIfaw/1;
+            	if(row.chsoftiIfaw==null){
+            		return 0;
+            	}
+            	var res = row.chsoftiIfaw/row.chsoftiMskHours;
+            	var res_temp = Math.floor(res * 100) / 100;
             	//计算后的值赋给字段
-            	row.chsoftiEffectiveSt=res;
-            	return res;
+            	row.chsoftiEffectiveSt=res_temp;
+            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
             }
         },
         {
@@ -322,10 +334,14 @@ function loadOfflineOperList(){
             title: 'InvalidSt',
             sortable: true,
             formatter: function (value, row, index) {  
-            	var res = row.chsoftiInvalid/1;
+            	if(row.chsoftiInvalid==null){
+            		return 0;
+            	}
+            	var res = row.chsoftiInvalid/row.chsoftiMskHours;
+            	var res_temp = Math.floor(res * 100) / 100;
             	//计算后的值赋给字段
-            	row.chsoftiInvalidSt=res;
-            	return res;
+            	row.chsoftiInvalidSt=res_temp;
+            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
             }
         }
         /*{
@@ -337,7 +353,17 @@ function loadOfflineOperList(){
         }*/],
         onEditableSave: function (field, row, oldValue, $el) {
         	//console.log(row);
-        	//console.log(oldValue);
+        	//获取当前页数据
+        	var currentData = $('#OfflineOperList').bootstrapTable('getData');
+        	for(var i=0;i<currentData.length;i++){
+        		//比对数据获取行号
+        		if(currentData[i]==row){
+        			//中软实际工时有变动
+        			if(field=="chsoftiAwHours"){
+        				upCell(i,"chsoftiIfaw",row.chsoftiIfaw)
+        			}
+        		}
+        	}
             $.ajax({
                 type: "POST",
                 url: path+"/service/offlineOper/save",
@@ -346,8 +372,7 @@ function loadOfflineOperList(){
                 dataType: 'JSON',
                 success: function (data, status) {
                     if (data == "0") {
-                    	//刷新表格
-                    	$('#OfflineOperList').bootstrapTable('refresh');  
+                    	
                     }
                 },
                 error: function () {
@@ -360,13 +385,14 @@ function loadOfflineOperList(){
             });
         },
         onLoadSuccess: function () {
+        	
         },
         onLoadError: function () {
         	
         },
         onDblClickRow: function (row, $element) {
            
-        },
+        }
         
     });
 }
@@ -383,5 +409,20 @@ function search(){
     }  
 	//刷新表格  
     $('#OfflineOperList').bootstrapTable('refresh',queryParams);  
+}
+
+//更新指定单元格数据
+function upCell(index,field,value){
+	var cellValue = {
+            index : index,  //更新列所在行的索引
+            field : field, //要更新列的field
+            value : value //要更新列的数据
+        }//更新表格数据        
+    $('#OfflineOperList').bootstrapTable("updateCell",cellValue);
+}
+
+//导出
+function exportData(){
+	alert("导出");
 }
 
