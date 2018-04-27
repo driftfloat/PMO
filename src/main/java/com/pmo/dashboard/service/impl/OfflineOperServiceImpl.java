@@ -87,7 +87,62 @@ public class OfflineOperServiceImpl implements OfflineOperService {
         }
 		return false;
 	}
+	
+//	@Override
+//	public void export(User user) {
+//		final int COLUMNS = 37 ; // 37列
+//		XSSFWorkbook workBook = new XSSFWorkbook();
+//	    XSSFSheet sheet = workBook.createSheet();
+//	    workBook.setSheetName(0,"过程数据");
+//	    XSSFRow titleRow = sheet.createRow(0);
+//	    
+//		if("5".equals(user.getUserType())) { // RM
+//			
+//		}else if("3".equals(user.getUserType())) {  // 交付部经理
+//			
+//		}else if("1".equals(user.getUserType())){ // 事业部经理
+//			
+//		}
+//	}
 
+	@Override
+	public List<OfflineOper> exportData(User user) {
+		OfflineOper condition = new OfflineOper() ;
+		List<OfflineOper> rtn = null ;
+		Set<User> rmSet = new HashSet();
+		if("5".equals(user.getUserType())) { // RM
+			condition.setRmId(user.getUserId());
+			rtn = offlineOperMapper.queryByRM(condition) ;
+		}else if("3".equals(user.getUserType())) {  // 交付部经理
+			List<CSDept> csDepts = csDeptMapper.queryCSDeptByIds(user.getCsdeptId().split(","));  // 交付部经理所在的部门
+			int index = 0;
+			String[] ids = new String[csDepts.size()] ;
+			for(CSDept d :csDepts ) {
+				ids[index] = d.getCsSubDeptId() ;
+				index++ ;
+			}
+			condition.setIds(ids);
+			rtn = offlineOperMapper.queryBySubDept(condition) ;
+		}else if("1".equals(user.getUserType())){ // 事业部经理
+			List<CSDept> csDepts = csDeptMapper.queryCSSubDeptNameByCsBuName(user.getBu());  // csBuName 根据事业部名称查
+			int index = 0;
+			String[] ids = new String[csDepts.size()] ;
+			for(CSDept d :csDepts ) {
+				ids[index] = d.getCsSubDeptId() ;
+				index++ ;
+			}
+			condition.setIds(ids);
+			rtn = offlineOperMapper.queryByDept(condition) ;
+		}else if("0".equals(user.getUserType())) { // admin
+			rtn = offlineOperMapper.queryAllStaff(condition) ;
+		}
+		for(OfflineOper offlineOper :rtn) {
+			workHour(offlineOper);
+			offlineOper.setBillRate(employeeMapper.getBillRate(employeeMapper.queryEmployeeById(offlineOper.getEmployeeId())));
+		}
+		return rtn ;
+	}
+	
 	@Override
 	public List<OfflineOper> query(OfflineOper condition, User user,int pageSize,int pageNumber) {
 		//1. count
@@ -275,24 +330,6 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			offlineOper.setChsoftiMskHours( workHourMapper.queryWorkHour(workHour)); 
 		}
 		return offlineOper;
-	}
-
-	@Override
-	public void export(User user) {
-		final int COLUMNS = 37 ; // 37列
-		XSSFWorkbook workBook = new XSSFWorkbook();
-	    XSSFSheet sheet = workBook.createSheet();
-	    workBook.setSheetName(0,"过程数据");
-	    XSSFRow titleRow = sheet.createRow(0);
-	    
-		if("5".equals(user.getUserType())) { // RM
-			
-		}else if("3".equals(user.getUserType())) {  // 交付部经理
-			
-		}else if("1".equals(user.getUserType())){ // 事业部经理
-			
-		}
-			
 	}
 
 }

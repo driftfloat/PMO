@@ -16,10 +16,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import com.pmo.dashboard.dao.CurrencysMapper;
 import com.pmo.dashboard.dao.OfflineOperMapper;
-import com.pmo.dashboard.entity.Currencys;
+import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.OfflineOper;
 import com.pmo.dashboard.entity.User;
+import com.pom.dashboard.service.EmployeeService;
 import com.pom.dashboard.service.OfflineOperService;
+import com.pom.dashboard.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -38,6 +40,12 @@ public class TestOfflineOperService {
 	private OfflineOperMapper offlineOperMapper;
 	
 	@Resource
+    private EmployeeService employeeService;
+	
+	@Resource
+	private UserService userService;
+	
+	@Resource
 	private CurrencysMapper currencysMapper;
 	
 	private ObjectMapper objectMapper = new ObjectMapper();  
@@ -47,12 +55,10 @@ public class TestOfflineOperService {
 //		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 //	}
 	
-//	@Test
 //	public void testPage() throws Exception {
 //		mockMvc.perform(MockMvcRequestBuilders.get("/offlineOper/query").param("pageNumber", "1")).andReturn();
 //	}
 	
-//	@Test
 	public void queryByRM() {
 		OfflineOper condition = new OfflineOper();
 		condition.seteHr("E000834441");
@@ -81,7 +87,7 @@ public class TestOfflineOperService {
 	}
 	
 	
-	public void testRWCount() {
+	public void rmCount() {
 		OfflineOper condition = new OfflineOper();
 		condition.setYear(YEAR); 
 		condition.setMonth(MONTH);
@@ -122,16 +128,19 @@ public class TestOfflineOperService {
 		System.out.println(objectMapper.writeValueAsString(o));
 	}
 	
-	private static void initOfflineOper(OfflineOper data,User user) {
+	private void initOfflineOper(OfflineOper data,User user) {
+		Employee e = employeeService.queryEmployeeById(data.getEmployeeId()) ;
+		user = userService.queryUserById(user.getUserId()) ; 
+		
 		data.setYear(YEAR);
 		data.setMonth(MONTH);
-		data.setStaffName("白世铭");
-		data.seteHr("E000834441");
-		data.setEmployeeId("04fcb811aeae4808bb303aaf2cabba52");
-		data.setCsSubdeptId("12");
-		data.setRmId("cb00bad3f16a4e8baf450e7b88af7c4b");
+		data.setStaffName(e.getStaffName());
+		data.seteHr(e.geteHr());
+		data.setEmployeeId(e.getEmployeeId());
+		data.setCsSubdeptId(e.getCsSubDept());
+		data.setRmId(user.getUserId());
 		data.setChsoftiAwHours(new BigDecimal("133"));
-		data.setChsoftiIwHours(new BigDecimal("27"));
+		data.setChsoftiIwHours(new BigDecimal("19")); // 27 19
 		data.setChsoftiOtHours(new BigDecimal("8"));
 		data.setChsoftiToHours(new BigDecimal("9"));
 		data.setChsoftiApwHours(new BigDecimal("10"));
@@ -141,7 +150,6 @@ public class TestOfflineOperService {
 		data.setRemark("test");
 	}
 	
-//	@Test
 //	public void queryCurrency() {
 //		Currencys c = new Currencys();
 //		c.setYear(YEAR);
@@ -152,16 +160,21 @@ public class TestOfflineOperService {
 //	}
 	
 
+	@Test
 	public void save() {
 		OfflineOper data = new OfflineOper();
 		
+//		data.setEmployeeId("04fcb811aeae4808bb303aaf2cabba52");  //白世铭
 //		data.setStaffName("白世铭");
-		data.setEmployeeId("04fcb811aeae4808bb303aaf2cabba52");  //白世铭
+//		User user = new User();
+//		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
+//		user.setUserType("5");
+		
+		data.setEmployeeId("1004");  // 王廣智
+		data.setStaffName(" 王廣智");
 		User user = new User();
-		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
-		
-//		E000814351
-		
+		user.setUserId("a42f87d13fff455da434649ab3c8f876");  // 叶海伦  
+		user.setUserType("5");
 		
 		List<OfflineOper> list =  offlineOperService.query(data, user, PAGESIZE , PAGENUMBER) ; //
 		if(list.size()>0) {

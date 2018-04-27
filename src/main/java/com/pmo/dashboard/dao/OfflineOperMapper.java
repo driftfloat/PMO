@@ -42,6 +42,14 @@ public interface OfflineOperMapper {
   List<OfflineOper> queryByDept(OfflineOper condition);
   
   /**
+   * 根据：年份、月份、两个条件在线下运营提交表去查询
+   * @param condition
+   * @return
+   */
+  List<OfflineOper> queryAllStaff(OfflineOper condition);
+  
+  
+  /**
    * 根据：年份、月份、RM_ID、三个条件在线下运营提交表去count查询
    * RM count
    */
