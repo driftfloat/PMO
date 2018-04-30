@@ -154,6 +154,17 @@ $(document).ready(function() {
 
                 }
             },
+            chsoftiProStartDate1: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select chsoftiProStartDate'
+                    },
+                    date : {
+                        format : 'YYYY-MM-DD',
+                        message : 'Time format is incorrect'
+                    }
+                }
+            },
             sowExpiredDate1: {
                 validators: {
                     notEmpty: {
@@ -433,6 +444,17 @@ $(document).ready(function() {
                     message : 'Time format is incorrect'  
                 }
 
+            }
+        },
+        chsoftiProStartDate1: {
+            validators: {
+                notEmpty: {
+                    message: 'Please select chsoftiProStartDate'
+                },
+                date : {
+                    format : 'YYYY-MM-DD',
+                    message : 'Time format is incorrect'
+                }
             }
         },
         terminatedDate1: {

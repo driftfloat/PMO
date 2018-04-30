@@ -207,7 +207,7 @@ public class ExportExcel {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		String now = dateFormat.format(new Date());
 		// 导出文件路径
-//		String basePath = "t:/";
+		//String basePath = "D:/";
 		// 文件名
 		String exportFileName = fileName +"_" + LocalDateTime.now().toString().replace(":", "") + ".xlsx";
 
@@ -301,7 +301,7 @@ public class ExportExcel {
 		// 设置表格默认列宽度为15个字节
         sheet.setDefaultColumnWidth((short) 16);
 		
-		File file = new File(/*basePath + */ exportFileName);
+		File file = new File(exportFileName);
 		// 文件输出流
 		try {
 			FileOutputStream outStream = new FileOutputStream(file);
