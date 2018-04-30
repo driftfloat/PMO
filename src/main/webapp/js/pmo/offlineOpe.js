@@ -206,7 +206,7 @@ function loadOfflineOperList(){
             sortable: true,
             formatter: function (value, row, index) {  
             	if(row.chsoftiAwHours==null){
-            		return 0;
+            		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
             	var res = parseFloat(row.billRate)*parseFloat(row.chsoftiAwHours);
             	//计算后的值赋给字段
@@ -220,7 +220,7 @@ function loadOfflineOperList(){
             sortable: true,
             formatter: function (value, row, index) {  
             	if(row.chsoftiIwHours==null){
-            		return 0;
+            		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
             	var res = parseFloat(row.billRate)*parseFloat(row.chsoftiIwHours);
             	//计算后的值赋给字段
@@ -234,7 +234,7 @@ function loadOfflineOperList(){
             sortable: true,
             formatter: function (value, row, index) {  
             	if(row.chsoftiOtHours==null){
-            		return 0;
+            		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
             	var res = parseFloat(row.billRate)*parseFloat(row.chsoftiOtHours);
             	//计算后的值赋给字段
@@ -248,7 +248,7 @@ function loadOfflineOperList(){
             sortable: true,
             formatter: function (value, row, index) {  
             	if(row.chsoftiToHours==null){
-            		return 0;
+            		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
             	var res = parseFloat(row.billRate)*parseFloat(row.chsoftiToHours);
             	//计算后的值赋给字段
@@ -262,7 +262,7 @@ function loadOfflineOperList(){
             sortable: true,
             formatter: function (value, row, index) {  
             	if(row.chsoftiApwHours==null){
-            		return 0;
+            		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
             	var res = parseFloat(row.billRate)*parseFloat(row.chsoftiApwHours);
             	//计算后的值赋给字段
@@ -320,7 +320,7 @@ function loadOfflineOperList(){
             sortable: true,
             formatter: function (value, row, index) {  
             	if(row.chsoftiInfTotal==null){
-            		return 0;
+            		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
             	var res = parseFloat(row.chsoftiInfTotal)-parseFloat(row.chsoftiInvalid);
             	//计算后的值赋给字段
@@ -334,7 +334,7 @@ function loadOfflineOperList(){
             sortable: true,
             formatter: function (value, row, index) {  
             	if(row.chsoftiInfCurrent==null){
-            		return 0;
+            		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
             	var res = parseFloat(row.chsoftiInfCurrent)/1.06;
             	var res_temp = Math.floor(res * 100) / 100;
@@ -348,8 +348,8 @@ function loadOfflineOperList(){
             title: 'EffectiveSt',
             sortable: true,
             formatter: function (value, row, index) {  
-            	if(row.chsoftiIfaw==null){
-            		return 0;
+            	if(row.chsoftiAwHours==null){
+            		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
             	var res = parseFloat(row.chsoftiAwHours)/parseFloat(row.chsoftiMskHours);
             	var res_temp = Math.floor(res * 100) / 100;
@@ -363,8 +363,8 @@ function loadOfflineOperList(){
             title: 'InvalidSt',
             sortable: true,
             formatter: function (value, row, index) {  
-            	if(row.chsoftiInvalid==null){
-            		return 0;
+            	if(row.chsoftiIwHours==null){
+            		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
             	var res = parseFloat(row.chsoftiIwHours)/parseFloat(row.chsoftiMskHours);
             	var res_temp = Math.floor(res * 100) / 100;
