@@ -3,6 +3,7 @@ package com.pom.dashboard.service;
 import java.util.List;
 
 import com.pmo.dashboard.entity.OfflineOper;
+import com.pmo.dashboard.entity.OfflineOperCondition;
 import com.pmo.dashboard.entity.User;
 
 public interface OfflineOperService {
@@ -20,7 +21,7 @@ public interface OfflineOperService {
 //
 //    int updateByPrimaryKey(OfflineOper record);
     
-    List<OfflineOper> query(OfflineOper condition, User user,int pageSize,int pageNumber);
+    List<OfflineOper> query(OfflineOperCondition condition, User user,int pageSize,int pageNumber);
 
 	boolean save(OfflineOper offlineOper, User user);
 	

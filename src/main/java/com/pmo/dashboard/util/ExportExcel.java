@@ -5,22 +5,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Color;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFColor;
+import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -201,13 +202,14 @@ public class ExportExcel {
 	
 
 	private String exportExcel(List<String[]> dataList, String fileName, String sheetName)  {
+		int[] blues = {16,17,18,19,20,26,27,28,32};
 		String[] cellTitle = dataList.get(0);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		String now = dateFormat.format(new Date());
 		// 导出文件路径
 		//String basePath = "D:/";
 		// 文件名
-		String exportFileName = fileName +"_" + now + ".xlsx";
+		String exportFileName = fileName +"_" + LocalDateTime.now().toString().replace(":", "") + ".xlsx";
 
 		// 需要导出的数据
 		// 声明一个工作薄
@@ -219,32 +221,44 @@ public class ExportExcel {
 		// 创建表格标题行 第一行
 		XSSFRow titleRow = sheet.createRow(0);
 		titleRow.setHeightInPoints(30);
-		CellStyle style = workBook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-		style.setAlignment(HorizontalAlignment.CENTER);
-		style.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);  
+		CellStyle yellowStyle = workBook.createCellStyle();
+        yellowStyle.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
+        yellowStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		yellowStyle.setAlignment(HorizontalAlignment.CENTER);
+		yellowStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);  
 		
-		style.setBorderBottom(CellStyle.BORDER_THIN); //    BORDER_THICK BORDER_DASHED BORDER_DOUBLE
-		style.setBorderTop(CellStyle.BORDER_THIN);   
-		style.setBorderLeft(CellStyle.BORDER_THIN);   
-		style.setBorderRight(CellStyle.BORDER_THIN);  
+		yellowStyle.setBorderBottom(CellStyle.BORDER_THIN); //    BORDER_THICK BORDER_DASHED BORDER_DOUBLE
+		yellowStyle.setBorderTop(CellStyle.BORDER_THIN);   
+		yellowStyle.setBorderLeft(CellStyle.BORDER_THIN);   
+		yellowStyle.setBorderRight(CellStyle.BORDER_THIN);  
 		
-		Font ztFont = workBook.createFont();  
-		ztFont.setFontName("微软雅黑"); 
-		ztFont.setFontHeightInPoints((short)9);
-		ztFont.setBold(true);
-		style.setFont(ztFont);                   
+		Font titleFont = workBook.createFont();  
+		titleFont.setFontName("微软雅黑"); 
+		titleFont.setFontHeightInPoints((short)9);
+		titleFont.setBold(true);
+		yellowStyle.setFont(titleFont);
+		
+		CellStyle bluetyle = workBook.createCellStyle();
+		bluetyle.cloneStyleFrom(yellowStyle);
+		bluetyle.setFillForegroundColor(IndexedColors.PALE_BLUE.getIndex());  // BLUE BLUE_GREY SKY_BLUE BLUE_LIGHT
+		bluetyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		
+		Font dataFont = workBook.createFont();  
+		dataFont.setFontName("微软雅黑"); 
+		dataFont.setFontHeightInPoints((short)9);
 		
 		CellStyle numberStyle = workBook.createCellStyle();
+		numberStyle.setFont(dataFont);
 //		numberStyle.setDataFormat(XSSFDataFormat  .getBuiltinFormat("0.00"));
 		numberStyle.setAlignment(HorizontalAlignment.RIGHT);
 		numberStyle.setBorderBottom(CellStyle.BORDER_THIN); //    BORDER_THICK BORDER_DASHED BORDER_DOUBLE
 		numberStyle.setBorderTop(CellStyle.BORDER_THIN);   
 		numberStyle.setBorderLeft(CellStyle.BORDER_THIN);   
 		numberStyle.setBorderRight(CellStyle.BORDER_THIN);  
+//		numberStyle.setDataFormat(XSSFDataFormat);    // .getBuiltinFormat("0.00")
 		
 		CellStyle dataStyle = workBook.createCellStyle();
+		dataStyle.setFont(dataFont);
 //		numberStyle.setDataFormat(XSSFDataFormat  .getBuiltinFormat("0.00"));
 		dataStyle.setAlignment(HorizontalAlignment.LEFT);
 		dataStyle.setBorderBottom(CellStyle.BORDER_THIN); //    BORDER_THICK BORDER_DASHED BORDER_DOUBLE
@@ -255,11 +269,12 @@ public class ExportExcel {
 		for (int i = 0; i < cellTitle.length; i++) {
 			XSSFCell cell = titleRow.createCell(i);
 			cell.setCellValue(cellTitle[i]);
-			cell.setCellStyle(style);
+			cell.setCellStyle(yellowStyle);
+			if(ArrayUtils.contains(blues,i) ) {
+				cell.setCellStyle(bluetyle);
+			}
 		}
 		
-		
-//		style.set
 		// 插入需导出的数据
 		for (int i = 1; i < dataList.size(); i++) {
 			XSSFRow row = sheet.createRow(i);

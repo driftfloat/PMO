@@ -29,7 +29,7 @@ public class OfflineOper {
 
     private String year;					//年份
 
-    private BigDecimal chsoftiMskHours = BigDecimal.ZERO ;		//中软月标准工时
+    private BigDecimal chsoftiMskHours ;		//中软月标准工时
 
     private BigDecimal chsoftiAwHours;		//中软实际工时
 
@@ -66,6 +66,10 @@ public class OfflineOper {
     private BigDecimal chsoftiEffectiveSt = BigDecimal.ZERO ;	//当月有效人力
 
     private BigDecimal chsoftiInvalidSt = BigDecimal.ZERO ;	//当月无效人力
+    
+    private String chsoftiProNumber;
+    private String chsoftiProName;
+    private String csSubDept;
 
     private String remark;					//备注
     
@@ -343,6 +347,30 @@ public class OfflineOper {
 
 	public void setBillRate(String billRate) {
 		this.billRate = billRate;
+	}
+
+	public String getChsoftiProNumber() {
+		return chsoftiProNumber;
+	}
+
+	public void setChsoftiProNumber(String chsoftiProNumber) {
+		this.chsoftiProNumber = chsoftiProNumber;
+	}
+
+	public String getChsoftiProName() {
+		return chsoftiProName;
+	}
+
+	public void setChsoftiProName(String chsoftiProName) {
+		this.chsoftiProName = chsoftiProName;
+	}
+
+	public String getCsSubDept() {
+		return csSubDept;
+	}
+
+	public void setCsSubDept(String csSubDept) {
+		this.csSubDept = csSubDept;
 	}
 
 }

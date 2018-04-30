@@ -44,8 +44,8 @@ public class TestExportExcel {
 //		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
 ////		user.setUserId("cff5fa689a2e40afa02ba2ceda914bbb");  // 梁嘉杰 9
 //		user.setUserId("20f1aeff297d49d4b3c42877687a7076");  // 张盛  9,12
-		user.setUserId("a42f87d13fff455da434649ab3c8f876");  // 叶海伦
-		user.setUserType("5");
+//		user.setUserId("a42f87d13fff455da434649ab3c8f876");  // 叶海伦
+//		user.setUserType("5");
 		
 //		user.setUserType("3");
 //		user.setUserId("c7b38226545c45e598f16a33031f85aa");
@@ -55,8 +55,8 @@ public class TestExportExcel {
 //		user.setUserId("1573"); // 风控数据事业部  潘亮
 //		user.setBu("风控数据事业部");
 		
-//		user.setUserType("0");
-//		user.setUserId("1");
+		user.setUserType("0");
+		user.setUserId("1");
 		
 		user = userService.queryUserById(user.getUserId());
 		

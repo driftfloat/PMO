@@ -33,6 +33,11 @@
     <result column="CHSOFTI_EFFECTIVE_NR" property="chsoftiEffectiveNr" jdbcType="DECIMAL" />
     <result column="CHSOFTI_EFFECTIVE_ST" property="chsoftiEffectiveSt" jdbcType="DECIMAL" />
     <result column="CHSOFTI_INVALID_ST" property="chsoftiInvalidSt" jdbcType="DECIMAL" />
+    
+    <result property="chsoftiProNumber" column="CHSOFTI_PRO_NUMBER" javaType="String" />
+<!-- 	<result property="chsoftiProStartdate" column="CHSOFTI_PRO_STARTDATE" javaType="String" /> -->
+	<result property="chsoftiProName" column="CHSOFTI_PRO_NAME" javaType="String" />
+<!-- 	<result property="csSubDept" column="CS_SUBDEPT_ID" javaType="String" /> -->
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.pmo.dashboard.entity.OfflineOper" extends="BaseResultMap" >
     <result column="REMARK" property="remark" jdbcType="LONGVARCHAR" />
@@ -64,7 +69,7 @@
     , o.CHSOFTI_IW_HOURS, o.CHSOFTI_OT_HOURS, o.CHSOFTI_TO_HOURS, o.CHSOFTI_APW_HOURS, o.CHSOFTI_IFAW
     , o.CHSOFTI_INVALID, o.CHSOFTI_INF_OT, o.CHSOFTI_INF_PT, o.CHSOFTI_INF_AD, o.CHSOFTI_INF_TRAVEL
     , o.CHSOFTI_INF_EQUIPMENT, o.CHSOFTI_INF_SUB, o.CHSOFTI_INF_TOTAL, o.CHSOFTI_INF_CURRENT
-    , o.CHSOFTI_EFFECTIVE_NR, o.CHSOFTI_EFFECTIVE_ST, o.CHSOFTI_INVALID_ST 
+    , o.CHSOFTI_EFFECTIVE_NR, o.CHSOFTI_EFFECTIVE_ST, o.CHSOFTI_INVALID_ST , z1.CHSOFTI_PRO_NUMBER, z1.CHSOFTI_PRO_NAME
   </sql>
   <sql id="Blob_Column_List" >
     REMARK
@@ -78,7 +83,7 @@
     where ID = #{id,jdbcType=VARCHAR}
   </select>
   
-  <select id="queryByRM" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" >
+  <select id="queryByRM" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOperCondition" >
     select 
     <include refid="Left_Column_List" />
     , o.REMARK
@@ -104,10 +109,19 @@
    </if>
    <if test="eHr != null and eHr != ''">
 		AND z1.E_HR = #{eHr}
-   </if> 
+   </if>
+   <if test="proNumber != null and proNumber != ''">
+		AND z1.CHSOFTI_PRO_NUMBER = #{proNumber}
+   </if>
+   <if test="projectName != null and projectName != ''">
+		AND z1.CHSOFTI_PRO_NAME = #{projectName}
+   </if>
+   <if test="csdeptid != null and csdeptid != ''">
+		AND z1.CS_SUBDEPT_ID = #{csdeptid}
+   </if>
     ORDER BY o.e_hr DESC
   </select>
-  <select id="queryBySubDept" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" >
+  <select id="queryBySubDept" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOperCondition" >
      select 
     <include refid="Left_Column_List" />
     , o.REMARK
@@ -137,11 +151,20 @@
      AND z1.CS_SUBDEPT_ID in 
 	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
 		#{item}
-	 </foreach>
+	</foreach>
+	<if test="proNumber != null and proNumber != ''">
+		AND z1.CHSOFTI_PRO_NUMBER = #{proNumber}
+   </if>
+   <if test="projectName != null and projectName != ''">
+		AND z1.CHSOFTI_PRO_NAME = #{projectName}
+   </if>
+   <if test="csdeptid != null and csdeptid != ''">
+		AND z1.CS_SUBDEPT_ID = #{csdeptid}
+   </if>
     ORDER BY o.e_hr DESC
   </select>
   
-  <select id="queryByDept" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" >
+  <select id="queryByDept" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOperCondition" >
     select 
     <include refid="Left_Column_List" />
     , o.REMARK
@@ -172,9 +195,18 @@
 	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
 		#{item}
 	 </foreach>
+	 <if test="proNumber != null and proNumber != ''">
+		AND z1.CHSOFTI_PRO_NUMBER = #{proNumber}
+   </if>
+   <if test="projectName != null and projectName != ''">
+		AND z1.CHSOFTI_PRO_NAME = #{projectName}
+   </if>
+   <if test="csdeptid != null and csdeptid != ''">
+		AND z1.CS_SUBDEPT_ID = #{csdeptid}
+   </if>
     ORDER BY o.e_hr DESC
   </select>
-  <select id="queryAllStaff" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" >
+  <select id="queryAllStaff" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOperCondition" >
     select 
     <include refid="Left_Column_List" />
     , o.REMARK
@@ -191,6 +223,21 @@
 	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
    WHERE 1=1 
      AND z1.RESOURCE_STATUS='Active' 
+   <if test="staffName != null and staffName != ''">
+		AND z1.STAFF_NAME like concat(concat('%',#{staffName}),'%')
+	 </if>
+	 <if test="eHr != null and eHr != ''">
+		AND z1.E_HR = #{eHr}
+	 </if>  
+   <if test="proNumber != null and proNumber != ''">
+		AND z1.CHSOFTI_PRO_NUMBER = #{proNumber}
+   </if>
+   <if test="projectName != null and projectName != ''">
+		AND z1.CHSOFTI_PRO_NAME = #{projectName}
+   </if>
+   <if test="csdeptid != null and csdeptid != ''">
+		AND z1.CS_SUBDEPT_ID = #{csdeptid}
+   </if> 
     ORDER BY o.e_hr DESC
   </select>
   
