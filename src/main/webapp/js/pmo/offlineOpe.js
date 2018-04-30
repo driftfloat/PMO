@@ -322,7 +322,7 @@ function loadOfflineOperList(){
             	if(row.chsoftiIfaw==null){
             		return 0;
             	}
-            	var res = row.chsoftiIfaw/row.chsoftiMskHours;
+            	var res = row.chsoftiAwHours/row.chsoftiMskHours;
             	var res_temp = Math.floor(res * 100) / 100;
             	//计算后的值赋给字段
             	row.chsoftiEffectiveSt=res_temp;
@@ -337,7 +337,7 @@ function loadOfflineOperList(){
             	if(row.chsoftiInvalid==null){
             		return 0;
             	}
-            	var res = row.chsoftiInvalid/row.chsoftiMskHours;
+            	var res = row.chsoftiIwHours/row.chsoftiMskHours;
             	var res_temp = Math.floor(res * 100) / 100;
             	//计算后的值赋给字段
             	row.chsoftiInvalidSt=res_temp;
@@ -423,6 +423,7 @@ function upCell(index,field,value){
 
 //导出
 function exportData(){
-	alert("导出");
+	uri = path+'/service/offlineOper/export',
+	window.location.href=uri;
 }
 
