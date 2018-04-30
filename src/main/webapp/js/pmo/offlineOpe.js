@@ -275,13 +275,42 @@ function loadOfflineOperList(){
             title: 'InfTotal',
             sortable: true,
             formatter: function (value, row, index) {  
-            	var res = row.chsoftiIfaw+row.chsoftiInvalid+
-            	row.chsoftiInfOt+row.chsoftiInfPt+
-            	row.chsoftiInfAd+row.chsoftiInfTravel+
-            	row.chsoftiInfEquipment+row.chsoftiInfSub;
+            	var temp = 0;
+            	//中软实际工时收入
+            	if(row.chsoftiIfaw!=null){
+            		temp=parseFloat(temp) + parseFloat(row.chsoftiIfaw);
+            	}
+            	//中软无效工时收入
+            	if(row.chsoftiInvalid!=null){
+            		temp=parseFloat(temp) + parseFloat(row.chsoftiInvalid);
+            	}
+            	//加班费工时收入
+            	if(row.chsoftiInfOt!=null){
+            		temp=parseFloat(temp) + parseFloat(row.chsoftiInfOt);
+            	}
+            	//调休工时收入
+            	if(row.chsoftiInfPt!=null){
+            		temp=parseFloat(temp) + parseFloat(row.chsoftiInfPt);
+            	}
+            	//调整上月工时收入
+            	if(row.chsoftiInfAd!=null){
+            		temp=parseFloat(temp) + parseFloat(row.chsoftiInfAd);
+            	}
+            	//差旅收入
+            	if(row.chsoftiInfTravel!=null){
+            		temp=parseFloat(temp) + parseFloat(row.chsoftiInfTravel);
+            	}
+            	//付费设备收入
+            	if(row.chsoftiInfEquipment!=null){
+            		temp=parseFloat(temp) + parseFloat(row.chsoftiInfEquipment);
+            	}
+            	//分包收入
+            	if(row.chsoftiInfSub!=null){
+            		temp=parseFloat(temp) + parseFloat(row.chsoftiInfSub);
+            	}
             	//计算后的值赋给字段
-            	row.chsoftiInfTotal=res;
-            	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
+            	row.chsoftiInfTotal=temp;
+            	return "<font color='green' family='黑体'><strong>"+temp+"</strong></font>";
             	
             }
         },
@@ -293,7 +322,7 @@ function loadOfflineOperList(){
             	if(row.chsoftiInfTotal==null){
             		return 0;
             	}
-            	var res = row.chsoftiInfTotal-row.chsoftiInvalid;
+            	var res = parseFloat(row.chsoftiInfTotal)-parseFloat(row.chsoftiInvalid);
             	//计算后的值赋给字段
             	row.chsoftiInfCurrent=res;
             	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
@@ -307,7 +336,7 @@ function loadOfflineOperList(){
             	if(row.chsoftiInfCurrent==null){
             		return 0;
             	}
-            	var res = row.chsoftiInfCurrent/1.06;
+            	var res = parseFloat(row.chsoftiInfCurrent)/1.06;
             	var res_temp = Math.floor(res * 100) / 100;
             	//计算后的值赋给字段
             	row.chsoftiEffectiveNr=res_temp;
@@ -322,7 +351,7 @@ function loadOfflineOperList(){
             	if(row.chsoftiIfaw==null){
             		return 0;
             	}
-            	var res = row.chsoftiAwHours/row.chsoftiMskHours;
+            	var res = parseFloat(row.chsoftiAwHours)/parseFloat(row.chsoftiMskHours);
             	var res_temp = Math.floor(res * 100) / 100;
             	//计算后的值赋给字段
             	row.chsoftiEffectiveSt=res_temp;
@@ -337,7 +366,7 @@ function loadOfflineOperList(){
             	if(row.chsoftiInvalid==null){
             		return 0;
             	}
-            	var res = row.chsoftiIwHours/row.chsoftiMskHours;
+            	var res = parseFloat(row.chsoftiIwHours)/parseFloat(row.chsoftiMskHours);
             	var res_temp = Math.floor(res * 100) / 100;
             	//计算后的值赋给字段
             	row.chsoftiInvalidSt=res_temp;
@@ -352,7 +381,7 @@ function loadOfflineOperList(){
             valign: 'middle'
         }*/],
         onEditableSave: function (field, row, oldValue, $el) {
-        	//console.log(row);
+        	console.log(row);
         	//获取当前页数据
         	var currentData = $('#OfflineOperList').bootstrapTable('getData');
         	for(var i=0;i<currentData.length;i++){
@@ -360,8 +389,25 @@ function loadOfflineOperList(){
         		if(currentData[i]==row){
         			//中软实际工时有变动
         			if(field=="chsoftiAwHours"){
-        				upCell(i,"chsoftiIfaw",row.chsoftiIfaw)
+        				upCell(i,"chsoftiIfaw",row.chsoftiIfaw);
         			}
+        			//中软无效工时有变动
+        			if(field=="chsoftiIwHours"){
+        				upCell(i,"chsoftiInvalid",row.chsoftiInvalid);
+        			}
+        			//中软加班费工时有变动
+        			if(field="chsoftiOtHours"){
+        				upCell(i,"chsoftiInfOt",row.chsoftiInfOt);
+        			}
+        			//中软调休工时有变动
+        			if(field="chsoftiToHours"){
+        				upCell(i,"chsoftiInfPt",row.chsoftiInfPt);
+        			}
+        			//中软调整上月工时有变动
+        			if(field="chsoftiApwHours"){
+        				upCell(i,"chsoftiInfAd",row.chsoftiInfAd);
+        			}
+        			
         		}
         	}
             $.ajax({
@@ -401,10 +447,19 @@ function search(){
 	//获取查询条件
 	var staffName = $("#staffName").val();
 	var ehr = $("#ehr").val();
+	//中软项目名称
+	var projectName = $("#projectName").val();
+	//中软项目编号
+	var proNumber = $("#projectNumber").val();
+	//中软部门
+	var csdeptid = $("#csSubDept").val();
 	var queryParams = { 
 		query: {  
 		   staffName:staffName,
-		   eHr:ehr
+		   eHr:ehr,
+		   projectName:projectName,
+		   proNumber:proNumber,
+		   csdeptid:csdeptid
         }
     }  
 	//刷新表格  
@@ -426,4 +481,5 @@ function exportData(){
 	uri = path+'/service/offlineOper/export',
 	window.location.href=uri;
 }
+
 

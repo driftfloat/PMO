@@ -64,7 +64,24 @@ var path='<%=path%>';
 										<div class="col-lg-4">
 											<select class="form-control" name="csSubDept" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="csSubDept" data-bv-group=".group">
-												<option value="">-- Option--</option>
+												<!-- RM -->
+												<c:if test="${userType == '5'}">
+												<c:forEach items="${csdeptList}" varStatus="i" var="item" >
+												<option value="${item.csSubDeptId}">${item.csSubDeptName}</option>
+												</c:forEach>
+												</c:if>
+												<!-- 交付部经理或者助理,职能部门经理，职能部门助理,HRBP经理,HRBP助理 -->
+												<c:if test="${userType == '3' || userType == '4' || userType == '11' || userType == '12' || userType == '13' || userType == '14'}">
+												<c:forEach items="${csdeptList}" varStatus="i" var="item" >
+												<option value="${item.csSubDeptId}">${item.csSubDeptName}</option>
+												</c:forEach>
+												</c:if>
+												<!-- 业务线或者管理员 -->
+												<c:if test="${userType == '15' || userType == '0'}">
+												<c:forEach items="${csdeptList}" varStatus="i" var="item" >
+												<option value="${item.csSubDeptId}">${item.csSubDeptName}</option>
+												</c:forEach>
+												</c:if>
 											</select>
 										</div>
 										</div>

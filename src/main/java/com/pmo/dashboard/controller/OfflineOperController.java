@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
+import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.OfflineOper;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.ExportExcel;
@@ -52,9 +54,37 @@ public class OfflineOperController {
 	@Resource
 	private ExportExcel exportExcel;
 	
+	@Resource
+	private CSDeptService csdeptService;
+	
 	
 	@RequestMapping("/listPage")
-	public String listPage(){
+	public String listPage(HttpServletRequest request,Model model){
+		User user = (User) request.getSession().getAttribute("loginUser");
+		List<CSDept> csdeptList = null;
+		//RM
+		if(user.getUserType().equals("5")){
+			if(user.getCsdeptId()!=null && !"".equals(user.getCsdeptId())){
+				String[] temp = user.getCsdeptId().split(",");
+				csdeptList = csdeptService.queryCSDeptByIds(temp);
+			}
+		}
+		//交付部经理或者助理,职能部门经理，职能部门助理,HRBP经理,HRBP助理
+		if(user.getUserType().equals("3") || user.getUserType().equals("4")
+		   || user.getUserType().equals("11") || user.getUserType().equals("12")
+		   || user.getUserType().equals("13") || user.getUserType().equals("14")
+		  ){
+			csdeptList = csdeptService.queryAllCSSubDeptName();
+		}
+		//业务线或者管理员
+		if(user.getUserType().equals("15") || user.getUserType().equals("0")){
+			csdeptList = csdeptService.queryAllCSSubDeptName();
+		}
+		
+		//用户类型
+		model.addAttribute("userType",user.getUserType());
+		//中软部门
+		model.addAttribute("csdeptList", csdeptList);
 		return "offline/offline";
 	}
 	
