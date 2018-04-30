@@ -18,6 +18,7 @@ import com.pmo.dashboard.dao.CurrencysMapper;
 import com.pmo.dashboard.dao.OfflineOperMapper;
 import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.OfflineOper;
+import com.pmo.dashboard.entity.OfflineOperCondition;
 import com.pmo.dashboard.entity.User;
 import com.pom.dashboard.service.EmployeeService;
 import com.pom.dashboard.service.OfflineOperService;
@@ -50,17 +51,9 @@ public class TestOfflineOperService {
 	
 	private ObjectMapper objectMapper = new ObjectMapper();  
 
-//	@Before
-//	public void initMockMvc() {
-//		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
-//	}
-	
-//	public void testPage() throws Exception {
-//		mockMvc.perform(MockMvcRequestBuilders.get("/offlineOper/query").param("pageNumber", "1")).andReturn();
-//	}
 	
 	public void queryByRM() {
-		OfflineOper condition = new OfflineOper();
+		OfflineOperCondition condition = new OfflineOperCondition();
 		condition.seteHr("E000834441");
 		condition.setStaffName("白世铭");
 		User user = new User();
@@ -111,6 +104,7 @@ public class TestOfflineOperService {
 		System.out.println(list.size());
 	}
 	
+	
 	public void employeeCount() {
 		OfflineOper condition = new OfflineOper();
 		String employeeId = "cb00bad3f16a4e8baf450e7b88af7c4b" ; 
@@ -140,7 +134,11 @@ public class TestOfflineOperService {
 		data.setCsSubdeptId(e.getCsSubDept());
 		data.setRmId(user.getUserId());
 		data.setChsoftiAwHours(new BigDecimal("133"));
+		if("".equals(user.getUserId())) {
+			
+		}
 		data.setChsoftiIwHours(new BigDecimal("19")); // 27 19
+		
 		data.setChsoftiOtHours(new BigDecimal("8"));
 		data.setChsoftiToHours(new BigDecimal("9"));
 		data.setChsoftiApwHours(new BigDecimal("10"));
@@ -162,21 +160,24 @@ public class TestOfflineOperService {
 
 	@Test
 	public void save() {
+		OfflineOperCondition condition = new OfflineOperCondition();
 		OfflineOper data = new OfflineOper();
 		
-//		data.setEmployeeId("04fcb811aeae4808bb303aaf2cabba52");  //白世铭
-//		data.setStaffName("白世铭");
-//		User user = new User();
-//		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
-//		user.setUserType("5");
 		
-		data.setEmployeeId("1004");  // 王廣智
-		data.setStaffName(" 王廣智");
+		data.setEmployeeId("04fcb811aeae4808bb303aaf2cabba52");  //白世铭
+		data.setStaffName("白世铭");
 		User user = new User();
-		user.setUserId("a42f87d13fff455da434649ab3c8f876");  // 叶海伦  
+		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
 		user.setUserType("5");
 		
-		List<OfflineOper> list =  offlineOperService.query(data, user, PAGESIZE , PAGENUMBER) ; //
+//		data.setEmployeeId("1004");  // 王廣智
+//		data.setStaffName(" 王廣智");
+//		User user = new User();
+//		user.setUserId("a42f87d13fff455da434649ab3c8f876");  // 叶海伦  
+//		user.setUserType("5");
+		
+		condition.setStaffName("白世铭");
+		List<OfflineOper> list =  offlineOperService.query(condition, user, PAGESIZE , PAGENUMBER) ; //
 		if(list.size()>0) {
 			offlineOperService.delete(list.get(0).getId());
 		}

@@ -11,9 +11,6 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
@@ -31,6 +28,7 @@ import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.HKWorkHour;
 import com.pmo.dashboard.entity.MLWorkHour;
 import com.pmo.dashboard.entity.OfflineOper;
+import com.pmo.dashboard.entity.OfflineOperCondition;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.entity.WorkHour;
 import com.pmo.dashboard.util.Utils;
@@ -107,7 +105,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 
 	@Override
 	public List<OfflineOper> exportData(User user) {
-		OfflineOper condition = new OfflineOper() ;
+		OfflineOperCondition condition = new OfflineOperCondition() ;
 		List<OfflineOper> rtn = null ;
 		Set<User> rmSet = new HashSet();
 		if("5".equals(user.getUserType())) { // RM
@@ -144,7 +142,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 	}
 	
 	@Override
-	public List<OfflineOper> query(OfflineOper condition, User user,int pageSize,int pageNumber) {
+	public List<OfflineOper> query(OfflineOperCondition condition, User user,int pageSize,int pageNumber) {
 		//1. count
 //		int rmCount = offlineOperMapper.rmCount(condition);
 //		if( 0 == rmCount) {
@@ -193,6 +191,9 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			//第一个参数当前页码，第二个参数每页条数
 			PageHelper.startPage(pageNumber,pageSize); 
 			rtn = offlineOperMapper.queryByDept(condition) ;
+		}else if("0".equals(user.getUserType())) {
+			PageHelper.startPage(pageNumber,pageSize); 
+			rtn = offlineOperMapper.queryAllStaff(condition) ;
 		}
 		for(OfflineOper offlineOper :rtn) {
 			workHour(offlineOper);
@@ -307,8 +308,10 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 				.add(oper.getChsoftiInfEquipment()).add(oper.getChsoftiInfSub()));
 		oper.setChsoftiInfCurrent(oper.getChsoftiInfTotal().subtract(oper.getChsoftiInvalid()));
 		oper.setChsoftiEffectiveNr(oper.getChsoftiInfCurrent().divide(new BigDecimal("1.06"),2 , BigDecimal.ROUND_HALF_EVEN));
-		oper.setChsoftiEffectiveSt(oper.getChsoftiAwHours().divide(oper.getChsoftiMskHours(),2 , BigDecimal.ROUND_HALF_EVEN));
-		oper.setChsoftiInvalidSt(oper.getChsoftiIwHours().divide(oper.getChsoftiMskHours(),2, BigDecimal.ROUND_HALF_EVEN ));
+		if(oper.getChsoftiMskHours().compareTo(BigDecimal.ZERO)!=0) {
+			oper.setChsoftiEffectiveSt(oper.getChsoftiAwHours().divide(oper.getChsoftiMskHours(),2 , BigDecimal.ROUND_HALF_EVEN));
+			oper.setChsoftiInvalidSt(oper.getChsoftiIwHours().divide(oper.getChsoftiMskHours(),2, BigDecimal.ROUND_HALF_EVEN ));
+		}
 		return ;
 	}
 	

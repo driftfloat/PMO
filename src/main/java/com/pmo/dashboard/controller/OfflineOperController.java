@@ -29,6 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.OfflineOper;
+import com.pmo.dashboard.entity.OfflineOperCondition;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.ExportExcel;
 import com.pom.dashboard.service.CSDeptService;
@@ -97,7 +98,7 @@ public class OfflineOperController {
 	 */
 	@RequestMapping("/query")
 	@ResponseBody
-	public String query(int pageSize,int pageNumber,OfflineOper condition,HttpServletRequest request) throws JsonProcessingException{
+	public String query(int pageSize,int pageNumber,OfflineOperCondition condition,HttpServletRequest request) throws JsonProcessingException{
 		User user = (User) request.getSession().getAttribute("loginUser");
 		List<OfflineOper> data = offlineOperService.query(condition,user,pageSize,pageNumber);
 		PageInfo<OfflineOper> page = new PageInfo(data);
