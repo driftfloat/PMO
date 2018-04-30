@@ -255,7 +255,7 @@ public class ExportExcel {
 		numberStyle.setBorderTop(CellStyle.BORDER_THIN);   
 		numberStyle.setBorderLeft(CellStyle.BORDER_THIN);   
 		numberStyle.setBorderRight(CellStyle.BORDER_THIN);  
-		numberStyle.setDataFormat(XSSFDataFormat);    // .getBuiltinFormat("0.00")
+//		numberStyle.setDataFormat(XSSFDataFormat);    // .getBuiltinFormat("0.00")
 		
 		CellStyle dataStyle = workBook.createCellStyle();
 		dataStyle.setFont(dataFont);
