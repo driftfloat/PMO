@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.pmo.dashboard.entity.OfflineOper;
 import com.pmo.dashboard.entity.OfflineOperCondition;
+import com.pmo.dashboard.entity.OperSummary;
 import com.pmo.dashboard.entity.User;
 
 public interface OfflineOperService {
@@ -28,4 +29,8 @@ public interface OfflineOperService {
 //	void export(User user);
 
 	List<OfflineOper> exportData(User user);
+	
+	List<OfflineOper> querySummary(OfflineOperCondition condition, User user,int pageSize,int pageNumber);
+	
+	List<OperSummary> exportSummary(User user);
 }

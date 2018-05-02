@@ -29,6 +29,7 @@ import com.pmo.dashboard.entity.HKWorkHour;
 import com.pmo.dashboard.entity.MLWorkHour;
 import com.pmo.dashboard.entity.OfflineOper;
 import com.pmo.dashboard.entity.OfflineOperCondition;
+import com.pmo.dashboard.entity.OperSummary;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.entity.WorkHour;
 import com.pmo.dashboard.util.Utils;
@@ -333,6 +334,18 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			offlineOper.setChsoftiMskHours( workHourMapper.queryWorkHour(workHour)); 
 		}
 		return offlineOper;
+	}
+
+	@Override
+	public List<OfflineOper> querySummary(OfflineOperCondition condition, User user, int pageSize, int pageNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OperSummary> exportSummary(User user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

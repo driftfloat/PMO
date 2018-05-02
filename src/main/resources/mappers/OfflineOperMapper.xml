@@ -1,50 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.pmo.dashboard.dao.OfflineOperMapper" >
-  <resultMap id="BaseResultMap" type="com.pmo.dashboard.entity.OfflineOper" >
-    <id column="ID" property="id" jdbcType="VARCHAR" />
-    <result column="E_HR" property="eHr" jdbcType="VARCHAR" />
-    <result column="STAFF_NAME" property="staffName" jdbcType="VARCHAR" />
-    <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR" />
-    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
-    <result column="CREATE_UPDATE" property="createUpdate" jdbcType="TIMESTAMP" />
-    <result column="CS_SUBDEPT_ID" property="csSubdeptId" jdbcType="VARCHAR" />
-    <result column="RM_ID" property="rmId" jdbcType="VARCHAR" />
-    <result column="RM_NAME" property="rmName" jdbcType="VARCHAR" />
-    <result column="OPERATOR_ID" property="operatorId" jdbcType="VARCHAR" />
-    <result column="MONTH" property="month" jdbcType="VARCHAR" />
-    <result column="YEAR" property="year" jdbcType="VARCHAR" />
-    <result column="CHSOFTI_MSK_HOURS" property="chsoftiMskHours" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_AW_HOURS" property="chsoftiAwHours" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_IW_HOURS" property="chsoftiIwHours" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_OT_HOURS" property="chsoftiOtHours" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_TO_HOURS" property="chsoftiToHours" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_APW_HOURS" property="chsoftiApwHours" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_IFAW" property="chsoftiIfaw" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_INVALID" property="chsoftiInvalid" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_INF_OT" property="chsoftiInfOt" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_INF_PT" property="chsoftiInfPt" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_INF_AD" property="chsoftiInfAd" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_INF_TRAVEL" property="chsoftiInfTravel" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_INF_EQUIPMENT" property="chsoftiInfEquipment" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_INF_SUB" property="chsoftiInfSub" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_INF_TOTAL" property="chsoftiInfTotal" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_INF_CURRENT" property="chsoftiInfCurrent" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_EFFECTIVE_NR" property="chsoftiEffectiveNr" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_EFFECTIVE_ST" property="chsoftiEffectiveSt" jdbcType="DECIMAL" />
-    <result column="CHSOFTI_INVALID_ST" property="chsoftiInvalidSt" jdbcType="DECIMAL" />
-    
-    <result property="chsoftiProNumber" column="CHSOFTI_PRO_NUMBER" javaType="String" />
-<!-- 	<result property="chsoftiProStartdate" column="CHSOFTI_PRO_STARTDATE" javaType="String" /> -->
-	<result property="chsoftiProName" column="CHSOFTI_PRO_NAME" javaType="String" />
-<!-- 	<result property="csSubDept" column="CS_SUBDEPT_ID" javaType="String" /> -->
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.pmo.dashboard.entity.OfflineOper" extends="BaseResultMap" >
-    <result column="REMARK" property="remark" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  
-  <resultMap id="userMap" type="com.pmo.dashboard.entity.User">
-		<id property="userId" column="USER_ID" javaType="String" /> 
+<mapper namespace="com.pmo.dashboard.dao.OfflineOperMapper">
+	<resultMap id="BaseResultMap" type="com.pmo.dashboard.entity.OfflineOper">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="E_HR" property="eHr" jdbcType="VARCHAR" />
+		<result column="STAFF_NAME" property="staffName" jdbcType="VARCHAR" />
+		<result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR" />
+		<result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="CREATE_UPDATE" property="createUpdate"
+			jdbcType="TIMESTAMP" />
+		<result column="CS_SUBDEPT_ID" property="csSubdeptId" jdbcType="VARCHAR" />
+		<result column="RM_ID" property="rmId" jdbcType="VARCHAR" />
+		<result column="RM_NAME" property="rmName" jdbcType="VARCHAR" />
+		<result column="OPERATOR_ID" property="operatorId" jdbcType="VARCHAR" />
+		<result column="MONTH" property="month" jdbcType="VARCHAR" />
+		<result column="YEAR" property="year" jdbcType="VARCHAR" />
+		<result column="CHSOFTI_MSK_HOURS" property="chsoftiMskHours"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_AW_HOURS" property="chsoftiAwHours"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_IW_HOURS" property="chsoftiIwHours"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_OT_HOURS" property="chsoftiOtHours"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_TO_HOURS" property="chsoftiToHours"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_APW_HOURS" property="chsoftiApwHours"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_IFAW" property="chsoftiIfaw" jdbcType="DECIMAL" />
+		<result column="CHSOFTI_INVALID" property="chsoftiInvalid"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_INF_OT" property="chsoftiInfOt"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_INF_PT" property="chsoftiInfPt"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_INF_AD" property="chsoftiInfAd"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_INF_TRAVEL" property="chsoftiInfTravel"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_INF_EQUIPMENT" property="chsoftiInfEquipment"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_INF_SUB" property="chsoftiInfSub"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_INF_TOTAL" property="chsoftiInfTotal"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_INF_CURRENT" property="chsoftiInfCurrent"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_EFFECTIVE_NR" property="chsoftiEffectiveNr"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_EFFECTIVE_ST" property="chsoftiEffectiveSt"
+			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_INVALID_ST" property="chsoftiInvalidSt"
+			jdbcType="DECIMAL" />
+
+		<result property="chsoftiProNumber" column="CHSOFTI_PRO_NUMBER"
+			javaType="String" />
+		<!-- <result property="chsoftiProStartdate" column="CHSOFTI_PRO_STARTDATE" 
+			javaType="String" /> -->
+		<result property="chsoftiProName" column="CHSOFTI_PRO_NAME"
+			javaType="String" />
+		<!-- <result property="csSubDept" column="CS_SUBDEPT_ID" javaType="String" 
+			/> -->
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.pmo.dashboard.entity.OfflineOper"
+		extends="BaseResultMap">
+		<result column="REMARK" property="remark" jdbcType="LONGVARCHAR" />
+	</resultMap>
+
+	<resultMap id="userMap" type="com.pmo.dashboard.entity.User">
+		<id property="userId" column="USER_ID" javaType="String" />
 		<result property="userName" column="USER_NAME" javaType="String" />
 		<result property="nickname" column="NICKNAME" javaType="String" />
 		<result property="password" column="PASSWORD" javaType="String" />
@@ -54,631 +78,745 @@
 		<result property="loginStatus" column="LOGIN_STATUS" jdbcType="VARCHAR" />
 		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
 	</resultMap>
-  
-  <sql id="Base_Column_List" >
-    ID, E_HR, STAFF_NAME, EMPLOYEE_ID, CREATE_DATE, CREATE_UPDATE, CS_SUBDEPT_ID, RM_ID, 
-    RM_NAME, OPERATOR_ID, MONTH, YEAR, CHSOFTI_MSK_HOURS, CHSOFTI_AW_HOURS, CHSOFTI_IW_HOURS, 
-    CHSOFTI_OT_HOURS, CHSOFTI_TO_HOURS, CHSOFTI_APW_HOURS, CHSOFTI_IFAW, CHSOFTI_INVALID, 
-    CHSOFTI_INF_OT, CHSOFTI_INF_PT, CHSOFTI_INF_AD, CHSOFTI_INF_TRAVEL, CHSOFTI_INF_EQUIPMENT, 
-    CHSOFTI_INF_SUB, CHSOFTI_INF_TOTAL, CHSOFTI_INF_CURRENT, CHSOFTI_EFFECTIVE_NR, CHSOFTI_EFFECTIVE_ST, 
-    CHSOFTI_INVALID_ST
-  </sql>
-  <sql id="Left_Column_List" >
-    o.ID, z1.E_HR, z1.STAFF_NAME, z1.EMPLOYEE_ID, o.CREATE_DATE, o.CREATE_UPDATE, z1.CS_SUBDEPT_ID
-    ,z1.RM_USER_ID RM_ID, o.RM_NAME, o.OPERATOR_ID, MONTH(NOW())  MONTH, YEAR(NOW())  YEAR, o.CHSOFTI_MSK_HOURS, o.CHSOFTI_AW_HOURS
-    , o.CHSOFTI_IW_HOURS, o.CHSOFTI_OT_HOURS, o.CHSOFTI_TO_HOURS, o.CHSOFTI_APW_HOURS, o.CHSOFTI_IFAW
-    , o.CHSOFTI_INVALID, o.CHSOFTI_INF_OT, o.CHSOFTI_INF_PT, o.CHSOFTI_INF_AD, o.CHSOFTI_INF_TRAVEL
-    , o.CHSOFTI_INF_EQUIPMENT, o.CHSOFTI_INF_SUB, o.CHSOFTI_INF_TOTAL, o.CHSOFTI_INF_CURRENT
-    , o.CHSOFTI_EFFECTIVE_NR, o.CHSOFTI_EFFECTIVE_ST, o.CHSOFTI_INVALID_ST , z1.CHSOFTI_PRO_NUMBER, z1.CHSOFTI_PRO_NAME
-  </sql>
-  <sql id="Blob_Column_List" >
-    REMARK
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from t_offline_oper
-    where ID = #{id,jdbcType=VARCHAR}
-  </select>
-  
-  <select id="queryByRM" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOperCondition" >
-    select 
-    <include refid="Left_Column_List" />
-    , o.REMARK
-    FROM t_employee z1 LEFT JOIN(
-    select * from t_offline_oper 
-    where 1=1 
-    <if test="year != null and year != ''">
-		AND YEAR = YEAR(NOW())
-	</if>
-	<if test="month != null and month != ''">
-		AND MONTH = MONTH(NOW())
-	</if>
-	<if test="rmId != null and rmId != ''">
-		AND RM_ID = #{rmId}
-	</if>
-	) o
-	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
-   WHERE 1=1 
-   AND z1.RM_USER_ID = #{rmId}
-   AND z1.RESOURCE_STATUS='Active' 
-   <if test="staffName != null and staffName != ''">
-		AND z1.STAFF_NAME like concat(concat('%',#{staffName}),'%')
-   </if>
-   <if test="eHr != null and eHr != ''">
-		AND z1.E_HR = #{eHr}
-   </if>
-   <if test="proNumber != null and proNumber != ''">
-		AND z1.CHSOFTI_PRO_NUMBER = #{proNumber}
-   </if>
-   <if test="projectName != null and projectName != ''">
-		AND z1.CHSOFTI_PRO_NAME = #{projectName}
-   </if>
-   <if test="csdeptid != null and csdeptid != ''">
-		AND z1.CS_SUBDEPT_ID = #{csdeptid}
-   </if>
-    ORDER BY o.e_hr DESC
-  </select>
-  <select id="queryBySubDept" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOperCondition" >
-     select 
-    <include refid="Left_Column_List" />
-    , o.REMARK
-    FROM t_employee z1 LEFT JOIN(
-    select * from t_offline_oper 
-    where 1=1 
-    <if test="year != null and year != ''">
-		AND YEAR = YEAR(NOW())
-	</if>
-	<if test="month != null and month != ''">
-		AND MONTH = MONTH(NOW())
-	</if>
-	AND CS_SUBDEPT_ID in 
-	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
-		#{item}
-	 </foreach>
-	) o
-	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
-   WHERE 1=1 
-     AND z1.RESOURCE_STATUS='Active'
-     <if test="staffName != null and staffName != ''">
-		AND z1.STAFF_NAME like concat(concat('%',#{staffName}),'%')
-	 </if>
-	 <if test="eHr != null and eHr != ''">
-		AND z1.E_HR = #{eHr}
-	 </if> 
-     AND z1.CS_SUBDEPT_ID in 
-	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
-		#{item}
-	</foreach>
-	<if test="proNumber != null and proNumber != ''">
-		AND z1.CHSOFTI_PRO_NUMBER = #{proNumber}
-   </if>
-   <if test="projectName != null and projectName != ''">
-		AND z1.CHSOFTI_PRO_NAME = #{projectName}
-   </if>
-   <if test="csdeptid != null and csdeptid != ''">
-		AND z1.CS_SUBDEPT_ID = #{csdeptid}
-   </if>
-    ORDER BY o.e_hr DESC
-  </select>
-  
-  <select id="queryByDept" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOperCondition" >
-    select 
-    <include refid="Left_Column_List" />
-    , o.REMARK
-    FROM t_employee z1 LEFT JOIN(
-    select * from t_offline_oper 
-    where 1=1 
-    <if test="year != null and year != ''">
-		AND YEAR = YEAR(NOW())
-	</if>
-	<if test="month != null and month != ''">
-		AND MONTH = MONTH(NOW())
-	</if>
-	AND CS_SUBDEPT_ID in 
-	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
-		#{item}
-	 </foreach>
-	) o
-	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
-   WHERE 1=1 
-     AND z1.RESOURCE_STATUS='Active' 
-     <if test="staffName != null and staffName != ''">
-		AND z1.STAFF_NAME like concat(concat('%',#{staffName}),'%')
-	 </if>
-	 <if test="eHr != null and eHr != ''">
-		AND z1.E_HR = #{eHr}
-	 </if>
-     AND z1.CS_SUBDEPT_ID in 
-	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
-		#{item}
-	 </foreach>
-	 <if test="proNumber != null and proNumber != ''">
-		AND z1.CHSOFTI_PRO_NUMBER = #{proNumber}
-   </if>
-   <if test="projectName != null and projectName != ''">
-		AND z1.CHSOFTI_PRO_NAME = #{projectName}
-   </if>
-   <if test="csdeptid != null and csdeptid != ''">
-		AND z1.CS_SUBDEPT_ID = #{csdeptid}
-   </if>
-    ORDER BY o.e_hr DESC
-  </select>
-  <select id="queryAllStaff" resultMap="ResultMapWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOperCondition" >
-    select 
-    <include refid="Left_Column_List" />
-    , o.REMARK
-    FROM t_employee z1 LEFT JOIN(
-    select * from t_offline_oper 
-    where 1=1 
-    <if test="year != null and year != ''">
-		AND YEAR = YEAR(NOW())
-	</if>
-	<if test="month != null and month != ''">
-		AND MONTH = MONTH(NOW())
-	</if>
-	) o
-	ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
-   WHERE 1=1 
-     AND z1.RESOURCE_STATUS='Active' 
-   <if test="staffName != null and staffName != ''">
-		AND z1.STAFF_NAME like concat(concat('%',#{staffName}),'%')
-	 </if>
-	 <if test="eHr != null and eHr != ''">
-		AND z1.E_HR = #{eHr}
-	 </if>  
-   <if test="proNumber != null and proNumber != ''">
-		AND z1.CHSOFTI_PRO_NUMBER = #{proNumber}
-   </if>
-   <if test="projectName != null and projectName != ''">
-		AND z1.CHSOFTI_PRO_NAME = #{projectName}
-   </if>
-   <if test="csdeptid != null and csdeptid != ''">
-		AND z1.CS_SUBDEPT_ID = #{csdeptid}
-   </if> 
-    ORDER BY o.e_hr DESC
-  </select>
-  
-  <resultMap id="ResultMap_offline_employee" type="com.pmo.dashboard.entity.OfflineOper" >
-    <result column="E_HR" property="eHr" jdbcType="VARCHAR" />
-    <result column="STAFF_NAME" property="staffName" jdbcType="VARCHAR" />
-    <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR" />
-    <result column="CS_SUBDEPT_ID" property="csSubdeptId" jdbcType="VARCHAR" />
-    <result column="RM_USER_ID" property="rmId" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="employee_List" >
-    E_HR, STAFF_NAME, EMPLOYEE_ID, CS_SUBDEPT_ID, RM_USER_ID
-  </sql>
-  <select id="queryFromEmployeeByRM" resultMap="ResultMap_offline_employee" parameterType="com.pmo.dashboard.entity.OfflineOper" >
-    select 
-    <include refid="employee_List" />
-    from t_employee     
-    where RESOURCE_STATUS='Active'
-     and RM_USER_ID = #{rmId}
-  </select>
-  
-  
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from t_offline_oper
-    where ID = #{id,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.pmo.dashboard.entity.OfflineOper" >
-    insert into t_offline_oper (ID, E_HR, STAFF_NAME, 
-      EMPLOYEE_ID, CREATE_DATE, CREATE_UPDATE, 
-      CS_SUBDEPT_ID, RM_ID, RM_NAME, 
-      OPERATOR_ID, MONTH, YEAR, 
-      CHSOFTI_MSK_HOURS, CHSOFTI_AW_HOURS, CHSOFTI_IW_HOURS, 
-      CHSOFTI_OT_HOURS, CHSOFTI_TO_HOURS, CHSOFTI_APW_HOURS, 
-      CHSOFTI_IFAW, CHSOFTI_INVALID, CHSOFTI_INF_OT, 
-      CHSOFTI_INF_PT, CHSOFTI_INF_AD, CHSOFTI_INF_TRAVEL, 
-      CHSOFTI_INF_EQUIPMENT, CHSOFTI_INF_SUB, CHSOFTI_INF_TOTAL, 
-      CHSOFTI_INF_CURRENT, CHSOFTI_EFFECTIVE_NR, 
-      CHSOFTI_EFFECTIVE_ST, CHSOFTI_INVALID_ST, REMARK
-      )
-    values (#{id,jdbcType=VARCHAR}, #{eHr,jdbcType=VARCHAR}, #{staffName,jdbcType=VARCHAR}, 
-      #{employeeId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createUpdate,jdbcType=TIMESTAMP}, 
-      #{csSubdeptId,jdbcType=VARCHAR}, #{rmId,jdbcType=VARCHAR}, #{rmName,jdbcType=VARCHAR}, 
-      #{operatorId,jdbcType=VARCHAR}, #{month,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
-      #{chsoftiMskHours,jdbcType=DECIMAL}, #{chsoftiAwHours,jdbcType=DECIMAL}, #{chsoftiIwHours,jdbcType=DECIMAL}, 
-      #{chsoftiOtHours,jdbcType=DECIMAL}, #{chsoftiToHours,jdbcType=DECIMAL}, #{chsoftiApwHours,jdbcType=DECIMAL}, 
-      #{chsoftiIfaw,jdbcType=DECIMAL}, #{chsoftiInvalid,jdbcType=DECIMAL}, #{chsoftiInfOt,jdbcType=DECIMAL}, 
-      #{chsoftiInfPt,jdbcType=DECIMAL}, #{chsoftiInfAd,jdbcType=DECIMAL}, #{chsoftiInfTravel,jdbcType=DECIMAL}, 
-      #{chsoftiInfEquipment,jdbcType=DECIMAL}, #{chsoftiInfSub,jdbcType=DECIMAL}, #{chsoftiInfTotal,jdbcType=DECIMAL}, 
-      #{chsoftiInfCurrent,jdbcType=DECIMAL}, #{chsoftiEffectiveNr,jdbcType=DECIMAL}, 
-      #{chsoftiEffectiveSt,jdbcType=DECIMAL}, #{chsoftiInvalidSt,jdbcType=DECIMAL}, #{remark,jdbcType=LONGVARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.pmo.dashboard.entity.OfflineOper" >
-    insert into t_offline_oper
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        ID,
-      </if>
-      <if test="eHr != null" >
-        E_HR,
-      </if>
-      <if test="staffName != null" >
-        STAFF_NAME,
-      </if>
-      <if test="employeeId != null" >
-        EMPLOYEE_ID,
-      </if>
-      <if test="createDate != null" >
-        CREATE_DATE,
-      </if>
-      <if test="createUpdate != null" >
-        CREATE_UPDATE,
-      </if>
-      <if test="csSubdeptId != null" >
-        CS_SUBDEPT_ID,
-      </if>
-      <if test="rmId != null" >
-        RM_ID,
-      </if>
-      <if test="rmName != null" >
-        RM_NAME,
-      </if>
-      <if test="operatorId != null" >
-        OPERATOR_ID,
-      </if>
-      <if test="month != null" >
-        MONTH,
-      </if>
-      <if test="year != null" >
-        YEAR,
-      </if>
-      <if test="chsoftiMskHours != null" >
-        CHSOFTI_MSK_HOURS,
-      </if>
-      <if test="chsoftiAwHours != null" >
-        CHSOFTI_AW_HOURS,
-      </if>
-      <if test="chsoftiIwHours != null" >
-        CHSOFTI_IW_HOURS,
-      </if>
-      <if test="chsoftiOtHours != null" >
-        CHSOFTI_OT_HOURS,
-      </if>
-      <if test="chsoftiToHours != null" >
-        CHSOFTI_TO_HOURS,
-      </if>
-      <if test="chsoftiApwHours != null" >
-        CHSOFTI_APW_HOURS,
-      </if>
-      <if test="chsoftiIfaw != null" >
-        CHSOFTI_IFAW,
-      </if>
-      <if test="chsoftiInvalid != null" >
-        CHSOFTI_INVALID,
-      </if>
-      <if test="chsoftiInfOt != null" >
-        CHSOFTI_INF_OT,
-      </if>
-      <if test="chsoftiInfPt != null" >
-        CHSOFTI_INF_PT,
-      </if>
-      <if test="chsoftiInfAd != null" >
-        CHSOFTI_INF_AD,
-      </if>
-      <if test="chsoftiInfTravel != null" >
-        CHSOFTI_INF_TRAVEL,
-      </if>
-      <if test="chsoftiInfEquipment != null" >
-        CHSOFTI_INF_EQUIPMENT,
-      </if>
-      <if test="chsoftiInfSub != null" >
-        CHSOFTI_INF_SUB,
-      </if>
-      <if test="chsoftiInfTotal != null" >
-        CHSOFTI_INF_TOTAL,
-      </if>
-      <if test="chsoftiInfCurrent != null" >
-        CHSOFTI_INF_CURRENT,
-      </if>
-      <if test="chsoftiEffectiveNr != null" >
-        CHSOFTI_EFFECTIVE_NR,
-      </if>
-      <if test="chsoftiEffectiveSt != null" >
-        CHSOFTI_EFFECTIVE_ST,
-      </if>
-      <if test="chsoftiInvalidSt != null" >
-        CHSOFTI_INVALID_ST,
-      </if>
-      <if test="remark != null" >
-        REMARK,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="eHr != null" >
-        #{eHr,jdbcType=VARCHAR},
-      </if>
-      <if test="staffName != null" >
-        #{staffName,jdbcType=VARCHAR},
-      </if>
-      <if test="employeeId != null" >
-        #{employeeId,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null" >
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUpdate != null" >
-        #{createUpdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="csSubdeptId != null" >
-        #{csSubdeptId,jdbcType=VARCHAR},
-      </if>
-      <if test="rmId != null" >
-        #{rmId,jdbcType=VARCHAR},
-      </if>
-      <if test="rmName != null" >
-        #{rmName,jdbcType=VARCHAR},
-      </if>
-      <if test="operatorId != null" >
-        #{operatorId,jdbcType=VARCHAR},
-      </if>
-      <if test="month != null" >
-        #{month,jdbcType=VARCHAR},
-      </if>
-      <if test="year != null" >
-        #{year,jdbcType=VARCHAR},
-      </if>
-      <if test="chsoftiMskHours != null" >
-        #{chsoftiMskHours,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiAwHours != null" >
-        #{chsoftiAwHours,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiIwHours != null" >
-        #{chsoftiIwHours,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiOtHours != null" >
-        #{chsoftiOtHours,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiToHours != null" >
-        #{chsoftiToHours,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiApwHours != null" >
-        #{chsoftiApwHours,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiIfaw != null" >
-        #{chsoftiIfaw,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInvalid != null" >
-        #{chsoftiInvalid,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfOt != null" >
-        #{chsoftiInfOt,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfPt != null" >
-        #{chsoftiInfPt,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfAd != null" >
-        #{chsoftiInfAd,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfTravel != null" >
-        #{chsoftiInfTravel,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfEquipment != null" >
-        #{chsoftiInfEquipment,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfSub != null" >
-        #{chsoftiInfSub,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfTotal != null" >
-        #{chsoftiInfTotal,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfCurrent != null" >
-        #{chsoftiInfCurrent,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiEffectiveNr != null" >
-        #{chsoftiEffectiveNr,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiEffectiveSt != null" >
-        #{chsoftiEffectiveSt,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInvalidSt != null" >
-        #{chsoftiInvalidSt,jdbcType=DECIMAL},
-      </if>
-      <if test="remark != null" >
-        #{remark,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pmo.dashboard.entity.OfflineOper" >
-    update t_offline_oper
-    <set >
-      <if test="eHr != null" >
-        E_HR = #{eHr,jdbcType=VARCHAR},
-      </if>
-      <if test="staffName != null" >
-        STAFF_NAME = #{staffName,jdbcType=VARCHAR},
-      </if>
-      <if test="employeeId != null" >
-        EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null" >
-        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUpdate != null" >
-        CREATE_UPDATE = #{createUpdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="csSubdeptId != null" >
-        CS_SUBDEPT_ID = #{csSubdeptId,jdbcType=VARCHAR},
-      </if>
-      <if test="rmId != null" >
-        RM_ID = #{rmId,jdbcType=VARCHAR},
-      </if>
-      <if test="rmName != null" >
-        RM_NAME = #{rmName,jdbcType=VARCHAR},
-      </if>
-      <if test="operatorId != null" >
-        OPERATOR_ID = #{operatorId,jdbcType=VARCHAR},
-      </if>
-      <if test="month != null" >
-        MONTH = #{month,jdbcType=VARCHAR},
-      </if>
-      <if test="year != null" >
-        YEAR = #{year,jdbcType=VARCHAR},
-      </if>
-      <if test="chsoftiMskHours != null" >
-        CHSOFTI_MSK_HOURS = #{chsoftiMskHours,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiAwHours != null" >
-        CHSOFTI_AW_HOURS = #{chsoftiAwHours,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiIwHours != null" >
-        CHSOFTI_IW_HOURS = #{chsoftiIwHours,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiOtHours != null" >
-        CHSOFTI_OT_HOURS = #{chsoftiOtHours,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiToHours != null" >
-        CHSOFTI_TO_HOURS = #{chsoftiToHours,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiApwHours != null" >
-        CHSOFTI_APW_HOURS = #{chsoftiApwHours,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiIfaw != null" >
-        CHSOFTI_IFAW = #{chsoftiIfaw,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInvalid != null" >
-        CHSOFTI_INVALID = #{chsoftiInvalid,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfOt != null" >
-        CHSOFTI_INF_OT = #{chsoftiInfOt,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfPt != null" >
-        CHSOFTI_INF_PT = #{chsoftiInfPt,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfAd != null" >
-        CHSOFTI_INF_AD = #{chsoftiInfAd,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfTravel != null" >
-        CHSOFTI_INF_TRAVEL = #{chsoftiInfTravel,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfEquipment != null" >
-        CHSOFTI_INF_EQUIPMENT = #{chsoftiInfEquipment,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfSub != null" >
-        CHSOFTI_INF_SUB = #{chsoftiInfSub,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfTotal != null" >
-        CHSOFTI_INF_TOTAL = #{chsoftiInfTotal,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInfCurrent != null" >
-        CHSOFTI_INF_CURRENT = #{chsoftiInfCurrent,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiEffectiveNr != null" >
-        CHSOFTI_EFFECTIVE_NR = #{chsoftiEffectiveNr,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiEffectiveSt != null" >
-        CHSOFTI_EFFECTIVE_ST = #{chsoftiEffectiveSt,jdbcType=DECIMAL},
-      </if>
-      <if test="chsoftiInvalidSt != null" >
-        CHSOFTI_INVALID_ST = #{chsoftiInvalidSt,jdbcType=DECIMAL},
-      </if>
-      <if test="remark != null" >
-        REMARK = #{remark,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper" >
-    update t_offline_oper
-    set E_HR = #{eHr,jdbcType=VARCHAR},
-      STAFF_NAME = #{staffName,jdbcType=VARCHAR},
-      EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR},
-      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-      CREATE_UPDATE = #{createUpdate,jdbcType=TIMESTAMP},
-      CS_SUBDEPT_ID = #{csSubdeptId,jdbcType=VARCHAR},
-      RM_ID = #{rmId,jdbcType=VARCHAR},
-      RM_NAME = #{rmName,jdbcType=VARCHAR},
-      OPERATOR_ID = #{operatorId,jdbcType=VARCHAR},
-      MONTH = #{month,jdbcType=VARCHAR},
-      YEAR = #{year,jdbcType=VARCHAR},
-      CHSOFTI_MSK_HOURS = #{chsoftiMskHours,jdbcType=DECIMAL},
-      CHSOFTI_AW_HOURS = #{chsoftiAwHours,jdbcType=DECIMAL},
-      CHSOFTI_IW_HOURS = #{chsoftiIwHours,jdbcType=DECIMAL},
-      CHSOFTI_OT_HOURS = #{chsoftiOtHours,jdbcType=DECIMAL},
-      CHSOFTI_TO_HOURS = #{chsoftiToHours,jdbcType=DECIMAL},
-      CHSOFTI_APW_HOURS = #{chsoftiApwHours,jdbcType=DECIMAL},
-      CHSOFTI_IFAW = #{chsoftiIfaw,jdbcType=DECIMAL},
-      CHSOFTI_INVALID = #{chsoftiInvalid,jdbcType=DECIMAL},
-      CHSOFTI_INF_OT = #{chsoftiInfOt,jdbcType=DECIMAL},
-      CHSOFTI_INF_PT = #{chsoftiInfPt,jdbcType=DECIMAL},
-      CHSOFTI_INF_AD = #{chsoftiInfAd,jdbcType=DECIMAL},
-      CHSOFTI_INF_TRAVEL = #{chsoftiInfTravel,jdbcType=DECIMAL},
-      CHSOFTI_INF_EQUIPMENT = #{chsoftiInfEquipment,jdbcType=DECIMAL},
-      CHSOFTI_INF_SUB = #{chsoftiInfSub,jdbcType=DECIMAL},
-      CHSOFTI_INF_TOTAL = #{chsoftiInfTotal,jdbcType=DECIMAL},
-      CHSOFTI_INF_CURRENT = #{chsoftiInfCurrent,jdbcType=DECIMAL},
-      CHSOFTI_EFFECTIVE_NR = #{chsoftiEffectiveNr,jdbcType=DECIMAL},
-      CHSOFTI_EFFECTIVE_ST = #{chsoftiEffectiveSt,jdbcType=DECIMAL},
-      CHSOFTI_INVALID_ST = #{chsoftiInvalidSt,jdbcType=DECIMAL},
-      REMARK = #{remark,jdbcType=LONGVARCHAR}
-    where ID = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.pmo.dashboard.entity.OfflineOper" >
-    update t_offline_oper
-    set E_HR = #{eHr,jdbcType=VARCHAR},
-      STAFF_NAME = #{staffName,jdbcType=VARCHAR},
-      EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR},
-      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-      CREATE_UPDATE = #{createUpdate,jdbcType=TIMESTAMP},
-      CS_SUBDEPT_ID = #{csSubdeptId,jdbcType=VARCHAR},
-      RM_ID = #{rmId,jdbcType=VARCHAR},
-      RM_NAME = #{rmName,jdbcType=VARCHAR},
-      OPERATOR_ID = #{operatorId,jdbcType=VARCHAR},
-      MONTH = #{month,jdbcType=VARCHAR},
-      YEAR = #{year,jdbcType=VARCHAR},
-      CHSOFTI_MSK_HOURS = #{chsoftiMskHours,jdbcType=DECIMAL},
-      CHSOFTI_AW_HOURS = #{chsoftiAwHours,jdbcType=DECIMAL},
-      CHSOFTI_IW_HOURS = #{chsoftiIwHours,jdbcType=DECIMAL},
-      CHSOFTI_OT_HOURS = #{chsoftiOtHours,jdbcType=DECIMAL},
-      CHSOFTI_TO_HOURS = #{chsoftiToHours,jdbcType=DECIMAL},
-      CHSOFTI_APW_HOURS = #{chsoftiApwHours,jdbcType=DECIMAL},
-      CHSOFTI_IFAW = #{chsoftiIfaw,jdbcType=DECIMAL},
-      CHSOFTI_INVALID = #{chsoftiInvalid,jdbcType=DECIMAL},
-      CHSOFTI_INF_OT = #{chsoftiInfOt,jdbcType=DECIMAL},
-      CHSOFTI_INF_PT = #{chsoftiInfPt,jdbcType=DECIMAL},
-      CHSOFTI_INF_AD = #{chsoftiInfAd,jdbcType=DECIMAL},
-      CHSOFTI_INF_TRAVEL = #{chsoftiInfTravel,jdbcType=DECIMAL},
-      CHSOFTI_INF_EQUIPMENT = #{chsoftiInfEquipment,jdbcType=DECIMAL},
-      CHSOFTI_INF_SUB = #{chsoftiInfSub,jdbcType=DECIMAL},
-      CHSOFTI_INF_TOTAL = #{chsoftiInfTotal,jdbcType=DECIMAL},
-      CHSOFTI_INF_CURRENT = #{chsoftiInfCurrent,jdbcType=DECIMAL},
-      CHSOFTI_EFFECTIVE_NR = #{chsoftiEffectiveNr,jdbcType=DECIMAL},
-      CHSOFTI_EFFECTIVE_ST = #{chsoftiEffectiveSt,jdbcType=DECIMAL},
-      CHSOFTI_INVALID_ST = #{chsoftiInvalidSt,jdbcType=DECIMAL}
-    where ID = #{id,jdbcType=VARCHAR}
-  </update>
-  
-  <select id="rmCount" parameterType="com.pmo.dashboard.entity.OfflineOper" resultType="int" >
-	    SELECT count(*) From t_offline_oper 
-        WHERE YEAR = #{year} and MONTH = #{month} and RM_ID = #{rmId}
-  </select>
-  
-  <select id="employeeCount" parameterType="com.pmo.dashboard.entity.OfflineOper" resultType="int" >
-	    SELECT count(*) From t_offline_oper 
-        WHERE YEAR = YEAR(NOW()) and MONTH = MONTH(NOW()) and EMPLOYEE_ID = #{employeeId}
-  </select>
-  <select id="queryByEmployeeID" parameterType="com.pmo.dashboard.entity.OfflineOper" resultMap="ResultMapWithBLOBs" >
-	    select 
-    	<include refid="Base_Column_List" />
-    	,
-    	<include refid="Blob_Column_List" />
-   		 from t_offline_oper
-        WHERE YEAR = YEAR(NOW()) and MONTH = MONTH(NOW()) and EMPLOYEE_ID = #{employeeId}
-  </select>
-  
-<!--   <select id="queryRMFromDept" parameterType="String" resultMap="userMap"> -->
-<!-- 		SELECT * FROM t_user WHERE user_type='5'  AND FIND_IN_SET( #{subDeptId},CSDEPT_ID )>0  -->
-<!--   </select> -->
-  
-  
+
+	<resultMap id="operSummaryMap" type="com.pmo.dashboard.entity.OperSummary">
+		<result property="year" column="YeAR" javaType="String" />
+		<result property="month" column="MONTH" javaType="String" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, E_HR, STAFF_NAME, EMPLOYEE_ID, CREATE_DATE, CREATE_UPDATE,
+		CS_SUBDEPT_ID, RM_ID,
+		RM_NAME, OPERATOR_ID, MONTH, YEAR, CHSOFTI_MSK_HOURS, CHSOFTI_AW_HOURS,
+		CHSOFTI_IW_HOURS,
+		CHSOFTI_OT_HOURS, CHSOFTI_TO_HOURS, CHSOFTI_APW_HOURS, CHSOFTI_IFAW, CHSOFTI_INVALID,
+		CHSOFTI_INF_OT, CHSOFTI_INF_PT, CHSOFTI_INF_AD, CHSOFTI_INF_TRAVEL,
+		CHSOFTI_INF_EQUIPMENT,
+		CHSOFTI_INF_SUB, CHSOFTI_INF_TOTAL, CHSOFTI_INF_CURRENT, CHSOFTI_EFFECTIVE_NR,
+		CHSOFTI_EFFECTIVE_ST,
+		CHSOFTI_INVALID_ST
+	</sql>
+	<sql id="Left_Column_List">
+		o.ID, z1.E_HR, z1.STAFF_NAME, z1.EMPLOYEE_ID, o.CREATE_DATE,
+		o.CREATE_UPDATE, z1.CS_SUBDEPT_ID
+		,z1.RM_USER_ID RM_ID, o.RM_NAME, o.OPERATOR_ID, MONTH(NOW()) MONTH, YEAR(NOW())
+		YEAR, o.CHSOFTI_MSK_HOURS, o.CHSOFTI_AW_HOURS
+		, o.CHSOFTI_IW_HOURS, o.CHSOFTI_OT_HOURS, o.CHSOFTI_TO_HOURS,
+		o.CHSOFTI_APW_HOURS, o.CHSOFTI_IFAW
+		, o.CHSOFTI_INVALID, o.CHSOFTI_INF_OT, o.CHSOFTI_INF_PT,
+		o.CHSOFTI_INF_AD, o.CHSOFTI_INF_TRAVEL
+		, o.CHSOFTI_INF_EQUIPMENT, o.CHSOFTI_INF_SUB, o.CHSOFTI_INF_TOTAL,
+		o.CHSOFTI_INF_CURRENT
+		, o.CHSOFTI_EFFECTIVE_NR, o.CHSOFTI_EFFECTIVE_ST, o.CHSOFTI_INVALID_ST
+		, z1.CHSOFTI_PRO_NUMBER, z1.CHSOFTI_PRO_NAME
+	</sql>
+	<sql id="Blob_Column_List">
+		REMARK
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_offline_oper
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+
+	<select id="queryByRM" resultMap="ResultMapWithBLOBs"
+		parameterType="com.pmo.dashboard.entity.OfflineOperCondition">
+		select
+		<include refid="Left_Column_List" />
+		, o.REMARK
+		FROM t_employee z1 LEFT JOIN(
+		select * from t_offline_oper
+		where 1=1
+		<if test="year != null and year != ''">
+			AND YEAR = YEAR(NOW())
+		</if>
+		<if test="month != null and month != ''">
+			AND MONTH = MONTH(NOW())
+		</if>
+		<if test="rmId != null and rmId != ''">
+			AND RM_ID = #{rmId}
+		</if>
+		) o
+		ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
+		WHERE 1=1
+		AND z1.RM_USER_ID = #{rmId}
+		AND z1.RESOURCE_STATUS='Active'
+		<if test="staffName != null and staffName != ''">
+			AND z1.STAFF_NAME like concat(concat('%',#{staffName}),'%')
+		</if>
+		<if test="eHr != null and eHr != ''">
+			AND z1.E_HR = #{eHr}
+		</if>
+		<if test="proNumber != null and proNumber != ''">
+			AND z1.CHSOFTI_PRO_NUMBER = #{proNumber}
+		</if>
+		<if test="projectName != null and projectName != ''">
+			AND z1.CHSOFTI_PRO_NAME = #{projectName}
+		</if>
+		<if test="csdeptid != null and csdeptid != ''">
+			AND z1.CS_SUBDEPT_ID = #{csdeptid}
+		</if>
+		ORDER BY o.e_hr DESC
+	</select>
+	<select id="queryBySubDept" resultMap="ResultMapWithBLOBs"
+		parameterType="com.pmo.dashboard.entity.OfflineOperCondition">
+		select
+		<include refid="Left_Column_List" />
+		, o.REMARK
+		FROM t_employee z1 LEFT JOIN(
+		select * from t_offline_oper
+		where 1=1
+		<if test="year != null and year != ''">
+			AND YEAR = YEAR(NOW())
+		</if>
+		<if test="month != null and month != ''">
+			AND MONTH = MONTH(NOW())
+		</if>
+		<if test="csdeptid == null or csdeptid == ''">
+			AND CS_SUBDEPT_ID in
+			<foreach item="item" index="index" collection="ids" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		) o
+		ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
+		WHERE 1=1
+		AND z1.RESOURCE_STATUS='Active'
+		<if test="staffName != null and staffName != ''">
+			AND z1.STAFF_NAME like concat(concat('%',#{staffName}),'%')
+		</if>
+		<if test="eHr != null and eHr != ''">
+			AND z1.E_HR = #{eHr}
+		</if>
+		<if test="csdeptid == null or csdeptid == ''">
+			AND z1.CS_SUBDEPT_ID in
+			<foreach item="item" index="index" collection="ids" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="proNumber != null and proNumber != ''">
+			AND z1.CHSOFTI_PRO_NUMBER = #{proNumber}
+		</if>
+		<if test="projectName != null and projectName != ''">
+			AND z1.CHSOFTI_PRO_NAME = #{projectName}
+		</if>
+		<if test="csdeptid != null and csdeptid != ''">
+			AND z1.CS_SUBDEPT_ID = #{csdeptid}
+		</if>
+		ORDER BY o.e_hr DESC
+	</select>
+
+	<select id="queryByDept" resultMap="ResultMapWithBLOBs"
+		parameterType="com.pmo.dashboard.entity.OfflineOperCondition">
+		select
+		<include refid="Left_Column_List" />
+		, o.REMARK
+		FROM t_employee z1 LEFT JOIN(
+		select * from t_offline_oper
+		where 1=1
+		<if test="year != null and year != ''">
+			AND YEAR = YEAR(NOW())
+		</if>
+		<if test="month != null and month != ''">
+			AND MONTH = MONTH(NOW())
+		</if>
+		<if test="csdeptid == null or csdeptid == ''">
+			AND z1.CS_SUBDEPT_ID in
+			<foreach item="item" index="index" collection="ids" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		) o
+		ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
+		WHERE 1=1
+		AND z1.RESOURCE_STATUS='Active'
+		<if test="staffName != null and staffName != ''">
+			AND z1.STAFF_NAME like concat(concat('%',#{staffName}),'%')
+		</if>
+		<if test="eHr != null and eHr != ''">
+			AND z1.E_HR = #{eHr}
+		</if>
+		<if test="csdeptid == null or csdeptid == ''">
+			AND CS_SUBDEPT_ID in
+			<foreach item="item" index="index" collection="ids" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="proNumber != null and proNumber != ''">
+			AND z1.CHSOFTI_PRO_NUMBER = #{proNumber}
+		</if>
+		<if test="projectName != null and projectName != ''">
+			AND z1.CHSOFTI_PRO_NAME = #{projectName}
+		</if>
+		<if test="csdeptid != null and csdeptid != ''">
+			AND z1.CS_SUBDEPT_ID = #{csdeptid}
+		</if>
+		ORDER BY o.e_hr DESC
+	</select>
+	<select id="queryAllStaff" resultMap="ResultMapWithBLOBs"
+		parameterType="com.pmo.dashboard.entity.OfflineOperCondition">
+		select
+		<include refid="Left_Column_List" />
+		, o.REMARK
+		FROM t_employee z1 LEFT JOIN(
+		select * from t_offline_oper
+		where 1=1
+		<if test="year != null and year != ''">
+			AND YEAR = YEAR(NOW())
+		</if>
+		<if test="month != null and month != ''">
+			AND MONTH = MONTH(NOW())
+		</if>
+		) o
+		ON z1.EMPLOYEE_ID = o.EMPLOYEE_ID
+		WHERE 1=1
+		AND z1.RESOURCE_STATUS='Active'
+		<if test="staffName != null and staffName != ''">
+			AND z1.STAFF_NAME like concat(concat('%',#{staffName}),'%')
+		</if>
+		<if test="eHr != null and eHr != ''">
+			AND z1.E_HR = #{eHr}
+		</if>
+		<if test="proNumber != null and proNumber != ''">
+			AND z1.CHSOFTI_PRO_NUMBER = #{proNumber}
+		</if>
+		<if test="projectName != null and projectName != ''">
+			AND z1.CHSOFTI_PRO_NAME = #{projectName}
+		</if>
+		<if test="csdeptid != null and csdeptid != ''">
+			AND z1.CS_SUBDEPT_ID = #{csdeptid}
+		</if>
+		ORDER BY o.e_hr DESC
+	</select>
+
+	<resultMap id="ResultMap_offline_employee" type="com.pmo.dashboard.entity.OfflineOper">
+		<result column="E_HR" property="eHr" jdbcType="VARCHAR" />
+		<result column="STAFF_NAME" property="staffName" jdbcType="VARCHAR" />
+		<result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR" />
+		<result column="CS_SUBDEPT_ID" property="csSubdeptId" jdbcType="VARCHAR" />
+		<result column="RM_USER_ID" property="rmId" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="employee_List">
+		E_HR, STAFF_NAME, EMPLOYEE_ID, CS_SUBDEPT_ID, RM_USER_ID
+	</sql>
+	<select id="queryFromEmployeeByRM" resultMap="ResultMap_offline_employee"
+		parameterType="com.pmo.dashboard.entity.OfflineOper">
+		select
+		<include refid="employee_List" />
+		from t_employee
+		where RESOURCE_STATUS='Active'
+		and RM_USER_ID = #{rmId}
+	</select>
+
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from t_offline_oper
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.pmo.dashboard.entity.OfflineOper">
+		insert into t_offline_oper (ID, E_HR, STAFF_NAME,
+		EMPLOYEE_ID, CREATE_DATE, CREATE_UPDATE,
+		CS_SUBDEPT_ID, RM_ID, RM_NAME,
+		OPERATOR_ID, MONTH, YEAR,
+		CHSOFTI_MSK_HOURS, CHSOFTI_AW_HOURS, CHSOFTI_IW_HOURS,
+		CHSOFTI_OT_HOURS, CHSOFTI_TO_HOURS, CHSOFTI_APW_HOURS,
+		CHSOFTI_IFAW, CHSOFTI_INVALID, CHSOFTI_INF_OT,
+		CHSOFTI_INF_PT, CHSOFTI_INF_AD, CHSOFTI_INF_TRAVEL,
+		CHSOFTI_INF_EQUIPMENT, CHSOFTI_INF_SUB, CHSOFTI_INF_TOTAL,
+		CHSOFTI_INF_CURRENT, CHSOFTI_EFFECTIVE_NR,
+		CHSOFTI_EFFECTIVE_ST, CHSOFTI_INVALID_ST, REMARK
+		)
+		values (#{id,jdbcType=VARCHAR}, #{eHr,jdbcType=VARCHAR},
+		#{staffName,jdbcType=VARCHAR},
+		#{employeeId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createUpdate,jdbcType=TIMESTAMP},
+		#{csSubdeptId,jdbcType=VARCHAR}, #{rmId,jdbcType=VARCHAR},
+		#{rmName,jdbcType=VARCHAR},
+		#{operatorId,jdbcType=VARCHAR}, #{month,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR},
+		#{chsoftiMskHours,jdbcType=DECIMAL},
+		#{chsoftiAwHours,jdbcType=DECIMAL},
+		#{chsoftiIwHours,jdbcType=DECIMAL},
+		#{chsoftiOtHours,jdbcType=DECIMAL},
+		#{chsoftiToHours,jdbcType=DECIMAL},
+		#{chsoftiApwHours,jdbcType=DECIMAL},
+		#{chsoftiIfaw,jdbcType=DECIMAL}, #{chsoftiInvalid,jdbcType=DECIMAL}, #{chsoftiInfOt,jdbcType=DECIMAL},
+		#{chsoftiInfPt,jdbcType=DECIMAL}, #{chsoftiInfAd,jdbcType=DECIMAL},
+		#{chsoftiInfTravel,jdbcType=DECIMAL},
+		#{chsoftiInfEquipment,jdbcType=DECIMAL},
+		#{chsoftiInfSub,jdbcType=DECIMAL},
+		#{chsoftiInfTotal,jdbcType=DECIMAL},
+		#{chsoftiInfCurrent,jdbcType=DECIMAL},
+		#{chsoftiEffectiveNr,jdbcType=DECIMAL},
+		#{chsoftiEffectiveSt,jdbcType=DECIMAL},
+		#{chsoftiInvalidSt,jdbcType=DECIMAL}, #{remark,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.pmo.dashboard.entity.OfflineOper">
+		insert into t_offline_oper
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="eHr != null">
+				E_HR,
+			</if>
+			<if test="staffName != null">
+				STAFF_NAME,
+			</if>
+			<if test="employeeId != null">
+				EMPLOYEE_ID,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="createUpdate != null">
+				CREATE_UPDATE,
+			</if>
+			<if test="csSubdeptId != null">
+				CS_SUBDEPT_ID,
+			</if>
+			<if test="rmId != null">
+				RM_ID,
+			</if>
+			<if test="rmName != null">
+				RM_NAME,
+			</if>
+			<if test="operatorId != null">
+				OPERATOR_ID,
+			</if>
+			<if test="month != null">
+				MONTH,
+			</if>
+			<if test="year != null">
+				YEAR,
+			</if>
+			<if test="chsoftiMskHours != null">
+				CHSOFTI_MSK_HOURS,
+			</if>
+			<if test="chsoftiAwHours != null">
+				CHSOFTI_AW_HOURS,
+			</if>
+			<if test="chsoftiIwHours != null">
+				CHSOFTI_IW_HOURS,
+			</if>
+			<if test="chsoftiOtHours != null">
+				CHSOFTI_OT_HOURS,
+			</if>
+			<if test="chsoftiToHours != null">
+				CHSOFTI_TO_HOURS,
+			</if>
+			<if test="chsoftiApwHours != null">
+				CHSOFTI_APW_HOURS,
+			</if>
+			<if test="chsoftiIfaw != null">
+				CHSOFTI_IFAW,
+			</if>
+			<if test="chsoftiInvalid != null">
+				CHSOFTI_INVALID,
+			</if>
+			<if test="chsoftiInfOt != null">
+				CHSOFTI_INF_OT,
+			</if>
+			<if test="chsoftiInfPt != null">
+				CHSOFTI_INF_PT,
+			</if>
+			<if test="chsoftiInfAd != null">
+				CHSOFTI_INF_AD,
+			</if>
+			<if test="chsoftiInfTravel != null">
+				CHSOFTI_INF_TRAVEL,
+			</if>
+			<if test="chsoftiInfEquipment != null">
+				CHSOFTI_INF_EQUIPMENT,
+			</if>
+			<if test="chsoftiInfSub != null">
+				CHSOFTI_INF_SUB,
+			</if>
+			<if test="chsoftiInfTotal != null">
+				CHSOFTI_INF_TOTAL,
+			</if>
+			<if test="chsoftiInfCurrent != null">
+				CHSOFTI_INF_CURRENT,
+			</if>
+			<if test="chsoftiEffectiveNr != null">
+				CHSOFTI_EFFECTIVE_NR,
+			</if>
+			<if test="chsoftiEffectiveSt != null">
+				CHSOFTI_EFFECTIVE_ST,
+			</if>
+			<if test="chsoftiInvalidSt != null">
+				CHSOFTI_INVALID_ST,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="eHr != null">
+				#{eHr,jdbcType=VARCHAR},
+			</if>
+			<if test="staffName != null">
+				#{staffName,jdbcType=VARCHAR},
+			</if>
+			<if test="employeeId != null">
+				#{employeeId,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUpdate != null">
+				#{createUpdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="csSubdeptId != null">
+				#{csSubdeptId,jdbcType=VARCHAR},
+			</if>
+			<if test="rmId != null">
+				#{rmId,jdbcType=VARCHAR},
+			</if>
+			<if test="rmName != null">
+				#{rmName,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorId != null">
+				#{operatorId,jdbcType=VARCHAR},
+			</if>
+			<if test="month != null">
+				#{month,jdbcType=VARCHAR},
+			</if>
+			<if test="year != null">
+				#{year,jdbcType=VARCHAR},
+			</if>
+			<if test="chsoftiMskHours != null">
+				#{chsoftiMskHours,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiAwHours != null">
+				#{chsoftiAwHours,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiIwHours != null">
+				#{chsoftiIwHours,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiOtHours != null">
+				#{chsoftiOtHours,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiToHours != null">
+				#{chsoftiToHours,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiApwHours != null">
+				#{chsoftiApwHours,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiIfaw != null">
+				#{chsoftiIfaw,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInvalid != null">
+				#{chsoftiInvalid,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfOt != null">
+				#{chsoftiInfOt,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfPt != null">
+				#{chsoftiInfPt,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfAd != null">
+				#{chsoftiInfAd,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfTravel != null">
+				#{chsoftiInfTravel,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfEquipment != null">
+				#{chsoftiInfEquipment,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfSub != null">
+				#{chsoftiInfSub,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfTotal != null">
+				#{chsoftiInfTotal,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfCurrent != null">
+				#{chsoftiInfCurrent,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiEffectiveNr != null">
+				#{chsoftiEffectiveNr,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiEffectiveSt != null">
+				#{chsoftiEffectiveSt,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInvalidSt != null">
+				#{chsoftiInvalidSt,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.pmo.dashboard.entity.OfflineOper">
+		update t_offline_oper
+		<set>
+			<if test="eHr != null">
+				E_HR = #{eHr,jdbcType=VARCHAR},
+			</if>
+			<if test="staffName != null">
+				STAFF_NAME = #{staffName,jdbcType=VARCHAR},
+			</if>
+			<if test="employeeId != null">
+				EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUpdate != null">
+				CREATE_UPDATE = #{createUpdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="csSubdeptId != null">
+				CS_SUBDEPT_ID = #{csSubdeptId,jdbcType=VARCHAR},
+			</if>
+			<if test="rmId != null">
+				RM_ID = #{rmId,jdbcType=VARCHAR},
+			</if>
+			<if test="rmName != null">
+				RM_NAME = #{rmName,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorId != null">
+				OPERATOR_ID = #{operatorId,jdbcType=VARCHAR},
+			</if>
+			<if test="month != null">
+				MONTH = #{month,jdbcType=VARCHAR},
+			</if>
+			<if test="year != null">
+				YEAR = #{year,jdbcType=VARCHAR},
+			</if>
+			<if test="chsoftiMskHours != null">
+				CHSOFTI_MSK_HOURS = #{chsoftiMskHours,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiAwHours != null">
+				CHSOFTI_AW_HOURS = #{chsoftiAwHours,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiIwHours != null">
+				CHSOFTI_IW_HOURS = #{chsoftiIwHours,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiOtHours != null">
+				CHSOFTI_OT_HOURS = #{chsoftiOtHours,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiToHours != null">
+				CHSOFTI_TO_HOURS = #{chsoftiToHours,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiApwHours != null">
+				CHSOFTI_APW_HOURS = #{chsoftiApwHours,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiIfaw != null">
+				CHSOFTI_IFAW = #{chsoftiIfaw,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInvalid != null">
+				CHSOFTI_INVALID = #{chsoftiInvalid,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfOt != null">
+				CHSOFTI_INF_OT = #{chsoftiInfOt,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfPt != null">
+				CHSOFTI_INF_PT = #{chsoftiInfPt,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfAd != null">
+				CHSOFTI_INF_AD = #{chsoftiInfAd,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfTravel != null">
+				CHSOFTI_INF_TRAVEL = #{chsoftiInfTravel,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfEquipment != null">
+				CHSOFTI_INF_EQUIPMENT = #{chsoftiInfEquipment,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfSub != null">
+				CHSOFTI_INF_SUB = #{chsoftiInfSub,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfTotal != null">
+				CHSOFTI_INF_TOTAL = #{chsoftiInfTotal,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInfCurrent != null">
+				CHSOFTI_INF_CURRENT = #{chsoftiInfCurrent,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiEffectiveNr != null">
+				CHSOFTI_EFFECTIVE_NR = #{chsoftiEffectiveNr,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiEffectiveSt != null">
+				CHSOFTI_EFFECTIVE_ST = #{chsoftiEffectiveSt,jdbcType=DECIMAL},
+			</if>
+			<if test="chsoftiInvalidSt != null">
+				CHSOFTI_INVALID_ST = #{chsoftiInvalidSt,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pmo.dashboard.entity.OfflineOper">
+		update t_offline_oper
+		set E_HR = #{eHr,jdbcType=VARCHAR},
+		STAFF_NAME = #{staffName,jdbcType=VARCHAR},
+		EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+		CREATE_UPDATE = #{createUpdate,jdbcType=TIMESTAMP},
+		CS_SUBDEPT_ID = #{csSubdeptId,jdbcType=VARCHAR},
+		RM_ID = #{rmId,jdbcType=VARCHAR},
+		RM_NAME = #{rmName,jdbcType=VARCHAR},
+		OPERATOR_ID = #{operatorId,jdbcType=VARCHAR},
+		MONTH = #{month,jdbcType=VARCHAR},
+		YEAR = #{year,jdbcType=VARCHAR},
+		CHSOFTI_MSK_HOURS = #{chsoftiMskHours,jdbcType=DECIMAL},
+		CHSOFTI_AW_HOURS = #{chsoftiAwHours,jdbcType=DECIMAL},
+		CHSOFTI_IW_HOURS = #{chsoftiIwHours,jdbcType=DECIMAL},
+		CHSOFTI_OT_HOURS = #{chsoftiOtHours,jdbcType=DECIMAL},
+		CHSOFTI_TO_HOURS = #{chsoftiToHours,jdbcType=DECIMAL},
+		CHSOFTI_APW_HOURS = #{chsoftiApwHours,jdbcType=DECIMAL},
+		CHSOFTI_IFAW = #{chsoftiIfaw,jdbcType=DECIMAL},
+		CHSOFTI_INVALID = #{chsoftiInvalid,jdbcType=DECIMAL},
+		CHSOFTI_INF_OT = #{chsoftiInfOt,jdbcType=DECIMAL},
+		CHSOFTI_INF_PT = #{chsoftiInfPt,jdbcType=DECIMAL},
+		CHSOFTI_INF_AD = #{chsoftiInfAd,jdbcType=DECIMAL},
+		CHSOFTI_INF_TRAVEL = #{chsoftiInfTravel,jdbcType=DECIMAL},
+		CHSOFTI_INF_EQUIPMENT = #{chsoftiInfEquipment,jdbcType=DECIMAL},
+		CHSOFTI_INF_SUB = #{chsoftiInfSub,jdbcType=DECIMAL},
+		CHSOFTI_INF_TOTAL = #{chsoftiInfTotal,jdbcType=DECIMAL},
+		CHSOFTI_INF_CURRENT = #{chsoftiInfCurrent,jdbcType=DECIMAL},
+		CHSOFTI_EFFECTIVE_NR = #{chsoftiEffectiveNr,jdbcType=DECIMAL},
+		CHSOFTI_EFFECTIVE_ST = #{chsoftiEffectiveSt,jdbcType=DECIMAL},
+		CHSOFTI_INVALID_ST = #{chsoftiInvalidSt,jdbcType=DECIMAL},
+		REMARK = #{remark,jdbcType=LONGVARCHAR}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.pmo.dashboard.entity.OfflineOper">
+		update t_offline_oper
+		set E_HR = #{eHr,jdbcType=VARCHAR},
+		STAFF_NAME = #{staffName,jdbcType=VARCHAR},
+		EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+		CREATE_UPDATE = #{createUpdate,jdbcType=TIMESTAMP},
+		CS_SUBDEPT_ID = #{csSubdeptId,jdbcType=VARCHAR},
+		RM_ID = #{rmId,jdbcType=VARCHAR},
+		RM_NAME = #{rmName,jdbcType=VARCHAR},
+		OPERATOR_ID = #{operatorId,jdbcType=VARCHAR},
+		MONTH = #{month,jdbcType=VARCHAR},
+		YEAR = #{year,jdbcType=VARCHAR},
+		CHSOFTI_MSK_HOURS = #{chsoftiMskHours,jdbcType=DECIMAL},
+		CHSOFTI_AW_HOURS = #{chsoftiAwHours,jdbcType=DECIMAL},
+		CHSOFTI_IW_HOURS = #{chsoftiIwHours,jdbcType=DECIMAL},
+		CHSOFTI_OT_HOURS = #{chsoftiOtHours,jdbcType=DECIMAL},
+		CHSOFTI_TO_HOURS = #{chsoftiToHours,jdbcType=DECIMAL},
+		CHSOFTI_APW_HOURS = #{chsoftiApwHours,jdbcType=DECIMAL},
+		CHSOFTI_IFAW = #{chsoftiIfaw,jdbcType=DECIMAL},
+		CHSOFTI_INVALID = #{chsoftiInvalid,jdbcType=DECIMAL},
+		CHSOFTI_INF_OT = #{chsoftiInfOt,jdbcType=DECIMAL},
+		CHSOFTI_INF_PT = #{chsoftiInfPt,jdbcType=DECIMAL},
+		CHSOFTI_INF_AD = #{chsoftiInfAd,jdbcType=DECIMAL},
+		CHSOFTI_INF_TRAVEL = #{chsoftiInfTravel,jdbcType=DECIMAL},
+		CHSOFTI_INF_EQUIPMENT = #{chsoftiInfEquipment,jdbcType=DECIMAL},
+		CHSOFTI_INF_SUB = #{chsoftiInfSub,jdbcType=DECIMAL},
+		CHSOFTI_INF_TOTAL = #{chsoftiInfTotal,jdbcType=DECIMAL},
+		CHSOFTI_INF_CURRENT = #{chsoftiInfCurrent,jdbcType=DECIMAL},
+		CHSOFTI_EFFECTIVE_NR = #{chsoftiEffectiveNr,jdbcType=DECIMAL},
+		CHSOFTI_EFFECTIVE_ST = #{chsoftiEffectiveSt,jdbcType=DECIMAL},
+		CHSOFTI_INVALID_ST = #{chsoftiInvalidSt,jdbcType=DECIMAL}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="rmCount" parameterType="com.pmo.dashboard.entity.OfflineOper"
+		resultType="int">
+		SELECT count(*) From t_offline_oper
+		WHERE YEAR = #{year} and MONTH = #{month} and RM_ID = #{rmId}
+	</select>
+
+	<select id="employeeCount" parameterType="com.pmo.dashboard.entity.OfflineOper"
+		resultType="int">
+		SELECT count(*) From t_offline_oper
+		WHERE YEAR = YEAR(NOW()) and MONTH = MONTH(NOW()) and EMPLOYEE_ID =
+		#{employeeId}
+	</select>
+	<select id="queryByEmployeeID" parameterType="com.pmo.dashboard.entity.OfflineOper"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_offline_oper
+		WHERE YEAR = YEAR(NOW()) and MONTH = MONTH(NOW()) and EMPLOYEE_ID =
+		#{employeeId}
+	</select>
+
+	<select id="queryOfflineOper" resultMap="ResultMapWithBLOBs"
+		parameterType="com.pmo.dashboard.entity.OfflineOperCondition">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_offline_oper
+		where 1=1
+		<if test="year != null and year != ''">
+			AND YEAR = #{year}
+		</if>
+		<if test="month != null and month != ''">
+			AND MONTH = #{month}
+		</if>
+		<if test="rmId != null and rmId != ''">
+			AND RM_ID = #{rmId}
+		</if>
+		<if test="staffName != null and staffName != ''">
+			AND STAFF_NAME like concat(concat('%',#{staffName}),'%')
+		</if>
+		<!-- <if test="csdeptid == null or csdeptid == ''"> -->
+		<!-- AND CS_SUBDEPT_ID in -->
+		<!-- <foreach item="item" index="index" collection="ids" open="(" separator="," 
+			close=")"> -->
+		<!-- #{item} -->
+		<!-- </foreach> -->
+		<!-- </if> -->
+	</select>
+
+	<!-- <select id="queryRMFromDept" parameterType="String" resultMap="userMap"> -->
+	<!-- SELECT * FROM t_user WHERE user_type='5' AND FIND_IN_SET( #{subDeptId},CSDEPT_ID 
+		)>0 -->
+	<!-- </select> -->
+
+	<select id="queryIfaw" parameterType="com.pmo.dashboard.entity.OfflineOperCondition"
+		resultType="com.pmo.dashboard.entity.OperSummary">
+		select sum(CHSOFTI_IFAW) value
+		from t_offline_oper
+		where 1=1
+		<if test="year != null and year != ''">
+			AND YEAR = #{year}
+		</if>
+		<if test="month != null and month != ''">
+			AND MONTH = #{month}
+		</if>
+		<if test="rmId != null and rmId != ''">
+			AND RM_ID = #{rmId}
+		</if>
+		<if test="csdeptid != null or csdeptid != ''">
+			AND CS_SUBDEPT_ID = #{csdeptid}
+		</if>
+	</select>
+	<select id="queryInfOt" parameterType="com.pmo.dashboard.entity.OfflineOperCondition"
+		resultType="com.pmo.dashboard.entity.OperSummary">
+		select sum(CHSOFTI_INF_OT) value
+		from t_offline_oper
+		where 1=1
+		<if test="year != null and year != ''">
+			AND YEAR = #{year}
+		</if>
+		<if test="month != null and month != ''">
+			AND MONTH = #{month}
+		</if>
+		<if test="rmId != null and rmId != ''">
+			AND RM_ID = #{rmId}
+		</if>
+		<if test="csdeptid != null or csdeptid != ''">
+			AND CS_SUBDEPT_ID = #{csdeptid}
+		</if>
+	</select>
 </mapper>

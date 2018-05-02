@@ -158,4 +158,29 @@ public class OfflineOperController {
 		}
 		return null;
 	}
+	
+	/**
+	 * 查询汇总数据
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws JsonProcessingException
+	 */
+	@RequestMapping("/querySummary")
+	@ResponseBody
+	public String querySummary(int pageSize,int pageNumber,OfflineOperCondition condition,HttpServletRequest request) throws JsonProcessingException{
+		User user = (User) request.getSession().getAttribute("loginUser");
+		List<OfflineOper> data = offlineOperService.query(condition,user,pageSize,pageNumber);
+		PageInfo<OfflineOper> page = new PageInfo(data);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("total", page.getTotal());
+		map.put("rows", data);
+		return objectMapper.writeValueAsString(map);
+	}
+	
+	@RequestMapping(value= {"/exportSummary"})
+	public String exportSummary(HttpServletRequest request,HttpServletResponse response) throws JsonProcessingException{
+		return null;
+	}
+		
 }

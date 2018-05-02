@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.pmo.dashboard.entity.OfflineOper;
 import com.pmo.dashboard.entity.OfflineOperCondition;
+import com.pmo.dashboard.entity.OperSummary;
 
 public interface OfflineOperMapper {
 	int deleteByPrimaryKey(String id);
@@ -75,4 +76,10 @@ public interface OfflineOperMapper {
     * OfflineOper
     */
    OfflineOper queryByEmployeeID(OfflineOper condition);
+   
+   List<OperSummary> queryIfaw(OfflineOperCondition condition);
+   
+   List<OfflineOper> queryOfflineOper(OfflineOperCondition condition);
+   
+   List<OfflineOper> queryInfOt(OfflineOperCondition condition);
 }
