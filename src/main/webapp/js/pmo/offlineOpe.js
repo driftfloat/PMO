@@ -208,10 +208,6 @@ function loadOfflineOperList(){
             	if(row.chsoftiAwHours==null){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
-            	if(row.billRate==null){
-            		alert("此员工没有单价，无法计算");
-            		return;
-            	}
             	var res = row.billRate*row.chsoftiAwHours;
             	//计算后的值赋给字段
             	row.chsoftiIfaw=res;
