@@ -1,8 +1,3 @@
-/**
- * @author zhixin wen <wenzhixin2010@gmail.com>
- * @version: v1.0.1
- */
-
 (function ($) {
     'use strict';
 
@@ -17,27 +12,18 @@
         _resetView = BootstrapTable.prototype.resetView;
 
     BootstrapTable.prototype.initFixedColumns = function () {
-        this.$fixedHeader = $([
-            '<div class="fixed-table-header-columns">',
+        this.$fixedBody = $([
+            '<div class="fixed-table-column" style="position: absolute; background-color: #fff; border-right:1px solid #ddd;">',
             '<table>',
             '<thead></thead>',
-            '</table>',
-            '</div>'].join(''));
-
-        this.timeoutHeaderColumns_ = 0;
-        this.$fixedHeader.find('table').attr('class', this.$el.attr('class'));
-        this.$fixedHeaderColumns = this.$fixedHeader.find('thead');
-        this.$tableHeader.before(this.$fixedHeader);
-
-        this.$fixedBody = $([
-            '<div class="fixed-table-body-columns">',
-            '<table>',
             '<tbody></tbody>',
             '</table>',
             '</div>'].join(''));
 
+        this.timeoutHeaderColumns_ = 0;
         this.timeoutBodyColumns_ = 0;
         this.$fixedBody.find('table').attr('class', this.$el.attr('class'));
+        this.$fixedHeaderColumns = this.$fixedBody.find('thead');
         this.$fixedBodyColumns = this.$fixedBody.find('tbody');
         this.$tableBody.before(this.$fixedBody);
     };
@@ -51,11 +37,14 @@
 
         this.initFixedColumns();
 
-        var that = this, $trs = this.$header.find('tr').clone();
-        $trs.each(function () {
-            $(this).find('th:gt(' + that.options.fixedNumber + ')').remove();
-        });
-        this.$fixedHeaderColumns.html('').append($trs); 
+        var $tr = this.$header.find('tr:eq(0)').clone(),
+            $ths = $tr.clone().find('th');
+
+        $tr.html('');
+        for (var i = 0; i < this.options.fixedNumber; i++) {
+            $tr.append($ths.eq(i).clone());
+        }
+        this.$fixedHeaderColumns.html('').append($tr);
     };
 
     BootstrapTable.prototype.initBody = function () {
@@ -65,28 +54,18 @@
             return;
         }
 
-        var that = this,
-            rowspan = 0;
+        var that = this;
 
         this.$fixedBodyColumns.html('');
         this.$body.find('> tr[data-index]').each(function () {
             var $tr = $(this).clone(),
-                $tds = $tr.find('td');
+                $tds = $tr.clone().find('td');
 
             $tr.html('');
-            var end = that.options.fixedNumber;
-            if (rowspan > 0) {
-                --end;
-                --rowspan;
-            }
-            for (var i = 0; i < end; i++) {
+            for (var i = 0; i < that.options.fixedNumber; i++) {
                 $tr.append($tds.eq(i).clone());
             }
             that.$fixedBodyColumns.append($tr);
-            
-            if ($tds.eq(0).attr('rowspan')){
-            	rowspan = $tds.eq(0).attr('rowspan') - 1;
-            }
         });
     };
 
@@ -121,40 +100,28 @@
                 index = i - 1;
             }
 
-            that.$fixedHeader.find('th[data-field="' + visibleFields[index] + '"]')
-                .find('.fht-cell').width($this.innerWidth());
+            that.$fixedBody.find('thead th[data-field="' + visibleFields[index] + '"]')
+                .find('.fht-cell').width($this.innerWidth() - 1);
             headerWidth += $this.outerWidth();
         });
-        this.$fixedHeader.width(headerWidth + 1).show();
+        this.$fixedBody.width(headerWidth - 1).show();
     };
 
     BootstrapTable.prototype.fitBodyColumns = function () {
         var that = this,
             top = -(parseInt(this.$el.css('margin-top')) - 2),
-            // the fixed height should reduce the scorll-x height
-            height = this.$tableBody.height() - 14;
+            height = this.$tableBody.height() - 2;
 
         if (!this.$body.find('> tr[data-index]').length) {
             this.$fixedBody.hide();
             return;
         }
 
-        if (!this.options.height) {
-            top = this.$fixedHeader.height();
-            height = height - top;
-        }
-
-        this.$fixedBody.css({
-            width: this.$fixedHeader.width(),
-            height: height,
-            top: top
-        }).show();
-
         this.$body.find('> tr').each(function (i) {
-            that.$fixedBody.find('tr:eq(' + i + ')').height($(this).height() - 1);
+            that.$fixedBody.find('tbody tr:eq(' + i + ')').height($(this).height() - 1);
         });
 
-        // events
+        //// events
         this.$tableBody.on('scroll', function () {
             that.$fixedBody.find('table').css('top', -$(this).scrollTop());
         });

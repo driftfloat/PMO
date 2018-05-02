@@ -157,7 +157,7 @@ function loadOfflineOperList(){
         },
         {
             field: 'chsoftiInfTravel',
-            title: 'InfTravel',
+            title: 'Travel',
             editable: {
                 type: 'text',
                 title: '差旅收入',
@@ -172,7 +172,7 @@ function loadOfflineOperList(){
         },
         {
             field: 'chsoftiInfEquipment',
-            title: 'InfEquipment',
+            title: 'Equipment',
             editable: {
                 type: 'text',
                 title: '付费设备收入',
@@ -187,7 +187,7 @@ function loadOfflineOperList(){
         },
         {
             field: 'chsoftiInfSub',
-            title: 'InfSub',
+            title: 'Sub',
             editable: {
                 type: 'text',
                 title: '分包收入',
@@ -208,7 +208,11 @@ function loadOfflineOperList(){
             	if(row.chsoftiAwHours==null){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
-            	var res = parseFloat(row.billRate)*parseFloat(row.chsoftiAwHours);
+            	if(row.billRate==null){
+            		alert("此员工没有单价，无法计算");
+            		return;
+            	}
+            	var res = row.billRate*row.chsoftiAwHours;
             	//计算后的值赋给字段
             	row.chsoftiIfaw=res;
             	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
@@ -222,7 +226,7 @@ function loadOfflineOperList(){
             	if(row.chsoftiIwHours==null){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
-            	var res = parseFloat(row.billRate)*parseFloat(row.chsoftiIwHours);
+            	var res = row.billRate*row.chsoftiIwHours;
             	//计算后的值赋给字段
             	row.chsoftiInvalid=res;
             	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
@@ -236,7 +240,7 @@ function loadOfflineOperList(){
             	if(row.chsoftiOtHours==null){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
-            	var res = parseFloat(row.billRate)*parseFloat(row.chsoftiOtHours);
+            	var res = row.billRate*row.chsoftiOtHours;
             	//计算后的值赋给字段
             	row.chsoftiInfOt=res;
             	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
@@ -250,7 +254,7 @@ function loadOfflineOperList(){
             	if(row.chsoftiToHours==null){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
-            	var res = parseFloat(row.billRate)*parseFloat(row.chsoftiToHours);
+            	var res = row.billRate*row.chsoftiToHours;
             	//计算后的值赋给字段
             	row.chsoftiInfPt=res;
             	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
@@ -264,7 +268,7 @@ function loadOfflineOperList(){
             	if(row.chsoftiApwHours==null){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
-            	var res = parseFloat(row.billRate)*parseFloat(row.chsoftiApwHours);
+            	var res = row.billRate*row.chsoftiApwHours;
             	//计算后的值赋给字段
             	row.chsoftiInfAd=res;
             	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
@@ -389,23 +393,23 @@ function loadOfflineOperList(){
         		if(currentData[i]==row){
         			//中软实际工时有变动
         			if(field=="chsoftiAwHours"){
-        				upCell(i,"chsoftiIfaw",row.chsoftiIfaw);
+        				upCell(i,"chsoftiIfaw",row.chsoftiIfaw,row.billRate);
         			}
         			//中软无效工时有变动
         			if(field=="chsoftiIwHours"){
-        				upCell(i,"chsoftiInvalid",row.chsoftiInvalid);
+        				upCell(i,"chsoftiInvalid",row.chsoftiInvalid,row.billRate);
         			}
         			//中软加班费工时有变动
         			if(field="chsoftiOtHours"){
-        				upCell(i,"chsoftiInfOt",row.chsoftiInfOt);
+        				upCell(i,"chsoftiInfOt",row.chsoftiInfOt,row.billRate);
         			}
         			//中软调休工时有变动
         			if(field="chsoftiToHours"){
-        				upCell(i,"chsoftiInfPt",row.chsoftiInfPt);
+        				upCell(i,"chsoftiInfPt",row.chsoftiInfPt,row.billRate);
         			}
         			//中软调整上月工时有变动
         			if(field="chsoftiApwHours"){
-        				upCell(i,"chsoftiInfAd",row.chsoftiInfAd);
+        				upCell(i,"chsoftiInfAd",row.chsoftiInfAd,row.billRate);
         			}
         			
         		}
@@ -467,7 +471,11 @@ function search(){
 }
 
 //更新指定单元格数据
-function upCell(index,field,value){
+function upCell(index,field,value,billRate){
+	/*if(billRate==null){
+		alert("此员工没有单价，无法计算");
+		return;
+	}*/
 	var cellValue = {
             index : index,  //更新列所在行的索引
             field : field, //要更新列的field
