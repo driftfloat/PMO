@@ -130,10 +130,15 @@ public class TestOfflineOperService {
 		data.setCsSubdeptId(e.getCsSubDept());
 		data.setRmId(user.getUserId());
 		data.setChsoftiAwHours(new BigDecimal("133"));
-		if ("".equals(user.getUserId())) {
+//		if ("".equals(user.getUserId())) {
+//
+//		}
 
+		if (" 王廣智".equals(e.getStaffName())) {
+			data.setChsoftiIwHours(new BigDecimal("19")); // 27 19
+		} else {
+			data.setChsoftiIwHours(new BigDecimal("27")); // 27 19
 		}
-		data.setChsoftiIwHours(new BigDecimal("19")); // 27 19
 
 		data.setChsoftiOtHours(new BigDecimal("8"));
 		data.setChsoftiToHours(new BigDecimal("9"));
@@ -154,31 +159,79 @@ public class TestOfflineOperService {
 	// }
 
 	@Test
+	public void saveYear() {
+		final String YEAR = "2018";
+		final int MONTH = LocalDate.now().getMonthValue();
+		final String STAFFNAME = "武建海";  
+			// "白世铭" "cb00bad3f16a4e8baf450e7b88af7c4b" ||    " 王廣智" "a42f87d13fff455da434649ab3c8f876"
+		final String EMPLOYEEID = "1018"; 
+				// "04fcb811aeae4808bb303aaf2cabba52" 白世铭  || "1024" 王涛   rm 张培
+				// || "1004"  王廣智 rm  叶海伦
+		        // || 1018     武建海     rm  张盛
+			
+		final String RMID = "20f1aeff297d49d4b3c42877687a7076";  
+			//"cb00bad3f16a4e8baf450e7b88af7c4b"  张培 || "a42f87d13fff455da434649ab3c8f876" 叶海伦
+		    // 20f1aeff297d49d4b3c42877687a7076     张盛  
+
+		for (int i = 1; i <= MONTH; i++) {
+			OfflineOperCondition condition = new OfflineOperCondition();
+			condition.setYear(YEAR);
+			condition.setMonth("" + i);
+
+			OfflineOper data = new OfflineOper();
+			data.setYear(YEAR);
+			data.setMonth("" + i);
+
+			data.setEmployeeId(EMPLOYEEID); // 白世铭
+			data.setStaffName(STAFFNAME);
+			User user = new User();
+			user.setUserId(RMID); // 张培 12
+			user.setUserType("5");
+			condition.setStaffName(STAFFNAME);
+
+			// data.setEmployeeId("1004"); // 王廣智
+			// data.setStaffName(" 王廣智");
+			// User user = new User();
+			// user.setUserId("a42f87d13fff455da434649ab3c8f876"); // 叶海伦
+			// user.setUserType("5");
+			// condition.setStaffName(" 王廣智");
+
+			List<OfflineOper> list = offlineOperMapper.queryOfflineOper(condition);
+			for (OfflineOper o : list) {
+				offlineOperService.delete(o.getId());
+			}
+			initOfflineOper(data, user);
+			System.out.println(offlineOperService.save(data, user));
+		}
+	}
+
+//	@Test
 	public void save() {
 		OfflineOperCondition condition = new OfflineOperCondition();
 		condition.setYear("2018");
 		condition.setMonth("4");
-		
+
 		OfflineOper data = new OfflineOper();
 		data.setYear("2018");
 		data.setMonth("4");
 
-		 data.setEmployeeId("04fcb811aeae4808bb303aaf2cabba52"); //白世铭
-		 data.setStaffName("白世铭");
-		 User user = new User();
-		 user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b"); // 张培 12
-		 user.setUserType("5");
-//		 condition.setStaffName("白世铭");
+		data.setEmployeeId("04fcb811aeae4808bb303aaf2cabba52"); // 白世铭
+		data.setStaffName("白世铭");
+		User user = new User();
+		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b"); // 张培 12
+		user.setUserType("5");
+		condition.setStaffName("白世铭");
 
-//		data.setEmployeeId("1004"); // 王廣智
-//		data.setStaffName(" 王廣智");
-//		User user = new User();
-//		user.setUserId("a42f87d13fff455da434649ab3c8f876"); // 叶海伦
-//		user.setUserType("5");
-//		condition.setStaffName(" 王廣智");
+		// data.setEmployeeId("1004"); // 王廣智
+		// data.setStaffName(" 王廣智");
+		// User user = new User();
+		// user.setUserId("a42f87d13fff455da434649ab3c8f876"); // 叶海伦
+		// user.setUserType("5");
+		// condition.setStaffName(" 王廣智");
 
-		List<OfflineOper> list = offlineOperService.query(condition, user, PAGESIZE, PAGENUMBER); //
-//		List<OfflineOper> list = offlineOperMapper.queryOfflineOper(condition);
+		// List<OfflineOper> list = offlineOperService.query(condition, user, PAGESIZE,
+		// PAGENUMBER); //
+		List<OfflineOper> list = offlineOperMapper.queryOfflineOper(condition);
 		for (OfflineOper o : list) {
 			offlineOperService.delete(o.getId());
 		}

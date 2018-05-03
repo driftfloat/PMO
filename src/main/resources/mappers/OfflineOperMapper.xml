@@ -132,10 +132,11 @@
 		select * from t_offline_oper
 		where 1=1
 		<if test="year != null and year != ''">
-			AND YEAR = YEAR(NOW())
+<!-- 			AND YEAR = YEAR(NOW()) -->
+			AND YEaR = #{year}
 		</if>
 		<if test="month != null and month != ''">
-			AND MONTH = MONTH(NOW())
+			AND MONTH = #{month}
 		</if>
 		<if test="rmId != null and rmId != ''">
 			AND RM_ID = #{rmId}
@@ -783,11 +784,14 @@
 		)>0 -->
 	<!-- </select> -->
 
-	<select id="queryIfaw" parameterType="com.pmo.dashboard.entity.OfflineOperCondition"
+	<select id="querySummary" parameterType="com.pmo.dashboard.entity.OfflineOperCondition"
 		resultType="com.pmo.dashboard.entity.OperSummary">
-		select sum(CHSOFTI_IFAW) value
-		from t_offline_oper
-		where 1=1
+		select sum(CHSOFTI_IFAW) ifaw, sum(CHSOFTI_INF_OT) infOt, sum(CHSOFTI_INF_PT) infPt, sum(CHSOFTI_INF_AD) infAd          
+		, sum(CHSOFTI_INF_TRAVEL) infTravel, sum(CHSOFTI_INF_EQUIPMENT) infEquipment, sum(CHSOFTI_INF_SUB) infSub, sum(CHSOFTI_INVALID) invalid
+		, sum(CHSOFTI_EFFECTIVE_ST) effectiveSt, sum(CHSOFTI_INVALID_ST) invalidSt
+<!-- 		, year, month  -->
+		from t_offline_oper o
+		where 1=1 
 		<if test="year != null and year != ''">
 			AND YEAR = #{year}
 		</if>
@@ -797,26 +801,9 @@
 		<if test="rmId != null and rmId != ''">
 			AND RM_ID = #{rmId}
 		</if>
-		<if test="csdeptid != null or csdeptid != ''">
+		<if test="csdeptid != null and csdeptid != ''">
 			AND CS_SUBDEPT_ID = #{csdeptid}
 		</if>
 	</select>
-	<select id="queryInfOt" parameterType="com.pmo.dashboard.entity.OfflineOperCondition"
-		resultType="com.pmo.dashboard.entity.OperSummary">
-		select sum(CHSOFTI_INF_OT) value
-		from t_offline_oper
-		where 1=1
-		<if test="year != null and year != ''">
-			AND YEAR = #{year}
-		</if>
-		<if test="month != null and month != ''">
-			AND MONTH = #{month}
-		</if>
-		<if test="rmId != null and rmId != ''">
-			AND RM_ID = #{rmId}
-		</if>
-		<if test="csdeptid != null or csdeptid != ''">
-			AND CS_SUBDEPT_ID = #{csdeptid}
-		</if>
-	</select>
+	
 </mapper>

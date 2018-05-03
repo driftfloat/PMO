@@ -26,10 +26,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.OfflineOper;
 import com.pmo.dashboard.entity.OfflineOperCondition;
+import com.pmo.dashboard.entity.OperSummary;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.ExportExcel;
 import com.pom.dashboard.service.CSDeptService;
@@ -168,12 +170,20 @@ public class OfflineOperController {
 	 */
 	@RequestMapping("/querySummary")
 	@ResponseBody
-	public String querySummary(int pageSize,int pageNumber,OfflineOperCondition condition,HttpServletRequest request) throws JsonProcessingException{
+	public String querySummary(int pageSize,int pageNumber,OfflineOperCondition condition,HttpServletRequest request) throws Exception{
 		User user = (User) request.getSession().getAttribute("loginUser");
-		List<OfflineOper> data = offlineOperService.query(condition,user,pageSize,pageNumber);
-		PageInfo<OfflineOper> page = new PageInfo(data);
+		PageHelper.startPage(pageNumber,pageSize); 	
+		List<OperSummary> data = offlineOperService.querySummary(user, pageSize, pageNumber);
+//		PageInfo<OfflineOper> page = new PageInfo(data);
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("total", page.getTotal());
+		map.put("total", data.size());  // page.getTotal()
+		int from = (pageNumber-1)*pageSize;
+		int to = pageNumber*pageSize ;
+		from = from <=0 ?0:from ;
+		from = from >data.size() ?data.size():from;
+		to = to >data.size() ?data.size():to;
+		to = to <=0 ?0:to ;
+		data = data.subList(from, to);
 		map.put("rows", data);
 		return objectMapper.writeValueAsString(map);
 	}

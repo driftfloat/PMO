@@ -77,9 +77,8 @@ public interface OfflineOperMapper {
     */
    OfflineOper queryByEmployeeID(OfflineOper condition);
    
-   List<OperSummary> queryIfaw(OfflineOperCondition condition);
-   
    List<OfflineOper> queryOfflineOper(OfflineOperCondition condition);
    
-   List<OfflineOper> queryInfOt(OfflineOperCondition condition);
+   List<OperSummary> querySummary(OfflineOperCondition condition);
+   
 }

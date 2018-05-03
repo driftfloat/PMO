@@ -30,7 +30,7 @@ public interface OfflineOperService {
 
 	List<OfflineOper> exportData(User user);
 	
-	List<OfflineOper> querySummary(OfflineOperCondition condition, User user,int pageSize,int pageNumber);
+	List<OperSummary> querySummary(User user,int pageSize,int pageNumber)  throws Exception;
 	
-	List<OperSummary> exportSummary(User user);
+	List<OperSummary> exportSummary(User user)  throws Exception;
 }

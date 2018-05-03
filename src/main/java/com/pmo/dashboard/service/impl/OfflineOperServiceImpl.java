@@ -1,6 +1,9 @@
 package com.pmo.dashboard.service.impl;
 
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -57,6 +60,16 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 	
 	@Resource
 	MLWorkHourMapper MLWorkHourMapper;
+	
+	private final static String[] TYPES = {"实际工时收入-收入1","加班费工时收入-收入2", "调休工时收入-收入3","调整上月工时收入-收入4"
+			,"差旅收入-收入5","付费设备收入-收入6","分包收入-收入7"
+			,"无效收入","billable人力","unbillable人力"};
+	private final static String[] REMARKS = {"∑（每个人有效工时*单价）","∑（每个人加班费工时*单价）","∑（每个人调休工时*单价）","轧差有效付费的收入"
+			,"非人员收入（付费差旅）","非人员收入（客户付费采购类）","真实分包收入"
+			,"∑（每个人非付费工时*单价）","有效工时人力","非付费工时人力"};
+	private final static String[] METHODS = {"getIfaw","getInfOt","getInfPt","getInfAd"
+			,"getInfTravel","getInfEquipment","getInfSub"
+			,"getInvalid","getEffectiveSt","getInvalidSt"};
 	
 	@Override
 	public boolean delete(String id) {
@@ -148,8 +161,9 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 //		int rmCount = offlineOperMapper.rmCount(condition);
 //		if( 0 == rmCount) {
 //		}
+		condition.setYear(""+LocalDate.now().getYear());
+		condition.setMonth(""+LocalDate.now().getMonthValue());
 		List<OfflineOper> rtn = null ;
-		Set<User> rmSet = new HashSet();
 		if("5".equals(user.getUserType())) { // RM
 			condition.setRmId(user.getUserId());
 //			String[] rmIDs = {user.getUserId()};
@@ -337,9 +351,69 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 	}
 
 	@Override
-	public List<OfflineOper> querySummary(OfflineOperCondition condition, User user, int pageSize, int pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<OperSummary> querySummary(User user, int pageSize, int pageNumber) throws Exception {
+		final int YEAR = LocalDate.now().getYear();
+		final int MONTH = LocalDate.now().getMonthValue();
+		final int LENGTH = 10 ;
+		List<OperSummary> rtn = new ArrayList<OperSummary>();
+//		for(int i=0;i< LENGTH;i++) {
+//			OperSummary r = new OperSummary();
+//			r.setId(""+i);
+//			r.setDepartmentName(user.getNickname());
+//			r.setType(TYPES[i]);
+//			r.setRemark(REMARKS[i]);
+//			rtn.add(r);
+//		}
+//		rtn.addAll(rtn);
+//		PageHelper.startPage(pageNumber,pageSize); 	
+			
+		if("5".equals(user.getUserType())) { // RM
+			for(int i=0;i< LENGTH;i++) {
+				OperSummary r = new OperSummary();
+				r.setId(""+i);
+				r.setDepartmentName(user.getNickname());
+				r.setType(TYPES[i]);
+				r.setRemark(REMARKS[i]);
+				rtn.add(r);
+			}
+			for (int i = 1; i <= MONTH; i++) {
+				OfflineOperCondition condition = new OfflineOperCondition();
+				condition.setYear(""+YEAR);
+				condition.setMonth(""+i);
+				condition.setRmId(user.getUserId()); 
+//				condition.setCsdeptid("12");
+				List<OperSummary> list = offlineOperMapper.querySummary(condition);
+				// 转置 row ==> column
+				if(list.get(0) != null) {
+					OperSummary o = list.get(0) ;
+					Class clazz = o.getClass(); 
+					for(int j=0; j< LENGTH;j++) {
+						OperSummary r = rtn.get(j);
+						Map<String,BigDecimal> months ; 
+						if(r.getMonths()!=null) {
+							months = r.getMonths();
+						}else {
+							months = new HashMap<String,BigDecimal>();
+						}
+						Method m1 = clazz.getDeclaredMethod(METHODS[j]);
+						BigDecimal value = (BigDecimal) m1.invoke(o); 
+						months.put("month"+i, value);
+						r.setMonths(months);
+						if(null != value) {
+							r.setYearTotal(r.getYearTotal().add(value));
+						}
+					}
+				}
+			}
+			return rtn;
+		}else if("3".equals(user.getUserType())) {  // 交付部经理
+			
+		}else if("1".equals(user.getUserType())){ // 事业部经理
+			
+		}else if("0".equals(user.getUserType())) {
+			
+		}
+		return rtn;
 	}
 
 	@Override
