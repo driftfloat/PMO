@@ -24,13 +24,16 @@ public class Constants
     // export offline summary types
     public final static String[] SUMMARY_TYPES = {"实际工时收入-收入1","加班费工时收入-收入2", "调休工时收入-收入3","调整上月工时收入-收入4"
 			,"差旅收入-收入5","付费设备收入-收入6","分包收入-收入7"
-			,"无效收入","billable人力","unbillable人力"};
+			,"无效收入","billable人力","unbillable人力"
+			,"理论收入合计","有效收入合计","月滚NR合计","有效人天产能"};
 	// export offline summary remark
     public final static String[] SUMMARY_REMARKS = {"∑（每个人有效工时*单价）","∑（每个人加班费工时*单价）","∑（每个人调休工时*单价）","轧差有效付费的收入"
 			,"非人员收入（付费差旅）","非人员收入（客户付费采购类）","真实分包收入"
-			,"∑（每个人非付费工时*单价）","有效工时人力","非付费工时人力"};
+			,"∑（每个人非付费工时*单价）","有效工时人力","非付费工时人力"
+			,"∑（收入1+2+3+4+5+6+无效收入）","∑（收入1+2+3+4+5+6）","NR=有效收入合计/1.06","产能=收入1/billable人力1/当月工作日"};
 	// export offline summary method
     public final static String[] SUMMARY_METHODS = {"getIfaw","getInfOt","getInfPt","getInfAd"
 			,"getInfTravel","getInfEquipment","getInfSub"
-			,"getInvalid","getEffectiveSt","getInvalidSt"};
+			,"getInvalid","getEffectiveSt","getInvalidSt"
+			,"getThinkTotalIncome","getRealTotalIncome","getEffectiveNr","getEffectiveHuman"};
 }

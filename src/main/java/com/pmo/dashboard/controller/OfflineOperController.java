@@ -172,8 +172,8 @@ public class OfflineOperController {
 	@ResponseBody
 	public String querySummary(int pageSize,int pageNumber,OfflineOperCondition condition,HttpServletRequest request) throws Exception{
 		User user = (User) request.getSession().getAttribute("loginUser");
-		PageHelper.startPage(pageNumber,pageSize); 	
-		List<OperSummary> data = offlineOperService.querySummary(user, pageSize, pageNumber);
+//		PageHelper.startPage(pageNumber,pageSize); 	
+		List<OperSummary> data = offlineOperService.querySummary(user);
 //		PageInfo<OfflineOper> page = new PageInfo(data);
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("total", data.size());  // page.getTotal()
