@@ -7,8 +7,8 @@ $(function () {
 //线下运营报表
 function loadOfflineReport(){
 	
-    //var queryUrl = path+'/service/offlineOper/query';
-	var queryUrl = path+'/json/test.json';
+    var queryUrl = path+'/service/offlineOper/querySummary';
+//	var queryUrl = path+'/json/test.json';
     var table = $('#OfflineReport').bootstrapTable({
         url: queryUrl,                      //请求后台的URL（*）
         method: 'GET',                      //请求方式（*）
