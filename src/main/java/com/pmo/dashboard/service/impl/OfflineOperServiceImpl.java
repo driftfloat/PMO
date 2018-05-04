@@ -346,26 +346,29 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 	}
 	
 	private List<OperSummary> summaryData(User user,String[] ids) throws Exception {
-		List<OperSummary> rtn = new ArrayList<OperSummary>();
+		List<OperSummary> returnLIst = new ArrayList<OperSummary>();
 		final int YEAR = LocalDate.now().getYear();
 		final int MONTH = LocalDate.now().getMonthValue();
-		int LENGTH = 10 ;
-//		if(ids !=null) {
-//			LENGTH = LENGTH * ids.length ;
-//		}
-		for(int i=0;i< LENGTH;i++) {
-			OperSummary r = new OperSummary();
-			r.setId(""+i);
-			r.setDepartmentName(user.getNickname());
-			r.setType(Constants.SUMMARY_TYPES[i]);
-			r.setRemark(Constants.SUMMARY_REMARKS[i]);
-			rtn.add(r);
-		}
+		final int LENGTH = 10 ;
 		if(user.isRM()) {
 			ids = new String[] {""};
 		}
-		
+		int count = 0;
 		for(String id :ids) {
+			List<OperSummary> rtn = new ArrayList<OperSummary>();
+			for(int i=0;i< LENGTH;i++) {
+				OperSummary r = new OperSummary();
+				r.setId(""+(count*LENGTH+i));
+				if(user.isRM()) {
+					r.setDepartmentName(user.getNickname());
+				}else {
+					CSDept csDept = csDeptMapper.queryCSDeptById(id) ;
+					r.setDepartmentName(csDept.getCsSubDeptName());
+				}
+				r.setType(Constants.SUMMARY_TYPES[i]);
+				r.setRemark(Constants.SUMMARY_REMARKS[i]);
+				rtn.add(r);
+			}
 			
 			for (int i = 1; i <= MONTH; i++) {
 				OfflineOperCondition condition = new OfflineOperCondition();
@@ -378,7 +381,6 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 					condition.setCsdeptid(id);
 				}
 				
-//				condition.setCsdeptid("12");
 				List<OperSummary> list = offlineOperMapper.querySummary(condition);
 				// 转置 row ==> column
 				if(list.get(0) != null) {
@@ -387,74 +389,75 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 					for(int j=0; j< LENGTH;j++) {
 						OperSummary r = rtn.get(j);
 						Map<String,BigDecimal> months ; 
-						if(r.getMonths()!=null) {
-							months = r.getMonths();
+						if(r.getMonth()!=null) {
+							months = r.getMonth();
 						}else {
 							months = new HashMap<String,BigDecimal>();
 						}
 						Method m1 = clazz.getDeclaredMethod(Constants.SUMMARY_METHODS[j]);
 						BigDecimal value = (BigDecimal) m1.invoke(o); 
 						months.put("month"+i, value);
-						r.setMonths(months);
+						r.setMonth(months);
 						if(null != value) {
 							r.setYearTotal(r.getYearTotal().add(value));
 						}
 					}
 				}
 			}
-			
+			returnLIst.addAll(rtn);
+			count++;
 		}
-		return rtn;
+		return returnLIst;
 	}
 
-	private List<OperSummary> summaryData_(User user,String[] ids) throws Exception {
-		List<OperSummary> rtn = new ArrayList<OperSummary>();
-		final int YEAR = LocalDate.now().getYear();
-		final int MONTH = LocalDate.now().getMonthValue();
-		int LENGTH = 10 ;
-		if(ids !=null) {
-			LENGTH = LENGTH * ids.length ;
-		}
-		for(int i=0;i< LENGTH;i++) {
-			OperSummary r = new OperSummary();
-			r.setId(""+i);
-			r.setDepartmentName(user.getNickname());
-			r.setType(Constants.SUMMARY_TYPES[i]);
-			r.setRemark(Constants.SUMMARY_REMARKS[i]);
-			rtn.add(r);
-		}
-		
-		for (int i = 1; i <= MONTH; i++) {
-			OfflineOperCondition condition = new OfflineOperCondition();
-			condition.setYear(""+YEAR);
-			condition.setMonth(""+i);
-			condition.setRmId(user.getUserId()); 
-//			condition.setCsdeptid("12");
-			List<OperSummary> list = offlineOperMapper.querySummary(condition);
-			// 转置 row ==> column
-			if(list.get(0) != null) {
-				OperSummary o = list.get(0) ;
-				Class clazz = o.getClass(); 
-				for(int j=0; j< LENGTH;j++) {
-					OperSummary r = rtn.get(j);
-					Map<String,BigDecimal> months ; 
-					if(r.getMonths()!=null) {
-						months = r.getMonths();
-					}else {
-						months = new HashMap<String,BigDecimal>();
-					}
-					Method m1 = clazz.getDeclaredMethod(Constants.SUMMARY_METHODS[j]);
-					BigDecimal value = (BigDecimal) m1.invoke(o); 
-					months.put("month"+i, value);
-					r.setMonths(months);
-					if(null != value) {
-						r.setYearTotal(r.getYearTotal().add(value));
-					}
-				}
-			}
-		}
-		return rtn;
-	}
+//	private List<OperSummary> summaryData_(User user,String[] ids) throws Exception {
+//		List<OperSummary> rtn = new ArrayList<OperSummary>();
+//		final int YEAR = LocalDate.now().getYear();
+//		final int MONTH = LocalDate.now().getMonthValue();
+//		int LENGTH = 10 ;
+//		if(ids !=null) {
+//			LENGTH = LENGTH * ids.length ;
+//		}
+//		for(int i=0;i< LENGTH;i++) {
+//			OperSummary r = new OperSummary();
+//			r.setId(""+i);
+//			r.setDepartmentName(user.getNickname());
+//			r.setType(Constants.SUMMARY_TYPES[i]);
+//			r.setRemark(Constants.SUMMARY_REMARKS[i]);
+//			rtn.add(r);
+//		}
+//		
+//		for (int i = 1; i <= MONTH; i++) {
+//			OfflineOperCondition condition = new OfflineOperCondition();
+//			condition.setYear(""+YEAR);
+//			condition.setMonth(""+i);
+//			condition.setRmId(user.getUserId()); 
+////			condition.setCsdeptid("12");
+//			List<OperSummary> list = offlineOperMapper.querySummary(condition);
+//			// 转置 row ==> column
+//			if(list.get(0) != null) {
+//				OperSummary o = list.get(0) ;
+//				Class clazz = o.getClass(); 
+//				for(int j=0; j< LENGTH;j++) {
+//					OperSummary r = rtn.get(j);
+//					Map<String,BigDecimal> months ; 
+//					if(r.getMonth()!=null) {
+//						months = r.getMonth();
+//					}else {
+//						months = new HashMap<String,BigDecimal>();
+//					}
+//					Method m1 = clazz.getDeclaredMethod(Constants.SUMMARY_METHODS[j]);
+//					BigDecimal value = (BigDecimal) m1.invoke(o); 
+//					months.put("month"+i, value);
+//					r.setMonth(months);
+//					if(null != value) {
+//						r.setYearTotal(r.getYearTotal().add(value));
+//					}
+//				}
+//			}
+//		}
+//		return rtn;
+//	}
 	
 	@Override
 	public List<OperSummary> querySummary(User user, int pageSize, int pageNumber) throws Exception {

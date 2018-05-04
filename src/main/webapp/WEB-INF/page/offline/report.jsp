@@ -111,6 +111,7 @@ var path='<%=path%>';
 	<script src="<%=path %>/extensionjs/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
     <script src="<%=path %>/extensionjs/bootstrap3-editable/js/bootstrap-editable.js" type="text/javascript"></script>
     <script src="<%=path %>/extensionjs/bootstrap-table/dist/extensions/editable/bootstrap-table-editable.js" type="text/javascript"></script>
+   
     
    
 	<script src="<%=path %>/bower_components/bootstrap-val/bootstrapValidator.min.js"></script>

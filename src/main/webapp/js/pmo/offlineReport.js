@@ -8,14 +8,13 @@ $(function () {
 function loadOfflineReport(){
 	
     var queryUrl = path+'/service/offlineOper/querySummary';
-	//var queryUrl = path+'/json/test.json';
     var table = $('#OfflineReport').bootstrapTable({
         url: queryUrl,                      //请求后台的URL（*）
         method: 'GET',                      //请求方式（*）
         toolbar: '#toolbar',              //工具按钮用哪个容器
         striped: true,                      //是否显示行间隔色
-        //fixedColumns: true,
-        //fixedNumber: 6,
+        fixedColumns: true,
+        fixedNumber: 3,
         singleSelect : true,                // 单选checkbox 
         cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,                   //是否显示分页（*）
@@ -45,115 +44,128 @@ function loadOfflineReport(){
         },
         columns: [
         {
-        	checkbox: true,  
-            visible: true                 //是否显示复选框  
-        },
-        {
             field: 'departmentName',
             title: 'DepartMent',
-            sortable: true
+            sortable: true,
+            formatter : function(value,row, index){
+                if(index>=1){
+                	return "";
+                }else{
+                	return value;
+                }
+            }
         },
         {
             field: 'type',
             title: 'Type',
-            sortable: true
+            sortable: true,
+            formatter : function(value, row, index){
+            	  var div = "<div style='width:200px;'>"+value+"</div>";
+            	  return div;
+            }
         },
         {
             field: 'remark',
             title: 'Remark',
-            sortable: true
+            sortable: true,
+            formatter : function(value, row, index){
+          	  var div = "<div style='width:200px;'>"+value+"</div>";
+          	  return div;
+            }
         },
         {
-            field: 'months',
+            field: 'month',
             title: '1月',
             sortable: true,
-            formatter : function(value,row, index){   //主要配置在这里
+            formatter : function(value,row, index){
                 return value.month1;
             }
         },
         {
-            field: 'months',
+            field: 'month',
             title: '2月',
             sortable: true,
-            formatter : function(value,row, index){   //主要配置在这里
+            formatter : function(value,row, index){
                 return value.month2;
             }
         },{
-            field: 'months',
+            field: 'month',
             title: '3月',
             sortable: true,
-            formatter : function(value,row, index){   //主要配置在这里
+            formatter : function(value,row, index){
                 return value.month3;
             }
         },{
-            field: 'months',
+            field: 'month',
             title: '4月',
             sortable: true,
-            formatter : function(value,row, index){   //主要配置在这里
+            formatter : function(value,row, index){
                 return value.month4;
             }
         },{
-            field: 'months',
+            field: 'month',
             title: '5月',
             sortable: true,
-            formatter : function(value,row, index){   //主要配置在这里
+            formatter : function(value,row, index){
                 return value.month5;
             }
         },{
-            field: 'months',
+            field: 'month',
             title: '6月',
             sortable: true,
-            formatter : function(value,row, index){   //主要配置在这里
+            formatter : function(value,row, index){
                 return value.month6;
             }
         },{
-            field: 'months',
+            field: 'month',
             title: '7月',
             sortable: true,
-            formatter : function(value,row, index){   //主要配置在这里
+            formatter : function(value,row, index){
                 return value.month7;
             }
         },{
-            field: 'months',
+            field: 'month',
             title: '8月',
             sortable: true,
-            formatter : function(value,row, index){   //主要配置在这里
+            formatter : function(value,row, index){
                 return value.month8;
             }
         },{
-            field: 'months',
+            field: 'month',
             title: '9月',
             sortable: true,
-            formatter : function(value,row, index){   //主要配置在这里
+            formatter : function(value,row, index){
                 return value.month9;
             }
         },{
-            field: 'months',
+            field: 'month',
             title: '10月',
             sortable: true,
-            formatter : function(value,row, index){   //主要配置在这里
+            formatter : function(value,row, index){
                 return value.month10;
             }
         },{
-            field: 'months',
+            field: 'month',
             title: '11月',
             sortable: true,
-            formatter : function(value,row, index){   //主要配置在这里
+            formatter : function(value,row, index){
                 return value.month11;
             }
         },{
-            field: 'months',
+            field: 'month',
             title: '12月',
             sortable: true,
-            formatter : function(value,row, index){   //主要配置在这里
+            formatter : function(value,row, index){
                 return value.month12;
             }
         }
         ],
         onLoadSuccess: function () {
-        	var data = $('#OfflineReport').bootstrapTable('getData', true);
+        	 //$('#OfflineReport').bootstrapTable('mergeCells', { index: 0, field: 'departmentName', colspan: 0, rowspan: 1});
+        	//var data = $('#OfflineReport').bootstrapTable('getData', true);
+        	//$('#OfflineReport').bootstrapTable('mergeCells', {index: 1, field: 'departmentName', rowspan: 10});
             //合并单元格
-            mergeCells(data, "departmentName", 1, $('#OfflineReport'));
+            //mergeCells(data, "departmentName", 1, $('#OfflineReport'));
         },
         onLoadError: function () {
         	

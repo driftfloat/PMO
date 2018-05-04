@@ -1,10 +1,9 @@
 package com.pmo.dashboard.entity;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.Map;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.TreeMap;
+import java.util.Comparator;
 
 public class OperSummary {
 	private String id;
@@ -12,9 +11,7 @@ public class OperSummary {
 	private String type;
 	private String remark;
 	private BigDecimal yearTotal = BigDecimal.ZERO;
-//	private String year;
-//	private String month;
-	private Map<String,BigDecimal> months;
+	private Map<String,BigDecimal> month ;
 	private BigDecimal ifaw;
 	private BigDecimal infOt;
 	private BigDecimal infPt;
@@ -25,6 +22,22 @@ public class OperSummary {
 	private BigDecimal invalid;
 	private BigDecimal effectiveSt;
 	private BigDecimal invalidSt;
+	
+	public OperSummary() {
+		month = new TreeMap<String,BigDecimal>(new Comparator<String>() {
+			@Override
+			public int compare(String o1, String o2) {
+				if(o1.length()>o2.length()) {
+					return 1;
+				}else if(o1.length()<o2.length()) {
+					return -1;
+				}
+				return o1.compareTo(o2);
+			}});
+		for(int i=1;i<=12;i++) {
+			month.put("month"+i, BigDecimal.ZERO);
+		}
+	}
 	
 	public BigDecimal getIfaw() {
 		return ifaw;
@@ -110,16 +123,16 @@ public class OperSummary {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public Map<String, BigDecimal> getMonths() {
-		return months;
-	}
-	public void setMonths(Map<String, BigDecimal> months) {
-		this.months = months;
-	}
 	public BigDecimal getYearTotal() {
 		return yearTotal;
 	}
 	public void setYearTotal(BigDecimal yearTotal) {
 		this.yearTotal = yearTotal;
+	}
+	public Map<String, BigDecimal> getMonth() {
+		return month;
+	}
+	public void setMonth(Map<String, BigDecimal> month) {
+		this.month = month;
 	}
 }
