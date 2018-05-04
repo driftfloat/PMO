@@ -33,9 +33,9 @@ import com.pmo.dashboard.entity.OfflineOper;
 import com.pmo.dashboard.entity.OfflineOperCondition;
 import com.pmo.dashboard.entity.OperSummary;
 import com.pmo.dashboard.entity.User;
-import com.pmo.dashboard.util.ExportExcel;
 import com.pom.dashboard.service.CSDeptService;
 import com.pom.dashboard.service.EmployeeService;
+import com.pom.dashboard.service.ExportOfflineOperService;
 import com.pom.dashboard.service.OfflineOperService;
 
 @Controller
@@ -55,7 +55,7 @@ public class OfflineOperController {
     private EmployeeService employeeService;
 	
 	@Resource
-	private ExportExcel exportExcel;
+	private ExportOfflineOperService exportOfflineOperService;
 	
 	@Resource
 	private CSDeptService csdeptService;
@@ -131,7 +131,7 @@ public class OfflineOperController {
 //		boolean rtn = offlineOperService.save(offlineOper,user);
 //		return objectMapper.writeValueAsString( rtn? "0" : "-1");
 		
-		String fileName = exportExcel.export("过程数据",user);
+		String fileName = exportOfflineOperService.exportOfflineOper("过程数据",user);
 		File file = new File(fileName);
 		String date = LocalDate.now().toString();
 		

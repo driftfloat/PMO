@@ -177,4 +177,29 @@ public class User {
 		this.csdeptId = csdeptId;
 	}
 	
+	public boolean isRM() {
+		if("5".equals(userType)) {
+			return true;
+		}
+		return false;
+	}
+	public boolean isSubDept() {
+		if("3".equals(userType)) {
+			return true;
+		}
+		return false;
+	}
+	public boolean isDept() {
+		if("1".equals(userType)) {
+			return true;
+		}
+		return false;
+	}
+	public boolean isAdmin() {
+		if("0".equals(userType)) {
+			return true;
+		}
+		return false;
+	}
+	
 }

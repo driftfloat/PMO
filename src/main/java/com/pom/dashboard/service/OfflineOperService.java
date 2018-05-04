@@ -28,7 +28,7 @@ public interface OfflineOperService {
 	
 //	void export(User user);
 
-	List<OfflineOper> exportData(User user);
+	List<OfflineOper> exportOfflieOperData(User user);
 	
 	List<OperSummary> querySummary(User user,int pageSize,int pageNumber)  throws Exception;
 	

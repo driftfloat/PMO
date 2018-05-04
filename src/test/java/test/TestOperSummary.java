@@ -63,7 +63,7 @@ public class TestOperSummary {
 		System.out.println(objectMapper.writeValueAsString(o));
 	}
 	
-//	@Test
+	@Test
 	public void querySummaryService() throws Exception{
 		User user = new User();
 		
@@ -91,7 +91,7 @@ public class TestOperSummary {
 		
 	}
 	
-	@Test
+//	@Test
 	public void querySummaryMapper() throws Exception {
 	//		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
 	//////	user.setUserId("cff5fa689a2e40afa02ba2ceda914bbb");  // 梁嘉杰 9
@@ -109,15 +109,17 @@ public class TestOperSummary {
 		
 		OfflineOperCondition condition = new OfflineOperCondition();
 		condition.setYear("2018");
-		condition.setMonth("1");
-//		condition.setRmId("cb00bad3f16a4e8baf450e7b88af7c4b"); 
-		condition.setCsdeptid("12");
+		condition.setMonth("6");
+		condition.setRmId("cb00bad3f16a4e8baf450e7b88af7c4b"); 
+//		condition.setCsdeptid("12");
 		List<OperSummary> list = offlineOperMapper.querySummary(condition);
+		System.out.println(list.size());
 		if(list.get(0) == null ) {
 			System.out.println("no data.");
 		}else {
-			System.out.println(objectMapper.writeValueAsString(list.get(0)));
-//			System.out.println(list.size());
+//			System.out.println(objectMapper.writeValueAsString(list.get(0)));
+			System.out.println(list.size());
 		}
+		
 	}
 }

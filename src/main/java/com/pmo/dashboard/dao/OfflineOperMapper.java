@@ -81,4 +81,6 @@ public interface OfflineOperMapper {
    
    List<OperSummary> querySummary(OfflineOperCondition condition);
    
+   List<OfflineOper> queryBySingleSubDept(OfflineOperCondition condition);
+   
 }

@@ -157,8 +157,18 @@ public class TestOfflineOperService {
 	// c = currencysMapper.queryCurrency(c) ;
 	// System.out.println(c.getExRate());
 	// }
+	
+//	@Test
+//	public void queryBySingleSubDept() {
+//		OfflineOperCondition condition = new OfflineOperCondition();
+//		condition.setYear(YEAR);
+//		condition.setMonth(MONTH);
+//		condition.setCsdeptid("9");
+//		List<OfflineOper> list = offlineOperMapper.queryBySingleSubDept(condition);
+//		System.out.println(list.size());
+//	}
 
-	@Test
+//	@Test
 	public void saveYear() {
 		final String YEAR = "2018";
 		final int MONTH = LocalDate.now().getMonthValue();
