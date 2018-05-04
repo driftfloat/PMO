@@ -7,8 +7,8 @@ $(function () {
 //线下运营报表
 function loadOfflineReport(){
 	
-    //var queryUrl = path+'/service/offlineOper/query';
-	var queryUrl = path+'/json/test.json';
+    var queryUrl = path+'/service/offlineOper/querySummary';
+	//var queryUrl = path+'/json/test.json';
     var table = $('#OfflineReport').bootstrapTable({
         url: queryUrl,                      //请求后台的URL（*）
         method: 'GET',                      //请求方式（*）
@@ -64,7 +64,7 @@ function loadOfflineReport(){
             sortable: true
         },
         {
-            field: 'month',
+            field: 'months',
             title: '1月',
             sortable: true,
             formatter : function(value,row, index){   //主要配置在这里
@@ -72,77 +72,77 @@ function loadOfflineReport(){
             }
         },
         {
-            field: 'month',
+            field: 'months',
             title: '2月',
             sortable: true,
             formatter : function(value,row, index){   //主要配置在这里
                 return value.month2;
             }
         },{
-            field: 'month',
+            field: 'months',
             title: '3月',
             sortable: true,
             formatter : function(value,row, index){   //主要配置在这里
                 return value.month3;
             }
         },{
-            field: 'month',
+            field: 'months',
             title: '4月',
             sortable: true,
             formatter : function(value,row, index){   //主要配置在这里
                 return value.month4;
             }
         },{
-            field: 'month',
+            field: 'months',
             title: '5月',
             sortable: true,
             formatter : function(value,row, index){   //主要配置在这里
                 return value.month5;
             }
         },{
-            field: 'month',
+            field: 'months',
             title: '6月',
             sortable: true,
             formatter : function(value,row, index){   //主要配置在这里
                 return value.month6;
             }
         },{
-            field: 'month',
+            field: 'months',
             title: '7月',
             sortable: true,
             formatter : function(value,row, index){   //主要配置在这里
                 return value.month7;
             }
         },{
-            field: 'month',
+            field: 'months',
             title: '8月',
             sortable: true,
             formatter : function(value,row, index){   //主要配置在这里
                 return value.month8;
             }
         },{
-            field: 'month',
+            field: 'months',
             title: '9月',
             sortable: true,
             formatter : function(value,row, index){   //主要配置在这里
                 return value.month9;
             }
         },{
-            field: 'month',
+            field: 'months',
             title: '10月',
             sortable: true,
             formatter : function(value,row, index){   //主要配置在这里
                 return value.month10;
             }
         },{
-            field: 'month',
+            field: 'months',
             title: '11月',
             sortable: true,
             formatter : function(value,row, index){   //主要配置在这里
                 return value.month11;
             }
         },{
-            field: 'month',
+            field: 'months',
             title: '12月',
             sortable: true,
             formatter : function(value,row, index){   //主要配置在这里
