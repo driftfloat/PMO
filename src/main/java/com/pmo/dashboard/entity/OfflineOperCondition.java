@@ -96,6 +96,4 @@ public class OfflineOperCondition
 		this.csdeptid = csdeptid;
 	}
 	
-	
-
 }

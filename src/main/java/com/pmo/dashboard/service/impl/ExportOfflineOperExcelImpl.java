@@ -1,4 +1,4 @@
-package com.pmo.dashboard.util;
+package com.pmo.dashboard.service.impl;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,7 +21,6 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -34,13 +33,16 @@ import com.pmo.dashboard.entity.Currencys;
 import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.OfflineOper;
 import com.pmo.dashboard.entity.User;
+import com.pmo.dashboard.util.Constants;
 import com.pom.dashboard.service.CSDeptService;
 import com.pom.dashboard.service.EmployeeService;
+import com.pom.dashboard.service.ExportOfflineOperService;
 import com.pom.dashboard.service.OfflineOperService;
 import com.pom.dashboard.service.UserService;
 
 @Component
-public class ExportExcel {
+public class ExportOfflineOperExcelImpl implements  ExportOfflineOperService{
+	
 	@Resource
 	private OfflineOperService offlineOperService;
 	
@@ -53,21 +55,21 @@ public class ExportExcel {
 	@Resource
 	private UserService userService;
 	
-	public OfflineOperService getOfflineOperService() {
-		return offlineOperService;
-	}
-	public CSDeptService getCsDeptService() {
-		return csDeptService;
-	}
-	public EmployeeService getEmployeeService() {
-		return employeeService;
-	}
-	public UserService getUserService() {
-		return userService;
-	}
-	public CurrencysMapper getCurrencysMapper() {
-		return currencysMapper;
-	}
+//	public OfflineOperService getOfflineOperService() {
+//		return offlineOperService;
+//	}
+//	public CSDeptService getCsDeptService() {
+//		return csDeptService;
+//	}
+//	public EmployeeService getEmployeeService() {
+//		return employeeService;
+//	}
+//	public UserService getUserService() {
+//		return userService;
+//	}
+//	public CurrencysMapper getCurrencysMapper() {
+//		return currencysMapper;
+//	}
 
 
 	@Resource
@@ -75,9 +77,9 @@ public class ExportExcel {
 	
 	private String exportFile;
 	
-	public String getExportFile() {
-		return exportFile;
-	}
+//	public String getExportFile() {
+//		return exportFile;
+//	}
 	@Value("${exportFile}")
 	public void setExportFile(String exportFile) {
 		this.exportFile = exportFile;
@@ -89,32 +91,25 @@ public class ExportExcel {
 		}else if(BigDecimal.ZERO.compareTo(b)==0){
 			return "";
 		}
-		return (null == b)? "" : b.toPlainString() ;
+		return b.toPlainString() ;
 	}
 	
-	public String export(String sheetName, User user ) {
-		List<String[]> dataList = exportData(user);
-		return exportExcel(dataList, exportFile, sheetName);
+	public String exportOfflineOper(String sheetName, User user ) {
+		List<String[]> dataList = exportOfflieOper(user);
+		return exportOfflieOperExcel(dataList, exportFile, sheetName);
 	}
 	
-	private List<String[]> exportData(User user) {
+	private List<String[]> exportOfflieOper(User user) {
 		List<String[]> dataList = new ArrayList<String[]>();
-		String[] cellTitle = { "月份", "业务线", "事业部", "执行交付部", "项目类型", "员工E-HR编码", "员工姓名", "项目编号", "项目名称", "工作地" 
-				,"技能", "级别", "币种", "当月汇率", "员工单价（h）-原币种", "月标准工时", "实际工时", "无效工时", "加班费工时", "调休工时"
-				, "调整上月工时", "实际工时收入-收入1", "无效工时收入", "加班费工时收入-收入2", "调休工时收入-收入3", "调整上月工时收入-收入4" 
-				,"差旅收入-收入5", "付费设备收入-收入6", "分包收入-收入7", "当月收入合计-原币种", "当月收入合计-RMB", "当月有效收入", "有效NR-与月滚一致"
-				, "当月有效人力", "当月无效人力", "RM", "备注"  };
-		dataList.add(cellTitle);
 		
+		dataList.add(Constants.CELLTITLES);
 		
 		OfflineOper condition = new OfflineOper();
-//		condition.seteHr("E000834441");
-//		condition.setStaffName("白世铭");
 		
-		List<OfflineOper> list = offlineOperService.exportData(user) ; 
+		List<OfflineOper> list = offlineOperService.exportOfflieOperData(user) ; 
 		
 		for(OfflineOper o:list) {
-			String[] row = new String[cellTitle.length];
+			String[] row = new String[Constants.CELLTITLES.length];
 			Employee e = employeeService.queryEmployeeById(o.getEmployeeId())  ;
 			CSDept csdept = csDeptService.queryCSDeptById(e.getCsSubDept()) ; 
 //			csDeptService.queryCSDeptById(e.getCsSubDeptName())
@@ -201,7 +196,7 @@ public class ExportExcel {
 	}
 	
 
-	private String exportExcel(List<String[]> dataList, String fileName, String sheetName)  {
+	private String exportOfflieOperExcel(List<String[]> dataList, String fileName, String sheetName)  {
 		int[] blues = {16,17,18,19,20,26,27,28,32};
 		String[] cellTitle = dataList.get(0);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
@@ -315,5 +310,7 @@ public class ExportExcel {
 //		System.out.println("导出成功！" /* + basePath */ + exportFileName);
 		return exportFileName;
 	}
+	
+	
 
 }

@@ -1,6 +1,9 @@
 package com.pmo.dashboard.service.impl;
 
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,8 +32,10 @@ import com.pmo.dashboard.entity.HKWorkHour;
 import com.pmo.dashboard.entity.MLWorkHour;
 import com.pmo.dashboard.entity.OfflineOper;
 import com.pmo.dashboard.entity.OfflineOperCondition;
+import com.pmo.dashboard.entity.OperSummary;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.entity.WorkHour;
+import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.OfflineOperService;
 
@@ -56,6 +61,8 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 	
 	@Resource
 	MLWorkHourMapper MLWorkHourMapper;
+	
+
 	
 	@Override
 	public boolean delete(String id) {
@@ -104,14 +111,16 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 //	}
 
 	@Override
-	public List<OfflineOper> exportData(User user) {
+	public List<OfflineOper> exportOfflieOperData(User user) {
 		OfflineOperCondition condition = new OfflineOperCondition() ;
+		condition.setYear(""+LocalDate.now().getYear());
+		condition.setMonth(""+LocalDate.now().getMonthValue());
 		List<OfflineOper> rtn = null ;
 		Set<User> rmSet = new HashSet();
-		if("5".equals(user.getUserType())) { // RM
+		if(user.isRM()) { // RM
 			condition.setRmId(user.getUserId());
 			rtn = offlineOperMapper.queryByRM(condition) ;
-		}else if("3".equals(user.getUserType())) {  // 交付部经理
+		}else if(user.isSubDept()) {  // 交付部经理
 			List<CSDept> csDepts = csDeptMapper.queryCSDeptByIds(user.getCsdeptId().split(","));  // 交付部经理所在的部门
 			int index = 0;
 			String[] ids = new String[csDepts.size()] ;
@@ -121,7 +130,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			}
 			condition.setIds(ids);
 			rtn = offlineOperMapper.queryBySubDept(condition) ;
-		}else if("1".equals(user.getUserType())){ // 事业部经理
+		}else if(user.isDept()){ // 事业部经理
 			List<CSDept> csDepts = csDeptMapper.queryCSSubDeptNameByCsBuName(user.getBu());  // csBuName 根据事业部名称查
 			int index = 0;
 			String[] ids = new String[csDepts.size()] ;
@@ -131,7 +140,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			}
 			condition.setIds(ids);
 			rtn = offlineOperMapper.queryByDept(condition) ;
-		}else if("0".equals(user.getUserType())) { // admin
+		}else if(user.isAdmin()) { // admin
 			rtn = offlineOperMapper.queryAllStaff(condition) ;
 		}
 		for(OfflineOper offlineOper :rtn) {
@@ -147,9 +156,10 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 //		int rmCount = offlineOperMapper.rmCount(condition);
 //		if( 0 == rmCount) {
 //		}
+		condition.setYear(""+LocalDate.now().getYear());
+		condition.setMonth(""+LocalDate.now().getMonthValue());
 		List<OfflineOper> rtn = null ;
-		Set<User> rmSet = new HashSet();
-		if("5".equals(user.getUserType())) { // RM
+		if(user.isRM()) { // RM
 			condition.setRmId(user.getUserId());
 //			String[] rmIDs = {user.getUserId()};
 //			condition.setRmIDs(rmIDs); 
@@ -165,7 +175,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 //				PageHelper.startPage(pageNumber,pageSize); 
 //				rtn = offlineOperMapper.queryByRM(condition) ;
 //			}
-		}else if("3".equals(user.getUserType())) {  // 交付部经理
+		}else if(user.isSubDept()) {  // 交付部经理
 			List<CSDept> csDepts = csDeptMapper.queryCSDeptByIds(user.getCsdeptId().split(","));  // 交付部经理所在的部门
 			
 			int index = 0;
@@ -178,7 +188,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			//第一个参数当前页码，第二个参数每页条数
 			PageHelper.startPage(pageNumber,pageSize); 
 			rtn = offlineOperMapper.queryBySubDept(condition) ;
-		}else if("1".equals(user.getUserType())){ // 事业部经理
+		}else if(user.isDept()){ // 事业部经理
 			List<CSDept> csDepts = csDeptMapper.queryCSSubDeptNameByCsBuName(user.getBu());  // csBuName 根据事业部名称查
 			
 			int index = 0;
@@ -191,7 +201,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			//第一个参数当前页码，第二个参数每页条数
 			PageHelper.startPage(pageNumber,pageSize); 
 			rtn = offlineOperMapper.queryByDept(condition) ;
-		}else if("0".equals(user.getUserType())) {
+		}else if(user.isAdmin()) {
 			PageHelper.startPage(pageNumber,pageSize); 
 			rtn = offlineOperMapper.queryAllStaff(condition) ;
 		}
@@ -333,6 +343,170 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			offlineOper.setChsoftiMskHours( workHourMapper.queryWorkHour(workHour)); 
 		}
 		return offlineOper;
+	}
+	
+	private List<OperSummary> summaryData(User user,String[] ids) throws Exception {
+		List<OperSummary> rtn = new ArrayList<OperSummary>();
+		final int YEAR = LocalDate.now().getYear();
+		final int MONTH = LocalDate.now().getMonthValue();
+		int LENGTH = 10 ;
+//		if(ids !=null) {
+//			LENGTH = LENGTH * ids.length ;
+//		}
+		for(int i=0;i< LENGTH;i++) {
+			OperSummary r = new OperSummary();
+			r.setId(""+i);
+			r.setDepartmentName(user.getNickname());
+			r.setType(Constants.SUMMARY_TYPES[i]);
+			r.setRemark(Constants.SUMMARY_REMARKS[i]);
+			rtn.add(r);
+		}
+		if(user.isRM()) {
+			ids = new String[] {""};
+		}
+		
+		for(String id :ids) {
+			
+			for (int i = 1; i <= MONTH; i++) {
+				OfflineOperCondition condition = new OfflineOperCondition();
+				condition.setYear(""+YEAR);
+				condition.setMonth(""+i);
+				if(user.isRM()) {
+					condition.setRmId(user.getUserId()); 
+				}
+				if(StringUtils.isNotBlank(id)) {
+					condition.setCsdeptid(id);
+				}
+				
+//				condition.setCsdeptid("12");
+				List<OperSummary> list = offlineOperMapper.querySummary(condition);
+				// 转置 row ==> column
+				if(list.get(0) != null) {
+					OperSummary o = list.get(0) ;
+					Class clazz = o.getClass(); 
+					for(int j=0; j< LENGTH;j++) {
+						OperSummary r = rtn.get(j);
+						Map<String,BigDecimal> months ; 
+						if(r.getMonths()!=null) {
+							months = r.getMonths();
+						}else {
+							months = new HashMap<String,BigDecimal>();
+						}
+						Method m1 = clazz.getDeclaredMethod(Constants.SUMMARY_METHODS[j]);
+						BigDecimal value = (BigDecimal) m1.invoke(o); 
+						months.put("month"+i, value);
+						r.setMonths(months);
+						if(null != value) {
+							r.setYearTotal(r.getYearTotal().add(value));
+						}
+					}
+				}
+			}
+			
+		}
+		return rtn;
+	}
+
+	private List<OperSummary> summaryData_(User user,String[] ids) throws Exception {
+		List<OperSummary> rtn = new ArrayList<OperSummary>();
+		final int YEAR = LocalDate.now().getYear();
+		final int MONTH = LocalDate.now().getMonthValue();
+		int LENGTH = 10 ;
+		if(ids !=null) {
+			LENGTH = LENGTH * ids.length ;
+		}
+		for(int i=0;i< LENGTH;i++) {
+			OperSummary r = new OperSummary();
+			r.setId(""+i);
+			r.setDepartmentName(user.getNickname());
+			r.setType(Constants.SUMMARY_TYPES[i]);
+			r.setRemark(Constants.SUMMARY_REMARKS[i]);
+			rtn.add(r);
+		}
+		
+		for (int i = 1; i <= MONTH; i++) {
+			OfflineOperCondition condition = new OfflineOperCondition();
+			condition.setYear(""+YEAR);
+			condition.setMonth(""+i);
+			condition.setRmId(user.getUserId()); 
+//			condition.setCsdeptid("12");
+			List<OperSummary> list = offlineOperMapper.querySummary(condition);
+			// 转置 row ==> column
+			if(list.get(0) != null) {
+				OperSummary o = list.get(0) ;
+				Class clazz = o.getClass(); 
+				for(int j=0; j< LENGTH;j++) {
+					OperSummary r = rtn.get(j);
+					Map<String,BigDecimal> months ; 
+					if(r.getMonths()!=null) {
+						months = r.getMonths();
+					}else {
+						months = new HashMap<String,BigDecimal>();
+					}
+					Method m1 = clazz.getDeclaredMethod(Constants.SUMMARY_METHODS[j]);
+					BigDecimal value = (BigDecimal) m1.invoke(o); 
+					months.put("month"+i, value);
+					r.setMonths(months);
+					if(null != value) {
+						r.setYearTotal(r.getYearTotal().add(value));
+					}
+				}
+			}
+		}
+		return rtn;
+	}
+	
+	@Override
+	public List<OperSummary> querySummary(User user, int pageSize, int pageNumber) throws Exception {
+		List<OperSummary> rtn = null ;
+//		for(int i=0;i< LENGTH;i++) {
+//			OperSummary r = new OperSummary();
+//			r.setId(""+i);
+//			r.setDepartmentName(user.getNickname());
+//			r.setType(TYPES[i]);
+//			r.setRemark(REMARKS[i]);
+//			rtn.add(r);
+//		}
+//		rtn.addAll(rtn);
+//		PageHelper.startPage(pageNumber,pageSize); 	
+			
+		if(user.isRM()) { // RM
+			rtn = this.summaryData(user,null);
+		}else if(user.isSubDept()) {  // 交付部经理
+			OfflineOperCondition condition = new OfflineOperCondition();
+			List<CSDept> csDepts = csDeptMapper.queryCSDeptByIds(user.getCsdeptId().split(","));  // 交付部经理所在的部门
+			
+			int index = 0;
+			String[] ids = new String[csDepts.size()] ;
+			for(CSDept d :csDepts ) {
+				ids[index] = d.getCsSubDeptId() ;
+				index++ ;
+			}
+//			condition.setIds(ids);
+			rtn = this.summaryData(user,ids);
+			
+		}else if(user.isDept()){ // 事业部经理
+			OfflineOperCondition condition = new OfflineOperCondition();
+			List<CSDept> csDepts = csDeptMapper.queryCSSubDeptNameByCsBuName(user.getBu());  // csBuName 根据事业部名称查
+			
+			int index = 0;
+			String[] ids = new String[csDepts.size()] ;
+			for(CSDept d :csDepts ) {
+				ids[index] = d.getCsSubDeptId() ;
+				index++ ;
+			}
+			condition.setIds(ids);
+			rtn = this.summaryData(user,ids);
+		}else if(user.isAdmin()) {
+//			rtn = offlineOperMapper.queryAllStaff(condition) ;
+		}
+		return rtn;
+	}
+
+	@Override
+	public List<OperSummary> exportSummary(User user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
