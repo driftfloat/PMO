@@ -209,9 +209,10 @@ function loadOfflineOperList(){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
             	var res = row.billRate*row.chsoftiAwHours;
+            	var res_temp = Math.floor(res * 100) / 100;
             	//计算后的值赋给字段
-            	row.chsoftiIfaw=res;
-            	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
+            	row.chsoftiIfaw=res_temp;
+            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
             }
         },
         {
@@ -223,9 +224,10 @@ function loadOfflineOperList(){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
             	var res = row.billRate*row.chsoftiIwHours;
+            	var res_temp = Math.floor(res * 100) / 100;
             	//计算后的值赋给字段
-            	row.chsoftiInvalid=res;
-            	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
+            	row.chsoftiInvalid=res_temp;
+            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
             }
         },
         {
@@ -237,9 +239,10 @@ function loadOfflineOperList(){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
             	var res = row.billRate*row.chsoftiOtHours;
+            	var res_temp = Math.floor(res * 100) / 100;
             	//计算后的值赋给字段
-            	row.chsoftiInfOt=res;
-            	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
+            	row.chsoftiInfOt=res_temp;
+            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
             }
         },
         {
@@ -251,9 +254,10 @@ function loadOfflineOperList(){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
             	var res = row.billRate*row.chsoftiToHours;
+            	var res_temp = Math.floor(res * 100) / 100;
             	//计算后的值赋给字段
-            	row.chsoftiInfPt=res;
-            	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
+            	row.chsoftiInfPt=res_temp;
+            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
             }
         },
         {
@@ -265,9 +269,10 @@ function loadOfflineOperList(){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
             	var res = row.billRate*row.chsoftiApwHours;
+            	var res_temp = Math.floor(res * 100) / 100;
             	//计算后的值赋给字段
-            	row.chsoftiInfAd=res;
-            	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
+            	row.chsoftiInfAd=res_temp;
+            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
             }
         },
         {
