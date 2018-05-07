@@ -395,7 +395,10 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			}
 			
 			for (int i = 1; i <= MONTH; i++) {
-				BigDecimal workHour =  this.getWorkHour(null, ""+ YEAR, ""+i);
+				WorkHour wh = new WorkHour();
+				wh.setYear(""+YEAR);
+				wh.setMonth(""+i +"月");
+				BigDecimal workDay = chinaWorkHourMapper.queryMonth(wh).getStandardWorkday();
 				OfflineOperCondition condition = new OfflineOperCondition();
 				condition.setYear(""+YEAR);
 				condition.setMonth(""+i);
@@ -422,8 +425,8 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 						try {
 							Method m1 = clazz.getMethod(Constants.SUMMARY_METHODS[j]);
 							BigDecimal value = (BigDecimal) m1.invoke(o); 
-							if("getEffectiveHuman".equals(Constants.SUMMARY_METHODS[j]) && BigDecimal.ZERO.compareTo(workHour)!=0) {
-								value = value.multiply(BigDecimal.valueOf(8)).divide(workHour,2 , BigDecimal.ROUND_HALF_EVEN);
+							if("getEffectiveHuman".equals(Constants.SUMMARY_METHODS[j]) && BigDecimal.ZERO.compareTo(workDay)!=0) {
+								value = value.divide(workDay,2 , BigDecimal.ROUND_HALF_EVEN);
 							}
 							months.put("month"+i, value);
 							r.setMonth(months);

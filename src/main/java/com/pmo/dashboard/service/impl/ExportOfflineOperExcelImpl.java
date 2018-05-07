@@ -5,8 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -14,19 +16,24 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.pmo.dashboard.dao.ChinaWorkHourMapper;
 import com.pmo.dashboard.dao.CurrencysMapper;
 import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.Currencys;
@@ -34,6 +41,7 @@ import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.OfflineOper;
 import com.pmo.dashboard.entity.OperSummary;
 import com.pmo.dashboard.entity.User;
+import com.pmo.dashboard.entity.WorkHour;
 import com.pmo.dashboard.util.Constants;
 import com.pom.dashboard.service.CSDeptService;
 import com.pom.dashboard.service.EmployeeService;
@@ -55,6 +63,9 @@ public class ExportOfflineOperExcelImpl implements  ExportOfflineOperService{
 	
 	@Resource
 	private UserService userService;
+	
+	@Resource
+	ChinaWorkHourMapper chinaWorkHourMapper;
 	
 //	public OfflineOperService getOfflineOperService() {
 //		return offlineOperService;
@@ -102,10 +113,174 @@ public class ExportOfflineOperExcelImpl implements  ExportOfflineOperService{
 	
 	@Override
 	public String exportSummary(String sheetName, User user) {
+		final int summaryLength = 16 ;
+		int thisYear = LocalDate.now().getYear();
 		List<OperSummary> summaryList = offlineOperService.querySummary(user);
+		List<WorkHour> workHourList = chinaWorkHourMapper.queryYear(""+thisYear);
+		Collections.sort(workHourList);
 		
-		return null;
-	}
+		//export summary excel
+//		int[] blues = {16,17,18,19,20,26,27,28,32};
+//		String[] cellTitle = dataList.get(0);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+		String now = dateFormat.format(new Date());
+		// 导出文件路径
+		//String basePath = "D:/";
+		// 文件名
+		String exportFileName = exportFile +"_" + LocalDateTime.now().toString().replace(":", "") + ".xlsx";
+
+		// 需要导出的数据
+		// 声明一个工作薄
+		XSSFWorkbook workBook = null;
+		workBook = new XSSFWorkbook();
+		// 生成一个表格
+		XSSFSheet sheet = workBook.createSheet();
+		workBook.setSheetName(0, sheetName);
+		// 创建表格标题行 第一行
+		XSSFRow firstRow = sheet.createRow(0);
+//		firstRow.setHeightInPoints(30);
+		CellStyle yellowStyle = workBook.createCellStyle();
+        yellowStyle.setFillForegroundColor(IndexedColors.WHITE.getIndex());
+        yellowStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		yellowStyle.setAlignment(HorizontalAlignment.LEFT);
+		yellowStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);  
+		
+		yellowStyle.setBorderBottom(CellStyle.BORDER_THIN); //    BORDER_THICK BORDER_DASHED BORDER_DOUBLE
+		yellowStyle.setBorderTop(CellStyle.BORDER_THIN);   
+		yellowStyle.setBorderLeft(CellStyle.BORDER_THIN);   
+		yellowStyle.setBorderRight(CellStyle.BORDER_THIN);  
+		
+		Font titleFont = workBook.createFont();  
+		titleFont.setFontName("微软雅黑"); 
+		titleFont.setFontHeightInPoints((short)9);
+//		titleFont.setBold(true);
+		yellowStyle.setFont(titleFont);
+		
+//		CellStyle bluetyle = workBook.createCellStyle();
+//		bluetyle.cloneStyleFrom(yellowStyle);
+//		bluetyle.setFillForegroundColor(IndexedColors.PALE_BLUE.getIndex());  // BLUE BLUE_GREY SKY_BLUE BLUE_LIGHT
+//		bluetyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		
+		Font dataFont = workBook.createFont();  
+		dataFont.setFontName("微软雅黑"); 
+		dataFont.setFontHeightInPoints((short)9);
+		
+		CellStyle numberStyle = workBook.createCellStyle();
+		numberStyle.setFont(dataFont);
+//		numberStyle.setDataFormat(XSSFDataFormat  .getBuiltinFormat("0.00"));
+		numberStyle.setAlignment(HorizontalAlignment.RIGHT);
+		numberStyle.setBorderBottom(CellStyle.BORDER_THIN); //    BORDER_THICK BORDER_DASHED BORDER_DOUBLE
+		numberStyle.setBorderTop(CellStyle.BORDER_THIN);   
+		numberStyle.setBorderLeft(CellStyle.BORDER_THIN);   
+		numberStyle.setBorderRight(CellStyle.BORDER_THIN);  
+//		numberStyle.setDataFormat(XSSFDataFormat);    // .getBuiltinFormat("0.00")
+		XSSFDataFormat df = workBook.createDataFormat();
+		numberStyle.setDataFormat(df.getFormat("#,##0.00"));
+		
+		CellStyle dataStyle = workBook.createCellStyle();
+		dataStyle.setFont(dataFont);
+//		numberStyle.setDataFormat(XSSFDataFormat  .getBuiltinFormat("0.00"));
+		dataStyle.setAlignment(HorizontalAlignment.LEFT);
+		dataStyle.setBorderBottom(CellStyle.BORDER_THIN); //    BORDER_THICK BORDER_DASHED BORDER_DOUBLE
+		dataStyle.setBorderTop(CellStyle.BORDER_THIN);   
+		dataStyle.setBorderLeft(CellStyle.BORDER_THIN);   
+		dataStyle.setBorderRight(CellStyle.BORDER_THIN);  
+		
+		BigDecimal wd = BigDecimal.ZERO;
+		CellRangeAddress cra=new CellRangeAddress(0, 0, 0, 1);   
+		sheet.addMergedRegion(cra);  
+		for (int i = 0; i < summaryLength; i++) {
+			XSSFCell cell = firstRow.createCell(i);
+//			cell.setCellValue(cellTitle[i]);
+			cell.setCellStyle(yellowStyle);
+			if(i<workHourList.size()) {
+				wd = wd.add(workHourList.get(i).getStandardWorkday());
+			}
+			if(i>2 && i <15) {
+//				cell = firstRow.createCell(i, Cell.CELL_TYPE_NUMERIC);
+//				cell = firstRow.createCell(i, CellType.NUMERIC);
+				
+				cell.setCellValue(toValue(workHourList.get(i-3).getStandardWorkday()));
+				cell.setCellStyle(numberStyle);
+			}else if(i==0) {
+				cell.setCellValue("单位：k");
+			}else if(i==2) {
+				cell.setCellValue(""+thisYear+"年月工作日");
+			}else if(i==15) {
+//				cell = firstRow.createCell(i, CellType.NUMERIC);
+				cell.setCellValue(""+toValue(wd.divide(new BigDecimal("12"),2, BigDecimal.ROUND_HALF_EVEN )));
+				cell.setCellStyle(numberStyle);
+			}
+			
+//			if(ArrayUtils.contains(blues,i) ) {
+//				cell.setCellStyle(bluetyle);
+//			}
+		}
+		XSSFRow titleRow = sheet.createRow(1);
+		for (int i = 0; i < summaryLength; i++) {
+			XSSFCell cell = titleRow.createCell(i);
+			if(i>2 && i <15) {
+				cell.setCellValue(workHourList.get(i-3).getMonth());
+			}else if(i==0) {
+				cell.setCellValue("xx交付部");
+			}else if(i==1) {
+				cell.setCellValue("类别");
+			}else if(i==2) {
+				cell.setCellValue("说明");
+			}else if(i==15) {
+				cell.setCellValue(""+thisYear+"年合计");
+			}
+			cell.setCellStyle(yellowStyle);
+		}
+		
+//		 插入需导出的数据
+		String lastName = "";
+		for (int i = 0; i < summaryList.size(); i++) {
+			XSSFRow row = sheet.createRow(i+2);
+			OperSummary summary =  summaryList.get(i);
+			for (int j = 0; j < summaryLength; j++) {
+				XSSFCell cell = row.createCell(j);
+				cell.setCellStyle(yellowStyle);
+				if(j>2 && j <15) {
+					cell = row.createCell(j, CellType.NUMERIC);
+					cell.setCellStyle(numberStyle);
+					cell.setCellValue(toValue(summary.getMonth().get("month"+(j-2))));
+				}else if(j==0) {
+					if(!lastName.equals(summary.getDepartmentName())) {
+						cell.setCellValue(summary.getDepartmentName());
+					}
+					
+				}else if(j==1) {
+					cell.setCellValue(Constants.SUMMARY_TYPES[i%Constants.SUMMARY_TYPES.length]);
+				}else if(j==2) {
+					cell.setCellValue(Constants.SUMMARY_REMARKS[i%Constants.SUMMARY_TYPES.length]);
+				}else if(j==15) {
+					cell = row.createCell(j, CellType.NUMERIC);
+					cell.setCellStyle(numberStyle);
+					cell.setCellValue(toValue(summary.getYearTotal()));
+				}
+				
+			}
+			lastName = summary.getDepartmentName();
+		}
+		
+		// 设置表格默认列宽度为15个字节
+        sheet.setDefaultColumnWidth((short) 16);
+		
+		File file = new File(exportFileName);
+		// 文件输出流
+		try {
+			FileOutputStream outStream = new FileOutputStream(file);
+			workBook.write(outStream);
+			workBook.close();
+			outStream.flush();
+			outStream.close();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+//		System.out.println("导出成功！" /* + basePath */ + exportFileName);
+		return exportFileName;
+	};
 	
 	private List<String[]> exportOfflieOper(User user) {
 		List<String[]> dataList = new ArrayList<String[]>();
@@ -259,6 +434,8 @@ public class ExportOfflineOperExcelImpl implements  ExportOfflineOperService{
 		numberStyle.setBorderLeft(CellStyle.BORDER_THIN);   
 		numberStyle.setBorderRight(CellStyle.BORDER_THIN);  
 //		numberStyle.setDataFormat(XSSFDataFormat);    // .getBuiltinFormat("0.00")
+		XSSFDataFormat df = workBook.createDataFormat();
+		numberStyle.setDataFormat(df.getFormat("#,##0.00"));
 		
 		CellStyle dataStyle = workBook.createCellStyle();
 		dataStyle.setFont(dataFont);
@@ -287,10 +464,12 @@ public class ExportOfflineOperExcelImpl implements  ExportOfflineOperService{
 			for (int j = 0; j < cellTitle.length; j++) {
 //				row.createCell(j).setCellValue(dataList.get(i)[j]);
 				XSSFCell cell = row.createCell(j);
-				cell.setCellValue(dataList.get(i)[j]);
 				if(j>12 && j < 35 ) {
+					cell = row.createCell(j, CellType.NUMERIC);
 					cell.setCellStyle(numberStyle);
+					cell.setCellValue(dataList.get(i)[j]);
 				}else {
+					cell.setCellValue(dataList.get(i)[j]);
 					cell.setCellStyle(dataStyle);
 				}
 			}
