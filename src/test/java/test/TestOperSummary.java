@@ -83,7 +83,7 @@ public class TestOperSummary {
 //		user.setBu("风控数据事业部");
 		
 		user = this.userService.queryUserById(user.getUserId());
-		List<OperSummary> rtn = offlineOperService.querySummary(user, PAGESIZE, PAGENUMBER);
+		List<OperSummary> rtn = offlineOperService.querySummary(user);
 		if(rtn != null) {
 //			System.out.println(rtn.size());
 			for(OperSummary o :rtn) {

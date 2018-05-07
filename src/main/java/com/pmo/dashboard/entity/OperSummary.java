@@ -22,6 +22,10 @@ public class OperSummary {
 	private BigDecimal invalid;
 	private BigDecimal effectiveSt;
 	private BigDecimal invalidSt;
+	private BigDecimal thinkTotalIncome;
+	private BigDecimal realTotalIncome;
+	private BigDecimal effectiveNr;
+	private BigDecimal effectiveHuman;
 	
 	public OperSummary() {
 		month = new TreeMap<String,BigDecimal>(new Comparator<String>() {
@@ -134,5 +138,54 @@ public class OperSummary {
 	}
 	public void setMonth(Map<String, BigDecimal> month) {
 		this.month = month;
+	}
+	public BigDecimal getThinkTotalIncome() {
+		thinkTotalIncome = getRealTotalIncome()
+				.add(getValue(invalid));
+		return thinkTotalIncome;
+	}
+
+	public void setThinkTotalIncome(BigDecimal thinkTotalIncome) {
+		this.thinkTotalIncome = thinkTotalIncome;
+	}
+
+	public BigDecimal getRealTotalIncome() {
+		realTotalIncome = getValue(ifaw).add(getValue(infOt)).add(getValue(infPt))
+				.add(getValue(infAd)).add(getValue(infTravel)).add(getValue(infEquipment));
+		return realTotalIncome;
+	}
+
+	public void setRealTotalIncome(BigDecimal realTotalIncome) {
+		this.realTotalIncome = realTotalIncome;
+	}
+
+	public BigDecimal getEffectiveNr() {
+		effectiveNr = getRealTotalIncome().divide(new BigDecimal("1.06"),2 , BigDecimal.ROUND_HALF_EVEN);
+		return effectiveNr;
+	}
+
+	public void setEffectiveNr(BigDecimal effectiveNr) {
+		this.effectiveNr = effectiveNr;
+	}
+
+	public BigDecimal getEffectiveHuman() { 
+		if(BigDecimal.ZERO.compareTo( getValue(effectiveSt))==0) {
+			return BigDecimal.ZERO;
+		}
+		effectiveHuman = getValue(ifaw).divide(getValue(effectiveSt),2 , BigDecimal.ROUND_HALF_EVEN);
+//		effectiveHuman 未完成, 还没/当月工作日 
+		return effectiveHuman;
+	}
+
+	public void setEffectiveHuman(BigDecimal effectiveHuman) {
+		this.effectiveHuman = effectiveHuman;
+	}
+	private BigDecimal getValue(BigDecimal b) {
+		if(null == b) {
+			return BigDecimal.ZERO;
+		}else if(BigDecimal.ZERO.compareTo(b)==0){
+			return BigDecimal.ZERO;
+		}
+		return b ;
 	}
 }

@@ -325,9 +325,13 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 		return ;
 	}
 	
-	private OfflineOper workHour(OfflineOper offlineOper) {
+	private BigDecimal getWorkHour(final String employeeId,final String year,final String month) {
 //		标准工时
-		String  location = employeeMapper.queryEmployeeById(offlineOper.getEmployeeId()).getStaffLocation() ;
+		String  location = "China";
+		if(StringUtils.isNotBlank(employeeId)) {
+			location = employeeMapper.queryEmployeeById(employeeId).getStaffLocation() ;
+		}
+		BigDecimal v = BigDecimal.ZERO;
 		if(StringUtils.isNotBlank(location) ) {
 			WorkHourMapper workHourMapper = chinaWorkHourMapper ;
 			WorkHour workHour = new ChinaWorkHour() ;
@@ -338,10 +342,30 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 				workHourMapper = MLWorkHourMapper ;	
 				workHour = new MLWorkHour() ;
 			}
-			workHour.setYear(offlineOper.getYear());
-			workHour.setMonth(offlineOper.getMonth()+"月");
-			offlineOper.setChsoftiMskHours( workHourMapper.queryWorkHour(workHour)); 
+			workHour.setYear(year);
+			workHour.setMonth(month+"月");
+			v = workHourMapper.queryWorkHour(workHour); 
 		}
+		return v==null ? BigDecimal.ZERO:v;
+	}
+	
+	private OfflineOper workHour(OfflineOper offlineOper) {
+//		String  location = employeeMapper.queryEmployeeById(offlineOper.getEmployeeId()).getStaffLocation() ;
+//		if(StringUtils.isNotBlank(location) ) {
+//			WorkHourMapper workHourMapper = chinaWorkHourMapper ;
+//			WorkHour workHour = new ChinaWorkHour() ;
+//			if("HK".equals(location)) {
+//				workHourMapper = HKWorkHourMapper ;
+//				workHour = new HKWorkHour() ;
+//			}else if("Malaysia".equals(location)) { 
+//				workHourMapper = MLWorkHourMapper ;	
+//				workHour = new MLWorkHour() ;
+//			}
+//			workHour.setYear(offlineOper.getYear());
+//			workHour.setMonth(offlineOper.getMonth()+"月");
+//			offlineOper.setChsoftiMskHours( workHourMapper.queryWorkHour(workHour)); 
+//		}
+		offlineOper.setChsoftiMskHours( getWorkHour(offlineOper.getEmployeeId(),offlineOper.getYear(),offlineOper.getMonth()));
 		return offlineOper;
 	}
 	
@@ -349,7 +373,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 		List<OperSummary> returnLIst = new ArrayList<OperSummary>();
 		final int YEAR = LocalDate.now().getYear();
 		final int MONTH = LocalDate.now().getMonthValue();
-		final int LENGTH = 10 ;
+		final int LENGTH = Constants.SUMMARY_TYPES.length ;
 		if(user.isRM()) {
 			ids = new String[] {""};
 		}
@@ -371,6 +395,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			}
 			
 			for (int i = 1; i <= MONTH; i++) {
+				BigDecimal workHour =  this.getWorkHour(null, ""+ YEAR, ""+i);
 				OfflineOperCondition condition = new OfflineOperCondition();
 				condition.setYear(""+YEAR);
 				condition.setMonth(""+i);
@@ -396,6 +421,9 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 						}
 						Method m1 = clazz.getDeclaredMethod(Constants.SUMMARY_METHODS[j]);
 						BigDecimal value = (BigDecimal) m1.invoke(o); 
+						if("getEffectiveHuman".equals(Constants.SUMMARY_METHODS[j]) && BigDecimal.ZERO.compareTo(workHour)!=0) {
+							value = value.divide(workHour,2 , BigDecimal.ROUND_HALF_EVEN);
+						}
 						months.put("month"+i, value);
 						r.setMonth(months);
 						if(null != value) {
@@ -460,7 +488,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 //	}
 	
 	@Override
-	public List<OperSummary> querySummary(User user, int pageSize, int pageNumber) throws Exception {
+	public List<OperSummary> querySummary(User user) throws Exception {
 		List<OperSummary> rtn = null ;
 //		for(int i=0;i< LENGTH;i++) {
 //			OperSummary r = new OperSummary();
