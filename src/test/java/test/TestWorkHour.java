@@ -48,6 +48,8 @@ public class TestWorkHour {
 		mapper = chinaWorkHourMapper;
 		BigDecimal b = mapper.queryWorkHour(workHour) ;
 		System.out.println(b.toString());
+		WorkHour thisMonth = mapper.queryMonth(workHour);
+//		System.out.println(thisMonth.);
 		
 		workHour = new HKWorkHour();
 		workHour.setYear("2018");

@@ -82,6 +82,8 @@ public class TestOperSummary {
 //		user.setUserId("1573"); // 风控数据事业部 潘亮
 //		user.setBu("风控数据事业部");
 		
+//		user.setUserId("1");  // admin
+		
 		user = this.userService.queryUserById(user.getUserId());
 		List<OperSummary> rtn = offlineOperService.querySummary(user);
 		if(rtn != null) {

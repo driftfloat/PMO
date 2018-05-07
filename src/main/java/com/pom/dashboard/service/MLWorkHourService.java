@@ -1,6 +1,5 @@
 package com.pom.dashboard.service;
 
-import com.pmo.dashboard.entity.ChinaWorkHour;
 import com.pmo.dashboard.entity.WorkHour;
 
 public interface MLWorkHourService {
@@ -10,7 +9,7 @@ public interface MLWorkHourService {
 
 	boolean insertSelective(WorkHour record);
 
-    ChinaWorkHour selectByPrimaryKey(String id);
+    WorkHour selectByPrimaryKey(String id);
 
     boolean updateByPrimaryKeySelective(WorkHour record);
 
