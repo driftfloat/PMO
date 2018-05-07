@@ -10,7 +10,7 @@ public interface ChinaWorkHourService {
 
 	boolean insert(WorkHour record); // mapper.insertSelective
 
-    ChinaWorkHour selectById(String id); //  mapper.selectByPrimaryKey
+    WorkHour selectById(String id); //  mapper.selectByPrimaryKey
 
     boolean update(WorkHour record);  // mapper.updateByPrimaryKeySelective
     

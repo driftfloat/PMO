@@ -33,7 +33,7 @@ public class ChinaWorkHourServiceImpl implements ChinaWorkHourService {
 	}
 
 	@Override
-	public ChinaWorkHour selectById(String id) {
+	public WorkHour selectById(String id) {
 		return chinaWorkHourMapper.selectByPrimaryKey(id);
 	}
 

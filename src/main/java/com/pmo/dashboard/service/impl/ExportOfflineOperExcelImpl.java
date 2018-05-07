@@ -32,6 +32,7 @@ import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.Currencys;
 import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.OfflineOper;
+import com.pmo.dashboard.entity.OperSummary;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
 import com.pom.dashboard.service.CSDeptService;
@@ -97,6 +98,13 @@ public class ExportOfflineOperExcelImpl implements  ExportOfflineOperService{
 	public String exportOfflineOper(String sheetName, User user ) {
 		List<String[]> dataList = exportOfflieOper(user);
 		return exportOfflieOperExcel(dataList, exportFile, sheetName);
+	}
+	
+	@Override
+	public String exportSummary(String sheetName, User user) {
+		List<OperSummary> summaryList = offlineOperService.querySummary(user);
+		
+		return null;
 	}
 	
 	private List<String[]> exportOfflieOper(User user) {
@@ -310,6 +318,8 @@ public class ExportOfflineOperExcelImpl implements  ExportOfflineOperService{
 //		System.out.println("导出成功！" /* + basePath */ + exportFileName);
 		return exportFileName;
 	}
+
+	
 	
 	
 

@@ -369,7 +369,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 		return offlineOper;
 	}
 	
-	private List<OperSummary> summaryData(User user,String[] ids) throws Exception {
+	private List<OperSummary> summaryData(User user,String[] ids)  {
 		List<OperSummary> returnLIst = new ArrayList<OperSummary>();
 		final int YEAR = LocalDate.now().getYear();
 		final int MONTH = LocalDate.now().getMonthValue();
@@ -419,15 +419,19 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 						}else {
 							months = new HashMap<String,BigDecimal>();
 						}
-						Method m1 = clazz.getDeclaredMethod(Constants.SUMMARY_METHODS[j]);
-						BigDecimal value = (BigDecimal) m1.invoke(o); 
-						if("getEffectiveHuman".equals(Constants.SUMMARY_METHODS[j]) && BigDecimal.ZERO.compareTo(workHour)!=0) {
-							value = value.divide(workHour,2 , BigDecimal.ROUND_HALF_EVEN);
-						}
-						months.put("month"+i, value);
-						r.setMonth(months);
-						if(null != value) {
-							r.setYearTotal(r.getYearTotal().add(value));
+						try {
+							Method m1 = clazz.getMethod(Constants.SUMMARY_METHODS[j]);
+							BigDecimal value = (BigDecimal) m1.invoke(o); 
+							if("getEffectiveHuman".equals(Constants.SUMMARY_METHODS[j]) && BigDecimal.ZERO.compareTo(workHour)!=0) {
+								value = value.multiply(BigDecimal.valueOf(8)).divide(workHour,2 , BigDecimal.ROUND_HALF_EVEN);
+							}
+							months.put("month"+i, value);
+							r.setMonth(months);
+							if(null != value) {
+								r.setYearTotal(r.getYearTotal().add(value));
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
 					}
 				}
@@ -487,8 +491,8 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 //		return rtn;
 //	}
 	
-	@Override
-	public List<OperSummary> querySummary(User user) throws Exception {
+//	@Override
+	public List<OperSummary> querySummary(User user)  {
 		List<OperSummary> rtn = null ;
 //		for(int i=0;i< LENGTH;i++) {
 //			OperSummary r = new OperSummary();
@@ -528,8 +532,18 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			}
 			condition.setIds(ids);
 			rtn = this.summaryData(user,ids);
-		}else if(user.isAdmin()) {
-//			rtn = offlineOperMapper.queryAllStaff(condition) ;
+		}else if(user.isAdmin()) { // admin
+			OfflineOperCondition condition = new OfflineOperCondition();
+			List<CSDept> csDepts = csDeptMapper.queryAllCSDept();  
+			
+			int index = 0;
+			String[] ids = new String[csDepts.size()] ;
+			for(CSDept d :csDepts ) {
+				ids[index] = d.getCsSubDeptId() ;
+				index++ ;
+			}
+			condition.setIds(ids);
+			rtn = this.summaryData(user,ids);
 		}
 		return rtn;
 	}
