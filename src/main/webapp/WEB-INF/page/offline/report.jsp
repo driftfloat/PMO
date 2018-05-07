@@ -50,41 +50,15 @@ var path='<%=path%>';
 								</h2>
 							</div>
 							<div id="employeeInfo" class="box-content">
-							<div class="panel panel-default">
-							  <div class="panel-heading">Query Conditions</div>
-                              <div class="panel-body">
-                                        <div class="group">
-										<label class="col-lg-2 control-label">ProjectNumber</label>
-										<div class="col-lg-4">
-											<input type="text" class="form-control" id="projectNumber"/>
-										</div>
-										</div>
-										<div class="group">
-											<label class="col-sm-2 control-label">StaffName</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" id="staffName"/>
-											</div>
-										</div>
-										</br></br></br>
-										
-										<div class="group">
-											<label class="col-sm-2 control-label">E-HR</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" id="ehr"/>
-											</div>
-										</div>
-										<div class="group">
-											<div class="col-sm-4">
-												<button onClick="search()" type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">Search</button>
-											</div>
-										</div>
-                               </div>
-                             </div>
+							 <!-- <div class="panel panel-default">
+							  
+                              
+                             </div> -->
                              <!-- 工具栏  -->
                              <div id="toolbar" class="btn-group">
-                               <button id="btn_add" type="button" onclick="exportData()" class="btn btn-default">
+                               <!--<button id="btn_add" type="button" onclick="exportData()" class="btn btn-default">
                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Export
-                               </button>
+                               </button>-->
                              </div>
                              <!-- 数据列表  -->
                              <table id="OfflineReport"></table>

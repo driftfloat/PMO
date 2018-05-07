@@ -48,11 +48,12 @@ function loadOfflineReport(){
             title: 'DepartMent',
             sortable: true,
             formatter : function(value,row, index){
-                if(index>=1){
-                	return "";
-                }else{
-                	return value;
-                }
+                //if(index>=1){
+                	//return "";
+                //}else{
+                	 var div = "<div style='width:200px;'>"+value+"</div>";
+               	     return div;
+               // }
             }
         },
         {
@@ -69,7 +70,7 @@ function loadOfflineReport(){
             title: 'Remark',
             sortable: true,
             formatter : function(value, row, index){
-          	  var div = "<div style='width:200px;'>"+value+"</div>";
+          	  var div = "<div style='width:255px;'>"+value+"</div>";
           	  return div;
             }
         },
