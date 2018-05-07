@@ -89,8 +89,8 @@ function loadOfflineOperList(){
                     if (!v) return '中软实际工时不能为空';
                     if (isNaN(v)) return '工时必须是数字';
                     var hours = parseInt(v);
-                    if (hours <= 0) return '工时必须大于0';
-
+                    if (hours < 0) return '工时必须大于等于0';
+                    
                 }
             },
             sortable: true
@@ -105,7 +105,7 @@ function loadOfflineOperList(){
                     if (!v) return '中软无效工时不能为空';
                     if (isNaN(v)) return '工时必须是数字';
                     var hours = parseInt(v);
-                    if (hours <= 0) return '工时必须大于0';
+                    if (hours < 0) return '工时必须大于等于0';
                 }
             },
             sortable: true
@@ -120,7 +120,7 @@ function loadOfflineOperList(){
                     if (!v) return '中软加班费工时不能为空';
                     if (isNaN(v)) return '工时必须是数字';
                     var hours = parseInt(v);
-                    if (hours <= 0) return '工时必须大于0';
+                    if (hours < 0) return '工时必须大于等于0';
                 }
             },
             sortable: true
@@ -135,7 +135,7 @@ function loadOfflineOperList(){
                     if (!v) return '中软调休工时不能为空';
                     if (isNaN(v)) return '工时必须是数字';
                     var hours = parseInt(v);
-                    if (hours <= 0) return '工时必须大于0';
+                    if (hours < 0) return '工时必须大于等于0';
                 }
             },
             sortable: true
@@ -150,7 +150,7 @@ function loadOfflineOperList(){
                     if (!v) return '中软调整上月工时不能为空';
                     if (isNaN(v)) return '工时必须是数字';
                     var hours = parseInt(v);
-                    if (hours <= 0) return '工时必须大于0';
+                    //if (hours <= 0) return '工时必须大于0';
                 }
             },
             sortable: true
@@ -163,9 +163,9 @@ function loadOfflineOperList(){
                 title: '差旅收入',
                 validate: function (v) {
                     if (!v) return '差旅收入不能为空';
-                    if (isNaN(v)) return '工时必须是数字';
+                    if (isNaN(v)) return '差旅收入必须是数字';
                     var hours = parseInt(v);
-                    if (hours <= 0) return '工时必须大于0';
+                    if (hours < 0) return '差旅收入必须大于等于0';
                 }
             },
             sortable: true
@@ -178,9 +178,9 @@ function loadOfflineOperList(){
                 title: '付费设备收入',
                 validate: function (v) {
                     if (!v) return '付费设备收入不能为空';
-                    if (isNaN(v)) return '工时必须是数字';
+                    if (isNaN(v)) return '付费设备收入必须是数字';
                     var hours = parseInt(v);
-                    if (hours <= 0) return '工时必须大于0';
+                    if (hours < 0) return '付费设备收入必须大于等于0';
                 }
             },
             sortable: true
@@ -193,9 +193,9 @@ function loadOfflineOperList(){
                 title: '分包收入',
                 validate: function (v) {
                     if (!v) return '分包收入不能为空';
-                    if (isNaN(v)) return '工时必须是数字';
+                    if (isNaN(v)) return '分包收入必须是数字';
                     var hours = parseInt(v);
-                    if (hours <= 0) return '工时必须大于0';
+                    if (hours < 0) return '分包收入必须大于等于0';
                 }
             },
             sortable: true
@@ -394,6 +394,13 @@ function loadOfflineOperList(){
         		if(currentData[i]==row){
         			//中软实际工时有变动
         			if(field=="chsoftiAwHours"){
+        				//校验中软实际工时不能大于标准工时
+        				if(row.chsoftiAwHours>row.chsoftiMskHours){
+        					alert("实际工时不能大于标准工时");
+        					//清空实际工时单元格
+        					upCell(i,"chsoftiAwHours",0,row.billRate);
+        					return;
+        				}
         				upCell(i,"chsoftiIfaw",row.chsoftiIfaw,row.billRate);
         			}
         			//中软无效工时有变动
