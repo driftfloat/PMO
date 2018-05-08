@@ -138,28 +138,40 @@ public class ExportOfflineOperExcelImpl implements  ExportOfflineOperService{
 		workBook.setSheetName(0, sheetName);
 		// 创建表格标题行 第一行
 		XSSFRow firstRow = sheet.createRow(0);
-//		firstRow.setHeightInPoints(30);
-		CellStyle yellowStyle = workBook.createCellStyle();
-        yellowStyle.setFillForegroundColor(IndexedColors.WHITE.getIndex());
-        yellowStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-		yellowStyle.setAlignment(HorizontalAlignment.LEFT);
-		yellowStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);  
+		for(int i=3;i<16;i++) {
+			sheet.setColumnWidth(i, 11 * 256);
+		}
 		
-		yellowStyle.setBorderBottom(CellStyle.BORDER_THIN); //    BORDER_THICK BORDER_DASHED BORDER_DOUBLE
-		yellowStyle.setBorderTop(CellStyle.BORDER_THIN);   
-		yellowStyle.setBorderLeft(CellStyle.BORDER_THIN);   
-		yellowStyle.setBorderRight(CellStyle.BORDER_THIN);  
+//		firstRow.setHeightInPoints(30);
+		CellStyle whiteStyle = workBook.createCellStyle();
+        whiteStyle.setFillForegroundColor(IndexedColors.WHITE.getIndex());
+        whiteStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		whiteStyle.setAlignment(HorizontalAlignment.LEFT);
+		whiteStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);  
+		
+		whiteStyle.setBorderBottom(CellStyle.BORDER_THIN); //    BORDER_THICK BORDER_DASHED BORDER_DOUBLE
+		whiteStyle.setBorderTop(CellStyle.BORDER_THIN);   
+		whiteStyle.setBorderLeft(CellStyle.BORDER_THIN);   
+		whiteStyle.setBorderRight(CellStyle.BORDER_THIN);  
 		
 		Font titleFont = workBook.createFont();  
 		titleFont.setFontName("微软雅黑"); 
 		titleFont.setFontHeightInPoints((short)9);
 //		titleFont.setBold(true);
-		yellowStyle.setFont(titleFont);
+		whiteStyle.setFont(titleFont);
 		
-//		CellStyle bluetyle = workBook.createCellStyle();
-//		bluetyle.cloneStyleFrom(yellowStyle);
-//		bluetyle.setFillForegroundColor(IndexedColors.PALE_BLUE.getIndex());  // BLUE BLUE_GREY SKY_BLUE BLUE_LIGHT
-//		bluetyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		CellStyle noneButtomStyle = workBook.createCellStyle();
+		noneButtomStyle.cloneStyleFrom(whiteStyle);
+		noneButtomStyle.setBorderBottom(CellStyle.BORDER_NONE);   
+		
+		CellStyle none4Style = workBook.createCellStyle();
+		none4Style.cloneStyleFrom(noneButtomStyle);
+		none4Style.setBorderTop(CellStyle.BORDER_NONE);   
+		none4Style.setBorderLeft(CellStyle.BORDER_NONE);   
+		none4Style.setBorderRight(CellStyle.BORDER_NONE);   
+		
+//		noneStyle.setFillForegroundColor(IndexedColors.PALE_BLUE.getIndex());  // BLUE BLUE_GREY SKY_BLUE BLUE_LIGHT
+//		noneStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 		
 		Font dataFont = workBook.createFont();  
 		dataFont.setFontName("微软雅黑"); 
@@ -181,7 +193,7 @@ public class ExportOfflineOperExcelImpl implements  ExportOfflineOperService{
 		dataStyle.setFont(dataFont);
 //		numberStyle.setDataFormat(XSSFDataFormat  .getBuiltinFormat("0.00"));
 		dataStyle.setAlignment(HorizontalAlignment.LEFT);
-		dataStyle.setBorderBottom(CellStyle.BORDER_THIN); //    BORDER_THICK BORDER_DASHED BORDER_DOUBLE
+//		dataStyle.setBorderBottom(CellStyle.BORDER_THIN); //    BORDER_THICK BORDER_DASHED BORDER_DOUBLE
 		dataStyle.setBorderTop(CellStyle.BORDER_THIN);   
 		dataStyle.setBorderLeft(CellStyle.BORDER_THIN);   
 		dataStyle.setBorderRight(CellStyle.BORDER_THIN);  
@@ -192,14 +204,14 @@ public class ExportOfflineOperExcelImpl implements  ExportOfflineOperService{
 		for (int i = 0; i < summaryLength; i++) {
 			XSSFCell cell = firstRow.createCell(i);
 //			cell.setCellValue(cellTitle[i]);
-			cell.setCellStyle(yellowStyle);
+			cell.setCellStyle(whiteStyle);
 			if(i<workHourList.size()) {
 				wd = wd.add(workHourList.get(i).getStandardWorkday());
 			}
 			if(i>2 && i <15) {
 //				cell = firstRow.createCell(i, Cell.CELL_TYPE_NUMERIC);
 //				cell = firstRow.createCell(i, CellType.NUMERIC);
-				
+//				cell.set
 				cell.setCellValue(toValue(workHourList.get(i-3).getStandardWorkday()));
 				cell.setCellStyle(numberStyle);
 			}else if(i==0) {
@@ -208,7 +220,7 @@ public class ExportOfflineOperExcelImpl implements  ExportOfflineOperService{
 				cell.setCellValue(""+thisYear+"年月工作日");
 			}else if(i==15) {
 //				cell = firstRow.createCell(i, CellType.NUMERIC);
-				cell.setCellValue(""+toValue(wd.divide(new BigDecimal("12"),2, BigDecimal.ROUND_HALF_EVEN )));
+				cell.setCellValue(""+toValue(wd.divide(new BigDecimal("12"),2, BigDecimal.ROUND_HALF_UP )));
 				cell.setCellStyle(numberStyle);
 			}
 			
@@ -230,7 +242,7 @@ public class ExportOfflineOperExcelImpl implements  ExportOfflineOperService{
 			}else if(i==15) {
 				cell.setCellValue(""+thisYear+"年合计");
 			}
-			cell.setCellStyle(yellowStyle);
+			cell.setCellStyle(whiteStyle);
 		}
 		
 //		 插入需导出的数据
@@ -240,14 +252,17 @@ public class ExportOfflineOperExcelImpl implements  ExportOfflineOperService{
 			OperSummary summary =  summaryList.get(i);
 			for (int j = 0; j < summaryLength; j++) {
 				XSSFCell cell = row.createCell(j);
-				cell.setCellStyle(yellowStyle);
+				cell.setCellStyle(whiteStyle);
 				if(j>2 && j <15) {
 					cell = row.createCell(j, CellType.NUMERIC);
 					cell.setCellStyle(numberStyle);
 					cell.setCellValue(toValue(summary.getMonth().get("month"+(j-2))));
 				}else if(j==0) {
 					if(!lastName.equals(summary.getDepartmentName())) {
+						cell.setCellStyle(noneButtomStyle);
 						cell.setCellValue(summary.getDepartmentName());
+					}else {
+						cell.setCellStyle(none4Style);
 					}
 					
 				}else if(j==1) {
@@ -311,9 +326,6 @@ public class ExportOfflineOperExcelImpl implements  ExportOfflineOperService{
 			}
 			currencyCondition.setPlaceWork(staffLocation);
 			Currencys currencys = currencysMapper.queryCurrency(currencyCondition);
-			if(null == currencys) {
-				int i = 1;
-			}
 			if(null == currencys.getExRate()) {
 				currencys.setExRate(BigDecimal.ZERO);
 			}

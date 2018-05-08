@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.pmo.dashboard.dao.CSDeptMapper;
 import com.pmo.dashboard.dao.ChinaWorkHourMapper;
+import com.pmo.dashboard.dao.CurrencysMapper;
 import com.pmo.dashboard.dao.EmployeeMapper;
 import com.pmo.dashboard.dao.HKWorkHourMapper;
 import com.pmo.dashboard.dao.MLWorkHourMapper;
@@ -27,6 +28,7 @@ import com.pmo.dashboard.dao.UserMapper;
 import com.pmo.dashboard.dao.WorkHourMapper;
 import com.pmo.dashboard.entity.CSDept;
 import com.pmo.dashboard.entity.ChinaWorkHour;
+import com.pmo.dashboard.entity.Currencys;
 import com.pmo.dashboard.entity.Employee;
 import com.pmo.dashboard.entity.HKWorkHour;
 import com.pmo.dashboard.entity.MLWorkHour;
@@ -62,7 +64,8 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 	@Resource
 	MLWorkHourMapper MLWorkHourMapper;
 	
-
+	@Resource
+	private CurrencysMapper currencysMapper;
 	
 	@Override
 	public boolean delete(String id) {
@@ -207,7 +210,10 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 		}
 		for(OfflineOper offlineOper :rtn) {
 			workHour(offlineOper);
-			offlineOper.setBillRate(employeeMapper.getBillRate(employeeMapper.queryEmployeeById(offlineOper.getEmployeeId())));
+			Employee e = employeeMapper.queryEmployeeById(offlineOper.getEmployeeId());
+			offlineOper.setBillRate(employeeMapper.getBillRate(e));
+			Currencys currencys = currency(offlineOper, e);   // 员工汇率
+			offlineOper.setExRate(currencys.getExRate()); 
 		}
 		return rtn ;
 	}
@@ -287,7 +293,31 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 		}
 		return true;
 	}
+	
+	private Currencys currency(OfflineOper o, Employee e) {
+		Currencys currencyCondition = new Currencys();
+		currencyCondition.setYear(o.getYear());
+		currencyCondition.setMonth(o.getMonth());
+		String staffLocation = e.getStaffLocation()  ;
+		staffLocation = ( null == staffLocation ) ? "China":staffLocation ;
+		if("China".equals(staffLocation)  ) {
+			staffLocation = "北京";
+		}else if("HK".equals(staffLocation)){
+			staffLocation = "HK";
+		}else if("Malaysia".equals(staffLocation)){
+			staffLocation = "马来";
+		}
+		currencyCondition.setPlaceWork(staffLocation);
+		Currencys currencys = currencysMapper.queryCurrency(currencyCondition);
+		if(null == currencys.getExRate()) {
+			currencys.setExRate(BigDecimal.ZERO);
+		}
+		return currencys;
+	}
+	
 	private void calculte(OfflineOper oper,Employee employee) {
+		Currencys currencys = currency(oper, employee);   // 员工汇率
+		oper.setExRate(currencys.getExRate()); 
 		if(!checkCalculte(oper, employee)) {
 			return ;
 		}
@@ -302,25 +332,33 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			CHSOFTI_EFFECTIVE_NR	有效NR=					当月有效收入/1.06
 			CHSOFTI_EFFECTIVE_ST	当月有效人力=				中软实际工时/中软月标准工时
 			CHSOFTI_INVALID_ST	　	当月无效人力=				中软无效工时/中软月标准工时
+			
+			•	月收入合计(原币种)=实际工时收入+无效工时收入+加班费工时收入+调休工时收入+调整上月工时收入+差旅收入+付费设备收入+分包收入  CHSOFTI_INF_TOTAL
+			•	月收入合计(人民币)=月收入合计(原币种)*汇率   			CHSOFTI_INF_RMBTOTAL
+			•	当月有效收入=(月收入合计原币种-无效工时收入)*汇率		CHSOFTI_INF_CURRENT
+
 		 */
 //		oper.set
 		// 员工单价  BILL_RATE , BILL_CURRENCY 货币类型
 		
 		BigDecimal billRate = new BigDecimal(employee.getBillRate());	// 员工单价
-		oper.setChsoftiIfaw( billRate.multiply( oper.getChsoftiAwHours())) ; 		//实际工时收入 
-		oper.setChsoftiInvalid( billRate.multiply( oper.getChsoftiIwHours())) ; 	//无效工时收入
-		oper.setChsoftiInfOt( billRate.multiply( oper.getChsoftiOtHours())) ; 	//加班费工时收入 
-		oper.setChsoftiInfPt( billRate.multiply( oper.getChsoftiToHours())) ; 	//调休工时收入 
-		oper.setChsoftiInfAd( billRate.multiply( oper.getChsoftiApwHours())) ; 	//调整上月工时收入
+		oper.setChsoftiIfaw( billRate.multiply( oper.getChsoftiAwHours()).setScale(2, BigDecimal.ROUND_HALF_UP)) ; 		//实际工时收入 
+		oper.setChsoftiInvalid( billRate.multiply( oper.getChsoftiIwHours()).setScale(2, BigDecimal.ROUND_HALF_UP)) ; 	//无效工时收入
+		oper.setChsoftiInfOt( billRate.multiply( oper.getChsoftiOtHours()).setScale(2, BigDecimal.ROUND_HALF_UP)) ; 	//加班费工时收入 
+		oper.setChsoftiInfPt( billRate.multiply( oper.getChsoftiToHours()).setScale(2, BigDecimal.ROUND_HALF_UP)) ; 	//调休工时收入 
+		oper.setChsoftiInfAd( billRate.multiply( oper.getChsoftiApwHours()).setScale(2, BigDecimal.ROUND_HALF_UP)) ; 	//调整上月工时收入
+		
+		
 		
 		oper.setChsoftiInfTotal(oper.getChsoftiIfaw().add(oper.getChsoftiInvalid()).add(oper.getChsoftiInfOt())
 				.add(oper.getChsoftiInfPt()).add(oper.getChsoftiInfAd()).add(oper.getChsoftiInfTravel())
 				.add(oper.getChsoftiInfEquipment()).add(oper.getChsoftiInfSub()));
-		oper.setChsoftiInfCurrent(oper.getChsoftiInfTotal().subtract(oper.getChsoftiInvalid()));
-		oper.setChsoftiEffectiveNr(oper.getChsoftiInfCurrent().divide(new BigDecimal("1.06"),2 , BigDecimal.ROUND_HALF_EVEN));
+		oper.setChsoftiInfRmbtotal(oper.getChsoftiInfTotal().multiply( currencys.getExRate()).setScale(2, BigDecimal.ROUND_HALF_UP)) ;
+		oper.setChsoftiInfCurrent(oper.getChsoftiInfTotal().subtract(oper.getChsoftiInvalid()).multiply( currencys.getExRate()).setScale(2, BigDecimal.ROUND_HALF_UP)) ;
+		oper.setChsoftiEffectiveNr(oper.getChsoftiInfCurrent().divide(new BigDecimal("1.06"),2 , BigDecimal.ROUND_HALF_UP));
 		if(oper.getChsoftiMskHours().compareTo(BigDecimal.ZERO)!=0) {
-			oper.setChsoftiEffectiveSt(oper.getChsoftiAwHours().divide(oper.getChsoftiMskHours(),2 , BigDecimal.ROUND_HALF_EVEN));
-			oper.setChsoftiInvalidSt(oper.getChsoftiIwHours().divide(oper.getChsoftiMskHours(),2, BigDecimal.ROUND_HALF_EVEN ));
+			oper.setChsoftiEffectiveSt(oper.getChsoftiAwHours().divide(oper.getChsoftiMskHours(),2 , BigDecimal.ROUND_HALF_UP));
+			oper.setChsoftiInvalidSt(oper.getChsoftiIwHours().divide(oper.getChsoftiMskHours(),2, BigDecimal.ROUND_HALF_UP ));
 		}
 		return ;
 	}
@@ -426,7 +464,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 							Method m1 = clazz.getMethod(Constants.SUMMARY_METHODS[j]);
 							BigDecimal value = (BigDecimal) m1.invoke(o); 
 							if("getEffectiveHuman".equals(Constants.SUMMARY_METHODS[j]) && BigDecimal.ZERO.compareTo(workDay)!=0) {
-								value = value.divide(workDay,2 , BigDecimal.ROUND_HALF_EVEN);
+								value = value.divide(workDay,2 , BigDecimal.ROUND_HALF_UP);
 							}
 							months.put("month"+i, value);
 							r.setMonth(months);
@@ -444,57 +482,8 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 		}
 		return returnLIst;
 	}
-
-//	private List<OperSummary> summaryData_(User user,String[] ids) throws Exception {
-//		List<OperSummary> rtn = new ArrayList<OperSummary>();
-//		final int YEAR = LocalDate.now().getYear();
-//		final int MONTH = LocalDate.now().getMonthValue();
-//		int LENGTH = 10 ;
-//		if(ids !=null) {
-//			LENGTH = LENGTH * ids.length ;
-//		}
-//		for(int i=0;i< LENGTH;i++) {
-//			OperSummary r = new OperSummary();
-//			r.setId(""+i);
-//			r.setDepartmentName(user.getNickname());
-//			r.setType(Constants.SUMMARY_TYPES[i]);
-//			r.setRemark(Constants.SUMMARY_REMARKS[i]);
-//			rtn.add(r);
-//		}
-//		
-//		for (int i = 1; i <= MONTH; i++) {
-//			OfflineOperCondition condition = new OfflineOperCondition();
-//			condition.setYear(""+YEAR);
-//			condition.setMonth(""+i);
-//			condition.setRmId(user.getUserId()); 
-////			condition.setCsdeptid("12");
-//			List<OperSummary> list = offlineOperMapper.querySummary(condition);
-//			// 转置 row ==> column
-//			if(list.get(0) != null) {
-//				OperSummary o = list.get(0) ;
-//				Class clazz = o.getClass(); 
-//				for(int j=0; j< LENGTH;j++) {
-//					OperSummary r = rtn.get(j);
-//					Map<String,BigDecimal> months ; 
-//					if(r.getMonth()!=null) {
-//						months = r.getMonth();
-//					}else {
-//						months = new HashMap<String,BigDecimal>();
-//					}
-//					Method m1 = clazz.getDeclaredMethod(Constants.SUMMARY_METHODS[j]);
-//					BigDecimal value = (BigDecimal) m1.invoke(o); 
-//					months.put("month"+i, value);
-//					r.setMonth(months);
-//					if(null != value) {
-//						r.setYearTotal(r.getYearTotal().add(value));
-//					}
-//				}
-//			}
-//		}
-//		return rtn;
-//	}
 	
-//	@Override
+	@Override
 	public List<OperSummary> querySummary(User user)  {
 		List<OperSummary> rtn = null ;
 //		for(int i=0;i< LENGTH;i++) {
@@ -550,11 +539,4 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 		}
 		return rtn;
 	}
-
-	@Override
-	public List<OperSummary> exportSummary(User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
