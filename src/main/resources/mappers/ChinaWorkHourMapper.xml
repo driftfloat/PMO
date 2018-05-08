@@ -108,7 +108,7 @@
     select 
     <include refid="Base_Column_List" />
     from t_china_workhour
-    where YEAR = #{year} and MONTH = #{month}
+    where YEAR = #{year} 
   </select>
   
  </mapper>
