@@ -1,8 +1,10 @@
 package com.pmo.dashboard.entity;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 
-public class WorkHour {
+public class WorkHour implements Comparable <WorkHour>
+{
 	protected String id;
 
     protected String month;
@@ -52,4 +54,19 @@ public class WorkHour {
     public void setStandardWorkhour(BigDecimal standardWorkhour) {
         this.standardWorkhour = standardWorkhour;
     }
+
+	@Override
+	public int compareTo(WorkHour o2) {
+		if(this.getYear().compareTo(o2.getYear())>0 ) {
+			return 1;
+		}else if(this.getYear().compareTo(o2.getYear())<0 ) {
+			return -1;
+		}
+		if(this.getMonth().length()>o2.getMonth().length()) {
+			return 1;
+		}else if(this.getMonth().length()<o2.getMonth().length()) {
+			return -1;
+		}
+		return 0;
+	}
 }

@@ -38,8 +38,20 @@ public class TestExportExcel {
 	@Resource
 	private ExportOfflineOperService exportOfflineOperService;
 	
+//	@Test
+	public void exportSummary() {
+		User user = new User();
+		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
+		
+//		user.setUserId("1"); //admin
+		
+		user = userService.queryUserById(user.getUserId());
+		System.out.println(exportOfflineOperService.exportSummary("交付部汇总（SEA）",user));
+	}
+	
+	
 	@Test
-	public void export() {
+	public void exportOfflie() {
 		User user = new User();
 		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
 ////		user.setUserId("cff5fa689a2e40afa02ba2ceda914bbb");  // 梁嘉杰 9
@@ -57,33 +69,6 @@ public class TestExportExcel {
 		
 //		user.setUserType("0");
 //		user.setUserId("1");
-		
-//		System.out.println(user.isRM());
-//		System.out.println(user.isSubDept());
-//		System.out.println(user.isDept());
-//		System.out.println(user.isAdmin());
-//		System.out.println();
-//		
-//		user.setUserType("3");
-//		System.out.println(user.isRM());
-//		System.out.println(user.isSubDept());
-//		System.out.println(user.isDept());
-//		System.out.println(user.isAdmin());
-//		System.out.println();
-//		
-//		user.setUserType("1");
-//		System.out.println(user.isRM());
-//		System.out.println(user.isSubDept());
-//		System.out.println(user.isDept());
-//		System.out.println(user.isAdmin());
-//		System.out.println();
-//		
-//		user.setUserType("0");
-//		System.out.println(user.isRM());
-//		System.out.println(user.isSubDept());
-//		System.out.println(user.isDept());
-//		System.out.println(user.isAdmin());
-//		System.out.println();
 		
 		user = userService.queryUserById(user.getUserId());
 		

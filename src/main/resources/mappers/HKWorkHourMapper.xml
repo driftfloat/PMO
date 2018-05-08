@@ -96,4 +96,18 @@
     from t_hk_workhour
     where YEAR = #{year} and MONTH = #{month}
   </select>
+  
+  <select id="queryMonth" parameterType="com.pmo.dashboard.entity.WorkHour" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_hk_workhour
+    where YEAR = #{year} and MONTH = #{month}
+  </select>
+  
+  <select id="queryYear" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_hk_workhour
+    where YEAR = #{year} 
+  </select>
   </mapper>

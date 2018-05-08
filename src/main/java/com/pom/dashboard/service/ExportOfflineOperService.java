@@ -8,6 +8,6 @@ import com.pmo.dashboard.entity.User;
 public interface ExportOfflineOperService {
 	String exportOfflineOper(String sheetName, User user );
 
-	String exportSummary(String sheetName, User user) throws Exception;
+	String exportSummary(String sheetName, User user) ;
 	
 }

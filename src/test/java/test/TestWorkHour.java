@@ -1,6 +1,8 @@
 package test;
 
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -41,29 +43,59 @@ public class TestWorkHour {
 	
 	@Test
 	public void queryWorkHour() {
+		final String YEAR = "2018" ;
+		final String MONTH = "4月" ;
+		final int INDEX=3;
 		WorkHour workHour = new ChinaWorkHour();
 		WorkHourMapper mapper ;
-		workHour.setYear("2018");
-		workHour.setMonth("4月");
+		workHour.setYear(YEAR);
+		workHour.setMonth(MONTH);
 		mapper = chinaWorkHourMapper;
 		BigDecimal b = mapper.queryWorkHour(workHour) ;
 		System.out.println(b.toString());
 		WorkHour thisMonth = mapper.queryMonth(workHour);
-//		System.out.println(thisMonth.);
+		System.out.println(thisMonth.getStandardWorkday()+"\t"+thisMonth.getStandardWorkhour());
+		List<WorkHour> list = mapper.queryYear("2018");
+		Collections.sort(list);
+		thisMonth = list.get(INDEX);
+		System.out.println(thisMonth.getMonth()+"\t"+thisMonth.getStandardWorkday()+"\t"+thisMonth.getStandardWorkhour());
+//		for(WorkHour w :list) {
+//			System.out.println(w.getMonth());
+//		}
+		System.out.println();
 		
 		workHour = new HKWorkHour();
-		workHour.setYear("2018");
-		workHour.setMonth("4月");
+		workHour.setYear(YEAR);
+		workHour.setMonth(MONTH);
 		mapper = HKWorkHourMapper;
 		b = mapper.queryWorkHour(workHour);
 		System.out.println(b.toString());
+		thisMonth = mapper.queryMonth(workHour);
+		System.out.println(thisMonth.getStandardWorkday()+"\t"+thisMonth.getStandardWorkhour());
+		list = mapper.queryYear(YEAR);
+		Collections.sort(list);
+		thisMonth = list.get(INDEX);
+		System.out.println(thisMonth.getMonth()+"\t"+thisMonth.getStandardWorkday()+"\t"+thisMonth.getStandardWorkhour());
+//		for(WorkHour w :list) {
+//			System.out.println(w.getMonth());
+//		}
+		System.out.println();
 		
 		workHour = new MLWorkHour();
-		workHour.setYear("2018");
-		workHour.setMonth("4月");
+		workHour.setYear(YEAR);
+		workHour.setMonth(MONTH);
 		mapper = MLWorkHourMapper;
 		b = mapper.queryWorkHour(workHour);
 		System.out.println(b.toString());
+		thisMonth = mapper.queryMonth(workHour);
+		System.out.println(thisMonth.getStandardWorkday()+"\t"+thisMonth.getStandardWorkhour());
+		list = mapper.queryYear(YEAR);
+		Collections.sort(list);
+		thisMonth = list.get(INDEX);
+		System.out.println(thisMonth.getMonth()+"\t"+thisMonth.getStandardWorkday()+"\t"+thisMonth.getStandardWorkhour());
+//		for(WorkHour w :list) {
+//			System.out.println(w.getMonth());
+//		}
 	}
 
 }
