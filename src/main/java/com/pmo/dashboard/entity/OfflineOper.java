@@ -2,7 +2,6 @@ package com.pmo.dashboard.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 public class OfflineOper {
     private String id;						//id
@@ -57,7 +56,9 @@ public class OfflineOper {
 
     private BigDecimal chsoftiInfSub;		//分包收入
 
-    private BigDecimal chsoftiInfTotal = BigDecimal.ZERO ;		//月收入合计
+    private BigDecimal chsoftiInfTotal = BigDecimal.ZERO ;		//月收入合计-原币种
+    
+    private BigDecimal chsoftiInfRmbtotal = BigDecimal.ZERO ;   //月收入合计-人民币
 
     private BigDecimal chsoftiInfCurrent = BigDecimal.ZERO ;	//当月有效收入
 
@@ -76,8 +77,19 @@ public class OfflineOper {
     private String[] ids;
     
     private String billRate;  
+    
+    
+    
 
-    public String getId() {
+    public BigDecimal getChsoftiInfRmbtotal() {
+		return chsoftiInfRmbtotal;
+	}
+
+	public void setChsoftiInfRmbtotal(BigDecimal chsoftiInfRmbtotal) {
+		this.chsoftiInfRmbtotal = chsoftiInfRmbtotal;
+	}
+
+	public String getId() {
         return id;
     }
 

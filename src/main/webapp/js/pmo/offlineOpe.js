@@ -95,9 +95,9 @@ function loadOfflineSummary(data){
     		s14 = parseFloat(s14) + parseFloat(data[i].chsoftiInfTotal);
     		s14 = Math.round(s14 * 100) / 100;
         }
-        if(data[i].chsoftiInfTotal!=null){
+        if(data[i].chsoftiInfRmbtotal!=null){
         	//月收入合计-人民币
-    		s15 = parseFloat(s15) + parseFloat(data[i].chsoftiInfTotal);
+    		s15 = parseFloat(s15) + parseFloat(data[i].chsoftiInfRmbtotal);
     		s15 = Math.round(s15 * 100) / 100;
         }
         if(data[i].chsoftiInfCurrent!=null){
@@ -418,7 +418,7 @@ function loadOfflineOperList(){
             }
         },
         {
-            field: 'chsoftiInfTotal',//月收入合计=实际工时收入+无效工时收入+加班费工时收入+调休工时收入+调整上月工时收入+差旅收入+付费设备收入+分包收入
+            field: 'chsoftiInfTotal',//月收入合计-原币种=实际工时收入+无效工时收入+加班费工时收入+调休工时收入+调整上月工时收入+差旅收入+付费设备收入+分包收入
             title: 'InfTotal',
             sortable: true,
             formatter: function (value, row, index) {  
@@ -460,8 +460,21 @@ function loadOfflineOperList(){
             	return "<font color='green' family='黑体'><strong>"+temp+"</strong></font>";
             	
             }
-        },
-        {
+        },{
+            field: 'chsoftiInfRmbtotal',//月收入合计(人民币)=月收入合计(原币种)*汇率
+            title: 'InfRmbTotal',
+            sortable: true,
+            formatter: function (value, row, index) {  
+            	var temp = 0;
+            	//if(row.){
+            		
+            	//}
+            	//计算后的值赋给字段
+            	//row.chsoftiInfTotal=temp;
+            	return "<font color='green' family='黑体'><strong>"+temp+"</strong></font>";
+            	
+            }
+        },{
             field: 'chsoftiInfCurrent',//当月有效收入=月收入合计-无效工时收入
             title: 'InfCurrent',
             sortable: true,
