@@ -57,8 +57,6 @@ public class OfflineOper {
     private BigDecimal chsoftiInfSub;		//分包收入
 
     private BigDecimal chsoftiInfTotal = BigDecimal.ZERO ;		//月收入合计-原币种
-    
-    private BigDecimal chsoftiInfRmbtotal = BigDecimal.ZERO ;   //月收入合计-人民币
 
     private BigDecimal chsoftiInfCurrent = BigDecimal.ZERO ;	//当月有效收入
 
@@ -67,6 +65,10 @@ public class OfflineOper {
     private BigDecimal chsoftiEffectiveSt = BigDecimal.ZERO ;	//当月有效人力
 
     private BigDecimal chsoftiInvalidSt = BigDecimal.ZERO ;	//当月无效人力
+    
+    private BigDecimal chsoftiInfRmbtotal = BigDecimal.ZERO ; // •	月收入合计-人民币 
+    
+    private BigDecimal exRate;  // 汇率
     
     private String chsoftiProNumber;
     private String chsoftiProName;
@@ -80,14 +82,6 @@ public class OfflineOper {
     
     
     
-
-    public BigDecimal getChsoftiInfRmbtotal() {
-		return chsoftiInfRmbtotal;
-	}
-
-	public void setChsoftiInfRmbtotal(BigDecimal chsoftiInfRmbtotal) {
-		this.chsoftiInfRmbtotal = chsoftiInfRmbtotal;
-	}
 
 	public String getId() {
         return id;
@@ -383,6 +377,22 @@ public class OfflineOper {
 
 	public void setCsSubDept(String csSubDept) {
 		this.csSubDept = csSubDept;
+	}
+
+	public BigDecimal getChsoftiInfRmbtotal() {
+		return chsoftiInfRmbtotal;
+	}
+
+	public void setChsoftiInfRmbtotal(BigDecimal chsoftiInfRmbtotal) {
+		this.chsoftiInfRmbtotal = chsoftiInfRmbtotal;
+	}
+
+	public BigDecimal getExRate() {
+		return exRate;
+	}
+
+	public void setExRate(BigDecimal exRate) {
+		this.exRate = exRate;
 	}
 
 }

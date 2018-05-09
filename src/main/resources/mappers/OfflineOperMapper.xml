@@ -44,8 +44,6 @@
 			jdbcType="DECIMAL" />
 		<result column="CHSOFTI_INF_TOTAL" property="chsoftiInfTotal"
 			jdbcType="DECIMAL" />
-		<result column="CHSOFTI_INF_RMBTOTAL" property="chsoftiInfRmbtotal"
-		    jdbcType="DECIMAL" />
 		<result column="CHSOFTI_INF_CURRENT" property="chsoftiInfCurrent"
 			jdbcType="DECIMAL" />
 		<result column="CHSOFTI_EFFECTIVE_NR" property="chsoftiEffectiveNr"
@@ -54,6 +52,7 @@
 			jdbcType="DECIMAL" />
 		<result column="CHSOFTI_INVALID_ST" property="chsoftiInvalidSt"
 			jdbcType="DECIMAL" />
+		<result column="CHSOFTI_INF_RMBTOTAL" property="chsoftiInfRmbtotal" jdbcType="DECIMAL" />	
 
 		<result property="chsoftiProNumber" column="CHSOFTI_PRO_NUMBER"
 			javaType="String" />
@@ -270,7 +269,7 @@
 			AND MONTH = MONTH(NOW())
 		</if>
 		<if test="csdeptid == null or csdeptid == ''">
-			AND z1.CS_SUBDEPT_ID in
+			AND CS_SUBDEPT_ID in
 			<foreach item="item" index="index" collection="ids" open="("
 				separator="," close=")">
 				#{item}
@@ -287,7 +286,7 @@
 			AND z1.E_HR = #{eHr}
 		</if>
 		<if test="csdeptid == null or csdeptid == ''">
-			AND CS_SUBDEPT_ID in
+			AND z1.CS_SUBDEPT_ID in
 			<foreach item="item" index="index" collection="ids" open="("
 				separator="," close=")">
 				#{item}
@@ -375,7 +374,8 @@
 		CHSOFTI_INF_PT, CHSOFTI_INF_AD, CHSOFTI_INF_TRAVEL,
 		CHSOFTI_INF_EQUIPMENT, CHSOFTI_INF_SUB, CHSOFTI_INF_TOTAL,
 		CHSOFTI_INF_CURRENT, CHSOFTI_EFFECTIVE_NR,
-		CHSOFTI_EFFECTIVE_ST, CHSOFTI_INVALID_ST, CHSOFTI_INF_RMBTOTAL,REMARK
+		CHSOFTI_EFFECTIVE_ST, CHSOFTI_INVALID_ST, CHSOFTI_INF_RMBTOTAL, 
+      REMARK
 		)
 		values (#{id,jdbcType=VARCHAR}, #{eHr,jdbcType=VARCHAR},
 		#{staffName,jdbcType=VARCHAR},
@@ -398,8 +398,8 @@
 		#{chsoftiInfCurrent,jdbcType=DECIMAL},
 		#{chsoftiEffectiveNr,jdbcType=DECIMAL},
 		#{chsoftiEffectiveSt,jdbcType=DECIMAL},
-		#{chsoftiInvalidSt,jdbcType=DECIMAL}, #{chsoftiInfRmbtotal,jdbcType=DECIMAL}, #{remark,jdbcType=LONGVARCHAR}
-		)
+		#{chsoftiInvalidSt,jdbcType=DECIMAL}, #{chsoftiInfRmbtotal,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=LONGVARCHAR})
 	</insert>
 	<insert id="insertSelective" parameterType="com.pmo.dashboard.entity.OfflineOper">
 		insert into t_offline_oper
@@ -499,7 +499,7 @@
 			</if>
 			<if test="chsoftiInfRmbtotal != null" >
                 CHSOFTI_INF_RMBTOTAL,
-            </if>
+		    </if>
 			<if test="remark != null">
 				REMARK,
 			</if>
@@ -599,8 +599,8 @@
 				#{chsoftiInvalidSt,jdbcType=DECIMAL},
 			</if>
 			<if test="chsoftiInfRmbtotal != null" >
-                #{chsoftiInfRmbtotal,jdbcType=DECIMAL},
-            </if>
+		        #{chsoftiInfRmbtotal,jdbcType=DECIMAL},
+		    </if>
 			<if test="remark != null">
 				#{remark,jdbcType=LONGVARCHAR},
 			</if>
@@ -700,8 +700,8 @@
 				CHSOFTI_INVALID_ST = #{chsoftiInvalidSt,jdbcType=DECIMAL},
 			</if>
 			<if test="chsoftiInfRmbtotal != null" >
-                CHSOFTI_INF_RMBTOTAL = #{chsoftiInfRmbtotal,jdbcType=DECIMAL},
-            </if>
+		        CHSOFTI_INF_RMBTOTAL = #{chsoftiInfRmbtotal,jdbcType=DECIMAL},
+		    </if>
 			<if test="remark != null">
 				REMARK = #{remark,jdbcType=LONGVARCHAR},
 			</if>
