@@ -53,9 +53,9 @@ public class TestOfflineOperService {
 	@Test
 	public void queryByRM() throws Exception {
 		OfflineOperCondition condition = new OfflineOperCondition();
-//		condition.seteHr("E000834441");
+		condition.seteHr("E111111111");  // E100044240 E100044240
 //		condition.setStaffName("白世铭");   //白世铭   汤俊承 
-		condition.setStaffName("汤俊承");
+//		condition.setStaffName("汤俊承");
 		
 //		condition.seteHr("E000814351");
 ////		condition.setStaffName(" 王廣智");

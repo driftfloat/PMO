@@ -38,23 +38,23 @@ public class TestExportExcel {
 	@Resource
 	private ExportOfflineOperService exportOfflineOperService;
 	
-//	@Test
+	@Test
 	public void exportSummary() {
 		User user = new User();
 //		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
 		
-		user.setUserId("c7b38226545c45e598f16a33031f85aa");  //jack li
+//		user.setUserId("c7b38226545c45e598f16a33031f85aa");  //jack li
 		
 //		user.setUserId("1573"); // 风控数据事业部  潘亮
 		
-//		user.setUserId("1"); //admin
+		user.setUserId("1"); //admin
 		
 		user = userService.queryUserById(user.getUserId());
 		System.out.println(exportOfflineOperService.exportSummary("交付部汇总（SEA）",user));
 	}
 	
 	
-	@Test
+//	@Test
 	public void exportOfflie() {
 		User user = new User();
 //		user.setUserId("cb00bad3f16a4e8baf450e7b88af7c4b");  // 张培  12
@@ -67,12 +67,12 @@ public class TestExportExcel {
 //		user.setUserId("c7b38226545c45e598f16a33031f85aa");
 //		user.setCsdeptId("9,12");
 		
-		user.setUserType("1"); 
-		user.setUserId("1573"); // 风控数据事业部  潘亮
-		user.setBu("风控数据事业部");
+//		user.setUserType("1"); 
+//		user.setUserId("1573"); // 风控数据事业部  潘亮
+//		user.setBu("风控数据事业部");
 		
 //		user.setUserType("0");
-//		user.setUserId("1");
+		user.setUserId("1");
 		
 		user = userService.queryUserById(user.getUserId());
 		

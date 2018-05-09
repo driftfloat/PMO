@@ -148,7 +148,8 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 		}
 		for(OfflineOper offlineOper :rtn) {
 			workHour(offlineOper);
-			offlineOper.setBillRate(employeeMapper.getBillRate(employeeMapper.queryEmployeeById(offlineOper.getEmployeeId())));
+			String billRate = employeeMapper.queryEmployeeById(offlineOper.getEmployeeId()).getBillRate();
+			offlineOper.setBillRate( StringUtils.isBlank(billRate)?"0":billRate);
 		}
 		return rtn ;
 	}
@@ -211,7 +212,8 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 		for(OfflineOper offlineOper :rtn) {
 			workHour(offlineOper);
 			Employee e = employeeMapper.queryEmployeeById(offlineOper.getEmployeeId());
-			offlineOper.setBillRate(employeeMapper.getBillRate(e));
+//			offlineOper.setBillRate(employeeMapper.getBillRate(e));
+			offlineOper.setBillRate( StringUtils.isBlank(e.getBillRate())?"0":e.getBillRate());
 			Currencys currencys = currency(offlineOper, e);   // 员工汇率
 			offlineOper.setExRate(currencys.getExRate()); 
 		}
@@ -341,7 +343,7 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 //		oper.set
 		// 员工单价  BILL_RATE , BILL_CURRENCY 货币类型
 		
-		BigDecimal billRate = new BigDecimal(employee.getBillRate());	// 员工单价
+		BigDecimal billRate = new BigDecimal(oper.getBillRate());	// 员工单价
 		oper.setChsoftiIfaw( billRate.multiply( oper.getChsoftiAwHours()).setScale(2, BigDecimal.ROUND_HALF_UP)) ; 		//实际工时收入 
 		oper.setChsoftiInvalid( billRate.multiply( oper.getChsoftiIwHours()).setScale(2, BigDecimal.ROUND_HALF_UP)) ; 	//无效工时收入
 		oper.setChsoftiInfOt( billRate.multiply( oper.getChsoftiOtHours()).setScale(2, BigDecimal.ROUND_HALF_UP)) ; 	//加班费工时收入 
