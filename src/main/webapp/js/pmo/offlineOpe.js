@@ -3,6 +3,148 @@ $(function () {
     loadOfflineOperList();
 });
 
+function loadOfflineSummary(data){
+	var s1=0.00;//实际工时
+	var s2=0.00;//无效工时
+	var s3=0.00;//加班工时
+	var s4=0.00;//调休工时
+	var s5=0.00;//调整上月工时
+	var s6=0.00;//实际工时收入
+	var s7=0.00;//无效工时收入
+	var s8=0.00;//加班工时收入
+	var s9=0.00;//调休工时收入
+	var s10=0.00;//调整上月工时收入
+	var s11=0.00;//差旅收入
+	var s12=0.00;//付费设备收入
+	var s13=0.00;//分包收入
+	var s14=0.00;//月收入合计-原币种
+	var s15=0.00;//月收入合计-人民币
+	var s16=0.00;//当月有效收入
+	var s17=0.00;//有效NR
+	var s18=0.00;//当月有效人力
+	var s19=0.00;//当月无效人力
+	
+	for(var i=0;i<data.length;i++){
+		if(data[i].chsoftiAwHours!=null){
+			//实际工时
+			s1 = parseFloat(s1) + parseFloat(data[i].chsoftiAwHours);
+			s1 = Math.round(s1 * 100) / 100;
+		}
+        if(data[i].chsoftiIwHours!=null){
+        	//无效工时
+    		s2 = parseFloat(s2) + parseFloat(data[i].chsoftiIwHours);
+    		s2 = Math.round(s2 * 100) / 100;
+		}
+        if(data[i].chsoftiOtHours!=null){
+        	//加班工时
+    		s3 = parseFloat(s3) + parseFloat(data[i].chsoftiOtHours);
+    		s3 = Math.round(s3 * 100) / 100;
+        }
+        if(data[i].chsoftiToHours!=null){
+        	//调休工时
+    		s4 = parseFloat(s4) + parseFloat(data[i].chsoftiToHours);
+    		s4 = Math.round(s4 * 100) / 100;
+        }
+        if(data[i].chsoftiApwHours!=null){
+        	//调整上月工时
+    		s5 = parseFloat(s5) + parseFloat(data[i].chsoftiApwHours);
+    		s5 = Math.round(s5 * 100) / 100;
+        }
+        if(data[i].chsoftiIfaw!=null){
+        	//实际工时收入
+    		s6 = parseFloat(s6) + parseFloat(data[i].chsoftiIfaw);
+    		s6 = Math.round(s6 * 100) / 100;
+        }
+        if(data[i].chsoftiInvalid!=null){
+        	//无效工时收入
+    		s7 = parseFloat(s7) + parseFloat(data[i].chsoftiInvalid);
+    		s7 = Math.round(s7 * 100) / 100;
+        }
+        if(data[i].chsoftiInfOt!=null){
+        	//加班工时收入
+    		s8 = parseFloat(s8) + parseFloat(data[i].chsoftiInfOt);
+    		s8 = Math.round(s8 * 100) / 100;
+        }
+        if(data[i].chsoftiInfPt!=null){
+        	//调休工时收入
+    		s9 = parseFloat(s9) + parseFloat(data[i].chsoftiInfPt);
+    		s9 = Math.round(s9 * 100) / 100;
+        }
+        if(data[i].chsoftiInfAd!=null){
+        	//调整上月工时收入
+    		s10 = parseFloat(s10) + parseFloat(data[i].chsoftiInfAd);
+    		s10 = Math.round(s10 * 100) / 100;
+        }
+        if(data[i].chsoftiInfTravel!=null){
+        	//差旅收入
+    		s11 = parseFloat(s11) + parseFloat(data[i].chsoftiInfTravel);
+    		s11 = Math.round(s11 * 100) / 100;
+        }
+        if(data[i].chsoftiInfEquipment!=null){
+        	//付费设备收入
+    		s12 = parseFloat(s12) + parseFloat(data[i].chsoftiInfEquipment);
+    		s12 = Math.round(s12 * 100) / 100;
+        }
+        if(data[i].chsoftiInfSub!=null){
+        	//分包收入
+    		s13 = parseFloat(s13) + parseFloat(data[i].chsoftiInfSub);
+    		s13 = Math.round(s13 * 100) / 100;
+        }
+        if(data[i].chsoftiInfTotal!=null){
+        	//月收入合计-原币种
+    		s14 = parseFloat(s14) + parseFloat(data[i].chsoftiInfTotal);
+    		s14 = Math.round(s14 * 100) / 100;
+        }
+        if(data[i].chsoftiInfTotal!=null){
+        	//月收入合计-人民币
+    		s15 = parseFloat(s15) + parseFloat(data[i].chsoftiInfTotal);
+    		s15 = Math.round(s15 * 100) / 100;
+        }
+        if(data[i].chsoftiInfCurrent!=null){
+        	//当月有效收入
+    		s16 = parseFloat(s16) + parseFloat(data[i].chsoftiInfCurrent);
+    		s16 = Math.round(s16 * 100) / 100;
+        }
+        if(data[i].chsoftiEffectiveNr!=null){
+        	//有效NR
+    		s17 = parseFloat(s17) + parseFloat(data[i].chsoftiEffectiveNr);
+    		s17 = Math.round(s17 * 100) / 100;
+        }
+        if(data[i].chsoftiEffectiveSt!=null){
+        	//当月有效人力
+    		s18 = parseFloat(s18) + parseFloat(data[i].chsoftiEffectiveSt);
+    		s18 = Math.round(s18 * 100) / 100;
+        }
+        if(data[i].chsoftiInvalidSt!=null){
+        	//当月无效人力
+    		s19 = parseFloat(s19) + parseFloat(data[i].chsoftiInvalidSt);
+    		s19 = Math.round(s19 * 100) / 100;
+        }
+	}
+	
+	$("#s1").html(s1);//实际工时
+	$("#s2").html(s2);//无效工时
+	$("#s3").html(s3);//加班工时
+	$("#s4").html(s4);//调休工时
+	$("#s5").html(s5);//调整上月工时
+	$("#s6").html(s6);//实际工时收入
+	$("#s7").html(s7);//无效工时收入
+	$("#s8").html(s8);//加班工时收入
+	$("#s9").html(s9);//调休工时收入
+	$("#s10").html(s10);//调整上月工时收入
+	$("#s11").html(s11);//差旅收入
+	$("#s12").html(s12);//付费设备收入
+	$("#s13").html(s13);//分包收入
+	$("#s14").html(s14);//月收入合计-原币种
+	$("#s15").html(s15);//月收入合计-人民币
+	$("#s16").html(s16);//当月有效收入
+	$("#s17").html(s17);//有效NR
+	$("#s18").html(s18);//当月有效人力
+	$("#s19").html(s19);//当月无效人力
+}
+
+
+
 
 //线下运营列表
 function loadOfflineOperList(){
@@ -23,8 +165,8 @@ function loadOfflineOperList(){
         sortOrder: "asc",                   //排序方式
         sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
         pageNumber: 1,                      //初始化加载第一页，默认第一页,并记录
-        pageSize: 10,                     //每页的记录行数（*）
-        pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+        pageSize: 200,                     //每页的记录行数（*）
+        pageList: [200],        //可供选择的每页的行数（*）
         search: false,                      //是否显示表格搜索
         strictSearch: true,
         showColumns: false,                  //是否显示所有的列（选择显示的列）
@@ -430,7 +572,8 @@ function loadOfflineOperList(){
                 dataType: 'JSON',
                 success: function (data, status) {
                     if (data == "0") {
-                    	
+                    	var data = $('#OfflineOperList').bootstrapTable('getData');
+                    	loadOfflineSummary(data);
                     }
                 },
                 error: function () {
@@ -443,7 +586,8 @@ function loadOfflineOperList(){
             });
         },
         onLoadSuccess: function () {
-        	
+        	var data = $('#OfflineOperList').bootstrapTable('getData');
+        	loadOfflineSummary(data);
         },
         onLoadError: function () {
         	

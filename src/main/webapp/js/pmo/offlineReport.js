@@ -159,14 +159,14 @@ function loadOfflineReport(){
             formatter : function(value,row, index){
                 return value.month12;
             }
+        },{
+            field: 'yearTotal',
+            title: 'Total',
+            sortable: true
         }
         ],
         onLoadSuccess: function () {
-        	 //$('#OfflineReport').bootstrapTable('mergeCells', { index: 0, field: 'departmentName', colspan: 0, rowspan: 1});
-        	//var data = $('#OfflineReport').bootstrapTable('getData', true);
-        	//$('#OfflineReport').bootstrapTable('mergeCells', {index: 1, field: 'departmentName', rowspan: 10});
-            //合并单元格
-            //mergeCells(data, "departmentName", 1, $('#OfflineReport'));
+        	 
         },
         onLoadError: function () {
         	
@@ -210,5 +210,11 @@ function mergeCells(data,fieldName,colspan,target){
         $(target).bootstrapTable('mergeCells',{index:index, field:fieldName, colspan: colspan, rowspan: count});   
         index += count;
     }
+}
+
+//导出
+function exportData(){
+	uri = path+'/service/offlineOper/export',
+	window.location.href=uri;
 }
 

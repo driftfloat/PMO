@@ -170,6 +170,8 @@ public class OfflineOperServiceImpl implements OfflineOperService {
 			//第一个参数当前页码，第二个参数每页条数
 			
 //			int count = offlineOperMapper.rmCount(condition);
+			//如果是RM pageSize给为:200
+			//pageSize = 200;
 			PageHelper.startPage(pageNumber,pageSize); 
 			rtn = offlineOperMapper.queryByRM(condition) ;
 //			if(0 == count) {
