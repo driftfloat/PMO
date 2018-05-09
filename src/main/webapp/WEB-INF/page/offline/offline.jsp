@@ -30,6 +30,13 @@
 <link href='<%=path %>/css/animate.min.css' rel='stylesheet'/>
 <link href='<%=path%>/css/bootstrap-datetimepicker.css' rel='stylesheet'/>
 <link href='<%=path%>/css/bootstrap-datetimepicker.min.css' rel='stylesheet'/>
+<style type="text/css">
+   .ssf{
+      font-size:15px;
+      font-weight:bold;
+      color:red;
+   }
+</style>
 </head>
 <script>
 var path='<%=path%>';
@@ -121,6 +128,60 @@ var path='<%=path%>';
                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Export
                                </button>
                              </div>
+                             <!-- 数据列汇总 -->
+                             <table id="columnSummary" border="1" width="100%">
+                               <tr align="center">
+                                 <td colspan="8" align="center">列数据汇总</td>
+                               </tr>
+                               <tr>
+                                 <td>实际工时</td>
+                                 <td><div id="s1" class="ssf"></div></td>
+                                 <td>无效工时</td>
+                                 <td><div id="s2" class="ssf"></div></td>
+                                 <td>加班工时</td>
+                                 <td><div id="s3" class="ssf"></div></td>
+                                 <td>调休工时</td>
+                                 <td><div id="s4" class="ssf"></div></td>
+                               </tr>
+                               <tr>
+                                 <td>调整上月工时</td>
+                                 <td><div id="s5" class="ssf"></div></td>
+                                 <td>实际工时收入</td>
+                                 <td><div id="s6" class="ssf"></div></td>
+                                 <td>无效工时收入</td>
+                                 <td><div id="s7" class="ssf"></div></td>
+                                 <td>加班工时收入</td>
+                                 <td><div id="s8" class="ssf"></div></td>
+                               </tr>
+                               <tr>
+                                 <td>调休工时收入</td>
+                                 <td><div id="s9" class="ssf"></div></td>
+                                 <td>调整上月工时收入</td>
+                                 <td><div id="s10" class="ssf"></div></td>
+                                 <td>差旅收入</td>
+                                 <td><div id="s11" class="ssf"></div></td>
+                                 <td>付费设备收入</td>
+                                 <td><div id="s12" class="ssf"></div></td>
+                               </tr>
+                               <tr>
+                                 <td>分包收入</td>
+                                 <td><div id="s13" class="ssf"></div></td>
+                                 <td>月收入合计-原币种</td>
+                                 <td><div id="s14" class="ssf"></div></td>
+                                 <td>月收入合计-人民币</td>
+                                 <td><div id="s15" class="ssf"></div></td>
+                                 <td>当月有效收入</td>
+                                 <td><div id="s16" class="ssf"></div></td>
+                               </tr>
+                               <tr>
+                                 <td>有效NR</td>
+                                 <td><div id="s17" class="ssf"></div></td>
+                                 <td>当月有效人力</td>
+                                 <td><div id="s18" class="ssf"></div></td>
+                                 <td>当月无效人力</td>
+                                 <td colspan="5"><div id="s19" class="ssf"></div></td>
+                               </tr>
+                             </table>
                              <!-- 数据列表  -->
                              <table id="OfflineOperList"></table>
                             </div>        
