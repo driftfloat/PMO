@@ -190,6 +190,34 @@ public class OfflineOperController {
 	
 	@RequestMapping(value= {"/exportSummary"})
 	public String exportSummary(HttpServletRequest request,HttpServletResponse response) throws JsonProcessingException{
+		User user = (User) request.getSession().getAttribute("loginUser");
+		String fileName = exportOfflineOperService.exportSummary("交付部汇总（SEA）",user);
+		File file = new File(fileName);
+		String date = LocalDate.now().toString();
+		
+		String downloadFilename = "Delivery department summary_"+date+".xlsx";
+		// 以流的形式下载文件。
+		try {
+	        InputStream fis = new BufferedInputStream(new FileInputStream(fileName));
+	        byte[] buffer = new byte[fis.available()];
+	        fis.read(buffer);
+	        fis.close();
+	        // 清空response
+	        response.reset();
+	        // 设置response的Header
+	        response.addHeader("Content-Disposition", "attachment;filename=" + downloadFilename);
+	        //response.setContentType("application/octet-stream");
+	        response.setContentType("application/vnd.ms-excel");
+	        response.addHeader("Content-Length", "" + file.length());
+	        OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+	        
+	        toClient.write(buffer);
+	        toClient.flush();
+	        toClient.close();
+	        file.delete();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 		

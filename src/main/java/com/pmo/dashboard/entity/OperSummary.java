@@ -160,7 +160,7 @@ public class OperSummary {
 	}
 
 	public BigDecimal getEffectiveNr() {
-		effectiveNr = getRealTotalIncome().divide(new BigDecimal("1.06"),2 , BigDecimal.ROUND_HALF_EVEN);
+		effectiveNr = getRealTotalIncome().divide(new BigDecimal("1.06"),2 , BigDecimal.ROUND_HALF_UP);
 		return effectiveNr;
 	}
 
@@ -172,7 +172,7 @@ public class OperSummary {
 		if(BigDecimal.ZERO.compareTo( getValue(effectiveSt))==0) {
 			return BigDecimal.ZERO;
 		}
-		effectiveHuman = getValue(ifaw).divide(getValue(effectiveSt),2 , BigDecimal.ROUND_HALF_EVEN);
+		effectiveHuman = getValue(ifaw).divide(getValue(effectiveSt),2 , BigDecimal.ROUND_HALF_UP);
 //		effectiveHuman 未完成, 还没/当月工作日 
 		return effectiveHuman;
 	}
