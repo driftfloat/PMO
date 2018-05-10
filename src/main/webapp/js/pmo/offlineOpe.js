@@ -112,7 +112,7 @@ function loadOfflineSummary(data){
 	$("#s7").html(s7.toFixed(2));//无效工时收入
 	$("#s8").html(s8.toFixed(2));//加班工时收入
 	$("#s9").html(s9.toFixed(2));//调休工时收入
-	$("#s10").html(s10);//调整上月工时收入
+	$("#s10").html(s10.toFixed(2));//调整上月工时收入
 	$("#s11").html(s11.toFixed(2));//差旅收入
 	$("#s12").html(s12.toFixed(2));//付费设备收入
 	$("#s13").html(s13.toFixed(2));//分包收入

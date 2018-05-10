@@ -79,7 +79,7 @@ function loadOfflineReport(){
             title: '1月',
             sortable: true,
             formatter : function(value,row, index){
-                return value.month1;
+                return "<font color='green' family='黑体'><strong>"+value.month1+"</strong></font>";
             }
         },
         {
@@ -87,82 +87,85 @@ function loadOfflineReport(){
             title: '2月',
             sortable: true,
             formatter : function(value,row, index){
-                return value.month2;
+                return "<font color='green' family='黑体'><strong>"+value.month2+"</strong></font>";
             }
         },{
             field: 'month',
             title: '3月',
             sortable: true,
             formatter : function(value,row, index){
-                return value.month3;
+                return "<font color='green' family='黑体'><strong>"+value.month3+"</strong></font>";
             }
         },{
             field: 'month',
             title: '4月',
             sortable: true,
             formatter : function(value,row, index){
-                return value.month4;
+                return "<font color='green' family='黑体'><strong>"+value.month4+"</strong></font>";
             }
         },{
             field: 'month',
             title: '5月',
             sortable: true,
             formatter : function(value,row, index){
-                return value.month5;
+                return "<font color='green' family='黑体'><strong>"+value.month5+"</strong></font>";
             }
         },{
             field: 'month',
             title: '6月',
             sortable: true,
             formatter : function(value,row, index){
-                return value.month6;
+                return "<font color='green' family='黑体'><strong>"+value.month6+"</strong></font>";
             }
         },{
             field: 'month',
             title: '7月',
             sortable: true,
             formatter : function(value,row, index){
-                return value.month7;
+                return "<font color='green' family='黑体'><strong>"+value.month7+"</strong></font>";
             }
         },{
             field: 'month',
             title: '8月',
             sortable: true,
             formatter : function(value,row, index){
-                return value.month8;
+                return "<font color='green' family='黑体'><strong>"+value.month8+"</strong></font>";
             }
         },{
             field: 'month',
             title: '9月',
             sortable: true,
             formatter : function(value,row, index){
-                return value.month9;
+                return "<font color='green' family='黑体'><strong>"+value.month9+"</strong></font>";
             }
         },{
             field: 'month',
             title: '10月',
             sortable: true,
             formatter : function(value,row, index){
-                return value.month10;
+                return "<font color='green' family='黑体'><strong>"+value.month10+"</strong></font>";
             }
         },{
             field: 'month',
             title: '11月',
             sortable: true,
             formatter : function(value,row, index){
-                return value.month11;
+                return "<font color='green' family='黑体'><strong>"+value.month11+"</strong></font>";
             }
         },{
             field: 'month',
             title: '12月',
             sortable: true,
             formatter : function(value,row, index){
-                return value.month12;
+                return "<font color='green' family='黑体'><strong>"+value.month12+"</strong></font>";
             }
         },{
             field: 'yearTotal',
             title: 'Total',
-            sortable: true
+            sortable: true,
+            formatter : function(value,row, index){
+                return "<font color='green' family='黑体'><strong>"+value+"</strong></font>";
+            }
         }
         ],
         onLoadSuccess: function () {
@@ -214,7 +217,7 @@ function mergeCells(data,fieldName,colspan,target){
 
 //导出
 function exportData(){
-	uri = path+'/service/offlineOper/export',
+	uri = path+'/service/offlineOper/exportSummary',
 	window.location.href=uri;
 }
 
