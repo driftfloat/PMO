@@ -27,120 +27,102 @@ function loadOfflineSummary(data){
 	for(var i=0;i<data.length;i++){
 		if(data[i].chsoftiAwHours!=null){
 			//实际工时
-			s1 = parseFloat(s1) + parseFloat(data[i].chsoftiAwHours);
-			s1 = Math.round(s1 * 100) / 100;
+			s1 = floatObj.add(s1, data[i].chsoftiAwHours, 2, 'add');
 		}
         if(data[i].chsoftiIwHours!=null){
         	//无效工时
-    		s2 = parseFloat(s2) + parseFloat(data[i].chsoftiIwHours);
-    		s2 = Math.round(s2 * 100) / 100;
+    		s2 = floatObj.add(s2, data[i].chsoftiIwHours, 2, 'add');
 		}
         if(data[i].chsoftiOtHours!=null){
         	//加班工时
-    		s3 = parseFloat(s3) + parseFloat(data[i].chsoftiOtHours);
-    		s3 = Math.round(s3 * 100) / 100;
+    		s3 = floatObj.add(s3, data[i].chsoftiOtHours, 2, 'add');
         }
         if(data[i].chsoftiToHours!=null){
         	//调休工时
-    		s4 = parseFloat(s4) + parseFloat(data[i].chsoftiToHours);
-    		s4 = Math.round(s4 * 100) / 100;
+    		s4 = floatObj.add(s4, data[i].chsoftiToHours, 2, 'add');
         }
         if(data[i].chsoftiApwHours!=null){
         	//调整上月工时
-    		s5 = parseFloat(s5) + parseFloat(data[i].chsoftiApwHours);
-    		s5 = Math.round(s5 * 100) / 100;
+    		s5 = floatObj.add(s5, data[i].chsoftiApwHours, 2, 'add');
         }
         if(data[i].chsoftiIfaw!=null){
         	//实际工时收入
-    		s6 = parseFloat(s6) + parseFloat(data[i].chsoftiIfaw);
-    		s6 = Math.round(s6 * 100) / 100;
+    		s6 = floatObj.add(s6, data[i].chsoftiIfaw, 2, 'add');
         }
         if(data[i].chsoftiInvalid!=null){
         	//无效工时收入
-    		s7 = parseFloat(s7) + parseFloat(data[i].chsoftiInvalid);
-    		s7 = Math.round(s7 * 100) / 100;
+    		s7 = floatObj.add(s7, data[i].chsoftiInvalid, 2, 'add');
         }
         if(data[i].chsoftiInfOt!=null){
         	//加班工时收入
-    		s8 = parseFloat(s8) + parseFloat(data[i].chsoftiInfOt);
-    		s8 = Math.round(s8 * 100) / 100;
+    		s8 = floatObj.add(s8, data[i].chsoftiInfOt, 2, 'add');
         }
         if(data[i].chsoftiInfPt!=null){
         	//调休工时收入
-    		s9 = parseFloat(s9) + parseFloat(data[i].chsoftiInfPt);
-    		s9 = Math.round(s9 * 100) / 100;
+    		s9 = floatObj.add(s9, data[i].chsoftiInfPt, 2, 'add');
         }
         if(data[i].chsoftiInfAd!=null){
         	//调整上月工时收入
-    		s10 = parseFloat(s10) + parseFloat(data[i].chsoftiInfAd);
-    		s10 = Math.round(s10 * 100) / 100;
+    		s10 = floatObj.add(s10, data[i].chsoftiInfAd, 2, 'add');
         }
         if(data[i].chsoftiInfTravel!=null){
         	//差旅收入
-    		s11 = parseFloat(s11) + parseFloat(data[i].chsoftiInfTravel);
-    		s11 = Math.round(s11 * 100) / 100;
+    		s11 = floatObj.add(s11, data[i].chsoftiInfTravel, 2, 'add');
         }
         if(data[i].chsoftiInfEquipment!=null){
         	//付费设备收入
-    		s12 = parseFloat(s12) + parseFloat(data[i].chsoftiInfEquipment);
-    		s12 = Math.round(s12 * 100) / 100;
+    		s12 = floatObj.add(s12, data[i].chsoftiInfEquipment, 2, 'add');
         }
         if(data[i].chsoftiInfSub!=null){
         	//分包收入
-    		s13 = parseFloat(s13) + parseFloat(data[i].chsoftiInfSub);
-    		s13 = Math.round(s13 * 100) / 100;
+    		s13 = floatObj.add(s13, data[i].chsoftiInfSub, 2, 'add');
         }
         if(data[i].chsoftiInfTotal!=null){
         	//月收入合计-原币种
-    		s14 = parseFloat(s14) + parseFloat(data[i].chsoftiInfTotal);
-    		s14 = Math.round(s14 * 100) / 100;
+    		s14 = floatObj.add(s14, data[i].chsoftiInfTotal, 2, 'add');
         }
         if(data[i].chsoftiInfRmbtotal!=null){
         	//月收入合计-人民币
-    		s15 = parseFloat(s15) + parseFloat(data[i].chsoftiInfRmbtotal);
-    		s15 = Math.round(s15 * 100) / 100;
+    		s15 = floatObj.add(s15, data[i].chsoftiInfRmbtotal, 2, 'add');
         }
         if(data[i].chsoftiInfCurrent!=null){
         	//当月有效收入
-    		s16 = parseFloat(s16) + parseFloat(data[i].chsoftiInfCurrent);
-    		s16 = Math.round(s16 * 100) / 100;
+    		s16 = floatObj.add(s16, data[i].chsoftiInfCurrent, 2, 'add');
         }
         if(data[i].chsoftiEffectiveNr!=null){
         	//有效NR
-    		s17 = parseFloat(s17) + parseFloat(data[i].chsoftiEffectiveNr);
-    		s17 = Math.round(s17 * 100) / 100;
+    		s17 = floatObj.add(s17, data[i].chsoftiEffectiveNr, 2, 'add');
         }
         if(data[i].chsoftiEffectiveSt!=null){
         	//当月有效人力
-    		s18 = parseFloat(s18) + parseFloat(data[i].chsoftiEffectiveSt);
-    		s18 = Math.round(s18 * 100) / 100;
+    		s18 = floatObj.add(s18, data[i].chsoftiEffectiveSt, 2, 'add');
         }
         if(data[i].chsoftiInvalidSt!=null){
         	//当月无效人力
-    		s19 = parseFloat(s19) + parseFloat(data[i].chsoftiInvalidSt);
-    		s19 = Math.round(s19 * 100) / 100;
+    		s19 = floatObj.add(s19, data[i].chsoftiInvalidSt, 2, 'add');
         }
 	}
 	
-	$("#s1").html(s1);//实际工时
-	$("#s2").html(s2);//无效工时
-	$("#s3").html(s3);//加班工时
-	$("#s4").html(s4);//调休工时
-	$("#s5").html(s5);//调整上月工时
-	$("#s6").html(s6);//实际工时收入
-	$("#s7").html(s7);//无效工时收入
-	$("#s8").html(s8);//加班工时收入
-	$("#s9").html(s9);//调休工时收入
+	$("#s1").html(s1.toFixed(2));//实际工时
+	$("#s2").html(s2.toFixed(2));//无效工时
+	$("#s3").html(s3.toFixed(2));//加班工时
+	$("#s4").html(s4.toFixed(2));//调休工时
+	$("#s5").html(s5.toFixed(2));//调整上月工时
+	$("#s6").html(s6.toFixed(2));//实际工时收入
+	$("#s7").html(s7.toFixed(2));//无效工时收入
+	$("#s8").html(s8.toFixed(2));//加班工时收入
+	$("#s9").html(s9.toFixed(2));//调休工时收入
 	$("#s10").html(s10);//调整上月工时收入
-	$("#s11").html(s11);//差旅收入
-	$("#s12").html(s12);//付费设备收入
-	$("#s13").html(s13);//分包收入
-	$("#s14").html(s14);//月收入合计-原币种
-	$("#s15").html(s15);//月收入合计-人民币
-	$("#s16").html(s16);//当月有效收入
-	$("#s17").html(s17);//有效NR
-	$("#s18").html(s18);//当月有效人力
-	$("#s19").html(s19);//当月无效人力
+	$("#s11").html(s11.toFixed(2));//差旅收入
+	$("#s12").html(s12.toFixed(2));//付费设备收入
+	$("#s13").html(s13.toFixed(2));//分包收入
+	$("#s14").html(s14.toFixed(2));//月收入合计-原币种
+	$("#s15").html(s15.toFixed(2));//月收入合计-人民币
+	$("#s16").html(s16.toFixed(2));//当月有效收入
+	$("#s17").html(s17.toFixed(2));//有效NR
+	$("#s18").html(s18.toFixed(2));//当月有效人力
+	$("#s19").html(s19.toFixed(2));//当月无效人力
+	
 }
 
 
@@ -350,11 +332,11 @@ function loadOfflineOperList(){
             	if(row.chsoftiAwHours==null){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
-            	var res = row.billRate*row.chsoftiAwHours;
-            	var res_temp = Math.floor(res * 100) / 100;
+            	var res = floatObj.multiply(row.billRate, row.chsoftiAwHours, 2, 'multiply');
+            	
             	//计算后的值赋给字段
-            	row.chsoftiIfaw=res_temp;
-            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
+            	row.chsoftiIfaw=res.toFixed(2);;
+            	return "<font color='green' family='黑体'><strong>"+res.toFixed(2);+"</strong></font>";
             }
         },
         {
@@ -365,11 +347,11 @@ function loadOfflineOperList(){
             	if(row.chsoftiIwHours==null){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
-            	var res = row.billRate*row.chsoftiIwHours;
-            	var res_temp = Math.floor(res * 100) / 100;
+            	var res = floatObj.multiply(row.billRate, row.chsoftiIwHours, 2, 'multiply');
+            	
             	//计算后的值赋给字段
-            	row.chsoftiInvalid=res_temp;
-            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
+            	row.chsoftiInvalid=res.toFixed(2);;
+            	return "<font color='green' family='黑体'><strong>"+res.toFixed(2);+"</strong></font>";
             }
         },
         {
@@ -380,11 +362,11 @@ function loadOfflineOperList(){
             	if(row.chsoftiOtHours==null){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
-            	var res = row.billRate*row.chsoftiOtHours;
-            	var res_temp = Math.floor(res * 100) / 100;
+            	var res = floatObj.multiply(row.billRate, row.chsoftiOtHours, 2, 'multiply');
+            	
             	//计算后的值赋给字段
-            	row.chsoftiInfOt=res_temp;
-            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
+            	row.chsoftiInfOt=res.toFixed(2);;
+            	return "<font color='green' family='黑体'><strong>"+res.toFixed(2);+"</strong></font>";
             }
         },
         {
@@ -395,11 +377,11 @@ function loadOfflineOperList(){
             	if(row.chsoftiToHours==null){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
-            	var res = row.billRate*row.chsoftiToHours;
-            	var res_temp = Math.floor(res * 100) / 100;
+            	var res = floatObj.multiply(row.billRate, row.chsoftiToHours, 2, 'multiply');
+            	
             	//计算后的值赋给字段
-            	row.chsoftiInfPt=res_temp;
-            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
+            	row.chsoftiInfPt=res.toFixed(2);;
+            	return "<font color='green' family='黑体'><strong>"+res.toFixed(2);+"</strong></font>";
             }
         },
         {
@@ -410,11 +392,10 @@ function loadOfflineOperList(){
             	if(row.chsoftiApwHours==null){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
-            	var res = row.billRate*row.chsoftiApwHours;
-            	var res_temp = Math.floor(res * 100) / 100;
+            	var res = floatObj.multiply(row.billRate, row.chsoftiApwHours, 2, 'multiply');
             	//计算后的值赋给字段
-            	row.chsoftiInfAd=res_temp;
-            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
+            	row.chsoftiInfAd=res.toFixed(2);;
+            	return "<font color='green' family='黑体'><strong>"+res.toFixed(2);+"</strong></font>";
             }
         },
         {
@@ -425,39 +406,39 @@ function loadOfflineOperList(){
             	var temp = 0;
             	//中软实际工时收入
             	if(row.chsoftiIfaw!=null){
-            		temp=parseFloat(temp) + parseFloat(row.chsoftiIfaw);
+            		temp=floatObj.add(temp, row.chsoftiIfaw, 2, 'add');
             	}
             	//中软无效工时收入
             	if(row.chsoftiInvalid!=null){
-            		temp=parseFloat(temp) + parseFloat(row.chsoftiInvalid);
+            		temp=floatObj.add(temp, row.chsoftiInvalid, 2, 'add');
             	}
             	//加班费工时收入
             	if(row.chsoftiInfOt!=null){
-            		temp=parseFloat(temp) + parseFloat(row.chsoftiInfOt);
+            		temp=floatObj.add(temp, row.chsoftiInfOt, 2, 'add');
             	}
             	//调休工时收入
             	if(row.chsoftiInfPt!=null){
-            		temp=parseFloat(temp) + parseFloat(row.chsoftiInfPt);
+            		temp=floatObj.add(temp, row.chsoftiInfPt, 2, 'add');
             	}
             	//调整上月工时收入
             	if(row.chsoftiInfAd!=null){
-            		temp=parseFloat(temp) + parseFloat(row.chsoftiInfAd);
+            		temp=floatObj.add(temp, row.chsoftiInfAd, 2, 'add');
             	}
             	//差旅收入
             	if(row.chsoftiInfTravel!=null){
-            		temp=parseFloat(temp) + parseFloat(row.chsoftiInfTravel);
+            		temp=floatObj.add(temp, row.chsoftiInfTravel, 2, 'add');
             	}
             	//付费设备收入
             	if(row.chsoftiInfEquipment!=null){
-            		temp=parseFloat(temp) + parseFloat(row.chsoftiInfEquipment);
+            		temp=floatObj.add(temp, row.chsoftiInfEquipment, 2, 'add');
             	}
             	//分包收入
             	if(row.chsoftiInfSub!=null){
-            		temp=parseFloat(temp) + parseFloat(row.chsoftiInfSub);
+            		temp=floatObj.add(temp, row.chsoftiInfSub, 2, 'add');
             	}
             	//计算后的值赋给字段
-            	row.chsoftiInfTotal=temp;
-            	return "<font color='green' family='黑体'><strong>"+temp+"</strong></font>";
+            	row.chsoftiInfTotal=temp.toFixed(2);;
+            	return "<font color='green' family='黑体'><strong>"+temp.toFixed(2);+"</strong></font>";
             	
             }
         },{
@@ -466,26 +447,29 @@ function loadOfflineOperList(){
             sortable: true,
             formatter: function (value, row, index) {  
             	var temp = 0;
-            	//if(row.){
-            		
-            	//}
+            	if(row.exRate!=null){
+            		temp = floatObj.multiply(row.chsoftiInfTotal, row.exRate, 2, 'multiply');
+            	}
             	//计算后的值赋给字段
-            	//row.chsoftiInfTotal=temp;
-            	return "<font color='green' family='黑体'><strong>"+temp+"</strong></font>";
+            	row.chsoftiInfRmbtotal=temp.toFixed(2);;
+            	return "<font color='green' family='黑体'><strong>"+temp.toFixed(2);+"</strong></font>";
             	
             }
         },{
-            field: 'chsoftiInfCurrent',//当月有效收入=月收入合计-无效工时收入
+            field: 'chsoftiInfCurrent',//当月有效收入=(月收入合计原币种-无效工时收入)*汇率
             title: 'InfCurrent',
             sortable: true,
             formatter: function (value, row, index) {  
             	if(row.chsoftiInfTotal==null){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
-            	var res = parseFloat(row.chsoftiInfTotal)-parseFloat(row.chsoftiInvalid);
+            	var res = floatObj.subtract(row.chsoftiInfTotal, row.chsoftiInvalid, 2, 'subtract');
+            	if(row.exRate!=null){
+            		res2 = floatObj.multiply(res, row.exRate, 2, 'multiply');
+            	}
             	//计算后的值赋给字段
-            	row.chsoftiInfCurrent=res;
-            	return "<font color='green' family='黑体'><strong>"+res+"</strong></font>";
+            	row.chsoftiInfCurrent=res2.toFixed(2);;
+            	return "<font color='green' family='黑体'><strong>"+res2.toFixed(2);+"</strong></font>";
             }
         },
         {
@@ -496,11 +480,10 @@ function loadOfflineOperList(){
             	if(row.chsoftiInfCurrent==null){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
-            	var res = parseFloat(row.chsoftiInfCurrent)/1.06;
-            	var res_temp = Math.floor(res * 100) / 100;
+            	var res = floatObj.divide(row.chsoftiInfCurrent, 1.06, 2, 'divide');
             	//计算后的值赋给字段
-            	row.chsoftiEffectiveNr=res_temp;
-            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
+            	row.chsoftiEffectiveNr=res.toFixed(2);
+            	return "<font color='green' family='黑体'><strong>"+res.toFixed(2);+"</strong></font>";
             }
         },
         {
@@ -511,11 +494,10 @@ function loadOfflineOperList(){
             	if(row.chsoftiAwHours==null){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
-            	var res = parseFloat(row.chsoftiAwHours)/parseFloat(row.chsoftiMskHours);
-            	var res_temp = Math.floor(res * 100) / 100;
+            	var res = floatObj.divide(row.chsoftiAwHours, row.chsoftiMskHours, 2, 'divide');
             	//计算后的值赋给字段
-            	row.chsoftiEffectiveSt=res_temp;
-            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
+            	row.chsoftiEffectiveSt=res.toFixed(2);;
+            	return "<font color='green' family='黑体'><strong>"+res.toFixed(2);+"</strong></font>";
             }
         },
         {
@@ -526,11 +508,10 @@ function loadOfflineOperList(){
             	if(row.chsoftiIwHours==null){
             		return "<font color='green' family='黑体'><strong>0</strong></font>";
             	}
-            	var res = parseFloat(row.chsoftiIwHours)/parseFloat(row.chsoftiMskHours);
-            	var res_temp = Math.floor(res * 100) / 100;
+            	var res = floatObj.divide(row.chsoftiIwHours, row.chsoftiMskHours, 2, 'divide');
             	//计算后的值赋给字段
-            	row.chsoftiInvalidSt=res_temp;
-            	return "<font color='green' family='黑体'><strong>"+res_temp+"</strong></font>";
+            	row.chsoftiInvalidSt=res.toFixed(2);;
+            	return "<font color='green' family='黑体'><strong>"+res.toFixed(2);+"</strong></font>";
             }
         }
         /*{
@@ -654,5 +635,180 @@ function exportData(){
 	uri = path+'/service/offlineOper/export',
 	window.location.href=uri;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************
+ * 
+ * 
+ * 处理js 运算精度问题
+ * 
+ * 
+ ************************************/
+//加法   
+Number.prototype.add = function(arg){   
+    var r1,r2,m;   
+    try{r1=this.toString().split(".")[1].length}catch(e){r1=0}   
+    try{r2=arg.toString().split(".")[1].length}catch(e){r2=0}   
+    m=Math.pow(10,Math.max(r1,r2))   
+    return (this*m+arg*m)/m   
+}  
+//减法  
+Number.prototype.sub = function (arg){   
+    return this.add(-arg);   
+}   
+//乘法   
+Number.prototype.mul = function (arg){   
+    var m=0,s1=this.toString(),s2=arg.toString();   
+    try{m+=s1.split(".")[1].length}catch(e){}   
+    try{m+=s2.split(".")[1].length}catch(e){}   
+    return Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m)   
+}   
+//除法   
+Number.prototype.div = function (arg){   
+    var t1=0,t2=0,r1,r2;   
+    try{t1=this.toString().split(".")[1].length}catch(e){}   
+    try{t2=arg.toString().split(".")[1].length}catch(e){}   
+    with(Math){   
+        r1=Number(this.toString().replace(".",""))   
+        r2=Number(arg.toString().replace(".",""))   
+        return (r1/r2)*pow(10,t2-t1);   
+    }   
+}
+
+
+/*  add / subtract / multiply /divide
+*
+* ** explame **
+*  0.1 + 0.2 == 0.30000000000000004 （多了 0.00000000000004）
+*  0.2 + 0.4 == 0.6000000000000001  （多了 0.0000000000001）
+*  19.9 * 100 == 1989.9999999999998 （少了 0.0000000000002）
+*
+* floatObj.add(0.1, 0.2) &gt;&gt; 0.3
+* floatObj.multiply(19.9, 100) &gt;&gt; 1990
+*
+*/
+var floatObj = function() {
+
+   /*
+    * 判断obj是否为一个整数
+    */
+   function isInteger(obj) {
+       return Math.floor(obj) === obj
+   }
+
+   /*
+    * 将一个浮点数转成整数，返回整数和倍数。如 3.14 &gt;&gt; 314，倍数是 100
+    * @param floatNum {number} 小数
+    * @return {object}
+    *   {times:100, num: 314}
+    */
+   function toInteger(floatNum) {
+       var ret = {times: 1, num: 0}
+       if (isInteger(floatNum)) {
+           ret.num = floatNum
+           return ret
+       }
+       var strfi  = floatNum + ''
+       var dotPos = strfi.indexOf('.')
+       var len    = strfi.substr(dotPos+1).length
+       var times  = Math.pow(10, len)
+       var intNum = parseInt(floatNum * times + 0.5, 10)
+       ret.times  = times
+       ret.num    = intNum
+       return ret
+   }
+
+   /*
+    * 核心方法，实现加减乘除运算，确保不丢失精度
+    * 思路：把小数放大为整数（乘），进行算术运算，再缩小为小数（除）
+    *
+    * @param a {number} 运算数1
+    * @param b {number} 运算数2
+    * @param digits {number} 精度，保留的小数点数，比如 2, 即保留为两位小数
+    * @param op {string} 运算类型，有加减乘除（add/subtract/multiply/divide）
+    *
+    */
+   function operation(a, b, digits, op) {
+       var o1 = toInteger(a)
+       var o2 = toInteger(b)
+       var n1 = o1.num
+       var n2 = o2.num
+       var t1 = o1.times
+       var t2 = o2.times
+       var max = t1 > t2 ? t1 : t2
+       var result = null
+       switch (op) {
+           case 'add':
+               if (t1 === t2) { // 两个小数位数相同
+                   result = n1 + n2
+               } else if (t1 > t2) { // o1 小数位 大于 o2
+                   result = n1 + n2 * (t1 / t2)
+               } else { // o1 小数位 小于 o2
+                   result = n1 * (t2 / t1) + n2
+               }
+               return result / max
+           case 'subtract':
+               if (t1 === t2) {
+                   result = n1 - n2
+               } else if (t1 > t2) {
+                   result = n1 - n2 * (t1 / t2)
+               } else {
+                   result = n1 * (t2 / t1) - n2
+               }
+               return result / max
+           case 'multiply':
+               result = (n1 * n2) / (t1 * t2)
+               return result
+           case 'divide':
+               result = (n1 / n2) * (t2 / t1)
+               return result
+       }
+   }
+
+   // 加减乘除的四个接口
+   function add(a, b, digits) {
+       return operation(a, b, digits, 'add')
+   }
+   function subtract(a, b, digits) {
+       return operation(a, b, digits, 'subtract')
+   }
+   function multiply(a, b, digits) {
+       return operation(a, b, digits, 'multiply')
+   }
+   function divide(a, b, digits) {
+       return operation(a, b, digits, 'divide')
+   }
+
+   // exports
+   return {
+       add: add,
+       subtract: subtract,
+       multiply: multiply,
+       divide: divide
+   }
+}();
+
 
 
