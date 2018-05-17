@@ -16,9 +16,58 @@ $(function(){
 	//dateType2();
 	loadCsSubDept();
 	//loadEngagementType();
+	loadGbGf();
 	
 })
 var draftFlag = false;
+
+function loadGbGf(){
+	var url = path + '/service/hsbcDept/queryTopParent';
+	$.getJSON(url, function(data){
+		$.each(data, function(i, item){
+			$("#gbGf").append("<option value='"+item.id+"'>"+item.name+"</option>");
+		})
+	});
+}
+function changeGBGF(){
+	var id =$("#gbGf").val();
+	$("#hsbcDept").empty();
+	$("#hsbcSubDept").empty();
+	$("#hsbcDept").append("<option value=''>-- Option --</option>");
+	$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
+	$.ajax({
+		url:path+'/service/hsbcDept/queryChild',
+		dataType:"json",
+		data:{"id":id},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			$.each(result, function(i, item){
+				$("#hsbcDept").append("<option value='"+item.id+"'>"+item.name+"</option>");
+			})
+		}
+	})
+}
+
+function changeHsbcDept(){
+	var id =$("#hsbcDept").val();
+	$("#hsbcSubDept").empty();
+	$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
+	$.ajax({
+		url:path+'/service/hsbcDept/queryChild',
+		dataType:"json",
+		data:{"id":id},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			$.each(result, function(i, item){
+				$("#hsbcSubDept").append("<option value='"+item.id+"'>"+item.name+"</option>");
+			})
+		}
+	})
+}
 /*function addDemand(){
 	var url = path+'/service/demand/addDemand';
 	alert(url);
@@ -155,8 +204,12 @@ function addDemand(){
 		var requestor=$('#requestor').val();
 		var position=$('#position').val();
 		//部门信息
+		var gbgf=$('#gbGf').val();
 		var hsbcDept=$('#hsbcDept').val();
 		var hsbcSubDept=$('#hsbcSubDept').val();
+		var zuhe = gbgf+","+hsbcDept+","+hsbcSubDept;
+		
+		
 		var location=$('#location').val();
 		var reqPublishedDate=$('#reqPublishedDate2').val();
 		var ageing=$('#ageing').val();
@@ -225,7 +278,7 @@ function addDemand(){
 				"status2":status2,"remark":remark,"csSubDept":csSubDept,"plannedOnboardDate":plannedOnboardDate,
 				"doNumber":doNumber,"hrPriority":hrPriority,"reqReceivedDate":reqReceivedDate,"ageingReceived":ageingReceived,
 				"demandPriority":demandPriority,"creatDate":creatDate,"updateDate":updateDate,"recruitmentCycle":recruitmentCycle,
-				"completionDay":completionDay,"completionDate":completionDate,"onboardDate":onboardDate,"hsbcDept":hsbcDept,"hsbcSubDept":hsbcSubDept,"requirementNumber":requirementNumber,"type":1},
+				"completionDay":completionDay,"completionDate":completionDate,"onboardDate":onboardDate,"hsbcDept":hsbcDept,"hsbcSubDept":zuhe,"requirementNumber":requirementNumber,"type":1},
 			async:true,
 			cache:false,
 			type:"post",

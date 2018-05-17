@@ -284,7 +284,7 @@ public class DemandController {
 				    if(demandList.get(i).getHsbcDept() == null){
 				        lab = new Label(j++, i+1, "");
 				    }else{
-				        lab = new Label(j++, i+1, demandList.get(i).getHsbcDept().getHsbcDeptName());
+				        //lab = new Label(j++, i+1, demandList.get(i).getHsbcDept().getHsbcDeptName());
 				    }
 					ws.addCell(lab);
 				}
@@ -293,7 +293,7 @@ public class DemandController {
                     if(demandList.get(i).getHsbcDept() == null){
                         lab = new Label(j++, i+1, "");
                     }else{
-                        lab = new Label(j++, i+1, demandList.get(i).getHsbcDept().getHsbcSubDeptName());
+                        //lab = new Label(j++, i+1, demandList.get(i).getHsbcDept().getHsbcSubDeptName());
                     }
 					ws.addCell(lab);
 				}
@@ -418,9 +418,9 @@ public class DemandController {
 				if(demand.getDemandId().equals(demandId)){
 					HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
 					if(hSBCDept!=null) {
-						if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
-							hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
-						}
+//						if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
+//							hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
+//						}
 					}
 					demand.setHsbcDept(hSBCDept);
 					
@@ -487,9 +487,9 @@ public class DemandController {
     				if(demand!=null) {
     					HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
     					if(hSBCDept!=null) {
-    						if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
-    							hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
-    						}
+//    						if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
+//    							hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
+//    						}
     					}
     					demand.setHsbcDept(hSBCDept);
     					demand.setProposedJoiningDate(candidate.getArrivalDate());
@@ -561,9 +561,9 @@ public class DemandController {
 				if(demand.getDemandId().equals(demandId)){
 					HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
 					if(hSBCDept!=null) {
-						if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
-							hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
-						}
+//						if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
+//							hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
+//						}
 					}
 					demand.setHsbcDept(hSBCDept);
 					demand.setUserType(userType);

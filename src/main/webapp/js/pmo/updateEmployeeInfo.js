@@ -54,6 +54,10 @@ function updateEmployee() {
 		var onshoreOrOffshore = $('#onshoreOrOffshore').val();
 		var csSubDept = $('#csSubDept').val();
 		var hsbcSubDept = $('#hsbcSubDept').val();
+		
+        var hsbcDept = $('#hsbcDept').val();
+		var zuhe = hsbcDept+","+hsbcSubDept;
+		
 		var projectName = $('#hsbcProjectName').val();
 		var projectManager = $('#hsbcProjectManager').val();
 		var sow = $('#sow').val();
@@ -104,7 +108,7 @@ function updateEmployee() {
 		$.ajax({
 			url:path+'/service/employee/updateEmployee',
 			dataType:"json",
-			data:{"employeeId":employeeId,"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":hsbcSubDept,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason,
+			data:{"employeeId":employeeId,"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":zuhe,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason,
 				"email":email,"entryDate":entryDate,"gbGf":gbGf,"itindustryWorkYear":itWorkYear,
 				"chsoftiProNumber":chsoftiProNumber,"chsoftiProStartDate":chsoftiProStartDate1,"chsoftiProName":chsoftiProName	
 			},
@@ -336,14 +340,57 @@ function loadRole(employee) {
 	});
 }
 function loadGbGf(employee){
-	var url = path + '/json/gbGf.json';
+	var url = path + '/service/hsbcDept/queryTopParent';
 	$.getJSON(url, function(data){
 		$.each(data, function(i, item){
-			$("#gbGf").append("<option>"+item.name+"</option>");
+			$("#gbGf").append("<option value='"+item.id+"'>"+item.name+"</option>");
 		})
 		$('#gbGf').val(employee.gbGf);
 	});
 }
+
+function changeGBGF(){
+	var id =$("#gbGf").val();
+	$("#hsbcDept").empty();
+	$("#hsbcSubDept").empty();
+	$("#hsbcDept").append("<option value=''>-- Option --</option>");
+	$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
+	$.ajax({
+		url:path+'/service/hsbcDept/queryChild',
+		dataType:"json",
+		data:{"id":id},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			$.each(result, function(i, item){
+				$("#hsbcDept").append("<option value='"+item.id+"'>"+item.name+"</option>");
+			})
+		}
+	})
+}
+
+function changeHsbcDept(){
+	var id =$("#hsbcDept").val();
+	$("#hsbcSubDept").empty();
+	$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
+	$.ajax({
+		url:path+'/service/hsbcDept/queryChild',
+		dataType:"json",
+		data:{"id":id},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			$.each(result, function(i, item){
+				$("#hsbcSubDept").append("<option value='"+item.id+"'>"+item.name+"</option>");
+			})
+		}
+	})
+}
+
+
+
 function loadStaffCategory(employee) {
 	var url = path + '/json/staffCategory.json'
 	$.getJSON(url, function(data) {
@@ -392,17 +439,41 @@ function loadCSDept(employee) {
 }
 
 function loadPersonHsbcDept(employee) {
-	var hsbcSubDeptId = employee.hsbcSubDept;
+	var combination = employee.hsbcSubDept;
+	var cc = combination.split(",");
+	//console.log(cc);
+	
+	var gbgf = employee.gbGf;
+	//$("#hsbcDept").empty();
+	//$("#hsbcSubDept").empty();
+	//$("#hsbcDept").append("<option value=''>-- Option --</option>");
+	//$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
+	$.ajax({
+		url:path+'/service/hsbcDept/queryChild',
+		dataType:"json",
+		data:{"id":gbgf},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			$.each(result, function(i, item){
+				$("#hsbcDept").append("<option value='"+item.id+"'>"+item.name+"</option>");
+			})
+			$('#hsbcDept').val(cc[0]);
+			loadHsbcSubDept(cc);
+		}
+	})
+	/**var hsbcSubDeptId = employee.hsbcSubDept;
 	if(hsbcSubDeptId==""||hsbcSubDeptId==null){
 		loadFirstDept(employee);
 	}else{
 		$.ajax({
-			url : path + '/service/hsbcDept/queryDeptById',
+			url : path + '/service/hsbcDept/queryById',
 			dataType : "json",
 			async : true,
 			cache : false,
 			data : {
-				"hsbcSubDeptId" : hsbcSubDeptId
+				"id" : hsbcSubDeptId
 			},
 			type : "post",
 			success : function(hsbcDept) {
@@ -410,12 +481,31 @@ function loadPersonHsbcDept(employee) {
 				loadDept(employee, hsbcDept);
 			}
 		})
-	}
+	}*/
 	
 	
 }
 
-function loadFirstDept(employee) {
+function loadHsbcSubDept(cc){
+	//$("#hsbcSubDept").empty();
+	//$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
+	$.ajax({
+		url:path+'/service/hsbcDept/queryChild',
+		dataType:"json",
+		data:{"id":cc[0]},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			$.each(result, function(i, item){
+				$("#hsbcSubDept").append("<option value='"+item.id+"'>"+item.name+"</option>");
+			})
+			$('#hsbcSubDept').val(cc[1]);
+		}
+	})
+}
+
+/**function loadFirstDept(employee) {
 	$.ajax({
 		url : path + '/service/hsbcDept/queryDeptName',
 		dataType : "json",
@@ -434,10 +524,13 @@ function loadFirstDept(employee) {
 			loadHSBCSubDept(employee);
 		}
 	})
-}
+}*/
 
 function loadDept(employee, hsbcDept) {
-	$.ajax({
+	$.each(hsbcDept, function(i, item){
+		$("#hsbcDept").append("<option value='"+item.id+"'>"+item.name+"</option>");
+	})
+	/**$.ajax({
 		url : path + '/service/hsbcDept/queryDeptName',
 		dataType : "json",
 		async : true,
@@ -459,10 +552,10 @@ function loadDept(employee, hsbcDept) {
 
 			loadHSBCSubDept(employee);
 		}
-	})
+	})*/
 }
 
-function loadHSBCSubDept(employee) {
+/**function loadHSBCSubDept(employee) {
 	var hsbcSubDeptId = employee.hsbcSubDept;
 	$.ajax({
 		url : path + '/service/hsbcDept/querySubDeptName',
@@ -496,7 +589,7 @@ function loadHSBCSubDept(employee) {
 			}
 		}
 	})
-}
+}*/
 
 function loadTerminationReason(employee) {
 	var url = path + '/json/terminatedReason.json'

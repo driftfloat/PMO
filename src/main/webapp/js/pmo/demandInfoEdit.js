@@ -14,7 +14,57 @@ $(function(){
 	loadScSubDeptNameEdit();
 	loadLocationEdit();
 	loadHrPriorityEdit();
+	loadGbGf();
 })
+
+function loadGbGf(){
+	var url = path + '/service/hsbcDept/queryTopParent';
+	$.getJSON(url, function(data){
+		$.each(data, function(i, item){
+			$("#gbGf").append("<option value='"+item.id+"'>"+item.name+"</option>");
+		})
+	});
+}
+
+function changeGBGF(){
+	var id =$("#gbGf").val();
+	$("#hsbcDeptEdit").empty();
+	$("#hsbcSubDeptEdit").empty();
+	$("#hsbcDeptEdit").append("<option value=''>-- Option --</option>");
+	$("#hsbcSubDeptEdit").append("<option value=''>-- Option --</option>");
+	$.ajax({
+		url:path+'/service/hsbcDept/queryChild',
+		dataType:"json",
+		data:{"id":id},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			$.each(result, function(i, item){
+				$("#hsbcDeptEdit").append("<option value='"+item.id+"'>"+item.name+"</option>");
+			})
+		}
+	})
+}
+
+function changeHsbcDept(){
+	var id =$("#hsbcDeptEdit").val();
+	$("#hsbcSubDeptEdit").empty();
+	$("#hsbcSubDeptEdit").append("<option value=''>-- Option --</option>");
+	$.ajax({
+		url:path+'/service/hsbcDept/queryChild',
+		dataType:"json",
+		data:{"id":id},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			$.each(result, function(i, item){
+				$("#hsbcSubDeptEdit").append("<option value='"+item.id+"'>"+item.name+"</option>");
+			})
+		}
+	})
+}
 
 $("#skill").change(function(){
 	$("#exportExcel").attr("disabled", true);
@@ -465,7 +515,7 @@ function exportCondition(){
 
 function demandDetail(demandId){
 	
-	
+	//alert("dddd");
 	$("#demandId").val(demandId);
 	var url = path+'/service/demand/demandDetail';
 	$("#detailForm").attr("action",url);
@@ -484,7 +534,7 @@ function demandDetail(demandId){
 //add by jama
 function demandDetailUpdate(demandId){
 	
-	
+	//alert("aa");
 	$("#demandId").val(demandId);
 	var url = path+'/service/demand/demandDetailUpdate';
 	$("#detailForm").attr("action",url);
@@ -516,8 +566,13 @@ function updateDemand(index){
 					var requestor=$('#requestorEdit').val();
 					var position=$('#positionEdit').val();
 					//部门信息
+					var gbgf=$('#gbGf').val();
 					var hsbcDept=$('#hsbcDeptEdit').val();
 					var hsbcSubDept=$('#hsbcSubDeptEdit').val();
+					
+					var zuhe = gbgf+","+hsbcDept+","+hsbcSubDept;
+					
+					
 					var location=$('#locationEdit').val();
 					var reqPublishedDate=$('#reqPublishedDate1Edit').val();
 					var ageing=$('#ageingEdit').val();
@@ -548,7 +603,7 @@ function updateDemand(index){
 							"reason":reason,"bgvCleared":bgvCleared,
 							"remark":remark,"csSubDept":csSubDept,"plannedOnboardDate":plannedOnboardDate,
 							"doNumber":doNumber,"hrPriority":hrPriority,
-							"hsbcDept":hsbcDept,"hsbcSubDept":hsbcSubDept,"onborad":index},
+							"hsbcDept":hsbcDept,"hsbcSubDept":hsbcSubDept,"hsbcSubDeptId":zuhe,"onborad":index},
 						async:true,
 						cache:false,
 						type:"post",

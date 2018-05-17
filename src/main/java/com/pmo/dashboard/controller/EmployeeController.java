@@ -523,10 +523,10 @@ public class EmployeeController {
 
 				if(listE.get(i - 1).getHsbcSubDept()!=null){
 					for (HSBCDept hsbcD : allHSBCDept) {
-						if (hsbcD.getHsbcSubDeptId().equals(listE.get(i - 1).getHsbcSubDept())) {
-							hsbcDept = hsbcD;
-							break;
-						}
+//						if (hsbcD.getHsbcSubDeptId().equals(listE.get(i - 1).getHsbcSubDept())) {
+//							hsbcDept = hsbcD;
+//							break;
+//						}
 					}
 				}else {
 					hsbcDept = null;
@@ -589,21 +589,21 @@ public class EmployeeController {
                        if(hsbcDept == null){
                            label= new Label(++j, i, "");
                        }else{
-                           label= new Label(++j, i, hsbcDept.getHsbcDeptName());
+                           //label= new Label(++j, i, hsbcDept.getHsbcDeptName());
                        }
                        ws.addCell(label);
                    }
 
                    if(conditionList.contains("HSBC Sub Dept")){
-                       Label label = null;
-                       if(hsbcDept == null){
-                           label= new Label(++j, i, "");
-                       }else if(hsbcDept.getHsbcSubDeptName() == null || ("").equals(hsbcDept.getHsbcSubDeptName())){
-                           label= new Label(++j, i, hsbcDept.getHsbcDeptName());
-                       }else{
-                           label= new Label(++j, i, hsbcDept.getHsbcSubDeptName());
-                       }
-                       ws.addCell(label);
+//                       Label label = null;
+//                       if(hsbcDept == null){
+//                           label= new Label(++j, i, "");
+//                       }else if(hsbcDept.getHsbcSubDeptName() == null || ("").equals(hsbcDept.getHsbcSubDeptName())){
+//                           label= new Label(++j, i, hsbcDept.getHsbcDeptName());
+//                       }else{
+//                           label= new Label(++j, i, hsbcDept.getHsbcSubDeptName());
+//                       }
+//                       ws.addCell(label);
                    }
 
                    if(conditionList.contains("HSBC Manager")){
@@ -1013,10 +1013,10 @@ public String entryEmployee(final HttpServletRequest request,
             	String oldname="";
             	String newsname="";
             	if(old!=null){
-            		oldname=old.getHsbcSubDeptName();
+            		//oldname=old.getHsbcSubDeptName();
             	}
             	if(news!=null){
-            		newsname=news.getHsbcSubDeptName();
+            		//newsname=news.getHsbcSubDeptName();
             	}
             	changeInfo.append("HsbcSubDept由["+oldname+"]变更为["+newsname+"];   ");
             	changeInfo.append("----");
@@ -1191,7 +1191,7 @@ public String entryEmployee(final HttpServletRequest request,
         	}
             String hsbcdeptname="";
         	if(hsbcdept!=null){
-        		hsbcdeptname=hsbcdept.getHsbcSubDeptName();
+        		//hsbcdeptname=hsbcdept.getHsbcSubDeptName();
         	}
         	if(hsbcdeptname!=null && !"".equals(hsbcdeptname)){
         		changeInfo.append("HsbcSubDept["+hsbcdeptname+"];----");

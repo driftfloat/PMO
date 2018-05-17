@@ -176,7 +176,7 @@ var path='<%=path%>';
 										<div class="group">
 										<label class="col-lg-2 control-label">GBGF</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="gbGf" data-bv-notempty
+											<select onchange="changeGBGF()" class="form-control" name="gbGf" data-bv-notempty
 												data-bv-notempty-message="please select  GB_GF" id="gbGf" data-bv-group=".group">
 											<option value="">--Option--</option>
 											</select>
@@ -189,7 +189,7 @@ var path='<%=path%>';
 								        <div class="group">
 										<label class="col-lg-2 control-label">HSBC Dept</label>
 										<div class="col-lg-4">
-											<select class="form-control" name="hsbcDept" id="hsbcDept" data-bv-notempty
+											<select onchange="changeHsbcDept()" class="form-control" name="hsbcDept" id="hsbcDept" data-bv-notempty
 												data-bv-notempty-message="please select  HSBDept" data-bv-group=".group">
 											<option value="">--Option--</option>
 											</select>

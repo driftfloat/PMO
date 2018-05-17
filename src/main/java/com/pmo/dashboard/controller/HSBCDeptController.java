@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pmo.dashboard.entity.HSBCDept;
 import com.pom.dashboard.service.HSBCDeptService;
 
@@ -26,7 +28,36 @@ public class HSBCDeptController
     @Resource
     HSBCDeptService hsbcDeptService;
     
+    private ObjectMapper objectMapper = new ObjectMapper();  
     
+    @RequestMapping("/queryTopParent")
+    @ResponseBody
+    public String queryTopParent(final HttpServletRequest request,
+            final HttpServletResponse response,HSBCDept hsbcDept) throws JsonProcessingException
+    {
+        List<HSBCDept> list = hsbcDeptService.queryTopParent(hsbcDept);
+        return objectMapper.writeValueAsString(list);
+    }
+    
+    @RequestMapping("/queryChild")
+    @ResponseBody
+    public String queryChild(final HttpServletRequest request,
+            final HttpServletResponse response,HSBCDept hsbcDept) throws JsonProcessingException
+    {
+        List<HSBCDept> list = hsbcDeptService.queryChild(hsbcDept);
+        return objectMapper.writeValueAsString(list);
+    }
+    
+    @RequestMapping("/queryById")
+    @ResponseBody
+    public String queryById(final HttpServletRequest request,
+            final HttpServletResponse response,HSBCDept hsbcDept) throws JsonProcessingException
+    {
+        List<HSBCDept> list = hsbcDeptService.queryById(hsbcDept);
+        return objectMapper.writeValueAsString(list);
+    }
+    
+    /**
     @RequestMapping("/queryDeptName")
     @ResponseBody
     public List queryDeptName(final HttpServletRequest request,
@@ -68,5 +99,5 @@ public class HSBCDeptController
         HSBCDept hsbcDept = hsbcDeptService.queryHSBCSubDeptById(hsbcProjectId);
         return hsbcDept;
     }
-
+*/
 }

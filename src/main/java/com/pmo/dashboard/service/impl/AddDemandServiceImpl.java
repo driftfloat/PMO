@@ -58,8 +58,8 @@ public class AddDemandServiceImpl implements AddDemandService{
 				params.put("hsbcSubDeptName", demand.getHsbcSubDept());
 				params.put("hsbcDeptName",demand.getHsbcDept() );
 			}
-			String hsbcSubDeptId = hsbcDeptMapper.queryHsbcSubDeptId(params);
-			demand.setHsbcSubDeptId(hsbcSubDeptId);
+			//String hsbcSubDeptId = hsbcDeptMapper.queryHsbcSubDeptId(params);
+			//demand.setHsbcSubDeptId(hsbcSubDeptId);
 		}
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");  
 		String onboradDate = format.format(new Date());

@@ -209,22 +209,8 @@ var userType='<%=userType%>'
 													id="profilesNoEdit" data-bv-group=".group"/>
 											</div>
 										</div>
-								        <!-- <div class="group">
-											<label class="col-sm-2 control-label">Remark</label>
-											<div class="col-md-4">
-												<textarea type="text" class="form-control" rows="10" name="remarkEdit"
-														id="remarkEdit" data-bv-group=".group">${demand.remark }</textarea>
-											</div>
-									    </div> -->
 								</div>
 								<div class="form-group">
-								         <!-- <div class="group">
-											<label class="col-sm-2 control-label">No. of Profiles Sent to HSBC</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="profilesNoEdit" value="${demand.profilesNo }"
-													id="profilesNoEdit" data-bv-group=".group"/>
-											</div>
-										</div> -->
 								         <div class="group">
 											<label class="col-sm-2 control-label">No of Profiles Interviewed</label>
 											<div class="col-sm-4">
@@ -249,34 +235,22 @@ var userType='<%=userType%>'
 										</div>
 								</div>
 								<div class="form-group">
-								        <!-- <div class="group">
-											<label class="col-sm-2 control-label">Req published Date</label>
-											<div class="col-md-4">
-												<div class="input-group date form_datetime col-sm-12"
-													data-link-field="dt_set_order_time_input">
-													<input class="form-control" type="text" readonly data-bv-group=".group"value="${demand.reqPublishedDate }"
-														id="reqPublishedDate1Edit" name="reqPublishedDate1Edit" data-bv-group=".group"> 
-														<span class="input-group-addon">
-															<span class="glyphicon glyphicon-th">
-															</span>
-														</span> 
-														<input type="hidden" id="reqPublishedDate2Edit" name="reqPublishedDate2Edit" value="${demand.reqPublishedDate }"  data-bv-group=".group"/>
-												</div>
-											</div>
-										</div> -->
-								        <div class="group">
-											<label class="col-sm-2 control-label">Ageing</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="ageingEdit" value="${demand.ageing }"
-													id="ageingEdit" data-bv-group=".group"/>
-											</div>
+										<div class="group">
+										<label class="col-lg-2 control-label">GBGF</label>
+										<div class="col-lg-4">
+											<select onchange="changeGBGF()" class="form-control" name="gbGf" data-bv-notempty
+												data-bv-notempty-message="please select  GB_GF" id="gbGf" data-bv-group=".group">
+											<option value="">--Option--</option>
+											</select>
 										</div>
+										</div>
+								        
 										<div class="group">
 										<label class="col-lg-2 control-label">HSBC Department</label>
 										<div class="col-lg-4">
 											<input type="text" style="display:none" value="${demand.hsbcDept.hsbcDeptName}" 
 													id="hsbcDeptInput" />
-											<select class="form-control" name="hsbcDeptEdit" data-bv-notempty
+											<select onchange="changeHsbcDept()" class="form-control" name="hsbcDeptEdit" data-bv-notempty
 												data-bv-notempty-message="Please Select Your HsbcDept" id="hsbcDeptEdit" data-bv-group=".group">
 												<option value="">-- Option --</option>
 											</select>
@@ -285,17 +259,6 @@ var userType='<%=userType%>'
 								
 								</div>
 								<div class="form-group">
-								       <!-- <div class="group">
-										<label class="col-lg-2 control-label">HSBC Department</label>
-										<div class="col-lg-4">
-											<input type="text" style="display:none" value="${demand.hsbcDept.hsbcDeptName}" 
-													id="hsbcDeptInput" />
-											<select class="form-control" name="hsbcDeptEdit" data-bv-notempty
-												data-bv-notempty-message="Please Select Your HsbcDept" id="hsbcDeptEdit" data-bv-group=".group">
-												<option value="">-- Option --</option>
-											</select>
-										</div>
-										</div> -->
 										<div class="group">
 										<label class="col-lg-2 control-label">HSBC Sub-Department</label>
 										<div class="col-lg-4">
@@ -313,25 +276,6 @@ var userType='<%=userType%>'
 											</div>
 										</div>
 								</div>
-								<!-- <div class="form-group">
-								         <!-- <div class="group">
-											<label class="col-lg-2 control-label">HSBC Requestor</label>
-											<div class="col-lg-4">
-													<input type="text" class="form-control" name="requestorEdit" value="${demand.requestor }"
-														id="requestorEdit" />
-											</div>
-										</div> -->
-								        <!--<div class="group">
-											<label class="col-sm-2 control-label">CS Department</label>
-											<div class="col-sm-4">
-												<select class="form-control" name="csSubDeptEdit" data-bv-notempty
-												data-bv-notempty-message="Please Select Your CsSubDept" id="csSubDeptEdit" data-bv-group=".group">
-												<option value="${demand.csSubDept }"></option>
-									        	</select>
-											</div>
-										</div>
-								
-								</div> -->
 								<div class="form-group" id="atype" style='display:none'>
 										<div class="group" id="staffnameEdit" style='display:none'>
 											<label class="col-sm-2 control-label">Staff Name</label>
@@ -393,13 +337,6 @@ var userType='<%=userType%>'
 										</div>
 								</div>
 								<div class="form-group">
-								         <!-- <div class="group">
-											<label class="col-lg-2 control-label">HSBC Requestor</label>
-											<div class="col-lg-4">
-													<input type="text" class="form-control" name="requestorEdit" value="${demand.requestor }"
-														id="requestorEdit" />
-											</div>
-										</div> -->
 								        <div class="group">
 											<label class="col-sm-2 control-label">CS Department</label>
 											<div class="col-sm-4">
@@ -409,6 +346,16 @@ var userType='<%=userType%>'
 									        	</select>
 											</div>
 										</div>
+									    <div class="group">
+											<label class="col-sm-2 control-label">Ageing</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="ageingEdit" value="${demand.ageing }"
+													id="ageingEdit" data-bv-group=".group"/>
+											</div>
+										</div>
+								
+								</div>
+								<div class="form-group">
 										<div class="group">
 											<label class="col-sm-2 control-label">Remark</label>
 											<div class="col-md-4">
@@ -416,6 +363,9 @@ var userType='<%=userType%>'
 														id="remarkEdit" data-bv-group=".group">${demand.remark }</textarea>
 											</div>
 									    </div>
+									    <div class="group">
+											
+										</div>
 								
 								</div>
 								<br/><br/><br/>

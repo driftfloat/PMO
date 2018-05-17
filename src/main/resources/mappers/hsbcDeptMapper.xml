@@ -1,64 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pmo.dashboard.dao.HSBCDeptMapper">
-	<resultMap id="hsbcDeptMap" type="com.pmo.dashboard.entity.HSBCDept">
-		<id property="hsbcSubDeptId" column="HSBC_SUBDEPT_ID" javaType="String" />
-		<result property="hsbcSubDeptName" column="HSBC_SUBDEPT_NAME" javaType="String" />
-		<result property="hsbcDeptName" column="HSBC_DEPT_NAME" javaType="String" />
-	</resultMap>
-	
-	<!--gkf modify do not change  -->
-	<select id="queryHSBCDeptName" resultMap="hsbcDeptMap">
-	    SELECT * FROM t_hsbc_dept GROUP BY  HSBC_DEPT_NAME ORDER BY HSBC_DEPT_NAME ASC
-	</select>
-	
-	<select id="queryHSBCDubDeptNameById" parameterType="String" resultMap="hsbcDeptMap">
-        SELECT * FROM t_hsbc_dept WHERE HSBC_DEPT_NAME = (SELECT HSBC_DEPT_NAME FROM t_hsbc_dept WHERE HSBC_SUBDEPT_ID = #{hsbcSubDeptName})
-	</select>
-	
-	<select id="queryHSBCSubDeptById" parameterType="String" resultMap="hsbcDeptMap">
-	    SELECT * FROM t_hsbc_dept WHERE HSBC_SUBDEPT_ID = (SELECT HSBC_SUBDEPT_ID FROM t_hsbc_project WHERE HSBC_PROJECT_ID = #{hsbcProjectId})
-	</select>
-	
-	<select id="queryDemandHSBCSubDeptById" parameterType="String" resultMap="hsbcDeptMap">
-	    SELECT * FROM t_hsbc_dept WHERE HSBC_SUBDEPT_ID = #{hsbcSubDeptId}
-	</select>
-	
-	<select id="queryHSBCSubDeptId" parameterType="com.pmo.dashboard.entity.Demand" resultType="String">
-	    SELECT HSBC_SUBDEPT_ID 
-	    FROM t_hsbc_dept 
-	    <where>
-	    	<if test="hsbcDept.hsbcDeptName!=null and hsbcDept.hsbcDeptName!=''">
-	    		and HSBC_DEPT_NAME = #{hsbcDept.hsbcDeptName}
-	    	</if>
-	    	<if test="hsbcDept.hsbcSubDeptName!=null and hsbcDept.hsbcSubDeptName!=''">
-	    		and HSBC_SUBDEPT_NAME = #{hsbcDept.hsbcSubDeptName}
-	    	</if>
-	    </where>
-	</select>
-	
-	<select id="queryHSBCSubDeptNameByDeptName" parameterType="String" resultMap="hsbcDeptMap">
-		select * 
-		from t_hsbc_dept 
-		where HSBC_DEPT_NAME=#{hsbcDeptName}
-		GROUP BY HSBC_SUBDEPT_NAME
-	</select>
-	
-	<select id="queryHsbcSubDeptId" parameterType="java.util.HashMap" resultType="String">
-		select HSBC_SUBDEPT_ID
-		from t_hsbc_dept
-		<where>
-			<if test="hsbcSubDeptName!=null and hsbcSubDeptName!=''">
-				and HSBC_SUBDEPT_NAME = #{hsbcSubDeptName}
-			</if>
-			<if test="hsbcDeptName!=null and hsbcDeptName!=''">
-				and HSBC_DEPT_NAME = #{hsbcDeptName}
-			</if>
-		</where>
-	</select>
-	
-	<select id="queryAllHSBCDept" resultMap="hsbcDeptMap">
-	    SELECT * FROM t_hsbc_dept ORDER BY HSBC_DEPT_NAME ASC
-	</select>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pmo.dashboard.dao.HSBCDeptMapper" >
+  <resultMap id="BaseResultMap" type="com.pmo.dashboard.entity.HSBCDept" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, NAME, PARENT_ID
+  </sql>
+  
+  <select id="queryTopParent" resultMap="BaseResultMap" parameterType="com.pmo.dashboard.entity.HSBCDept" >
+    select * from t_hsbc_dept t where t.PARENT_ID is null
+  </select>
+  
+  <select id="queryChild" resultMap="BaseResultMap" parameterType="com.pmo.dashboard.entity.HSBCDept" >
+    select * from t_hsbc_dept t where 1=1
+    <if test="id != null and id != ''">
+		AND PARENT_ID = #{id}
+	</if>
+  </select>
+  
+  <select id="queryById" resultMap="BaseResultMap" parameterType="com.pmo.dashboard.entity.HSBCDept" >
+    select * from t_hsbc_dept t where 1=1
+    <if test="id != null and id != ''">
+		AND ID = #{id}
+	</if>
+  </select>
+ 
+  <insert id="insert" parameterType="com.pmo.dashboard.entity.HSBCDept" >
+    insert into t_hsbc_dept
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="com.pmo.dashboard.entity.HSBCDept" >
+    update t_hsbc_dept
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
 </mapper>

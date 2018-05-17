@@ -258,10 +258,10 @@ public class EmployeeModifyController {
             	String oldname="";
             	String newsname="";
             	if(old!=null){
-            		oldname=old.getHsbcSubDeptName();
+            		//oldname=old.getHsbcSubDeptName();
             	}
             	if(news!=null){
-            		newsname=news.getHsbcSubDeptName();
+            		//newsname=news.getHsbcSubDeptName();
             	}
             	changeInfo.append("HsbcSubDept由["+oldname+"]变更为["+newsname+"];   ");
             	changeInfo.append("----");

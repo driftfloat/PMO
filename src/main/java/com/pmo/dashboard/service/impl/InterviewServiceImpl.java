@@ -126,7 +126,8 @@ public class InterviewServiceImpl implements InterviewService {
 
 	@Override
 	public HSBCDept queryHSBCSubDeptById(String hsbcSubDeptId) {
-		return hsbcDeptMapper.queryDemandHSBCSubDeptById(hsbcSubDeptId);
+		//return hsbcDeptMapper.queryDemandHSBCSubDeptById(hsbcSubDeptId);
+		return null;
 	}
 
 	@Override
