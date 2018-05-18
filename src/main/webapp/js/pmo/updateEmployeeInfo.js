@@ -440,8 +440,10 @@ function loadCSDept(employee) {
 
 function loadPersonHsbcDept(employee) {
 	var combination = employee.hsbcSubDept;
-	var cc = combination.split(",");
-	//console.log(cc);
+	var cc = null;
+	if(combination!=null && combination!="" && combination!=undefined){
+		cc = combination.split(",");
+	}
 	
 	var gbgf = employee.gbGf;
 	//$("#hsbcDept").empty();
@@ -459,7 +461,12 @@ function loadPersonHsbcDept(employee) {
 			$.each(result, function(i, item){
 				$("#hsbcDept").append("<option value='"+item.id+"'>"+item.name+"</option>");
 			})
-			$('#hsbcDept').val(cc[0]);
+			if(cc!=null){
+				if(cc.length>0){
+					$('#hsbcDept').val(cc[0]);
+				}
+			}
+			
 			loadHsbcSubDept(cc);
 		}
 	})
@@ -500,7 +507,11 @@ function loadHsbcSubDept(cc){
 			$.each(result, function(i, item){
 				$("#hsbcSubDept").append("<option value='"+item.id+"'>"+item.name+"</option>");
 			})
-			$('#hsbcSubDept').val(cc[1]);
+			if(cc!=null){
+				if(cc.length>1){
+					$('#hsbcSubDept').val(cc[1]);
+				}
+			}
 		}
 	})
 }
