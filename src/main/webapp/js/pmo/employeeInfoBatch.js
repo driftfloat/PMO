@@ -13,8 +13,9 @@ $(function() {
 	loadRole();
 	loadSkill();
 	loadStaffRegion();
-	loadDept();
+	//loadDept();
 	batchMaintenanceValidate();
+	loadGBGF();
 })
 
 $("#pageRecordsNum").change(function() {
@@ -57,7 +58,53 @@ $("#csBu").change(function() {
 	loadUserForRM(bu, du, "");
 })
 
-function loadDept() {
+function loadGBGF(){
+	var url = path + '/service/hsbcDept/queryTopParent';
+	$.getJSON(url, function(data){
+		$.each(data, function(i, item){
+			$("#gbGf").append("<option value='"+item.id+"'>"+item.name+"</option>");
+		})
+	});
+}
+function changeGBGF(){
+	var id =$("#gbGf").val();
+	$("#hsbcDept").empty();
+	$("#hsbcSubDept").empty();
+	$("#hsbcDept").append("<option value=''>-- Option --</option>");
+	$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
+	$.ajax({
+		url:path+'/service/hsbcDept/queryChild',
+		dataType:"json",
+		data:{"id":id},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			$.each(result, function(i, item){
+				$("#hsbcDept").append("<option value='"+item.id+"'>"+item.name+"</option>");
+			})
+		}
+	})
+}
+function changeHSBCDept(){
+	var id =$("#hsbcDept").val();
+	$("#hsbcSubDept").empty();
+	$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
+	$.ajax({
+		url:path+'/service/hsbcDept/queryChild',
+		dataType:"json",
+		data:{"id":id},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			$.each(result, function(i, item){
+				$("#hsbcSubDept").append("<option value='"+item.id+"'>"+item.name+"</option>");
+			})
+		}
+	})
+}
+/*function loadDept() {
 	$.ajax({
 		url : path + '/service/hsbcDept/queryDeptName',
 		dataType : "json",
@@ -72,7 +119,7 @@ function loadDept() {
 			}
 		}
 	})
-}
+}*/
 
 function loadSkill() {
 	var url = path + '/json/skill.json'
@@ -253,8 +300,7 @@ function loadEmployeeList(pageState, csDeptName, csSubDeptName, csBuName,
 
 	var pageRecordsNum = $("#pageRecordsNum").find("option:selected").text();
 
-	$
-			.ajax({
+	$.ajax({
 				url : path + "/service/employeeInfo/queryBatchEmployeeList",
 				dataType : "json",
 				async : true,
@@ -1024,9 +1070,11 @@ function updateRoles() {
 
 function updateDept() {
 	var staffIds = $("#staffIds").val();
+	var gbgf = $("#gbGf").find("option:selected").val();
 	var hsbcDept = $("#hsbcDept").find("option:selected").val();
 	var hsbcSubDept = $("#hsbcSubDept").find("option:selected").val();
 	var hsbcManager = $("#hsbcManager").val();
+	var zuhe=hsbcDept+","+hsbcSubDept;
 
 	$.ajax({
 		url : path + '/service/employee/deptModify',
@@ -1035,7 +1083,8 @@ function updateDept() {
 		data : {
 			"staffIds" : staffIds,
 			"hsbcDept" : hsbcDept,
-			"hsbcSubDept" : hsbcSubDept,
+			"hsbcSubDept" : zuhe,
+			"gbgf" : gbgf,
 			"hsbcManager" : hsbcManager
 		},
 		cache : false,

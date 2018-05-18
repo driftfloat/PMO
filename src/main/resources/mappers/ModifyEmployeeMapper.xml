@@ -21,6 +21,7 @@
 	<update id="modifyDept" parameterType="com.pmo.dashboard.entity.TransferDept">
 	  update t_employee 
 	        set HSBC_SUBDEPT_ID=#{hsbcSubDept},
+	            GB_GF=#{gbgf},
 	            HSBC_MANAGER=#{hsbcManager}
 	          where EMPLOYEE_ID=#{employeeId}
 	</update>

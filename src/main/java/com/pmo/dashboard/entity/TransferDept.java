@@ -21,8 +21,17 @@ public class TransferDept {
 	private String hsbcDept;
 	private String hsbcSubDept;
 	private String hsbcManager;
+	private String gbgf;
 	
 	
+	
+	
+	public String getGbgf() {
+		return gbgf;
+	}
+	public void setGbgf(String gbgf) {
+		this.gbgf = gbgf;
+	}
 	public String getRmUserId() {
 		return rmUserId;
 	}
