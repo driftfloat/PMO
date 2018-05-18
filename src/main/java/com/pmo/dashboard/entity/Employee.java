@@ -50,7 +50,26 @@ public class Employee
     private String chsoftiProName;
     
     private String itindustryWorkYear;
+    private String hsbcDeptName;
+    private String hsbcDeptSubName;
     
+    
+    
+    
+    
+    
+	public String getHsbcDeptSubName() {
+		return hsbcDeptSubName;
+	}
+	public void setHsbcDeptSubName(String hsbcDeptSubName) {
+		this.hsbcDeptSubName = hsbcDeptSubName;
+	}
+	public String getHsbcDeptName() {
+		return hsbcDeptName;
+	}
+	public void setHsbcDeptName(String hsbcDeptName) {
+		this.hsbcDeptName = hsbcDeptName;
+	}
 	public String getChsoftiProStartdate() {
 		return chsoftiProStartdate;
 	}

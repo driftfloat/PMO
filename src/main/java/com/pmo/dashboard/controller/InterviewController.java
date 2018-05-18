@@ -20,6 +20,7 @@ import com.pmo.dashboard.entity.HSBCDept;
 import com.pmo.dashboard.entity.PageCondition;
 import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Constants;
+import com.pom.dashboard.service.HSBCDeptService;
 import com.pom.dashboard.service.InterviewService;
 
 @Controller
@@ -28,6 +29,10 @@ public class InterviewController {
 
 	@Resource
 	private InterviewService interviewService;
+	
+	@Resource
+    private HSBCDeptService hsbcDeptService;
+	
 
 	@RequestMapping("/interviewRecordInfo")
 	public String interviewRecordInfo(HttpServletRequest request, HttpServletResponse response) {
@@ -126,11 +131,47 @@ public class InterviewController {
 		 User user = (User) request.getSession().getAttribute("loginUser");
 		 String userType = user.getUserType();
 
-		Employee employee = interviewService.queryEmployeeById(employeeId);
+		 Employee employee = interviewService.queryEmployeeById(employeeId);
 		 if("6".equals(userType)||"7".equals(userType)||"8".equals(userType)||"10".equals(userType)||"11".equals(userType)||"12".equals(userType)){
 			 employee.setBillRate("****");
 		 }
-		return employee;
+		 
+		 //获取GBGF
+		 if(employee.getGbGf()!=null && !"".equals(employee.getGbGf())){
+			 HSBCDept hsbcDept = new HSBCDept();
+			 hsbcDept.setId(employee.getGbGf());
+			 List<HSBCDept> hsbcDeptList = hsbcDeptService.queryById(hsbcDept);
+			 if(hsbcDeptList!=null && hsbcDeptList.size()>0){
+				 employee.setGbGf(hsbcDeptList.get(0).getName());
+			 }
+		 }
+		 
+		 //获取HSBCDept
+		 String temp[] = null;
+		 if(employee.getHsbcSubDept()!=null && !"".equals(employee.getHsbcSubDept())){
+			 temp = employee.getHsbcSubDept().split(",");
+			 HSBCDept hsbcDept = new HSBCDept();
+			 hsbcDept.setId(temp[0]);
+			 List<HSBCDept> hsbcDeptList = hsbcDeptService.queryById(hsbcDept);
+			 if(hsbcDeptList!=null && hsbcDeptList.size()>0){
+				 employee.setHsbcDeptName(hsbcDeptList.get(0).getName());
+			 }
+		 }
+		 
+		 //获取HSBCSubDept
+		 if(temp!=null){
+			 if(temp.length==2){
+				 if(temp[1]!=null && !"".equals(temp[1])){
+					 HSBCDept hsbcDept = new HSBCDept();
+					 hsbcDept.setId(temp[1]);
+					 List<HSBCDept> hsbcDeptList = hsbcDeptService.queryById(hsbcDept);
+					 if(hsbcDeptList!=null && hsbcDeptList.size()>0){
+						 employee.setHsbcDeptSubName(hsbcDeptList.get(0).getName());
+					 }
+				 }
+			 }
+		 }
+		 return employee;
 	}
 	
 	

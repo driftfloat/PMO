@@ -253,8 +253,8 @@ public class EmployeeModifyController {
             
             //HSBC Sub Dept
             if(transferDept.getHsbcSubDept()!=null && !transferDept.getHsbcSubDept().equals(before.getHsbcSubDept())){
-            	HSBCDept old = hsbcDeptService.queryDemandHSBCSubDeptById(before.getHsbcSubDept());
-            	HSBCDept news = hsbcDeptService.queryDemandHSBCSubDeptById(transferDept.getHsbcSubDept());
+            	HSBCDept old = null;//hsbcDeptService.queryDemandHSBCSubDeptById(before.getHsbcSubDept());
+            	HSBCDept news = null;//hsbcDeptService.queryDemandHSBCSubDeptById(transferDept.getHsbcSubDept());
             	String oldname="";
             	String newsname="";
             	if(old!=null){

@@ -105,8 +105,8 @@ public class DemandController {
 	@RequestMapping("/loadDepartment")
 	@ResponseBody
 	public List<HSBCDept> loadDepartment(){
-		List<HSBCDept> list = hsbcDeptService.queryHSBCDeptName();
-		return list;
+		//List<HSBCDept> list = hsbcDeptService.queryHSBCDeptName();
+		return null;
 	}
 	
 	/**
@@ -117,8 +117,8 @@ public class DemandController {
 	@RequestMapping("/loadSubDepartment")
 	@ResponseBody
 	public List<HSBCDept> loadSubDepartment(String hsbcDeptName){
-		List<HSBCDept> list = hsbcDeptService.queryHSBCSubDeptNameByDeptName(hsbcDeptName);
-		return list;
+		//List<HSBCDept> list = hsbcDeptService.queryHSBCSubDeptNameByDeptName(hsbcDeptName);
+		return null;
 	}
 	
 	/**
@@ -412,17 +412,41 @@ public class DemandController {
 		
 	    //Demand demand = demandService.queryDemandById(demandId);
 		try{
+			@SuppressWarnings("unchecked")
 			List<Demand> list = (List<Demand>) request.getSession().getAttribute("demandList");
 			long day = 0;
 			for (Demand demand : list) {
 				if(demand.getDemandId().equals(demandId)){
-					HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
-					if(hSBCDept!=null) {
-//						if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
-//							hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
-//						}
+					String temp[] = null;
+					//获取GBGF
+					if(demand.getHsbcSubDeptId()!=null && !"".equals(demand.getHsbcSubDeptId())){
+						temp = demand.getHsbcSubDeptId().split(",");
+						HSBCDept hsbcDept = new HSBCDept();
+						hsbcDept.setId(temp[0]);
+						List<HSBCDept> hsbcDeptList = hsbcDeptService.queryById(hsbcDept);
+						if(hsbcDeptList!=null && hsbcDeptList.size()>0){
+							demand.setGbgf(hsbcDeptList.get(0).getName());
+						}
 					}
-					demand.setHsbcDept(hSBCDept);
+					//获取HSBCDept
+					if(temp!=null && temp.length>1){
+						HSBCDept hsbcDept = new HSBCDept();
+						hsbcDept.setId(temp[1]);
+						List<HSBCDept> hsbcDeptList = hsbcDeptService.queryById(hsbcDept);
+						if(hsbcDeptList!=null && hsbcDeptList.size()>0){
+							demand.setHsbcDeptName(hsbcDeptList.get(0).getName());
+						}
+					}
+					//获取HSBCSubDept
+					if(temp!=null && temp.length>2){
+						HSBCDept hsbcDept = new HSBCDept();
+						hsbcDept.setId(temp[2]);
+						List<HSBCDept> hsbcDeptList = hsbcDeptService.queryById(hsbcDept);
+						if(hsbcDeptList!=null && hsbcDeptList.size()>0){
+							demand.setHsbcSubDeptName(hsbcDeptList.get(0).getName());
+						}
+					}
+					
 					
 					//ageing计算
 					if(demand.getStatus().equals("Onboard")){
@@ -485,7 +509,7 @@ public class DemandController {
     				em.setEmail(candidate.getEmail());
     				
     				if(demand!=null) {
-    					HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
+    					HSBCDept hSBCDept = null; //hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
     					if(hSBCDept!=null) {
 //    						if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
 //    							hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
@@ -559,7 +583,7 @@ public class DemandController {
 			long day = 0;
 			for (Demand demand : list) {
 				if(demand.getDemandId().equals(demandId)){
-					HSBCDept hSBCDept = hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
+					HSBCDept hSBCDept = null; //hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
 					if(hSBCDept!=null) {
 //						if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
 //							hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());

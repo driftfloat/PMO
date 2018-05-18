@@ -175,26 +175,11 @@ var userType='<%=userType%>'
 													id="profilesNoEdit"disabled="true"/>
 											</div>
 										</div>
-								        <!-- <div class="group">
-											<label class="col-sm-2 control-label">Remark</label>
-											<div class="col-md-4">
-												<input type="text" class="form-control" name="remarkEdit" value="${demand.remark }"
-														id="remarkEdit" disabled="true"/>
-											</div>
-									    </div> -->
 								</div>
 								<div class="form-group">
-								         <!-- <div class="group">
-											<label class="col-sm-2 control-label">No. of Profiles Sent to HSBC</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="profilesNoEdit" value="${demand.profilesNo }"
-													id="profilesNoEdit"disabled="true"/>
-											</div>
-										</div> -->
 										<div class="group">
 											<label class="col-sm-2 control-label">Req published Date</label>
 											<div class="col-md-4">
-												
 													<input class="form-control" type="text" 
 														id="reqPublishedDate1Edit" name="reqPublishedDate1Edit" value="${demand.reqPublishedDate }"disabled="true"/> 
 											</div>
@@ -208,21 +193,14 @@ var userType='<%=userType%>'
 										</div>
 								</div>
 								<div class="form-group">
-								        <!-- <div class="group">
-											<label class="col-sm-2 control-label">Req published Date</label>
-											<div class="col-md-4">
-												
-													<input class="form-control" type="text" 
-														id="reqPublishedDate1Edit" name="reqPublishedDate1Edit" value="${demand.reqPublishedDate }"disabled="true"/> 
+								       <div class="group">
+											<label class="col-lg-2 control-label">HSBC Requestor</label>
+											<div class="col-lg-4">
+													<input type="text" class="form-control" name="requestorEdit" value="${demand.requestor }"
+														id="requestorEdit" disabled="true"/>
 											</div>
-										</div> -->
-										<div class="group">
-										<label class="col-lg-2 control-label">HSBC Department</label>
-										<div class="col-lg-4">
-											<input type="text" class="form-control" value="${demand.hsbcDept.hsbcDeptName }" 
-													id="hsbcDeptInput" disabled="true"/>
 										</div>
-										</div>
+										
 								        <div class="group">
 											<label class="col-sm-2 control-label">Ageing</label>
 											<div class="col-sm-4">
@@ -233,37 +211,23 @@ var userType='<%=userType%>'
 								
 								</div>
 								<div class="form-group">
-								       <!-- <div class="group">
-										<label class="col-lg-2 control-label">HSBC Department</label>
+								        <div class="group">
+										<label class="col-lg-2 control-label">GBGF</label>
 										<div class="col-lg-4">
-											<input type="text" class="form-control" value="${demand.hsbcDept.hsbcDeptName }" 
+											<input type="text" class="form-control" value="${demand.gbgf }" 
 													id="hsbcDeptInput" disabled="true"/>
 										</div>
-										</div> -->
-										<div class="group">
-											<label class="col-lg-2 control-label">HSBC Requestor</label>
-											<div class="col-lg-4">
-													<input type="text" class="form-control" name="requestorEdit" value="${demand.requestor }"
-														id="requestorEdit" disabled="true"/>
-											</div>
 										</div>
 										<div class="group">
-										<label class="col-lg-2 control-label">HSBC Sub-Department</label>
+										<label class="col-lg-2 control-label">HSBC Department</label>
 										<div class="col-lg-4">
-										<input type="text"  class="form-control" value="${demand.hsbcDept.hsbcSubDeptName }"
-													id="hsbcSubDeptEdit" disabled="true"/>
+											<input type="text" class="form-control" value="${demand.hsbcDeptName }" 
+													id="hsbcDeptInput" disabled="true"/>
 										</div>
 										</div>
 								</div>
 								
 								<div class="form-group" id="atype" style='display:none'>
-										<!-- <div class="group" id="staffnameEdit" style='display:none'>
-											<label class="col-sm-2 control-label">Staff Name</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="candidateNameEdit" value="${demand.candidateName }"
-													id="candidateNameEdit"disabled="true"/>
-											</div>
-										</div> -->
 										<div class="group" id="bgvEdit" style='display:none'>
 											<label class="col-sm-2 control-label">BGV Cleared</label>
 											<div class="col-sm-4">
@@ -281,14 +245,6 @@ var userType='<%=userType%>'
 										</div>
 								</div>
 								<div class="form-group" id="btype"style='display:none'>
-								        <!-- <div class="group" id="bgvEdit" style='display:none'>
-											<label class="col-sm-2 control-label">BGV Cleared</label>
-											<div class="col-sm-4">
-											<input type="text" class="form-control" name="bgvClearedEdit" value="${demand.bgvCleared }"
-													id="bgvClearedEdit"disabled="true"/>
-											</div>
-											
-										</div> -->
 										<div class="group" id="reasonAbort" style='display:none'>
 											<label class="col-sm-2 control-label">Reason for Abort</label>
 											<div class="col-sm-4">
@@ -315,13 +271,6 @@ var userType='<%=userType%>'
 										
 								</div>
 								<div class="form-group"id="ctype" style='display:none'>
-								       <!-- <div class="group" id="reasonAbort" style='display:none'>
-											<label class="col-sm-2 control-label">Reason for Abort</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="reasonEdit" value="${demand.reason }"
-													id="reasonEdit"disabled="true"/>
-											</div>
-										</div> -->
 										<div class="group" id="reasonDelayed" style='display:none'>
 											<label class="col-sm-2 control-label">Reason for Delay</label>
 											<div class="col-sm-4">
@@ -329,30 +278,16 @@ var userType='<%=userType%>'
 													id="reasonEdit"disabled="true"/>
 											</div>
 										</div>
-										<!-- <div class="group">
-											<label class="col-sm-2 control-label">Remark</label>
-											<div class="col-sm-4">
-												<textarea type="text" class="form-control" rows="10" name="remarkEdit" value="${demand.remark }"
-														id="remarkEdit" disabled="true"></textarea>
-											</div>
-									    </div>  -->
 								</div>
 								
 								<div class="form-group">
-								         <!-- <div class="group">
-											<label class="col-lg-2 control-label">HSBC Requestor</label>
-											<div class="col-lg-4">
-													<input type="text" class="form-control" name="requestorEdit" value="${demand.requestor }"
-														id="requestorEdit" disabled="true"/>
-											</div>
-										</div> -->
-										<!-- <div class="group" id="staffnameEdit" style='display:none'>
-											<label class="col-sm-2 control-label">Staff Name</label>
-											<div class="col-sm-4">
-												<input type="text" class="form-control" name="candidateNameEdit" value="${demand.candidateName }"
-													id="candidateNameEdit"disabled="true"/>
-											</div>
-										</div> -->
+								        <div class="group">
+										<label class="col-lg-2 control-label">HSBC Sub-Department</label>
+										<div class="col-lg-4">
+										<input type="text"  class="form-control" value="${demand.hsbcSubDeptName }"
+													id="hsbcSubDeptEdit" disabled="true"/>
+										</div>
+										</div>
 								        <div class="group">
 											<label class="col-sm-2 control-label">CS Department</label>
 											<div class="col-sm-4">
@@ -360,6 +295,8 @@ var userType='<%=userType%>'
 														id="csSubDeptEdit"disabled="true" />
 											</div>
 										</div>
+								</div>
+								<div class="form-group">
 										<div class="group">
 											<label class="col-sm-2 control-label">Remark</label>
 											<div class="col-sm-4">
@@ -367,7 +304,9 @@ var userType='<%=userType%>'
 														id="remarkEdit" disabled="true">${demand.remark }</textarea>
 											</div>
 									    </div>
-								
+									    <div class="group">
+											
+										</div>
 								</div>
 								
 								<div class="form-group">

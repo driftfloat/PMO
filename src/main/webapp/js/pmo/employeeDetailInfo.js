@@ -38,13 +38,15 @@ function loadEmployeeInfo(){
 			$('#terminatedDate1').val(employee.terminatedDate);
 			$('#eHr').val(employee.eHr);
 			$('#csSubDept').val(employee.csSubDeptName);
-			loadHSBCSubDept(employee.hsbcSubDept);
+			//loadHSBCSubDept(employee.hsbcSubDept);
 			//loadTerminationReason(employee);
 			$('#terminationReason').val(employee.terminationReason);
 			loadCSDept(employee);
 			$('#email').val(employee.email);
 			$('#entryDate1').val(employee.entryDate);
 			$('#gbGf').val(employee.gbGf);
+			$("#hsbcDept").val(employee.hsbcDeptName);
+			$("#hsbcSubDept").val(employee.hsbcDeptSubName);
 			$('#itworkyear').val(employee.itindustryWorkYear);
 			$('#chsoftiProNumber').val(employee.chsoftiProNumber);
 			$('#chsoftiProStartDate').val(employee.chsoftiProStartdate);
@@ -69,7 +71,7 @@ function loadEmployeeInfo(){
 }
 
 
-function loadHSBCSubDept(hsbcSubDeptId){
+/**function loadHSBCSubDept(hsbcSubDeptId){
 	$.ajax({
 		url:path+'/service/interview/queryHSBCSubDeptById',
 		dataType:"json",
@@ -82,7 +84,7 @@ function loadHSBCSubDept(hsbcSubDeptId){
 			$("#hsbcDept").val(data.hsbcDeptName);
 		}
 	})
-}
+}*/
 
 function loadTerminationReason(employee){
 	var url = path+'/json/terminatedReason.json'

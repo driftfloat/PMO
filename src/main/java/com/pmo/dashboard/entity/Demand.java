@@ -73,10 +73,24 @@ public class Demand
 
     private String completionDay;
     
+    private String gbgf;
+    
     private String hsbcSubDeptName;
     
     private String userType;
-    public String getUserType() {
+    
+    
+    
+    
+    public String getGbgf() {
+		return gbgf;
+	}
+
+	public void setGbgf(String gbgf) {
+		this.gbgf = gbgf;
+	}
+
+	public String getUserType() {
 		return userType;
 	}
 

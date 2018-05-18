@@ -491,7 +491,7 @@ public class EmployeeController {
                }
 
                List<CSDept> allCSDept = csDeptService.queryAllCSDept();
-               List<HSBCDept> allHSBCDept = hsbcDeptService.queryAllHSBCDept();
+               List<HSBCDept> allHSBCDept = null; //hsbcDeptService.queryAllHSBCDept();
                List<User> allRM = userService.getUserForRM();
 
                CSDept csDept = null;
@@ -1008,8 +1008,8 @@ public String entryEmployee(final HttpServletRequest request,
             }
         	//HSBC Sub Dept
             if(before.getHsbcSubDept()!=null && !before.getHsbcSubDept().equals(after.getHsbcSubDept())){
-            	HSBCDept old = hsbcDeptService.queryDemandHSBCSubDeptById(before.getHsbcSubDept());
-            	HSBCDept news = hsbcDeptService.queryDemandHSBCSubDeptById(after.getHsbcSubDept());
+            	HSBCDept old = null;//hsbcDeptService.queryDemandHSBCSubDeptById(before.getHsbcSubDept());
+            	HSBCDept news = null;//hsbcDeptService.queryDemandHSBCSubDeptById(after.getHsbcSubDept());
             	String oldname="";
             	String newsname="";
             	if(old!=null){
@@ -1187,7 +1187,7 @@ public String entryEmployee(final HttpServletRequest request,
         	//HSBC Sub Dept
             HSBCDept hsbcdept = null;
         	if(employee.getHsbcSubDept()!=null && !"".equals(employee.getHsbcSubDept())){
-        		hsbcdept = hsbcDeptService.queryDemandHSBCSubDeptById(employee.getHsbcSubDept());
+        		hsbcdept = null;//hsbcDeptService.queryDemandHSBCSubDeptById(employee.getHsbcSubDept());
         	}
             String hsbcdeptname="";
         	if(hsbcdept!=null){
