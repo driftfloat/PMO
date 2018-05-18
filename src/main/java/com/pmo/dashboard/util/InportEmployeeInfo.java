@@ -4,71 +4,84 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
+
 import com.pmo.dashboard.entity.Employee;
+import com.pmo.dashboard.entity.HSBCDept;
+import com.pom.dashboard.service.EmployeeService;
+import com.pom.dashboard.service.HSBCDeptService;
 
 import jxl.Sheet;
 import jxl.Workbook;
-
+@Component
 public class InportEmployeeInfo
 {
     
+	
+	
     public static void main(String[] args){
-        
-        List<Employee> list = new ArrayList<Employee>();
+    	ApplicationContext context = new ClassPathXmlApplicationContext("classpath:/conf/spring-mybatis.xml");
+    	EmployeeService employeeService = (EmployeeService) context.getBean(EmployeeService.class);
+    	HSBCDeptService hsbcDeptService = (HSBCDeptService) context.getBean(HSBCDeptService.class);
+    	List<Employee> list = new ArrayList<Employee>();
         try
         {
-            Workbook rwb = Workbook.getWorkbook(new File("C:/Users/nick/Desktop/GSV Engagement Dashboard_170725.xlsx"));
-            Sheet rs = rwb.getSheet(4);
+            Workbook rwb = Workbook.getWorkbook(new File("C:/Users/gaonana/Desktop/a.xls"));
+            Sheet rs = rwb.getSheet(0);
             int clos = rs.getColumns();
             int rows = rs.getRows();
+            HSBCDept hsbcDept = new HSBCDept();
+            Employee em = new Employee();
+            for(int i=1;i<rows;i++){
+                //处理GBGF
+            	/**String ehr = rs.getCell(3, i).getContents();
+            	String gbgf = rs.getCell(0, i).getContents();
+            	System.out.println(ehr);
+            	//根据Name去获取ID
+            	hsbcDept.setName(gbgf);
+            	List<HSBCDept> hsbcDeptList = hsbcDeptService.queryById(hsbcDept);
 
-            /*for (int i = 1; i < rows; i++)
-            {
-                */
-                    String employeeId = Utils.getUUID();
-                    String hsbcStaffId = rs.getCell(2, 1).getContents();
-                    String staffName = rs.getCell(2, 1).getContents();
-                    String ln = rs.getCell(2, 1).getContents();
-                    String staffRegion = rs.getCell(2, 1).getContents();
-                    String staffLocation = rs.getCell(2, 1).getContents();
-                    String locationType = rs.getCell(2, 1).getContents();
-                    String onShoreOrOffShore = rs.getCell(2, 1).getContents();
-                    String sow = rs.getCell(2, 1).getContents();
-                    String sowExpiredDate = rs.getCell(2, 1).getContents();
-                    String staffCategory = rs.getCell(2, 1).getContents();
-                    String engagementType = rs.getCell(2, 1).getContents();
-                    String hsbcDoj = rs.getCell(2, 1).getContents();
-                    int experienceONHSBC = 0;
-                    String graduationDate = rs.getCell(2, 1).getContents();
-                    int totalExperience = 0;
-                    String billingEntity = rs.getCell(2, 1).getContents();
-                    String billCurrency = rs.getCell(2, 1).getContents();
-                    String billRate = rs.getCell(2, 1).getContents();
-                    String resourceStatus = rs.getCell(2, 1).getContents();
-                    String mentionLWD = rs.getCell(2, 1).getContents();
-                    String reasonForTermination = rs.getCell(2, 1).getContents();
-                    String eHr = rs.getCell(2, 1).getContents();
-                    String nicheSkill = rs.getCell(2, 1).getContents();
-                    String hsbcProjectId = rs.getCell(2, 1).getContents();
-                    String role = rs.getCell(2, 1).getContents();
-                    String skill = rs.getCell(2, 1).getContents();
-                    String csSubDeptId = rs.getCell(2, 1).getContents();
-                    
-                    
 
-                    /*list.add(new Employee(employeeId,hsbcStaffId,staffName,ln,staffRegion,staffLocation,
-                         locationType,onShoreOrOffShore,sow,sowExpiredDate,staffCategory,engagementType,
-                         hsbcDoj,experienceONHSBC,graduationDate,totalExperience,billingEntity,billCurrency,
-                         billRate,resourceStatus,mentionLWD,reasonForTermination,eHr,nicheSkill,
-                         hsbcProjectId,role,skill,csSubDeptId));*/
-                
-            //}
+            	if(hsbcDeptList!=null && hsbcDeptList.size()>0){
+            		em.seteHr(ehr);
+                	em.setGbGf(hsbcDeptList.get(0).getId());
+                	employeeService.importEmployeeProject(em);
+            	}*/
+            	//处理HSBCDept和HSBCSubDept
+            	String ehr = rs.getCell(3, i).getContents();
+            	String hsbcDeptt = rs.getCell(1, i).getContents();
+            	String hsbcSubDeptt = rs.getCell(2, i).getContents();
+            	
+            	System.out.println(ehr);
+            	//根据Name去获取ID
+            	HSBCDept hsbcDept2 = new HSBCDept();
+            	HSBCDept hsbcDept3 = new HSBCDept();
+            	hsbcDept2.setName(hsbcDeptt);
+            	hsbcDept3.setName(hsbcSubDeptt);
+            	List<HSBCDept> hsbcDeptList1 = hsbcDeptService.queryById(hsbcDept2);
+            	List<HSBCDept> hsbcDeptList2 = hsbcDeptService.queryById(hsbcDept3);
+
+            	String zuhe="";
+            	if(hsbcDeptList1!=null && hsbcDeptList1.size()>0){
+            		zuhe = zuhe+hsbcDeptList1.get(0).getId()+",";
+            		if(hsbcDeptList2!=null && hsbcDeptList2.size()>0){
+            			zuhe = zuhe + hsbcDeptList2.get(0).getId();
+            		}
+            	}
+            	em.seteHr(ehr);
+                em.setHsbcSubDept(zuhe);
+                employeeService.importEmployeeProject(em);
+            }
+            System.out.println("处理完成");    
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-        
         return;
     }
 
