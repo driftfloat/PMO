@@ -314,7 +314,7 @@ function loadDemandList(currPage){
 				var status=result.list[i].status;
 			/*	var hsbcSubDeptName=result.list[i].hsbcSubDeptName;
 				var csDeptName=result.list[i].csSubDept;*/
-				var td7 = $("<td>"+result.list[i].csSubDept+"</td>");
+				var td7 = $("<td>"+result.list[i].csDeptName+"</td>");
 				var demandId = result.list[i].demandId;
 				var statusa  = result.list[i].status;
 				
