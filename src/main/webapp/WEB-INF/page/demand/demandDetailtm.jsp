@@ -285,7 +285,7 @@ var userType='<%=userType%>'
 										<label class="col-lg-2 control-label">HSBC Sub-Department</label>
 										<div class="col-lg-4">
 										<input type="text"  class="form-control" value="${demand.hsbcSubDeptName }"
-													id="hsbcSubDeptEdit" disabled="true"/>
+													id="hsbcSubDeptDetail" disabled="true"/>
 										</div>
 										</div>
 								        <div class="group">
