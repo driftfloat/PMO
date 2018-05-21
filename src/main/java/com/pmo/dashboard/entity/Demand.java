@@ -136,6 +136,41 @@ public class Demand
     
     
     
+    
+    /**
+     * 表外字段
+     */
+    private String gbgfid;
+    private String hsbcdeptid;
+    private String hsbcsubdeptid;
+    
+    
+    
+    
+	public String getGbgfid() {
+		return gbgfid;
+	}
+
+	public void setGbgfid(String gbgfid) {
+		this.gbgfid = gbgfid;
+	}
+
+	public String getHsbcdeptid() {
+		return hsbcdeptid;
+	}
+
+	public void setHsbcdeptid(String hsbcdeptid) {
+		this.hsbcdeptid = hsbcdeptid;
+	}
+
+	public String getHsbcsubdeptid() {
+		return hsbcsubdeptid;
+	}
+
+	public void setHsbcsubdeptid(String hsbcsubdeptid) {
+		this.hsbcsubdeptid = hsbcsubdeptid;
+	}
+
 	public String getCompletionDay() {
 		return completionDay;
 	}

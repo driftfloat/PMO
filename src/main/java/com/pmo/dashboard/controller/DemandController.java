@@ -581,15 +581,46 @@ public class DemandController {
 		try{
 			List<Demand> list = (List<Demand>) request.getSession().getAttribute("demandList");
 			long day = 0;
+			HSBCDept hsbcdept = new HSBCDept();
 			for (Demand demand : list) {
 				if(demand.getDemandId().equals(demandId)){
-					HSBCDept hSBCDept = null; //hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
-					if(hSBCDept!=null) {
+					String[] temp = null;
+					
+					if(demand.getHsbcSubDeptId()!=null && !"".equals(demand.getHsbcSubDeptId())){
+						temp = demand.getHsbcSubDeptId().split(",");
+						//处理GBGF
+						hsbcdept.setId(temp[0]);
+						List<HSBCDept> hsbcdeptlist = hsbcDeptService.queryById(hsbcdept);
+						if(hsbcdeptlist!=null && hsbcdeptlist.size()>0){
+							demand.setGbgf(hsbcdeptlist.get(0).getName());
+							demand.setGbgfid(hsbcdeptlist.get(0).getId());
+						}
+						//处理HSBCDept
+						if(temp.length>1){
+							hsbcdept.setId(temp[1]);
+							List<HSBCDept> hsbcdeptlist2 = hsbcDeptService.queryById(hsbcdept);
+							if(hsbcdeptlist2!=null && hsbcdeptlist2.size()>0){
+								demand.setHsbcDeptName(hsbcdeptlist2.get(0).getName());
+								demand.setHsbcdeptid(hsbcdeptlist2.get(0).getId());
+							}
+						}
+						//处理HSBCSubDept
+						if(temp.length>2){
+							hsbcdept.setId(temp[2]);
+							List<HSBCDept> hsbcdeptlist3 = hsbcDeptService.queryById(hsbcdept);
+							if(hsbcdeptlist3!=null && hsbcdeptlist3.size()>0){
+								demand.setHsbcSubDeptName(hsbcdeptlist3.get(0).getName());
+								demand.setHsbcsubdeptid(hsbcdeptlist3.get(0).getId());
+							}
+						}
+					}
+					//HSBCDept hSBCDept = null; //hsbcDeptService.queryDemandHSBCSubDeptById(demand.getHsbcSubDeptId());
+					//if(hSBCDept!=null) {
 //						if(hSBCDept.getHsbcSubDeptName()==null||"".equals(hSBCDept.getHsbcSubDeptName())) {
 //							hSBCDept.setHsbcSubDeptName(hSBCDept.getHsbcDeptName());
 //						}
-					}
-					demand.setHsbcDept(hSBCDept);
+					//}
+					//demand.setHsbcDept(hSBCDept);
 					demand.setUserType(userType);
 					
 					//ageing计算

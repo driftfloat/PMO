@@ -235,6 +235,9 @@ var userType='<%=userType%>'
 										</div>
 								</div>
 								<div class="form-group">
+								        <input id="editgbgfid" value="${demand.gbgfid}" type="hidden"></input>
+								        <input id="edithsbcdeptid" value="${demand.hsbcdeptid}" type="hidden"></input>
+								        <input id="edithsbcsubdeptid" value="${demand.hsbcsubdeptid}" type="hidden"></input>
 										<div class="group">
 										<label class="col-lg-2 control-label">GBGF</label>
 										<div class="col-lg-4">
@@ -264,7 +267,7 @@ var userType='<%=userType%>'
 										<div class="col-lg-4">
 											<select class="form-control" name="hsbcSubDeptEdit" data-bv-notempty
 												data-bv-notempty-message="Please Select Your HsbcSubDept" id="hsbcSubDeptEdit" data-bv-group=".group">
-												<option value="${demand.hsbcDept.hsbcSubDeptName }"></option>
+												<option value="">-- Option --</option>
 											</select>
 										</div>
 										</div>

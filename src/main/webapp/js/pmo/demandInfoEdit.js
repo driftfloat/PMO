@@ -15,7 +15,47 @@ $(function(){
 	loadLocationEdit();
 	loadHrPriorityEdit();
 	loadGbGf();
+	loadHsbcDept();
+	loadHsbcSubDept();
 })
+
+function loadHsbcDept(){
+	//$("#hsbcSubDept").empty();
+	//$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
+	$.ajax({
+		url:path+'/service/hsbcDept/queryChild',
+		dataType:"json",
+		data:{"id":$("#editgbgfid").val()},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			$.each(result, function(i, item){
+				$("#hsbcDeptEdit").append("<option value='"+item.id+"'>"+item.name+"</option>");
+			})
+			$('#hsbcDeptEdit').val($("#edithsbcdeptid").val());
+		}
+	})
+}
+
+function loadHsbcSubDept(){
+	//$("#hsbcSubDept").empty();
+	//$("#hsbcSubDept").append("<option value=''>-- Option --</option>");
+	$.ajax({
+		url:path+'/service/hsbcDept/queryChild',
+		dataType:"json",
+		data:{"id":$("#edithsbcdeptid").val()},
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(result){
+			$.each(result, function(i, item){
+				$("#hsbcSubDeptEdit").append("<option value='"+item.id+"'>"+item.name+"</option>");
+			})
+			$('#hsbcSubDeptEdit').val($("#edithsbcsubdeptid").val());
+		}
+	})
+}
 
 function loadGbGf(){
 	var url = path + '/service/hsbcDept/queryTopParent';
@@ -23,6 +63,7 @@ function loadGbGf(){
 		$.each(data, function(i, item){
 			$("#gbGf").append("<option value='"+item.id+"'>"+item.name+"</option>");
 		})
+		$("#gbGf").val($("#editgbgfid").val());
 	});
 }
 
