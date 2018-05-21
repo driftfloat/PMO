@@ -224,6 +224,7 @@ public class DemandController {
 	 * @param response
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/exportExcel")
 	public HttpServletResponse exportExcel(String condition,HttpServletRequest request,HttpServletResponse response){
 		Map<String, Object> params = (Map<String, Object>)request.getSession().getAttribute("demandParams");

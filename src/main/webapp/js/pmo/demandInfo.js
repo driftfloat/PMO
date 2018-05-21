@@ -402,6 +402,7 @@ function exportCondition(){
 	$("label").find(":checkbox:checked").each(function(){
 		condition += $(this).attr("name") +",";
 	});
+	console.log(condition);
 	var url = path+'/service/demand/exportExcel';
 	$("#condition").val(condition);
 	$("#conditionForm").attr("action",url);

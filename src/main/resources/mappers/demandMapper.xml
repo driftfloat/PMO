@@ -69,12 +69,13 @@
 					</if>
 				</otherwise>
 			</choose>
+			<!-- 
 			<if test="demand.hsbcDept.hsbcDeptName!=null and demand.hsbcDept.hsbcDeptName!=''">
 				and HSBC_SUBDEPT_ID in 
 				<foreach item="item" collection="hsbcSubDeptIdList" open="(" separator="," close=")">
 					#{item}
 				</foreach>
-			</if>
+			</if> -->
 		</where>
 	</sql>
 	
