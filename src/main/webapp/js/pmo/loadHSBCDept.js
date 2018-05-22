@@ -32,7 +32,8 @@ function addEmployee(){
 	var bootstrapValidator = $("#registerEmployeeForm").data('bootstrapValidator');
 	bootstrapValidator.validate();
 	if(bootstrapValidator.isValid()){
-		$('#sub_search').addClass('disabled'); 
+		//$('#sub_search').addClass('disabled'); 
+		
 		
 		var eHr = $('#eHr').val();
 		var lob = $('#lob').val();
@@ -112,6 +113,9 @@ function addEmployee(){
 			}, 2000);
 			return;
 		}
+		
+		$('#addjindu').modal('show');
+		
 		$.ajax({
 			url:path+'/service/employee/addEmployee',
 			dataType:"json",
@@ -145,6 +149,7 @@ function addEmployee(){
 				})
 				
 				if(resultFlag){
+					$('#addjindu').modal('hide');
 					$("html,body").animate({scrollTop:0}, 500);
 					$('#successAlert').html('Employee:'+staffName+' information added succesffully').show();
 					setTimeout(function () {

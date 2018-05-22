@@ -104,7 +104,7 @@ function updateEmployee() {
 			}
 		//}
 		
-		
+		$('#updatejindu').modal('show');
 		$.ajax({
 			url:path+'/service/employee/updateEmployee',
 			dataType:"json",
@@ -117,6 +117,7 @@ function updateEmployee() {
 			type:"post",
 			success:function(resultFlag){
 				if(resultFlag){
+					$('#updatejindu').modal('hide');
 					$("html,body").animate({scrollTop:0}, 500);
 					$('#successAlert').html('Staff:'+staffName+' information edited succesffully').show();
 					setTimeout(function () {

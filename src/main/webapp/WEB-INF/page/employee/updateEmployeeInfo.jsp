@@ -498,6 +498,19 @@ var path='<%=path%>';
 				
 	</div>
 	<!--/.fluid-container-->
+	
+	<!-- 进度显示 -->
+	<div class="modal fade" id="updatejindu" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="progress progress-striped active" style="margin-top:300px;">
+	          <div class="progress-bar progress-bar-success" role="progressbar"
+		            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+		            style="width: 100%;">保存中,请稍后......
+		            <span class="sr-only">100% 完成</span>
+	          </div>
+             </div>
+		</div>		
+	</div>
 
 	<!-- external javascript -->
 
