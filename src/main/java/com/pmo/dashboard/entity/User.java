@@ -145,6 +145,21 @@ public class User {
         this.csdeptId = csDeptId;
         this.loginStatus = loginStatus;
     }
+	
+	public User(String userId, String userName, String nickname,
+            String password, String userType, String bu, String csDeptId,String loginStatus, String email)
+    {
+        super();
+        this.userId = userId;
+        this.userName = userName;
+        this.nickname = nickname;
+        this.password = password;
+        this.userType = userType;
+        this.bu = bu;
+        this.csdeptId = csDeptId;
+        this.loginStatus = loginStatus;
+        this.email = email;
+    }
 
     public User(String userId, String userName, String nickname,
             String password, String userType, CSDept csDept, String bu,
