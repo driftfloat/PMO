@@ -86,7 +86,7 @@ var path='<%=path%>';
 							</div>
 							<div id="register" class="box-content" style="overflow: auto;">
 							<form id="registerEmployeeForm" method="post">
-							    
+							    <input id="rmuserid" value="${rmuserid}" type="hidden"></input>
 							    <div id="successAlert" class="alert alert-success" style="display: none;"></div>
 							    <div class="form-group">
 										<div class="group">
@@ -263,8 +263,8 @@ var path='<%=path%>';
 											<select class="form-control" name="engagementType" data-bv-notempty
 												data-bv-notempty-message="please select  engagementType" id="engagementType" data-bv-group=".group">
 												<option value="">--Option--</option>
-											    <option value="Time&Material">Time&Material</option>
-                                                <option value="Time&Material">Team Delivery</option>
+											    <option value="Time&Material" selected>Time&Material</option>
+                                                <option value="Team Delivery">Team Delivery</option>
 											</select>
 										</div>
 										</div>

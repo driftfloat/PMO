@@ -151,10 +151,12 @@ public class InterviewController {
 		 if(employee.getHsbcSubDept()!=null && !"".equals(employee.getHsbcSubDept())){
 			 temp = employee.getHsbcSubDept().split(",");
 			 HSBCDept hsbcDept = new HSBCDept();
-			 hsbcDept.setId(temp[0]);
-			 List<HSBCDept> hsbcDeptList = hsbcDeptService.queryById(hsbcDept);
-			 if(hsbcDeptList!=null && hsbcDeptList.size()>0){
-				 employee.setHsbcDeptName(hsbcDeptList.get(0).getName());
+			 if(temp.length>0){
+				 hsbcDept.setId(temp[0]);
+				 List<HSBCDept> hsbcDeptList = hsbcDeptService.queryById(hsbcDept);
+				 if(hsbcDeptList!=null && hsbcDeptList.size()>0){
+					 employee.setHsbcDeptName(hsbcDeptList.get(0).getName());
+				 }
 			 }
 		 }
 		 
