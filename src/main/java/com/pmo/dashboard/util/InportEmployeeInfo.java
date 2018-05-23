@@ -46,7 +46,7 @@ public class InportEmployeeInfo
             int count = 0;
             for(int i=1;i<rows;i++){
             	String zuhe = "";
-            	System.out.println(rs.getCell(30, 1).getContents());
+            	//System.out.println(rs.getCell(30, 1).getContents());
             	//先查询此人是否存在，如果存在则修改，如果不存在则添加
             	List<Employee> emlist = employeeService.selectByEhr(rs.getCell(30, i).getContents());
             	
@@ -69,7 +69,11 @@ public class InportEmployeeInfo
             		
             		
             		//gbgf
-            		em.setGbGf(rs.getCell(9, i).getContents());
+            		hsbcDept.setName(rs.getCell(9, i).getContents());
+            		List<HSBCDept> hsbcdeptlist1 = hsbcDeptService.queryById(hsbcDept);
+            		if(hsbcdeptlist1!=null && hsbcdeptlist1.size()>0){
+            			em.setGbGf(hsbcdeptlist1.get(0).getId());
+            		}
             		//hsbcdept
             		hsbcDept.setName(rs.getCell(10, i).getContents());
             		List<HSBCDept> hsbcdeptlist2 = hsbcDeptService.queryById(hsbcDept);
@@ -138,27 +142,15 @@ public class InportEmployeeInfo
             		em.setLob(rs.getCell(31, i).getContents());
             		
             		//rm
-            		if(rs.getCell(32, i).getContents().equals("高赛")){
-            			em.setRmUserId("0699ce9ceb7343a48c2acbe3e6e3aa97");
-            		}
-            		if(rs.getCell(32, i).getContents().equals("王蓓")){
-            			em.setRmUserId("d7f19c09a5f1456fb9edf45bd3c2fbbb");
+            		if(rs.getCell(32, i).getContents().equals("张晨")){
+            			em.setRmUserId("d87ca6a3b5534553b7967bc34b8eb59c");
             		}
             		
             		//csdept
             		if(rs.getCell(33, i).getContents().equals("财富管理交付部")){
             			em.setCsSubDept("8");
             		}
-                    if(rs.getCell(33, i).getContents().equals("恒生银行交付部")){
-                    	em.setCsSubDept("13");
-            		}
-                    if(rs.getCell(33, i).getContents().equals("能力中心")){
-                    	em.setCsSubDept("24");
-            		}
-                    if(rs.getCell(33, i).getContents().equals("保险与运营交付部")){
-                    	em.setCsSubDept("5");
-            		}
-            		
+                    
             		
             		//it work year
             		em.setItindustryWorkYear(rs.getCell(34, i).getContents());
@@ -184,6 +176,7 @@ public class InportEmployeeInfo
             	
             	    //如果此人存在则修改，如果不存在则添加
             		if(emlist!=null && emlist.size()==1){
+            			System.out.println(rs.getCell(30, i).getContents());
             			em.setEmployeeId(emlist.get(0).getEmployeeId());
             			//存在，修改
             			employeeService.updateEmployee(em);

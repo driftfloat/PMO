@@ -268,7 +268,10 @@ function loadOnshoreOrOffshore(){
 	var url = path+'/json/onshoreOrOffshore.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
-	    	   $("#onshoreOrOffshore").append("<option>"+item.name+"</option>");
+	    	   $("#onshoreOrOffshore").append("<option value='"+item.name+"'>"+item.name+"</option>");
+	    	   if(item.name=='Offshore'){
+	    		   $("#onshoreOrOffshore").val(item.name);
+	    	   }
 	       })
 	});
 }
@@ -278,7 +281,10 @@ function loadLocationType(){
 	var url = path+'/json/locationType.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
-	    	   $("#locationType").append("<option>"+item.name+"</option>");
+	    	   $("#locationType").append("<option value='"+item.name+"'>"+item.name+"</option>");
+	    	   if(item.name=='ODC'){
+	    		   $("#locationType").val(item.name);
+	    	   }
 	       })
 	});
 }
@@ -288,7 +294,11 @@ function loadStaffLocation(){
 	var url = path+'/json/staffLocation.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
-	    	   $("#staffLocation").append("<option>"+item.name+"</option>");
+	    	   
+	    	   $("#staffLocation").append("<option value='"+item.name+"'>"+item.name+"</option>");
+	    	   if(item.name=='China'){
+	    		   $("#staffLocation").val(item.name);
+	    	   }
 	       })
 	});
 }
@@ -299,7 +309,10 @@ function loadStaffRegion(){
 	var url = path+'/json/staffRegion.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
-	    	   $("#staffRegion").append("<option>"+item.name+"</option>");
+	    	   $("#staffRegion").append("<option value='"+item.name+"'>"+item.name+"</option>");
+	    	   if(item.name=='Xian'){
+	    		   $("#staffRegion").val(item.name);
+	    	   }
 	    	   regionMap.set(item.name,item.key);
 	       })
 	});
@@ -333,7 +346,10 @@ function loadBillingCurrency(){
 	var url = path+'/json/billingCurrency.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
-	    	   $("#billingCurrency").append("<option>"+item.name+"</option>");
+	    	   $("#billingCurrency").append("<option value='"+item.name+"'>"+item.name+"</option>");
+	    	   if(item.name=='CNY'){
+	    		   $("#billingCurrency").val(item.name);
+	    	   }
 	       })
 	});
 }
@@ -420,7 +436,10 @@ function loadStaffCategory(){
 	var url = path+'/json/staffCategory.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
-	    	   $("#staffCategory").append("<option>"+item.name+"</option>");
+	    	   $("#staffCategory").append("<option value='"+item.name+"'>"+item.name+"</option>");
+	    	   if(item.name=='CAT G'){
+	    		   $("#staffCategory").val(item.name);
+	    	   }
 	       })
 	});
 }
@@ -430,7 +449,7 @@ function loadEngagementType(){
 	var url = path+'/json/engagementType.json'
 	$.getJSON(url,  function(data) {
 	       $.each(data, function(i, item) {
-	    	   $("#engagementType").append("<option>"+item.name+"</option>");
+	    	   $("#engagementType").append("<option value='"+item.name+"'>"+item.name+"</option>");
 	       })
 	});
 }
@@ -515,7 +534,7 @@ function loadUserForRM(du){
 			for(var i = 0;i < newRMList.length;i++){
 				$("#RM").append("<option value='"+newRMList[i].userId+"'>"+newRMList[i].nickname+"</option>")
 			}
-			
+			$("#RM").val($("#rmuserid").val());
 		}
 	})
 }

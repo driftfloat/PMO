@@ -598,15 +598,19 @@ public class EmployeeController {
                 	   if(listE.get(i-1).getHsbcSubDept()!=null && !"".equals(listE.get(i-1).getHsbcSubDept())){
                 		   zuhe = listE.get(i-1).getHsbcSubDept().split(",");
                 	   }
-                	   if(zuhe != null){
-                		   //获取名称
-                    	   hsbcDept.setId(zuhe[0]);
-                    	   List<HSBCDept> hsbcDeptList = hsbcDeptService.queryById(hsbcDept);
-                    	   if(hsbcDeptList!=null && hsbcDeptList.size()>0){
-                     		  label= new Label(++j, i, hsbcDeptList.get(0).getName());
-                     	   }else{
-                     		  label= new Label(++j, i, "");
-                     	   }
+                	   if(zuhe != null && !"".equals(zuhe) && !",".equals(zuhe)){
+                		   if(zuhe.length>0){
+                			   //获取名称
+                        	   hsbcDept.setId(zuhe[0]);
+                        	   List<HSBCDept> hsbcDeptList = hsbcDeptService.queryById(hsbcDept);
+                        	   if(hsbcDeptList!=null && hsbcDeptList.size()>0){
+                         		  label= new Label(++j, i, hsbcDeptList.get(0).getName());
+                         	   }else{
+                         		  label= new Label(++j, i, "");
+                         	   }
+                		   }else{
+                			   label= new Label(++j, i, "");
+                		   }
                 	   }else{
                 		   label= new Label(++j, i, "");
                 	   }
@@ -884,8 +888,11 @@ public class EmployeeController {
  */
 @RequestMapping("/getTMemployee")
 public String getTMemployee(final HttpServletRequest request,
-        final HttpServletResponse response,String status){
-
+        final HttpServletResponse response,String status,Model model){
+	User u=(User)request.getSession().getAttribute("loginUser");
+	if(u.getUserType().equals("5")){
+		model.addAttribute("rmuserid", u.getUserId());
+	}
 	if("1".equals(status)){
 		return "index1";
 	/*}else if("2".equals(status)){
