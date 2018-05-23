@@ -82,11 +82,12 @@ public class UserRelevantController {
         String type = request.getParameter("type");
         String bu = request.getParameter("bu");
         String du = request.getParameter("du");
+        String email = request.getParameter("email");
         
         boolean resultFlag = false;
         //字段校验
-        if(checkField(eHr,name,type,bu,du)){
-        	User user = new User(userId,eHr,name,"123", type, bu.substring(0, bu.length()-1), du.substring(0, du.length()-1),"0");
+        if(checkField(eHr,name,type,bu,du,email)){
+        	User user = new User(userId,eHr,name,"123", type, bu.substring(0, bu.length()-1), du.substring(0, du.length()-1),"0", email);
             try{
                 resultFlag = userService.addUser(user);
             }catch(Exception e){
@@ -220,7 +221,7 @@ public class UserRelevantController {
 	 * @param field
 	 * @return
 	 */
-	private boolean checkField(String eHr,String name,String type,String bu,String du){
+	private boolean checkField(String eHr,String name,String type,String bu,String du, String email){
 		if(eHr == null || "".equals(eHr)){
 			return false;
 		}
@@ -234,6 +235,9 @@ public class UserRelevantController {
 			return false;
 		}
 		if(du == null || "".equals(du)){
+			return false;
+		}
+		if(email == null || "".equals(email)){
 			return false;
 		}
 		return true;
