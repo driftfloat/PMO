@@ -56,6 +56,18 @@ $(document).ready(function() {
                     }
 
                 }
+            },
+            email: {
+                validators: {
+                	 regexp: {
+                         regexp:/^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/,
+                         message: 'Please enter correct Email'
+                     },
+                     stringLength: {
+                         max: 100,
+                         message: 'Exceeded the maxLength'
+                     }
+                }
             }
         }
     });
@@ -78,6 +90,7 @@ function addUser(){
 		var type = $("#type").val();
 		var temp_bu="";
 		var temp_du="";
+		var email= $("#email").val();
 		for(var i=0;i<bu.length;i++){
 			temp_bu+=bu[i]+",";
 		}
@@ -87,7 +100,7 @@ function addUser(){
 		$.ajax({
 			url:path+'/service/user/addUser',
 			dataType:"json",
-			data:{"eHr":eHr,"name":name,"bu":temp_bu,"du":temp_du,"type":type},
+			data:{"eHr":eHr,"name":name,"bu":temp_bu,"du":temp_du,"type":type, "email":email},
 			async:true,
 			cache:false,
 			type:"post",
