@@ -93,7 +93,7 @@ function addEmployee(){
 		//}
 		
 		
-		var addEmpConditionStr = eHr + lob + hsbcStaffId + staffName + LN
+		/*var addEmpConditionStr = eHr + lob + hsbcStaffId + staffName + LN
 						+ staffRegion + staffLocation + locationType
 						+ onshoreOrOffshore + csSubDept + hsbcSubDept + projectName
 						+ projectManager + sow + sowExpiredDate + staffCategory
@@ -112,7 +112,7 @@ function addEmployee(){
 				$('#successAlert').hide();
 			}, 2000);
 			return;
-		}
+		}*/
 		
 		$('#addjindu').modal('show');
 		
