@@ -86,7 +86,7 @@ var path='<%=path%>';
 							</div>
 							<div id="register" class="box-content" style="overflow: auto;">
 							<form id="registerEmployeeForm" method="post">
-							    
+							    <input id="rmuserid" value="${rmuserid}" type="hidden"></input>
 							    <div id="successAlert" class="alert alert-success" style="display: none;"></div>
 							 
 							    <div class="form-group">
