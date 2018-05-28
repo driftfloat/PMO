@@ -113,12 +113,33 @@ public class DemandServiceImpl implements DemandService{
 	@Override
 	public List<Demand> queryAllDemand(Map<String, Object> params) {
 		List<Demand> list = demandMapper.queryAllDemand(params);
+		String[] temp = null;
+		HSBCDept hd = new HSBCDept();
 		for (Demand demands : list) {
+			if(demands.getHsbcSubDeptId()!=null && !"".equals(demands.getHsbcSubDeptId())){
+				temp = demands.getHsbcSubDeptId().split(",");
+			}
+			//处理hsbcdept
+			if(temp!=null && temp.length>1){
+				hd.setId(temp[1]);
+				List<HSBCDept> list1 = hsbcDeptMapper.queryById(hd);
+				if(list1!=null && list1.size()>0){
+					demands.setHsbcDeptName(list1.get(0).getName());
+				}
+			}
+			//处理hsbcsubdept
+			if(temp!=null && temp.length>2){
+				hd.setId(temp[2]);
+				List<HSBCDept> list2 = hsbcDeptMapper.queryById(hd);
+				if(list2!=null && list2.size()>0){
+					demands.setHsbcSubDeptName(list2.get(0).getName());
+				}
+			}
 //			HSBCDept hsbcDept = hsbcDeptMapper.queryDemandHSBCSubDeptById(demands.getHsbcSubDeptId());
 //			demands.setHsbcDept(hsbcDept);
-//			CSDept csDept=new CSDept();
-//			 csDept=csDeptMapper.queryCSDeptById(demands.getCsSubDept());
-//			 demands.setCsSubDept(csDept==null?"":csDept.getCsSubDeptName());
+			CSDept csDept=new CSDept();
+			csDept=csDeptMapper.queryCSDeptById(demands.getCsSubDept());
+			demands.setCsSubDept(csDept==null?"":csDept.getCsSubDeptName());
 		}
 		return list;
 	}
