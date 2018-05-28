@@ -282,19 +282,19 @@ public class DemandController {
 				}
 				if(condition.indexOf("Department")!= -1){
 				    Label lab = null;
-				    if(demandList.get(i).getHsbcDept() == null){
+				    if(demandList.get(i).getHsbcDeptName() == null){
 				        lab = new Label(j++, i+1, "");
 				    }else{
-				        //lab = new Label(j++, i+1, demandList.get(i).getHsbcDept().getHsbcDeptName());
+				        lab = new Label(j++, i+1, demandList.get(i).getHsbcDeptName());
 				    }
 					ws.addCell(lab);
 				}
 				if(condition.indexOf("Sub - Department")!= -1){
 				    Label lab = null;
-                    if(demandList.get(i).getHsbcDept() == null){
+                    if(demandList.get(i).getHsbcSubDeptName() == null){
                         lab = new Label(j++, i+1, "");
                     }else{
-                        //lab = new Label(j++, i+1, demandList.get(i).getHsbcDept().getHsbcSubDeptName());
+                        lab = new Label(j++, i+1, demandList.get(i).getHsbcSubDeptName());
                     }
 					ws.addCell(lab);
 				}
@@ -347,7 +347,7 @@ public class DemandController {
 					Label lab = new Label(j++, i+1, demandList.get(i).getRemark());
 					ws.addCell(lab);
 				}
-				if(condition.indexOf("交付部")!= -1){
+				if(condition.indexOf("CsDept")!= -1){
 					Label lab = new Label(j++, i+1, demandList.get(i).getCsSubDept());
 					ws.addCell(lab);
 				}

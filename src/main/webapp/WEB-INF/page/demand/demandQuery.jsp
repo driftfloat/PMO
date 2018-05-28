@@ -315,7 +315,7 @@ var path='<%=path%>';
 										name="Reason for Abort / Delay" />Reason for Abort /
 										Delay&nbsp;&nbsp;</label>
 									<label><input type="checkbox" name="Remark" />Remark&nbsp;&nbsp;</label>
-									<label><input type="checkbox" name="交付部" />CsDept&nbsp;&nbsp;</label>
+									<label><input type="checkbox" name="CsDept" />CsDept&nbsp;&nbsp;</label>
 									<label><input type="checkbox"
 										name="Planned Onboard date" />Planned Onboard
 										date&nbsp;&nbsp;</label>
