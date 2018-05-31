@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pmo.dashboard.dao.CapabilityLabelParamMapper" >
+  <resultMap id="BaseResultMap" type="com.pmo.dashboard.entity.CapabilityLabelParam" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="OPERATE_ID" property="operateId" jdbcType="VARCHAR" />
+    <result column="MAJORCATE_ID" property="majorcateId" jdbcType="VARCHAR" />
+    <result column="SUBCATE_ID" property="subcateId" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CREATE_DATE, UPDATE_DATE, OPERATE_ID, MAJORCATE_ID, SUBCATE_ID, NAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_capabilitylabel_param
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_capabilitylabel_param
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pmo.dashboard.entity.CapabilityLabelParam" >
+    insert into t_capabilitylabel_param (ID, CREATE_DATE, UPDATE_DATE, 
+      OPERATE_ID, MAJORCATE_ID, SUBCATE_ID, 
+      NAME)
+    values (#{id,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{operateId,jdbcType=VARCHAR}, #{majorcateId,jdbcType=VARCHAR}, #{subcateId,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pmo.dashboard.entity.CapabilityLabelParam" >
+    insert into t_capabilitylabel_param
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE,
+      </if>
+      <if test="operateId != null" >
+        OPERATE_ID,
+      </if>
+      <if test="majorcateId != null" >
+        MAJORCATE_ID,
+      </if>
+      <if test="subcateId != null" >
+        SUBCATE_ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateId != null" >
+        #{operateId,jdbcType=VARCHAR},
+      </if>
+      <if test="majorcateId != null" >
+        #{majorcateId,jdbcType=VARCHAR},
+      </if>
+      <if test="subcateId != null" >
+        #{subcateId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pmo.dashboard.entity.CapabilityLabelParam" >
+    update t_capabilitylabel_param
+    <set >
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateId != null" >
+        OPERATE_ID = #{operateId,jdbcType=VARCHAR},
+      </if>
+      <if test="majorcateId != null" >
+        MAJORCATE_ID = #{majorcateId,jdbcType=VARCHAR},
+      </if>
+      <if test="subcateId != null" >
+        SUBCATE_ID = #{subcateId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pmo.dashboard.entity.CapabilityLabelParam" >
+    update t_capabilitylabel_param
+    set CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      OPERATE_ID = #{operateId,jdbcType=VARCHAR},
+      MAJORCATE_ID = #{majorcateId,jdbcType=VARCHAR},
+      SUBCATE_ID = #{subcateId,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="query" resultMap="BaseResultMap" parameterType="com.pmo.dashboard.entity.CapabilityLabelParam" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_capabilitylabel_param
+    where 1=1 
+    <if test="majorcateId != null and majorcateId != ''">
+        AND MAJORCATE_ID = #{majorcateId ,jdbcType=VARCHAR}
+    </if>
+    <if test="name != null and name != ''">
+		AND NAME like concat(concat('%',#{name}),'%')
+	</if>
+	 ORDER BY MAJORCATE_ID,SUBCATE_ID
+  </select>
+  <select id="majorcateIds"  parameterType="java.lang.String"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_capabilitylabel_param
+    WHERE SUBCATE_ID IS NULL or SUBCATE_ID='' 
+    ORDER by MAJORCATE_ID
+  </select>
+  <select id="maxSubCate"  parameterType="string"  resultType="java.lang.String">
+  	SELECT MAX(SUBCATE_ID) FROM t_capabilitylabel_param WHERE MAJORCATE_ID= #{value}
+  </select>
+</mapper>
