@@ -64,7 +64,7 @@ function loadCapabilityList(){
         }, 
         {
             field: 'createDate',
-            title: 'create Date',
+            title: 'Create Date',
             sortable: true
             ,formatter:function(value,row,index){
             	if(value){
@@ -76,7 +76,7 @@ function loadCapabilityList(){
         },
         {
             field: 'updateDate',
-            title: 'update Date',
+            title: 'Update Date',
             sortable: true
             ,formatter:function(value,row,index){
             	if(value){
@@ -93,17 +93,17 @@ function loadCapabilityList(){
 //        }, 
         {
             field: 'majorcateId',
-            title: 'majorcateId',
+            title: 'Major Cate',
             sortable: true
         },
         {
             field: 'subcateId',
-            title: 'subcateId',
+            title: 'Subcate',
             sortable: true
         },
         {
             field: 'name',
-            title: 'name',
+            title: 'Name',
             sortable: true
         }
         ,{

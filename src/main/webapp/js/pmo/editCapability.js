@@ -89,7 +89,8 @@ function updateCapability(){
 					setTimeout(function () {
 						$('#successAlert').hide();
 					}, 2000);
-					$("#addCapabilityForm")[0].reset();
+//					$("#addCapabilityForm")[0].reset();
+//					location=path+"/service/capability/listPage";
 				}
 			}
 		})
