@@ -81,20 +81,81 @@ var path='<%=path%>';
 <!-- 													id="eHr" /> -->
 <!-- 											</div> -->
 <!-- 										</div> -->
-										
 										<div class="group">
-											<label class="col-lg-2 control-label">Major Cate</label>
-											<div class="col-lg-4">
-												<select class="form-control" id="majorcateId" name="majorcateId" data-bv-notempty
-													data-bv-notempty-message="please select  resourceStatus" id="userType" data-bv-group=".group">
-													<option value="">--Option--</option>
-												</select>
+											<label class="col-sm-2 control-label">E-HR</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="eHr"
+													id="eHr" />
 											</div>
 										</div>
 										<div class="group">
-											<label class="col-sm-2 control-label">Param Name</label>
+											<label class="col-sm-2 control-label">Staff ID</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="paramName"	id="paramName" />
+												<input type="text" class="form-control" name="staffId"
+													id="staffId" />
+											</div>
+										</div>
+										</br></br></br>
+										<div class="group">
+											<label class="col-sm-2 control-label">Staff Name</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="staffName"
+													id="staffName" />
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">LOB</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="lob"
+													id="lob" />
+											</div>
+										</div>
+										</br></br></br>
+										<div class="group">
+										<label class="col-lg-2 control-label">Role</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="role" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="role" data-bv-group=".group">
+												<option value="">-- Option--</option>
+											</select>
+										</div>
+										</div>
+										<div class="group">
+										<label class="col-lg-2 control-label">DU</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="csSubDept" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="csSubDept" data-bv-group=".group">
+												<option value="">-- Option--</option>
+											</select>
+										</div>
+										</div>
+										</br></br></br>
+										<div class="group">
+										<label class="col-lg-2 control-label">Skill</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="paramName" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="paramName" data-bv-group=".group">
+												<option value="">-- Option--</option>
+											</select>
+										</div>
+										</div>
+										<div class="group">
+										<label class="col-lg-2 control-label">Main Skill</label>
+										<div class="col-lg-4">
+											<input type="checkbox" CHECKED  value="1" name="mainAbility" id="mainAbility" onclick="return  false;" disabled>
+										</div>
+										</div>
+										</br></br></br>
+										<div class="group">
+											<label class="col-sm-2 control-label">official Certification</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="officialAccreditation"	id="officialAccreditation" />
+											</div>
+										</div>
+										<div class="group">
+											<label class="col-sm-2 control-label">work Experience(Years)</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="workExperience"	id="workExperience" />
 											</div>
 										</div>
 										</br></br></br>
@@ -108,7 +169,7 @@ var path='<%=path%>';
 									</div>
 <!-- 								</div> -->
 								<!-- 数据列表  -->
-								<table id="capabilityList"></table>
+								<table id="skillList"></table>
 							</div>
 							
 							<form action="" id="editForm" method="post" target="_self">
@@ -194,7 +255,7 @@ var path='<%=path%>';
 	<!-- application script for Charisma demo -->
 	<script src="<%=path %>/js/charisma.js"></script>
 
-	<script type="text/javascript" src="<%=path %>/js/pmo/capabilityList.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/employeeSkillList.js"></script>
 
 </body>
 </html>

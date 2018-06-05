@@ -1,5 +1,7 @@
 package com.pmo.dashboard.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -40,6 +42,16 @@ public class EmployeeSkillServiceImpl implements EmployeeSkillService {
             return true;
         }
 		return false;
+	}
+
+	@Override
+	public List<EmployeeSkill> query(EmployeeSkill condition) {
+		return employeeSkillMapper.query(condition);
+	}
+
+	@Override
+	public List<String> skills() {
+		return employeeSkillMapper.skills();
 	}
 
 }

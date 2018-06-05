@@ -3,6 +3,7 @@ package com.pmo.dashboard.service.impl;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.pmo.dashboard.dao.CapabilityLabelParamMapper;
 import com.pmo.dashboard.entity.CapabilityLabelParam;
+import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.CapabilityLabelParamService;
 
 @Service
@@ -28,6 +30,7 @@ public class CapabilityLabelParamServiceImpl implements CapabilityLabelParamServ
 
 	@Override
 	public boolean insert(CapabilityLabelParam record) {
+		record.setId(Utils.getUUID());
 		record.setCreateDate(new Date());
 		if (capabilityLabelParamMapper.insertSelective(record) > 0) {
 			return true;

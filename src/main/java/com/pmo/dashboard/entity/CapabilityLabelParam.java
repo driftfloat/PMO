@@ -15,7 +15,7 @@ public class CapabilityLabelParam {
 
     private String subcateId;
 
-    private String name;
+    private String paramName;
 
     public String getId() {
         return id;
@@ -65,13 +65,11 @@ public class CapabilityLabelParam {
         this.subcateId = subcateId;
     }
 
-    public String getName() {
-        return name;
+    public String getParamName() {
+        return paramName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setParamName(String paramName) {
+        this.paramName = paramName;
     }
-
-    
 }

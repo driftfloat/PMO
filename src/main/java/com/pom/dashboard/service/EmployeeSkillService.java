@@ -1,5 +1,7 @@
 package com.pom.dashboard.service;
 
+import java.util.List;
+
 import com.pmo.dashboard.entity.EmployeeSkill;
 
 public interface EmployeeSkillService {
@@ -14,4 +16,9 @@ public interface EmployeeSkillService {
     boolean update(EmployeeSkill record);  // updateByPrimaryKeySelective
 
 //    int updateByPrimaryKey(EmployeeSkill record);
+    
+    List<EmployeeSkill> query(EmployeeSkill condition);
+    
+    List<String> skills();
+    
 }

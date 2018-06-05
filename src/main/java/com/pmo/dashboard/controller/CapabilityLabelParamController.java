@@ -71,14 +71,14 @@ public class CapabilityLabelParamController {
 	@RequestMapping("/addPage")
 	public String addPage()
     {
-        return "capability/addCapability";
+        return "capability/capabilityAdd";
     }
 	
 	@RequestMapping("/editPage")
 	public String editPage(String id,Model model)
     {
 		model.addAttribute("id", id);
-        return "capability/editCapability";
+        return "capability/capabilityEdit";
     }
 	@RequestMapping("/queryById")
 	@ResponseBody
