@@ -11,11 +11,11 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            name: {
+        	paramName: {
             	group: '.group',
                 validators: {
                     notEmpty: {
-                        message: 'Please enter Name'
+                        message: 'Please enter paramName'
                     }
                 }
             },
@@ -93,7 +93,7 @@ function majorcateIds(result){
 			$("#majorcateId").empty();
 			$("#majorcateId").append("<option value=''>--Option--</option>");
 			for(var i = 0;i<list.length;i++){
-				$("#majorcateId").append("<option value='"+list[i].majorcateId+"'>"+list[i].name+"</option>");
+				$("#majorcateId").append("<option value='"+list[i].majorcateId+"'>"+list[i].paramName+"</option>");
 			}
 //			$('#csSubDept').val(result.pageInfo.du);
 		}
@@ -106,11 +106,11 @@ function addCapability(){
 //	if(bootstrapValidator.isValid()){
 		var majorcateId = $("#majorcateId").val();
 		var subcateId = $("#subcateId").val();
-		var name = $("#name").val();
+		var paramName = $("#paramName").val();
 		$.ajax({
 			url:path+'/service/capability/add',
 			dataType:"json",
-			data:{"majorcateId":majorcateId,"name":name,"subcateId":subcateId},
+			data:{"majorcateId":majorcateId,"paramName":paramName,"subcateId":subcateId},
 			async:true,
 			cache:false,
 			type:"post",

@@ -1,29 +1,91 @@
 $(function () {
-	majorcateIds();
-    loadCapabilityList();
+    loadSkillList();
+    loadCSSubDept();
+    loadRole();
+    loadSkill();
 });
 
-function majorcateIds(result){
+function loadCSSubDept(result){
 	$.ajax({
-		url:path+'/service/capability/majorcateIds',
+		url:path+'/service/csDept/queryAllCSSubDeptName',
 		dataType:"json",
 		async:true,
 		cache:false,
 		type:"post",
 		success:function(list){
-			$("#majorcateId").empty();
-			$("#majorcateId").append("<option value=''>--Option--</option>");
+			$("#csSubDept").empty();
+			$("#csSubDept").append("<option value=''>--Option--</option>");
 			for(var i = 0;i<list.length;i++){
-				$("#majorcateId").append("<option value='"+list[i].majorcateId+"'>"+list[i].name+"</option>");
+				$("#csSubDept").append("<option>"+list[i].csSubDeptName+"</option>");
 			}
+//			$('#csSubDept').val(result.pageInfo.du);
 		}
 	})
 }
 
-function loadCapabilityList(){
-    var queryUrl = path+'/service/capability/query';
+function loadSkill(result){
+	$.ajax({
+		url:path+'/service/skill/skills',
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(list){
+			$("#paramName").empty();
+			$("#paramName").append("<option value=''>--Option--</option>");
+			for(var i = 0;i<list.length;i++){
+				$("#paramName").append("<option>"+list[i]+"</option>");
+			}
+//			$('#csSubDept').val(result.pageInfo.du);
+		}
+	})
+}
+
+function loadRole(result){
+	var url = path+'/json/role.json'
+	$.getJSON(url,  function(data) {
+		   $("#role").empty();
+		   $("#role").append("<option value=''>--Option--</option>");
+	       $.each(data, function(i, item) {
+	    	   $("#role").append("<option>"+item.name+"</option>");
+	       })
+//		   $('#csBu').val(result.pageInfo.bu);
+	});
+}
+
+function loadCSBu(result){
+	var url = path+'/json/csBuName.json'
+	$.getJSON(url,  function(data) {
+		   $("#csBu").empty();
+		   $("#csBu").append("<option value=''>--Option--</option>");
+	       $.each(data, function(i, item) {
+	    	   $("#csBu").append("<option>"+item.name+"</option>");
+	       })
+//		   $('#csBu').val(result.pageInfo.bu);
+	});
+}
+
+//function majorcateIds(result){
+//	$.ajax({
+//		url:path+'/service/skill/majorcateIds',
+//		dataType:"json",
+//		async:true,
+//		cache:false,
+//		type:"post",
+//		success:function(list){
+//			$("#majorcateId").empty();
+//			$("#majorcateId").append("<option value=''>--Option--</option>");
+//			for(var i = 0;i<list.length;i++){
+//				$("#majorcateId").append("<option value='"+list[i].majorcateId+"'>"+list[i].name+"</option>");
+//			}
+//		}
+//	})
+//}
+
+function loadSkillList(){
+    var queryUrl = path+'/service/skill/query';
 	//var queryUrl = path+'/json/test.json';
-    var table = $('#capabilityList').bootstrapTable({
+    var table = $('#skillList').bootstrapTable({
         url: queryUrl,                      //请求后台的URL（*）
         method: 'GET',                      //请求方式（*）
         toolbar: '#toolbar',              //工具按钮用哪个容器
@@ -63,56 +125,58 @@ function loadCapabilityList(){
             visible: true                 //是否显示复选框  
         }, 
         {
-            field: 'createDate',
-            title: 'Create Date',
-            sortable: true
-            ,formatter:function(value,row,index){
-            	if(value){
-            		var d = new Date();
-                	d.setTime(value);
-                    return d.toLocaleDateString();
-            	}
-            }
-        },
-        {
-            field: 'updateDate',
-            title: 'Update Date',
-            sortable: true
-            ,formatter:function(value,row,index){
-            	if(value){
-            		var d = new Date();
-                	d.setTime(value);
-                    return d.toLocaleDateString();
-            	}
-            }
-        },
-//        {
-//            field: 'operateId',
-//            title: 'operateId',
-//            sortable: true
-//        }, 
-        {
-            field: 'majorcateId',
-            title: 'Major Cate',
+            field: 'eHr',
+            title: 'E-HR',
             sortable: true
         },
         {
-            field: 'subcateId',
-            title: 'Subcate',
+            field: 'staffId',
+            title: 'Staff ID',
             sortable: true
         },
         {
-            field: 'name',
-            title: 'Name',
+            field: 'lob',
+            title: 'LOB',
+            sortable: true
+        }, 
+        {
+            field: 'staffName',
+            title: 'Staff Name',
+            sortable: true
+        },
+        {
+            field: 'csSubDept',
+            title: 'DU',
+            sortable: true
+        },
+        {
+            field: 'role',
+            title: 'Role',
+            sortable: true
+        },
+        {
+            field: 'paramName',
+            title: 'Major Skill',
+            sortable: true
+        }
+        ,{
+            field: 'officialAccreditation',
+            title: 'official Certification',
+            sortable: true
+        }
+        ,{
+            field: 'workExperience',
+            title: 'work Experience(Years)',
             sortable: true
         }
         ,{
 //            field: 'Operate',
-            title: 'Operate',
-            sortable: true
-            
+            title: 'Operate'
+//            ,sortable: true
             ,formatter:function(value,row,index){
-            	return "<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editCapability('"+row.id+"')>Edit</a>";
+            	return "<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=detail('"+row.id+"')>Detail</a>"
+            	+"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editSkill('"+row.id+"')>Edit</a>"
+            	;
             }
         }
         /*{
@@ -125,7 +189,7 @@ function loadCapabilityList(){
         
         ]
         ,onLoadSuccess: function () {
-        	var data = $('#capabilityList').bootstrapTable('getData');
+        	var data = $('#skillList').bootstrapTable('getData');
 //        	loadOfflineSummary(data);
         },
         onLoadError: function () {
@@ -141,7 +205,7 @@ function loadCapabilityList(){
 function search(){
 //	//获取查询条件
 	var majorcateId = $("#majorcateId").val();
-	var name = $("#name").val();
+	var paramName = $("#paramName").val();
 //	//中软项目名称
 //	var projectName = $("#projectName").val();
 //	//中软项目编号
@@ -151,21 +215,29 @@ function search(){
 	var queryParams = { 
 		query: {  
 			majorcateId:majorcateId,
-			name:name
+			paramName:paramName
 //		   ,projectName:projectName,
 //		   proNumber:proNumber,
 //		   csdeptid:csdeptid
         }
     }  
 	//刷新表格  
-    $('#capabilityList').bootstrapTable('refresh',queryParams);  
+    $('#skillList').bootstrapTable('refresh',queryParams);  
 }
 
-function editCapability(id){
+function editSkill(id){
 //	$("#editForm").attr("action",path+"/service/capability/editPage.html");
 //	$("#id").val(id);
 //	$("#editForm").submit();
-	var url= path+"/service/capability/editPage.html"+"?id="+id
+	var url= path+"/service/skill/editPage.html"+"?id="+id
+	location=url;
+}
+
+function detail(id){
+//	$("#editForm").attr("action",path+"/service/capability/editPage.html");
+//	$("#id").val(id);
+//	$("#editForm").submit();
+	var url= path+"/service/skill/detail.html"+"?id="+id
 	location=url;
 }
 

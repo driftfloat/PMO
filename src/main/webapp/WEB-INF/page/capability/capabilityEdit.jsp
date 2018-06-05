@@ -83,12 +83,13 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> Add Capability
+									<i class="glyphicon glyphicon-user"></i> Edit Capability
 								</h2>
 							</div>
 							<div id="add" class="box-content" style="overflow: auto;height: 400px;">
 							<form id="addCapabilityForm" method="post">
-							    
+							    <input type="hidden" name="id" id="id" value="${id}"/>
+							    <input type="hidden" name="_majorcateId" id="_majorcateId" value="${majorcateId}"/>
 							    <div id="successAlert" class="alert alert-success" style="display: none;"></div>
 								<div class="form-group">
 <!-- 										<div class="group"> -->
@@ -103,7 +104,7 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-lg-2 control-label">Major Cate</label>
 											<div class="col-lg-4">
-												<select class="form-control" id="majorcateId" name="majorcateId" data-bv-notempty
+												<select class="form-control" id="majorcateId" name="majorcateId" data-bv-notempty 
 													 id="userType" data-bv-group=".group">
 													<option value="">--Option--</option>
 												</select>
@@ -120,10 +121,10 @@ var path='<%=path%>';
 								</div>
 								<div class="form-group">
 										<div class="group">
-											<label class="col-sm-2 control-label">Name</label>
+											<label class="col-sm-2 control-label">Param Name</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="name"
-													id="name" data-bv-group=".group"/>
+												<input type="text" class="form-control" name="paramName"
+													id="paramName" data-bv-group=".group"/>
 											</div>
 										</div>
 <!-- 										<div class="group"> -->
@@ -153,7 +154,7 @@ var path='<%=path%>';
 								
 								<div class="form-group">
 									    <div style="text-align:center;width:50%;float:left"">
-									    <input type="submit" value="Add"
+									    <input type="submit" value="Update"
 										class="button btn btn-primary" data-dismiss="modal"
 										
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
@@ -231,7 +232,7 @@ var path='<%=path%>';
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-select.min.js"></script>
 
 <%-- 	<script type="text/javascript" src="<%=path %>/js/pmo/loadHSBCDept.js"></script> --%>
-	<script type="text/javascript" src="<%=path %>/js/pmo/addCapability.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/capabilityEdit.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>

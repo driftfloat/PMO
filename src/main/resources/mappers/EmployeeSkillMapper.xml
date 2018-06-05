@@ -1,171 +1,196 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pmo.dashboard.dao.EmployeeSkillMapper">
-  <resultMap id="BaseResultMap" type="com.pmo.dashboard.entity.EmployeeSkill">
-    <id column="ID" jdbcType="VARCHAR" property="id" />
-    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
-    <result column="EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
-    <result column="CAPPARAM_ID" jdbcType="VARCHAR" property="capparamId" />
-    <result column="NAME" jdbcType="VARCHAR" property="name" />
-    <result column="ABILITY_LEVEL" jdbcType="VARCHAR" property="abilityLevel" />
-    <result column="MAIN_ABILITY" jdbcType="VARCHAR" property="mainAbility" />
-    <result column="OFFICIAL_ACCREDITATION" jdbcType="VARCHAR" property="officialAccreditation" />
-    <result column="AUTHENTICATION_NAME" jdbcType="VARCHAR" property="authenticationName" />
-    <result column="WORK_EXPERIENCE" jdbcType="VARCHAR" property="workExperience" />
-    <result column="OPERATE_ID" jdbcType="VARCHAR" property="operateId" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pmo.dashboard.dao.EmployeeSkillMapper" >
+  <resultMap id="BaseResultMap" type="com.pmo.dashboard.entity.EmployeeSkill" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR" />
+    <result column="CAPPARAM_ID" property="capparamId" jdbcType="VARCHAR" />
+    <result column="PARAM_NAME" property="paramName" jdbcType="VARCHAR" />
+    <result column="ABILITY_LEVEL" property="abilityLevel" jdbcType="VARCHAR" />
+    <result column="MAIN_ABILITY" property="mainAbility" jdbcType="VARCHAR" />
+    <result column="OFFICIAL_ACCREDITATION" property="officialAccreditation" jdbcType="VARCHAR" />
+    <result column="AUTHENTICATION_NAME" property="authenticationName" jdbcType="VARCHAR" />
+    <result column="WORK_EXPERIENCE" property="workExperience" jdbcType="VARCHAR" />
+    <result column="OPERATE_ID" property="operateId" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Base_Column_List">
-    ID, CREATE_DATE, UPDATE_DATE, EMPLOYEE_ID, CAPPARAM_ID, NAME, ABILITY_LEVEL, MAIN_ABILITY, 
-    OFFICIAL_ACCREDITATION, AUTHENTICATION_NAME, WORK_EXPERIENCE, OPERATE_ID
+  <resultMap id="JoinResultMap" type="com.pmo.dashboard.entity.EmployeeSkill" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR" />
+    <result column="CAPPARAM_ID" property="capparamId" jdbcType="VARCHAR" />
+    <result column="PARAM_NAME" property="paramName" jdbcType="VARCHAR" />
+    <result column="ABILITY_LEVEL" property="abilityLevel" jdbcType="VARCHAR" />
+    <result column="MAIN_ABILITY" property="mainAbility" jdbcType="VARCHAR" />
+    <result column="OFFICIAL_ACCREDITATION" property="officialAccreditation" jdbcType="VARCHAR" />
+    <result column="AUTHENTICATION_NAME" property="authenticationName" jdbcType="VARCHAR" />
+    <result column="WORK_EXPERIENCE" property="workExperience" jdbcType="VARCHAR" />
+    <result column="OPERATE_ID" property="operateId" jdbcType="VARCHAR" />
+    
+    <result property="staffId" column="HSBC_STAFF_ID" javaType="String" />
+    <result property="eHr" column="E_HR" javaType="String" />
+	<result property="lob" column="LOB" javaType="String" />
+	<result property="staffName" column="STAFF_NAME" javaType="String" />
+	<result property="csSubDept" column="CS_SUBDEPT_ID" javaType="String" />
+	<result property="role" column="ROLE" javaType="String" />
+	
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CREATE_DATE, UPDATE_DATE, EMPLOYEE_ID, CAPPARAM_ID, PARAM_NAME, ABILITY_LEVEL, 
+    MAIN_ABILITY, OFFICIAL_ACCREDITATION, AUTHENTICATION_NAME, WORK_EXPERIENCE, OPERATE_ID
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <sql id="Join_Column_List" >
+    e.HSBC_STAFF_ID,e.E_HR,e.EMPLOYEE_ID,e.lob,e.STAFF_NAME,e.CS_SUBDEPT_ID,e.ROLE, s.PARAM_NAME,s.OFFICIAL_ACCREDITATION,s.WORK_EXPERIENCE 
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from t_employee_skill
     where ID = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_employee_skill
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.pmo.dashboard.entity.EmployeeSkill">
+  <insert id="insert" parameterType="com.pmo.dashboard.entity.EmployeeSkill" >
     insert into t_employee_skill (ID, CREATE_DATE, UPDATE_DATE, 
-      EMPLOYEE_ID, CAPPARAM_ID, NAME, 
+      EMPLOYEE_ID, CAPPARAM_ID, PARAM_NAME, 
       ABILITY_LEVEL, MAIN_ABILITY, OFFICIAL_ACCREDITATION, 
       AUTHENTICATION_NAME, WORK_EXPERIENCE, OPERATE_ID
       )
     values (#{id,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{employeeId,jdbcType=VARCHAR}, #{capparamId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{employeeId,jdbcType=VARCHAR}, #{capparamId,jdbcType=VARCHAR}, #{paramName,jdbcType=VARCHAR}, 
       #{abilityLevel,jdbcType=VARCHAR}, #{mainAbility,jdbcType=VARCHAR}, #{officialAccreditation,jdbcType=VARCHAR}, 
       #{authenticationName,jdbcType=VARCHAR}, #{workExperience,jdbcType=VARCHAR}, #{operateId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.pmo.dashboard.entity.EmployeeSkill">
+  <insert id="insertSelective" parameterType="com.pmo.dashboard.entity.EmployeeSkill" >
     insert into t_employee_skill
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         ID,
       </if>
-      <if test="createDate != null">
+      <if test="createDate != null" >
         CREATE_DATE,
       </if>
-      <if test="updateDate != null">
+      <if test="updateDate != null" >
         UPDATE_DATE,
       </if>
-      <if test="employeeId != null">
+      <if test="employeeId != null" >
         EMPLOYEE_ID,
       </if>
-      <if test="capparamId != null">
+      <if test="capparamId != null" >
         CAPPARAM_ID,
       </if>
-      <if test="name != null">
-        NAME,
+      <if test="paramName != null" >
+        PARAM_NAME,
       </if>
-      <if test="abilityLevel != null">
+      <if test="abilityLevel != null" >
         ABILITY_LEVEL,
       </if>
-      <if test="mainAbility != null">
+      <if test="mainAbility != null" >
         MAIN_ABILITY,
       </if>
-      <if test="officialAccreditation != null">
+      <if test="officialAccreditation != null" >
         OFFICIAL_ACCREDITATION,
       </if>
-      <if test="authenticationName != null">
+      <if test="authenticationName != null" >
         AUTHENTICATION_NAME,
       </if>
-      <if test="workExperience != null">
+      <if test="workExperience != null" >
         WORK_EXPERIENCE,
       </if>
-      <if test="operateId != null">
+      <if test="operateId != null" >
         OPERATE_ID,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="createDate != null">
+      <if test="createDate != null" >
         #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateDate != null">
+      <if test="updateDate != null" >
         #{updateDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="employeeId != null">
+      <if test="employeeId != null" >
         #{employeeId,jdbcType=VARCHAR},
       </if>
-      <if test="capparamId != null">
+      <if test="capparamId != null" >
         #{capparamId,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="paramName != null" >
+        #{paramName,jdbcType=VARCHAR},
       </if>
-      <if test="abilityLevel != null">
+      <if test="abilityLevel != null" >
         #{abilityLevel,jdbcType=VARCHAR},
       </if>
-      <if test="mainAbility != null">
+      <if test="mainAbility != null" >
         #{mainAbility,jdbcType=VARCHAR},
       </if>
-      <if test="officialAccreditation != null">
+      <if test="officialAccreditation != null" >
         #{officialAccreditation,jdbcType=VARCHAR},
       </if>
-      <if test="authenticationName != null">
+      <if test="authenticationName != null" >
         #{authenticationName,jdbcType=VARCHAR},
       </if>
-      <if test="workExperience != null">
+      <if test="workExperience != null" >
         #{workExperience,jdbcType=VARCHAR},
       </if>
-      <if test="operateId != null">
+      <if test="operateId != null" >
         #{operateId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pmo.dashboard.entity.EmployeeSkill">
+  <update id="updateByPrimaryKeySelective" parameterType="com.pmo.dashboard.entity.EmployeeSkill" >
     update t_employee_skill
-    <set>
-      <if test="createDate != null">
+    <set >
+      <if test="createDate != null" >
         CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateDate != null">
+      <if test="updateDate != null" >
         UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="employeeId != null">
+      <if test="employeeId != null" >
         EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR},
       </if>
-      <if test="capparamId != null">
+      <if test="capparamId != null" >
         CAPPARAM_ID = #{capparamId,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        NAME = #{name,jdbcType=VARCHAR},
+      <if test="paramName != null" >
+        PARAM_NAME = #{paramName,jdbcType=VARCHAR},
       </if>
-      <if test="abilityLevel != null">
+      <if test="abilityLevel != null" >
         ABILITY_LEVEL = #{abilityLevel,jdbcType=VARCHAR},
       </if>
-      <if test="mainAbility != null">
+      <if test="mainAbility != null" >
         MAIN_ABILITY = #{mainAbility,jdbcType=VARCHAR},
       </if>
-      <if test="officialAccreditation != null">
+      <if test="officialAccreditation != null" >
         OFFICIAL_ACCREDITATION = #{officialAccreditation,jdbcType=VARCHAR},
       </if>
-      <if test="authenticationName != null">
+      <if test="authenticationName != null" >
         AUTHENTICATION_NAME = #{authenticationName,jdbcType=VARCHAR},
       </if>
-      <if test="workExperience != null">
+      <if test="workExperience != null" >
         WORK_EXPERIENCE = #{workExperience,jdbcType=VARCHAR},
       </if>
-      <if test="operateId != null">
+      <if test="operateId != null" >
         OPERATE_ID = #{operateId,jdbcType=VARCHAR},
       </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pmo.dashboard.entity.EmployeeSkill">
+  <update id="updateByPrimaryKey" parameterType="com.pmo.dashboard.entity.EmployeeSkill" >
     update t_employee_skill
     set CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
       UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
       EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR},
       CAPPARAM_ID = #{capparamId,jdbcType=VARCHAR},
-      NAME = #{name,jdbcType=VARCHAR},
+      PARAM_NAME = #{paramName,jdbcType=VARCHAR},
       ABILITY_LEVEL = #{abilityLevel,jdbcType=VARCHAR},
       MAIN_ABILITY = #{mainAbility,jdbcType=VARCHAR},
       OFFICIAL_ACCREDITATION = #{officialAccreditation,jdbcType=VARCHAR},
@@ -174,4 +199,48 @@
       OPERATE_ID = #{operateId,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="query" parameterType="com.pmo.dashboard.entity.EmployeeSkill" resultMap="JoinResultMap">
+    select 
+    <include refid="Join_Column_List" />
+    FROM t_employee e  LEFT JOIN (
+    select * from  t_employee_skill 
+    where 1 =1 and MAIN_ABILITY='1' 
+    <if test="paramName != null and paramName != ''">
+		AND PARAM_NAME = #{paramName}
+	</if>
+<!-- 	<if test="mainAbility != null and mainAbility != ''"> -->
+<!-- 		AND MAIN_ABILITY = '1' -->
+<!-- 	</if> -->
+	<if test="officialAccreditation != null and officialAccreditation != ''">
+		AND OFFICIAL_ACCREDITATION = '1'
+	</if>
+	<if test="workExperience != null and workExperience != ''">
+		AND WORK_EXPERIENCE >= #{workExperience}
+	</if>
+	
+    ) s ON e.HSBC_STAFF_ID = s.EMPLOYEE_ID
+    where 1=1 
+    <if test="eHr != null and eHr != ''">
+		AND e.E_HR = #{eHr}
+	</if>
+	<if test="staffId != null and staffId != ''">
+		AND e.HSBC_STAFF_ID = #{staffId}
+	</if>
+    <if test="staffName != null and staffName != ''">
+		AND e.STAFF_NAME like concat(concat('%',#{staffName}),'%')
+	</if>
+	<if test="lob != null and lob != ''">
+		AND e.LOB = #{lob}
+	</if>
+	<if test="role != null and role != ''">
+		AND e.ROLE = #{role}
+	</if>
+	<if test="csSubDept != null and csSubDept != ''">
+		AND e.CS_SUBDEPT_ID = #{csSubDept}
+	</if>
+    
+  </select>
+  <select id="skills"  parameterType="string" resultType="string">
+  	SELECT PARAM_NAME paramName FROM  `t_capabilitylabel_param` WHERE LENGTH(SUBCATE_ID)>LENGTH(MAJORCATE_ID) ORDER BY PARAM_NAME
+  </select>
 </mapper>

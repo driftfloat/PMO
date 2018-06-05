@@ -1,5 +1,7 @@
 package com.pmo.dashboard.dao;
 
+import java.util.List;
+
 import com.pmo.dashboard.entity.EmployeeSkill;
 
 public interface EmployeeSkillMapper {
@@ -14,4 +16,8 @@ public interface EmployeeSkillMapper {
     int updateByPrimaryKeySelective(EmployeeSkill record);
 
     int updateByPrimaryKey(EmployeeSkill record);
+    
+    List<EmployeeSkill> query(EmployeeSkill condition);
+    
+    List<String> skills();
 }
