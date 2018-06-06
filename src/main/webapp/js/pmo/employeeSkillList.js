@@ -3,6 +3,14 @@ $(function () {
     loadCSSubDept();
     loadRole();
     loadSkill();
+    
+    $("#officialAccreditation").change(function() { 
+    	if($(this).is(':checked')){
+    		$("#officialAccreditation").val('1');
+    	}else{
+    		$("#officialAccreditation").val('');
+    	}
+    });
 });
 
 function loadCSSubDept(result){
@@ -163,10 +171,17 @@ function loadSkillList(){
             field: 'officialAccreditation',
             title: 'official Certification',
             sortable: true
+            ,formatter:function(value,row,index){
+            	if('1'==value){
+            		return 'Yes';
+            	}
+            	return 'No';
+            }
         }
         ,{
             field: 'workExperience',
-            title: 'work Experience(Years)',
+//            title: 'work Experience(Years)',
+            title: 'work',
             sortable: true
         }
         ,{
@@ -204,21 +219,27 @@ function loadSkillList(){
 
 function search(){
 //	//获取查询条件
-	var majorcateId = $("#majorcateId").val();
+	var eHr = $("#eHr").val();
+	var staffId = $("#staffId").val();
+	var staffName = $("#staffName").val();
+	var lob = $("#lob").val();
+	var role = $("#role").val();
+	var csSubDept = $("#csSubDept").val();
 	var paramName = $("#paramName").val();
-//	//中软项目名称
-//	var projectName = $("#projectName").val();
-//	//中软项目编号
-//	var proNumber = $("#projectNumber").val();
-//	//中软部门
-//	var csdeptid = $("#csSubDept").val();
+	var officialAccreditation = $("#officialAccreditation").val();
+	var workExperience = $("#workExperience").val();
+	
 	var queryParams = { 
 		query: {  
-			majorcateId:majorcateId,
-			paramName:paramName
-//		   ,projectName:projectName,
-//		   proNumber:proNumber,
-//		   csdeptid:csdeptid
+			eHr:eHr
+			,staffId:staffId
+			,staffName:staffName
+			,lob:lob
+			,role:role
+			,csSubDept:csSubDept
+			,paramName:paramName
+			,officialAccreditation:officialAccreditation
+			,workExperience:workExperience
         }
     }  
 	//刷新表格  

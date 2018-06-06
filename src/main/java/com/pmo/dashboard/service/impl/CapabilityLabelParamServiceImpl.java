@@ -64,16 +64,18 @@ public class CapabilityLabelParamServiceImpl implements CapabilityLabelParamServ
 
 	@Override
 	public String maxSubCate(String majorcateId) {
+		DecimalFormat df = new DecimalFormat(STR_FORMAT);
+		Integer intHao = Integer.valueOf(majorcateId) + 1 ;
+		majorcateId = df.format(intHao);
+		
 		String rtn = capabilityLabelParamMapper.maxSubCate(majorcateId);
 		if (StringUtils.isBlank(rtn)) {
 			rtn = majorcateId + "001";
 		} else {
 			rtn = rtn.replaceFirst(majorcateId, "");
-			Integer intHao = Integer.parseInt(rtn);
+			intHao = Integer.parseInt(rtn);
 			intHao++;
-			DecimalFormat df = new DecimalFormat(STR_FORMAT);
 			return majorcateId + df.format(intHao);
-			// }
 		}
 		return rtn;
 	}

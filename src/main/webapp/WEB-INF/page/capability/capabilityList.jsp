@@ -72,7 +72,7 @@ var path='<%=path%>';
 							</div>
 							<div id="employeeInfo" class="box-content">
 								<div class="panel panel-default">
-									<div class="panel-heading">Query Conditions</div>
+<!-- 									<div class="panel-heading">Query Conditions</div> -->
 									<div class="panel-body">
 <!-- 										<div class="group"> -->
 <!-- 											<label class="col-sm-2 control-label">E-HR</label> -->

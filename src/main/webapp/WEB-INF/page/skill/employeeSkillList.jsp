@@ -72,15 +72,8 @@ var path='<%=path%>';
 							</div>
 							<div id="employeeInfo" class="box-content">
 								<div class="panel panel-default">
-									<div class="panel-heading">Query Conditions</div>
+<!-- 									<div class="panel-heading">Query Conditions</div> -->
 									<div class="panel-body">
-<!-- 										<div class="group"> -->
-<!-- 											<label class="col-sm-2 control-label">E-HR</label> -->
-<!-- 											<div class="col-sm-4"> -->
-<!-- 												<input type="text" class="form-control" name="eHr" -->
-<!-- 													id="eHr" /> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
 										<div class="group">
 											<label class="col-sm-2 control-label">E-HR</label>
 											<div class="col-sm-4">
@@ -149,7 +142,7 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-sm-2 control-label">official Certification</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="officialAccreditation"	id="officialAccreditation" />
+												<input type="checkbox" value="" name="officialAccreditation" id="officialAccreditation">
 											</div>
 										</div>
 										<div class="group">
