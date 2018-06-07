@@ -23,4 +23,6 @@ public interface EmployeeSkillService {
     
     List<EmployeeSkill> detail(String eHr);
     
+    List<EmployeeSkill> toEdit(String eHr);
+    
 }

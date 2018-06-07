@@ -15,7 +15,9 @@
     <result column="WORK_EXPERIENCE" property="workExperience" jdbcType="VARCHAR" />
     <result column="OPERATE_ID" property="operateId" jdbcType="VARCHAR" />
     <result column="MAJORCATE_ID" property="majorcateId" jdbcType="VARCHAR" />
-     <result column="FATHERNAME" property="fatherName" jdbcType="VARCHAR" />
+    <result column="FATHERNAME" property="fatherName" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+     
   </resultMap>
   <resultMap id="JoinResultMap" type="com.pmo.dashboard.entity.EmployeeSkill" >
     <id column="ID" property="id" jdbcType="VARCHAR" />
@@ -267,5 +269,15 @@
   </select>
   <select id="fatherCapability"  parameterType="string" resultType="string">
   	SELECT PARAM_NAME FROM  t_capabilitylabel_param WHERE MAJORCATE_ID=#{value}  AND( SUBCATE_ID IS NULL OR SUBCATE_ID='' )
+  </select>
+  <select id="toEdit" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	SELECT EMPLOYEE_ID,c.PARAM_NAME , f.PARAM_NAME FATHERNAME, IF(ISNULL(s.PARAM_NAME)=1,'0', '1' ) STATE
+	FROM 
+	(SELECT PARAM_NAME,MAJORCATE_ID FROM t_capabilitylabel_param WHERE LENGTH(SUBCATE_ID) >0 ) c
+	LEFT JOIN  (SELECT EMPLOYEE_ID,PARAM_NAME FROM `t_employee_skill` WHERE EMPLOYEE_ID= #{value}  ) s
+	ON s.PARAM_NAME = c.PARAM_NAME 
+	JOIN t_capabilitylabel_param f
+	WHERE f.MAJORCATE_ID=c.MAJORCATE_ID
+	  AND (f.SUBCATE_ID  IS NULL OR f.SUBCATE_ID='') 
   </select>
 </mapper>

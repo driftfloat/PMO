@@ -59,4 +59,9 @@ public class EmployeeSkillServiceImpl implements EmployeeSkillService {
 		return employeeSkillMapper.skills();
 	}
 
+	@Override
+	public List<EmployeeSkill> toEdit(String eHr) {
+		return employeeSkillMapper.toEdit(eHr);
+	}
+
 }
