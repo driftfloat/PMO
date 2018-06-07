@@ -22,4 +22,9 @@ public interface CapabilityLabelParamMapper {
     List<CapabilityLabelParam> majorcateIds();
     
     String maxSubCate(String majorcateId);
+    
+    String fatherCapability(String id);
+    
+    List<CapabilityLabelParam> queryChilds();
+    
 }

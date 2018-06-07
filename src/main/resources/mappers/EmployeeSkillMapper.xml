@@ -14,6 +14,8 @@
     <result column="AUTHENTICATION_NAME" property="authenticationName" jdbcType="VARCHAR" />
     <result column="WORK_EXPERIENCE" property="workExperience" jdbcType="VARCHAR" />
     <result column="OPERATE_ID" property="operateId" jdbcType="VARCHAR" />
+    <result column="MAJORCATE_ID" property="majorcateId" jdbcType="VARCHAR" />
+     <result column="FATHERNAME" property="fatherName" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="JoinResultMap" type="com.pmo.dashboard.entity.EmployeeSkill" >
     <id column="ID" property="id" jdbcType="VARCHAR" />
@@ -42,7 +44,7 @@
     MAIN_ABILITY, OFFICIAL_ACCREDITATION, AUTHENTICATION_NAME, WORK_EXPERIENCE, OPERATE_ID
   </sql>
   <sql id="Join_Column_List" >
-    e.HSBC_STAFF_ID,e.E_HR,e.EMPLOYEE_ID,e.lob,e.STAFF_NAME,e.CS_SUBDEPT_ID,e.ROLE, s.PARAM_NAME,s.OFFICIAL_ACCREDITATION,s.WORK_EXPERIENCE 
+    s.ID,e.HSBC_STAFF_ID,e.E_HR,e.EMPLOYEE_ID,e.lob,e.STAFF_NAME,e.CS_SUBDEPT_ID,e.ROLE, s.PARAM_NAME,s.OFFICIAL_ACCREDITATION,s.WORK_EXPERIENCE 
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -203,19 +205,19 @@
     select 
     <include refid="Join_Column_List" />
     FROM t_employee e  LEFT JOIN (
-    select * from  t_employee_skill 
-    where 1 =1 and MAIN_ABILITY='1' 
+    select * from  t_employee_skill s
+    where 1 =1 and s.MAIN_ABILITY='1' 
     <if test="paramName != null and paramName != ''">
-		AND PARAM_NAME = #{paramName}
+		AND s.PARAM_NAME = #{paramName}
 	</if>
 <!-- 	<if test="mainAbility != null and mainAbility != ''"> -->
 <!-- 		AND MAIN_ABILITY = '1' -->
 <!-- 	</if> -->
 	<if test="officialAccreditation != null and officialAccreditation != ''">
-		AND OFFICIAL_ACCREDITATION = '1'
+		AND s.OFFICIAL_ACCREDITATION = '1'
 	</if>
 	<if test="workExperience != null and workExperience != ''">
-		AND WORK_EXPERIENCE >= #{workExperience}
+		AND s.WORK_EXPERIENCE >= #{workExperience}
 	</if>
 	
     ) s ON e.HSBC_STAFF_ID = s.EMPLOYEE_ID
@@ -238,9 +240,32 @@
 	<if test="csSubDept != null and csSubDept != ''">
 		AND e.CS_SUBDEPT_ID = #{csSubDept}
 	</if>
-    
+	<if test="paramName != null and paramName != ''">
+		AND s.PARAM_NAME = #{paramName}
+	</if>
+    <if test="officialAccreditation != null and officialAccreditation != ''">
+		AND s.OFFICIAL_ACCREDITATION = '1'
+	</if>
+	<if test="workExperience != null and workExperience != ''">
+		AND s.WORK_EXPERIENCE >= #{workExperience}
+	</if>
   </select>
   <select id="skills"  parameterType="string" resultType="string">
   	SELECT PARAM_NAME paramName FROM  `t_capabilitylabel_param` WHERE LENGTH(SUBCATE_ID)>LENGTH(MAJORCATE_ID) ORDER BY PARAM_NAME
+  </select>
+  <select id="detail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    s.ID, s.CREATE_DATE, s.UPDATE_DATE, s.EMPLOYEE_ID, s.CAPPARAM_ID, s.PARAM_NAME, s.ABILITY_LEVEL, 
+    s.MAIN_ABILITY, s.OFFICIAL_ACCREDITATION, s.AUTHENTICATION_NAME, s.WORK_EXPERIENCE, s.OPERATE_ID
+    , c.MAJORCATE_ID,  f.PARAM_NAME as FATHERNAME
+    from t_employee_skill s , t_capabilitylabel_param c, t_capabilitylabel_param f
+    where EMPLOYEE_ID = #{value} 
+    and s.CAPPARAM_ID = c.id 
+    AND f.MAJORCATE_ID=c.MAJORCATE_ID
+    AND (f.SUBCATE_ID  IS NULL OR f.SUBCATE_ID='') 
+    ORDER BY c.MAJORCATE_ID, c.SUBCATE_ID
+  </select>
+  <select id="fatherCapability"  parameterType="string" resultType="string">
+  	SELECT PARAM_NAME FROM  t_capabilitylabel_param WHERE MAJORCATE_ID=#{value}  AND( SUBCATE_ID IS NULL OR SUBCATE_ID='' )
   </select>
 </mapper>

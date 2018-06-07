@@ -1,8 +1,17 @@
 $(function () {
+	$('#myModal').modal('hide')
     loadSkillList();
     loadCSSubDept();
     loadRole();
     loadSkill();
+    
+    $("#officialAccreditation").change(function() { 
+    	if($(this).is(':checked')){
+    		$("#officialAccreditation").val('1');
+    	}else{
+    		$("#officialAccreditation").val('');
+    	}
+    });
 });
 
 function loadCSSubDept(result){
@@ -161,12 +170,19 @@ function loadSkillList(){
         }
         ,{
             field: 'officialAccreditation',
-            title: 'official Certification',
+            title: 'Official Certification',
             sortable: true
+            ,formatter:function(value,row,index){
+            	if('1'==value){
+            		return 'Yes';
+            	}
+            	return 'No';
+            }
         }
         ,{
             field: 'workExperience',
-            title: 'work Experience(Years)',
+//            title: 'work Experience(Years)',
+            title: 'work',
             sortable: true
         }
         ,{
@@ -174,8 +190,8 @@ function loadSkillList(){
             title: 'Operate'
 //            ,sortable: true
             ,formatter:function(value,row,index){
-            	return "<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=detail('"+row.id+"')>Detail</a>"
-            	+"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editSkill('"+row.id+"')>Edit</a>"
+            	return "<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=detail('"+row.eHr+"')>Detail</a>"
+            	+"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editSkill('"+row.eHr+"')>Edit</a>"
             	;
             }
         }
@@ -204,21 +220,27 @@ function loadSkillList(){
 
 function search(){
 //	//获取查询条件
-	var majorcateId = $("#majorcateId").val();
+	var eHr = $("#eHr").val();
+	var staffId = $("#staffId").val();
+	var staffName = $("#staffName").val();
+	var lob = $("#lob").val();
+	var role = $("#role").val();
+	var csSubDept = $("#csSubDept").val();
 	var paramName = $("#paramName").val();
-//	//中软项目名称
-//	var projectName = $("#projectName").val();
-//	//中软项目编号
-//	var proNumber = $("#projectNumber").val();
-//	//中软部门
-//	var csdeptid = $("#csSubDept").val();
+	var officialAccreditation = $("#officialAccreditation").val();
+	var workExperience = $("#workExperience").val();
+	
 	var queryParams = { 
 		query: {  
-			majorcateId:majorcateId,
-			paramName:paramName
-//		   ,projectName:projectName,
-//		   proNumber:proNumber,
-//		   csdeptid:csdeptid
+			eHr:eHr
+			,staffId:staffId
+			,staffName:staffName
+			,lob:lob
+			,role:role
+			,csSubDept:csSubDept
+			,paramName:paramName
+			,officialAccreditation:officialAccreditation
+			,workExperience:workExperience
         }
     }  
 	//刷新表格  
@@ -234,11 +256,133 @@ function editSkill(id){
 }
 
 function detail(id){
-//	$("#editForm").attr("action",path+"/service/capability/editPage.html");
-//	$("#id").val(id);
-//	$("#editForm").submit();
-	var url= path+"/service/skill/detail.html"+"?id="+id
-	location=url;
+	var queryUrl = path+'/service/skill/detail/'+id;
+	$.ajax({
+		url:queryUrl,
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(data){
+			$("#detailBtn").click();
+//			$("#accordion tbody").remove();
+			$("#accordion > div:gt(0)").remove();
+			
+//			var _firstDiv = $("#accordion > div");
+			
+			var tbody ;
+			var last_majorcate = '' ;
+			if(data.length>0){
+//				last_majorcate = data[0].majorcateId;= 
+				var t = "View Detail Information of "+data[0].employeeId ;
+				$("#myModalLabel").text(t);
+				
+//				console.log($("#myModalLabel").val());
+//				console.log($("#myModalLabel").text($("#myModalLabel").text()+" "+data[0].employeeId);
+			}
+			for (var i = 0; i <data.length; i++) {
+//				if(i>1) return;
+				if(last_majorcate!=data[i].majorcateId){
+					var div_id='div_'+data[i].majorcateId;
+					var a_id='a_'+data[i].majorcateId;
+//					$("#accordion > div:first-child").clone().insertAfter($("#accordion > div:last-child")); 
+					$("#accordion > div:first-child").clone().appendTo($("#accordion")); 
+					$("#accordion > div:last-child").attr('id',div_id);
+					
+					$("#"+div_id +" a").attr('href','#'+a_id);
+					$("#"+div_id +" a").text(data[i].fatherName);
+					$("#"+div_id +" > div").eq(1).attr('id', a_id);
+					
+					$("#accordion > div:last-child").css("display","block");
+					tbody = $("#accordion tbody:last-child");
+					div_id = '';
+				}
+				var tr = $("<tr></tr>");
+				tr.appendTo(tbody);
+				
+				var td1 = $("<td>"	+data[i].paramName + "</td>");
+				var td2 = $("<td>"	+(data[i].abilityLevel==null?'':data[i].abilityLevel)	+ "</td>");
+				var td3 = $("<td>"	+( data[i].mainAbility==null?'': ('1'==data[i].mainAbility?'<input CHECKED type="radio"/>':'' )	)+ "</td>");
+				var td4 = $("<td>"	+( data[i].officialAccreditation==null?'':('1'==data[i].officialAccreditation?'Yes':'No' ))		+ "</td>");
+				var td5 = $("<td>"	+( data[i].authenticationName==null?'':data[i].authenticationName)	+ "</td>");
+				var td6 = $("<td>"	+( data[i].workExperience==null?'':data[i].workExperience)	+ "</td>");
+				
+				td1.appendTo(tr);
+				td2.appendTo(tr);
+				td3.appendTo(tr);
+				td4.appendTo(tr);
+				td5.appendTo(tr);
+				td6.appendTo(tr);
+				last_majorcate = data[i].majorcateId ;
+			}
+		}
+	}
+)
+	
+//function toEdit(id){
+//	var queryUrl = path+'/service/skill/toEdit/'+id;
+//	$.ajax({
+//		url:queryUrl,
+//		dataType:"json",
+//		async:true,
+//		cache:false,
+//		type:"post",
+//		success:function(data){
+//			$("#detailBtn").click();
+////			$("#accordion tbody").remove();
+//			$("#accordion > div:gt(0)").remove();
+//			
+////			var _firstDiv = $("#accordion > div");
+//			
+//			var tbody ;
+//			var last_majorcate = '' ;
+//			if(data.length>0){
+////				last_majorcate = data[0].majorcateId;= 
+//				var t = "View Detail Information of "+data[0].employeeId ;
+//				$("#myModalLabel").text(t);
+//				
+////				console.log($("#myModalLabel").val());
+////				console.log($("#myModalLabel").text($("#myModalLabel").text()+" "+data[0].employeeId);
+//			}
+//			for (var i = 0; i <data.length; i++) {
+////				if(i>1) return;
+//				if(last_majorcate!=data[i].majorcateId){
+//					var div_id='div_'+data[i].majorcateId;
+//					var a_id='a_'+data[i].majorcateId;
+////					$("#accordion > div:first-child").clone().insertAfter($("#accordion > div:last-child")); 
+//					$("#accordion > div:first-child").clone().appendTo($("#accordion")); 
+//					$("#accordion > div:last-child").attr('id',div_id);
+//					
+//					$("#"+div_id +" a").attr('href','#'+a_id);
+//					$("#"+div_id +" a").text(data[i].fatherName);
+//					$("#"+div_id +" > div").eq(1).attr('id', a_id);
+//					
+//					$("#accordion > div:last-child").css("display","block");
+//					tbody = $("#accordion tbody:last-child");
+//					div_id = '';
+//				}
+//				var tr = $("<tr></tr>");
+//				tr.appendTo(tbody);
+//				
+//				var td1 = $("<td>"	+data[i].paramName + "</td>");
+//				var td2 = $("<td>"	+(data[i].abilityLevel==null?'':data[i].abilityLevel)	+ "</td>");
+//				var td3 = $("<td>"	+( data[i].mainAbility==null?'': ('1'==data[i].mainAbility?'<input CHECKED type="radio"/>':'' )	)+ "</td>");
+//				var td4 = $("<td>"	+( data[i].officialAccreditation==null?'':('1'==data[i].officialAccreditation?'Yes':'No' ))		+ "</td>");
+//				var td5 = $("<td>"	+( data[i].authenticationName==null?'':data[i].authenticationName)	+ "</td>");
+//				var td6 = $("<td>"	+( data[i].workExperience==null?'':data[i].workExperience)	+ "</td>");
+//				
+//				td1.appendTo(tr);
+//				td2.appendTo(tr);
+//				td3.appendTo(tr);
+//				td4.appendTo(tr);
+//				td5.appendTo(tr);
+//				td6.appendTo(tr);
+//				last_majorcate = data[i].majorcateId ;
+//			}
+//		}
+//	}
+	
+	
 }
 
 

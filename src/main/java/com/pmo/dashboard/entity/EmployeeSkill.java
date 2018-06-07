@@ -39,6 +39,9 @@ public class EmployeeSkill {
 
     private String role;
 
+    private String majorcateId;
+    
+    private String fatherName;
 
     public String getId() {
         return id;
@@ -183,4 +186,21 @@ public class EmployeeSkill {
 	public void setStaffId(String staffId) {
 		this.staffId = staffId;
 	}
+
+	public String getMajorcateId() {
+		return majorcateId;
+	}
+
+	public void setMajorcateId(String majorcateId) {
+		this.majorcateId = majorcateId;
+	}
+
+	public String getFatherName() {
+		return fatherName;
+	}
+
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
+	}
+	
 }

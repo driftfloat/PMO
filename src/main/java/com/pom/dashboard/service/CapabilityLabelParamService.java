@@ -20,4 +20,8 @@ public interface CapabilityLabelParamService {
     String maxSubCate(String majorcateId);
     
     boolean save(CapabilityLabelParam capabilityLabelParam);
+    
+    String fatherCapability(String id);
+    
+    List<CapabilityLabelParam> queryChilds();
 }

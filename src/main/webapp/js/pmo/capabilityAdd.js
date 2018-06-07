@@ -1,3 +1,33 @@
+function majorcateIds(result){
+	var url = path+'/json/capabilityLabelType.json'
+	$.getJSON(url,  function(data) {
+		   $("#majorcateId").empty();
+		   $("#majorcateId").append("<option value=''>--Option--</option>");
+	       $.each(data, function(i, item) {
+	    	   $("#majorcateId").append("<option value='"+ item.key + "'>"+item.name+"</option>");
+	       })
+//		   $('#csBu').val(result.pageInfo.bu);
+	});
+}
+
+//function majorcateIds(result){
+//	$.ajax({
+//		url:path+'/service/capability/majorcateIds',
+//		dataType:"json",
+//		async:true,
+//		cache:false,
+//		type:"post",
+//		success:function(list){
+//			$("#majorcateId").empty();
+//			$("#majorcateId").append("<option value=''>--Option--</option>");
+//			for(var i = 0;i<list.length;i++){
+//				$("#majorcateId").append("<option value='"+list[i].majorcateId+"'>"+list[i].paramName+"</option>");
+//			}
+////			$('#csSubDept').val(result.pageInfo.du);
+//		}
+//	})
+//}
+
 $(document).ready(function() {
 //	loadDu();
 //	loadBu();
@@ -81,24 +111,6 @@ $(document).ready(function() {
 //
 //    });
 //}
-
-function majorcateIds(result){
-	$.ajax({
-		url:path+'/service/capability/majorcateIds',
-		dataType:"json",
-		async:true,
-		cache:false,
-		type:"post",
-		success:function(list){
-			$("#majorcateId").empty();
-			$("#majorcateId").append("<option value=''>--Option--</option>");
-			for(var i = 0;i<list.length;i++){
-				$("#majorcateId").append("<option value='"+list[i].majorcateId+"'>"+list[i].paramName+"</option>");
-			}
-//			$('#csSubDept').val(result.pageInfo.du);
-		}
-	})
-}
 
 function addCapability(){
 //	var bootstrapValidator = $("#addCapabilityForm").data('bootstrapValidator');

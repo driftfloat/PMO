@@ -72,15 +72,8 @@ var path='<%=path%>';
 							</div>
 							<div id="employeeInfo" class="box-content">
 								<div class="panel panel-default">
-									<div class="panel-heading">Query Conditions</div>
+<!-- 									<div class="panel-heading">Query Conditions</div> -->
 									<div class="panel-body">
-<!-- 										<div class="group"> -->
-<!-- 											<label class="col-sm-2 control-label">E-HR</label> -->
-<!-- 											<div class="col-sm-4"> -->
-<!-- 												<input type="text" class="form-control" name="eHr" -->
-<!-- 													id="eHr" /> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
 										<div class="group">
 											<label class="col-sm-2 control-label">E-HR</label>
 											<div class="col-sm-4">
@@ -149,7 +142,7 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-sm-2 control-label">official Certification</label>
 											<div class="col-sm-4">
-												<input type="text" class="form-control" name="officialAccreditation"	id="officialAccreditation" />
+												<input type="checkbox" value="" name="officialAccreditation" id="officialAccreditation">
 											</div>
 										</div>
 										<div class="group">
@@ -181,6 +174,55 @@ var path='<%=path%>';
 			</div>
 		</div>
 	</div>
+	
+	<div id="skillDetailDiv">
+		<button class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" id="detailBtn" style="display: none;"></button>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		                <h4 class="modal-title" id="myModalLabel"></h4>
+		            </div>
+		            <div class="modal-body">
+		            	<div class="panel-group" id="accordion">
+						    <div class="panel panel-default" style="display: none;">
+						        <div class="panel-heading">
+						            <h4 class="panel-title">
+						                <a data-toggle="collapse" data-parent="#accordion" href="#collapse" id="accordionLink">
+						                </a>
+						            </h4>
+						        </div>
+						        <div id="collapse" class="panel-collapse collapse in">
+									<table 
+										class="table table-striped table-bordered">
+										<thead>
+											<tr>
+												<th>Skill</th>
+												<th>Level</th>
+												<th>Main Skill</th>
+												<th>Official Certification</th>
+												<th>Certification Name</th>
+												<th>work Experience(Years)</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+						        </div>
+						    </div>
+		            	</div>
+			            <div class="modal-footer">
+			                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	<!-- 		                <button type="button" class="btn btn-primary">提交更改</button> -->
+			            </div>
+		        	</div><!-- /.modal-content -->
+		    	</div><!-- /.modal-dialog -->
+			</div>
+		</div>
+	</div>
+	<!-- /.modal -->
+	
 	<c:import url="/service/manage/footer" />
 
 	<!-- CSS引用 -->
