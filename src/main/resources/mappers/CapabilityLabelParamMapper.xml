@@ -137,4 +137,11 @@
   <select id="maxSubCate"  parameterType="string"  resultType="java.lang.String">
   	SELECT MAX(SUBCATE_ID) FROM t_capabilitylabel_param WHERE MAJORCATE_ID= #{value}
   </select>
+  <select id="queryChilds" resultMap="BaseResultMap" parameterType="string" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_capabilitylabel_param
+    where LENGTH(SUBCATE_ID) >0
+    ORDER BY MAJORCATE_ID,SUBCATE_ID
+  </select>
 </mapper>

@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -18,7 +19,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.pmo.dashboard.entity.CapabilityLabelParam;
 import com.pmo.dashboard.entity.EmployeeSkill;
 import com.pmo.dashboard.entity.OfflineOper;
 import com.pmo.dashboard.entity.User;
@@ -64,5 +64,19 @@ public class EmployeeSkillController {
 	public Object skill(String id)
     {
         return employeeSkillService.skills();
+    }
+	
+	@RequestMapping("/detail/{eHr}")
+	@ResponseBody
+	public String detail(@PathVariable String eHr)  throws JsonProcessingException
+    {
+        return objectMapper.writeValueAsString(employeeSkillService.detail(eHr));
+    }
+	
+	@RequestMapping("/toEdit/{eHr}")
+	@ResponseBody
+	public String toEdit(@PathVariable String eHr)  throws JsonProcessingException
+    {
+        return objectMapper.writeValueAsString(employeeSkillService.detail(eHr));
     }
 }

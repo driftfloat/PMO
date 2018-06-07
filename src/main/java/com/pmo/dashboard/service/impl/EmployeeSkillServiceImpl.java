@@ -24,6 +24,11 @@ public class EmployeeSkillServiceImpl implements EmployeeSkillService {
 	}
 
 	@Override
+	public List<EmployeeSkill> detail(String eHr) {
+		return employeeSkillMapper.detail(eHr);
+	}
+
+	@Override
 	public boolean insert(EmployeeSkill record) {
 		if(employeeSkillMapper.insertSelective(record)>0){
             return true;

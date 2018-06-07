@@ -94,4 +94,14 @@ public class CapabilityLabelParamServiceImpl implements CapabilityLabelParamServ
 		}
 		return rtnCount > 0 ? true : false;
 	}
+
+	@Override
+	public String fatherCapability(String id) {
+		return capabilityLabelParamMapper.fatherCapability(id);
+	}
+
+	@Override
+	public List<CapabilityLabelParam> queryChilds() {
+		return capabilityLabelParamMapper.queryChilds();
+	}
 }

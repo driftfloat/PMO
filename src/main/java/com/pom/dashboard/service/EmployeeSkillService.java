@@ -21,4 +21,6 @@ public interface EmployeeSkillService {
     
     List<String> skills();
     
+    List<EmployeeSkill> detail(String eHr);
+    
 }
