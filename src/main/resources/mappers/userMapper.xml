@@ -101,7 +101,7 @@
 	</select>
 	
 	<update id="updateUser" parameterType="com.pmo.dashboard.entity.User">
-		update t_user set USER_NAME = #{userName},NICKNAME = #{nickname},USER_TYPE = #{userType},BU = #{bu},CSDEPT_ID = #{csdeptId} WHERE USER_ID = #{userId}
+		update t_user set USER_NAME = #{userName},NICKNAME = #{nickname},USER_TYPE = #{userType},EMAIL = #{email},BU = #{bu},CSDEPT_ID = #{csdeptId} WHERE USER_ID = #{userId}
 	</update>
 	<!-- Felix, End -->
    
