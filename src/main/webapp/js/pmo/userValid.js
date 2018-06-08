@@ -51,6 +51,18 @@ $(document).ready(function() {
                     }
 
                 }
+            },
+            email: {
+                validators: {
+                	 regexp: {
+                         regexp:/^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/,
+                         message: 'Please enter correct Email'
+                     },
+                     stringLength: {
+                         max: 100,
+                         message: 'Exceeded the maxLength'
+                     }
+                }
             }
             
         }

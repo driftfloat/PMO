@@ -15,10 +15,11 @@ function updateUser(){
 		var bu = $('#buName').val();
 		var du = $('#csSubDept option:selected').val();
 		var userType = $('#userType').val();
+		var email = $('#email').val();
 		$.ajax({
 			url:path+'/service/user/updateUser',
 			dataType:"json",
-			data:{"userId":userId,"eHr":eHr,"userName":nickName,"bu":bu,"du":du,"userType":userType},
+			data:{"userId":userId,"eHr":eHr,"userName":nickName,"bu":bu,"du":du,"userType":userType,"email":email},
 			async:true,
 			cache:false,
 			type:"post",
@@ -64,6 +65,8 @@ function loadUserInfo(){
 			$('#nickName').val(user.nickname);
 			
 			$('#eHr').val(user.userName);
+			
+			$('#email').val(user.email);
 			
 		}
 	})

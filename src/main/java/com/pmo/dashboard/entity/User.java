@@ -182,12 +182,13 @@ public class User {
         // TODO Auto-generated constructor stub
     }
 
-	public User(String userId, String userName, String nickname, String userType, String bu, String csdeptId) {
+	public User(String userId, String userName, String nickname, String userType, String email, String bu, String csdeptId) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
 		this.nickname = nickname;
 		this.userType = userType;
+		this.email = email;
 		this.bu = bu;
 		this.csdeptId = csdeptId;
 	}
