@@ -23,13 +23,13 @@ public class TestSkll {
 	
 	private ObjectMapper objectMapper = new ObjectMapper();
 	
-//	@Test
+	@Test
 	public void detail() throws Exception  {
 		String eHr = "E000830374";
 		System.out.println(objectMapper.writeValueAsString(employeeSkillService.detail(eHr)));
 	}
 	
-	@Test
+//	@Test
 	public void toEdit() throws Exception  {
 		String eHr = "E000830374";
 		System.out.println(objectMapper.writeValueAsString(employeeSkillService.toEdit(eHr)));

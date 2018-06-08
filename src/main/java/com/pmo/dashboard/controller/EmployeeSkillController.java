@@ -77,6 +77,6 @@ public class EmployeeSkillController {
 	@ResponseBody
 	public String toEdit(@PathVariable String eHr)  throws JsonProcessingException
     {
-        return objectMapper.writeValueAsString(employeeSkillService.detail(eHr));
+        return objectMapper.writeValueAsString(employeeSkillService.toEdit(eHr));
     }
 }

@@ -4,14 +4,19 @@ $(function () {
     loadCSSubDept();
     loadRole();
     loadSkill();
+//    $("input[name='_officialAccreditation']").change(function() { 
+//    $("#_officialAccreditation").click(function() { 
+//    	if($(this).is(':checked')){
+//    		console.log(3);
+//    		$(this).val(1);
+//    		$(this).next().text('Yes');
+//    	}else{
+//    		console.log(4);
+//    		$(this).val(0);
+//    		$(this).next().text('No');
+//    	}
+//    });
     
-    $("#officialAccreditation").change(function() { 
-    	if($(this).is(':checked')){
-    		$("#officialAccreditation").val('1');
-    	}else{
-    		$("#officialAccreditation").val('');
-    	}
-    });
 });
 
 function loadCSSubDept(result){
@@ -190,9 +195,8 @@ function loadSkillList(){
             title: 'Operate'
 //            ,sortable: true
             ,formatter:function(value,row,index){
-            	return "<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=detail('"+row.eHr+"')>Detail</a>"
-            	+"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editSkill('"+row.eHr+"')>Edit</a>"
-            	;
+            	var r = row.id==null?'':"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=detail('"+row.eHr+"')>Detail</a>" ;
+            	return r+"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=toEdit('"+row.eHr+"')>Edit</a>" ;
             }
         }
         /*{
@@ -247,16 +251,17 @@ function search(){
     $('#skillList').bootstrapTable('refresh',queryParams);  
 }
 
-function editSkill(id){
-//	$("#editForm").attr("action",path+"/service/capability/editPage.html");
-//	$("#id").val(id);
-//	$("#editForm").submit();
-	var url= path+"/service/skill/editPage.html"+"?id="+id
-	location=url;
-}
+//function editSkill(id){
+////	$("#editForm").attr("action",path+"/service/capability/editPage.html");
+////	$("#id").val(id);
+////	$("#editForm").submit();
+//	var url= path+"/service/skill/editPage.html"+"?id="+id
+//	location=url;
+//}
 
-function detail(id){
-	var queryUrl = path+'/service/skill/detail/'+id;
+function detail(eHr){
+	$("#editModal").css("display","none");
+	var queryUrl = path+'/service/skill/detail/'+eHr;
 	$.ajax({
 		url:queryUrl,
 		dataType:"json",
@@ -272,14 +277,8 @@ function detail(id){
 			
 			var tbody ;
 			var last_majorcate = '' ;
-			if(data.length>0){
-//				last_majorcate = data[0].majorcateId;= 
-				var t = "View Detail Information of "+data[0].employeeId ;
-				$("#myModalLabel").text(t);
+			$("#myModalLabel").text("View Detail Information of "+eHr);
 				
-//				console.log($("#myModalLabel").val());
-//				console.log($("#myModalLabel").text($("#myModalLabel").text()+" "+data[0].employeeId);
-			}
 			for (var i = 0; i <data.length; i++) {
 //				if(i>1) return;
 				if(last_majorcate!=data[i].majorcateId){
@@ -300,7 +299,7 @@ function detail(id){
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
 				
-				var td1 = $("<td>"	+data[i].paramName + "</td>");
+				var td1 = $("<td width='20%'>"	+data[i].paramName + "</td>");
 				var td2 = $("<td>"	+(data[i].abilityLevel==null?'':data[i].abilityLevel)	+ "</td>");
 				var td3 = $("<td>"	+( data[i].mainAbility==null?'': ('1'==data[i].mainAbility?'<input CHECKED type="radio"/>':'' )	)+ "</td>");
 				var td4 = $("<td>"	+( data[i].officialAccreditation==null?'':('1'==data[i].officialAccreditation?'Yes':'No' ))		+ "</td>");
@@ -319,8 +318,9 @@ function detail(id){
 	})
 }
 	
-function toEdit(id){
-	var queryUrl = path+'/service/skill/detail/'+id;
+function toEdit(eHr){
+	$("#editModal").css("display","block");
+	var queryUrl = path+'/service/skill/toEdit/'+eHr;
 	$.ajax({
 		url:queryUrl,
 		dataType:"json",
@@ -336,20 +336,11 @@ function toEdit(id){
 			
 			var tbody ;
 			var last_majorcate = '' ;
-			if(data.length>0){
-//				last_majorcate = data[0].majorcateId;= 
-				var t = "View Detail Information of "+data[0].employeeId ;
-				$("#myModalLabel").text(t);
-				
-//				console.log($("#myModalLabel").val());
-//				console.log($("#myModalLabel").text($("#myModalLabel").text()+" "+data[0].employeeId);
-			}
+			$("#myModalLabel").text("Edit Competence Tag for "+eHr);
 			for (var i = 0; i <data.length; i++) {
-//				if(i>1) return;
 				if(last_majorcate!=data[i].majorcateId){
 					var div_id='div_'+data[i].majorcateId;
 					var a_id='a_'+data[i].majorcateId;
-//					$("#accordion > div:first-child").clone().insertAfter($("#accordion > div:last-child")); 
 					$("#accordion > div:first-child").clone().appendTo($("#accordion")); 
 					$("#accordion > div:last-child").attr('id',div_id);
 					
@@ -364,12 +355,22 @@ function toEdit(id){
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
 				
-				var td1 = $("<td>"	+data[i].paramName + "</td>");
+				var td1 = $("<td width='20%'><input id='"+data[i].id+"' type='checkbox'"+ (data[i].status=='1'?'checked':'')
+						+" />      "  	+data[i].paramName + "</td>");
 				var td2 = $("<td>"	+(data[i].abilityLevel==null?'':data[i].abilityLevel)	+ "</td>");
-				var td3 = $("<td>"	+( data[i].mainAbility==null?'': ('1'==data[i].mainAbility?'<input CHECKED type="radio"/>':'' )	)+ "</td>");
-				var td4 = $("<td>"	+( data[i].officialAccreditation==null?'':('1'==data[i].officialAccreditation?'Yes':'No' ))		+ "</td>");
-				var td5 = $("<td>"	+( data[i].authenticationName==null?'':data[i].authenticationName)	+ "</td>");
-				var td6 = $("<td>"	+( data[i].workExperience==null?'':data[i].workExperience)	+ "</td>");
+				var td3 = $("<td>"	+( data[i].mainAbility==null?'<input id="mainAbility" name="mainAbility" type="radio"/>': 
+						('1'==data[i].mainAbility?'<input id="mainAbility" name="mainAbility" CHECKED type="radio"/>':
+							'<input id="mainAbility" name="mainAbility" type="radio"/>' )	
+						)
+						+ "</td>");
+				var td4 = $("<td>"	+( data[i].officialAccreditation==null?
+						'<SELECT ID="_official" NAME="_official" ><OPTION VALUE="1">Yes<OPTION VALUE="0" selected>No</SELECT>'
+						:('1'==data[i].officialAccreditation?
+							'<SELECT ID="_official" NAME="_official" ><OPTION VALUE="1" selected>Yes<OPTION VALUE="0">No</SELECT>':
+							'<SELECT ID="_official" NAME="_official" ><OPTION VALUE="1">Yes<OPTION VALUE="0" selected>No</SELECT>' ))		+ "</td>");
+				var td5 = $("<td><input name='_auth' type='text' value='"+(data[i].authenticationName==null?'':data[i].authenticationName) + "' /></td>");
+				var td6 = $("<td><input name='_work' type='text' size=2 value='"+(data[i].workExperience==null?'':data[i].workExperience) + "' /></td>");
+				
 				
 				td1.appendTo(tr);
 				td2.appendTo(tr);

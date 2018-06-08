@@ -43,7 +43,7 @@ public class EmployeeSkill {
     
     private String fatherName;
     
-    private String state;
+    private String status;
 
     public String getId() {
         return id;
@@ -205,12 +205,12 @@ public class EmployeeSkill {
 		this.fatherName = fatherName;
 	}
 
-	public String getState() {
-		return state;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setState(String state) {
-		this.state = state;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }

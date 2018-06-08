@@ -41,8 +41,7 @@
 <link href='<%=path %>/css/uploadify.css' rel='stylesheet' />
 <link href='<%=path %>/css/animate.min.css' rel='stylesheet' />
 <link href='<%=path%>/css/bootstrap-datetimepicker.css' rel='stylesheet' />
-<link href='<%=path%>/css/bootstrap-datetimepicker.min.css'
-	rel='stylesheet' />
+<link href='<%=path%>/css/bootstrap-datetimepicker.min.css' rel='stylesheet' />
 <style type="text/css">
 .ssf {
 	font-size: 15px;
@@ -160,6 +159,15 @@ var path='<%=path%>';
 											</div>
 										</div>
 									</div>
+									
+									<div class="input-group spinner" data-trigger="spinner">
+									    <input type="text" class="form-control text-center" value="1" data-min="-10" data-max="10" data-step="2" data-rule="quantity">
+									    <span class="input-group-addon">
+									        <a href="javascript:;" class="spin-up" data-spin="up"><i class="fa fa-caret-up"></i></a>
+									        <a href="javascript:;" class="spin-down" data-spin="down"><i class="fa fa-caret-down"></i></a>
+									    </span>
+									</div>
+									
 <!-- 								</div> -->
 								<!-- 数据列表  -->
 								<table id="skillList"></table>
@@ -179,8 +187,8 @@ var path='<%=path%>';
 		<button class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" id="detailBtn" style="display: none;"></button>
 		<!-- 模态框（Modal） -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		    <div class="modal-dialog">
-		        <div class="modal-content">
+		    <div class="modal-dialog" style="width: 70%">
+		        <div class="modal-content" >
 		            <div class="modal-header">
 		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		                <h4 class="modal-title" id="myModalLabel"></h4>
@@ -196,7 +204,7 @@ var path='<%=path%>';
 						        </div>
 						        <div id="collapse" class="panel-collapse collapse in">
 									<table 
-										class="table table-striped table-bordered">
+										class="table table-bordered">
 										<thead>
 											<tr>
 												<th>Skill</th>
@@ -213,8 +221,11 @@ var path='<%=path%>';
 						    </div>
 		            	</div>
 			            <div class="modal-footer">
-			                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-	<!-- 		                <button type="button" class="btn btn-primary">提交更改</button> -->
+							<button id="editModal" type="button" class="btn btn-primary">
+								提交更改
+							</button>
+			                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+							
 			            </div>
 		        	</div><!-- /.modal-content -->
 		    	</div><!-- /.modal-dialog -->
