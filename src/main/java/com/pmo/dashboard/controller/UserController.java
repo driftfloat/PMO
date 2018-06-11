@@ -164,10 +164,11 @@ public class UserController {
 	        String eHr = request.getParameter("eHr");
 	        String userName = request.getParameter("userName");
 	        String userType = request.getParameter("userType");
+	        String email = request.getParameter("email");
 	        String bu = request.getParameter("bu");
 	        String csDeptId = request.getParameter("du");
 	        
-	        User user = new User(userId, eHr, userName,  userType, bu, csDeptId);
+	        User user = new User(userId, eHr, userName, userType, email, bu, csDeptId);
 	        
 	     
 	        
