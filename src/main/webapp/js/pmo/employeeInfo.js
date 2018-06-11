@@ -1,46 +1,155 @@
-var csDeptName0 = "";
-
-var csSubDeptName0 = "";
-	
-var csBuName0 = "";
-
 
 $(function(){
 	
-	loadEmployeeList();
+	loadEmployeeListNew();
+	initSearchDate();
+	loadEngagementType();
+	loadResourceStatus();
 	
 })
 
-$("#pageRecordsNum").change(function(){
-	var csDeptName = $("#csDept").find("option:selected").text();
+function loadEmployeeListNew(){
+	//var queryUrl = path+'/service/offlineOper/query';
+	var queryUrl = path+'/json/test.json';
+    var table = $('#employeeList').bootstrapTable({
+        url: queryUrl,                      //请求后台的URL（*）
+        method: 'GET',                      //请求方式（*）
+        //toolbar: '#toolbar',              //工具按钮用哪个容器
+        striped: true,                      //是否显示行间隔色
+        singleSelect : true,                // 单选checkbox 
+        cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true,                   //是否显示分页（*）
+        sortable: true,                     //是否启用排序
+        sortOrder: "asc",                   //排序方式
+        sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+        pageNumber: 1,                      //初始化加载第一页，默认第一页,并记录
+        pageSize: 10,                     //每页的记录行数（*）
+        pageList: [10,20,30,50,60,100],        //可供选择的每页的行数（*）
+        search: false,                      //是否显示表格搜索
+        strictSearch: true,
+        showColumns: true,                  //是否显示所有的列（选择显示的列）
+        showRefresh: true,                  //是否显示刷新按钮
+        minimumCountColumns: 2,             //最少允许的列数
+        clickToSelect: true,                //是否启用点击选中行
+        //height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+        uniqueId: "id",                     //每一行的唯一标识，一般为主键列
+        showToggle: false,                   //是否显示详细视图和列表视图的切换按钮
+        cardView: false,                    //是否显示详细视图
+        detailView: false,                  //是否显示父子表
+        //得到查询的参数
+        queryParams : function (params) {
+        	return {
+        		pageSize: params.limit,
+        		pageNumber: params.offset/params.limit+1,
+            };
+        },
+        columns: [
+        {  
+                title: 'SL',
+                formatter: function (value, row, index) {  
+                    return index+1;  
+                }  
+        },
+        {
+            field: 'staffName',
+            title: 'StaffName',
+            sortable: true
+        },
+        {
+            field: 'eHr',
+            title: 'EHr',
+            sortable: true
+        },
+        {
+            field: 'lob',
+            title: 'LOB',
+            sortable: true
+        }, 
+        {
+            field: 'hsbcStaffId',
+            title: 'StaffId',
+            sortable: true
+        },
+        {
+            field: 'csDeptName',
+            title: 'DU',
+            sortable: true
+        },
+        {
+            field: 'engagementType',
+            title: 'EngagementType',
+            sortable: true
+        }, 
+        {
+            field: 'resourceStatus',
+            title: 'Status',
+            sortable: true
+        },
+        {
+            field: 'rmUserId',
+            title: 'RM',
+            sortable: true
+        },
+        {
+            field:'id',
+            title: 'Operation',
+            width: 120,
+            align: 'center',
+            valign: 'middle',
+            formatter:function(value,row,index){
+            	return "<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('006a494ccd244c7d9d1a4eef94470260','Time&Material')>Detail</a>"
+            	+"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('006a494ccd244c7d9d1a4eef94470260','Time&Material')>Edit</a>"
+            	+"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade()>Promote</a>"
+            	;
+            }
+        }],
+        onLoadSuccess: function () {
+        	
+        },
+        onLoadError: function () {
+        	
+        },
+        onDblClickRow: function (row, $element) {
+           
+        }
+        
+    });
+}
 
-	if(csDeptName.indexOf('Option')!=-1){
-		csDeptName = "";
-	}
-	
-	var csBuName = $("#csBu").find("option:selected").text();
+function initSearchDate(){
+	var picker1 = $('#datetimepicker1').datetimepicker({  
+		language : 'zh-CN',
+		format : "yyyy-mm-dd",
+		weekStart : 1,
+		todayBtn : 1,
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		minView : 2,
+		forceParse : 0
+    });  
+    var picker2 = $('#datetimepicker2').datetimepicker({  
+    	language : 'zh-CN',
+    	format : "yyyy-mm-dd",
+    	weekStart : 1,
+    	todayBtn : 1,
+    	autoclose : 1,
+    	todayHighlight : 1,
+    	startView : 2,
+    	minView : 2,
+    	forceParse : 0
+    });  
+    //动态设置最小值  
+    picker1.on('dp.change', function (e) {  
+        picker2.data('DateTimePicker').minDate(e.date);  
+    });  
+    //动态设置最大值  
+    picker2.on('dp.change', function (e) {  
+        picker1.data('DateTimePicker').maxDate(e.date);  
+    });  
+}
 
-	if(csBuName.indexOf('Option')!=-1){
-		csBuName = "";
-	}
-	
-	var csSubDeptName = $("#csSubDept").find("option:selected").text();
-	
-	if(csSubDeptName.indexOf('Option')!=-1){
-		csSubDeptName = "";
-	}
-	
-	var engagementType = $("#engagementType").find("option:selected").text();
-	
-	if(engagementType.indexOf('Option')!=-1){
-		engagementType = "";
-	}
-	
-	loadEmployeeList("",csDeptName,csSubDeptName,csBuName,engagementType);
-	
-})
-
-function loadEngagementType(result){
+function loadEngagementType(){
 	var url = path+'/json/engagementType.json'
 	$.getJSON(url,  function(data) {
 		   $("#engagementType").empty();
@@ -48,11 +157,11 @@ function loadEngagementType(result){
 	       $.each(data, function(i, item) {
 	    	   $("#engagementType").append("<option>"+item.name+"</option>");
 	       })
-	       $('#engagementType').val(result.pageInfo.engagementType);
+	       //$('#engagementType').val(result.pageInfo.engagementType);
 	});
 }
 
-function loadResourceStatus(result){
+function loadResourceStatus(){
 	var url = path+'/json/resourceStatus.json'
 	$.getJSON(url,  function(data) {
 		   $("#resourceStatus").empty();
@@ -60,16 +169,29 @@ function loadResourceStatus(result){
 	       $.each(data, function(i, item) {
 	    	   $("#resourceStatus").append("<option>"+item.name+"</option>");
 	       })
-	       $('#resourceStatus').val(result.pageInfo.resourceStatus);
+	       //$('#resourceStatus').val(result.pageInfo.resourceStatus);
 	});
 }
 
+function employeeDetail(employeeId,engagementType){
+	if(engagementType=="Time&Material"||engagementType=="TeamDelivery"){
+		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=1");
+	}else if(engagementType=="FixedPrice"){
+		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=2");
+	}else if(engagementType=="Support"){
+		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=3");
+	}else{
+		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=1");
+	}
+	
+	$("#employeeId").val(employeeId);
+	$("#editForm").submit();
+}
 
 $("#csDept").change(function(){
 	$("#exportExcel").attr("disabled", true);
 	
 })
-
 
 $("#csSubDept").change(function(){
 	$("#exportExcel").attr("disabled", true);
@@ -78,7 +200,6 @@ $("#csSubDept").change(function(){
 	loadUserForRM(bu,du,"");
 })
 
-
 $("#csBu").change(function(){
 	$("#exportExcel").attr("disabled", true);
 	var bu = $("#csBu").val();
@@ -86,55 +207,8 @@ $("#csBu").change(function(){
 	loadUserForRM(bu,du,"");
 })
 
-
-/*function loadCSDept(){
-	$.ajax({
-		url:path+'/service/csDept/queryCSDeptName',
-		dataType:"json",
-		async:true,
-		cache:false,
-		type:"post",
-		success:function(list){
-			for(var i = 0;i<list.length;i++){
-				$("#csDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csDeptName+"</option>");
-			}
-		}
-	})
-}*/
-
-
-$('#searchBtn').bind("click", function(){
-	var csDeptName = $("#csDept").find("option:selected").text();
-
-	if(csDeptName.indexOf('Option')!=-1){
-		csDeptName = "";
-	}
-	
-	var csBuName = $("#csBu").find("option:selected").text();
-
-	if(csBuName.indexOf('Option')!=-1){
-		csBuName = "";
-	}
-	
-	var csSubDeptName = $("#csSubDept").find("option:selected").text();
-	
-	if(csSubDeptName.indexOf('Option')!=-1){
-		csSubDeptName = "";
-	}
-	
-	var engagementType = $("#engagementType").find("option:selected").text();
-	
-	if(engagementType.indexOf('Option')!=-1){
-		engagementType = "";
-	}
-	
-	loadEmployeeList("",csDeptName,csSubDeptName,csBuName,engagementType);
-});
-
 $('#exportExcel').bind("click", function(){
-	
 	$('#myModal').modal('show');
-	
 });
 
 function selectAll(){
@@ -334,8 +408,11 @@ function changeCSDeptToId(du){
 	return csDeptId;
 }
 
+function employeeUpgrade(){
+	$("#employeeUpgrade").modal('show');
+}
 
-
+/**
 function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagementType){
 	
 	var csDeptName = csDeptName;
@@ -502,19 +579,107 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 		}
 		
 	})
-}
+}*/
+/**
+$("#pageRecordsNum").change(function(){
+	var csDeptName = $("#csDept").find("option:selected").text();
 
-function employeeDetail(employeeId,engagementType){
-	if(engagementType=="Time&Material"||engagementType=="TeamDelivery"){
-		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=1");
-	}else if(engagementType=="FixedPrice"){
-		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=2");
-	}else if(engagementType=="Support"){
-		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=3");
-	}else{
-		$("#editForm").attr("action",path+"/service/interview/employeeDetailInfo.html?type=1");
+	if(csDeptName.indexOf('Option')!=-1){
+		csDeptName = "";
 	}
 	
-	$("#employeeId").val(employeeId);
-	$("#editForm").submit();
+	var csBuName = $("#csBu").find("option:selected").text();
+
+	if(csBuName.indexOf('Option')!=-1){
+		csBuName = "";
+	}
+	
+	var csSubDeptName = $("#csSubDept").find("option:selected").text();
+	
+	if(csSubDeptName.indexOf('Option')!=-1){
+		csSubDeptName = "";
+	}
+	
+	var engagementType = $("#engagementType").find("option:selected").text();
+	
+	if(engagementType.indexOf('Option')!=-1){
+		engagementType = "";
+	}
+	
+	loadEmployeeList("",csDeptName,csSubDeptName,csBuName,engagementType);
+	
+})*/
+/**
+$('#searchBtn').bind("click", function(){
+	var csDeptName = $("#csDept").find("option:selected").text();
+
+	if(csDeptName.indexOf('Option')!=-1){
+		csDeptName = "";
+	}
+	
+	var csBuName = $("#csBu").find("option:selected").text();
+
+	if(csBuName.indexOf('Option')!=-1){
+		csBuName = "";
+	}
+	
+	var csSubDeptName = $("#csSubDept").find("option:selected").text();
+	
+	if(csSubDeptName.indexOf('Option')!=-1){
+		csSubDeptName = "";
+	}
+	
+	var engagementType = $("#engagementType").find("option:selected").text();
+	
+	if(engagementType.indexOf('Option')!=-1){
+		engagementType = "";
+	}
+	
+	loadEmployeeList("",csDeptName,csSubDeptName,csBuName,engagementType);
+});*/
+
+/**function loadCSDept(){
+$.ajax({
+	url:path+'/service/csDept/queryCSDeptName',
+	dataType:"json",
+	async:true,
+	cache:false,
+	type:"post",
+	success:function(list){
+		for(var i = 0;i<list.length;i++){
+			$("#csDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csDeptName+"</option>");
+		}
+	}
+})
+}*/
+/**
+function loadEngagementType(result){
+	var url = path+'/json/engagementType.json'
+	$.getJSON(url,  function(data) {
+		   $("#engagementType").empty();
+		   $("#engagementType").append("<option value=''>--Option--</option>");
+	       $.each(data, function(i, item) {
+	    	   $("#engagementType").append("<option>"+item.name+"</option>");
+	       })
+	       $('#engagementType').val(result.pageInfo.engagementType);
+	});
 }
+
+function loadResourceStatus(result){
+	var url = path+'/json/resourceStatus.json'
+	$.getJSON(url,  function(data) {
+		   $("#resourceStatus").empty();
+		   $("#resourceStatus").append("<option value=''>--Option--</option>");
+	       $.each(data, function(i, item) {
+	    	   $("#resourceStatus").append("<option>"+item.name+"</option>");
+	       })
+	       $('#resourceStatus').val(result.pageInfo.resourceStatus);
+	});
+}*/
+/**
+var csDeptName0 = "";
+
+var csSubDeptName0 = "";
+	
+var csBuName0 = "";
+*/

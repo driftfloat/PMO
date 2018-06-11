@@ -84,7 +84,154 @@ var path='<%=path%>';
 								</h2>
 							</div>
 							<div id="employeeInfo" class="box-content">
-							    
+							  <div class="panel panel-default">
+							  <div class="panel-heading">Employee Base Query Conditions</div>
+                              <div class="panel-body">
+                                    <div class="group">
+										<label class="col-lg-2 control-label">BU</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="csBu" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="csBu" data-bv-group=".group">
+												<option value="">-- Option--</option>
+											</select>
+										</div>
+									</div>
+									<div class="group">
+										<label class="col-lg-2 control-label">DU</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="csSubDept" data-bv-notempty
+												data-bv-notempty-message="请选择角色" id="csSubDept" data-bv-group=".group">
+												<option value="">-- Option--</option>
+											</select>
+										</div>
+									</div>
+									</br></br></br>
+									<div class="group">
+											<label class="col-sm-2 control-label">LOB</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="lob"
+													id="lob" />
+											</div>
+									</div>
+									<div class="group">
+											<label class="col-sm-2 control-label">Staff ID</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="hsbcStaffId"
+													id="hsbcStaffId" />
+											</div>
+									</div>
+									</br></br></br>
+									<div class="group">
+											<label class="col-sm-2 control-label">E-HR</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="eHr"
+													id="eHr" />
+											</div>
+									</div>
+									<div class="group">
+									        <label class="col-sm-2 control-label">Name</label>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" name="staffName"
+													id="staffName" />
+											</div>
+									</div>
+									</br></br></br>
+									<div class="group">
+									        <label class="col-lg-2 control-label">Status</label>
+										    <div class="col-lg-4">
+											   <select class="form-control" name="resourceStatus" data-bv-notempty
+												  data-bv-notempty-message="please select  resourceStatus" id="resourceStatus" data-bv-group=".group">
+												  <option value="">--Option--</option>
+											   </select>
+										    </div>
+								     </div>
+								     <div class="group">
+								            <label class="col-lg-2 control-label">EngagementType</label>
+										    <div class="col-lg-4">
+											   <select class="form-control" name="engagementType" data-bv-notempty
+												  id="engagementType" data-bv-group=".group">
+												  <option value="">--Option--</option>
+											   </select>
+										    </div>
+									  </div>
+									  </br></br></br>
+									  <div class="group">
+									        <label class="col-lg-2 control-label">RM</label>
+										    <div class="col-lg-4">
+											  <select class="form-control" name="nickName" data-bv-notempty
+												  id="RM" data-bv-group=".group">
+												  <option value="">--Option--</option>
+											  </select>
+										    </div>
+									   </div>
+                               </div>
+                             </div>
+                             
+                             <div class="panel panel-default">
+							 <div class="panel-heading">Employee Upgrade Record Query Conditions</div>
+                             <div class="panel-body">
+                                    <div class="group">
+										<label class="col-lg-2 control-label">StartTime</label>  
+                                        <!--指定 date标记--> 
+                                        <div class="col-lg-4">
+                                        <div class='input-group date' id='datetimepicker1'>  
+                                            <input id="startTime" type='text' class="form-control" />  
+                                            <span class="input-group-addon">  
+                                             <span class="glyphicon glyphicon-calendar"></span>  
+                                            </span>  
+                                        </div> 
+                                        </div> 
+									</div>
+									<div class="group">
+										<label class="col-lg-2 control-label">EndTime</label>  
+                                        <!--指定 date标记-->  
+                                        <div class="col-lg-4">
+                                        <div class='input-group date' id='datetimepicker2'>  
+                                            <input id="endTime" type='text' class="form-control" />  
+                                            <span class="input-group-addon">  
+                                              <span class="glyphicon glyphicon-calendar"></span>  
+                                            </span>  
+                                        </div>
+                                        </div>  
+									</div>
+									</br></br></br>
+									
+                               </div>
+                             </div>
+                             
+                             <div class="form-group">
+										<div style="text-align:center;width:50%;float:left">
+									    <input type="button" value="Search"
+										name="searchBtn" id="searchBtn" href="#"
+										class="button btn btn-primary" data-dismiss="modal"
+										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
+									    </div>
+									    <div style="text-align:center;width:50%;float:right">
+									    <input type="button" value="Export" disabled="disabled"
+										name="exportExcel" id="exportExcel" href="#"
+										class="button btn btn-primary" data-dismiss="modal"
+										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
+									    </div>
+							  </div>
+									   
+						      <div >
+									    <a href="" id="exceltHref" style="display:none;">Export</a>
+							  </div>
+							  
+							  <form action="" id="editForm" method="post" target="_blank">
+									<input id="employeeId" name="employeeId" type="hidden" />
+							  </form>
+                             
+                             
+                             
+                             <!-- 数据列表  -->
+                             <table id="employeeList"></table>
+							
+							
+							
+							
+							
+							    <!--
 							    <form id="employeeForm" method="post" class="form-horizontal">
 									
 									<input id="userId" name="userId" type="hidden" value="${loginUser.userId}"/>
@@ -94,11 +241,6 @@ var path='<%=path%>';
 											<select class="form-control" name="csBu" data-bv-notempty
 												data-bv-notempty-message="请选择角色" id="csBu" data-bv-group=".group">
 												<option value="">-- Option--</option>
-												<!-- <option value="1">第一事业部</option>
-												<option value="2">第二事业部</option>
-												<option value="3">第三事业部</option>
-												<option value="4">第四事业部</option>
-												<option value="5">业务部门</option> -->
 											</select>
 										</div>
 										</div>
@@ -229,7 +371,6 @@ var path='<%=path%>';
 										</ul>
 										
 										<div style="max-width: 400px; float: right; margin-top: 30px;">
-											<!-- 每页<span id="pageDataCount"></span>条&nbsp;&nbsp;第<span id="currentPage"></span>页&nbsp;/&nbsp;共<span id="pageCount"></span>页&nbsp;&nbsp;共<span id="dataCount"></span>条 -->
 											<b><span id="currentPage"></span> / <span id="pageCount"></span>
 												<select class="pagination pagination-centered"	name="pageRecordsNum" data-bv-notempty
 													data-bv-notempty-message="please select  pageRecordsNum"
@@ -241,8 +382,6 @@ var path='<%=path%>';
 												</select> 
 											</b>
 										</div>
-										<!-- <br>
-										共<span id="pageCount"></span>页   第<span id="currentPage"></span>页 -->
 									</div>
 									
 								</form>
@@ -251,6 +390,8 @@ var path='<%=path%>';
 								</form>
 
 							</div>
+							-->
+							
 						</div>
 				</div>
 				</div>
@@ -352,6 +493,68 @@ var path='<%=path%>';
 
 	</div>
 	<!--/.fluid-container-->
+	
+	<!-- 员工调级 -->
+	<div class="modal fade" id="employeeUpgrade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					    <div class="modal-header">
+							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							 <h4 class="modal-title" id="myModalLabel">
+								 Promote Detail Information Of 
+							 </h4>
+						</div>
+						<div class="modal-body">
+						
+						 <table id="employeeUpgradeRecordList"></table>
+						 
+						 <table width="100%" border="1">
+						    <tr>
+						      <td>&nbsp;</td>
+						      <td>&nbsp;</td>
+						      <td>&nbsp;</td>
+						      <td>&nbsp;</td>
+						    </tr>
+						    <tr>
+						      <td>&nbsp;</td>
+						      <td>&nbsp;</td>
+						      <td>&nbsp;</td>
+						      <td>&nbsp;</td>
+						    </tr>
+						    <tr>
+						      <td>&nbsp;</td>
+						      <td>&nbsp;</td>
+						      <td>&nbsp;</td>
+						      <td>&nbsp;</td>
+						    </tr>
+						    <tr>
+						      <td>&nbsp;</td>
+						      <td>&nbsp;</td>
+						      <td>&nbsp;</td>
+						      <td>&nbsp;</td>
+						    </tr>
+						 </table>
+				          
+			            </div>
+						<div class="modal-footer">
+							 <button id="cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel&nbsp;</button>
+							 <button id="send" type="button" onclick="sendemail()" class="btn btn-primary">Update&nbsp;&nbsp;</button>
+						</div>
+					</div>
+					
+				</div>
+				
+	</div>
+	
+	<!-- CSS引用 -->
+    <link rel="stylesheet" href="<%=path %>/extensioncss/bootstarp-table/bootstrap-table.css" type="text/css" />
+    <link rel="stylesheet" href="<%=path %>/extensioncss/bootstarp-table/bootstrap-table.min.css" type="text/css" />      
+  
+    <!-- JS引用 -->
+    <script src="<%=path %>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<%=path %>/extensionjs/bootstrap-table/dist/bootstrap-table.js" type="text/javascript"></script>
+    <script src="<%=path %>/extensionjs/bootstrap-table/dist/bootstrap-table-locale-all.js" type="text/javascript"></script>
+	<script src="<%=path %>/extensionjs/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
 
 	<!-- external javascript -->
 
