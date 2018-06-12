@@ -160,13 +160,13 @@ var path='<%=path%>';
 										</div>
 									</div>
 									
-									<div class="input-group spinner" data-trigger="spinner">
-									    <input type="text" class="form-control text-center" value="1" data-min="-10" data-max="10" data-step="2" data-rule="quantity">
-									    <span class="input-group-addon">
-									        <a href="javascript:;" class="spin-up" data-spin="up"><i class="fa fa-caret-up"></i></a>
-									        <a href="javascript:;" class="spin-down" data-spin="down"><i class="fa fa-caret-down"></i></a>
-									    </span>
-									</div>
+<!-- 									<div class="input-group spinner" data-trigger="spinner"> -->
+<!-- 									    <input type="text" class="form-control text-center" value="1" data-min="-10" data-max="10" data-step="2" data-rule="quantity"> -->
+<!-- 									    <span class="input-group-addon"> -->
+<!-- 									        <a href="javascript:;" class="spin-up" data-spin="up"><i class="fa fa-caret-up"></i></a> -->
+<!-- 									        <a href="javascript:;" class="spin-down" data-spin="down"><i class="fa fa-caret-down"></i></a> -->
+<!-- 									    </span> -->
+<!-- 									</div> -->
 									
 <!-- 								</div> -->
 								<!-- 数据列表  -->
@@ -221,11 +221,17 @@ var path='<%=path%>';
 						    </div>
 		            	</div>
 			            <div class="modal-footer">
-							<button id="editModal" type="button" class="btn btn-primary">
-								提交更改
-							</button>
-			                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
-							
+							</br></br></br>
+							<div class="group">
+								<div class="col-sm-4">
+									<button onClick="update()" type="button"
+										id="updateSkills" 
+										style="margin-left: 400px"
+										class="btn btn-primary">更改</button>
+								</div>
+								<button type="button" class="btn btn-primary" data-dismiss="modal">关闭
+								</button>
+							</div>
 			            </div>
 		        	</div><!-- /.modal-content -->
 		    	</div><!-- /.modal-dialog -->

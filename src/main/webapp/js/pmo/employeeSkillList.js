@@ -4,18 +4,7 @@ $(function () {
     loadCSSubDept();
     loadRole();
     loadSkill();
-//    $("input[name='_officialAccreditation']").change(function() { 
-//    $("#_officialAccreditation").click(function() { 
-//    	if($(this).is(':checked')){
-//    		console.log(3);
-//    		$(this).val(1);
-//    		$(this).next().text('Yes');
-//    	}else{
-//    		console.log(4);
-//    		$(this).val(0);
-//    		$(this).next().text('No');
-//    	}
-//    });
+    
     
 });
 
@@ -57,6 +46,18 @@ function loadSkill(result){
 
 function loadRole(result){
 	var url = path+'/json/role.json'
+	$.getJSON(url,  function(data) {
+		   $("#role").empty();
+		   $("#role").append("<option value=''>--Option--</option>");
+	       $.each(data, function(i, item) {
+	    	   $("#role").append("<option>"+item.name+"</option>");
+	       })
+//		   $('#csBu').val(result.pageInfo.bu);
+	});
+}
+
+function loadLevel(result){
+	var url = path+'/json/capabilityLevel.json'
 	$.getJSON(url,  function(data) {
 		   $("#role").empty();
 		   $("#role").append("<option value=''>--Option--</option>");
@@ -260,7 +261,8 @@ function search(){
 //}
 
 function detail(eHr){
-	$("#editModal").css("display","none");
+	$("tr:empty").remove();
+	$("#updateSkills").css("display","none");
 	var queryUrl = path+'/service/skill/detail/'+eHr;
 	$.ajax({
 		url:queryUrl,
@@ -319,7 +321,8 @@ function detail(eHr){
 }
 	
 function toEdit(eHr){
-	$("#editModal").css("display","block");
+	$("tr:empty").remove();
+	$("#updateSkills").css("display","block");
 	var queryUrl = path+'/service/skill/toEdit/'+eHr;
 	$.ajax({
 		url:queryUrl,
@@ -355,22 +358,28 @@ function toEdit(eHr){
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
 				
-				var td1 = $("<td width='20%'><input id='"+data[i].id+"' type='checkbox'"+ (data[i].status=='1'?'checked':'')
-						+" />      "  	+data[i].paramName + "</td>");
+				var td1 = $("<td width='20%'>" +"<input id='capparamId' type='hidden' value='"+(data[i].capparamId==null?'':data[i].capparamId)+"'/>"
+						+"<input id='status' type='hidden' value='"+data[i].status+"'/>"
+						+"<input id='id' type='hidden' value='"+(data[i].id==null?'':data[i].id)+"'/>"
+						+"<input id='ischeck' type='checkbox'"+ (data[i].status=='1'?'checked':'')
+						+" />"  	+data[i].paramName + "</td>");
 				var td2 = $("<td>"	+(data[i].abilityLevel==null?'':data[i].abilityLevel)	+ "</td>");
-				var td3 = $("<td>"	+( data[i].mainAbility==null?'<input id="mainAbility" name="mainAbility" type="radio"/>': 
-						('1'==data[i].mainAbility?'<input id="mainAbility" name="mainAbility" CHECKED type="radio"/>':
-							'<input id="mainAbility" name="mainAbility" type="radio"/>' )	
+				var td3 = $("<td>"	+( data[i].mainAbility==null?'<input id="mainAbility" name="mainAbility" type="radio" value="0"/>': 
+						('1'==data[i].mainAbility?'<input id="mainAbility" name="mainAbility" CHECKED type="radio" value="1"/>':
+							'<input id="mainAbility" name="mainAbility" type="radio" value="0"/>' )	
 						)
-						+ "</td>");
+						+ "</td>"); 
 				var td4 = $("<td>"	+( data[i].officialAccreditation==null?
-						'<SELECT ID="_official" NAME="_official" ><OPTION VALUE="1">Yes<OPTION VALUE="0" selected>No</SELECT>'
+						'<SELECT ID="officialAccreditation" ><OPTION VALUE="1">Yes<OPTION VALUE="0" selected="selected">No</SELECT>'
 						:('1'==data[i].officialAccreditation?
-							'<SELECT ID="_official" NAME="_official" ><OPTION VALUE="1" selected>Yes<OPTION VALUE="0">No</SELECT>':
-							'<SELECT ID="_official" NAME="_official" ><OPTION VALUE="1">Yes<OPTION VALUE="0" selected>No</SELECT>' ))		+ "</td>");
-				var td5 = $("<td><input name='_auth' type='text' value='"+(data[i].authenticationName==null?'':data[i].authenticationName) + "' /></td>");
-				var td6 = $("<td><input name='_work' type='text' size=2 value='"+(data[i].workExperience==null?'':data[i].workExperience) + "' /></td>");
-				
+							'<SELECT ID="officialAccreditation" ><OPTION VALUE="1" selected="selected">Yes<OPTION VALUE="0">No</SELECT>':
+							'<SELECT ID="officialAccreditation" ><OPTION VALUE="1">Yes<OPTION VALUE="0" selected="selected">No</SELECT>' ))		+ "</td>");
+//				var td5 = $("<td><input id='_authenticationName' type='text' value='"+(data[i].authenticationName==null?'':data[i].authenticationName) + "' /></td>");
+				var td5 = $("<td>"+(data[i].authenticationName==null?"<input id='authenticationName' type='text' maxLength=100 />": 
+					"<input id='authenticationName' type='text' value='"+data[i].authenticationName + "' maxLength=100 />")+"</td>") ;
+//				var td6 = $("<td><input id='_workExperience' type='text' size=2 value='"+(data[i].workExperience==null?'':data[i].workExperience) + "' /></td>");
+				var td6 = $("<td>"+(data[i].workExperience==null?"<input id='workExperience' type='text' onkeypress='return event.keyCode>=48&&event.keyCode<=57' ng-pattern=''/[^a-zA-Z]/' size=2 maxLength=2 />": 
+					"<input id='workExperience' type='text' value='"+data[i].workExperience + "' onkeypress='return event.keyCode>=48&&event.keyCode<=57' ng-pattern=''/[^a-zA-Z]/' size=2 maxLength=2 />")+"</td>") ;
 				
 				td1.appendTo(tr);
 				td2.appendTo(tr);
@@ -383,7 +392,62 @@ function toEdit(eHr){
 		}
 	})
 }
-	
-	
+
+function update(eHr){
+	$("tr:empty").remove();
+	var eHr= $("#myModalLabel").text().replace('Edit Competence Tag for ','');
+	var url = path+'/service/skill/save';
+	var rtn=1;
+	$("#accordion tbody tr").each(function(index,domEle){
+//		alert(paramName);
+//		alert( $(domEle).find("td").length);
+//		alert( $(domEle).find("td").eq(0).text());
+//		return ;
+		
+		var ischeck=$(domEle).find('#ischeck').prop('checked'); 
+//		alert("ischeck:"+typeof(ischeck));
+		var status=$(domEle).find('#status').val();
+		var id=$(domEle).find('#id').val();
+		if(ischeck){
+			var paramName= $(domEle).find("td").eq(0).text();
+			var capparamId=$(domEle).find('#capparamId').val();
+			var mainAbility=$(domEle).find('#mainAbility').prop('checked')?'1':''; 
+			var officialAccreditation=$(domEle).find("#officialAccreditation").val();
+			var authenticationName=$(domEle).find("#authenticationName").val(); 
+			var workExperience=$(domEle).find("#workExperience").val(); 
+//			alert(capparamId+','+id+','+mainAbility+','+officialAccreditation+','+authenticationName+','+workExperience);  
+			$.ajax({
+				url:url,
+				dataType:"json",
+				data:{"employeeId":eHr, "status":status, "capparamId":capparamId, "id":id,  "mainAbility":mainAbility
+					, "officialAccreditation":officialAccreditation, "authenticationName":authenticationName, "workExperience":workExperience },
+				async:true,
+				cache:false,
+				type:"post",
+				success:function(flag){
+					if(flag=='0'){
+						alert(eHr +" update "+paramName+" fail1");
+					}
+				}
+			})
+		}else{
+			//del
+			if(status=='1'){
+				url = path+'/service/skill/delete/'+id;
+				$.post(url);
+			}
+		}
+		
+		
+	});
+//	toEdit(eHr);
+	alert(eHr+" update Success.");
+	$(".modal-footer .group > button").click();
+}
+
+
+
+
+
 
 
