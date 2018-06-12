@@ -590,9 +590,18 @@ var path='<%=path%>';
 	<!--/.fluid-container-->
 
 	<!-- external javascript -->
+	<!-- CSS引用 -->
+    <link rel="stylesheet" href="<%=path %>/extensioncss/bootstarp-table/bootstrap-table.css" type="text/css" />
+    <link rel="stylesheet" href="<%=path %>/extensioncss/bootstarp-table/bootstrap-table.min.css" type="text/css" />     
+  
+    <!-- JS引用 -->
+    <script src="<%=path %>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<%=path %>/extensionjs/bootstrap-table/dist/bootstrap-table.js" type="text/javascript"></script>
+    <script src="<%=path %>/extensionjs/bootstrap-table/dist/bootstrap-table-locale-all.js" type="text/javascript"></script>
+	<script src="<%=path %>/extensionjs/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
+	
 
-	<script
-		src="<%=path %>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	
 	<script
 		src="<%=path %>/bower_components/bootstrap-val/bootstrapValidator.min.js"></script>
 
@@ -631,15 +640,7 @@ var path='<%=path%>';
 	<!-- application script for Charisma demo -->
 	<script src="<%=path %>/js/charisma.js"></script>
 	
-	<!-- CSS引用 -->
-    <link rel="stylesheet" href="<%=path %>/extensioncss/bootstarp-table/bootstrap-table.css" type="text/css" />
-    <link rel="stylesheet" href="<%=path %>/extensioncss/bootstarp-table/bootstrap-table.min.css" type="text/css" />     
-  
-    <!-- JS引用 -->
-    <script src="<%=path %>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="<%=path %>/extensionjs/bootstrap-table/dist/bootstrap-table.js" type="text/javascript"></script>
-    <script src="<%=path %>/extensionjs/bootstrap-table/dist/bootstrap-table-locale-all.js" type="text/javascript"></script>
-	<script src="<%=path %>/extensionjs/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
+	
     
 
 	<script type="text/javascript" src="<%=path %>/js/pmo/loadHSBCDept.js"></script>

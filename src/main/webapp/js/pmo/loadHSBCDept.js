@@ -747,33 +747,33 @@ function cdemand(){
 	            visible: true                  //是否显示复选框  
 	        },{
 	            field: 'rr',
-	            title: 'rr',
+	            title: 'RR',
 	            sortable: true
 	        },{
 	            field: 'jobCode',
-	            title: 'jobCode',
+	            title: 'JobCode',
 	            sortable: true
 	        },{
 	            field: 'skill',
-	            title: 'skill',
+	            title: 'Skill',
 	            sortable: true
 	        },{
 	            field: 'position',
-	            title: 'position',
+	            title: 'Position',
 	            sortable: true
 	        },{
 	            field: 'location',
-	            title: 'location',
+	            title: 'Location',
 	            sortable: true
 	        },
 	        {
 	            field: 'status',
-	            title: 'status',
+	            title: 'Status',
 	            sortable: true
 	        },
 	        {
 	            field: 'csSubDept',
-	            title: 'csSubDept',
+	            title: 'DU',
 	            sortable: true
 	        }/*,
 	        {
