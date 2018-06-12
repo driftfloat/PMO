@@ -46,6 +46,7 @@ import com.pmo.dashboard.util.Constants;
 import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.CSDeptService;
 import com.pom.dashboard.service.CandidateService;
+import com.pom.dashboard.service.DemandService;
 import com.pom.dashboard.service.EmployeeLogService;
 import com.pom.dashboard.service.EmployeeService;
 import com.pom.dashboard.service.HSBCDeptService;
@@ -84,6 +85,9 @@ public class EmployeeController {
 
 	@Resource
 	private CandidateService candidateService;
+	
+	@Resource
+	private DemandService demandService;
 
 
 
@@ -204,6 +208,7 @@ public class EmployeeController {
         String gbGf = request.getParameter("gbGf");
         String entryDate = request.getParameter("entryDate");
         String rmUserId = request.getParameter("rmUserId");
+        String demandid = request.getParameter("udemandid");
         String itindustryWorkYear = request.getParameter("itindustryWorkYear");
 
         //add begin
@@ -254,6 +259,11 @@ public class EmployeeController {
             }catch(Exception e){
             	e.printStackTrace();
             }
+            //修改需求状态
+            Demand demand = new Demand();
+            demand.setDemandId(demandid);
+            demand.setStatus("Onboard");
+            demandService.update(demand);
         }
         return resultFlag;
     }

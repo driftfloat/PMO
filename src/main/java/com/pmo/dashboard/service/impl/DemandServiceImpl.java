@@ -21,6 +21,7 @@ import com.pmo.dashboard.entity.CandidatePush;
 import com.pmo.dashboard.entity.Demand;
 import com.pmo.dashboard.entity.HSBCDept;
 import com.pmo.dashboard.entity.PageCondition;
+import com.pmo.dashboard.entity.QueryModel;
 import com.pom.dashboard.service.DemandService;
 
 /**
@@ -208,6 +209,16 @@ public class DemandServiceImpl implements DemandService{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<Demand> getDemand(QueryModel qm) {
+		return demandMapper.getDemand(qm);
+	}
+
+	@Override
+	public int update(Demand demand) {
+		return demandMapper.update(demand);
 	}
 	
 }

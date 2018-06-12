@@ -276,4 +276,32 @@
 		update t_demand set BGV_CLEARED = #{bgvCleared},UPDATE_DATE= date_format(now(),'%Y-%m-%d')
 		where CANDIDATE_ID = #{candidateId}
 	</update>
+	
+	<select id="getDemand" resultMap="demandMap" parameterType="com.pmo.dashboard.entity.QueryModel">
+	
+	    select * from t_demand where 1=1
+	    <if test="status != null and status != ''">
+			and STATUS = #{status}
+		</if>
+		<if test="csdeptids != null and csdeptids != ''">
+		    and CS_SUBDEPT in
+			<foreach collection="list" open="(" separator="," close=")" item="deptid">
+               #{deptid}
+            </foreach>
+		</if>
+		
+	
+	</select>
+	
+	
+	<update id="update" parameterType="com.pmo.dashboard.entity.Demand" >
+    update t_demand
+    <set >
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DEMAND_ID = #{demandId,jdbcType=VARCHAR}
+  </update>
+	
 </mapper>
