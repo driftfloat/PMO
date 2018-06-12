@@ -220,13 +220,6 @@ $(document).ready(function() {
                       
                 }
             },
-            demandrr: {
-                validators: {
-                    notEmpty: {
-                        message: 'please select  demand rr'
-                    }
-                }
-            },
             entryDate1: {
             	validators: {
                 notEmpty: {
