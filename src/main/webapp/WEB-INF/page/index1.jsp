@@ -81,7 +81,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> ddAdd Employee
+									<i class="glyphicon glyphicon-user"></i> Add Employee
 								</h2>
 							</div>
 							<div id="register" class="box-content" style="overflow: auto;">
@@ -569,7 +569,7 @@ var path='<%=path%>';
 									    <input type="button" value="Search"
 										name="subscribedemand" id="sub_searchdemand" href="#"
 										class="button btn btn-primary"
-										onclick=""
+										onclick="searchDemand()"
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
 									    </div>
 						  </div>

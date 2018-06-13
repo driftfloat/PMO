@@ -805,5 +805,20 @@ function sureDemand(){
 	
 	$("#udemandid").val("");
 	$("#udemandid").val(demand[0].demandId);
-	console.log($("#udemandid").val());
+	//console.log($("#udemandid").val());
 }
+
+//查找需求
+function searchDemand(){
+	var rr = $("#searchdemandrr").val();
+    var jobcode = $("#searchjobcode").val(); 
+    //alert(rr);
+	var queryParams = { 
+		query: {  
+			rr:rr,
+			jobcode:jobcode
+        }
+    }  
+	//刷新表格  
+    $('#demandlist2').bootstrapTable('refresh',queryParams);  
+} 

@@ -283,6 +283,12 @@
 	    <if test="status != null and status != ''">
 			and STATUS = #{status}
 		</if>
+		<if test="rr != null and rr != ''">
+			and RR = #{rr}
+		</if>
+		<if test="jobcode != null and jobcode != ''">
+			and JOB_CODE = #{jobcode}
+		</if>
 		<if test="csdeptids != null and csdeptids != ''">
 		    and CS_SUBDEPT in
 			<foreach collection="list" open="(" separator="," close=")" item="deptid">

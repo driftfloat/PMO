@@ -147,7 +147,7 @@ public class DemandController {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping("/getDemand")
 	@ResponseBody
-	public String getDemand(int pageSize,int pageNumber,HttpServletRequest request) throws JsonProcessingException{
+	public String getDemand(int pageSize,int pageNumber,String rr,String jobcode,HttpServletRequest request) throws JsonProcessingException{
 		//获取当前登录用户
 		User user = (User) request.getSession().getAttribute("loginUser");
 		//获取用户类型
@@ -175,11 +175,12 @@ public class DemandController {
 		QueryModel qm = new QueryModel();
 		qm.setCsdeptids(tempList);
 		qm.setStatus("Open");
+		qm.setRr(rr);
+		qm.setJobcode(jobcode);
 		//第一个参数当前页码，第二个参数每页条数
 		PageHelper.startPage(pageNumber,pageSize);  
 		List<Demand> list = demandService.getDemand(qm);
 		Map map = new HashMap();
-		@SuppressWarnings("unchecked")
 		PageInfo<Demand> page = new PageInfo(list);
 		map.put("total",page.getTotal());
 		map.put("rows", list);

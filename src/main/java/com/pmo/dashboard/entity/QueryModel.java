@@ -9,10 +9,32 @@ public class QueryModel {
 	   private List csdeptids;
 	   
 	   private String status;
+	   
+	   private String rr;
+	   
+	   private String jobcode;
+	   
+	   
 
 	   
 	   
 	   
+
+	   public String getRr() {
+		  return rr;
+	   }
+
+	   public void setRr(String rr) {
+		  this.rr = rr;
+	   }
+
+	   public String getJobcode() {
+		  return jobcode;
+	   }
+
+	   public void setJobcode(String jobcode) {
+		  this.jobcode = jobcode;
+	   }
 
 	   @SuppressWarnings("rawtypes")
 	   public List getCsdeptids() {
