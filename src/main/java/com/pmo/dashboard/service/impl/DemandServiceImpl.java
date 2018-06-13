@@ -93,10 +93,15 @@ public class DemandServiceImpl implements DemandService{
 		HSBCDept hsbcdept = new HSBCDept();
 		//将部门信息设置到需求信息中
 		for (Demand demands : list) {
-			temp = demands.getHsbcSubDeptId().split(",");
-			hsbcdept.setId(temp[0]);
-			List<HSBCDept> hsbcDept = hsbcDeptMapper.queryById(hsbcdept);
-			demands.setHsbcDept(hsbcDept.get(0));
+			List<HSBCDept> hsbcDept = null;
+			if(demands.getHsbcSubDeptId()!=null && !"".equals(demands.getHsbcSubDeptId())){
+				temp = demands.getHsbcSubDeptId().split(",");
+				hsbcdept.setId(temp[0]);
+				hsbcDept = hsbcDeptMapper.queryById(hsbcdept);
+				demands.setHsbcDept(hsbcDept.get(0));
+			}
+			
+			
 			if(hsbcDept!=null) {
 //				if(hsbcDept.getHsbcSubDeptName()==null||"".equals(hsbcDept.getHsbcSubDeptName())) {
 //					hsbcDept.setHsbcSubDeptName(hsbcDept.getHsbcDeptName());
