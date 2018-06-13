@@ -8,6 +8,7 @@ var csBuName0 = "";
 $(function(){
 	
 	loadEmployeeList();
+	initSearchDate();
 	
 })
 
@@ -424,23 +425,33 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 				}else if(userType=='5'){
 					if($("#userId").val()==result.data[i].rmUserId || result.data[i].rmUserId=='' || result.data[i].rmUserId==null){
 						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
-								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a></td>");
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a>" +
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"')>Promote</a>"+
+										"</td>"
+										
+						);
 					}else{
 						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a></td>");
 					}
 				}else if(userType=='11'||userType=='12'||userType=='13'||userType=='14'){
 					if(result.csdeptNameForEdit == result.data[i].csSubDeptName || result.user.bu== result.data[i].csSubDeptName){
 						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
-								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a></td>");
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a>" +
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"')>Promote</a>"+
+										"</td>");
 					}else{
 						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a></td>");
 					}
 				}else if(userType=='8'){
 					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a></td>");
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a>" +
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"')>Promote</a>"+
+									"</td>");
 				}else{
 					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a></td>");
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a>" +
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"')>Promote</a>"+
+									"</td>");
 				}
 				if((result.data[i].hsbcStaffId)==null){
 					var td4 = $("<td></td>");
@@ -517,4 +528,42 @@ function employeeDetail(employeeId,engagementType){
 	
 	$("#employeeId").val(employeeId);
 	$("#editForm").submit();
+}
+
+function initSearchDate(){
+	var picker1 = $('#datetimepicker1').datetimepicker({  
+		language : 'zh-CN',
+		format : "yyyy-mm-dd",
+		weekStart : 1,
+		todayBtn : 1,
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		minView : 2,
+		forceParse : 0
+    });  
+    var picker2 = $('#datetimepicker2').datetimepicker({  
+    	language : 'zh-CN',
+    	format : "yyyy-mm-dd",
+    	weekStart : 1,
+    	todayBtn : 1,
+    	autoclose : 1,
+    	todayHighlight : 1,
+    	startView : 2,
+    	minView : 2,
+    	forceParse : 0
+    });  
+    //动态设置最小值  
+    picker1.on('dp.change', function (e) {  
+        picker2.data('DateTimePicker').minDate(e.date);  
+    });  
+    //动态设置最大值  
+    picker2.on('dp.change', function (e) {  
+        picker1.data('DateTimePicker').maxDate(e.date);  
+    });  
+}
+
+function employeeUpgrade(staffname){
+	$("#employeeUpgrade").modal('show');
+	$("#upgradeemployeename").html(staffname);
 }

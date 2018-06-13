@@ -640,6 +640,16 @@ function getCurrentDate() {
 function cdemand(){
     //alert("加载需求");
     $("#demandlist").modal('show');
+    
+    /*var url = path+'/json/skill.json';
+    $.getJSON(url, function(data){
+        $.each(data, function(i, item){
+    	     $("#searchdemandskill").append("<option value='"+item.name+"'>"+item.name+"</option>");
+        })
+    })*/
+    
+    
+    
     var queryUrl = path+'/service/demand/getDemand/2'
     var table = $('#demandlist2').bootstrapTable({
         url: queryUrl,                      //请求后台的URL（*）
