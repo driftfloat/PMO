@@ -14,11 +14,34 @@ public class QueryModel {
 	   
 	   private String jobcode;
 	   
+	   private String type;
+	   
+	   private String skill;
+	   
+	   
+	   
+	   
 	   
 
 	   
 	   
 	   
+
+	   public String getSkill() {
+		  return skill;
+	   }
+
+	   public void setSkill(String skill) {
+		  this.skill = skill;
+	   }
+
+	   public String getType() {
+		  return type;
+	   }
+
+	   public void setType(String type) {
+		  this.type = type;
+	   }
 
 	   public String getRr() {
 		  return rr;

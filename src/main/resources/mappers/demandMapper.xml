@@ -289,6 +289,12 @@
 		<if test="jobcode != null and jobcode != ''">
 			and JOB_CODE = #{jobcode}
 		</if>
+		<if test="type != null and type != ''">
+			and ENGAGEMENT_TYPE = #{type}
+		</if>
+		<if test="skill != null and skill != ''">
+			and SKILL = #{skill}
+		</if>
 		<if test="csdeptids != null and csdeptids != ''">
 		    and CS_SUBDEPT in
 			<foreach collection="list" open="(" separator="," close=")" item="deptid">

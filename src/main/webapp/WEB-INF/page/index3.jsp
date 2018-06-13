@@ -390,10 +390,10 @@ var path='<%=path%>';
 								
 								<div class="form-group">
 									<div class="group">
-										<label class="col-sm-2 control-label">Demand RR</label>
+										<label class="col-sm-2 control-label">Demand Skill</label>
 										<div class="col-lg-4">
-											<input readonly="readonly" onclick="cdemand()" type="text" class="form-control" name="demandrr"
-												   id="demandrr" data-bv-group=".group"/>
+											<input readonly="readonly" onclick="cdemand()" type="text" class="form-control" name="demandskill"
+												   id="demandskill" data-bv-group=".group"/>
 										</div>
 									</div>
 
@@ -498,18 +498,10 @@ var path='<%=path%>';
 						<div class="modal-body">
 						  <div class="form-group">
 									<div class="group">
-										<label class="col-sm-2 control-label">RR</label>
+										<label class="col-sm-2 control-label">Skill</label>
 										<div class="col-lg-4">
-											<input type="text" class="form-control" name="searchdemandrr"
-												   id="searchdemandrr" data-bv-group=".group"/>
-										</div>
-									</div>
-
-									<div class="group">
-										<label class="col-sm-2 control-label">JobCode</label>
-										<div class="col-lg-4">
-											<input type="text" class="form-control" name="searchjobcode"
-												   id="searchjobcode" data-bv-group=".group"/>
+											<input type="text" class="form-control" name="searchdemandskill"
+												   id="searchdemandskill" data-bv-group=".group"/>
 										</div>
 									</div>
 						  </div>

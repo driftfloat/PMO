@@ -695,21 +695,10 @@ function getCurrentDate() {
 	
 }*/
 
-function loadDemand(){
-	var url = path+'/service/demand/getDemand'
-	$.getJSON(url,  function(data) {
-		   $("#demandrr").empty();
-		   $("#demandrr").append("<option value=''>--Option--</option>");	
-	       $.each(data, function(i, item) {
-	    	   $("#demandrr").append("<option value=''>"+item.rr+"</option>");
-	       })
-	});
-}
-
 function cdemand(){
 	    //alert("加载需求");
 	    $("#demandlist").modal('show');
-	    var queryUrl = path+'/service/demand/getDemand'
+	    var queryUrl = path+'/service/demand/getDemand/1'
 	    var table = $('#demandlist2').bootstrapTable({
 	        url: queryUrl,                      //请求后台的URL（*）
 	        method: 'get',                      //请求方式（*）

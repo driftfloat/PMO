@@ -640,7 +640,7 @@ function getCurrentDate() {
 function cdemand(){
     //alert("加载需求");
     $("#demandlist").modal('show');
-    var queryUrl = path+'/service/demand/getDemand'
+    var queryUrl = path+'/service/demand/getDemand/2'
     var table = $('#demandlist2').bootstrapTable({
         url: queryUrl,                      //请求后台的URL（*）
         method: 'get',                      //请求方式（*）
@@ -731,8 +731,8 @@ var demand = $('#demandlist2').bootstrapTable('getSelections');
 
 $("#demandlist").modal('hide');
 
-$("#demandrr").val("");
-$("#demandrr").val(demand[0].rr);
+$("#demandskill").val("");
+$("#demandskill").val(demand[0].skill);
 
 $("#udemandid").val("");
 $("#udemandid").val(demand[0].demandId);
@@ -741,13 +741,11 @@ $("#udemandid").val(demand[0].demandId);
 
 //查找需求
 function searchDemand(){
-var rr = $("#searchdemandrr").val();
-var jobcode = $("#searchjobcode").val(); 
+var skill = $("#searchdemandskill").val();
 //alert(rr);
 var queryParams = { 
 	query: {  
-		rr:rr,
-		jobcode:jobcode
+		skill:skill
     }
 }  
 //刷新表格  

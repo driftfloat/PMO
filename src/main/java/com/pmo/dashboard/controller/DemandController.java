@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -145,9 +146,9 @@ public class DemandController {
 	 * @throws JsonProcessingException 
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping("/getDemand")
+	@RequestMapping("/getDemand/{id}")
 	@ResponseBody
-	public String getDemand(int pageSize,int pageNumber,String rr,String jobcode,HttpServletRequest request) throws JsonProcessingException{
+	public String getDemand(int pageSize,int pageNumber,String rr,String jobcode,String skill,@PathVariable("id") String id,HttpServletRequest request) throws JsonProcessingException{
 		//获取当前登录用户
 		User user = (User) request.getSession().getAttribute("loginUser");
 		//获取用户类型
@@ -177,6 +178,15 @@ public class DemandController {
 		qm.setStatus("Open");
 		qm.setRr(rr);
 		qm.setJobcode(jobcode);
+		if(id.equals("1")){
+			qm.setType("Time&Material");
+		}
+        if(id.equals("2")){
+        	qm.setType("Fixed Price");
+		}
+        if(id.equals("3")){
+        	qm.setType("Support");
+        }
 		//第一个参数当前页码，第二个参数每页条数
 		PageHelper.startPage(pageNumber,pageSize);  
 		List<Demand> list = demandService.getDemand(qm);
