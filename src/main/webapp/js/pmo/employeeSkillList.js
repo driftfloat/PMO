@@ -2,6 +2,7 @@ $(function () {
 	$('#myModal').modal('hide')
     loadSkillList();
     loadCSSubDept();
+    loadLevel();
     loadRole();
     loadSkill();
     
@@ -45,26 +46,39 @@ function loadSkill(result){
 }
 
 function loadRole(result){
-	var url = path+'/json/role.json'
+	var url = path+'/json/role.json';
 	$.getJSON(url,  function(data) {
 		   $("#role").empty();
 		   $("#role").append("<option value=''>--Option--</option>");
 	       $.each(data, function(i, item) {
 	    	   $("#role").append("<option>"+item.name+"</option>");
 	       })
-//		   $('#csBu').val(result.pageInfo.bu);
 	});
 }
 
 function loadLevel(result){
-	var url = path+'/json/capabilityLevel.json'
+	var url = path+'/json/capabilityLevel.json';
 	$.getJSON(url,  function(data) {
-		   $("#role").empty();
-		   $("#role").append("<option value=''>--Option--</option>");
+		   $("#capabilityLevel").empty();
+		   $("#capabilityLevel").append("<option value=''>--Option--</option>");
 	       $.each(data, function(i, item) {
-	    	   $("#role").append("<option>"+item.name+"</option>");
+	    	   $("#capabilityLevel").append("<option value='"+item.key+"'>"+item.name+"</option>");
 	       })
-//		   $('#csBu').val(result.pageInfo.bu);
+	});
+}
+function loadLevelToTd(sele, abilityLevel){
+	if(abilityLevel==null) abilityLevel='';
+	var url = path+'/json/capabilityLevel.json';
+	$.getJSON(url,  function(data) {
+		$(sele).empty();
+		$(sele).append("<option value=''>--Option--</option>");
+	    $.each(data, function(i, item) {
+	    	 if(item.key==abilityLevel){
+	    		 $(sele).append("<option selected value='"+item.key+"'>"+item.name+"</option>");
+	    	 }else{
+	    		 $(sele).append("<option value='"+item.key+"'>"+item.name+"</option>");
+	    	 }
+	    })
 	});
 }
 
@@ -188,7 +202,7 @@ function loadSkillList(){
         ,{
             field: 'workExperience',
 //            title: 'work Experience(Years)',
-            title: 'work',
+            title: 'work(Years)',
             sortable: true
         }
         ,{
@@ -197,6 +211,7 @@ function loadSkillList(){
 //            ,sortable: true
             ,formatter:function(value,row,index){
             	var r = row.id==null?'':"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=detail('"+row.eHr+"')>Detail</a>" ;
+//            	var r = "<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=detail('"+row.eHr+"')>Detail</a>" ;
             	return r+"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=toEdit('"+row.eHr+"')>Edit</a>" ;
             }
         }
@@ -234,6 +249,7 @@ function search(){
 	var paramName = $("#paramName").val();
 	var officialAccreditation = $("#officialAccreditation").val();
 	var workExperience = $("#workExperience").val();
+	var capabilityLevel = $("#capabilityLevel").val();
 	
 	var queryParams = { 
 		query: {  
@@ -246,6 +262,7 @@ function search(){
 			,paramName:paramName
 			,officialAccreditation:officialAccreditation
 			,workExperience:workExperience
+			,abilityLevel:capabilityLevel
         }
     }  
 	//刷新表格  
@@ -302,7 +319,7 @@ function detail(eHr){
 				tr.appendTo(tbody);
 				
 				var td1 = $("<td width='20%'>"	+data[i].paramName + "</td>");
-				var td2 = $("<td>"	+(data[i].abilityLevel==null?'':data[i].abilityLevel)	+ "</td>");
+				var td2 = $("<td>"	+(data[i].abilityLevel==null?'':showLeve(data[i].abilityLevel))	+ "</td>");
 				var td3 = $("<td>"	+( data[i].mainAbility==null?'': ('1'==data[i].mainAbility?'<input CHECKED type="radio"/>':'' )	)+ "</td>");
 				var td4 = $("<td>"	+( data[i].officialAccreditation==null?'':('1'==data[i].officialAccreditation?'Yes':'No' ))		+ "</td>");
 				var td5 = $("<td>"	+( data[i].authenticationName==null?'':data[i].authenticationName)	+ "</td>");
@@ -317,7 +334,8 @@ function detail(eHr){
 				last_majorcate = data[i].majorcateId ;
 			}
 		}
-	})
+	});
+	$(".panel-collapse").css("in");
 }
 	
 function toEdit(eHr){
@@ -363,7 +381,8 @@ function toEdit(eHr){
 						+"<input id='id' type='hidden' value='"+(data[i].id==null?'':data[i].id)+"'/>"
 						+"<input id='ischeck' type='checkbox'"+ (data[i].status=='1'?'checked':'')
 						+" />"  	+data[i].paramName + "</td>");
-				var td2 = $("<td>"	+(data[i].abilityLevel==null?'':data[i].abilityLevel)	+ "</td>");
+				var td2 = $("<td></td>");  
+				var sel_level = $("<SELECT ID='capabilityLevel' ></SELECT>");
 				var td3 = $("<td>"	+( data[i].mainAbility==null?'<input id="mainAbility" name="mainAbility" type="radio" value="0"/>': 
 						('1'==data[i].mainAbility?'<input id="mainAbility" name="mainAbility" CHECKED type="radio" value="1"/>':
 							'<input id="mainAbility" name="mainAbility" type="radio" value="0"/>' )	
@@ -374,10 +393,8 @@ function toEdit(eHr){
 						:('1'==data[i].officialAccreditation?
 							'<SELECT ID="officialAccreditation" ><OPTION VALUE="1" selected="selected">Yes<OPTION VALUE="0">No</SELECT>':
 							'<SELECT ID="officialAccreditation" ><OPTION VALUE="1">Yes<OPTION VALUE="0" selected="selected">No</SELECT>' ))		+ "</td>");
-//				var td5 = $("<td><input id='_authenticationName' type='text' value='"+(data[i].authenticationName==null?'':data[i].authenticationName) + "' /></td>");
 				var td5 = $("<td>"+(data[i].authenticationName==null?"<input id='authenticationName' type='text' maxLength=100 />": 
 					"<input id='authenticationName' type='text' value='"+data[i].authenticationName + "' maxLength=100 />")+"</td>") ;
-//				var td6 = $("<td><input id='_workExperience' type='text' size=2 value='"+(data[i].workExperience==null?'':data[i].workExperience) + "' /></td>");
 				var td6 = $("<td>"+(data[i].workExperience==null?"<input id='workExperience' type='text' onkeypress='return event.keyCode>=48&&event.keyCode<=57' ng-pattern=''/[^a-zA-Z]/' size=2 maxLength=2 />": 
 					"<input id='workExperience' type='text' value='"+data[i].workExperience + "' onkeypress='return event.keyCode>=48&&event.keyCode<=57' ng-pattern=''/[^a-zA-Z]/' size=2 maxLength=2 />")+"</td>") ;
 				
@@ -387,28 +404,45 @@ function toEdit(eHr){
 				td4.appendTo(tr);
 				td5.appendTo(tr);
 				td6.appendTo(tr);
+				
+				sel_level.appendTo(td2);
+				loadLevelToTd(sel_level, data[i].abilityLevel);
 				last_majorcate = data[i].majorcateId ;
 			}
 		}
-	})
+	});
+	$(".panel-collapse").css("in");
 }
 
 function update(eHr){
 	$("tr:empty").remove();
+	
+	var _ischeck = $("#accordion tbody tr").find("#ischeck:checked").length==0?true:false; 
+	if(_ischeck){
+		alert("Please choose  at least one  skills.");
+		return ;
+	}
+	
+	var _mainAbility = $("#accordion tbody tr").find("input[name='mainAbility']").is(':checked')?false:true; 
+	if(_mainAbility){
+		alert("Please choose Main Ability.");
+		return ;
+	}
+	
+	
 	var eHr= $("#myModalLabel").text().replace('Edit Competence Tag for ','');
 	var url = path+'/service/skill/save';
 	var rtn=1;
 	$("#accordion tbody tr").each(function(index,domEle){
-//		alert(paramName);
 //		alert( $(domEle).find("td").length);
 //		alert( $(domEle).find("td").eq(0).text());
 //		return ;
 		
 		var ischeck=$(domEle).find('#ischeck').prop('checked'); 
-//		alert("ischeck:"+typeof(ischeck));
 		var status=$(domEle).find('#status').val();
 		var id=$(domEle).find('#id').val();
 		if(ischeck){
+			var capabilityLevel= $(domEle).find("#capabilityLevel").val();
 			var paramName= $(domEle).find("td").eq(0).text();
 			var capparamId=$(domEle).find('#capparamId').val();
 			var mainAbility=$(domEle).find('#mainAbility').prop('checked')?'1':''; 
@@ -419,7 +453,7 @@ function update(eHr){
 			$.ajax({
 				url:url,
 				dataType:"json",
-				data:{"employeeId":eHr, "status":status, "capparamId":capparamId, "id":id,  "mainAbility":mainAbility
+				data:{"abilityLevel":capabilityLevel, "employeeId":eHr, "status":status, "capparamId":capparamId, "id":id,  "mainAbility":mainAbility
 					, "officialAccreditation":officialAccreditation, "authenticationName":authenticationName, "workExperience":workExperience },
 				async:true,
 				cache:false,
@@ -440,12 +474,26 @@ function update(eHr){
 		
 		
 	});
-//	toEdit(eHr);
 	alert(eHr+" update Success.");
 	$(".modal-footer .group > button").click();
 }
 
-
+function showLeve(n){
+	var v='';
+	switch(n)
+	{
+		case '0':
+	        v='junior';
+	        break;
+	    case '1':
+	    	v='intermediate';
+	        break;
+	    case '2':
+	    	v='senior';
+	        break;
+	}
+	return v;
+}
 
 
 

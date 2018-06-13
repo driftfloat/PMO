@@ -36,14 +36,14 @@ public class EmployeeSkillServiceImpl implements EmployeeSkillService {
 
 	@Override
 	public boolean insert(EmployeeSkill record) {
+		boolean rtn = false;
 		record.setId(Utils.getUUID());
-//		capabilityLabelParamMapper.selectByPrimaryKey(record.getCapparamId()).getParamName();
 		record.setParamName(capabilityLabelParamMapper.selectByPrimaryKey(record.getCapparamId()).getParamName());
 		record.setCreateDate(new Date());
 		if(employeeSkillMapper.insertSelective(record)>0){
-            return true;
+			rtn = true;
         }
-		return false;
+		return rtn;
 	}
 
 	@Override

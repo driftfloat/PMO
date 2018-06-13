@@ -46,7 +46,7 @@
     MAIN_ABILITY, OFFICIAL_ACCREDITATION, AUTHENTICATION_NAME, WORK_EXPERIENCE, OPERATE_ID
   </sql>
   <sql id="Join_Column_List" >
-    s.ID,e.HSBC_STAFF_ID,e.E_HR,e.EMPLOYEE_ID,e.lob,e.STAFF_NAME,e.CS_SUBDEPT_ID,e.ROLE, s.PARAM_NAME,s.OFFICIAL_ACCREDITATION,s.WORK_EXPERIENCE 
+    s.ID,e.HSBC_STAFF_ID,e.E_HR,e.EMPLOYEE_ID,e.lob,e.STAFF_NAME,e.CS_SUBDEPT_ID,e.ROLE, s.ABILITY_LEVEL, s.PARAM_NAME,s.OFFICIAL_ACCREDITATION,s.WORK_EXPERIENCE 
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -221,6 +221,9 @@
 	<if test="workExperience != null and workExperience != ''">
 		AND s.WORK_EXPERIENCE >= #{workExperience}
 	</if>
+	<if test="abilityLevel != null and abilityLevel != ''">
+		AND s.ABILITY_LEVEL = #{abilityLevel}
+	</if>
 	
     ) s ON e.E_HR = s.EMPLOYEE_ID
     where 1=1 
@@ -250,6 +253,9 @@
 	</if>
 	<if test="workExperience != null and workExperience != ''">
 		AND s.WORK_EXPERIENCE >= #{workExperience}
+	</if>
+	<if test="abilityLevel != null and abilityLevel != ''">
+		AND s.ABILITY_LEVEL = #{abilityLevel}
 	</if>
   </select>
   <select id="skills"  parameterType="string" resultType="string">
@@ -285,5 +291,9 @@
 	JOIN t_capabilitylabel_param f
 	WHERE f.MAJORCATE_ID=c.MAJORCATE_ID
 	  AND (f.SUBCATE_ID  IS NULL OR f.SUBCATE_ID='') 
+  </select>
+  
+  <select id="queryEhrIds"  parameterType="string" resultType="string">
+  	SELECT id FROM t_employee_skill WHERE EMPLOYEE_ID =#{value}
   </select>
 </mapper>

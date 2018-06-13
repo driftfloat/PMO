@@ -139,7 +139,7 @@ var path='<%=path%>';
 										</div>
 										</br></br></br>
 										<div class="group">
-											<label class="col-sm-2 control-label">official Certification</label>
+											<label class="col-sm-2 control-label">Official Certification</label>
 											<div class="col-sm-4">
 												<input type="checkbox" value="" name="officialAccreditation" id="officialAccreditation">
 											</div>
@@ -148,6 +148,16 @@ var path='<%=path%>';
 											<label class="col-sm-2 control-label">work Experience(Years)</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="workExperience"	id="workExperience" />
+											</div>
+										</div>
+										</br></br></br>
+										<div class="group">
+											<label class="col-lg-2 control-label">Capability Level</label>
+											<div class="col-lg-4">
+												<select class="form-control" name="capabilityLevel" data-bv-notempty
+													data-bv-notempty-message="请选择Level" id="capabilityLevel" data-bv-group=".group">
+													<option value="">-- Option--</option>
+												</select>
 											</div>
 										</div>
 										</br></br></br>
