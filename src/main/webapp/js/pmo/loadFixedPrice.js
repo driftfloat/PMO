@@ -703,7 +703,7 @@ function cdemand(){
             sortable: true
         },
         {
-            field: 'csSubDept',
+            field: 'csDeptName',
             title: 'DU',
             sortable: true
         }/*,

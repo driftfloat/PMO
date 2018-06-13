@@ -180,6 +180,15 @@ public class DemandController {
 		//第一个参数当前页码，第二个参数每页条数
 		PageHelper.startPage(pageNumber,pageSize);  
 		List<Demand> list = demandService.getDemand(qm);
+		/**
+		 * 处理交付部名称
+		 */
+		for(int i=0;i<list.size();i++){
+			CSDept csdept = csDeptService.queryCSDeptById(list.get(i).getCsSubDept());
+			if(csdept!=null){
+				list.get(i).setCsDeptName(csdept.getCsSubDeptName());
+			}
+		}
 		Map map = new HashMap();
 		PageInfo<Demand> page = new PageInfo(list);
 		map.put("total",page.getTotal());
