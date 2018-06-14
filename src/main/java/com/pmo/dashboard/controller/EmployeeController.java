@@ -261,12 +261,13 @@ public class EmployeeController {
             	e.printStackTrace();
             }
             //修改需求状态并且将返回的员工ID保存到需求表中的候选人ID字段中
-            Demand demand = new Demand();
-            demand.setDemandId(demandid);
-            demand.setStatus("Onboard");
-            demand.setCandidateId(employeeid);
-            demandService.update(demand);
-           
+            if(!"".equals(demandid) && demandid!=null){
+            	Demand demand = new Demand();
+                demand.setDemandId(demandid);
+                demand.setStatus("Onboard");
+                demand.setCandidateId(employeeid);
+                demandService.update(demand);
+            }
         }
         return employeeid!=""?true:false;
     }
@@ -366,31 +367,31 @@ public class EmployeeController {
         
         boolean resultFlag = employeeService.updateEmployee(employee);
         
-        /**
-         * 第一步:清空原来对应需求的候选人ID字段，并且将原来需求的状态修改回Open状态
-         */
-        QueryModel qm = new QueryModel();
-        Demand demand = new Demand();
-        qm.setEmployeeid(employee.getEmployeeId());
-        List<Demand> list = demandService.getDemand(qm);
-        if(list!=null && list.size()>0){
-        	demand.setDemandId(list.get(0).getDemandId());
-        	demand.setStatus("Open");
-        	demand.setCandidateId("");
-        	demandService.update(demand);
+        
+        if(!"".equals(demandid) && demandid!=null){
+        	/**
+             * 第一步:清空原来对应需求的候选人ID字段，并且将原来需求的状态修改回Open状态
+             */
+            QueryModel qm = new QueryModel();
+            Demand demand = new Demand();
+            qm.setEmployeeid(employee.getEmployeeId());
+            List<Demand> list = demandService.getDemand(qm);
+            if(list!=null && list.size()>0){
+            	demand.setDemandId(list.get(0).getDemandId());
+            	demand.setStatus("Open");
+            	demand.setCandidateId("");
+            	demandService.update(demand);
+            }
+            
+            /**
+             * 第二步:修改需求状态并且将员工ID保存到需求表中的候选人ID字段中
+             */
+            
+            demand.setDemandId(demandid);
+            demand.setStatus("Onboard");
+            demand.setCandidateId(employee.getEmployeeId());
+            demandService.update(demand);
         }
-        
-        
-        
-        /**
-         * 第二步:修改需求状态并且将员工ID保存到需求表中的候选人ID字段中
-         */
-        
-        demand.setDemandId(demandid);
-        demand.setStatus("Onboard");
-        demand.setCandidateId(employee.getEmployeeId());
-        demandService.update(demand);
-
         return resultFlag;
     }
 

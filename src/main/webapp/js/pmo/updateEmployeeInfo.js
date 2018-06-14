@@ -1,5 +1,5 @@
 $(function() {
-
+	$("#udemandid").val("");
 	loadEmployeeInfo();
 	dateType();
 });
