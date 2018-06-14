@@ -80,7 +80,7 @@ var path='<%=path%>';
 						<div class="box-inner">
 							<div class="box-header well" data-original-title="">
 								<h2>
-									<i class="glyphicon glyphicon-user"></i> ddEdit Employee
+									<i class="glyphicon glyphicon-user"></i> Edit Employee
 								</h2>
 							</div>
 							<div id="register" class="box-content" style="overflow: auto;">
@@ -88,6 +88,7 @@ var path='<%=path%>';
 							    
 									    <input type="hidden" name="employeeId" id="employeeId" value="${employeeId}"/>
 								<input id="udemandid" value="" type="hidden"></input>
+								<input id="senddemandtype" value="1" type="hidden"></input>
 								<div id="successAlert" class="alert alert-success" style="display: none;"></div>	
 							    <br/>
 								<div class="form-group">
@@ -421,7 +422,7 @@ var path='<%=path%>';
 								</div>
 								<div class="form-group">
 									<div class="group">
-										<label class="col-sm-2 control-label">Demand RR</label>
+										<label class="col-sm-2 control-label">Demand</label>
 										<div class="col-lg-4">
 											<input readonly="readonly" onclick="cdemand()" type="text" class="form-control" name="demandrr"
 												   id="demandrr" data-bv-group=".group"/>
@@ -571,7 +572,7 @@ var path='<%=path%>';
 			            </div>
 						<div class="modal-footer">
 							 <button id="cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel&nbsp;</button>
-							 <button id="sure" type="button" onclick="sureDemand()" class="btn btn-primary">Sure&nbsp;&nbsp;</button>
+							 <button id="sure" type="button" onclick="sureDemand(1)" class="btn btn-primary">Sure&nbsp;&nbsp;</button>
 						</div>
 					</div>
 					

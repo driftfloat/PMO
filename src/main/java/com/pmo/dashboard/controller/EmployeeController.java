@@ -166,6 +166,14 @@ public class EmployeeController {
         String employeeId = request.getParameter("employeeId");
 
         Employee employee = employeeService.queryEmployeeById(employeeId);
+        //根据employeeid获取需求
+        QueryModel qm = new QueryModel();
+        qm.setEmployeeid(employee.getEmployeeId());
+        List<Demand> list = demandService.getDemand(qm);
+        if(list!=null && list.size()>0){
+        	employee.setDemandrr(list.get(0).getRr());
+        	employee.setDemandskill(list.get(0).getSkill());
+        }
 
         return employee;
     }

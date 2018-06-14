@@ -185,6 +185,21 @@ function loadEmployeeInfo() {
 			$('#chsoftiProNumber').val(employee.chsoftiProNumber);
 			$('#chsoftiProStartDate1').val(employee.chsoftiProStartdate);
 			$('#chsoftiProName').val(employee.chsoftiProName);
+			
+			var type = $("#senddemandtype").val();
+			if(type=="1"){
+				$("#demandrr").val("");
+				$("#demandrr").val(employee.demandrr);
+			}
+			if(type=="2"){
+				$("#demandskill").val("");
+				$("#demandskill").val(employee.demandskill);
+			}
+			if(type=="3"){
+				$("#demandskill").val("");
+				$("#demandskill").val(employee.demandskill);
+			}
+			
 		}
 	})
 }
@@ -677,8 +692,9 @@ function getCurrentDate() {
 
 function cdemand(){
     //alert("加载需求");
+	var type = $("#senddemandtype").val();
     $("#demandlist").modal('show');
-    var queryUrl = path+'/service/demand/getDemand/1'
+    var queryUrl = path+'/service/demand/getDemand/'+type
     var table = $('#demandlist2').bootstrapTable({
         url: queryUrl,                      //请求后台的URL（*）
         method: 'get',                      //请求方式（*）
@@ -763,14 +779,25 @@ function cdemand(){
     });
 }
 
-function sureDemand(){
+function sureDemand(type){
 var demand = $('#demandlist2').bootstrapTable('getSelections');
 //console.log(demand[0].demandId);
 
 $("#demandlist").modal('hide');
 
-$("#demandrr").val("");
-$("#demandrr").val(demand[0].rr);
+if(type=="1"){
+	$("#demandrr").val("");
+	$("#demandrr").val(demand[0].rr);
+}
+if(type=="2"){
+	$("#demandskill").val("");
+	$("#demandskill").val(demand[0].skill);
+}
+if(type=="3"){
+	$("#demandskill").val("");
+	$("#demandskill").val(demand[0].skill);
+}
+
 
 $("#udemandid").val("");
 $("#udemandid").val(demand[0].demandId);
