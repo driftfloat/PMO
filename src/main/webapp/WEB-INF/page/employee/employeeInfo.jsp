@@ -407,8 +407,10 @@ var path='<%=path%>';
                                     <div class="group">
 										<label class="col-sm-2 control-label">Promote Role</label>
 										<div class="col-sm-4">
-											<input type="text" class="form-control" name="promoteroleupgrade"
-													id="promoteroleupgrade" />
+											<select class="form-control" name="promoteroleupgrade"
+													id="promoteroleupgrade">
+												<option value="">--Option--</option>	
+											</select>
 										</div>
 									</div>
 									<div class="group">

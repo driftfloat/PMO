@@ -686,4 +686,14 @@ function employeeUpgrade(staffname,ehr,staffid,lob){
            
         },
     });
+    loadRole();
+}
+
+function loadRole(){
+	var url = path+'/json/role.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#promoteroleupgrade").append("<option>"+item.name+"</option>");
+	       })
+	});
 }
