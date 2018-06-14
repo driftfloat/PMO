@@ -26,4 +26,9 @@ public interface EmployeeSkillMapper {
     List<EmployeeSkill> toEdit(String eHr);
     
     List<String> queryEhrIds(String eHr);
+    
+    String haveSkill(EmployeeSkill condition);
+    
+    List<EmployeeSkill> toBatch();
+    
 }

@@ -121,7 +121,7 @@ function loadSkillList(){
         striped: true,                      //是否显示行间隔色
         fixedColumns: true,
         fixedNumber: 0,
-        singleSelect : true,                // 单选checkbox 
+        singleSelect : false,                // 单选checkbox 
         cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,                   //是否显示分页（*）
         sortable: true,                     //是否启用排序
@@ -280,6 +280,7 @@ function search(){
 function detail(eHr){
 	$("tr:empty").remove();
 	$("#updateSkills").css("display","none");
+	$("#batchUpdate").css("display","none");
 	var queryUrl = path+'/service/skill/detail/'+eHr;
 	$.ajax({
 		url:queryUrl,
@@ -341,6 +342,7 @@ function detail(eHr){
 function toEdit(eHr){
 	$("tr:empty").remove();
 	$("#updateSkills").css("display","block");
+	$("#batchUpdate").css("display","none");
 	var queryUrl = path+'/service/skill/toEdit/'+eHr;
 	$.ajax({
 		url:queryUrl,
@@ -493,6 +495,91 @@ function showLeve(n){
 	        break;
 	}
 	return v;
+}
+
+function toBatch(){
+	if($("#skillList .bs-checkbox :checkbox:checked").length==0){
+		alert("please select employee.");
+		return ;
+	}
+	var eHrs ='';
+	$("#skillList .bs-checkbox :checkbox:checked").each(function(i){
+//		alert($(this).html())  //.eq(1).html()
+		alert($(this).parent().parent().find("td").length)  //.eq(1).html()
+	 });
+	return ;
+	
+	$("tr:empty").remove();
+	$("#updateSkills").css("display","none");
+	$("#batchUpdate").css("display","block");
+	
+	var queryUrl = path+'/service/skill/toBatch';
+	$.ajax({
+		url:queryUrl,
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"post",
+		success:function(data){
+			$("#detailBtn").click();
+			$("#accordion > div:gt(0)").remove();
+			var tbody ;
+			var last_majorcate = '' ;
+			$("#myModalLabel").text("Batch Edit");
+			for (var i = 0; i <data.length; i++) {
+				if(last_majorcate!=data[i].majorcateId){
+					var div_id='div_'+data[i].majorcateId;
+					var a_id='a_'+data[i].majorcateId;
+					$("#accordion > div:first-child").clone().appendTo($("#accordion")); 
+					$("#accordion > div:last-child").attr('id',div_id);
+					
+					$("#"+div_id +" a").attr('href','#'+a_id);
+					$("#"+div_id +" a").text(data[i].fatherName);
+					$("#"+div_id +" > div").eq(1).attr('id', a_id);
+					
+					$("#accordion > div:last-child").css("display","block");
+					tbody = $("#accordion tbody:last-child");
+					div_id = '';
+				}
+				var tr = $("<tr></tr>");
+				tr.appendTo(tbody);
+				
+				var td1 = $("<td width='20%'>" +"<input id='capparamId' type='hidden' value='"+(data[i].capparamId==null?'':data[i].capparamId)+"'/>"
+						+"<input id='status' type='hidden' value='"+data[i].status+"'/>"
+						+"<input id='id' type='hidden' value='"+(data[i].id==null?'':data[i].id)+"'/>"
+						+"<input id='ischeck' type='checkbox'"+ (data[i].status=='1'?'checked':'')
+						+" />"  	+data[i].paramName + "</td>");
+				var td2 = $("<td></td>");  
+				var sel_level = $("<SELECT ID='capabilityLevel' ></SELECT>");
+				var td3 = $("<td>"	+( data[i].mainAbility==null?'<input id="mainAbility" name="mainAbility" type="radio" value="0"/>': 
+						('1'==data[i].mainAbility?'<input id="mainAbility" name="mainAbility" CHECKED type="radio" value="1"/>':
+							'<input id="mainAbility" name="mainAbility" type="radio" value="0"/>' )	
+						)
+						+ "</td>"); 
+				var td4 = $("<td>"	+( data[i].officialAccreditation==null?
+						'<SELECT ID="officialAccreditation" ><OPTION VALUE="1">Yes<OPTION VALUE="0" selected="selected">No</SELECT>'
+						:('1'==data[i].officialAccreditation?
+							'<SELECT ID="officialAccreditation" ><OPTION VALUE="1" selected="selected">Yes<OPTION VALUE="0">No</SELECT>':
+							'<SELECT ID="officialAccreditation" ><OPTION VALUE="1">Yes<OPTION VALUE="0" selected="selected">No</SELECT>' ))		+ "</td>");
+				var td5 = $("<td>"+(data[i].authenticationName==null?"<input id='authenticationName' type='text' maxLength=100 />": 
+					"<input id='authenticationName' type='text' value='"+data[i].authenticationName + "' maxLength=100 />")+"</td>") ;
+				var td6 = $("<td>"+(data[i].workExperience==null?"<input id='workExperience' type='text' onkeypress='return event.keyCode>=48&&event.keyCode<=57' ng-pattern=''/[^a-zA-Z]/' size=2 maxLength=2 />": 
+					"<input id='workExperience' type='text' value='"+data[i].workExperience + "' onkeypress='return event.keyCode>=48&&event.keyCode<=57' ng-pattern=''/[^a-zA-Z]/' size=2 maxLength=2 />")+"</td>") ;
+				
+				td1.appendTo(tr);
+				td2.appendTo(tr);
+				td3.appendTo(tr);
+				td4.appendTo(tr);
+				td5.appendTo(tr);
+				td6.appendTo(tr);
+				
+				sel_level.appendTo(td2);
+				loadLevelToTd(sel_level, data[i].abilityLevel);
+				last_majorcate = data[i].majorcateId ;
+			}
+		}
+	});
+	$(".panel-collapse").css("in");
 }
 
 

@@ -296,4 +296,23 @@
   <select id="queryEhrIds"  parameterType="string" resultType="string">
   	SELECT id FROM t_employee_skill WHERE EMPLOYEE_ID =#{value}
   </select>
+  <select id="haveSkill"  parameterType="com.pmo.dashboard.entity.EmployeeSkill" resultType="string">
+  	SELECT id FROM t_employee_skill WHERE EMPLOYEE_ID =#{employeeId} and CAPPARAM_ID=#{capparamId}
+  </select>
+  <select id="toBatch" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	SELECT c.id CAPPARAM_ID, c.PARAM_NAME, s.ABILITY_LEVEL, 
+    s.MAIN_ABILITY, s.OFFICIAL_ACCREDITATION, s.AUTHENTICATION_NAME, s.WORK_EXPERIENCE
+    , c.MAJORCATE_ID, f.PARAM_NAME FATHERNAME
+	FROM 
+	(SELECT ID,PARAM_NAME,MAJORCATE_ID FROM t_capabilitylabel_param WHERE LENGTH(SUBCATE_ID) >0 ) c
+	LEFT JOIN 
+	(SELECT ID, CREATE_DATE, UPDATE_DATE, EMPLOYEE_ID, CAPPARAM_ID, PARAM_NAME, ABILITY_LEVEL, 
+      MAIN_ABILITY, OFFICIAL_ACCREDITATION, AUTHENTICATION_NAME, WORK_EXPERIENCE, OPERATE_ID
+     FROM t_employee_skill WHERE  1=2) s
+	 ON s.PARAM_NAME = c.PARAM_NAME 
+	JOIN t_capabilitylabel_param f
+	ON f.MAJORCATE_ID=c.MAJORCATE_ID
+	  WHERE (f.SUBCATE_ID  IS NULL OR f.SUBCATE_ID='') 
+  </select>
+  
 </mapper>

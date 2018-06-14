@@ -75,4 +75,32 @@ public class EmployeeSkillServiceImpl implements EmployeeSkillService {
 		return employeeSkillMapper.toEdit(eHr);
 	}
 
+	@Override
+	public String haveSkill(EmployeeSkill condition) {
+		return employeeSkillMapper.haveSkill(condition);
+	}
+
+	@Override
+	public List<EmployeeSkill> toBatch() {
+		return employeeSkillMapper.toBatch();
+	}
+
+	@Override
+	public boolean batch(EmployeeSkill record) {
+		String[] ids = record.geteHr().split(",");
+		for(String eHr: ids) {
+			record.setEmployeeId(eHr);
+			String id = employeeSkillMapper.haveSkill(record);
+			if(null==employeeSkillMapper.haveSkill(record)) {
+				record.setCreateDate(new Date());
+				employeeSkillMapper.insertSelective(record);
+			}else {
+				record.setId(id);
+				record.setUpdateDate(new Date());
+				employeeSkillMapper.updateByPrimaryKeySelective(record);
+			}
+		}
+		return false;
+	}
+
 }

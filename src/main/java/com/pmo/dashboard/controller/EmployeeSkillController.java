@@ -103,4 +103,20 @@ public class EmployeeSkillController {
 		rtn = employeeSkillService.delete(id);
 		return objectMapper.writeValueAsString( rtn? "1" : "0");
 	}
+	
+	@RequestMapping("/toBatch")
+	@ResponseBody
+	public String toBatch()  throws JsonProcessingException
+    {
+        return objectMapper.writeValueAsString(employeeSkillService.toBatch());
+    }
+	
+	@RequestMapping(value= {"/batch"})
+	@ResponseBody
+	public String batch(EmployeeSkill skill,HttpServletRequest request) throws JsonProcessingException{
+		User user = (User) request.getSession().getAttribute("loginUser");
+		boolean rtn ;
+		rtn = employeeSkillService.batch(skill);
+		return objectMapper.writeValueAsString( rtn? "1" : "0");
+	}
 }

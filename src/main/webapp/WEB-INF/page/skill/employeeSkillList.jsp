@@ -181,6 +181,15 @@ var path='<%=path%>';
 <!-- 								</div> -->
 								<!-- 数据列表  -->
 								<table id="skillList"></table>
+<!-- 								</br> -->
+								<div class="group">
+										<div class="col-sm-4">
+											<button onClick="toBatch()" type="button"
+													style="margin-left: 50px" id="btn_batchEdit"
+													class="btn btn-primary">Batch Edit</button>
+										</div>
+								</div>
+								</br></br></br>
 							</div>
 							
 							<form action="" id="editForm" method="post" target="_self">
@@ -236,8 +245,14 @@ var path='<%=path%>';
 								<div class="col-sm-4">
 									<button onClick="update()" type="button"
 										id="updateSkills" 
-										style="margin-left: 400px"
-										class="btn btn-primary">更改</button>
+										style="margin-left: 200px"
+										class="btn btn-primary">Update</button>
+								</div>
+								<div class="col-sm-4">
+									<button onClick="batchUpdate()" type="button"
+										id="batchUpdate" 
+										style="margin-left: 50px"
+										class="btn btn-primary">batch Update</button>
 								</div>
 								<button type="button" class="btn btn-primary" data-dismiss="modal">关闭
 								</button>
