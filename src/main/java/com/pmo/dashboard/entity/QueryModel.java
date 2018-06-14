@@ -18,17 +18,24 @@ public class QueryModel {
 	   
 	   private String skill;
 	   
+	   private String employeeid;
 	   
 	   
 	   
 	   
+	   
+	 
 
-	   
-	   
-	   
+	   public String getEmployeeid() {
+		 return employeeid;
+	   }
+
+	   public void setEmployeeid(String employeeid) {
+		  this.employeeid = employeeid;
+	   }
 
 	   public String getSkill() {
-		  return skill;
+		   return skill;
 	   }
 
 	   public void setSkill(String skill) {
