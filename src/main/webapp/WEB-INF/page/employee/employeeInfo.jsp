@@ -397,7 +397,7 @@ var path='<%=path%>';
 						   <div class="panel panel-default">
 							 <div class="panel-heading">Employee Upgrade History Record</div>
                              <div class="panel-body">
-                                 <table id="historyupgraderecord"></table>
+                                 <table id="employeeUpgradeRecordList"></table>
                              </div>
                            </div>
                            <!-- 员工基本信息模块 -->
@@ -405,51 +405,6 @@ var path='<%=path%>';
 							 <div class="panel-heading">Employee Base Information</div>
                              <div class="panel-body">
                                     <div class="group">
-										<label class="col-sm-2 control-label">E-HR</label>
-										<div class="col-sm-4">
-											<input readonly="readonly" type="text" class="form-control" name="eHrupgrade"
-													id="eHrupgrade" />
-										</div>
-									</div>
-									<div class="group">
-										<label class="col-sm-2 control-label">StaffId</label>
-										<div class="col-sm-4">
-											<input readonly="readonly" type="text" class="form-control" name="staffidupgrade"
-													id="staffidupgrade" />
-										</div>
-									</div>
-									<br/><br/><br/>
-									<div class="group">
-										<label class="col-sm-2 control-label">Staff Name</label>
-										<div class="col-sm-4">
-											<input readonly="readonly" type="text" class="form-control" name="staffnameupgrade"
-													id="staffnameupgrade" />
-										</div>
-									</div>
-									<div class="group">
-										<label class="col-sm-2 control-label">LOB</label>
-										<div class="col-sm-4">
-											<input readonly="readonly" type="text" class="form-control" name="lobupgrade"
-													id="lobupgrade" />
-										</div>
-									</div>
-									<br/><br/><br/>
-									<div class="group">
-										<label class="col-sm-2 control-label">MSA Role</label>
-										<div class="col-sm-4">
-											<input readonly="readonly" type="text" class="form-control" name="msaroleupgrade"
-													id="msaroleupgrade" />
-										</div>
-									</div>
-									<div class="group">
-										<label class="col-sm-2 control-label">Previous Rate</label>
-										<div class="col-sm-4">
-											<input readonly="readonly" type="text" class="form-control" name="previousrateupgrade"
-													id="previousrateupgrade" />
-										</div>
-									</div>
-									<br/><br/><br/>
-									<div class="group">
 										<label class="col-sm-2 control-label">Promote Role</label>
 										<div class="col-sm-4">
 											<input type="text" class="form-control" name="promoteroleupgrade"
@@ -463,11 +418,71 @@ var path='<%=path%>';
 													id="nowrateupgrade" />
 										</div>
 									</div>
+									<br/><br/><br/>
+									<div class="group">
+										<label class="col-lg-2 control-label">Effective Date</label>  
+                                        <!--指定 date标记-->  
+                                        <div class="col-lg-4">
+                                        <div class='input-group date' id='datetimepicker3'>  
+                                            <input id="effectivedate" type='text' class="form-control" />  
+                                            <span class="input-group-addon">  
+                                              <span class="glyphicon glyphicon-calendar"></span>  
+                                            </span>  
+                                        </div>
+                                        </div>  
+									</div>
+                                    <div class="group">
+										<label class="col-sm-2 control-label">E-HR</label>
+										<div class="col-sm-4">
+											<input readonly="readonly" type="text" class="form-control" name="eHrupgrade"
+													id="eHrupgrade" />
+										</div>
+									</div>
+									<br/><br/><br/>
+									<div class="group">
+										<label class="col-sm-2 control-label">StaffId</label>
+										<div class="col-sm-4">
+											<input readonly="readonly" type="text" class="form-control" name="staffidupgrade"
+													id="staffidupgrade" />
+										</div>
+									</div>
+									<div class="group">
+										<label class="col-sm-2 control-label">Staff Name</label>
+										<div class="col-sm-4">
+											<input readonly="readonly" type="text" class="form-control" name="staffnameupgrade"
+													id="staffnameupgrade" />
+										</div>
+									</div>
+									<br/><br/><br/>
+									<div class="group">
+										<label class="col-sm-2 control-label">LOB</label>
+										<div class="col-sm-4">
+											<input readonly="readonly" type="text" class="form-control" name="lobupgrade"
+													id="lobupgrade" />
+										</div>
+									</div>
+									<div class="group">
+										<label class="col-sm-2 control-label">MSA Role</label>
+										<div class="col-sm-4">
+											<input readonly="readonly" type="text" class="form-control" name="msaroleupgrade"
+													id="msaroleupgrade" />
+										</div>
+									</div>
+									<br/><br/><br/>
+									<div class="group">
+										<label class="col-sm-2 control-label">Previous Rate</label>
+										<div class="col-sm-4">
+											<input readonly="readonly" type="text" class="form-control" name="previousrateupgrade"
+													id="previousrateupgrade" />
+										</div>
+									</div>
+									<br/><br/><br/>
+									
 									
                                </div>
                            </div>
 						
-						 <table id="employeeUpgradeRecordList"></table>
+						 
 						 
 			            </div>
 						<div class="modal-footer">
@@ -482,6 +497,15 @@ var path='<%=path%>';
 	<!--/.fluid-container-->
 
 	<!-- external javascript -->
+	<!-- CSS引用 -->
+    <link rel="stylesheet" href="<%=path %>/extensioncss/bootstarp-table/bootstrap-table.css" type="text/css" />
+    <link rel="stylesheet" href="<%=path %>/extensioncss/bootstarp-table/bootstrap-table.min.css" type="text/css" />     
+  
+    <!-- JS引用 -->
+    <script src="<%=path %>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<%=path %>/extensionjs/bootstrap-table/dist/bootstrap-table.js" type="text/javascript"></script>
+    <script src="<%=path %>/extensionjs/bootstrap-table/dist/bootstrap-table-locale-all.js" type="text/javascript"></script>
+	<script src="<%=path %>/extensionjs/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
 
 	<script
 		src="<%=path %>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
