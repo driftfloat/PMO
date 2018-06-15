@@ -805,16 +805,39 @@ $("#udemandid").val(demand[0].demandId);
 }
 
 //查找需求
-function searchDemand(){
-var rr = $("#searchdemandrr").val();
-var jobcode = $("#searchjobcode").val(); 
-//alert(rr);
-var queryParams = { 
-	query: {  
-		rr:rr,
-		jobcode:jobcode
-    }
-}  
-//刷新表格  
-$('#demandlist2').bootstrapTable('refresh',queryParams);  
+function searchDemand(type){
+	if(type=="1"){
+		var rr = $("#searchdemandrr").val();
+		var jobcode = $("#searchjobcode").val(); 
+		//alert(rr);
+		var queryParams = { 
+			query: {  
+				rr:rr,
+				jobcode:jobcode
+		    }
+		}  
+		//刷新表格  
+		$('#demandlist2').bootstrapTable('refresh',queryParams);  
+	}
+    if(type=="2"){
+    	var searchdemandskill = $("#searchdemandskill").val();
+    	var queryParams = { 
+    		query: {  
+    			skill:searchdemandskill
+    	    }
+    	}  
+    	//刷新表格  
+    	$('#demandlist2').bootstrapTable('refresh',queryParams);  
+	}
+    if(type=="3"){
+    	var searchdemandskill = $("#searchdemandskill").val();
+    	var queryParams = { 
+    		query: {  
+    			skill:searchdemandskill
+    	    }
+    	}  
+    	//刷新表格  
+    	$('#demandlist2').bootstrapTable('refresh',queryParams); 
+	}
+
 }

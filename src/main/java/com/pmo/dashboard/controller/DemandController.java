@@ -178,6 +178,7 @@ public class DemandController {
 		qm.setStatus("Open");
 		qm.setRr(rr);
 		qm.setJobcode(jobcode);
+		qm.setSkill(skill);
 		if(id.equals("1")){
 			qm.setType("Time&Material");
 		}

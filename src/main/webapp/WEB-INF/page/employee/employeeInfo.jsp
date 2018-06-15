@@ -401,6 +401,7 @@ var path='<%=path%>';
                              </div>
                            </div>
                            <!-- 员工基本信息模块 -->
+                           <form id="employeeUpgradeRecordForm" class="form-horizontal">
 						   <div class="panel panel-default">
 						     <input id="upgradeemployeeid" value="" type="hidden"></input>
 							 <div class="panel-heading">Employee Base Information</div>
@@ -427,7 +428,7 @@ var path='<%=path%>';
                                         <!--指定 date标记-->  
                                         <div class="col-lg-4">
                                         <div class='input-group date' id='datetimepicker3'>  
-                                            <input id="effectivedate" type='text' class="form-control" />  
+                                            <input name="effectivedate" id="effectivedate" type='text' class="form-control" />  
                                             <span class="input-group-addon">  
                                               <span class="glyphicon glyphicon-calendar"></span>  
                                             </span>  
@@ -484,7 +485,7 @@ var path='<%=path%>';
 									
                                </div>
                            </div>
-						
+						   </form>
 						 
 						 
 			            </div>

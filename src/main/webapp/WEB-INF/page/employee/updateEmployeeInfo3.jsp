@@ -347,7 +347,7 @@ var path='<%=path%>';
 									    <input type="button" value="Search"
 										name="subscribedemand" id="sub_searchdemand" href="#"
 										class="button btn btn-primary"
-										onclick="searchDemand()"
+										onclick="searchDemand(3)"
 										style="background-color: #D5D5D5; border: 0 none; border-radius: 4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: 100px; margin:auto ;">
 									    </div>
 						  </div>

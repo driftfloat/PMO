@@ -579,14 +579,14 @@ function initSearchDate(){
 }
 
 function employeeUpgrade(staffname,ehr,staffid,lob,employeeid){
-	console.log(staffid);
+	//console.log(staffname);
 	$("#employeeUpgrade").modal('show');
 	$("#upgradeemployeename").html(staffname);
 	
-	$("#eHrupgrade").val(ehr!=null?ehr:" ");
-	$("#staffidupgrade").val(staffid!=null?staffid:" ");
-	$("#staffnameupgrade").val(staffname!=null?staffname:" ");
-	$("#lobupgrade").val(lob!=null?lob:" ");
+	$("#eHrupgrade").val(ehr);
+	$("#staffidupgrade").val(staffid);
+	$("#staffnameupgrade").val(staffname);
+	$("#lobupgrade").val(lob);
 	
 	$("#upgradeemployeeid").val(employeeid);
 	
@@ -598,8 +598,12 @@ function employeeUpgrade(staffname,ehr,staffid,lob,employeeid){
 		type:"GET",
 		success:function(result){
 			if(result){
-				$("#previousrateupgrade").val(result.billRate);
-				$("#msaroleupgrade").val(result.role);
+				if(result.billRate!=null){
+					$("#previousrateupgrade").val(result.billRate);
+				}
+				if(result.role!=null){
+					$("#msaroleupgrade").val(result.role);
+				}
 			}
 		}
 	})
@@ -690,14 +694,7 @@ function employeeUpgrade(staffname,ehr,staffid,lob,employeeid){
             title: 'OperationName',
             sortable: true
         }
-        /*,
-        {
-            field:'ID',
-            title: 'Operation',
-            width: 120,
-            align: 'center',
-            valign: 'middle'
-        },*/ ],
+         ],
         onLoadSuccess: function () {
         },
         onLoadError: function () {
@@ -720,9 +717,9 @@ function loadRole(){
 }
 
 function addEmployeeUpgradeRecord(){
-	//var bootstrapValidator = $("#addEmpUpgradeRecordForm").data('bootstrapValidator');
-	//bootstrapValidator.validate();
-	//if(bootstrapValidator.isValid()){
+//	var bootstrapValidator = $("#employeeUpgradeRecordForm").data('bootstrapValidator');
+//	bootstrapValidator.validate();
+//	if(bootstrapValidator.isValid()){
 		var nowLevel = $("#promoteroleupgrade").val();
 		var nowRate = $("#nowrateupgrade").val();
 		var stringeffectivedate = $("#effectivedate").val();
@@ -751,8 +748,8 @@ function addEmployeeUpgradeRecord(){
 			}
 		})
 		
-	//}else{
-		//return;
-	//}
+//	}else{
+//		return;
+//	}
 	
 }
