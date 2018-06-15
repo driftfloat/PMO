@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pmo.dashboard.dao.EmployeeUpgradeRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.pmo.dashboard.entity.EmployeeUpgradeRecord" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="DATE" />
+    <result column="OPERATE_ID" property="operateId" jdbcType="VARCHAR" />
+    <result column="EFFECT_DATE" property="effectDate" jdbcType="DATE" />
+    <result column="ORIGINAL_LEVEL" property="originalLevel" jdbcType="VARCHAR" />
+    <result column="NOW_LEVEL" property="nowLevel" jdbcType="VARCHAR" />
+    <result column="PREVIOUS_RATE" property="previousRate" jdbcType="DECIMAL" />
+    <result column="NOW_RATE" property="nowRate" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, EMPLOYEE_ID, CREATE_DATE, OPERATE_ID, EFFECT_DATE, ORIGINAL_LEVEL, NOW_LEVEL, 
+    PREVIOUS_RATE, NOW_RATE
+  </sql>
+  
+  <select id="queryById" resultMap="BaseResultMap" parameterType="com.pmo.dashboard.entity.EmployeeUpgradeRecord" >
+    select * from t_upgrade_record where 1=1
+    <if test="employeeId != null" >
+        and EMPLOYEE_ID=#{employeeId}
+    </if>
+ 
+  </select>
+  
+  <insert id="insert" parameterType="com.pmo.dashboard.entity.EmployeeUpgradeRecord" >
+    insert into t_upgrade_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="employeeId != null" >
+        EMPLOYEE_ID,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="operateId != null" >
+        OPERATE_ID,
+      </if>
+      <if test="effectDate != null" >
+        EFFECT_DATE,
+      </if>
+      <if test="originalLevel != null" >
+        ORIGINAL_LEVEL,
+      </if>
+      <if test="nowLevel != null" >
+        NOW_LEVEL,
+      </if>
+      <if test="previousRate != null" >
+        PREVIOUS_RATE,
+      </if>
+      <if test="nowRate != null" >
+        NOW_RATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="operateId != null" >
+        #{operateId,jdbcType=VARCHAR},
+      </if>
+      <if test="effectDate != null" >
+        #{effectDate,jdbcType=DATE},
+      </if>
+      <if test="originalLevel != null" >
+        #{originalLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="nowLevel != null" >
+        #{nowLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="previousRate != null" >
+        #{previousRate,jdbcType=DECIMAL},
+      </if>
+      <if test="nowRate != null" >
+        #{nowRate,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="com.pmo.dashboard.entity.EmployeeUpgradeRecord" >
+    update t_upgrade_record
+    <set >
+      <if test="employeeId != null" >
+        EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="operateId != null" >
+        OPERATE_ID = #{operateId,jdbcType=VARCHAR},
+      </if>
+      <if test="effectDate != null" >
+        EFFECT_DATE = #{effectDate,jdbcType=DATE},
+      </if>
+      <if test="originalLevel != null" >
+        ORIGINAL_LEVEL = #{originalLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="nowLevel != null" >
+        NOW_LEVEL = #{nowLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="previousRate != null" >
+        PREVIOUS_RATE = #{previousRate,jdbcType=DECIMAL},
+      </if>
+      <if test="nowRate != null" >
+        NOW_RATE = #{nowRate,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

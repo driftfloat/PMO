@@ -402,6 +402,7 @@ var path='<%=path%>';
                            </div>
                            <!-- 员工基本信息模块 -->
 						   <div class="panel panel-default">
+						     <input id="upgradeemployeeid" value="" type="hidden"></input>
 							 <div class="panel-heading">Employee Base Information</div>
                              <div class="panel-body">
                                     <div class="group">
@@ -489,7 +490,7 @@ var path='<%=path%>';
 			            </div>
 						<div class="modal-footer">
 							 <button id="cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel&nbsp;</button>
-							 <button id="send" type="button" onclick="sendemail()" class="btn btn-primary">Update&nbsp;&nbsp;</button>
+							 <button id="send" type="button" onclick="addEmployeeUpgradeRecord()" class="btn btn-primary">Update&nbsp;&nbsp;</button>
 						</div>
 					</div>
 					

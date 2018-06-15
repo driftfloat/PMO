@@ -426,7 +426,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 					if($("#userId").val()==result.data[i].rmUserId || result.data[i].rmUserId=='' || result.data[i].rmUserId==null){
 						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
 								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a>" +
-								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"')>Promote</a>"+
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"','"+result.data[i].employeeId+"')>Promote</a>"+
 										"</td>"
 										
 						);
@@ -437,7 +437,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 					if(result.csdeptNameForEdit == result.data[i].csSubDeptName || result.user.bu== result.data[i].csSubDeptName){
 						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
 								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a>" +
-								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"')>Promote</a>"+
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"','"+result.data[i].employeeId+"')>Promote</a>"+
 										"</td>");
 					}else{
 						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a></td>");
@@ -445,12 +445,12 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 				}else if(userType=='8'){
 					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"')>Promote</a>"+
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"','"+result.data[i].employeeId+"')>Promote</a>"+
 									"</td>");
 				}else{
 					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"')>Promote</a>"+
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"','"+result.data[i].employeeId+"')>Promote</a>"+
 									"</td>");
 				}
 				if((result.data[i].hsbcStaffId)==null){
@@ -574,7 +574,7 @@ function initSearchDate(){
     });  
 }
 
-function employeeUpgrade(staffname,ehr,staffid,lob){
+function employeeUpgrade(staffname,ehr,staffid,lob,employeeid){
 	console.log(staffid);
 	$("#employeeUpgrade").modal('show');
 	$("#upgradeemployeename").html(staffname);
@@ -584,8 +584,10 @@ function employeeUpgrade(staffname,ehr,staffid,lob){
 	$("#staffnameupgrade").val(staffname!=null?staffname:" ");
 	$("#lobupgrade").val(lob!=null?lob:" ");
 	
+	$("#upgradeemployeeid").val(employeeid);
 	
-	var queryUrl = path+'/json/test.json';
+	
+	var queryUrl = path+'/service/employee/upgrade/getUpgradeRecord/'+employeeid;
     var table = $('#employeeUpgradeRecordList').bootstrapTable({
         url: queryUrl,                      //请求后台的URL（*）
         method: 'get',                      //请求方式（*）
@@ -639,33 +641,33 @@ function employeeUpgrade(staffname,ehr,staffid,lob){
             title: 'LOB',
             sortable: true
         },{
-            field: 'msa role',
+            field: 'originalLevel',
             title: 'MSA Role',
             sortable: true
         },{
-            field: 'promote Role',
+            field: 'nowLevel',
             title: 'Promote Role',
             sortable: true
         },
         {
-            field: 'previous rate',
+            field: 'previousRate',
             title: 'Previous rate',
             sortable: true
         },
         {
-            field: 'now rate',
+            field: 'nowRate',
             title: 'Now Rate',
             sortable: true
         },{
-            field: 'effective date',
+            field: 'stringeffectivedate',
             title: 'Effective Date',
             sortable: true
         },{
-            field: 'operation date',
+            field: 'stringcreatedate',
             title: 'Operation Date',
             sortable: true
         },{
-            field: 'owner',
+            field: 'operateId',
             title: 'Owner',
             sortable: true
         }
@@ -696,4 +698,37 @@ function loadRole(){
 	    	   $("#promoteroleupgrade").append("<option>"+item.name+"</option>");
 	       })
 	});
+}
+
+function addEmployeeUpgradeRecord(){
+	//var bootstrapValidator = $("#addEmpUpgradeRecordForm").data('bootstrapValidator');
+	//bootstrapValidator.validate();
+	//if(bootstrapValidator.isValid()){
+		var nowLevel = $("#promoteroleupgrade").val();
+		var nowRate = $("#nowrateupgrade").val();
+		var stringeffectivedate = $("#effectivedate").val();
+		var employeeId = $("#upgradeemployeeid").val();
+		$.ajax({
+			url:path+'/service/employee/upgrade/saveUpgradeRecord',
+			dataType:"json",
+			data:{
+				"nowLevel":nowLevel,
+				"nowRate":nowRate,
+				"stringeffectivedate":stringeffectivedate,
+				"employeeId":employeeId
+			},
+			async:true,
+			cache:false,
+			type:"post",
+			success:function(result){
+				if(result){
+					
+				}
+			}
+		})
+		
+	//}else{
+		//return;
+	//}
+	
 }
