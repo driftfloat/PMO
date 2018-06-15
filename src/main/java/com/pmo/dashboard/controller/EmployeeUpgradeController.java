@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ import com.pmo.dashboard.entity.User;
 import com.pmo.dashboard.util.Utils;
 import com.pom.dashboard.service.EmployeeService;
 import com.pom.dashboard.service.EmployeeUpgradeService;
+import com.pom.dashboard.service.UserService;
 
 @Controller
 @RequestMapping(value="/employee/upgrade")
@@ -38,6 +40,8 @@ public class EmployeeUpgradeController {
 	private EmployeeUpgradeService employeeUpgradeService;
 	@Resource
 	private EmployeeService employeeService;
+	@Resource
+	private UserService userService;
 	
 	private ObjectMapper objectMapper = new ObjectMapper();  
 	
@@ -46,7 +50,7 @@ public class EmployeeUpgradeController {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping("/getUpgradeRecord/{id}")
 	@ResponseBody
-	public String getUpgradeRecord(int pageSize,int pageNumber,@PathVariable("id") String id,HttpServletRequest request) throws JsonProcessingException{
+	public String getUpgradeRecord(int pageSize,int pageNumber,Model model,@PathVariable("id") String id,HttpServletRequest request) throws JsonProcessingException{
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 		EmployeeUpgradeRecord eur = new EmployeeUpgradeRecord();
 		eur.setEmployeeId(id);
@@ -62,10 +66,17 @@ public class EmployeeUpgradeController {
 				list.get(i).setEhr(em.geteHr());
 				list.get(i).setStaffid(em.getHsbcStaffId());
 				list.get(i).setLob(em.getLob());
+				
 			}
 			list.get(i).setStringcreatedate(sf.format(list.get(i).getCreateDate()));
 			list.get(i).setStringeffectivedate(sf.format(list.get(i).getEffectDate()));
+			User u = userService.queryUserById(list.get(i).getOperateId());
+			if(u!=null){
+				list.get(i).setOperationname(u.getNickname());
+			}
 		}
+		
+		//model.addAttribute("em", em);
 		Map map = new HashMap();
 		PageInfo<EmployeeUpgradeRecord> page = new PageInfo(list);
 		map.put("total",page.getTotal());
@@ -88,6 +99,14 @@ public class EmployeeUpgradeController {
 			return true;
 		}
 		return false;
+	}
+	
+	@RequestMapping("/getEmployeeById/{id}")
+	@ResponseBody
+	public String getEmployeeById(@PathVariable("id") String id,HttpServletRequest request) throws JsonProcessingException{
+		Employee em = employeeService.queryEmployeeById(id);
+		
+		return objectMapper.writeValueAsString(em);
 	}
 
 }

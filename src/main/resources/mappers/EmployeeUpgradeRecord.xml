@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.pmo.dashboard.entity.EmployeeUpgradeRecord" >
     <id column="ID" property="id" jdbcType="VARCHAR" />
     <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR" />
-    <result column="CREATE_DATE" property="createDate" jdbcType="DATE" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
     <result column="OPERATE_ID" property="operateId" jdbcType="VARCHAR" />
     <result column="EFFECT_DATE" property="effectDate" jdbcType="DATE" />
     <result column="ORIGINAL_LEVEL" property="originalLevel" jdbcType="VARCHAR" />
@@ -23,7 +23,7 @@
     <if test="employeeId != null" >
         and EMPLOYEE_ID=#{employeeId}
     </if>
- 
+    order by CREATE_DATE desc
   </select>
   
   <insert id="insert" parameterType="com.pmo.dashboard.entity.EmployeeUpgradeRecord" >
@@ -65,7 +65,7 @@
         #{employeeId,jdbcType=VARCHAR},
       </if>
       <if test="createDate != null" >
-        #{createDate,jdbcType=DATE},
+        #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="operateId != null" >
         #{operateId,jdbcType=VARCHAR},
@@ -95,7 +95,7 @@
         EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR},
       </if>
       <if test="createDate != null" >
-        CREATE_DATE = #{createDate,jdbcType=DATE},
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="operateId != null" >
         OPERATE_ID = #{operateId,jdbcType=VARCHAR},

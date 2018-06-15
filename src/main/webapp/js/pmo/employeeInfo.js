@@ -586,6 +586,21 @@ function employeeUpgrade(staffname,ehr,staffid,lob,employeeid){
 	
 	$("#upgradeemployeeid").val(employeeid);
 	
+	$.ajax({
+		url:path+'/service/employee/upgrade/getEmployeeById/'+employeeid,
+		dataType:"json",
+		async:true,
+		cache:false,
+		type:"GET",
+		success:function(result){
+			if(result){
+				$("#previousrateupgrade").val(result.billRate);
+				$("#msaroleupgrade").val(result.role);
+			}
+		}
+	})
+	
+	
 	
 	var queryUrl = path+'/service/employee/upgrade/getUpgradeRecord/'+employeeid;
     var table = $('#employeeUpgradeRecordList').bootstrapTable({
@@ -664,11 +679,11 @@ function employeeUpgrade(staffname,ehr,staffid,lob,employeeid){
             sortable: true
         },{
             field: 'stringcreatedate',
-            title: 'Operation Date',
+            title: 'OperationDate',
             sortable: true
         },{
-            field: 'operateId',
-            title: 'Owner',
+            field: 'operationname',
+            title: 'OperationName',
             sortable: true
         }
         /*,
@@ -708,6 +723,8 @@ function addEmployeeUpgradeRecord(){
 		var nowRate = $("#nowrateupgrade").val();
 		var stringeffectivedate = $("#effectivedate").val();
 		var employeeId = $("#upgradeemployeeid").val();
+		var previousRate = $("#previousrateupgrade").val();
+		var originalLevel = $("#msaroleupgrade").val();
 		$.ajax({
 			url:path+'/service/employee/upgrade/saveUpgradeRecord',
 			dataType:"json",
@@ -715,14 +732,17 @@ function addEmployeeUpgradeRecord(){
 				"nowLevel":nowLevel,
 				"nowRate":nowRate,
 				"stringeffectivedate":stringeffectivedate,
-				"employeeId":employeeId
+				"employeeId":employeeId,
+				"previousRate":previousRate,
+				"originalLevel":originalLevel
 			},
 			async:true,
 			cache:false,
 			type:"post",
 			success:function(result){
 				if(result){
-					
+					var urlTo = path+'/service/employee/employeeInfo.html';
+					window.location.href = urlTo;
 				}
 			}
 		})

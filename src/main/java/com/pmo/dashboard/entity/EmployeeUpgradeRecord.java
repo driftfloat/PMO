@@ -32,13 +32,23 @@ public class EmployeeUpgradeRecord {
     private String lob;
     private String stringcreatedate;
     private String stringeffectivedate;
+    private String operationname;
+    
     
     
     
     
     
 
-    public String getStringcreatedate() {
+    public String getOperationname() {
+		return operationname;
+	}
+
+	public void setOperationname(String operationname) {
+		this.operationname = operationname;
+	}
+
+	public String getStringcreatedate() {
 		return stringcreatedate;
 	}
 
