@@ -30,6 +30,10 @@ public class CapabilityLabelParamServiceImpl implements CapabilityLabelParamServ
 
 	@Override
 	public boolean insert(CapabilityLabelParam record) {
+		DecimalFormat df = new DecimalFormat(STR_FORMAT);
+		Integer intHao = Integer.valueOf(record.getMajorcateId()) + 1 ;
+		record.setMajorcateId(df.format(intHao));
+		
 		record.setId(Utils.getUUID());
 		record.setCreateDate(new Date());
 		if (capabilityLabelParamMapper.insertSelective(record) > 0) {

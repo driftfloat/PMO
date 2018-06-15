@@ -314,5 +314,10 @@
 	ON f.MAJORCATE_ID=c.MAJORCATE_ID
 	  WHERE (f.SUBCATE_ID  IS NULL OR f.SUBCATE_ID='') 
   </select>
+  <update id="cleanMainSkill" parameterType="string" >
+    update t_employee_skill
+    set MAIN_ABILITY = null
+    where EMPLOYEE_ID = #{value}
+  </update>
   
 </mapper>

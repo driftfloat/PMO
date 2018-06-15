@@ -86,6 +86,7 @@ public class EmployeeSkillController {
 	@ResponseBody
 	public String save(EmployeeSkill skill,HttpServletRequest request) throws JsonProcessingException{
 		User user = (User) request.getSession().getAttribute("loginUser");
+		skill.setOperateId(user.getUserId());
 		boolean rtn ;
 		if("0".equals( skill.getStatus())) {
 			rtn = employeeSkillService.insert(skill);
@@ -115,8 +116,10 @@ public class EmployeeSkillController {
 	@ResponseBody
 	public String batch(EmployeeSkill skill,HttpServletRequest request) throws JsonProcessingException{
 		User user = (User) request.getSession().getAttribute("loginUser");
+		skill.setOperateId(user.getUserId());
 		boolean rtn ;
 		rtn = employeeSkillService.batch(skill);
 		return objectMapper.writeValueAsString( rtn? "1" : "0");
 	}
+	
 }
