@@ -390,7 +390,10 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 				$("#exportExcel").removeAttr("disabled");
 			}
 			var userType = result.user.userType;
+			
 			for (var i = 0; i < result.data.length; i++) {
+				console.log("'"+result.data[i].staffName+"'");
+				
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
 				
@@ -430,7 +433,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 					if($("#userId").val()==result.data[i].rmUserId || result.data[i].rmUserId=='' || result.data[i].rmUserId==null){
 						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
 								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a>" +
-								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"','"+result.data[i].employeeId+"')>Promote</a>"+
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"','"+result.data[i].employeeId+"')>Promote</a>"+
 										"</td>"
 										
 						);
@@ -441,7 +444,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 					if(result.csdeptNameForEdit == result.data[i].csSubDeptName || result.user.bu== result.data[i].csSubDeptName){
 						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
 								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a>" +
-								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"','"+result.data[i].employeeId+"')>Promote</a>"+
+								"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"','"+result.data[i].employeeId+"')>Promote</a>"+
 										"</td>");
 					}else{
 						td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a></td>");
@@ -449,12 +452,12 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 				}else if(userType=='8'){
 					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"','"+result.data[i].employeeId+"')>Promote</a>"+
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"','"+result.data[i].employeeId+"')>Promote</a>"+
 									"</td>");
 				}else{
 					td8 = $("<td><a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeDetail('"+result.data[i].employeeId+"','"+engagementType+"')>Detail</a>" +
 							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=editEmployeeInfo('"+result.data[i].employeeId+"','"+engagementType+"')>Edit</a>" +
-							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('"+result.data[i].staffName+"','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"','"+result.data[i].employeeId+"')>Promote</a>"+
+							"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=employeeUpgrade('','"+result.data[i].eHr+"','"+result.data[i].hsbcStaffId+"','"+result.data[i].lob+"','"+result.data[i].employeeId+"')>Promote</a>"+
 									"</td>");
 				}
 				if((result.data[i].hsbcStaffId)==null){
@@ -581,13 +584,11 @@ function initSearchDate(){
 function employeeUpgrade(staffname,ehr,staffid,lob,employeeid){
 	//console.log(staffname);
 	$("#employeeUpgrade").modal('show');
-	$("#upgradeemployeename").html(staffname);
+	
 	
 	$("#eHrupgrade").val(ehr);
 	$("#staffidupgrade").val(staffid);
-	$("#staffnameupgrade").val(staffname);
 	$("#lobupgrade").val(lob);
-	
 	$("#upgradeemployeeid").val(employeeid);
 	
 	$.ajax({
@@ -604,6 +605,8 @@ function employeeUpgrade(staffname,ehr,staffid,lob,employeeid){
 				if(result.role!=null){
 					$("#msaroleupgrade").val(result.role);
 				}
+				$("#upgradeemployeename").html(result.staffName);
+				$("#staffnameupgrade").val(result.staffName);
 			}
 		}
 	})
