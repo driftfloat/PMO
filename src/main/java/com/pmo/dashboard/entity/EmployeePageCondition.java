@@ -18,7 +18,28 @@ public class EmployeePageCondition extends PageCondition
     private String[] csbuNames;
     
     
+    //员工调级记录表中的创建时间
+    private String empupgradestartdate;
     
+    private String empupgradeenddate;
+    
+    
+    
+    
+    
+    
+	public String getEmpupgradestartdate() {
+		return empupgradestartdate;
+	}
+	public void setEmpupgradestartdate(String empupgradestartdate) {
+		this.empupgradestartdate = empupgradestartdate;
+	}
+	public String getEmpupgradeenddate() {
+		return empupgradeenddate;
+	}
+	public void setEmpupgradeenddate(String empupgradeenddate) {
+		this.empupgradeenddate = empupgradeenddate;
+	}
 	public String[] getCsbuNames() {
 		return csbuNames;
 	}

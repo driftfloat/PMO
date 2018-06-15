@@ -19,46 +19,58 @@
 	</resultMap>
 	
 	<select id="queryEmployeeList" parameterType="com.pmo.dashboard.entity.EmployeePageCondition" resultMap="employeeInfoMap" >
+	    
+	    select DISTINCT(z1.EMPLOYEE_ID),z1.* from(
 	    SELECT e.ITINDUSTRY_WORK_YEAR,e.EMPLOYEE_ID,e.HSBC_STAFF_ID,e.E_HR,e.LOB,e.STAFF_NAME,e.LN,d.CS_SUBDEPT_NAME,e.RESOURCE_STATUS,e.RM_USER_ID,u.NICKNAME,e.ENGAGEMENT_TYPE
         FROM t_employee AS e
         LEFT JOIN t_cs_dept AS d
         ON e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID
         LEFT JOIN T_USER AS u
         ON e.RM_USER_ID = u.USER_ID
-        WHERE 1 = 1
+        WHERE 1 = 1) z1
+        LEFT JOIN
+        t_upgrade_record z2
+        on z1.EMPLOYEE_ID=z2.EMPLOYEE_ID
+        where 1=1
+        <if test="empupgradestartdate != null and empupgradestartdate != ''">
+				AND z2.CREATE_DATE &gt; #{empupgradestartdate}
+		</if>
+		<if test="empupgradeenddate != null and empupgradeenddate != ''">
+				AND z2.CREATE_DATE &lt; #{empupgradeenddate}
+		</if>
         
 			<if test="hsbcStaffId != null and hsbcStaffId != ''">
-				AND e.HSBC_STAFF_ID = #{hsbcStaffId}
+				AND z1.HSBC_STAFF_ID = #{hsbcStaffId}
 			</if>
 			<if test="eHr != null and eHr != ''">
-				AND e.E_HR = #{eHr}
+				AND z1.E_HR = #{eHr}
 			</if>
 			<if test="lob != null and lob != ''">
-				AND e.LOB = #{lob}
+				AND z1.LOB = #{lob}
 			</if>
 			<if test="csDeptName != null and csDeptName != ''">
-				AND d.CS_DEPT_NAME = #{csDeptName}
+				AND z1.CS_DEPT_NAME = #{csDeptName}
 			</if>
 			<if test="csSubDeptName != null and csSubDeptName != ''">
-				AND d.CS_SUBDEPT_NAME = #{csSubDeptName}
+				AND z1.CS_SUBDEPT_NAME = #{csSubDeptName}
 			</if>
 			<if test="csbuName != null and csbuName != ''">
-				AND d.CS_BU_NAME = #{csbuName}
+				AND z1.CS_BU_NAME = #{csbuName}
 			</if>
 			<if test="resourceStatus != null and resourceStatus != ''">
-				AND e.RESOURCE_STATUS = #{resourceStatus}
+				AND z1.RESOURCE_STATUS = #{resourceStatus}
 			</if>
 			<if test="staffName != null and staffName != ''">
-				AND e.STAFF_NAME LIKE '%${staffName}%' 
+				AND z1.STAFF_NAME LIKE '%${staffName}%' 
 			</if>
 			<if test="rmUserId != null and rmUserId != ''">
-				AND e.RM_USER_ID = #{rmUserId}
+				AND z1.RM_USER_ID = #{rmUserId}
 			</if>
 			<if test="engagementType != null and engagementType != ''">
-				AND e.ENGAGEMENT_TYPE = #{engagementType}
+				AND z1.ENGAGEMENT_TYPE = #{engagementType}
 			</if>
 			
-		ORDER BY u.NICKNAME,e.ROLE
+		ORDER BY z1.NICKNAME<!-- ,e.ROLE -->
     LIMIT #{currentPage},#{pageRecordsNum}; 
 	</select>
 	
@@ -67,6 +79,8 @@
         FROM t_employee AS e
         LEFT JOIN t_cs_dept AS d
         ON e.CS_SUBDEPT_ID = d.CS_SUBDEPT_ID
+        LEFT JOIN (select DISTINCT(z1.EMPLOYEE_ID) from t_upgrade_record z1) z2
+        on e.EMPLOYEE_ID=z2.EMPLOYEE_ID
         WHERE 1 = 1
         
 			<if test="hsbcStaffId != null and hsbcStaffId != ''">

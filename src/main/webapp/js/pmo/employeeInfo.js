@@ -128,8 +128,12 @@ $('#searchBtn').bind("click", function(){
 	if(engagementType.indexOf('Option')!=-1){
 		engagementType = "";
 	}
+	var startTime = $("#startTime").val();
+	var endTime = $("#endTime").val();
+	//alert(startTime);
+	//alert(endTime);
 	
-	loadEmployeeList("",csDeptName,csSubDeptName,csBuName,engagementType);
+	loadEmployeeList("",csDeptName,csSubDeptName,csBuName,engagementType,startTime,endTime);
 });
 
 $('#exportExcel').bind("click", function(){
@@ -337,7 +341,7 @@ function changeCSDeptToId(du){
 
 
 
-function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagementType){
+function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagementType,startTime,endTime){
 	
 	var csDeptName = csDeptName;
 
@@ -373,7 +377,7 @@ function loadEmployeeList(pageState,csDeptName,csSubDeptName,csBuName,engagement
 		url:path+"/service/employeeInfo/queryEmployeeList",
 		dataType:"json",
 		async:true,
-		data:{"staffName":staffName,"resourceStatus":resourceStatus,"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob,"rmUserId":rmName,"engagementType":engagementType,"pageRecordsNum":pageRecordsNum},
+		data:{"startTime":startTime,"endTime":endTime,"staffName":staffName,"resourceStatus":resourceStatus,"pageState":pageState,"csBuName":csBuName,"csSubDeptName":csSubDeptName,"hsbcStaffId":hsbcStaffId,"eHr":eHr,"lob":lob,"rmUserId":rmName,"engagementType":engagementType,"pageRecordsNum":pageRecordsNum},
 		cache:false,
 		type:"post",
 		success:function(result){

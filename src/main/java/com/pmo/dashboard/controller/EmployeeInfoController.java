@@ -43,6 +43,10 @@ public class EmployeeInfoController
     public Object queryEmployeeList(final HttpServletRequest request,
             final HttpServletResponse response)
     {
+    	String startTime = request.getParameter("startTime");
+    	
+    	String endTime = request.getParameter("endTime");
+    	
         String pageState = request.getParameter("pageState");
         
         String hsbcStaffId = request.getParameter("hsbcStaffId");
@@ -126,6 +130,8 @@ public class EmployeeInfoController
             employeePageCondition.setRmUserId(rmUserId);
             employeePageCondition.setEngagementType(engagementType);
             employeePageCondition.setPageRecordsNum(pageRecordsNum);
+            employeePageCondition.setEmpupgradestartdate(startTime);
+            employeePageCondition.setEmpupgradeenddate(endTime);
             countPage = employeeInfoService.countEmployeeList(employeePageCondition);
             employeePageCondition.setPageCount(countPage+"");
             request.getSession().setAttribute("employeePageCondition", employeePageCondition);
