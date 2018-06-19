@@ -42,12 +42,12 @@ public class TestSkll {
 		System.out.println(objectMapper.writeValueAsString(employeeSkillService.detail(eHr)));
 	}
 	
-////	@Test
-//	public void toEdit() throws Exception  {
-//		String eHr = "E000830374";
-//		eHr="E000240803";
-//		System.out.println(objectMapper.writeValueAsString(employeeSkillService.toEdit(eHr)));
-//	}
+	@Test
+	public void toEdit() throws Exception  {
+		String eHr = "E000830374";
+		eHr="E000240803";
+		System.out.println(objectMapper.writeValueAsString(employeeSkillService.toEdit(eHr)));
+	}
 	
 //	@Test
 	public void queryEhrIds() throws Exception  {
@@ -58,14 +58,14 @@ public class TestSkll {
 		System.out.println(ids.size());
 	}
 	
-	@Test
+//	@Test
 	public void haveSkill() throws Exception  {
 		String eHr = "E000830374";
 		eHr="E000240803";
 		eHr="E000826021";
 		EmployeeSkill skill =new EmployeeSkill();
 		skill.setEmployeeId(eHr);
-		skill.setCapparamId("23-");
+		skill.setCapparamId("23");
 		System.out.println(employeeSkillService.haveSkill(skill));
 	}
 	
@@ -76,4 +76,6 @@ public class TestSkll {
 //		System.out.println(employeeSkillService.toBatch ().size());
 		System.out.println(objectMapper.writeValueAsString(employeeSkillService.toBatch()));
 	}
+	
+	
 }

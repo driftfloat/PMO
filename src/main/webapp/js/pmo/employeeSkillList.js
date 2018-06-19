@@ -20,7 +20,7 @@ function loadCSSubDept(result){
 			$("#csSubDept").empty();
 			$("#csSubDept").append("<option value=''>--Option--</option>");
 			for(var i = 0;i<list.length;i++){
-				$("#csSubDept").append("<option>"+list[i].csSubDeptName+"</option>");
+				$("#csSubDept").append("<option value='"+list[i].csSubDeptId+"'>"+list[i].csSubDeptName+"</option>");
 			}
 //			$('#csSubDept').val(result.pageInfo.du);
 		}
@@ -82,17 +82,17 @@ function loadLevelToTd(sele, abilityLevel){
 	});
 }
 
-function loadCSBu(result){
-	var url = path+'/json/csBuName.json'
-	$.getJSON(url,  function(data) {
-		   $("#csBu").empty();
-		   $("#csBu").append("<option value=''>--Option--</option>");
-	       $.each(data, function(i, item) {
-	    	   $("#csBu").append("<option>"+item.name+"</option>");
-	       })
-//		   $('#csBu').val(result.pageInfo.bu);
-	});
-}
+//function loadCSBu(result){
+//	var url = path+'/json/csBuName.json'
+//	$.getJSON(url,  function(data) {
+//		   $("#csBu").empty();
+//		   $("#csBu").append("<option value=''>--Option--</option>");
+//	       $.each(data, function(i, item) {
+//	    	   $("#csBu").append("<option value=''>"+item.name+"</option>");
+//	       })
+////		   $('#csBu').val(result.pageInfo.bu);
+//	});
+//}
 
 //function majorcateIds(result){
 //	$.ajax({
@@ -247,9 +247,12 @@ function search(){
 	var role = $("#role").val();
 	var csSubDept = $("#csSubDept").val();
 	var paramName = $("#paramName").val();
-	var officialAccreditation = $("#officialAccreditation").val();
+	var officialAccreditation = $('#officialAccreditation').is(':checked')?'1':'';
 	var workExperience = $("#workExperience").val();
 	var capabilityLevel = $("#capabilityLevel").val();
+//	if($('#officialAccreditation').is(':checked')) {
+//		officialAccreditation='1';
+//	}
 	
 	var queryParams = { 
 		query: {  
@@ -319,8 +322,8 @@ function detail(eHr){
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
 				
-				var td1 = $("<td width='20%'>"	+data[i].paramName + "</td>");
-				var td2 = $("<td>"	+(data[i].abilityLevel==null?'':showLeve(data[i].abilityLevel))	+ "</td>");
+				var td1 = $("<td width='15%'>"	+data[i].paramName + "</td>");
+				var td2 = $("<td width='12%'>"	+(data[i].abilityLevel==null?'':showLeve(data[i].abilityLevel))	+ "</td>");
 				var td3 = $("<td>"	+( data[i].mainAbility==null?'': ('1'==data[i].mainAbility?'<input CHECKED type="radio"/>':'' )	)+ "</td>");
 				var td4 = $("<td>"	+( data[i].officialAccreditation==null?'':('1'==data[i].officialAccreditation?'Yes':'No' ))		+ "</td>");
 				var td5 = $("<td>"	+( data[i].authenticationName==null?'':data[i].authenticationName)	+ "</td>");
@@ -378,12 +381,12 @@ function toEdit(eHr){
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
 				
-				var td1 = $("<td width='20%'>" +"<input id='capparamId' type='hidden' value='"+(data[i].capparamId==null?'':data[i].capparamId)+"'/>"
+				var td1 = $("<td width='15%'>" +"<input id='capparamId' type='hidden' value='"+(data[i].capparamId==null?'':data[i].capparamId)+"'/>"
 						+"<input id='status' type='hidden' value='"+data[i].status+"'/>"
 						+"<input id='id' type='hidden' value='"+(data[i].id==null?'':data[i].id)+"'/>"
 						+"<input id='ischeck' type='checkbox'"+ (data[i].status=='1'?'checked':'')
 						+" />"  	+data[i].paramName + "</td>");
-				var td2 = $("<td></td>");  
+				var td2 = $("<td  width='12%'></td>");  
 				var sel_level = $("<SELECT ID='capabilityLevel' ></SELECT>");
 				var td3 = $("<td>"	+( data[i].mainAbility==null?'<input id="mainAbility" name="mainAbility" type="radio" value="0"/>': 
 						('1'==data[i].mainAbility?'<input id="mainAbility" name="mainAbility" CHECKED type="radio" value="1"/>':
@@ -450,6 +453,7 @@ function update(eHr){
 			var mainAbility=$(domEle).find('#mainAbility').prop('checked')?'1':''; 
 			var officialAccreditation=$(domEle).find("#officialAccreditation").val();
 			var authenticationName=$(domEle).find("#authenticationName").val(); 
+			authenticationName=$.trim(authenticationName);
 			var workExperience=$(domEle).find("#workExperience").val(); 
 //			alert(capparamId+','+id+','+mainAbility+','+officialAccreditation+','+authenticationName+','+workExperience);  
 			$.ajax({
@@ -499,16 +503,9 @@ function showLeve(n){
 
 function toBatch(){
 	if($("#skillList .bs-checkbox :checkbox:checked").length==0){
-		alert("please select employee.");
+		alert("please select employees.");
 		return ;
 	}
-	var eHrs ='';
-	$("#skillList .bs-checkbox :checkbox:checked").each(function(i){
-//		alert($(this).html())  //.eq(1).html()
-		alert($(this).parent().parent().find("td").length)  //.eq(1).html()
-	 });
-	return ;
-	
 	$("tr:empty").remove();
 	$("#updateSkills").css("display","none");
 	$("#batchUpdate").css("display","block");
@@ -544,27 +541,34 @@ function toBatch(){
 				var tr = $("<tr></tr>");
 				tr.appendTo(tbody);
 				
-				var td1 = $("<td width='20%'>" +"<input id='capparamId' type='hidden' value='"+(data[i].capparamId==null?'':data[i].capparamId)+"'/>"
-						+"<input id='status' type='hidden' value='"+data[i].status+"'/>"
-						+"<input id='id' type='hidden' value='"+(data[i].id==null?'':data[i].id)+"'/>"
-						+"<input id='ischeck' type='checkbox'"+ (data[i].status=='1'?'checked':'')
-						+" />"  	+data[i].paramName + "</td>");
-				var td2 = $("<td></td>");  
+				var td1 = $("<td width='15%'>" +"<input id='capparamId' type='hidden' value='"+(data[i].capparamId==null?'':data[i].capparamId)+"'/>"
+//						+"<input id='status' type='hidden' value='"+data[i].status+"'/>"
+//						+"<input id='id' type='hidden' value='"+(data[i].id==null?'':data[i].id)+"'/>"
+						+"<input id='ischeck' name='ischeck' type='radio' onclick='checkWithMainAbility(this)'	 />"  	+data[i].paramName 
+						+ "</td>");
+				var td2 = $("<td  width='12%'></td>");  
 				var sel_level = $("<SELECT ID='capabilityLevel' ></SELECT>");
-				var td3 = $("<td>"	+( data[i].mainAbility==null?'<input id="mainAbility" name="mainAbility" type="radio" value="0"/>': 
-						('1'==data[i].mainAbility?'<input id="mainAbility" name="mainAbility" CHECKED type="radio" value="1"/>':
-							'<input id="mainAbility" name="mainAbility" type="radio" value="0"/>' )	
-						)
+				var td3 = $("<td>" + '<input id="mainAbility" name="mainAbility" type="radio" value="0" onclick="checkWithMainAbility(this)" />'
+//						+( data[i].mainAbility==null?'<input id="mainAbility" name="mainAbility" type="radio" value="0"/>': 
+//						('1'==data[i].mainAbility?'<input id="mainAbility" name="mainAbility" CHECKED type="radio" value="1"/>':
+//							'<input id="mainAbility" name="mainAbility" type="radio" value="0"/>' )	
+//						)
 						+ "</td>"); 
-				var td4 = $("<td>"	+( data[i].officialAccreditation==null?
-						'<SELECT ID="officialAccreditation" ><OPTION VALUE="1">Yes<OPTION VALUE="0" selected="selected">No</SELECT>'
-						:('1'==data[i].officialAccreditation?
-							'<SELECT ID="officialAccreditation" ><OPTION VALUE="1" selected="selected">Yes<OPTION VALUE="0">No</SELECT>':
-							'<SELECT ID="officialAccreditation" ><OPTION VALUE="1">Yes<OPTION VALUE="0" selected="selected">No</SELECT>' ))		+ "</td>");
-				var td5 = $("<td>"+(data[i].authenticationName==null?"<input id='authenticationName' type='text' maxLength=100 />": 
-					"<input id='authenticationName' type='text' value='"+data[i].authenticationName + "' maxLength=100 />")+"</td>") ;
-				var td6 = $("<td>"+(data[i].workExperience==null?"<input id='workExperience' type='text' onkeypress='return event.keyCode>=48&&event.keyCode<=57' ng-pattern=''/[^a-zA-Z]/' size=2 maxLength=2 />": 
-					"<input id='workExperience' type='text' value='"+data[i].workExperience + "' onkeypress='return event.keyCode>=48&&event.keyCode<=57' ng-pattern=''/[^a-zA-Z]/' size=2 maxLength=2 />")+"</td>") ;
+				var td4 = $("<td>"	 + '<SELECT ID="officialAccreditation" ><OPTION VALUE="1">Yes<OPTION VALUE="0" selected="selected">No</SELECT>'
+//						+( data[i].officialAccreditation==null?
+//						'<SELECT ID="officialAccreditation" ><OPTION VALUE="1">Yes<OPTION VALUE="0" selected="selected">No</SELECT>'
+//						:('1'==data[i].officialAccreditation?
+//							'<SELECT ID="officialAccreditation" ><OPTION VALUE="1" selected="selected">Yes<OPTION VALUE="0">No</SELECT>':
+//							'<SELECT ID="officialAccreditation" ><OPTION VALUE="1">Yes<OPTION VALUE="0" selected="selected">No</SELECT>' ))	
+							+ "</td>");
+				var td5 = $("<td>" + "<input id='authenticationName' type='text' maxLength=100 />"
+//						+(data[i].authenticationName==null?"<input id='authenticationName' type='text' maxLength=100 />": 
+//					"<input id='authenticationName' type='text' value='"+data[i].authenticationName + "' maxLength=100 />")
+					+"</td>") ;
+				var td6 = $("<td>" + "<input id='workExperience' type='text' onkeypress='return event.keyCode>=48&&event.keyCode<=57' ng-pattern=''/[^a-zA-Z]/' size=2 maxLength=2 />"
+//						+(data[i].workExperience==null?"<input id='workExperience' type='text' onkeypress='return event.keyCode>=48&&event.keyCode<=57' ng-pattern=''/[^a-zA-Z]/' size=2 maxLength=2 />": 
+//					"<input id='workExperience' type='text' value='"+data[i].workExperience + "' onkeypress='return event.keyCode>=48&&event.keyCode<=57' ng-pattern=''/[^a-zA-Z]/' size=2 maxLength=2 />")
+					+"</td>") ;
 				
 				td1.appendTo(tr);
 				td2.appendTo(tr);
@@ -582,7 +586,73 @@ function toBatch(){
 	$(".panel-collapse").css("in");
 }
 
+function batchUpdate(){
+	var eHrs ='';
+	$("#skillList .bs-checkbox :checkbox:checked").each(function(i){
+		eHrs +=$(this).parent().parent().find("td").eq(1).text() + ",";
+	 });
+	eHrs = eHrs.substring(0, eHrs.length-1);
+	
+	$("tr:empty").remove();
+	
+	var _ischeck = $("#accordion tbody tr").find("#ischeck:checked").length==0?true:false; 
+	if(_ischeck){
+		alert("Please choose  at least one  skills.");
+		return ;
+	}
+	
+	var _mainAbility = $("#accordion tbody tr").find("input[name='mainAbility']").is(':checked')?false:true; 
+	if(_mainAbility){
+		alert("Please choose Main Ability.");
+		return ;
+	}
+	
+	
+//	var eHr= $("#myModalLabel").text().replace('Edit Competence Tag for ','');
+	var url = path+'/service/skill/batch';
+	var rtn=1;
+	$("#accordion tbody tr").each(function(index,domEle){
+		var ischeck=$(domEle).find('#ischeck').prop('checked'); 
+		var status=$(domEle).find('#status').val();
+		var id=$(domEle).find('#id').val();
+		if(ischeck){
+			var capabilityLevel= $(domEle).find("#capabilityLevel").val();
+			var paramName= $(domEle).find("td").eq(0).text();
+			var capparamId=$(domEle).find('#capparamId').val();
+			var mainAbility=$(domEle).find('#mainAbility').prop('checked')?'1':''; 
+			var officialAccreditation=$(domEle).find("#officialAccreditation").val();
+			var authenticationName=$(domEle).find("#authenticationName").val(); 
+			authenticationName=$.trim(authenticationName);
+			var workExperience=$(domEle).find("#workExperience").val(); 
+			$.ajax({
+				url:url,
+				dataType:"json",
+				data:{"abilityLevel":capabilityLevel, "employeeId":eHrs, "status":status, "capparamId":capparamId, "id":id,  "mainAbility":mainAbility
+					, "officialAccreditation":officialAccreditation, "authenticationName":authenticationName, "workExperience":workExperience 
+					, 
+					},
+				async:true,
+				cache:false,
+				type:"post",
+				success:function(flag){
+//					if(flag=='1'){
+//						alert("Batch update fail1.");
+//					}else{
+//						alert("Batch update success.");
+//					}
+				}
+			})
+		}
+		
+	});
+	alert("Batch update Success.");
+	$(".modal-footer .group > button").click();
+}
 
-
-
+function checkWithMainAbility(obj){
+	if($(obj).is(':checked')){
+		$(obj).parent().parent().find("#mainAbility").attr('checked','true');
+//		$(obj).parent().parent().find("#ischeck").attr('checked','true');
+	}
+}
 

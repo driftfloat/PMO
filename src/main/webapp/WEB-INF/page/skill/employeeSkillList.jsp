@@ -141,7 +141,7 @@ var path='<%=path%>';
 										<div class="group">
 											<label class="col-sm-2 control-label">Official Certification</label>
 											<div class="col-sm-4">
-												<input type="checkbox" value="" name="officialAccreditation" id="officialAccreditation">
+												<input type="checkbox" name="officialAccreditation" id="officialAccreditation">
 											</div>
 										</div>
 										<div class="group">
@@ -240,22 +240,21 @@ var path='<%=path%>';
 						    </div>
 		            	</div>
 			            <div class="modal-footer">
-							</br></br></br>
 							<div class="group">
+								<div class="col-sm-4">
+									<button type="button" style="margin-left: 20px" class="btn btn-primary" data-dismiss="modal">Close
+									</button>
+								</div>
 								<div class="col-sm-4">
 									<button onClick="update()" type="button"
 										id="updateSkills" 
-										style="margin-left: 200px"
 										class="btn btn-primary">Update</button>
 								</div>
 								<div class="col-sm-4">
 									<button onClick="batchUpdate()" type="button"
 										id="batchUpdate" 
-										style="margin-left: 50px"
 										class="btn btn-primary">batch Update</button>
 								</div>
-								<button type="button" class="btn btn-primary" data-dismiss="modal">关闭
-								</button>
 							</div>
 			            </div>
 		        	</div><!-- /.modal-content -->

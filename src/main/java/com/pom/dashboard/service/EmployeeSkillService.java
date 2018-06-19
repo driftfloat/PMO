@@ -30,4 +30,5 @@ public interface EmployeeSkillService {
     List<EmployeeSkill> toBatch();
     
     boolean batch(EmployeeSkill record); 
+    
 }

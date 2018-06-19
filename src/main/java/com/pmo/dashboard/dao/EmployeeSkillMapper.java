@@ -31,4 +31,6 @@ public interface EmployeeSkillMapper {
     
     List<EmployeeSkill> toBatch();
     
+    int cleanMainSkill(String eHr);
+    
 }

@@ -87,12 +87,15 @@ public class EmployeeSkillServiceImpl implements EmployeeSkillService {
 
 	@Override
 	public boolean batch(EmployeeSkill record) {
-		String[] ids = record.geteHr().split(",");
+		String[] ids = record.getEmployeeId().split(",");
 		for(String eHr: ids) {
+			employeeSkillMapper.cleanMainSkill(eHr);
 			record.setEmployeeId(eHr);
 			String id = employeeSkillMapper.haveSkill(record);
 			if(null==employeeSkillMapper.haveSkill(record)) {
 				record.setCreateDate(new Date());
+				record.setId(Utils.getUUID());
+				record.setParamName(capabilityLabelParamMapper.selectByPrimaryKey(record.getCapparamId()).getParamName());
 				employeeSkillMapper.insertSelective(record);
 			}else {
 				record.setId(id);
@@ -100,7 +103,7 @@ public class EmployeeSkillServiceImpl implements EmployeeSkillService {
 				employeeSkillMapper.updateByPrimaryKeySelective(record);
 			}
 		}
-		return false;
+		return true;
 	}
 
 }
