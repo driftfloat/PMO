@@ -40,6 +40,8 @@
 	<result property="csSubDept" column="CS_SUBDEPT_ID" javaType="String" />
 	<result property="role" column="ROLE" javaType="String" />
 	
+	<result property="du" column="du" javaType="String" />
+	
   </resultMap>
   <sql id="Base_Column_List" >
     ID, CREATE_DATE, UPDATE_DATE, EMPLOYEE_ID, CAPPARAM_ID, PARAM_NAME, ABILITY_LEVEL, 
@@ -206,6 +208,7 @@
   <select id="query" parameterType="com.pmo.dashboard.entity.EmployeeSkill" resultMap="JoinResultMap">
     select 
     <include refid="Join_Column_List" />
+    , (SELECT CS_SUBDEPT_NAME FROM t_cs_dept d WHERE d.CS_SUBDEPT_ID=e.CS_SUBDEPT_ID) du
     FROM t_employee e  LEFT JOIN (
     select * from  t_employee_skill s
     where 1 =1 and s.MAIN_ABILITY='1' 

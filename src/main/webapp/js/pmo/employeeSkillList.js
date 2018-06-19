@@ -174,7 +174,8 @@ function loadSkillList(){
             sortable: true
         },
         {
-            field: 'csSubDept',
+//            field: 'csSubDept',
+            field: 'du',
             title: 'DU',
             sortable: true
         },
@@ -654,5 +655,9 @@ function checkWithMainAbility(obj){
 		$(obj).parent().parent().find("#mainAbility").attr('checked','true');
 //		$(obj).parent().parent().find("#ischeck").attr('checked','true');
 	}
+}
+
+function importSkill(){
+	
 }
 
