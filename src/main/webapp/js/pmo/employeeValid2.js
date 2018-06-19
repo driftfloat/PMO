@@ -51,9 +51,13 @@ $(document).ready(function() {
                 	notEmpty: {
                         message: 'Please enter hsbcStaffId'
                     },
-                    numeric: {
-                    	message:'Please enter number'
-                    },
+                    /*numeric: {
+                	message:'Please enter number'
+                    },*/
+				    regexp:{
+        			   regexp:/^[0-9a-zA-Z\s?]+$/,
+        			   message:'please enter right format.'
+        		    },
                     remote:{
                     	type:"post",
                     	url: path+'/service/employee/checkHSBCStaffID',
@@ -278,9 +282,13 @@ $(document).ready(function() {
                 	notEmpty: {
                         message: 'Please enter hsbcStaffId'
                     },
-                    numeric: {
-                    	message:'Please enter number'
-                    },
+                    /*numeric: {
+                	message:'Please enter number'
+                    },*/
+				    regexp:{
+        			   regexp:/^[0-9a-zA-Z\s?]+$/,
+        			   message:'please enter right format.'
+        		    },
                     stringLength: {
                         max: 32,
                         message: 'Exceeded the maxLength'
