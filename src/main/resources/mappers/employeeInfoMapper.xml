@@ -33,10 +33,10 @@
         on z1.EMPLOYEE_ID=z2.EMPLOYEE_ID
         where 1=1
         <if test="empupgradestartdate != null and empupgradestartdate != ''">
-				AND z2.CREATE_DATE &gt; #{empupgradestartdate}
+				AND DATE_FORMAT(z2.CREATE_DATE,'%Y-%m-%d') &gt;= #{empupgradestartdate}
 		</if>
 		<if test="empupgradeenddate != null and empupgradeenddate != ''">
-				AND z2.CREATE_DATE &lt; #{empupgradeenddate}
+				AND DATE_FORMAT(z2.CREATE_DATE,'%Y-%m-%d') &lt;= #{empupgradeenddate}
 		</if>
         
 			<if test="hsbcStaffId != null and hsbcStaffId != ''">
