@@ -102,4 +102,9 @@ public class EmployeeServiceImpl implements EmployeeService
         }
         return false;
     }
+
+	@Override
+	public int updatePromoteInfo(Employee employee) {
+		return employeeMapper.updatePromoteInfo(employee);
+	}
 }

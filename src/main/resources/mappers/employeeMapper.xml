@@ -358,5 +358,18 @@
  	    update t_employee set HSBC_SUBDEPT_ID = #{hsbcSubDept}
  	      WHERE E_HR = #{eHr} 
  	</update>-->
+ 	
+ 	<update id="updatePromoteInfo" parameterType="com.pmo.dashboard.entity.Employee" >
+    update t_employee
+    <set >
+      <if test="billRate != null" >
+        BILL_RATE = #{billRate,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        ROLE = #{role,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where EMPLOYEE_ID = #{employeeId,jdbcType=VARCHAR}
+  </update>
 	
 </mapper>

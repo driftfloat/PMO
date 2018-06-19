@@ -19,4 +19,6 @@ public interface EmployeeService
 	public List<Employee> getAllEmployee();
 	public List<Employee> getEmployeeByLastUpdateTime(String lastUpdateTime);
 	boolean importEmployeeProject(Employee employee);
+	
+	int updatePromoteInfo(Employee employee);
 }

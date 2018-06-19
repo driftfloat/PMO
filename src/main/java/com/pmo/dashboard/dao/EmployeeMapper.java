@@ -21,4 +21,6 @@ public interface EmployeeMapper
 	List<Employee> queryAllEmployee();
 	List<Employee> getEmployeeByLastUpdateTime(String lastUpdateTime);
 	int importEmployeeProject(Employee employee);
+	
+	int updatePromoteInfo(Employee employee);
 }

@@ -96,6 +96,14 @@ public class EmployeeUpgradeController {
 		eur.setOperateId(user.getUserId());
 		int i = employeeUpgradeService.save(eur);
 		if(i>0){
+			//更新员工级别，单价信息
+			Employee em = new Employee();
+			em.setEmployeeId(eur.getEmployeeId());
+			if(eur.getNowRate()!=null){
+				em.setBillRate(String.valueOf(eur.getNowRate()));
+			}
+			em.setRole(eur.getNowLevel());
+			employeeService.updatePromoteInfo(em);
 			return true;
 		}
 		return false;
