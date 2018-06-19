@@ -406,24 +406,27 @@ var path='<%=path%>';
 						     <input id="upgradeemployeeid" value="" type="hidden"></input>
 							 <div class="panel-heading">Employee Base Information</div>
                              <div class="panel-body">
-                                    <div class="group">
+                                    <div class="form-group">
+                                      <div class="group">
 										<label class="col-sm-2 control-label">Promote Role</label>
 										<div class="col-sm-4">
-											<select class="form-control" name="promoteroleupgrade"
+											<select data-bv-notempty
+												data-bv-notempty-message="Please Select Role" data-bv-group=".group" class="form-control" name="promoteroleupgrade"
 													id="promoteroleupgrade">
 												<option value="">--Option--</option>	
 											</select>
 										</div>
-									</div>
-									<div class="group">
-										<label class="col-sm-2 control-label">Now Rate</label>
-										<div class="col-sm-4">
-											<input type="text" class="form-control" name="nowrateupgrade"
+									   </div>
+									   <div class="group">
+										 <label class="col-sm-2 control-label">Now Rate</label>
+										 <div class="col-sm-4">
+											<input data-bv-group=".group" type="text" class="form-control" name="nowrateupgrade"
 													id="nowrateupgrade" />
-										</div>
+										 </div>
+									    </div>
 									</div>
-									<br/><br/><br/>
-									<div class="group">
+									
+									<div class="form-group">
 										<label class="col-lg-2 control-label">Effective Date</label>  
                                         <!--指定 date标记-->  
                                         <div class="col-lg-4">
@@ -433,54 +436,57 @@ var path='<%=path%>';
                                               <span class="glyphicon glyphicon-calendar"></span>  
                                             </span>  
                                         </div>
-                                        </div>  
-									</div>
-                                    <div class="group">
-										<label class="col-sm-2 control-label">E-HR</label>
-										<div class="col-sm-4">
+                                        </div>
+                                        
+                                        <div class="group">
+										 <label class="col-sm-2 control-label">E-HR</label>
+										 <div class="col-sm-4">
 											<input readonly="readonly" type="text" class="form-control" name="eHrupgrade"
 													id="eHrupgrade" />
-										</div>
+										 </div>
+									    </div>  
 									</div>
-									<br/><br/><br/>
-									<div class="group">
+									<div class="form-group">
+									 <div class="group">
 										<label class="col-sm-2 control-label">StaffId</label>
 										<div class="col-sm-4">
 											<input readonly="readonly" type="text" class="form-control" name="staffidupgrade"
 													id="staffidupgrade" />
 										</div>
-									</div>
-									<div class="group">
+									 </div>
+									 <div class="group">
 										<label class="col-sm-2 control-label">Staff Name</label>
 										<div class="col-sm-4">
 											<input readonly="readonly" type="text" class="form-control" name="staffnameupgrade"
 													id="staffnameupgrade" />
 										</div>
+									 </div>
 									</div>
-									<br/><br/><br/>
-									<div class="group">
+									<div class="form-group">
+									 <div class="group">
 										<label class="col-sm-2 control-label">LOB</label>
 										<div class="col-sm-4">
 											<input readonly="readonly" type="text" class="form-control" name="lobupgrade"
 													id="lobupgrade" />
 										</div>
-									</div>
-									<div class="group">
+									 </div>
+									 <div class="group">
 										<label class="col-sm-2 control-label">MSA Role</label>
 										<div class="col-sm-4">
 											<input readonly="readonly" type="text" class="form-control" name="msaroleupgrade"
 													id="msaroleupgrade" />
 										</div>
+									 </div>
 									</div>
-									<br/><br/><br/>
-									<div class="group">
+									<div class="form-group">
+									 <div class="group">
 										<label class="col-sm-2 control-label">Previous Rate</label>
 										<div class="col-sm-4">
 											<input readonly="readonly" type="text" class="form-control" name="previousrateupgrade"
 													id="previousrateupgrade" />
 										</div>
+									 </div>
 									</div>
-									<br/><br/><br/>
 									
 									
                                </div>
@@ -552,6 +558,7 @@ var path='<%=path%>';
 	<script src="<%=path %>/js/charisma.js"></script>
 
 	<script type="text/javascript" src="<%=path %>/js/pmo/employeeInfo.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/pmo/employeeupgradevalid.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/bootstrap-datetimepicker.zh-CN.js"></script>

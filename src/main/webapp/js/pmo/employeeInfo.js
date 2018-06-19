@@ -720,9 +720,9 @@ function loadRole(){
 }
 
 function addEmployeeUpgradeRecord(){
-//	var bootstrapValidator = $("#employeeUpgradeRecordForm").data('bootstrapValidator');
-//	bootstrapValidator.validate();
-//	if(bootstrapValidator.isValid()){
+	var bootstrapValidator = $("#employeeUpgradeRecordForm").data('bootstrapValidator');
+	bootstrapValidator.validate();
+	if(bootstrapValidator.isValid()){
 		var nowLevel = $("#promoteroleupgrade").val();
 		var nowRate = $("#nowrateupgrade").val();
 		var stringeffectivedate = $("#effectivedate").val();
@@ -751,8 +751,8 @@ function addEmployeeUpgradeRecord(){
 			}
 		})
 		
-//	}else{
-//		return;
-//	}
+	}else{
+		return;
+	}
 	
 }

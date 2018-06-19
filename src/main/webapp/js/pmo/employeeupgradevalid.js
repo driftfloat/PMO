@@ -16,18 +16,7 @@ $(document).ready(function() {
                     }
                 }
             },
-            effectivedate: {
-            	validators: {
-                   notEmpty: {
-                     message: 'Please select EffectDate'
-                   },
-                   date : {  
-                     format : 'YYYY-MM-DD',  
-                     message : 'Time format is incorrect'  
-                   }
-
-                }
-             }
+            
          
         }
     });
