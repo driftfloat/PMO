@@ -179,6 +179,7 @@ function loadEmployeeInfo() {
 			$('#hsbcDOJ1').val(employee.hsbcDOJ);
 			$('#graduationDate1').val(employee.graduationDate);
 			$('#billRate').val(employee.billRate);
+			$('#billRateType').val(employee.billRateType);
 			$('#terminatedDate1').val(employee.terminatedDate);
 			$('#eHr').val(employee.eHr);
 			$('#email').val(employee.email);
