@@ -71,7 +71,7 @@ var path='<%=path%>';
 							</div>
 							<div id="employeeInfo" class="box-content">
 								<div class="panel panel-default">
-<!-- 									<div class="panel-heading">Query Conditions</div> -->
+									<div class="panel-heading">Query Conditions</div>
 									<div class="panel-body">
 										<div class="group">
 											<label class="col-sm-2 control-label">E-HR</label>
@@ -179,9 +179,19 @@ var path='<%=path%>';
 <!-- 									</div> -->
 									
 <!-- 								</div> -->
-								<!-- 数据列表  -->
-								<table id="skillList"></table>
 <!-- 								</br> -->
+							</div>
+							<!-- 数据列表  -->
+								<table id="skillList"></table>
+							 <!-- 工具栏  -->
+<!--                              <div id="toolbar" class="btn-group"> -->
+                             	<div class="group">
+										<div class="col-sm-4">
+											<button onClick="import()" type="button"
+													style="margin-left: 50px" id="btn_batchEdit"
+													class="btn btn-primary">Batch Import</button>
+										</div>
+								</div>
 								<div class="group">
 										<div class="col-sm-4">
 											<button onClick="toBatch()" type="button"
@@ -190,8 +200,8 @@ var path='<%=path%>';
 										</div>
 								</div>
 								</br></br></br>
-							</div>
-							
+<!--                              </div> -->
+								
 							<form action="" id="editForm" method="post" target="_self">
 									<input id="id" name="id" type="hidden" />
 							</form>

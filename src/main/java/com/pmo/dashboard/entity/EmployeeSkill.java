@@ -44,6 +44,8 @@ public class EmployeeSkill {
     private String fatherName;
     
     private String status;
+    
+    private String du;
 
     public String getId() {
         return id;
@@ -211,6 +213,14 @@ public class EmployeeSkill {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getDu() {
+		return du;
+	}
+
+	public void setDu(String du) {
+		this.du = du;
 	}
 	
 }
