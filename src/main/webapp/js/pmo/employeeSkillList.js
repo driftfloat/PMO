@@ -172,12 +172,20 @@ function loadSkillList(){
             field: 'staffName',
             title: 'Staff Name',
             sortable: true
+            , formatter : function(value, row, index){
+          	  	var div = "<div style='width:200px;'>"+value+"</div>";
+          	  	return div;
+            }
         },
         {
 //            field: 'csSubDept',
             field: 'du',
             title: 'DU',
             sortable: true
+            , formatter : function(value, row, index){
+            	  var div = "<div style='width:150px;'>"+value+"</div>";
+            	  return div;
+            }
         },
         {
             field: 'role',
