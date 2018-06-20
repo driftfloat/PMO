@@ -208,6 +208,7 @@ public class EmployeeController {
         String role = request.getParameter("role");
         String skill = request.getParameter("skill");
         String billingCurrency = request.getParameter("billingCurrency");
+        String billRateType = request.getParameter("billRateType");
         String billRate = request.getParameter("billRate");
         String resourceStatus = request.getParameter("resourceStatus");
         String terminatedDate = request.getParameter("terminatedDate");
@@ -237,7 +238,7 @@ public class EmployeeController {
 		
 		
         Timestamp updateTime = createTime;
-        Employee employee = new Employee(employeeId,eHr,lob,
+        Employee employee = new Employee(billRateType,employeeId,eHr,lob,
                 hsbcStaffId, staffName, LN, staffRegion,
                 staffLocation, locationType, onshoreOrOffshore,
                 csSubDept, hsbcSubDept, projectName,
@@ -309,6 +310,7 @@ public class EmployeeController {
         String role = request.getParameter("role");
         String skill = request.getParameter("skill");
         String billingCurrency = request.getParameter("billingCurrency");
+        String billRateType = request.getParameter("billRateType");
         String billRate = request.getParameter("billRate");
         String resourceStatus = request.getParameter("resourceStatus");
         String terminatedDate = request.getParameter("terminatedDate");
@@ -339,7 +341,7 @@ public class EmployeeController {
 
         //修改后的employee
 
-        Employee employee = new Employee(employeeId,eHr,lob,
+        Employee employee = new Employee(billRateType,employeeId,eHr,lob,
                 hsbcStaffId, staffName, LN, staffRegion,
                 staffLocation, locationType, onshoreOrOffshore,
                 csSubDept, hsbcSubDept, projectName,

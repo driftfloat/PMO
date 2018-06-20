@@ -341,7 +341,7 @@ var path='<%=path%>';
 								</div>
 								
 								<div class="form-group">
-										<div class="group">
+									<div class="group">
 										<label class="col-lg-2 control-label">Billing Currency</label>
 										<div class="col-lg-4">
 											<select class="form-control" name="billingCurrency" data-bv-notempty
@@ -349,17 +349,26 @@ var path='<%=path%>';
 											<option value="">--Option--</option>
 											</select>
 										</div>
+									</div>
+									<div class="group">
+										<label class="col-lg-2 control-label">BillRateType</label>
+										<div class="col-lg-4">
+											<select class="form-control" name="billRateType" data-bv-notempty
+												data-bv-notempty-message="Please Select BillRateType" id="billRateType" data-bv-group=".group">
+											<option value="">--Option--</option>
+											</select>
 										</div>
-										<div class="group">
+									</div>
+								</div>
+								<div class="form-group">
+								     <div class="group">
 											<label class="col-sm-2 control-label">Bill Rate</label>
 											<div class="col-sm-4">
 												<input type="text" class="form-control" name="billRate"
 													id="billRate" data-bv-group=".group"/>
 											</div>
-										</div>
-								</div>
-								<div class="form-group">
-									<div class="group">
+									 </div>
+								     <div class="group">
 										<label class="col-sm-2 control-label">HSBC DOJ</label>
 										<div class="col-md-4">
 											<div class="input-group date form_datetime col-sm-12"
@@ -370,6 +379,15 @@ var path='<%=path%>';
 													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden"
 													id="hsbcDOJ2" name="hsbcDOJ2" />
 											</div>
+										</div>
+									 </div>
+								</div>
+								<div class="form-group">
+									<div class="group">
+										<label class="col-sm-2 control-label">IT Work Year</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" name="itworkyear"
+													id="itworkyear" data-bv-group=".group"/>
 										</div>
 									</div>
 									<div class="group">
@@ -385,10 +403,15 @@ var path='<%=path%>';
 								
 								<div class="form-group">
 									<div class="group">
-										<label class="col-sm-2 control-label">IT Work Year</label>
+										<label class="col-sm-2 control-label">Chsofti Pro StartDate</label>
 										<div class="col-md-4">
-											<input type="text" class="form-control" name="itworkyear"
-													id="itworkyear" data-bv-group=".group"/>
+											<div class="input-group date form_datetime3 col-sm-12"
+												 data-link-field="dt_set_order_time_input">
+												<input class="form-control" type="text" readonly data-bv-group=".group"
+													   id="chsoftiProStartDate1" name="chsoftiProStartDate1"> <span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden" id="chsoftiProStartDate2" name="chsoftiProStartDate2" />
+											</div>
 										</div>
 									</div>
 									<div class="group">
@@ -401,30 +424,13 @@ var path='<%=path%>';
 								</div>
 
 								<div class="form-group">
-									<div class="group">
-										<label class="col-sm-2 control-label">Chsofti Pro StartDate</label>
-										<div class="col-md-4">
-											<div class="input-group date form_datetime3 col-sm-12"
-												 data-link-field="dt_set_order_time_input">
-												<input class="form-control" type="text" readonly data-bv-group=".group"
-													   id="chsoftiProStartDate1" name="chsoftiProStartDate1"> <span
-													class="input-group-addon"><span
-													class="glyphicon glyphicon-calendar"></span></span> <input type="hidden" id="chsoftiProStartDate2" name="chsoftiProStartDate2" />
-											</div>
-										</div>
-									</div>
-
-									<div class="group">
+								    <div class="group">
 										<label class="col-sm-2 control-label">Chsofti Pro Name</label>
 										<div class="col-md-4">
 											<input type="text" class="form-control" name="chsoftiProName"
 												   id="chsoftiProName" data-bv-group=".group"/>
 										</div>
 									</div>
-								</div>
-								
-								
-								<div class="form-group">
 									<div class="group">
 										<label class="col-sm-2 control-label">Demand RR</label>
 										<div class="col-lg-4">
@@ -432,11 +438,8 @@ var path='<%=path%>';
 												   id="demandrr" data-bv-group=".group"/>
 										</div>
 									</div>
-
-									<div class="group">
-										
-									</div>
 								</div>
+								
 								<!-- <div class="form-group">
 										<div class="group">
 										<label class="col-lg-2 control-label">Resource Status</label>

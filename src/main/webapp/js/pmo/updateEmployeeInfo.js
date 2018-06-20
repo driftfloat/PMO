@@ -1,5 +1,6 @@
 $(function() {
 	$("#udemandid").val("");
+	loadBillRateType();
 	loadEmployeeInfo();
 	dateType();
 });
@@ -70,6 +71,7 @@ function updateEmployee() {
 		var role = $('#role').val();
 		var skill = $('#skill').val();
 		var billingCurrency = $('#billingCurrency').val();
+		var billRateType = $('#billRateType').val();
 		var billRate = $('#billRate').val();
 		var resourceStatus = $('#resourceStatus').val();
 		var terminatedDate = $('#terminatedDate1').val();
@@ -109,7 +111,7 @@ function updateEmployee() {
 		$.ajax({
 			url:path+'/service/employee/updateEmployee',
 			dataType:"json",
-			data:{"udemandid":udemandid,"employeeId":employeeId,"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":zuhe,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason,
+			data:{"billRateType":billRateType,"udemandid":udemandid,"employeeId":employeeId,"eHr":eHr,"lob":lob,"hsbcStaffId":hsbcStaffId,"staffName":staffName,"LN":LN,"staffRegion":staffRegion,"staffLocation":staffLocation,"locationType":locationType,"onshoreOrOffshore":onshoreOrOffshore,"csSubDept":csSubDept,"hsbcSubDept":zuhe,"projectName":projectName,"projectManager":projectManager,"sow":sow,"sowExpiredDate":sowExpiredDate,"staffCategory":staffCategory,"engagementType":engagementType,"hsbcDOJ":hsbcDOJ,"graduationDate":graduationDate,"role":role,"skill":skill,"billingCurrency":billingCurrency,"billRate":billRate,"resourceStatus":resourceStatus,"terminatedDate":terminatedDate,"terminationReason":terminationReason,
 				"email":email,"entryDate":entryDate,"gbGf":gbGf,"itindustryWorkYear":itWorkYear,
 				"chsoftiProNumber":chsoftiProNumber,"chsoftiProStartDate":chsoftiProStartDate1,"chsoftiProName":chsoftiProName	
 			},
@@ -840,4 +842,13 @@ function searchDemand(type){
     	$('#demandlist2').bootstrapTable('refresh',queryParams); 
 	}
 
+}
+
+function loadBillRateType(){
+	var url = path+'/json/billRateType.json'
+	$.getJSON(url,  function(data) {
+	       $.each(data, function(i, item) {
+	    	   $("#billRateType").append("<option value='"+item.name+"'>"+item.name+"</option>");
+	       })
+	});
 }

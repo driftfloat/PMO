@@ -1,7 +1,6 @@
 package com.pmo.dashboard.entity;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class Employee
 {
@@ -29,6 +28,7 @@ public class Employee
     private String role;
     private String skill;
     private String billingCurrency;
+    private String billRateType;
     private String billRate;
     private String resourceStatus;
     private String terminatedDate;
@@ -66,6 +66,12 @@ public class Employee
     
     
     
+	public String getBillRateType() {
+		return billRateType;
+	}
+	public void setBillRateType(String billRateType) {
+		this.billRateType = billRateType;
+	}
 	public String getDemandskill() {
 		return demandskill;
 	}
@@ -392,7 +398,7 @@ public class Employee
     {
         super();
     }
-    public Employee(String employeeId, String eHr, String lob,
+    public Employee(String billRateType,String employeeId, String eHr, String lob,
             String hsbcStaffId, String staffName, String ln, String staffRegion,
             String staffLocation, String locationType, String onshoreOrOffshore,
             String csSubDept, String hsbcSubDept, String projectName,
@@ -405,6 +411,7 @@ public class Employee
             String chsoftiProNumber,String chsoftiProStartDate, String chsoftiProName)
     {
         super();
+        this.billRateType = billRateType;
         this.employeeId = employeeId;
         this.eHr = eHr;
         this.lob = lob;
@@ -443,7 +450,7 @@ public class Employee
         this.chsoftiProStartdate = chsoftiProStartDate;
         this.chsoftiProName = chsoftiProName;
     }
-    public Employee(String employeeId, String eHr, String lob,
+    public Employee(String billRateType,String employeeId, String eHr, String lob,
             String hsbcStaffId, String staffName, String ln, String staffRegion,
             String staffLocation, String locationType, String onshoreOrOffshore,
             String csSubDept, String hsbcSubDept, String projectName,
@@ -457,6 +464,7 @@ public class Employee
     		)
     {
         super();
+        this.billRateType = billRateType;
         this.employeeId = employeeId;
         this.eHr = eHr;
         this.lob = lob;
