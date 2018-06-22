@@ -49,6 +49,10 @@
 	color: red;
 }
 </style>
+<style> 
+ #uploadImg{ font-size:12px; overflow:hidden; position:absolute} 
+ #myfiles{ position:absolute; z-index:100; margin-left:-180px; font-size:60px;opacity:0;filter:alpha(opacity=0); margin-top:-5px;} 
+</style> 
 </head>
 <script>
 var path='<%=path%>';
@@ -187,13 +191,28 @@ var path='<%=path%>';
 <!--                              <div id="toolbar" class="btn-group"> -->
                              	<div class="group">
 										<div class="col-sm-4">
-											<button onClick="import()" type="button"
-													style="margin-left: 50px" id="btn_batchEdit"
-													class="btn btn-primary">Batch Import</button>
+											<form action="<%=path %>/service/skill/skillUpload" id="uploadForm" method="post" target="_blank" enctype="multipart/form-data">
+<!-- 													<input id="file_upload" name="file_upload" type="file"  -->
+<!-- 													class="btn btn-primary" > -->
+<!-- 													<a class="easyui-linkbutton" onclick="startUpload();" href="javascript:void(0);">开始上传</a>  -->
+													
+<!-- 													<input type="file" id="file" size="1" style="{ position:absolute; z-index:100; margin-left:-180px; font-size:60px;opacity:0;filter:alpha(opacity=0); margin-top:-5px;}"> -->
+<!-- 													<input type="button" class="btn btn-primary" >上传 -->
+													
+													<span id="uploadImg">
+													<input type="file" id="myfiles"  name="myfiles" size="1">
+													<input type="button" class="btn btn-primary" value="Choose File" id="file_upload2" name="file_upload2" />
+<!-- 													<a href="#">上传图片</a>  -->
+													</span>
+											</form>
+											
 										</div>
 								</div>
 								<div class="group">
 										<div class="col-sm-4">
+											<button onClick="skillUpload()" type="button"
+													style="margin-left: 50px" id="btn_batchUpload"
+													class="btn btn-primary">Batch Upload</button>
 											<button onClick="toBatch()" type="button"
 													style="margin-left: 50px" id="btn_batchEdit"
 													class="btn btn-primary">Batch Edit</button>
@@ -201,10 +220,6 @@ var path='<%=path%>';
 								</div>
 								</br></br></br>
 <!--                              </div> -->
-								
-							<form action="" id="editForm" method="post" target="_self">
-									<input id="id" name="id" type="hidden" />
-							</form>
 						</div>
 					</div>
 				</div>
@@ -341,10 +356,10 @@ var path='<%=path%>';
 	<script src="<%=path %>/js/jquery.iphone.toggle.js"></script>
 	<!-- autogrowing textarea plugin -->
 	<script src="<%=path %>/js/jquery.autogrow-textarea.js"></script>
-	<!-- multiple file upload plugin -->
-	<script src="<%=path %>/js/jquery.uploadify-3.1.min.js"></script>
 	<!-- history.js for cross-browser state change on ajax -->
 	<script src="<%=path %>/js/jquery.history.js"></script>
+	<!-- multiple file upload plugin -->
+	<script src="<%=path %>/js/jquery.uploadify-3.1.min.js"></script>
 	<!-- application script for Charisma demo -->
 	<script src="<%=path %>/js/charisma.js"></script>
 

@@ -1,10 +1,51 @@
 $(function () {
+//	$("#fileUpload").blur( function() {
+//		alert('upload');
+//	});
+//	$("fileUpload").blur( function() {
+//		alert('upload2');
+//	});
+	
+//	$('#fileUpload').uploadify({
+//    	'buttonText' : '上传'
+//    	,'auto'     : false
+//    	,  'swf'      : path+'/misc/uploadify.swf'
+//    	, 'uploader' : path+'/service/skill/skillUpload2' 
+//    }); 
+	
+	
+	
+//     $("#fileUpload").uploadify({  
+////            'height'        : 27,   
+////            'width'         : 80,    
+//            'buttonText'    : '添加附件',  
+//            'swf'           : path+'/misc/uploadify.swf',  
+//            'uploader'      : path+'/service/skill/skillUpload2',
+//            'auto'          : false,  
+//            'fileTypeExts'  : '*.*',  
+////            'formData'      : {'userName':'','content':''},  
+//            'onUploadStart' : function(file) {  
+//                $("#file_upload").uploadify("settings");  
+//            },  
+//            'onUploadSuccess':function(){  
+//                $.messager.show({  
+//                    msg : '导入成功！',  
+//                    title : '提示'  
+//                });  
+//            },  
+//            'onUploadComplete':function(){  
+//                $('#importLispDialog').window('close');  
+//            }  
+//    });  
+  
+	
 	$('#myModal').modal('hide')
     loadSkillList();
     loadCSSubDept();
     loadLevel();
     loadRole();
     loadSkill();
+    
     
     
 });
@@ -661,11 +702,14 @@ function batchUpdate(){
 function checkWithMainAbility(obj){
 	if($(obj).is(':checked')){
 		$(obj).parent().parent().find("#mainAbility").attr('checked','true');
-//		$(obj).parent().parent().find("#ischeck").attr('checked','true');
 	}
 }
 
-function importSkill(){
-	
+function skillUpload(){
+	if(''==$("#myfiles")[0].value){
+		alert('Please choose file!');
+		return ;
+	}
+	$('#uploadForm').submit();
 }
 
