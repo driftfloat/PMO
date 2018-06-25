@@ -154,7 +154,13 @@ public class EmployeeSkillController {
 		List<EmployeeSkill> skillList = importSkill(excelFile, operateId);
 		
 		response.setContentType("text/html;charset=utf-8");
-		importSkill2DB(skillList, response.getWriter());
+		PrintWriter writer = response.getWriter();
+		writer.print("<title>Batch Upload</title>");
+		if(skillList.size()==0) {
+			writer.println("The excel file hasn't  found skill 'sheet' or it hasn't data." + "<br/>");
+		}else {
+			importSkill2DB(skillList, writer);
+		}
 		excelFile.delete();
 		// return "redirect:listPage";
 	}
@@ -164,7 +170,7 @@ public class EmployeeSkillController {
 		InputStream is = new FileInputStream(file);
 		XSSFWorkbook xssfWorkbook = new XSSFWorkbook(is);
 		List<EmployeeSkill> list = new ArrayList<EmployeeSkill>();
-		XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(0); // xssfWorkbook.getSheet("skill");
+		XSSFSheet xssfSheet = xssfWorkbook.getSheet("skill"); // xssfWorkbook.getSheet("skill");
 
 		if (xssfSheet == null) {
 			return list;
@@ -178,9 +184,14 @@ public class EmployeeSkillController {
 				skill.seteHr(skill.getEmployeeId());
 				skill.setParamName(getValue(xssfRow.getCell(1)));
 				skill.setAbilityLevel(getValue(xssfRow.getCell(2)));
-				skill.setOfficialAccreditation(getValue(xssfRow.getCell(3)));
+				skill.setOfficialAccreditation(getValue(xssfRow.getCell(3)).equalsIgnoreCase("yes")?"1":"0");
 				skill.setAuthenticationName(getValue(xssfRow.getCell(4)));
 				skill.setWorkExperience(getValue(xssfRow.getCell(5)));
+				String t = skill.getWorkExperience();
+				if(t.indexOf(".")>0) {
+					t = t.substring(0,t.indexOf("."));
+					skill.setWorkExperience(t);
+				}
 				skill.setMainAbility("1");
 				skill.setOperateId(operateId);
 				list.add(skill);
@@ -227,12 +238,11 @@ public class EmployeeSkillController {
 				}
 			}
 			row++;
-			// if (row % 100 == 0) {
-			// System.out.println("共" + total + "行数据,正在倒入" + row + "行数据");
-			writer.print("共" + total + "行数据,正在倒入" + row + "行数据" + "<br/>");
-			// }
+			if (row % 5 == 0) {
+				writer.print("A total of " + total + " rows of data are being poured into " + row + " of data." + "<br/>");
+			}
 		}
-		writer.print("倒入完成，共"+ row + "行数据" + "<br/>");
+		writer.print("Pour complete, a total of "+ row + " rows of data." + "<br/>");
 		writer.print("<input type='button' onclick='javascript:window.close()' value='Close'/>");
 		// writer.close();
 	}

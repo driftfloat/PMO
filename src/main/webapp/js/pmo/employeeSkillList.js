@@ -1,7 +1,4 @@
 $(function () {
-//	$("#fileUpload").blur( function() {
-//		alert('upload');
-//	});
 //	$("fileUpload").blur( function() {
 //		alert('upload2');
 //	});
@@ -46,7 +43,9 @@ $(function () {
     loadRole();
     loadSkill();
     
-    
+	$("#myfiles").blur( function() {
+		skillUpload();
+	});
     
 });
 
@@ -161,7 +160,7 @@ function loadSkillList(){
         toolbar: '#toolbar',              //工具按钮用哪个容器
         striped: true,                      //是否显示行间隔色
         fixedColumns: true,
-        fixedNumber: 0,
+        fixedNumber: 6,
         singleSelect : false,                // 单选checkbox 
         cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,                   //是否显示分页（*）
@@ -176,7 +175,7 @@ function loadSkillList(){
         showColumns: false,                  //是否显示所有的列（选择显示的列）
         showRefresh: true,                  //是否显示刷新按钮
         minimumCountColumns: 2,             //最少允许的列数
-        clickToSelect: true,                //是否启用点击选中行
+        clickToSelect: false,                //是否启用点击选中行
         //height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
         uniqueId: "id",                     //每一行的唯一标识，一般为主键列
         showToggle: false,                   //是否显示详细视图和列表视图的切换按钮
@@ -552,7 +551,7 @@ function showLeve(n){
 }
 
 function toBatch(){
-	if($("#skillList .bs-checkbox :checkbox:checked").length==0){
+	if($(".bs-checkbox :checkbox:checked").length==0){
 		alert("please select employees.");
 		return ;
 	}
@@ -706,10 +705,9 @@ function checkWithMainAbility(obj){
 }
 
 function skillUpload(){
-	if(''==$("#myfiles")[0].value){
-		alert('Please choose file!');
-		return ;
+	if(''!=$("#myfiles")[0].value){
+		$('#uploadForm').submit();
 	}
-	$('#uploadForm').submit();
+	
 }
 
