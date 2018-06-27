@@ -175,7 +175,7 @@ function loadSkillList(){
         showColumns: false,                  //是否显示所有的列（选择显示的列）
         showRefresh: true,                  //是否显示刷新按钮
         minimumCountColumns: 2,             //最少允许的列数
-        clickToSelect: false,                //是否启用点击选中行
+        clickToSelect: true,                //是否启用点击选中行
         //height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
         uniqueId: "id",                     //每一行的唯一标识，一般为主键列
         showToggle: false,                   //是否显示详细视图和列表视图的切换按钮
@@ -257,11 +257,10 @@ function loadSkillList(){
         ,{
 //            field: 'Operate',
             title: 'Operate'
-//            ,sortable: true
             ,formatter:function(value,row,index){
-            	var r = row.id==null?'':"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=detail('"+row.eHr+"')>Detail</a>" ;
-//            	var r = "<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=detail('"+row.eHr+"')>Detail</a>" ;
-            	return r+"<a href='javascript:void(0);' class='btn btn-info btn-small' onclick=toEdit('"+row.eHr+"')>Edit</a>" ;
+//            	 class='btn btn-info btn-small'
+            	var r = row.id==null?'':"<a href='javascript:void(0);' class='btn-info btn-small' onclick=detail('"+row.eHr+"')>Detail</a>" ;
+            	return r+"<a href='javascript:void(0);' class='btn-info btn-small' onclick=toEdit('"+row.eHr+"')>Edit</a>" ;
             }
         }
         /*{
@@ -274,8 +273,7 @@ function loadSkillList(){
         
         ]
         ,onLoadSuccess: function () {
-        	var data = $('#skillList').bootstrapTable('getData');
-//        	loadOfflineSummary(data);
+//        	var data = $('#skillList').bootstrapTable('getData');
         },
         onLoadError: function () {
         	

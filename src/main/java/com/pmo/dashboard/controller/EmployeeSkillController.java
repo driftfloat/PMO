@@ -238,7 +238,7 @@ public class EmployeeSkillController {
 				}
 			}
 			row++;
-			if (row % 5 == 0) {
+			if (row % 100 == 0) {
 				writer.print("A total of " + total + " rows of data are being poured into " + row + " of data." + "<br/>");
 			}
 		}
